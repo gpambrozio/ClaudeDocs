@@ -16,7 +16,7 @@ ID of the User.
 
 ##### ReturnsExpand Collapse
 
-User = object { id, added\_at, email, 3 more }
+User object { id, added\_at, email, 3 more }
 
 id: string
 
@@ -38,7 +38,7 @@ role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
-Accepts one of the following:
+One of the following:
 
 "user"
 

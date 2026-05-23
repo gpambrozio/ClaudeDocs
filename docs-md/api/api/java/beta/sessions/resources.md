@@ -84,7 +84,7 @@ String url
 
 Optional<Checkout> checkout
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout:
 
@@ -116,7 +116,7 @@ Optional<Access> access
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 READ\_WRITE("read\_write")
 
@@ -162,7 +162,7 @@ String url
 
 Optional<Checkout> checkout
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout:
 
@@ -212,7 +212,7 @@ Optional<Access> access
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 READ\_WRITE("read\_write")
 

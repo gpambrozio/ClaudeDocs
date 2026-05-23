@@ -30,13 +30,13 @@ Opaque pagination cursor from a previous response's next\_page. Forward-only.
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -124,15 +124,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -170,13 +170,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -186,9 +186,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -198,7 +198,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -212,9 +212,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -224,7 +224,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -246,15 +246,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -270,15 +270,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -286,7 +286,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -298,15 +298,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -322,15 +322,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -340,7 +340,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -406,7 +406,7 @@ status: [BetaManagedAgentsSessionThreadStatus](api/beta.md)
 
 SessionThreadStatus enum
 
-Accepts one of the following:
+One of the following:
 
 "running"
 

@@ -28,7 +28,7 @@ DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsDeleteSessionResource = object { id, type }
+BetaManagedAgentsDeleteSessionResource object { id, type }
 
 Confirmation of resource deletion.
 
@@ -36,7 +36,7 @@ id: string
 
 type: "session\_resource\_deleted"
 
-BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsFileResource object { id, created\_at, file\_id, 3 more }
 
 id: string
 
@@ -54,7 +54,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object { id, created\_at, mount\_path, 4 more }
 
 id: string
 
@@ -74,9 +74,9 @@ url: string
 
 checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -84,7 +84,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -92,7 +92,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -106,7 +106,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -132,9 +132,9 @@ BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](a
 
 A memory store attached to an agent session.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object { id, created\_at, mount\_path, 4 more }
 
 id: string
 
@@ -154,9 +154,9 @@ url: string
 
 checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -164,7 +164,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -172,7 +172,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsFileResource object { id, created\_at, file\_id, 3 more }
 
 id: string
 
@@ -190,7 +190,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -204,7 +204,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -230,9 +230,9 @@ ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.
 
 The requested session resource.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object { id, created\_at, mount\_path, 4 more }
 
 id: string
 
@@ -252,9 +252,9 @@ url: string
 
 checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -262,7 +262,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -270,7 +270,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsFileResource object { id, created\_at, file\_id, 3 more }
 
 id: string
 
@@ -288,7 +288,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -302,7 +302,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -328,9 +328,9 @@ ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md
 
 The updated session resource.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object { id, created\_at, mount\_path, 4 more }
 
 id: string
 
@@ -350,9 +350,9 @@ url: string
 
 checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -360,7 +360,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -368,7 +368,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsFileResource object { id, created\_at, file\_id, 3 more }
 
 id: string
 
@@ -386,7 +386,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -400,7 +400,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 

@@ -20,7 +20,7 @@ ID of the File.
 
 query BetaFileGetMetadataParams
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -28,7 +28,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -112,11 +112,11 @@ Object type.
 
 For files, this is always `"file"`.
 
-Downloadable booloptional
+Downloadable boolOptional
 
 Whether the file can be downloaded.
 
-Scope [BetaFileScope](api/beta.md)optional
+Scope [BetaFileScope](api/beta.md)Optional
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

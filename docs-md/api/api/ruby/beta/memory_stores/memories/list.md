@@ -28,7 +28,7 @@ order: :asc | :desc
 
 Query parameter for order
 
-Accepts one of the following:
+One of the following:
 
 :asc
 
@@ -50,7 +50,7 @@ view: [BetaManagedAgentsMemoryView](api/beta.md)
 
 Query parameter for view
 
-Accepts one of the following:
+One of the following:
 
 :basic
 
@@ -60,13 +60,13 @@ betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
 
-Accepts one of the following:
+One of the following:
 
 :"message-batches-2024-09-24"
 
@@ -124,7 +124,7 @@ BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta.md) { id, c
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsMemory { id, content\_sha256, content\_size\_bytes, 7 more }
 

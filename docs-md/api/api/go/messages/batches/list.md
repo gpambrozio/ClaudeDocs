@@ -18,15 +18,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 query MessageBatchListParams
 
-AfterID param.Field[string]optional
+AfterID param.Field[string]Optional
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-BeforeID param.Field[string]optional
+BeforeID param.Field[string]Optional
 
 ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Number of items to return per page.
 
@@ -74,7 +74,7 @@ ProcessingStatus MessageBatchProcessingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 const MessageBatchProcessingStatusInProgress MessageBatchProcessingStatus = "in\_progress"
 

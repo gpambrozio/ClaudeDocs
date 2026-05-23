@@ -47,7 +47,7 @@ Subagents can be limited to specific tools, reducing the risk of unintended acti
 
 ### [​](#programmatic-definition-recommended) Programmatic definition (recommended)
 
-Define subagents directly in your code using the `agents` parameter. This example creates two subagents: a code reviewer with read-only access and a test runner that can execute commands. The `Agent` tool must be included in `allowedTools` since Claude invokes subagents through the Agent tool.
+Define subagents directly in your code using the `agents` parameter. This example creates two subagents: a code reviewer with read-only access and a test runner that can execute commands. Claude invokes subagents through the `Agent` tool, so include `Agent` in `allowedTools` to auto-approve subagent invocations without a permission prompt.
 
 Python
 
@@ -61,7 +61,7 @@ async def main():
     async for message in query(
         prompt="Review the authentication module for security issues",
         options=ClaudeAgentOptions(
-            # Agent tool is required for subagent invocation
+            # Auto-approve these tools, including Agent for subagent invocation
             allowed_tools=["Read", "Grep", "Glob", "Agent"],
             agents={
                 "code-reviewer": AgentDefinition(
@@ -128,7 +128,7 @@ Subagents cannot spawn their own subagents. Don’t include `Agent` in a subagen
 
 You can also define subagents as markdown files in `.claude/agents/` directories. See the [Claude Code subagents documentation](sub-agents.md) for details on this approach. Programmatically defined agents take precedence over filesystem-based agents with the same name.
 
-Even without defining custom subagents, Claude can spawn the built-in `general-purpose` subagent when `Agent` is in your `allowedTools`. This is useful for delegating research or exploration tasks without creating specialized agents.
+Even without defining custom subagents, Claude can spawn the built-in `general-purpose` subagent. This is useful for delegating research or exploration tasks without creating specialized agents. Include `Agent` in `allowedTools` so these invocations auto-approve without a permission prompt.
 
 ## [​](#what-subagents-inherit) What subagents inherit
 
@@ -372,7 +372,7 @@ asyncio.run(main())
 
 If Claude completes tasks directly instead of delegating to your subagent:
 
-1. **Include the Agent tool**: subagents are invoked via the Agent tool, so it must be in `allowedTools`
+1. **Check Agent invocations are approved**: include `Agent` in `allowedTools` to auto-approve subagent calls. Without it, Agent invocations fall through to your `canUseTool` callback or, in `dontAsk` mode, are denied
 2. **Use explicit prompting**: mention the subagent by name in your prompt (for example, “Use the code-reviewer agent to…”)
 3. **Write a clear description**: explain exactly when the subagent should be used so Claude can match tasks appropriately
 

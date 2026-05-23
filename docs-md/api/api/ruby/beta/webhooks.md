@@ -47,7 +47,7 @@ RFC 3339 timestamp when the event occurred.
 
 data: [BetaWebhookEventData](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id }
 
@@ -335,7 +335,7 @@ Object type. Always `event` for webhook payloads.
 
 BetaWebhookEventData = [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  | [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  | [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  | 19 more
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id }
 
@@ -909,7 +909,7 @@ RFC 3339 timestamp when the event occurred.
 
 data: [BetaWebhookEventData](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id }
 

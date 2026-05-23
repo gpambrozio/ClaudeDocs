@@ -18,19 +18,19 @@ vaultID string
 
 params BetaVaultCredentialListParams
 
-IncludeArchived param.Field[bool]optional
+IncludeArchived param.Field[bool]Optional
 
 Query param: Whether to include archived credentials in the results.
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Query param: Maximum number of credentials to return per page. Defaults to 20, maximum 100.
 
-Page param.Field[string]optional
+Page param.Field[string]Optional
 
 Query param: Opaque pagination token from a previous `list_credentials` response.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -38,7 +38,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -108,7 +108,7 @@ Auth BetaManagedAgentsCredentialAuthUnion
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsMCPOAuthAuthResponse struct{…}
 
@@ -120,11 +120,11 @@ URL of the MCP server this credential authenticates against.
 
 Type BetaManagedAgentsMCPOAuthAuthResponseType
 
-ExpiresAt Timeoptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -140,7 +140,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
@@ -160,11 +160,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -196,7 +196,7 @@ VaultID string
 
 Identifier of the vault this credential belongs to.
 
-DisplayName stringoptional
+DisplayName stringOptional
 
 Human-readable name for the credential.
 

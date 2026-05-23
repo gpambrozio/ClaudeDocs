@@ -22,13 +22,13 @@ resource\_id: string
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -88,7 +88,7 @@ New authorization token for the resource. Currently only `github_repository` res
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object { id, created\_at, mount\_path, 4 more }
 
 id: string
 
@@ -108,9 +108,9 @@ url: string
 
 checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -118,7 +118,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -126,7 +126,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsFileResource object { id, created\_at, file\_id, 3 more }
 
 id: string
 
@@ -144,7 +144,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -158,7 +158,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 

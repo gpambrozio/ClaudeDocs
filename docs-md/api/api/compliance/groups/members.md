@@ -12,7 +12,7 @@ GET/v1/compliance/groups/{group\_id}/members
 
 ##### ModelsExpand Collapse
 
-MemberListResponse = object { created\_at, email, updated\_at, user\_id }
+MemberListResponse object { created\_at, email, updated\_at, user\_id }
 
 Group member for compliance responses.
 

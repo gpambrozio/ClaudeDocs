@@ -26,13 +26,13 @@ betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
 
-Accepts one of the following:
+One of the following:
 
 :"message-batches-2024-09-24"
 
@@ -102,7 +102,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageBatchSucceededResult { message, type }
 
@@ -138,7 +138,7 @@ type: :anthropic | :custom
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 :anthropic
 
@@ -177,7 +177,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock { citations, text, type }
 
@@ -187,7 +187,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -323,7 +323,7 @@ caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller { type }
 
@@ -353,7 +353,7 @@ input: Hash[Symbol, untyped]
 
 name: :advisor | :web\_search | :web\_fetch | 5 more
 
-Accepts one of the following:
+One of the following:
 
 :advisor
 
@@ -377,7 +377,7 @@ caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller { type }
 
@@ -403,13 +403,13 @@ class BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller\_ }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -425,7 +425,7 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Array[[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } ]
+UnionMember1 = Array[[BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
 
@@ -445,7 +445,7 @@ caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller { type }
 
@@ -471,13 +471,13 @@ class BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller\_ }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -509,7 +509,7 @@ enabled: bool
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource { data, media\_type, type }
 
@@ -551,7 +551,7 @@ caller\_: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller { type }
 
@@ -577,13 +577,13 @@ class BetaAdvisorToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError { error\_code, type }
 
 error\_code: :max\_uses\_exceeded | :prompt\_too\_long | :too\_many\_requests | 3 more
 
-Accepts one of the following:
+One of the following:
 
 :max\_uses\_exceeded
 
@@ -623,13 +623,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -683,13 +683,13 @@ class BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError { error\_code, type }
 
 error\_code: :invalid\_tool\_input | :unavailable | :too\_many\_requests | 2 more
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -727,13 +727,13 @@ class BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type 
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
 
 error\_code: :invalid\_tool\_input | :unavailable | :too\_many\_requests | 2 more
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -755,7 +755,7 @@ content: String
 
 file\_type: :text | :image | :pdf
 
-Accepts one of the following:
+One of the following:
 
 :text
 
@@ -799,13 +799,13 @@ class BetaToolSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError { error\_code, error\_message, type }
 
 error\_code: :invalid\_tool\_input | :unavailable | :too\_many\_requests | :execution\_time\_exceeded
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -853,11 +853,11 @@ class BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type }
 
 content: String | Array[[BetaTextBlock](api/beta.md) { citations, text, type } ]
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-Array[[BetaTextBlock](api/beta.md) { citations, text, type } ]
+BetaMCPToolResultBlockContent = Array[[BetaTextBlock](api/beta.md) { citations, text, type } ]
 
 citations: Array[[BetaTextCitation](api/beta.md)]
 
@@ -865,7 +865,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -1015,7 +1015,7 @@ applied\_edits: Array[[BetaClearToolUses20250919EditResponse](api/beta.md) { cle
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
@@ -1054,7 +1054,7 @@ cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_i
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged { cache\_missed\_input\_tokens, type }
 
@@ -1102,15 +1102,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -1180,7 +1180,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-String
+String = String
 
 role: :assistant
 
@@ -1198,7 +1198,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 :cyber
 
@@ -1227,7 +1227,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 :end\_turn
 
@@ -1307,7 +1307,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
@@ -1415,15 +1415,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -1493,7 +1493,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-String
+String = String
 
 output\_tokens: Integer
 
@@ -1523,7 +1523,7 @@ service\_tier: :standard | :priority | :batch
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -1535,7 +1535,7 @@ speed: :standard | :fast
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -1549,7 +1549,7 @@ error: [BetaErrorResponse](api/beta.md) { error, request\_id, type }
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError { message, type }
 

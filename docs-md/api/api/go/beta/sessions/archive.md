@@ -18,7 +18,7 @@ sessionID string
 
 body BetaSessionArchiveParams
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -26,7 +26,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -112,7 +112,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -120,7 +120,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -160,11 +160,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -200,7 +200,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -208,7 +208,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -248,11 +248,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -262,7 +262,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -288,7 +288,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -300,7 +300,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -322,7 +322,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -346,7 +346,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -374,7 +374,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -398,7 +398,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -426,15 +426,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -452,7 +452,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -478,7 +478,7 @@ System string
 
 Tools []BetaManagedAgentsSessionAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -490,7 +490,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -512,7 +512,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -536,7 +536,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -564,7 +564,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -588,7 +588,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -616,15 +616,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -680,7 +680,7 @@ Type BetaManagedAgentsOutcomeEvaluationResourceType
 
 Resources [][BetaManagedAgentsSessionResourceUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsGitHubRepositoryResource struct{…}
 
@@ -700,9 +700,9 @@ A timestamp in RFC 3339 format
 
 URL string
 
-Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionoptional
+Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionOptional
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBranchCheckout struct{…}
 
@@ -748,29 +748,29 @@ The memory store ID (memstore\_...). Must belong to the caller's organization an
 
 Type BetaManagedAgentsMemoryStoreResourceType
 
-Access BetaManagedAgentsMemoryStoreResourceAccessoptional
+Access BetaManagedAgentsMemoryStoreResourceAccessOptional
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryStoreResourceAccessReadWrite BetaManagedAgentsMemoryStoreResourceAccess = "read\_write"
 
 const BetaManagedAgentsMemoryStoreResourceAccessReadOnly BetaManagedAgentsMemoryStoreResourceAccess = "read\_only"
 
-Description stringoptional
+Description stringOptional
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-Instructions stringoptional
+Instructions stringOptional
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-MountPath stringoptional
+MountPath stringOptional
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-Name stringoptional
+Name stringOptional
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -778,11 +778,11 @@ Stats [BetaManagedAgentsSessionStats](api/beta.md)
 
 Timing statistics for a session.
 
-ActiveSeconds float64optional
+ActiveSeconds float64Optional
 
 Cumulative time in seconds the session spent in running status. Excludes idle time.
 
-DurationSeconds float64optional
+DurationSeconds float64Optional
 
 Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
 
@@ -790,7 +790,7 @@ Status BetaManagedAgentsSessionStatus
 
 SessionStatus enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSessionStatusRescheduling BetaManagedAgentsSessionStatus = "rescheduling"
 
@@ -812,27 +812,27 @@ Usage [BetaManagedAgentsSessionUsage](api/beta.md)
 
 Cumulative token usage for a session across all turns.
 
-CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)optional
+CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)Optional
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
-Ephemeral1hInputTokens int64optional
+Ephemeral1hInputTokens int64Optional
 
 Tokens used to create 1-hour ephemeral cache entries.
 
-Ephemeral5mInputTokens int64optional
+Ephemeral5mInputTokens int64Optional
 
 Tokens used to create 5-minute ephemeral cache entries.
 
-CacheReadInputTokens int64optional
+CacheReadInputTokens int64Optional
 
 Total tokens read from prompt cache.
 
-InputTokens int64optional
+InputTokens int64Optional
 
 Total input tokens consumed across all turns.
 
-OutputTokens int64optional
+OutputTokens int64Optional
 
 Total output tokens generated across all turns.
 

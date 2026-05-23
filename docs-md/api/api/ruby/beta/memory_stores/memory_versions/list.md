@@ -40,7 +40,7 @@ operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 Query parameter for operation
 
-Accepts one of the following:
+One of the following:
 
 :created
 
@@ -60,7 +60,7 @@ view: [BetaManagedAgentsMemoryView](api/beta.md)
 
 Query parameter for view
 
-Accepts one of the following:
+One of the following:
 
 :basic
 
@@ -70,13 +70,13 @@ betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
 
-Accepts one of the following:
+One of the following:
 
 :"message-batches-2024-09-24"
 
@@ -154,7 +154,7 @@ operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 :created
 
@@ -180,7 +180,7 @@ created\_by: [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionActor { session\_id, type }
 
@@ -224,7 +224,7 @@ redacted\_by: [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionActor { session\_id, type }
 

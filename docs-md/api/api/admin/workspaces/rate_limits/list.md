@@ -24,7 +24,7 @@ group\_type: optional "model\_group" or "batch" or "token\_count" or 3 more
 
 Filter by group type.
 
-Accepts one of the following:
+One of the following:
 
 "model\_group"
 
@@ -52,7 +52,7 @@ group\_type: "model\_group" or "batch" or "token\_count" or 3 more
 
 The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
-Accepts one of the following:
+One of the following:
 
 "model\_group"
 

@@ -24,7 +24,7 @@ workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_rest
 
 Role of the new Workspace Member. Cannot be "workspace\_billing".
 
-Accepts one of the following:
+One of the following:
 
 "workspace\_user"
 
@@ -36,7 +36,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-WorkspaceMember = object { type, user\_id, workspace\_id, workspace\_role }
+WorkspaceMember object { type, user\_id, workspace\_id, workspace\_role }
 
 type: "workspace\_member"
 
@@ -56,7 +56,7 @@ workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_rest
 
 Role of the Workspace Member.
 
-Accepts one of the following:
+One of the following:
 
 "workspace\_user"
 

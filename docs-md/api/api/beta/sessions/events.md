@@ -20,7 +20,7 @@ GET/v1/sessions/{session\_id}/events/stream
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsAgentCustomToolUseEvent = object { id, input, name, 3 more }
+BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -46,7 +46,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-BetaManagedAgentsAgentMCPToolResultEvent = object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
+BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
 
 Event representing the result of an MCP tool execution.
 
@@ -68,9 +68,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -80,7 +80,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -88,9 +88,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -104,7 +104,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -114,7 +114,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -126,7 +126,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -134,9 +134,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -150,7 +150,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -164,7 +164,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -174,7 +174,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -194,7 +194,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -230,7 +230,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentMCPToolUseEvent = object { id, input, mcp\_server\_name, 5 more }
+BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp\_server\_name, 5 more }
 
 Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -260,7 +260,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -272,7 +272,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentMessageEvent = object { id, content, processed\_at, type }
+BetaManagedAgentsAgentMessageEvent object { id, content, processed\_at, type }
 
 An agent response event in the session conversation.
 
@@ -296,7 +296,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.message"
 
-BetaManagedAgentsAgentThinkingEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThinkingEvent object { id, processed\_at, type }
 
 Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -310,7 +310,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thinking"
 
-BetaManagedAgentsAgentThreadContextCompactedEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed\_at, type }
 
 Indicates that context compaction (summarization) occurred during the session.
 
@@ -324,7 +324,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thread\_context\_compacted"
 
-BetaManagedAgentsAgentThreadMessageReceivedEvent = object { id, content, from\_session\_thread\_id, 3 more }
+BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from\_session\_thread\_id, 3 more }
 
 Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -336,9 +336,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -348,7 +348,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -356,9 +356,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -372,7 +372,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -382,7 +382,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -394,7 +394,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -402,9 +402,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -418,7 +418,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -432,7 +432,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -442,7 +442,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -476,7 +476,7 @@ from\_agent\_name: optional string
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-BetaManagedAgentsAgentThreadMessageSentEvent = object { id, content, processed\_at, 3 more }
+BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed\_at, 3 more }
 
 Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -488,9 +488,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -500,7 +500,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -508,9 +508,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -524,7 +524,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -534,7 +534,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -546,7 +546,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -554,9 +554,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -570,7 +570,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -584,7 +584,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -594,7 +594,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -628,7 +628,7 @@ to\_agent\_name: optional string
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-BetaManagedAgentsAgentToolResultEvent = object { id, processed\_at, tool\_use\_id, 3 more }
+BetaManagedAgentsAgentToolResultEvent object { id, processed\_at, tool\_use\_id, 3 more }
 
 Event representing the result of an agent tool execution.
 
@@ -650,9 +650,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -662,7 +662,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -670,9 +670,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -686,7 +686,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -696,7 +696,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -708,7 +708,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -716,9 +716,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -732,7 +732,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -746,7 +746,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -756,7 +756,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -776,7 +776,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -812,7 +812,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentToolUseEvent = object { id, input, name, 4 more }
+BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }
 
 Event emitted when the agent invokes a built-in agent tool.
 
@@ -838,7 +838,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -850,7 +850,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -864,7 +864,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -878,7 +878,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsBillingError = object { message, retry\_status, type }
+BetaManagedAgentsBillingError object { message, retry\_status, type }
 
 The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -890,21 +890,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -912,7 +912,7 @@ type: "terminal"
 
 type: "billing\_error"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -920,9 +920,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -936,7 +936,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -950,7 +950,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -960,7 +960,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -984,9 +984,9 @@ BetaManagedAgentsEventParams = [BetaManagedAgentsUserMessageEventParams](api/bet
 
 Union type for event parameters that can be sent to a session.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUserMessageEventParams = object { content, type }
+BetaManagedAgentsUserMessageEventParams object { content, type }
 
 Parameters for sending a user message to the session.
 
@@ -994,9 +994,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -1006,7 +1006,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -1014,9 +1014,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -1030,7 +1030,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -1040,7 +1040,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -1052,7 +1052,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -1060,9 +1060,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -1076,7 +1076,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -1090,7 +1090,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -1100,7 +1100,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -1122,7 +1122,7 @@ The title of the document.
 
 type: "user.message"
 
-BetaManagedAgentsUserInterruptEventParams = object { type, session\_thread\_id }
+BetaManagedAgentsUserInterruptEventParams object { type, session\_thread\_id }
 
 Parameters for sending an interrupt to pause the agent.
 
@@ -1132,7 +1132,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserToolConfirmationEventParams = object { result, tool\_use\_id, type, deny\_message }
+BetaManagedAgentsUserToolConfirmationEventParams object { result, tool\_use\_id, type, deny\_message }
 
 Parameters for confirming or denying a tool execution request.
 
@@ -1140,7 +1140,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -1156,7 +1156,7 @@ deny\_message: optional string
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-BetaManagedAgentsUserCustomToolResultEventParams = object { custom\_tool\_use\_id, type, content, is\_error }
+BetaManagedAgentsUserCustomToolResultEventParams object { custom\_tool\_use\_id, type, content, is\_error }
 
 Parameters for providing the result of a custom tool execution.
 
@@ -1170,9 +1170,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -1182,7 +1182,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -1190,9 +1190,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -1206,7 +1206,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -1216,7 +1216,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -1228,7 +1228,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -1236,9 +1236,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -1252,7 +1252,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -1266,7 +1266,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -1276,7 +1276,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -1296,7 +1296,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -1332,7 +1332,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsUserDefineOutcomeEventParams = object { description, rubric, type, max\_iterations }
+BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max\_iterations }
 
 Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -1344,9 +1344,9 @@ rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  or 
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubricParams = object { file\_id, type }
+BetaManagedAgentsFileRubricParams object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -1356,7 +1356,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubricParams = object { content, type }
+BetaManagedAgentsTextRubricParams object { content, type }
 
 Rubric content provided inline as text.
 
@@ -1372,7 +1372,7 @@ max\_iterations: optional number
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-BetaManagedAgentsUserToolResultEventParams = object { tool\_use\_id, type, content, is\_error }
+BetaManagedAgentsUserToolResultEventParams object { tool\_use\_id, type, content, is\_error }
 
 Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -1386,9 +1386,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -1398,7 +1398,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -1406,9 +1406,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -1422,7 +1422,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -1432,7 +1432,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -1444,7 +1444,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -1452,9 +1452,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -1468,7 +1468,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -1482,7 +1482,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -1492,7 +1492,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -1512,7 +1512,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -1548,7 +1548,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -1558,7 +1558,7 @@ ID of a previously uploaded file.
 
 type: "file"
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -1568,7 +1568,7 @@ ID of a previously uploaded file.
 
 type: "file"
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -1578,7 +1578,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsFileRubricParams = object { file\_id, type }
+BetaManagedAgentsFileRubricParams object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -1588,7 +1588,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -1596,9 +1596,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -1612,7 +1612,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -1622,7 +1622,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -1634,7 +1634,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPAuthenticationFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Authentication to an MCP server failed.
 
@@ -1650,21 +1650,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -1672,7 +1672,7 @@ type: "terminal"
 
 type: "mcp\_authentication\_failed\_error"
 
-BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPConnectionFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Failed to connect to an MCP server.
 
@@ -1688,21 +1688,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -1710,7 +1710,7 @@ type: "terminal"
 
 type: "mcp\_connection\_failed\_error"
 
-BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+BetaManagedAgentsModelOverloadedError object { message, retry\_status, type }
 
 The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -1722,21 +1722,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -1744,7 +1744,7 @@ type: "terminal"
 
 type: "model\_overloaded\_error"
 
-BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRateLimitedError object { message, retry\_status, type }
 
 The model request was rate-limited.
 
@@ -1756,21 +1756,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -1778,7 +1778,7 @@ type: "terminal"
 
 type: "model\_rate\_limited\_error"
 
-BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRequestFailedError object { message, retry\_status, type }
 
 A model request failed for a reason other than overload or rate-limiting.
 
@@ -1790,21 +1790,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -1812,7 +1812,7 @@ type: "terminal"
 
 type: "model\_request\_failed\_error"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -1826,25 +1826,25 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
 type: "terminal"
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -1876,7 +1876,7 @@ The title of the search result.
 
 type: "search\_result"
 
-BetaManagedAgentsSearchResultCitations = object { enabled }
+BetaManagedAgentsSearchResultCitations object { enabled }
 
 Citation settings for a search result.
 
@@ -1884,7 +1884,7 @@ enabled: boolean
 
 Whether citations are enabled for this search result.
 
-BetaManagedAgentsSearchResultContent = object { text, type }
+BetaManagedAgentsSearchResultContent object { text, type }
 
 Text content within a search result.
 
@@ -1894,7 +1894,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsSendSessionEvents = object { data }
+BetaManagedAgentsSendSessionEvents object { data }
 
 Events that were successfully sent to the session.
 
@@ -1902,9 +1902,9 @@ data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, c
 
 Sent events
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+BetaManagedAgentsUserMessageEvent object { id, content, type, processed\_at }
 
 A user message event in the session conversation.
 
@@ -1916,9 +1916,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -1928,7 +1928,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -1936,9 +1936,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -1952,7 +1952,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -1962,7 +1962,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -1974,7 +1974,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -1982,9 +1982,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -1998,7 +1998,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -2012,7 +2012,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -2022,7 +2022,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -2048,7 +2048,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at, session\_thread\_id }
+BetaManagedAgentsUserInterruptEvent object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -2066,7 +2066,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 4 more }
+BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -2078,7 +2078,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -2102,7 +2102,7 @@ session\_thread\_id: optional string
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserCustomToolResultEvent object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -2120,9 +2120,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -2132,7 +2132,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -2140,9 +2140,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -2156,7 +2156,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -2166,7 +2166,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -2178,7 +2178,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -2186,9 +2186,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -2202,7 +2202,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -2216,7 +2216,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -2226,7 +2226,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -2246,7 +2246,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -2290,7 +2290,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsUserDefineOutcomeEvent = object { id, description, max\_iterations, 4 more }
+BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max\_iterations, 4 more }
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -2318,9 +2318,9 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaM
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -2330,7 +2330,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -2342,7 +2342,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-BetaManagedAgentsUserToolResultEvent = object { id, tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserToolResultEvent object { id, tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -2360,9 +2360,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -2372,7 +2372,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -2380,9 +2380,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -2396,7 +2396,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -2406,7 +2406,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -2418,7 +2418,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -2426,9 +2426,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -2442,7 +2442,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -2456,7 +2456,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -2466,7 +2466,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -2486,7 +2486,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -2530,7 +2530,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsSessionDeletedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionDeletedEvent object { id, processed\_at, type }
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -2544,13 +2544,13 @@ A timestamp in RFC 3339 format
 
 type: "session.deleted"
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionErrorEvent = object { id, error, processed\_at, type }
+BetaManagedAgentsSessionErrorEvent object { id, error, processed\_at, type }
 
 An error event indicating a problem occurred during session execution.
 
@@ -2562,9 +2562,9 @@ error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, ty
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+BetaManagedAgentsUnknownError object { message, retry\_status, type }
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -2576,21 +2576,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -2598,7 +2598,7 @@ type: "terminal"
 
 type: "unknown\_error"
 
-BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+BetaManagedAgentsModelOverloadedError object { message, retry\_status, type }
 
 The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -2610,21 +2610,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -2632,7 +2632,7 @@ type: "terminal"
 
 type: "model\_overloaded\_error"
 
-BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRateLimitedError object { message, retry\_status, type }
 
 The model request was rate-limited.
 
@@ -2644,21 +2644,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -2666,7 +2666,7 @@ type: "terminal"
 
 type: "model\_rate\_limited\_error"
 
-BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRequestFailedError object { message, retry\_status, type }
 
 A model request failed for a reason other than overload or rate-limiting.
 
@@ -2678,21 +2678,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -2700,7 +2700,7 @@ type: "terminal"
 
 type: "model\_request\_failed\_error"
 
-BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPConnectionFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Failed to connect to an MCP server.
 
@@ -2716,21 +2716,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -2738,7 +2738,7 @@ type: "terminal"
 
 type: "mcp\_connection\_failed\_error"
 
-BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPAuthenticationFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Authentication to an MCP server failed.
 
@@ -2754,21 +2754,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -2776,7 +2776,7 @@ type: "terminal"
 
 type: "mcp\_authentication\_failed\_error"
 
-BetaManagedAgentsBillingError = object { message, retry\_status, type }
+BetaManagedAgentsBillingError object { message, retry\_status, type }
 
 The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -2788,21 +2788,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -2820,9 +2820,9 @@ BetaManagedAgentsSessionEvent = [BetaManagedAgentsUserMessageEvent](api/beta.md)
 
 Union type for all event types in a session.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+BetaManagedAgentsUserMessageEvent object { id, content, type, processed\_at }
 
 A user message event in the session conversation.
 
@@ -2834,9 +2834,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -2846,7 +2846,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -2854,9 +2854,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -2870,7 +2870,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -2880,7 +2880,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -2892,7 +2892,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -2900,9 +2900,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -2916,7 +2916,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -2930,7 +2930,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -2940,7 +2940,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -2966,7 +2966,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at, session\_thread\_id }
+BetaManagedAgentsUserInterruptEvent object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -2984,7 +2984,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 4 more }
+BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -2996,7 +2996,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -3020,7 +3020,7 @@ session\_thread\_id: optional string
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserCustomToolResultEvent object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -3038,9 +3038,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -3050,7 +3050,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -3058,9 +3058,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -3074,7 +3074,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -3084,7 +3084,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -3096,7 +3096,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -3104,9 +3104,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -3120,7 +3120,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -3134,7 +3134,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -3144,7 +3144,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -3164,7 +3164,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -3208,7 +3208,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsAgentCustomToolUseEvent = object { id, input, name, 3 more }
+BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -3234,7 +3234,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-BetaManagedAgentsAgentMessageEvent = object { id, content, processed\_at, type }
+BetaManagedAgentsAgentMessageEvent object { id, content, processed\_at, type }
 
 An agent response event in the session conversation.
 
@@ -3258,7 +3258,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.message"
 
-BetaManagedAgentsAgentThinkingEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThinkingEvent object { id, processed\_at, type }
 
 Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -3272,7 +3272,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thinking"
 
-BetaManagedAgentsAgentMCPToolUseEvent = object { id, input, mcp\_server\_name, 5 more }
+BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp\_server\_name, 5 more }
 
 Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -3302,7 +3302,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -3314,7 +3314,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentMCPToolResultEvent = object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
+BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
 
 Event representing the result of an MCP tool execution.
 
@@ -3336,9 +3336,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -3348,7 +3348,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -3356,9 +3356,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -3372,7 +3372,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -3382,7 +3382,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -3394,7 +3394,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -3402,9 +3402,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -3418,7 +3418,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -3432,7 +3432,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -3442,7 +3442,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -3462,7 +3462,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -3498,7 +3498,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentToolUseEvent = object { id, input, name, 4 more }
+BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }
 
 Event emitted when the agent invokes a built-in agent tool.
 
@@ -3524,7 +3524,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -3536,7 +3536,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentToolResultEvent = object { id, processed\_at, tool\_use\_id, 3 more }
+BetaManagedAgentsAgentToolResultEvent object { id, processed\_at, tool\_use\_id, 3 more }
 
 Event representing the result of an agent tool execution.
 
@@ -3558,9 +3558,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -3570,7 +3570,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -3578,9 +3578,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -3594,7 +3594,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -3604,7 +3604,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -3616,7 +3616,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -3624,9 +3624,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -3640,7 +3640,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -3654,7 +3654,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -3664,7 +3664,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -3684,7 +3684,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -3720,7 +3720,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentThreadMessageReceivedEvent = object { id, content, from\_session\_thread\_id, 3 more }
+BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from\_session\_thread\_id, 3 more }
 
 Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -3732,9 +3732,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -3744,7 +3744,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -3752,9 +3752,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -3768,7 +3768,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -3778,7 +3778,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -3790,7 +3790,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -3798,9 +3798,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -3814,7 +3814,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -3828,7 +3828,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -3838,7 +3838,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -3872,7 +3872,7 @@ from\_agent\_name: optional string
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-BetaManagedAgentsAgentThreadMessageSentEvent = object { id, content, processed\_at, 3 more }
+BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed\_at, 3 more }
 
 Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -3884,9 +3884,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -3896,7 +3896,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -3904,9 +3904,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -3920,7 +3920,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -3930,7 +3930,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -3942,7 +3942,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -3950,9 +3950,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -3966,7 +3966,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -3980,7 +3980,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -3990,7 +3990,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -4024,7 +4024,7 @@ to\_agent\_name: optional string
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-BetaManagedAgentsAgentThreadContextCompactedEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed\_at, type }
 
 Indicates that context compaction (summarization) occurred during the session.
 
@@ -4038,7 +4038,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thread\_context\_compacted"
 
-BetaManagedAgentsSessionErrorEvent = object { id, error, processed\_at, type }
+BetaManagedAgentsSessionErrorEvent object { id, error, processed\_at, type }
 
 An error event indicating a problem occurred during session execution.
 
@@ -4050,9 +4050,9 @@ error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, ty
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+BetaManagedAgentsUnknownError object { message, retry\_status, type }
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -4064,21 +4064,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -4086,7 +4086,7 @@ type: "terminal"
 
 type: "unknown\_error"
 
-BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+BetaManagedAgentsModelOverloadedError object { message, retry\_status, type }
 
 The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -4098,21 +4098,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -4120,7 +4120,7 @@ type: "terminal"
 
 type: "model\_overloaded\_error"
 
-BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRateLimitedError object { message, retry\_status, type }
 
 The model request was rate-limited.
 
@@ -4132,21 +4132,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -4154,7 +4154,7 @@ type: "terminal"
 
 type: "model\_rate\_limited\_error"
 
-BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRequestFailedError object { message, retry\_status, type }
 
 A model request failed for a reason other than overload or rate-limiting.
 
@@ -4166,21 +4166,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -4188,7 +4188,7 @@ type: "terminal"
 
 type: "model\_request\_failed\_error"
 
-BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPConnectionFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Failed to connect to an MCP server.
 
@@ -4204,21 +4204,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -4226,7 +4226,7 @@ type: "terminal"
 
 type: "mcp\_connection\_failed\_error"
 
-BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPAuthenticationFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Authentication to an MCP server failed.
 
@@ -4242,21 +4242,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -4264,7 +4264,7 @@ type: "terminal"
 
 type: "mcp\_authentication\_failed\_error"
 
-BetaManagedAgentsBillingError = object { message, retry\_status, type }
+BetaManagedAgentsBillingError object { message, retry\_status, type }
 
 The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -4276,21 +4276,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -4304,7 +4304,7 @@ A timestamp in RFC 3339 format
 
 type: "session.error"
 
-BetaManagedAgentsSessionStatusRescheduledEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed\_at, type }
 
 Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -4318,7 +4318,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_rescheduled"
 
-BetaManagedAgentsSessionStatusRunningEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRunningEvent object { id, processed\_at, type }
 
 Indicates the session is actively running and the agent is working.
 
@@ -4332,7 +4332,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_running"
 
-BetaManagedAgentsSessionStatusIdleEvent = object { id, processed\_at, stop\_reason, type }
+BetaManagedAgentsSessionStatusIdleEvent object { id, processed\_at, stop\_reason, type }
 
 Indicates the agent has paused and is awaiting user input.
 
@@ -4348,15 +4348,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -4366,7 +4366,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -4374,7 +4374,7 @@ type: "retries\_exhausted"
 
 type: "session.status\_idle"
 
-BetaManagedAgentsSessionStatusTerminatedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed\_at, type }
 
 Indicates the session has terminated, either due to an error or completion.
 
@@ -4388,7 +4388,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_terminated"
 
-BetaManagedAgentsSessionThreadCreatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadCreatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -4410,7 +4410,7 @@ Public `sthr_` ID of the newly created thread.
 
 type: "session.thread\_created"
 
-BetaManagedAgentsSpanOutcomeEvaluationStartEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome\_id, 2 more }
 
 Emitted when an outcome evaluation cycle begins.
 
@@ -4432,7 +4432,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_start"
 
-BetaManagedAgentsSpanOutcomeEvaluationEndEvent = object { id, explanation, iteration, 6 more }
+BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }
 
 Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -4490,13 +4490,13 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaManagedAgentsSpanModelRequestStartEvent = object { id, processed\_at, type }
+BetaManagedAgentsSpanModelRequestStartEvent object { id, processed\_at, type }
 
 Emitted when a model request is initiated by the agent.
 
@@ -4510,7 +4510,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_start"
 
-BetaManagedAgentsSpanModelRequestEndEvent = object { id, is\_error, model\_request\_start\_id, 3 more }
+BetaManagedAgentsSpanModelRequestEndEvent object { id, is\_error, model\_request\_start\_id, 3 more }
 
 Emitted when a model request completes.
 
@@ -4550,7 +4550,7 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -4562,7 +4562,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_end"
 
-BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome\_id, 2 more }
 
 Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -4584,7 +4584,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_ongoing"
 
-BetaManagedAgentsUserDefineOutcomeEvent = object { id, description, max\_iterations, 4 more }
+BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max\_iterations, 4 more }
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -4612,9 +4612,9 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaM
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -4624,7 +4624,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -4636,7 +4636,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-BetaManagedAgentsSessionDeletedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionDeletedEvent object { id, processed\_at, type }
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -4650,7 +4650,7 @@ A timestamp in RFC 3339 format
 
 type: "session.deleted"
 
-BetaManagedAgentsSessionThreadStatusRunningEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -4672,7 +4672,7 @@ Public sthr\_ ID of the thread that started running.
 
 type: "session.thread\_status\_running"
 
-BetaManagedAgentsSessionThreadStatusIdleEvent = object { id, agent\_name, processed\_at, 3 more }
+BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent\_name, processed\_at, 3 more }
 
 A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -4696,15 +4696,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -4714,7 +4714,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -4722,7 +4722,7 @@ type: "retries\_exhausted"
 
 type: "session.thread\_status\_idle"
 
-BetaManagedAgentsSessionThreadStatusTerminatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -4744,7 +4744,7 @@ Public sthr\_ ID of the thread that terminated.
 
 type: "session.thread\_status\_terminated"
 
-BetaManagedAgentsUserToolResultEvent = object { id, tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserToolResultEvent object { id, tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -4762,9 +4762,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -4774,7 +4774,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -4782,9 +4782,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -4798,7 +4798,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -4808,7 +4808,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -4820,7 +4820,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -4828,9 +4828,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -4844,7 +4844,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -4858,7 +4858,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -4868,7 +4868,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -4888,7 +4888,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -4932,7 +4932,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsSessionThreadStatusRescheduledEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -4954,7 +4954,7 @@ Public sthr\_ ID of the thread that is retrying.
 
 type: "session.thread\_status\_rescheduled"
 
-BetaManagedAgentsSessionUpdatedEvent = object { id, processed\_at, type, 3 more }
+BetaManagedAgentsSessionUpdatedEvent object { id, processed\_at, type, 3 more }
 
 Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -4994,15 +4994,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -5040,13 +5040,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -5082,15 +5082,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -5128,13 +5128,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -5144,9 +5144,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -5156,7 +5156,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -5170,9 +5170,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -5182,7 +5182,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -5204,15 +5204,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -5228,15 +5228,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -5244,7 +5244,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -5256,15 +5256,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -5280,15 +5280,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -5298,7 +5298,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -5334,9 +5334,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -5346,7 +5346,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -5360,9 +5360,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -5372,7 +5372,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -5394,15 +5394,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -5418,15 +5418,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -5434,7 +5434,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -5446,15 +5446,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -5470,15 +5470,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -5488,7 +5488,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -5526,7 +5526,7 @@ title: optional string
 
 The session's new title. Present only when the update changed it.
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -5536,13 +5536,13 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
 type: "retries\_exhausted"
 
-BetaManagedAgentsSessionStatusIdleEvent = object { id, processed\_at, stop\_reason, type }
+BetaManagedAgentsSessionStatusIdleEvent object { id, processed\_at, stop\_reason, type }
 
 Indicates the agent has paused and is awaiting user input.
 
@@ -5558,15 +5558,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -5576,7 +5576,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -5584,7 +5584,7 @@ type: "retries\_exhausted"
 
 type: "session.status\_idle"
 
-BetaManagedAgentsSessionStatusRescheduledEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed\_at, type }
 
 Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -5598,7 +5598,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_rescheduled"
 
-BetaManagedAgentsSessionStatusRunningEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRunningEvent object { id, processed\_at, type }
 
 Indicates the session is actively running and the agent is working.
 
@@ -5612,7 +5612,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_running"
 
-BetaManagedAgentsSessionStatusTerminatedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed\_at, type }
 
 Indicates the session has terminated, either due to an error or completion.
 
@@ -5626,7 +5626,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_terminated"
 
-BetaManagedAgentsSessionThreadCreatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadCreatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -5648,7 +5648,7 @@ Public `sthr_` ID of the newly created thread.
 
 type: "session.thread\_created"
 
-BetaManagedAgentsSessionThreadStatusIdleEvent = object { id, agent\_name, processed\_at, 3 more }
+BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent\_name, processed\_at, 3 more }
 
 A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -5672,15 +5672,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -5690,7 +5690,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -5698,7 +5698,7 @@ type: "retries\_exhausted"
 
 type: "session.thread\_status\_idle"
 
-BetaManagedAgentsSessionThreadStatusRescheduledEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -5720,7 +5720,7 @@ Public sthr\_ ID of the thread that is retrying.
 
 type: "session.thread\_status\_rescheduled"
 
-BetaManagedAgentsSessionThreadStatusRunningEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -5742,7 +5742,7 @@ Public sthr\_ ID of the thread that started running.
 
 type: "session.thread\_status\_running"
 
-BetaManagedAgentsSessionThreadStatusTerminatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -5764,7 +5764,7 @@ Public sthr\_ ID of the thread that terminated.
 
 type: "session.thread\_status\_terminated"
 
-BetaManagedAgentsSpanModelRequestEndEvent = object { id, is\_error, model\_request\_start\_id, 3 more }
+BetaManagedAgentsSpanModelRequestEndEvent object { id, is\_error, model\_request\_start\_id, 3 more }
 
 Emitted when a model request completes.
 
@@ -5804,7 +5804,7 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -5816,7 +5816,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_end"
 
-BetaManagedAgentsSpanModelRequestStartEvent = object { id, processed\_at, type }
+BetaManagedAgentsSpanModelRequestStartEvent object { id, processed\_at, type }
 
 Emitted when a model request is initiated by the agent.
 
@@ -5830,7 +5830,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_start"
 
-BetaManagedAgentsSpanModelUsage = object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+BetaManagedAgentsSpanModelUsage object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
 
 Token usage for a single model request.
 
@@ -5854,13 +5854,13 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaManagedAgentsSpanOutcomeEvaluationEndEvent = object { id, explanation, iteration, 6 more }
+BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }
 
 Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -5918,13 +5918,13 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome\_id, 2 more }
 
 Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -5946,7 +5946,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_ongoing"
 
-BetaManagedAgentsSpanOutcomeEvaluationStartEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome\_id, 2 more }
 
 Emitted when an outcome evaluation cycle begins.
 
@@ -5972,9 +5972,9 @@ BetaManagedAgentsStreamSessionEvents = [BetaManagedAgentsUserMessageEvent](api/b
 
 Server-sent event in the session stream.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+BetaManagedAgentsUserMessageEvent object { id, content, type, processed\_at }
 
 A user message event in the session conversation.
 
@@ -5986,9 +5986,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -5998,7 +5998,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6006,9 +6006,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -6022,7 +6022,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -6032,7 +6032,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -6044,7 +6044,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6052,9 +6052,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -6068,7 +6068,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -6082,7 +6082,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -6092,7 +6092,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -6118,7 +6118,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at, session\_thread\_id }
+BetaManagedAgentsUserInterruptEvent object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -6136,7 +6136,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 4 more }
+BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -6148,7 +6148,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -6172,7 +6172,7 @@ session\_thread\_id: optional string
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserCustomToolResultEvent object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -6190,9 +6190,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -6202,7 +6202,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6210,9 +6210,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -6226,7 +6226,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -6236,7 +6236,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -6248,7 +6248,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6256,9 +6256,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -6272,7 +6272,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -6286,7 +6286,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -6296,7 +6296,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -6316,7 +6316,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -6360,7 +6360,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsAgentCustomToolUseEvent = object { id, input, name, 3 more }
+BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -6386,7 +6386,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-BetaManagedAgentsAgentMessageEvent = object { id, content, processed\_at, type }
+BetaManagedAgentsAgentMessageEvent object { id, content, processed\_at, type }
 
 An agent response event in the session conversation.
 
@@ -6410,7 +6410,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.message"
 
-BetaManagedAgentsAgentThinkingEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThinkingEvent object { id, processed\_at, type }
 
 Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -6424,7 +6424,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thinking"
 
-BetaManagedAgentsAgentMCPToolUseEvent = object { id, input, mcp\_server\_name, 5 more }
+BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp\_server\_name, 5 more }
 
 Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -6454,7 +6454,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -6466,7 +6466,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentMCPToolResultEvent = object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
+BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
 
 Event representing the result of an MCP tool execution.
 
@@ -6488,9 +6488,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -6500,7 +6500,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6508,9 +6508,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -6524,7 +6524,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -6534,7 +6534,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -6546,7 +6546,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6554,9 +6554,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -6570,7 +6570,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -6584,7 +6584,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -6594,7 +6594,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -6614,7 +6614,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -6650,7 +6650,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentToolUseEvent = object { id, input, name, 4 more }
+BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }
 
 Event emitted when the agent invokes a built-in agent tool.
 
@@ -6676,7 +6676,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -6688,7 +6688,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentToolResultEvent = object { id, processed\_at, tool\_use\_id, 3 more }
+BetaManagedAgentsAgentToolResultEvent object { id, processed\_at, tool\_use\_id, 3 more }
 
 Event representing the result of an agent tool execution.
 
@@ -6710,9 +6710,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -6722,7 +6722,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6730,9 +6730,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -6746,7 +6746,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -6756,7 +6756,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -6768,7 +6768,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6776,9 +6776,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -6792,7 +6792,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -6806,7 +6806,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -6816,7 +6816,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -6836,7 +6836,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -6872,7 +6872,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentThreadMessageReceivedEvent = object { id, content, from\_session\_thread\_id, 3 more }
+BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from\_session\_thread\_id, 3 more }
 
 Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -6884,9 +6884,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -6896,7 +6896,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -6904,9 +6904,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -6920,7 +6920,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -6930,7 +6930,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -6942,7 +6942,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -6950,9 +6950,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -6966,7 +6966,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -6980,7 +6980,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -6990,7 +6990,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -7024,7 +7024,7 @@ from\_agent\_name: optional string
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-BetaManagedAgentsAgentThreadMessageSentEvent = object { id, content, processed\_at, 3 more }
+BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed\_at, 3 more }
 
 Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -7036,9 +7036,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -7048,7 +7048,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -7056,9 +7056,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -7072,7 +7072,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -7082,7 +7082,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -7094,7 +7094,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -7102,9 +7102,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -7118,7 +7118,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -7132,7 +7132,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -7142,7 +7142,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -7176,7 +7176,7 @@ to\_agent\_name: optional string
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-BetaManagedAgentsAgentThreadContextCompactedEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed\_at, type }
 
 Indicates that context compaction (summarization) occurred during the session.
 
@@ -7190,7 +7190,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thread\_context\_compacted"
 
-BetaManagedAgentsSessionErrorEvent = object { id, error, processed\_at, type }
+BetaManagedAgentsSessionErrorEvent object { id, error, processed\_at, type }
 
 An error event indicating a problem occurred during session execution.
 
@@ -7202,9 +7202,9 @@ error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, ty
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+BetaManagedAgentsUnknownError object { message, retry\_status, type }
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -7216,21 +7216,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7238,7 +7238,7 @@ type: "terminal"
 
 type: "unknown\_error"
 
-BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+BetaManagedAgentsModelOverloadedError object { message, retry\_status, type }
 
 The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -7250,21 +7250,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7272,7 +7272,7 @@ type: "terminal"
 
 type: "model\_overloaded\_error"
 
-BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRateLimitedError object { message, retry\_status, type }
 
 The model request was rate-limited.
 
@@ -7284,21 +7284,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7306,7 +7306,7 @@ type: "terminal"
 
 type: "model\_rate\_limited\_error"
 
-BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRequestFailedError object { message, retry\_status, type }
 
 A model request failed for a reason other than overload or rate-limiting.
 
@@ -7318,21 +7318,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7340,7 +7340,7 @@ type: "terminal"
 
 type: "model\_request\_failed\_error"
 
-BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPConnectionFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Failed to connect to an MCP server.
 
@@ -7356,21 +7356,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7378,7 +7378,7 @@ type: "terminal"
 
 type: "mcp\_connection\_failed\_error"
 
-BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPAuthenticationFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Authentication to an MCP server failed.
 
@@ -7394,21 +7394,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7416,7 +7416,7 @@ type: "terminal"
 
 type: "mcp\_authentication\_failed\_error"
 
-BetaManagedAgentsBillingError = object { message, retry\_status, type }
+BetaManagedAgentsBillingError object { message, retry\_status, type }
 
 The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -7428,21 +7428,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -7456,7 +7456,7 @@ A timestamp in RFC 3339 format
 
 type: "session.error"
 
-BetaManagedAgentsSessionStatusRescheduledEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed\_at, type }
 
 Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -7470,7 +7470,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_rescheduled"
 
-BetaManagedAgentsSessionStatusRunningEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRunningEvent object { id, processed\_at, type }
 
 Indicates the session is actively running and the agent is working.
 
@@ -7484,7 +7484,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_running"
 
-BetaManagedAgentsSessionStatusIdleEvent = object { id, processed\_at, stop\_reason, type }
+BetaManagedAgentsSessionStatusIdleEvent object { id, processed\_at, stop\_reason, type }
 
 Indicates the agent has paused and is awaiting user input.
 
@@ -7500,15 +7500,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -7518,7 +7518,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -7526,7 +7526,7 @@ type: "retries\_exhausted"
 
 type: "session.status\_idle"
 
-BetaManagedAgentsSessionStatusTerminatedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed\_at, type }
 
 Indicates the session has terminated, either due to an error or completion.
 
@@ -7540,7 +7540,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_terminated"
 
-BetaManagedAgentsSessionThreadCreatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadCreatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -7562,7 +7562,7 @@ Public `sthr_` ID of the newly created thread.
 
 type: "session.thread\_created"
 
-BetaManagedAgentsSpanOutcomeEvaluationStartEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome\_id, 2 more }
 
 Emitted when an outcome evaluation cycle begins.
 
@@ -7584,7 +7584,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_start"
 
-BetaManagedAgentsSpanOutcomeEvaluationEndEvent = object { id, explanation, iteration, 6 more }
+BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }
 
 Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -7642,13 +7642,13 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaManagedAgentsSpanModelRequestStartEvent = object { id, processed\_at, type }
+BetaManagedAgentsSpanModelRequestStartEvent object { id, processed\_at, type }
 
 Emitted when a model request is initiated by the agent.
 
@@ -7662,7 +7662,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_start"
 
-BetaManagedAgentsSpanModelRequestEndEvent = object { id, is\_error, model\_request\_start\_id, 3 more }
+BetaManagedAgentsSpanModelRequestEndEvent object { id, is\_error, model\_request\_start\_id, 3 more }
 
 Emitted when a model request completes.
 
@@ -7702,7 +7702,7 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -7714,7 +7714,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_end"
 
-BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome\_id, 2 more }
 
 Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -7736,7 +7736,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_ongoing"
 
-BetaManagedAgentsUserDefineOutcomeEvent = object { id, description, max\_iterations, 4 more }
+BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max\_iterations, 4 more }
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -7764,9 +7764,9 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaM
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -7776,7 +7776,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -7788,7 +7788,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-BetaManagedAgentsSessionDeletedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionDeletedEvent object { id, processed\_at, type }
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -7802,7 +7802,7 @@ A timestamp in RFC 3339 format
 
 type: "session.deleted"
 
-BetaManagedAgentsSessionThreadStatusRunningEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -7824,7 +7824,7 @@ Public sthr\_ ID of the thread that started running.
 
 type: "session.thread\_status\_running"
 
-BetaManagedAgentsSessionThreadStatusIdleEvent = object { id, agent\_name, processed\_at, 3 more }
+BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent\_name, processed\_at, 3 more }
 
 A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -7848,15 +7848,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -7866,7 +7866,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -7874,7 +7874,7 @@ type: "retries\_exhausted"
 
 type: "session.thread\_status\_idle"
 
-BetaManagedAgentsSessionThreadStatusTerminatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -7896,7 +7896,7 @@ Public sthr\_ ID of the thread that terminated.
 
 type: "session.thread\_status\_terminated"
 
-BetaManagedAgentsUserToolResultEvent = object { id, tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserToolResultEvent object { id, tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -7914,9 +7914,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -7926,7 +7926,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -7934,9 +7934,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -7950,7 +7950,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -7960,7 +7960,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -7972,7 +7972,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -7980,9 +7980,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -7996,7 +7996,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -8010,7 +8010,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -8020,7 +8020,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -8040,7 +8040,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -8084,7 +8084,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsSessionThreadStatusRescheduledEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -8106,7 +8106,7 @@ Public sthr\_ ID of the thread that is retrying.
 
 type: "session.thread\_status\_rescheduled"
 
-BetaManagedAgentsSessionUpdatedEvent = object { id, processed\_at, type, 3 more }
+BetaManagedAgentsSessionUpdatedEvent object { id, processed\_at, type, 3 more }
 
 Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -8146,15 +8146,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -8192,13 +8192,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -8234,15 +8234,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -8280,13 +8280,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -8296,9 +8296,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -8308,7 +8308,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -8322,9 +8322,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -8334,7 +8334,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -8356,15 +8356,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -8380,15 +8380,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -8396,7 +8396,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -8408,15 +8408,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -8432,15 +8432,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -8450,7 +8450,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -8486,9 +8486,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -8498,7 +8498,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -8512,9 +8512,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -8524,7 +8524,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -8546,15 +8546,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -8570,15 +8570,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -8586,7 +8586,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -8598,15 +8598,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -8622,15 +8622,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -8640,7 +8640,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -8678,7 +8678,7 @@ title: optional string
 
 The session's new title. Present only when the update changed it.
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -8688,7 +8688,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -8698,7 +8698,7 @@ Rubric content. Plain text or markdown — the grader treats it as freeform text
 
 type: "text"
 
-BetaManagedAgentsTextRubricParams = object { content, type }
+BetaManagedAgentsTextRubricParams object { content, type }
 
 Rubric content provided inline as text.
 
@@ -8708,7 +8708,7 @@ Rubric content. Plain text or markdown — the grader treats it as freeform text
 
 type: "text"
 
-BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+BetaManagedAgentsUnknownError object { message, retry\_status, type }
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -8720,21 +8720,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -8742,7 +8742,7 @@ type: "terminal"
 
 type: "unknown\_error"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -8752,7 +8752,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -8762,7 +8762,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserCustomToolResultEvent object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -8780,9 +8780,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -8792,7 +8792,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -8800,9 +8800,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -8816,7 +8816,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -8826,7 +8826,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -8838,7 +8838,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -8846,9 +8846,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -8862,7 +8862,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -8876,7 +8876,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -8886,7 +8886,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -8906,7 +8906,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -8950,7 +8950,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsUserCustomToolResultEventParams = object { custom\_tool\_use\_id, type, content, is\_error }
+BetaManagedAgentsUserCustomToolResultEventParams object { custom\_tool\_use\_id, type, content, is\_error }
 
 Parameters for providing the result of a custom tool execution.
 
@@ -8964,9 +8964,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -8976,7 +8976,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -8984,9 +8984,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -9000,7 +9000,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -9010,7 +9010,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -9022,7 +9022,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -9030,9 +9030,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -9046,7 +9046,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -9060,7 +9060,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -9070,7 +9070,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -9090,7 +9090,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -9126,7 +9126,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsUserDefineOutcomeEvent = object { id, description, max\_iterations, 4 more }
+BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max\_iterations, 4 more }
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -9154,9 +9154,9 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaM
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -9166,7 +9166,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -9178,7 +9178,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-BetaManagedAgentsUserDefineOutcomeEventParams = object { description, rubric, type, max\_iterations }
+BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max\_iterations }
 
 Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -9190,9 +9190,9 @@ rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  or 
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubricParams = object { file\_id, type }
+BetaManagedAgentsFileRubricParams object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -9202,7 +9202,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubricParams = object { content, type }
+BetaManagedAgentsTextRubricParams object { content, type }
 
 Rubric content provided inline as text.
 
@@ -9218,7 +9218,7 @@ max\_iterations: optional number
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at, session\_thread\_id }
+BetaManagedAgentsUserInterruptEvent object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -9236,7 +9236,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserInterruptEventParams = object { type, session\_thread\_id }
+BetaManagedAgentsUserInterruptEventParams object { type, session\_thread\_id }
 
 Parameters for sending an interrupt to pause the agent.
 
@@ -9246,7 +9246,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+BetaManagedAgentsUserMessageEvent object { id, content, type, processed\_at }
 
 A user message event in the session conversation.
 
@@ -9258,9 +9258,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -9270,7 +9270,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -9278,9 +9278,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -9294,7 +9294,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -9304,7 +9304,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -9316,7 +9316,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -9324,9 +9324,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -9340,7 +9340,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -9354,7 +9354,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -9364,7 +9364,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -9390,7 +9390,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserMessageEventParams = object { content, type }
+BetaManagedAgentsUserMessageEventParams object { content, type }
 
 Parameters for sending a user message to the session.
 
@@ -9398,9 +9398,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -9410,7 +9410,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -9418,9 +9418,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -9434,7 +9434,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -9444,7 +9444,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -9456,7 +9456,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -9464,9 +9464,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -9480,7 +9480,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -9494,7 +9494,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -9504,7 +9504,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -9526,7 +9526,7 @@ The title of the document.
 
 type: "user.message"
 
-BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 4 more }
+BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -9538,7 +9538,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -9562,7 +9562,7 @@ session\_thread\_id: optional string
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-BetaManagedAgentsUserToolConfirmationEventParams = object { result, tool\_use\_id, type, deny\_message }
+BetaManagedAgentsUserToolConfirmationEventParams object { result, tool\_use\_id, type, deny\_message }
 
 Parameters for confirming or denying a tool execution request.
 
@@ -9570,7 +9570,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -9586,7 +9586,7 @@ deny\_message: optional string
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-BetaManagedAgentsUserToolResultEventParams = object { tool\_use\_id, type, content, is\_error }
+BetaManagedAgentsUserToolResultEventParams object { tool\_use\_id, type, content, is\_error }
 
 Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -9600,9 +9600,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -9612,7 +9612,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -9620,9 +9620,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -9636,7 +9636,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -9646,7 +9646,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -9658,7 +9658,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -9666,9 +9666,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -9682,7 +9682,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -9696,7 +9696,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -9706,7 +9706,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -9726,7 +9726,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 

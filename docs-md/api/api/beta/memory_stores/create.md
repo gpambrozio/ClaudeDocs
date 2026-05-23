@@ -16,13 +16,13 @@ Create a memory store
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -90,7 +90,7 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsMemoryStore = object { id, created\_at, name, 5 more }
+BetaManagedAgentsMemoryStore object { id, created\_at, name, 5 more }
 
 A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 

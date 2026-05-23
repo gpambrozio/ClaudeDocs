@@ -108,7 +108,7 @@ required string Url
 
 Checkout? Checkout
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout:
 
@@ -158,7 +158,7 @@ Access? Access
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"ReadWrite
 

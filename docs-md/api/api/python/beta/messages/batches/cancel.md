@@ -26,13 +26,13 @@ betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 str
 
 Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -122,7 +122,7 @@ processing\_status: Literal["in\_progress", "canceling", "ended"]
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 

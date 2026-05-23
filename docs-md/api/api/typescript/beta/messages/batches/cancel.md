@@ -28,7 +28,7 @@ betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 (string & {})
 
@@ -122,7 +122,7 @@ processing\_status: "in\_progress" | "canceling" | "ended"
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 

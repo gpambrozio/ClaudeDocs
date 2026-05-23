@@ -54,7 +54,7 @@ order: :asc | :desc
 
 Sort direction for results, ordered by created\_at. Defaults to desc (newest first).
 
-Accepts one of the following:
+One of the following:
 
 :asc
 
@@ -68,7 +68,7 @@ statuses: Array[:rescheduling | :running | :idle | :terminated]
 
 Filter by session status. Repeat the parameter to match any of multiple statuses.
 
-Accepts one of the following:
+One of the following:
 
 :rescheduling
 
@@ -82,13 +82,13 @@ betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
 
-Accepts one of the following:
+One of the following:
 
 :"message-batches-2024-09-24"
 
@@ -174,15 +174,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -220,13 +220,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -262,15 +262,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -308,13 +308,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -324,7 +324,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -350,7 +350,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -362,7 +362,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -384,7 +384,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -408,7 +408,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -436,7 +436,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -460,7 +460,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -514,7 +514,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -540,7 +540,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -552,7 +552,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -574,7 +574,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -598,7 +598,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -626,7 +626,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -650,7 +650,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -742,7 +742,7 @@ type: :outcome\_evaluation
 
 resources: Array[[BetaManagedAgentsSessionResource](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource { id, created\_at, mount\_path, 4 more }
 
@@ -764,7 +764,7 @@ url: String
 
 checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout { name, type }
 
@@ -814,7 +814,7 @@ access: :read\_write | :read\_only
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 :read\_write
 
@@ -852,7 +852,7 @@ status: :rescheduling | :running | :idle | :terminated
 
 SessionStatus enum
 
-Accepts one of the following:
+One of the following:
 
 :rescheduling
 

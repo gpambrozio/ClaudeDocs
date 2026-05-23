@@ -52,7 +52,7 @@ order: optional "asc" or "desc"
 
 Sort direction for messages within the response. `asc` (the default) returns oldest-first; `desc` returns newest-first.
 
-Accepts one of the following:
+One of the following:
 
 "asc"
 
@@ -164,7 +164,7 @@ role: "assistant" or "user"
 
 Message sender (user or assistant)
 
-Accepts one of the following:
+One of the following:
 
 "assistant"
 

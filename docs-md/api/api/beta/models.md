@@ -16,7 +16,7 @@ GET/v1/models/{model\_id}
 
 ##### ModelsExpand Collapse
 
-BetaCapabilitySupport = object { supported }
+BetaCapabilitySupport object { supported }
 
 Indicates whether a capability is supported.
 
@@ -24,7 +24,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaContextManagementCapability = object { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported }
+BetaContextManagementCapability object { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported }
 
 Context management capability details.
 
@@ -56,7 +56,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaEffortCapability = object { high, low, max, 3 more }
+BetaEffortCapability object { high, low, max, 3 more }
 
 Effort (reasoning\_effort) capability details.
 
@@ -104,7 +104,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaModelCapabilities = object { batch, citations, code\_execution, 6 more }
+BetaModelCapabilities object { batch, citations, code\_execution, 6 more }
 
 Model capability information.
 
@@ -264,7 +264,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaModelInfo = object { id, capabilities, created\_at, 4 more }
+BetaModelInfo object { id, capabilities, created\_at, 4 more }
 
 id: string
 
@@ -452,7 +452,7 @@ Object type.
 
 For Models, this is always `"model"`.
 
-BetaThinkingCapability = object { supported, types }
+BetaThinkingCapability object { supported, types }
 
 Thinking capability details.
 
@@ -480,7 +480,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaThinkingTypes = object { adaptive, enabled }
+BetaThinkingTypes object { adaptive, enabled }
 
 Supported thinking type configurations.
 

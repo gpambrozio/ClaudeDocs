@@ -22,7 +22,7 @@ view: optional [BetaManagedAgentsMemoryView](api/beta.md)
 
 Query parameter for view
 
-Accepts one of the following:
+One of the following:
 
 "basic"
 
@@ -34,13 +34,13 @@ Accepts one of the following:
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -94,7 +94,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsMemoryVersion = object { id, created\_at, memory\_id, 10 more }
+BetaManagedAgentsMemoryVersion object { id, created\_at, memory\_id, 10 more }
 
 A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and persist after the memory is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
@@ -118,7 +118,7 @@ operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 "created"
 
@@ -144,9 +144,9 @@ created\_by: optional [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionActor = object { session\_id, type }
+BetaManagedAgentsSessionActor object { session\_id, type }
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -156,7 +156,7 @@ ID of the session that performed the write (a `sesn_...` value). Look up the ses
 
 type: "session\_actor"
 
-BetaManagedAgentsAPIActor = object { api\_key\_id, type }
+BetaManagedAgentsAPIActor object { api\_key\_id, type }
 
 Attribution for a write made directly via the public API (outside of any session).
 
@@ -166,7 +166,7 @@ ID of the API key that performed the write. This identifies the key, not the sec
 
 type: "api\_actor"
 
-BetaManagedAgentsUserActor = object { type, user\_id }
+BetaManagedAgentsUserActor object { type, user\_id }
 
 Attribution for a write made by a human user through the Anthropic Console.
 
@@ -188,9 +188,9 @@ redacted\_by: optional [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionActor = object { session\_id, type }
+BetaManagedAgentsSessionActor object { session\_id, type }
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -200,7 +200,7 @@ ID of the session that performed the write (a `sesn_...` value). Look up the ses
 
 type: "session\_actor"
 
-BetaManagedAgentsAPIActor = object { api\_key\_id, type }
+BetaManagedAgentsAPIActor object { api\_key\_id, type }
 
 Attribution for a write made directly via the public API (outside of any session).
 
@@ -210,7 +210,7 @@ ID of the API key that performed the write. This identifies the key, not the sec
 
 type: "api\_actor"
 
-BetaManagedAgentsUserActor = object { type, user\_id }
+BetaManagedAgentsUserActor object { type, user\_id }
 
 Attribution for a write made by a human user through the Anthropic Console.
 

@@ -20,13 +20,13 @@ session\_id: string
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -84,9 +84,9 @@ events: array of [BetaManagedAgentsEventParams](api/beta.md)
 
 Events to send to the `session`.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUserMessageEventParams = object { content, type }
+BetaManagedAgentsUserMessageEventParams object { content, type }
 
 Parameters for sending a user message to the session.
 
@@ -94,9 +94,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -106,7 +106,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -114,9 +114,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -130,7 +130,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -140,7 +140,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -152,7 +152,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -160,9 +160,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -176,7 +176,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -190,7 +190,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -200,7 +200,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -222,7 +222,7 @@ The title of the document.
 
 type: "user.message"
 
-BetaManagedAgentsUserInterruptEventParams = object { type, session\_thread\_id }
+BetaManagedAgentsUserInterruptEventParams object { type, session\_thread\_id }
 
 Parameters for sending an interrupt to pause the agent.
 
@@ -232,7 +232,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserToolConfirmationEventParams = object { result, tool\_use\_id, type, deny\_message }
+BetaManagedAgentsUserToolConfirmationEventParams object { result, tool\_use\_id, type, deny\_message }
 
 Parameters for confirming or denying a tool execution request.
 
@@ -240,7 +240,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -256,7 +256,7 @@ deny\_message: optional string
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-BetaManagedAgentsUserCustomToolResultEventParams = object { custom\_tool\_use\_id, type, content, is\_error }
+BetaManagedAgentsUserCustomToolResultEventParams object { custom\_tool\_use\_id, type, content, is\_error }
 
 Parameters for providing the result of a custom tool execution.
 
@@ -270,9 +270,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -282,7 +282,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -290,9 +290,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -306,7 +306,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -316,7 +316,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -328,7 +328,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -336,9 +336,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -352,7 +352,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -366,7 +366,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -376,7 +376,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -396,7 +396,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -432,7 +432,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsUserDefineOutcomeEventParams = object { description, rubric, type, max\_iterations }
+BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max\_iterations }
 
 Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -444,9 +444,9 @@ rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  or 
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubricParams = object { file\_id, type }
+BetaManagedAgentsFileRubricParams object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -456,7 +456,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubricParams = object { content, type }
+BetaManagedAgentsTextRubricParams object { content, type }
 
 Rubric content provided inline as text.
 
@@ -472,7 +472,7 @@ max\_iterations: optional number
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-BetaManagedAgentsUserToolResultEventParams = object { tool\_use\_id, type, content, is\_error }
+BetaManagedAgentsUserToolResultEventParams object { tool\_use\_id, type, content, is\_error }
 
 Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -486,9 +486,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -498,7 +498,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -506,9 +506,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -522,7 +522,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -532,7 +532,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -544,7 +544,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -552,9 +552,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -568,7 +568,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -582,7 +582,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -592,7 +592,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -612,7 +612,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -650,7 +650,7 @@ Whether the tool execution resulted in an error.
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsSendSessionEvents = object { data }
+BetaManagedAgentsSendSessionEvents object { data }
 
 Events that were successfully sent to the session.
 
@@ -658,9 +658,9 @@ data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, c
 
 Sent events
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+BetaManagedAgentsUserMessageEvent object { id, content, type, processed\_at }
 
 A user message event in the session conversation.
 
@@ -672,9 +672,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -684,7 +684,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -692,9 +692,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -708,7 +708,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -718,7 +718,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -730,7 +730,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -738,9 +738,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -754,7 +754,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -768,7 +768,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -778,7 +778,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -804,7 +804,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at, session\_thread\_id }
+BetaManagedAgentsUserInterruptEvent object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -822,7 +822,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 4 more }
+BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -834,7 +834,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -858,7 +858,7 @@ session\_thread\_id: optional string
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserCustomToolResultEvent object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -876,9 +876,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -888,7 +888,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -896,9 +896,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -912,7 +912,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -922,7 +922,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -934,7 +934,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -942,9 +942,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -958,7 +958,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -972,7 +972,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -982,7 +982,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -1002,7 +1002,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -1046,7 +1046,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsUserDefineOutcomeEvent = object { id, description, max\_iterations, 4 more }
+BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max\_iterations, 4 more }
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -1074,9 +1074,9 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaM
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -1086,7 +1086,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -1098,7 +1098,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-BetaManagedAgentsUserToolResultEvent = object { id, tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserToolResultEvent object { id, tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -1116,9 +1116,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -1128,7 +1128,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -1136,9 +1136,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -1152,7 +1152,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -1162,7 +1162,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -1174,7 +1174,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -1182,9 +1182,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -1198,7 +1198,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -1212,7 +1212,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -1222,7 +1222,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -1242,7 +1242,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 

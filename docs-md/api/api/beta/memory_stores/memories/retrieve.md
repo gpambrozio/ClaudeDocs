@@ -22,7 +22,7 @@ view: optional [BetaManagedAgentsMemoryView](api/beta.md)
 
 Query parameter for view
 
-Accepts one of the following:
+One of the following:
 
 "basic"
 
@@ -34,13 +34,13 @@ Accepts one of the following:
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -94,7 +94,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsMemory = object { id, content\_sha256, content\_size\_bytes, 7 more }
+BetaManagedAgentsMemory object { id, content\_sha256, content\_size\_bytes, 7 more }
 
 A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 

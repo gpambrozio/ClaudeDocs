@@ -18,19 +18,19 @@ userProfileID string
 
 params BetaUserProfileUpdateParams
 
-ExternalID param.Field[string]optional
+ExternalID param.Field[string]Optional
 
 Body param: If present, replaces the stored external\_id. Omit to leave unchanged. Maximum 255 characters.
 
-Metadata param.Field[map[string, string]]optional
+Metadata param.Field[map[string, string]]Optional
 
 Body param: Key-value pairs to merge into the stored metadata. Keys provided overwrite existing values. To remove a key, set its value to an empty string. Keys not provided are left unchanged. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters.
 
-Name param.Field[string]optional
+Name param.Field[string]Optional
 
 Body param: If present, replaces the stored name. Omit to leave unchanged. Maximum 255 characters.
 
-Relationship param.Field[[BetaUserProfileUpdateParamsRelationship](api/beta/user_profiles/update.md)]optional
+Relationship param.Field[[BetaUserProfileUpdateParamsRelationship](api/beta/user_profiles/update.md)]Optional
 
 Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
@@ -40,7 +40,7 @@ const BetaUserProfileUpdateParamsRelationshipResold [BetaUserProfileUpdateParams
 
 const BetaUserProfileUpdateParamsRelationshipInternal [BetaUserProfileUpdateParamsRelationship](api/beta/user_profiles/update.md) = "internal"
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -48,7 +48,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -120,7 +120,7 @@ Relationship BetaUserProfileRelationship
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"
 
@@ -136,7 +136,7 @@ Status BetaUserProfileTrustGrantStatus
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
 
@@ -152,11 +152,11 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-ExternalID stringoptional
+ExternalID stringOptional
 
 Platform's own identifier for this user. Not enforced unique.
 
-Name stringoptional
+Name stringOptional
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 

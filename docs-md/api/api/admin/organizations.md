@@ -10,7 +10,7 @@ GET/v1/organizations/me
 
 ##### ModelsExpand Collapse
 
-Organization = object { id, name, type }
+Organization object { id, name, type }
 
 id: string
 

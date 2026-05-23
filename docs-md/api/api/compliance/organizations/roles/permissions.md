@@ -12,7 +12,7 @@ GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
 
 ##### ModelsExpand Collapse
 
-PermissionListResponse = object { action, resource\_id, resource\_type }
+PermissionListResponse object { action, resource\_id, resource\_type }
 
 Permission granted by a role.
 

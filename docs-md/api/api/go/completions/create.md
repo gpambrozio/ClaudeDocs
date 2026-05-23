@@ -56,11 +56,11 @@ See [prompt validation](https://docs.claude.com/en/api/prompt-validation) and ou
 
 minLength1
 
-Metadata param.Field[[Metadata](api/messages.md)]optional
+Metadata param.Field[[Metadata](api/messages.md)]Optional
 
 Body param: An object describing metadata about the request.
 
-StopSequences param.Field[[]string]optional
+StopSequences param.Field[[]string]Optional
 
 Body param: Sequences that will cause the model to stop generating.
 
@@ -68,7 +68,7 @@ Our models stop on `"
 
 Human:"`, and may include additional built-in stop sequences in the future. By providing the stop\_sequences parameter, you may include additional strings that will cause the model to stop generating.
 
-DeprecatedTemperature param.Field[float64]optional
+DeprecatedTemperature param.Field[float64]Optional
 
 Body param: Amount of randomness injected into the response.
 
@@ -82,7 +82,7 @@ maximum1
 
 minimum0
 
-DeprecatedTopK param.Field[int64]optional
+DeprecatedTopK param.Field[int64]Optional
 
 Body param: Only sample from the top K options for each subsequent token.
 
@@ -94,7 +94,7 @@ Recommended for advanced use cases only.
 
 minimum0
 
-DeprecatedTopP param.Field[float64]optional
+DeprecatedTopP param.Field[float64]Optional
 
 Body param: Use nucleus sampling.
 
@@ -108,7 +108,7 @@ maximum1
 
 minimum0
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -116,7 +116,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -188,7 +188,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -196,7 +196,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -301,7 +301,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -309,7 +309,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 

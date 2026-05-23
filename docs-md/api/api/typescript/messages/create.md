@@ -87,7 +87,7 @@ There is a limit of 100,000 messages in a single request.
 
 content: string | Array<[ContentBlockParam](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -116,7 +116,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -124,7 +124,7 @@ Accepts one of the following:
 
 citations?: Array<[TextCitationParam](api/messages.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -226,7 +226,7 @@ ImageBlockParam { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 Base64ImageSource { data, media\_type, type }
 
@@ -234,7 +234,7 @@ data: string
 
 media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -271,7 +271,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -281,7 +281,7 @@ DocumentBlockParam { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }  | [ContentBlockSource](api/messages.md) { content, type }  | [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 Base64PDFSource { data, media\_type, type }
 
@@ -303,7 +303,7 @@ ContentBlockSource { content, type }
 
 content: string | Array<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -332,7 +332,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -340,7 +340,7 @@ Accepts one of the following:
 
 citations?: Array<[TextCitationParam](api/messages.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -442,7 +442,7 @@ ImageBlockParam { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 Base64ImageSource { data, media\_type, type }
 
@@ -450,7 +450,7 @@ data: string
 
 media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -487,7 +487,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -520,7 +520,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -559,7 +559,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -567,7 +567,7 @@ Accepts one of the following:
 
 citations?: Array<[TextCitationParam](api/messages.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -688,7 +688,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -739,7 +739,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -749,7 +749,7 @@ caller?: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -794,7 +794,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -802,7 +802,7 @@ Accepts one of the following:
 
 content?: string | Array<[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | 2 more>
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -831,7 +831,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -839,7 +839,7 @@ Accepts one of the following:
 
 citations?: Array<[TextCitationParam](api/messages.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -941,7 +941,7 @@ ImageBlockParam { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 Base64ImageSource { data, media\_type, type }
 
@@ -949,7 +949,7 @@ data: string
 
 media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -986,7 +986,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1017,7 +1017,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1025,7 +1025,7 @@ Accepts one of the following:
 
 citations?: Array<[TextCitationParam](api/messages.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1146,7 +1146,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1160,7 +1160,7 @@ DocumentBlockParam { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }  | [ContentBlockSource](api/messages.md) { content, type }  | [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 Base64PDFSource { data, media\_type, type }
 
@@ -1182,7 +1182,7 @@ ContentBlockSource { content, type }
 
 content: string | Array<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -1211,7 +1211,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1219,7 +1219,7 @@ Accepts one of the following:
 
 citations?: Array<[TextCitationParam](api/messages.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1321,7 +1321,7 @@ ImageBlockParam { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 Base64ImageSource { data, media\_type, type }
 
@@ -1329,7 +1329,7 @@ data: string
 
 media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1366,7 +1366,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1399,7 +1399,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1438,7 +1438,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1454,7 +1454,7 @@ input: Record<string, unknown>
 
 name: "web\_search" | "web\_fetch" | "code\_execution" | 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -1489,7 +1489,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1499,7 +1499,7 @@ caller?: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -1525,7 +1525,7 @@ WebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 Array<[WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more } >
 
@@ -1543,7 +1543,7 @@ WebSearchToolRequestError { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1580,7 +1580,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1590,7 +1590,7 @@ caller?: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -1616,13 +1616,13 @@ WebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  | [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
 
-Accepts one of the following:
+One of the following:
 
 WebFetchToolResultErrorBlockParam { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1648,7 +1648,7 @@ content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }  | [ContentBlockSource](api/messages.md) { content, type }  | [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 Base64PDFSource { data, media\_type, type }
 
@@ -1670,7 +1670,7 @@ ContentBlockSource { content, type }
 
 content: string | Array<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -1699,7 +1699,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1707,7 +1707,7 @@ Accepts one of the following:
 
 citations?: Array<[TextCitationParam](api/messages.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1809,7 +1809,7 @@ ImageBlockParam { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 Base64ImageSource { data, media\_type, type }
 
@@ -1817,7 +1817,7 @@ data: string
 
 media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1854,7 +1854,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1887,7 +1887,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1932,7 +1932,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1942,7 +1942,7 @@ caller?: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -1970,13 +1970,13 @@ content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 CodeExecutionToolResultErrorParam { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2043,7 +2043,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2053,13 +2053,13 @@ BashCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\_con
 
 content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 BashCodeExecutionToolResultErrorParam { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2110,7 +2110,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2120,13 +2120,13 @@ TextEditorCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cach
 
 content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  | [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  | [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 TextEditorCodeExecutionToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2148,7 +2148,7 @@ content: string
 
 file\_type: "text" | "image" | "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -2205,7 +2205,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2215,13 +2215,13 @@ ToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
 content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 ToolSearchToolResultErrorParam { error\_code, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2258,7 +2258,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2287,7 +2287,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2319,7 +2319,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2327,7 +2327,7 @@ Accepts one of the following:
 
 role: "user" | "assistant"
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -2339,7 +2339,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
 
@@ -2430,7 +2430,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2464,7 +2464,7 @@ effort?: "low" | "medium" | "high" | 2 more | null
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 "low"
 
@@ -2492,7 +2492,7 @@ Determines whether to use priority capacity (if available) or standard capacity 
 
 Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
-Accepts one of the following:
+One of the following:
 
 "auto"
 
@@ -2518,7 +2518,7 @@ System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -2545,7 +2545,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2553,7 +2553,7 @@ Accepts one of the following:
 
 citations?: Array<[TextCitationParam](api/messages.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -2673,7 +2673,7 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Accepts one of the following:
+One of the following:
 
 ThinkingConfigEnabled { budget\_tokens, type, display }
 
@@ -2693,7 +2693,7 @@ display?: "summarized" | "omitted" | null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -2711,7 +2711,7 @@ display?: "summarized" | "omitted" | null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -2721,7 +2721,7 @@ tool\_choice?: [ToolChoice](api/messages.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Accepts one of the following:
+One of the following:
 
 ToolChoiceAuto { type, disable\_parallel\_tool\_use }
 
@@ -2833,7 +2833,7 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-Accepts one of the following:
+One of the following:
 
 Tool { input\_schema, name, allowed\_callers, 7 more }
 
@@ -2861,7 +2861,7 @@ minLength1
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -2886,7 +2886,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2926,7 +2926,7 @@ type: "bash\_20250124"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -2951,7 +2951,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2979,7 +2979,7 @@ type: "code\_execution\_20250522"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3004,7 +3004,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3030,7 +3030,7 @@ type: "code\_execution\_20250825"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3055,7 +3055,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3083,7 +3083,7 @@ type: "code\_execution\_20260120"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3108,7 +3108,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3134,7 +3134,7 @@ type: "memory\_20250818"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3159,7 +3159,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3187,7 +3187,7 @@ type: "text\_editor\_20250124"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3212,7 +3212,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3240,7 +3240,7 @@ type: "text\_editor\_20250429"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3265,7 +3265,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3293,7 +3293,7 @@ type: "text\_editor\_20250728"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3318,7 +3318,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3350,7 +3350,7 @@ type: "web\_search\_20250305"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3383,7 +3383,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3435,7 +3435,7 @@ type: "web\_fetch\_20250910"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3468,7 +3468,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3508,7 +3508,7 @@ type: "web\_search\_20260209"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3541,7 +3541,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3593,7 +3593,7 @@ type: "web\_fetch\_20260209"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3626,7 +3626,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3668,7 +3668,7 @@ type: "web\_fetch\_20260309"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3701,7 +3701,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3743,7 +3743,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_bm25\_20251119" | "tool\_search\_tool\_bm25"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -3751,7 +3751,7 @@ Accepts one of the following:
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3776,7 +3776,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3800,7 +3800,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_regex\_20251119" | "tool\_search\_tool\_regex"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -3808,7 +3808,7 @@ Accepts one of the following:
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3833,7 +3833,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3940,7 +3940,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 TextBlock { citations, text, type }
 
@@ -3950,7 +3950,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -4080,7 +4080,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -4116,7 +4116,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -4142,7 +4142,7 @@ input: Record<string, unknown>
 
 name: "web\_search" | "web\_fetch" | "code\_execution" | 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -4166,7 +4166,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -4190,13 +4190,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 WebSearchToolResultError { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -4234,7 +4234,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -4258,13 +4258,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
 WebFetchToolResultErrorBlock { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -4296,7 +4296,7 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
 Base64PDFSource { data, media\_type, type }
 
@@ -4340,13 +4340,13 @@ content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 CodeExecutionToolResultError { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -4400,13 +4400,13 @@ BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 BashCodeExecutionToolResultError { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -4444,13 +4444,13 @@ TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -4472,7 +4472,7 @@ content: string
 
 file\_type: "text" | "image" | "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -4516,13 +4516,13 @@ ToolSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 ToolSearchToolResultError { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -4564,7 +4564,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
 
@@ -4654,7 +4654,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -4683,7 +4683,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -4769,7 +4769,7 @@ service\_tier: "standard" | "priority" | "batch" | null
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -4779,7 +4779,7 @@ Accepts one of the following:
 
 RawMessageStreamEvent = [RawMessageStartEvent](api/messages.md) { message, type }  | [RawMessageDeltaEvent](api/messages.md) { delta, type, usage }  | [RawMessageStopEvent](api/messages.md) { type }  | 3 more
 
-Accepts one of the following:
+One of the following:
 
 RawMessageStartEvent { message, type }
 
@@ -4832,7 +4832,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 TextBlock { citations, text, type }
 
@@ -4842,7 +4842,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -4972,7 +4972,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -5008,7 +5008,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -5034,7 +5034,7 @@ input: Record<string, unknown>
 
 name: "web\_search" | "web\_fetch" | "code\_execution" | 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -5058,7 +5058,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -5082,13 +5082,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 WebSearchToolResultError { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5126,7 +5126,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -5150,13 +5150,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
 WebFetchToolResultErrorBlock { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5188,7 +5188,7 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
 Base64PDFSource { data, media\_type, type }
 
@@ -5232,13 +5232,13 @@ content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 CodeExecutionToolResultError { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5292,13 +5292,13 @@ BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 BashCodeExecutionToolResultError { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5336,13 +5336,13 @@ TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5364,7 +5364,7 @@ content: string
 
 file\_type: "text" | "image" | "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -5408,13 +5408,13 @@ ToolSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 ToolSearchToolResultError { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5456,7 +5456,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
 
@@ -5546,7 +5546,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -5575,7 +5575,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -5661,7 +5661,7 @@ service\_tier: "standard" | "priority" | "batch" | null
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -5697,7 +5697,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -5713,7 +5713,7 @@ type: "refusal"
 
 stop\_reason: [StopReason](api/messages.md) | null
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -5781,7 +5781,7 @@ content\_block: [TextBlock](api/messages.md) { citations, text, type }  | [Think
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
 TextBlock { citations, text, type }
 
@@ -5791,7 +5791,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -5921,7 +5921,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -5957,7 +5957,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -5983,7 +5983,7 @@ input: Record<string, unknown>
 
 name: "web\_search" | "web\_fetch" | "code\_execution" | 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -6007,7 +6007,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -6031,13 +6031,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 WebSearchToolResultError { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -6075,7 +6075,7 @@ caller: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/messa
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 DirectCaller { type }
 
@@ -6099,13 +6099,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
 WebFetchToolResultErrorBlock { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -6137,7 +6137,7 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
 Base64PDFSource { data, media\_type, type }
 
@@ -6181,13 +6181,13 @@ content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 CodeExecutionToolResultError { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -6241,13 +6241,13 @@ BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 BashCodeExecutionToolResultError { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -6285,13 +6285,13 @@ TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -6313,7 +6313,7 @@ content: string
 
 file\_type: "text" | "image" | "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -6357,13 +6357,13 @@ ToolSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 ToolSearchToolResultError { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -6407,7 +6407,7 @@ RawContentBlockDeltaEvent { delta, index, type }
 
 delta: [RawContentBlockDelta](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 TextDelta { text, type }
 
@@ -6425,7 +6425,7 @@ CitationsDelta { citation, type }
 
 citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  | [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  | [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  | 2 more
 
-Accepts one of the following:
+One of the following:
 
 CitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 

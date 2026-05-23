@@ -22,13 +22,13 @@ betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 str
 
 Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -98,7 +98,7 @@ auth: Auth
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsMCPOAuthAuthResponse: …
 
@@ -130,7 +130,7 @@ token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
 

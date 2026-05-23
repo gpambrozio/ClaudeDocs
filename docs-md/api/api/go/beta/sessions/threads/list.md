@@ -18,15 +18,15 @@ sessionID string
 
 params BetaSessionThreadListParams
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Query param: Maximum results per page. Defaults to 1000.
 
-Page param.Field[string]optional
+Page param.Field[string]Optional
 
 Query param: Opaque pagination cursor from a previous response's next\_page. Forward-only.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -34,7 +34,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -122,7 +122,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -130,7 +130,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -170,11 +170,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -184,7 +184,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -210,7 +210,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -222,7 +222,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -244,7 +244,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -268,7 +268,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -296,7 +296,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -320,7 +320,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -348,15 +348,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -388,15 +388,15 @@ Stats [BetaManagedAgentsSessionThreadStats](api/beta.md)
 
 Timing statistics for a session thread.
 
-ActiveSeconds float64optional
+ActiveSeconds float64Optional
 
 Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
-DurationSeconds float64optional
+DurationSeconds float64Optional
 
 Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
-StartupSeconds float64optional
+StartupSeconds float64Optional
 
 Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
 
@@ -404,7 +404,7 @@ Status [BetaManagedAgentsSessionThreadStatus](api/beta.md)
 
 SessionThreadStatus enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSessionThreadStatusRunning [BetaManagedAgentsSessionThreadStatus](api/beta.md) = "running"
 
@@ -424,27 +424,27 @@ Usage [BetaManagedAgentsSessionThreadUsage](api/beta.md)
 
 Cumulative token usage for a session thread across all turns.
 
-CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)optional
+CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)Optional
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
-Ephemeral1hInputTokens int64optional
+Ephemeral1hInputTokens int64Optional
 
 Tokens used to create 1-hour ephemeral cache entries.
 
-Ephemeral5mInputTokens int64optional
+Ephemeral5mInputTokens int64Optional
 
 Tokens used to create 5-minute ephemeral cache entries.
 
-CacheReadInputTokens int64optional
+CacheReadInputTokens int64Optional
 
 Total tokens read from prompt cache.
 
-InputTokens int64optional
+InputTokens int64Optional
 
 Total input tokens consumed across all turns.
 
-OutputTokens int64optional
+OutputTokens int64Optional
 
 Total output tokens generated across all turns.
 

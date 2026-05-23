@@ -22,23 +22,23 @@ MemoryStoreID param.Field[string]
 
 Path param: Path parameter memory\_store\_id
 
-View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]optional
+View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]Optional
 
 Query param: Query parameter for view
 
-Content param.Field[string]optional
+Content param.Field[string]Optional
 
 Body param: New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to leave the content unchanged (e.g., for a rename-only update).
 
-Path param.Field[string]optional
+Path param.Field[string]Optional
 
 Body param: New path for the memory (a rename). Must start with `/`, contain at least one non-empty segment, and be at most 1,024 bytes. Must not contain empty segments, `.` or `..` segments, control or format characters, and must be NFC-normalized. Paths are case-sensitive. The memory's `id` is preserved across renames. Omit to leave the path unchanged.
 
-Precondition param.Field[[BetaManagedAgentsPrecondition](api/beta.md)]optional
+Precondition param.Field[[BetaManagedAgentsPrecondition](api/beta.md)]Optional
 
 Body param: Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -46,7 +46,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -138,7 +138,7 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 

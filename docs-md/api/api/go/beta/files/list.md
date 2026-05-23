@@ -16,15 +16,15 @@ List Files
 
 params BetaFileListParams
 
-AfterID param.Field[string]optional
+AfterID param.Field[string]Optional
 
 Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-BeforeID param.Field[string]optional
+BeforeID param.Field[string]Optional
 
 Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Query param: Number of items to return per page.
 
@@ -34,11 +34,11 @@ maximum1000
 
 minimum1
 
-ScopeID param.Field[string]optional
+ScopeID param.Field[string]Optional
 
 Query param: Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -46,7 +46,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -130,11 +130,11 @@ Object type.
 
 For files, this is always `"file"`.
 
-Downloadable booloptional
+Downloadable boolOptional
 
 Whether the file can be downloaded.
 
-Scope [BetaFileScope](api/beta.md)optional
+Scope [BetaFileScope](api/beta.md)Optional
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

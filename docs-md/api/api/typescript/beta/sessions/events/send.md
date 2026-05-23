@@ -22,7 +22,7 @@ events: Array<[BetaManagedAgentsEventParams](api/beta.md)>
 
 Body param: Events to send to the `session`.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsUserMessageEventParams { content, type }
 
@@ -32,7 +32,7 @@ content: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsTextBlock { text, type }
 
@@ -52,7 +52,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -98,7 +98,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -178,7 +178,7 @@ result: "allow" | "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -208,7 +208,7 @@ content?: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Bet
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsTextBlock { text, type }
 
@@ -228,7 +228,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -274,7 +274,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -382,7 +382,7 @@ rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  | [
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsFileRubricParams { file\_id, type }
 
@@ -424,7 +424,7 @@ content?: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Bet
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsTextBlock { text, type }
 
@@ -444,7 +444,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -490,7 +490,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -590,7 +590,7 @@ betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 (string & {})
 
@@ -656,7 +656,7 @@ data?: Array<[BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, typ
 
 Sent events
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsUserMessageEvent { id, content, type, processed\_at }
 
@@ -670,7 +670,7 @@ content: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsTextBlock { text, type }
 
@@ -690,7 +690,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -736,7 +736,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -832,7 +832,7 @@ result: "allow" | "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -874,7 +874,7 @@ content?: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Bet
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsTextBlock { text, type }
 
@@ -894,7 +894,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -940,7 +940,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -1072,7 +1072,7 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  | [BetaMa
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsFileRubric { file\_id, type }
 
@@ -1114,7 +1114,7 @@ content?: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Bet
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsTextBlock { text, type }
 
@@ -1134,7 +1134,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -1180,7 +1180,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 

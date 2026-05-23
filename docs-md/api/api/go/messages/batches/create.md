@@ -105,11 +105,11 @@ There is a limit of 100,000 messages in a single request.
 
 Content [][ContentBlockParamUnionResp](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 [][ContentBlockParamUnionResp](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 type TextBlockParamResp struct{…}
 
@@ -117,13 +117,13 @@ Text string
 
 Type Text
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -134,15 +134,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [][TextCitationParamUnionResp](api/messages.md)optional
+Citations [][TextCitationParamUnionResp](api/messages.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type CitationCharLocationParamResp struct{…}
 
@@ -244,7 +244,7 @@ type ImageBlockParamResp struct{…}
 
 Source ImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type Base64ImageSource struct{…}
 
@@ -252,7 +252,7 @@ Data string
 
 MediaType Base64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"
 
@@ -272,13 +272,13 @@ URL string
 
 Type Image
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -289,7 +289,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
@@ -299,7 +299,7 @@ type DocumentBlockParamResp struct{…}
 
 Source DocumentBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type Base64PDFSource struct{…}
 
@@ -321,13 +321,13 @@ type ContentBlockSource struct{…}
 
 Content ContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][ContentBlockSourceContentItemUnion](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 type TextBlockParamResp struct{…}
 
@@ -335,13 +335,13 @@ Text string
 
 Type Text
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -352,15 +352,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [][TextCitationParamUnionResp](api/messages.md)optional
+Citations [][TextCitationParamUnionResp](api/messages.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type CitationCharLocationParamResp struct{…}
 
@@ -462,7 +462,7 @@ type ImageBlockParamResp struct{…}
 
 Source ImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type Base64ImageSource struct{…}
 
@@ -470,7 +470,7 @@ Data string
 
 MediaType Base64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"
 
@@ -490,13 +490,13 @@ URL string
 
 Type Image
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -507,7 +507,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
@@ -523,13 +523,13 @@ URL string
 
 Type Document
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -540,19 +540,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [CitationsConfigParamResp](api/messages.md)optional
+Citations [CitationsConfigParamResp](api/messages.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 type SearchResultBlockParamResp struct{…}
 
@@ -562,13 +562,13 @@ Text string
 
 Type Text
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -579,15 +579,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [][TextCitationParamUnionResp](api/messages.md)optional
+Citations [][TextCitationParamUnionResp](api/messages.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type CitationCharLocationParamResp struct{…}
 
@@ -691,13 +691,13 @@ Title string
 
 Type SearchResult
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -708,15 +708,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [CitationsConfigParamResp](api/messages.md)optional
+Citations [CitationsConfigParamResp](api/messages.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
 type ThinkingBlockParamResp struct{…}
 
@@ -742,13 +742,13 @@ Name string
 
 Type ToolUse
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -759,17 +759,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Caller ToolUseBlockParamCallerUnionRespoptional
+Caller ToolUseBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -797,13 +797,13 @@ ToolUseID string
 
 Type ToolResult
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -814,19 +814,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Content []ToolResultBlockParamContentUnionRespoptional
+Content []ToolResultBlockParamContentUnionRespOptional
 
-Accepts one of the following:
+One of the following:
 
 []ToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type TextBlockParamResp struct{…}
 
@@ -834,13 +834,13 @@ Text string
 
 Type Text
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -851,15 +851,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [][TextCitationParamUnionResp](api/messages.md)optional
+Citations [][TextCitationParamUnionResp](api/messages.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type CitationCharLocationParamResp struct{…}
 
@@ -961,7 +961,7 @@ type ImageBlockParamResp struct{…}
 
 Source ImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type Base64ImageSource struct{…}
 
@@ -969,7 +969,7 @@ Data string
 
 MediaType Base64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"
 
@@ -989,13 +989,13 @@ URL string
 
 Type Image
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1006,7 +1006,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
@@ -1020,13 +1020,13 @@ Text string
 
 Type Text
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1037,15 +1037,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [][TextCitationParamUnionResp](api/messages.md)optional
+Citations [][TextCitationParamUnionResp](api/messages.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type CitationCharLocationParamResp struct{…}
 
@@ -1149,13 +1149,13 @@ Title string
 
 Type SearchResult
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1166,21 +1166,21 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [CitationsConfigParamResp](api/messages.md)optional
+Citations [CitationsConfigParamResp](api/messages.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
 type DocumentBlockParamResp struct{…}
 
 Source DocumentBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type Base64PDFSource struct{…}
 
@@ -1202,13 +1202,13 @@ type ContentBlockSource struct{…}
 
 Content ContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][ContentBlockSourceContentItemUnion](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 type TextBlockParamResp struct{…}
 
@@ -1216,13 +1216,13 @@ Text string
 
 Type Text
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1233,15 +1233,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [][TextCitationParamUnionResp](api/messages.md)optional
+Citations [][TextCitationParamUnionResp](api/messages.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type CitationCharLocationParamResp struct{…}
 
@@ -1343,7 +1343,7 @@ type ImageBlockParamResp struct{…}
 
 Source ImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type Base64ImageSource struct{…}
 
@@ -1351,7 +1351,7 @@ Data string
 
 MediaType Base64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"
 
@@ -1371,13 +1371,13 @@ URL string
 
 Type Image
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1388,7 +1388,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
@@ -1404,13 +1404,13 @@ URL string
 
 Type Document
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1421,19 +1421,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [CitationsConfigParamResp](api/messages.md)optional
+Citations [CitationsConfigParamResp](api/messages.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 type ToolReferenceBlockParamResp struct{…}
 
@@ -1443,13 +1443,13 @@ ToolName string
 
 Type ToolReference
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1460,13 +1460,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-IsError booloptional
+IsError boolOptional
 
 type ServerToolUseBlockParamResp struct{…}
 
@@ -1476,7 +1476,7 @@ Input map[string, any]
 
 Name ServerToolUseBlockParamName
 
-Accepts one of the following:
+One of the following:
 
 const ServerToolUseBlockParamNameWebSearch ServerToolUseBlockParamName = "web\_search"
 
@@ -1494,13 +1494,13 @@ const ServerToolUseBlockParamNameToolSearchToolBm25 ServerToolUseBlockParamName 
 
 Type ServerToolUse
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1511,17 +1511,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Caller ServerToolUseBlockParamCallerUnionRespoptional
+Caller ServerToolUseBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -1547,7 +1547,7 @@ type WebSearchToolResultBlockParamResp struct{…}
 
 Content [WebSearchToolResultBlockParamContentUnionResp](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 [][WebSearchResultBlockParamResp](api/messages.md)
 
@@ -1559,13 +1559,13 @@ Type WebSearchResult
 
 URL string
 
-PageAge stringoptional
+PageAge stringOptional
 
 type WebSearchToolRequestError struct{…}
 
 ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -1585,13 +1585,13 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1602,17 +1602,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Caller WebSearchToolResultBlockParamCallerUnionRespoptional
+Caller WebSearchToolResultBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -1638,13 +1638,13 @@ type WebFetchToolResultBlockParamResp struct{…}
 
 Content WebFetchToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type WebFetchToolResultErrorBlockParamResp struct{…}
 
 ErrorCode [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const WebFetchToolResultErrorCodeInvalidToolInput [WebFetchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -1670,7 +1670,7 @@ Content [DocumentBlockParamResp](api/messages.md)
 
 Source DocumentBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type Base64PDFSource struct{…}
 
@@ -1692,13 +1692,13 @@ type ContentBlockSource struct{…}
 
 Content ContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][ContentBlockSourceContentItemUnion](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 type TextBlockParamResp struct{…}
 
@@ -1706,13 +1706,13 @@ Text string
 
 Type Text
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1723,15 +1723,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [][TextCitationParamUnionResp](api/messages.md)optional
+Citations [][TextCitationParamUnionResp](api/messages.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type CitationCharLocationParamResp struct{…}
 
@@ -1833,7 +1833,7 @@ type ImageBlockParamResp struct{…}
 
 Source ImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type Base64ImageSource struct{…}
 
@@ -1841,7 +1841,7 @@ Data string
 
 MediaType Base64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const Base64ImageSourceMediaTypeImageJPEG Base64ImageSourceMediaType = "image/jpeg"
 
@@ -1861,13 +1861,13 @@ URL string
 
 Type Image
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1878,7 +1878,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
@@ -1894,13 +1894,13 @@ URL string
 
 Type Document
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1911,19 +1911,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [CitationsConfigParamResp](api/messages.md)optional
+Citations [CitationsConfigParamResp](api/messages.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 Type WebFetchResult
 
@@ -1931,7 +1931,7 @@ URL string
 
 Fetched content URL
 
-RetrievedAt stringoptional
+RetrievedAt stringOptional
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -1939,13 +1939,13 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1956,17 +1956,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Caller WebFetchToolResultBlockParamCallerUnionRespoptional
+Caller WebFetchToolResultBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -1994,13 +1994,13 @@ Content [CodeExecutionToolResultBlockParamContentUnionResp](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type CodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const CodeExecutionToolResultErrorCodeInvalidToolInput [CodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -2050,13 +2050,13 @@ ToolUseID string
 
 Type CodeExecutionToolResult
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2067,7 +2067,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
@@ -2077,13 +2077,13 @@ type BashCodeExecutionToolResultBlockParamResp struct{…}
 
 Content BashCodeExecutionToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BashCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const BashCodeExecutionToolResultErrorCodeInvalidToolInput [BashCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -2117,13 +2117,13 @@ ToolUseID string
 
 Type BashCodeExecutionToolResult
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2134,7 +2134,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
@@ -2144,13 +2144,13 @@ type TextEditorCodeExecutionToolResultBlockParamResp struct{…}
 
 Content TextEditorCodeExecutionToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type TextEditorCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -2164,7 +2164,7 @@ const TextEditorCodeExecutionToolResultErrorCodeFileNotFound [TextEditorCodeExec
 
 Type TextEditorCodeExecutionToolResultError
 
-ErrorMessage stringoptional
+ErrorMessage stringOptional
 
 type TextEditorCodeExecutionViewResultBlockParamResp struct{…}
 
@@ -2172,7 +2172,7 @@ Content string
 
 FileType TextEditorCodeExecutionViewResultBlockParamFileType
 
-Accepts one of the following:
+One of the following:
 
 const TextEditorCodeExecutionViewResultBlockParamFileTypeText TextEditorCodeExecutionViewResultBlockParamFileType = "text"
 
@@ -2182,11 +2182,11 @@ const TextEditorCodeExecutionViewResultBlockParamFileTypePDF TextEditorCodeExecu
 
 Type TextEditorCodeExecutionViewResult
 
-NumLines int64optional
+NumLines int64Optional
 
-StartLine int64optional
+StartLine int64Optional
 
-TotalLines int64optional
+TotalLines int64Optional
 
 type TextEditorCodeExecutionCreateResultBlockParamResp struct{…}
 
@@ -2198,27 +2198,27 @@ type TextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}
 
 Type TextEditorCodeExecutionStrReplaceResult
 
-Lines []stringoptional
+Lines []stringOptional
 
-NewLines int64optional
+NewLines int64Optional
 
-NewStart int64optional
+NewStart int64Optional
 
-OldLines int64optional
+OldLines int64Optional
 
-OldStart int64optional
+OldStart int64Optional
 
 ToolUseID string
 
 Type TextEditorCodeExecutionToolResult
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2229,7 +2229,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
@@ -2239,13 +2239,13 @@ type ToolSearchToolResultBlockParamResp struct{…}
 
 Content ToolSearchToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type ToolSearchToolResultErrorParamResp struct{…}
 
 ErrorCode [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const ToolSearchToolResultErrorCodeInvalidToolInput [ToolSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -2265,13 +2265,13 @@ ToolName string
 
 Type ToolReference
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2282,7 +2282,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
@@ -2294,13 +2294,13 @@ ToolUseID string
 
 Type ToolSearchToolResult
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2311,7 +2311,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
@@ -2326,13 +2326,13 @@ FileID string
 
 Type ContainerUpload
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2343,7 +2343,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
@@ -2351,7 +2351,7 @@ const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
 Role MessageParamRole
 
-Accepts one of the following:
+One of the following:
 
 const MessageParamRoleUser MessageParamRole = "user"
 
@@ -2363,7 +2363,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -2371,7 +2371,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -2443,13 +2443,13 @@ Fast and cost-effective model
 
 string
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Top-level cache control automatically applies a cache\_control marker to the last cacheable block in the request.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2460,25 +2460,25 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Container stringoptional
+Container stringOptional
 
 Container identifier for reuse across requests.
 
-InferenceGeo stringoptional
+InferenceGeo stringOptional
 
 Specifies the geographic region for inference processing. If not specified, the workspace's `default_inference_geo` is used.
 
-Metadata [Metadata](api/messages.md)optional
+Metadata [Metadata](api/messages.md)Optional
 
 An object describing metadata about the request.
 
-UserID stringoptional
+UserID stringOptional
 
 An external identifier for the user who is associated with the request.
 
@@ -2486,15 +2486,15 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-OutputConfig [OutputConfig](api/messages.md)optional
+OutputConfig [OutputConfig](api/messages.md)Optional
 
 Configuration options for the model's output, such as the output format.
 
-Effort OutputConfigEffortoptional
+Effort OutputConfigEffortOptional
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 const OutputConfigEffortLow OutputConfigEffort = "low"
 
@@ -2506,7 +2506,7 @@ const OutputConfigEffortXhigh OutputConfigEffort = "xhigh"
 
 const OutputConfigEffortMax OutputConfigEffort = "max"
 
-Format [JSONOutputFormat](api/messages.md)optional
+Format [JSONOutputFormat](api/messages.md)Optional
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -2516,19 +2516,19 @@ The JSON schema of the format
 
 Type JSONSchema
 
-ServiceTier stringoptional
+ServiceTier stringOptional
 
 Determines whether to use priority capacity (if available) or standard capacity for this request.
 
 Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
-Accepts one of the following:
+One of the following:
 
 const MessageBatchNewParamsRequestParamsServiceTierAuto MessageBatchNewParamsRequestParamsServiceTier = "auto"
 
 const MessageBatchNewParamsRequestParamsServiceTierStandardOnly MessageBatchNewParamsRequestParamsServiceTier = "standard\_only"
 
-StopSequences []stringoptional
+StopSequences []stringOptional
 
 Custom text sequences that will cause the model to stop generating.
 
@@ -2536,19 +2536,19 @@ Our models will normally stop when they have naturally completed their turn, whi
 
 If you want the model to stop generating when it encounters custom strings of text, you can use the `stop_sequences` parameter. If the model encounters one of the custom sequences, the response `stop_reason` value will be `"stop_sequence"` and the response `stop_sequence` value will contain the matched stop sequence.
 
-Stream booloptional
+Stream boolOptional
 
 Whether to incrementally stream the response using server-sent events.
 
 See [streaming](https://docs.claude.com/en/api/messages-streaming) for details.
 
-System [][TextBlockParamResp](api/messages.md)optional
+System [][TextBlockParamResp](api/messages.md)Optional
 
 System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-Accepts one of the following:
+One of the following:
 
 [][TextBlockParam](api/messages.md)
 
@@ -2556,13 +2556,13 @@ Text string
 
 Type Text
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2573,15 +2573,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [][TextCitationParamUnionResp](api/messages.md)optional
+Citations [][TextCitationParamUnionResp](api/messages.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type CitationCharLocationParamResp struct{…}
 
@@ -2679,7 +2679,7 @@ Title string
 
 Type SearchResultLocation
 
-DeprecatedTemperature float64optional
+DeprecatedTemperature float64Optional
 
 Amount of randomness injected into the response.
 
@@ -2693,7 +2693,7 @@ maximum1
 
 minimum0
 
-Thinking [ThinkingConfigParamUnionResp](api/messages.md)optional
+Thinking [ThinkingConfigParamUnionResp](api/messages.md)Optional
 
 Configuration for enabling Claude's extended thinking.
 
@@ -2701,7 +2701,7 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Accepts one of the following:
+One of the following:
 
 type ThinkingConfigEnabled struct{…}
 
@@ -2717,11 +2717,11 @@ minimum1024
 
 Type Enabled
 
-Display ThinkingConfigEnabledDisplayoptional
+Display ThinkingConfigEnabledDisplayOptional
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 const ThinkingConfigEnabledDisplaySummarized ThinkingConfigEnabledDisplay = "summarized"
 
@@ -2735,21 +2735,21 @@ type ThinkingConfigAdaptive struct{…}
 
 Type Adaptive
 
-Display ThinkingConfigAdaptiveDisplayoptional
+Display ThinkingConfigAdaptiveDisplayOptional
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 const ThinkingConfigAdaptiveDisplaySummarized ThinkingConfigAdaptiveDisplay = "summarized"
 
 const ThinkingConfigAdaptiveDisplayOmitted ThinkingConfigAdaptiveDisplay = "omitted"
 
-ToolChoice [ToolChoiceUnion](api/messages.md)optional
+ToolChoice [ToolChoiceUnion](api/messages.md)Optional
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Accepts one of the following:
+One of the following:
 
 type ToolChoiceAuto struct{…}
 
@@ -2757,7 +2757,7 @@ The model will automatically decide whether to use tools.
 
 Type Auto
 
-DisableParallelToolUse booloptional
+DisableParallelToolUse boolOptional
 
 Whether to disable parallel tool use.
 
@@ -2769,7 +2769,7 @@ The model will use any available tools.
 
 Type Any
 
-DisableParallelToolUse booloptional
+DisableParallelToolUse boolOptional
 
 Whether to disable parallel tool use.
 
@@ -2785,7 +2785,7 @@ The name of the tool to use.
 
 Type Tool
 
-DisableParallelToolUse booloptional
+DisableParallelToolUse boolOptional
 
 Whether to disable parallel tool use.
 
@@ -2797,7 +2797,7 @@ The model will not be allowed to use tools.
 
 Type None
 
-Tools [][ToolUnion](api/messages.md)optional
+Tools [][ToolUnion](api/messages.md)Optional
 
 Definitions of tools that the model may use.
 
@@ -2861,7 +2861,7 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-Accepts one of the following:
+One of the following:
 
 type Tool struct{…}
 
@@ -2873,9 +2873,9 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 Type Object
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
-Required []stringoptional
+Required []stringOptional
 
 Name string
 
@@ -2887,9 +2887,9 @@ maxLength128
 
 minLength1
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const ToolAllowedCallerDirect ToolAllowedCaller = "direct"
 
@@ -2897,13 +2897,13 @@ const ToolAllowedCallerCodeExecution20250825 ToolAllowedCaller = "code\_executio
 
 const ToolAllowedCallerCodeExecution20260120 ToolAllowedCaller = "code\_execution\_20260120"
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2914,33 +2914,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Description stringoptional
+Description stringOptional
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-EagerInputStreaming booloptional
+EagerInputStreaming boolOptional
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-Type ToolTypeoptional
+Type ToolTypeOptional
 
 type ToolBash20250124 struct{…}
 
@@ -2952,9 +2952,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Bash20250124
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const ToolBash20250124AllowedCallerDirect ToolBash20250124AllowedCaller = "direct"
 
@@ -2962,13 +2962,13 @@ const ToolBash20250124AllowedCallerCodeExecution20250825 ToolBash20250124Allowed
 
 const ToolBash20250124AllowedCallerCodeExecution20260120 ToolBash20250124AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2979,19 +2979,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -3005,9 +3005,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type CodeExecution20250522
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const CodeExecutionTool20250522AllowedCallerDirect CodeExecutionTool20250522AllowedCaller = "direct"
 
@@ -3015,13 +3015,13 @@ const CodeExecutionTool20250522AllowedCallerCodeExecution20250825 CodeExecutionT
 
 const CodeExecutionTool20250522AllowedCallerCodeExecution20260120 CodeExecutionTool20250522AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3032,17 +3032,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -3056,9 +3056,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type CodeExecution20250825
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const CodeExecutionTool20250825AllowedCallerDirect CodeExecutionTool20250825AllowedCaller = "direct"
 
@@ -3066,13 +3066,13 @@ const CodeExecutionTool20250825AllowedCallerCodeExecution20250825 CodeExecutionT
 
 const CodeExecutionTool20250825AllowedCallerCodeExecution20260120 CodeExecutionTool20250825AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3083,17 +3083,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -3109,9 +3109,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type CodeExecution20260120
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const CodeExecutionTool20260120AllowedCallerDirect CodeExecutionTool20260120AllowedCaller = "direct"
 
@@ -3119,13 +3119,13 @@ const CodeExecutionTool20260120AllowedCallerCodeExecution20250825 CodeExecutionT
 
 const CodeExecutionTool20260120AllowedCallerCodeExecution20260120 CodeExecutionTool20260120AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3136,17 +3136,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -3160,9 +3160,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Memory20250818
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const MemoryTool20250818AllowedCallerDirect MemoryTool20250818AllowedCaller = "direct"
 
@@ -3170,13 +3170,13 @@ const MemoryTool20250818AllowedCallerCodeExecution20250825 MemoryTool20250818All
 
 const MemoryTool20250818AllowedCallerCodeExecution20260120 MemoryTool20250818AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3187,19 +3187,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -3213,9 +3213,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type TextEditor20250124
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const ToolTextEditor20250124AllowedCallerDirect ToolTextEditor20250124AllowedCaller = "direct"
 
@@ -3223,13 +3223,13 @@ const ToolTextEditor20250124AllowedCallerCodeExecution20250825 ToolTextEditor202
 
 const ToolTextEditor20250124AllowedCallerCodeExecution20260120 ToolTextEditor20250124AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3240,19 +3240,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -3266,9 +3266,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type TextEditor20250429
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const ToolTextEditor20250429AllowedCallerDirect ToolTextEditor20250429AllowedCaller = "direct"
 
@@ -3276,13 +3276,13 @@ const ToolTextEditor20250429AllowedCallerCodeExecution20250825 ToolTextEditor202
 
 const ToolTextEditor20250429AllowedCallerCodeExecution20260120 ToolTextEditor20250429AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3293,19 +3293,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -3319,9 +3319,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type TextEditor20250728
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const ToolTextEditor20250728AllowedCallerDirect ToolTextEditor20250728AllowedCaller = "direct"
 
@@ -3329,13 +3329,13 @@ const ToolTextEditor20250728AllowedCallerCodeExecution20250825 ToolTextEditor202
 
 const ToolTextEditor20250728AllowedCallerCodeExecution20260120 ToolTextEditor20250728AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3346,23 +3346,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-MaxCharacters int64optional
+MaxCharacters int64Optional
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -3376,9 +3376,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebSearch20250305
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const WebSearchTool20250305AllowedCallerDirect WebSearchTool20250305AllowedCaller = "direct"
 
@@ -3386,21 +3386,21 @@ const WebSearchTool20250305AllowedCallerCodeExecution20250825 WebSearchTool20250
 
 const WebSearchTool20250305AllowedCallerCodeExecution20260120 WebSearchTool20250305AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3411,43 +3411,43 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation [UserLocation](api/messages.md)optional
+UserLocation [UserLocation](api/messages.md)Optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 Type Approximate
 
-City stringoptional
+City stringOptional
 
 The city of the user.
 
-Country stringoptional
+Country stringOptional
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-Region stringoptional
+Region stringOptional
 
 The region of the user.
 
-Timezone stringoptional
+Timezone stringOptional
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -3461,9 +3461,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebFetch20250910
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const WebFetchTool20250910AllowedCallerDirect WebFetchTool20250910AllowedCaller = "direct"
 
@@ -3471,21 +3471,21 @@ const WebFetchTool20250910AllowedCallerCodeExecution20250825 WebFetchTool2025091
 
 const WebFetchTool20250910AllowedCallerCodeExecution20260120 WebFetchTool20250910AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 List of domains to allow fetching from
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 List of domains to block fetching from
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3496,31 +3496,31 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [CitationsConfigParamResp](api/messages.md)optional
+Citations [CitationsConfigParamResp](api/messages.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Enabled booloptional
+Enabled boolOptional
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxContentTokens int64optional
+MaxContentTokens int64Optional
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -3534,9 +3534,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebSearch20260209
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const WebSearchTool20260209AllowedCallerDirect WebSearchTool20260209AllowedCaller = "direct"
 
@@ -3544,21 +3544,21 @@ const WebSearchTool20260209AllowedCallerCodeExecution20250825 WebSearchTool20260
 
 const WebSearchTool20260209AllowedCallerCodeExecution20260120 WebSearchTool20260209AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3569,43 +3569,43 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation [UserLocation](api/messages.md)optional
+UserLocation [UserLocation](api/messages.md)Optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 Type Approximate
 
-City stringoptional
+City stringOptional
 
 The city of the user.
 
-Country stringoptional
+Country stringOptional
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-Region stringoptional
+Region stringOptional
 
 The region of the user.
 
-Timezone stringoptional
+Timezone stringOptional
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -3619,9 +3619,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebFetch20260209
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const WebFetchTool20260209AllowedCallerDirect WebFetchTool20260209AllowedCaller = "direct"
 
@@ -3629,21 +3629,21 @@ const WebFetchTool20260209AllowedCallerCodeExecution20250825 WebFetchTool2026020
 
 const WebFetchTool20260209AllowedCallerCodeExecution20260120 WebFetchTool20260209AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 List of domains to allow fetching from
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 List of domains to block fetching from
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3654,31 +3654,31 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [CitationsConfigParamResp](api/messages.md)optional
+Citations [CitationsConfigParamResp](api/messages.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Enabled booloptional
+Enabled boolOptional
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxContentTokens int64optional
+MaxContentTokens int64Optional
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -3694,9 +3694,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebFetch20260309
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const WebFetchTool20260309AllowedCallerDirect WebFetchTool20260309AllowedCaller = "direct"
 
@@ -3704,21 +3704,21 @@ const WebFetchTool20260309AllowedCallerCodeExecution20250825 WebFetchTool2026030
 
 const WebFetchTool20260309AllowedCallerCodeExecution20260120 WebFetchTool20260309AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 List of domains to allow fetching from
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 List of domains to block fetching from
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3729,35 +3729,35 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-Citations [CitationsConfigParamResp](api/messages.md)optional
+Citations [CitationsConfigParamResp](api/messages.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Enabled booloptional
+Enabled boolOptional
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxContentTokens int64optional
+MaxContentTokens int64Optional
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UseCache booloptional
+UseCache boolOptional
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
@@ -3771,15 +3771,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type ToolSearchToolBm25\_20251119Type
 
-Accepts one of the following:
+One of the following:
 
 const ToolSearchToolBm25\_20251119TypeToolSearchToolBm25\_20251119 ToolSearchToolBm25\_20251119Type = "tool\_search\_tool\_bm25\_20251119"
 
 const ToolSearchToolBm25\_20251119TypeToolSearchToolBm25 ToolSearchToolBm25\_20251119Type = "tool\_search\_tool\_bm25"
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const ToolSearchToolBm25\_20251119AllowedCallerDirect ToolSearchToolBm25\_20251119AllowedCaller = "direct"
 
@@ -3787,13 +3787,13 @@ const ToolSearchToolBm25\_20251119AllowedCallerCodeExecution20250825 ToolSearchT
 
 const ToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260120 ToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3804,17 +3804,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -3828,15 +3828,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type ToolSearchToolRegex20251119Type
 
-Accepts one of the following:
+One of the following:
 
 const ToolSearchToolRegex20251119TypeToolSearchToolRegex20251119 ToolSearchToolRegex20251119Type = "tool\_search\_tool\_regex\_20251119"
 
 const ToolSearchToolRegex20251119TypeToolSearchToolRegex ToolSearchToolRegex20251119Type = "tool\_search\_tool\_regex"
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const ToolSearchToolRegex20251119AllowedCallerDirect ToolSearchToolRegex20251119AllowedCaller = "direct"
 
@@ -3844,13 +3844,13 @@ const ToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 ToolSearchTo
 
 const ToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 ToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [CacheControlEphemeral](api/messages.md)optional
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL CacheControlEphemeralTTLoptional
+TTL CacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3861,21 +3861,21 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-DeprecatedTopK int64optional
+DeprecatedTopK int64Optional
 
 Only sample from the top K options for each subsequent token.
 
@@ -3887,7 +3887,7 @@ Recommended for advanced use cases only.
 
 minimum0
 
-DeprecatedTopP float64optional
+DeprecatedTopP float64Optional
 
 Use nucleus sampling.
 
@@ -3939,7 +3939,7 @@ ProcessingStatus MessageBatchProcessingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 const MessageBatchProcessingStatusInProgress MessageBatchProcessingStatus = "in\_progress"
 

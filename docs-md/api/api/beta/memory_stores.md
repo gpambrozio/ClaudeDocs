@@ -32,7 +32,7 @@ POST/v1/memory\_stores/{memory\_store\_id}/archive
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsDeletedMemoryStore = object { id, type }
+BetaManagedAgentsDeletedMemoryStore object { id, type }
 
 Confirmation that a `memory_store` was deleted.
 
@@ -42,7 +42,7 @@ ID of the deleted memory store (a `memstore_...` identifier). The store and all 
 
 type: "memory\_store\_deleted"
 
-BetaManagedAgentsMemoryStore = object { id, created\_at, name, 5 more }
+BetaManagedAgentsMemoryStore object { id, created\_at, name, 5 more }
 
 A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
@@ -100,13 +100,13 @@ DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsConflictError = object { type, message }
+BetaManagedAgentsConflictError object { type, message }
 
 type: "conflict\_error"
 
 message: optional string
 
-BetaManagedAgentsContentSha256Precondition = object { type, content\_sha256 }
+BetaManagedAgentsContentSha256Precondition object { type, content\_sha256 }
 
 Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 
@@ -116,7 +116,7 @@ content\_sha256: optional string
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
-BetaManagedAgentsDeletedMemory = object { id, type }
+BetaManagedAgentsDeletedMemory object { id, type }
 
 Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). The memory's version history persists and remains listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) until the store itself is deleted.
 
@@ -128,69 +128,69 @@ type: "memory\_deleted"
 
 BetaManagedAgentsError = [BetaInvalidRequestError](api/beta.md) { message, type }  or [BetaAuthenticationError](api/beta.md) { message, type }  or [BetaBillingError](api/beta.md) { message, type }  or 9 more
 
-Accepts one of the following:
+One of the following:
 
-BetaInvalidRequestError = object { message, type }
+BetaInvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-BetaAuthenticationError = object { message, type }
+BetaAuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BetaBillingError = object { message, type }
+BetaBillingError object { message, type }
 
 message: string
 
 type: "billing\_error"
 
-BetaPermissionError = object { message, type }
+BetaPermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-BetaNotFoundError = object { message, type }
+BetaNotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-BetaRateLimitError = object { message, type }
+BetaRateLimitError object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
 
-BetaGatewayTimeoutError = object { message, type }
+BetaGatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-BetaAPIError = object { message, type }
+BetaAPIError object { message, type }
 
 message: string
 
 type: "api\_error"
 
-BetaOverloadedError = object { message, type }
+BetaOverloadedError object { message, type }
 
 message: string
 
 type: "overloaded\_error"
 
-BetaManagedAgentsMemoryPreconditionFailedError = object { type, message }
+BetaManagedAgentsMemoryPreconditionFailedError object { type, message }
 
 type: "memory\_precondition\_failed\_error"
 
 message: optional string
 
-BetaManagedAgentsMemoryPathConflictError = object { type, conflicting\_memory\_id, conflicting\_path, message }
+BetaManagedAgentsMemoryPathConflictError object { type, conflicting\_memory\_id, conflicting\_path, message }
 
 type: "memory\_path\_conflict\_error"
 
@@ -200,13 +200,13 @@ conflicting\_path: optional string
 
 message: optional string
 
-BetaManagedAgentsConflictError = object { type, message }
+BetaManagedAgentsConflictError object { type, message }
 
 type: "conflict\_error"
 
 message: optional string
 
-BetaManagedAgentsMemory = object { id, content\_sha256, content\_size\_bytes, 7 more }
+BetaManagedAgentsMemory object { id, content\_sha256, content\_size\_bytes, 7 more }
 
 A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -252,9 +252,9 @@ BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta.md) { id, c
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsMemory = object { id, content\_sha256, content\_size\_bytes, 7 more }
+BetaManagedAgentsMemory object { id, content\_sha256, content\_size\_bytes, 7 more }
 
 A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -296,7 +296,7 @@ content: optional string
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-BetaManagedAgentsMemoryPrefix = object { path, type }
+BetaManagedAgentsMemoryPrefix object { path, type }
 
 A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
@@ -306,7 +306,7 @@ The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pas
 
 type: "memory\_prefix"
 
-BetaManagedAgentsMemoryPathConflictError = object { type, conflicting\_memory\_id, conflicting\_path, message }
+BetaManagedAgentsMemoryPathConflictError object { type, conflicting\_memory\_id, conflicting\_path, message }
 
 type: "memory\_path\_conflict\_error"
 
@@ -316,13 +316,13 @@ conflicting\_path: optional string
 
 message: optional string
 
-BetaManagedAgentsMemoryPreconditionFailedError = object { type, message }
+BetaManagedAgentsMemoryPreconditionFailedError object { type, message }
 
 type: "memory\_precondition\_failed\_error"
 
 message: optional string
 
-BetaManagedAgentsMemoryPrefix = object { path, type }
+BetaManagedAgentsMemoryPrefix object { path, type }
 
 A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
@@ -336,13 +336,13 @@ BetaManagedAgentsMemoryView = "basic" or "full"
 
 Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-Accepts one of the following:
+One of the following:
 
 "basic"
 
 "full"
 
-BetaManagedAgentsPrecondition = object { type, content\_sha256 }
+BetaManagedAgentsPrecondition object { type, content\_sha256 }
 
 Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 
@@ -372,9 +372,9 @@ BetaManagedAgentsActor = [BetaManagedAgentsSessionActor](api/beta.md) { session\
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionActor = object { session\_id, type }
+BetaManagedAgentsSessionActor object { session\_id, type }
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -384,7 +384,7 @@ ID of the session that performed the write (a `sesn_...` value). Look up the ses
 
 type: "session\_actor"
 
-BetaManagedAgentsAPIActor = object { api\_key\_id, type }
+BetaManagedAgentsAPIActor object { api\_key\_id, type }
 
 Attribution for a write made directly via the public API (outside of any session).
 
@@ -394,7 +394,7 @@ ID of the API key that performed the write. This identifies the key, not the sec
 
 type: "api\_actor"
 
-BetaManagedAgentsUserActor = object { type, user\_id }
+BetaManagedAgentsUserActor object { type, user\_id }
 
 Attribution for a write made by a human user through the Anthropic Console.
 
@@ -404,7 +404,7 @@ user\_id: string
 
 ID of the user who performed the write (a `user_...` value).
 
-BetaManagedAgentsAPIActor = object { api\_key\_id, type }
+BetaManagedAgentsAPIActor object { api\_key\_id, type }
 
 Attribution for a write made directly via the public API (outside of any session).
 
@@ -414,7 +414,7 @@ ID of the API key that performed the write. This identifies the key, not the sec
 
 type: "api\_actor"
 
-BetaManagedAgentsMemoryVersion = object { id, created\_at, memory\_id, 10 more }
+BetaManagedAgentsMemoryVersion object { id, created\_at, memory\_id, 10 more }
 
 A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and persist after the memory is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
@@ -438,7 +438,7 @@ operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 "created"
 
@@ -464,9 +464,9 @@ created\_by: optional [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionActor = object { session\_id, type }
+BetaManagedAgentsSessionActor object { session\_id, type }
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -476,7 +476,7 @@ ID of the session that performed the write (a `sesn_...` value). Look up the ses
 
 type: "session\_actor"
 
-BetaManagedAgentsAPIActor = object { api\_key\_id, type }
+BetaManagedAgentsAPIActor object { api\_key\_id, type }
 
 Attribution for a write made directly via the public API (outside of any session).
 
@@ -486,7 +486,7 @@ ID of the API key that performed the write. This identifies the key, not the sec
 
 type: "api\_actor"
 
-BetaManagedAgentsUserActor = object { type, user\_id }
+BetaManagedAgentsUserActor object { type, user\_id }
 
 Attribution for a write made by a human user through the Anthropic Console.
 
@@ -508,9 +508,9 @@ redacted\_by: optional [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionActor = object { session\_id, type }
+BetaManagedAgentsSessionActor object { session\_id, type }
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -520,7 +520,7 @@ ID of the session that performed the write (a `sesn_...` value). Look up the ses
 
 type: "session\_actor"
 
-BetaManagedAgentsAPIActor = object { api\_key\_id, type }
+BetaManagedAgentsAPIActor object { api\_key\_id, type }
 
 Attribution for a write made directly via the public API (outside of any session).
 
@@ -530,7 +530,7 @@ ID of the API key that performed the write. This identifies the key, not the sec
 
 type: "api\_actor"
 
-BetaManagedAgentsUserActor = object { type, user\_id }
+BetaManagedAgentsUserActor object { type, user\_id }
 
 Attribution for a write made by a human user through the Anthropic Console.
 
@@ -544,7 +544,7 @@ BetaManagedAgentsMemoryVersionOperation = "created" or "modified" or "deleted"
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 "created"
 
@@ -552,7 +552,7 @@ Accepts one of the following:
 
 "deleted"
 
-BetaManagedAgentsSessionActor = object { session\_id, type }
+BetaManagedAgentsSessionActor object { session\_id, type }
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -562,7 +562,7 @@ ID of the session that performed the write (a `sesn_...` value). Look up the ses
 
 type: "session\_actor"
 
-BetaManagedAgentsUserActor = object { type, user\_id }
+BetaManagedAgentsUserActor object { type, user\_id }
 
 Attribution for a write made by a human user through the Anthropic Console.
 

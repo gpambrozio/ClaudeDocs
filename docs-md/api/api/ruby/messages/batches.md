@@ -92,7 +92,7 @@ processing\_status: :in\_progress | :canceling | :ended
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 :in\_progress
 
@@ -156,7 +156,7 @@ error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
 
 error: [ErrorObject](api/$shared.md)
 
-Accepts one of the following:
+One of the following:
 
 class InvalidRequestError { message, type }
 
@@ -238,7 +238,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 class MessageBatchSucceededResult { message, type }
 
@@ -291,7 +291,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock { citations, text, type }
 
@@ -301,7 +301,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -431,7 +431,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -467,7 +467,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -493,7 +493,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search | :web\_fetch | :code\_execution | 4 more
 
-Accepts one of the following:
+One of the following:
 
 :web\_search
 
@@ -517,7 +517,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -541,13 +541,13 @@ type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -563,7 +563,7 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
+UnionMember1 = Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
 
@@ -585,7 +585,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -609,13 +609,13 @@ type: :code\_execution\_20260120
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -647,7 +647,7 @@ enabled: bool
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
 class Base64PDFSource { data, media\_type, type }
 
@@ -691,13 +691,13 @@ content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -751,13 +751,13 @@ class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -795,13 +795,13 @@ class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -823,7 +823,7 @@ content: String
 
 file\_type: :text | :image | :pdf
 
-Accepts one of the following:
+One of the following:
 
 :text
 
@@ -867,13 +867,13 @@ class ToolSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -915,15 +915,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -993,7 +993,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-String
+String = String
 
 role: :assistant
 
@@ -1011,7 +1011,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 :cyber
 
@@ -1040,7 +1040,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 :end\_turn
 
@@ -1126,7 +1126,7 @@ service\_tier: :standard | :priority | :batch
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -1142,7 +1142,7 @@ error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
 
 error: [ErrorObject](api/$shared.md)
 
-Accepts one of the following:
+One of the following:
 
 class InvalidRequestError { message, type }
 
@@ -1248,7 +1248,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 class MessageBatchSucceededResult { message, type }
 
@@ -1301,7 +1301,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock { citations, text, type }
 
@@ -1311,7 +1311,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -1441,7 +1441,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -1477,7 +1477,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -1503,7 +1503,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search | :web\_fetch | :code\_execution | 4 more
 
-Accepts one of the following:
+One of the following:
 
 :web\_search
 
@@ -1527,7 +1527,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -1551,13 +1551,13 @@ type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -1573,7 +1573,7 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
+UnionMember1 = Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
 
@@ -1595,7 +1595,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -1619,13 +1619,13 @@ type: :code\_execution\_20260120
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -1657,7 +1657,7 @@ enabled: bool
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
 class Base64PDFSource { data, media\_type, type }
 
@@ -1701,13 +1701,13 @@ content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -1761,13 +1761,13 @@ class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -1805,13 +1805,13 @@ class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -1833,7 +1833,7 @@ content: String
 
 file\_type: :text | :image | :pdf
 
-Accepts one of the following:
+One of the following:
 
 :text
 
@@ -1877,13 +1877,13 @@ class ToolSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -1925,15 +1925,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -2003,7 +2003,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-String
+String = String
 
 role: :assistant
 
@@ -2021,7 +2021,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 :cyber
 
@@ -2050,7 +2050,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 :end\_turn
 
@@ -2136,7 +2136,7 @@ service\_tier: :standard | :priority | :batch
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -2152,7 +2152,7 @@ error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
 
 error: [ErrorObject](api/$shared.md)
 
-Accepts one of the following:
+One of the following:
 
 class InvalidRequestError { message, type }
 
@@ -2273,7 +2273,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock { citations, text, type }
 
@@ -2283,7 +2283,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -2413,7 +2413,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -2449,7 +2449,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -2475,7 +2475,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search | :web\_fetch | :code\_execution | 4 more
 
-Accepts one of the following:
+One of the following:
 
 :web\_search
 
@@ -2499,7 +2499,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -2523,13 +2523,13 @@ type: :code\_execution\_20260120
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -2545,7 +2545,7 @@ Accepts one of the following:
 
 type: :web\_search\_tool\_result\_error
 
-Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
+UnionMember1 = Array[[WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more } ]
 
 encrypted\_content: String
 
@@ -2567,7 +2567,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -2591,13 +2591,13 @@ type: :code\_execution\_20260120
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  | [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -2629,7 +2629,7 @@ enabled: bool
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
 class Base64PDFSource { data, media\_type, type }
 
@@ -2673,13 +2673,13 @@ content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -2733,13 +2733,13 @@ class BashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -2777,13 +2777,13 @@ class TextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  | [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  | [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -2805,7 +2805,7 @@ content: String
 
 file\_type: :text | :image | :pdf
 
-Accepts one of the following:
+One of the following:
 
 :text
 
@@ -2849,13 +2849,13 @@ class ToolSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  | [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -2897,15 +2897,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -2975,7 +2975,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-String
+String = String
 
 role: :assistant
 
@@ -2993,7 +2993,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 :cyber
 
@@ -3022,7 +3022,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 :end\_turn
 
@@ -3108,7 +3108,7 @@ service\_tier: :standard | :priority | :batch
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 

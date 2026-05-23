@@ -20,13 +20,13 @@ session\_id: string
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -80,7 +80,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsSession = object { id, agent, archived\_at, 12 more }
+BetaManagedAgentsSession object { id, agent, archived\_at, 12 more }
 
 A Managed Agents `session`.
 
@@ -112,15 +112,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -158,13 +158,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -200,15 +200,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -246,13 +246,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -262,9 +262,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -274,7 +274,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -288,9 +288,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -300,7 +300,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -322,15 +322,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -346,15 +346,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -362,7 +362,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -374,15 +374,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -398,15 +398,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -416,7 +416,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -452,9 +452,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -464,7 +464,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -478,9 +478,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -490,7 +490,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -512,15 +512,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -536,15 +536,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -552,7 +552,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -564,15 +564,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -588,15 +588,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -606,7 +606,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -680,9 +680,9 @@ type: "outcome\_evaluation"
 
 resources: array of [BetaManagedAgentsSessionResource](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object { id, created\_at, mount\_path, 4 more }
 
 id: string
 
@@ -702,9 +702,9 @@ url: string
 
 checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -712,7 +712,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -720,7 +720,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsFileResource object { id, created\_at, file\_id, 3 more }
 
 id: string
 
@@ -738,7 +738,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -752,7 +752,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -790,7 +790,7 @@ status: "rescheduling" or "running" or "idle" or "terminated"
 
 SessionStatus enum
 
-Accepts one of the following:
+One of the following:
 
 "rescheduling"
 

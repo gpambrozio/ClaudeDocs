@@ -96,7 +96,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageBatchSucceededResult:
 
@@ -132,7 +132,7 @@ required Type Type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"Anthropic
 
@@ -171,7 +171,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock:
 
@@ -181,7 +181,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -317,7 +317,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -347,7 +347,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "advisor"Advisor
 
@@ -371,7 +371,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -397,13 +397,13 @@ class BetaWebSearchToolResultBlock:
 
 required [BetaWebSearchToolResultBlockContent](api/beta.md) Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError:
 
 required [BetaWebSearchToolResultErrorCode](api/beta.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -439,7 +439,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -465,13 +465,13 @@ class BetaWebFetchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock:
 
 required [BetaWebFetchToolResultErrorCode](api/beta.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -503,7 +503,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -545,7 +545,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -571,13 +571,13 @@ class BetaAdvisorToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError:
 
 required ErrorCode ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"MaxUsesExceeded
 
@@ -617,13 +617,13 @@ required [BetaCodeExecutionToolResultBlockContent](api/beta.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError:
 
 required [BetaCodeExecutionToolResultErrorCode](api/beta.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -677,13 +677,13 @@ class BetaBashCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError:
 
 required ErrorCode ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -721,13 +721,13 @@ class BetaTextEditorCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError:
 
 required ErrorCode ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -749,7 +749,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -793,13 +793,13 @@ class BetaToolSearchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError:
 
 required ErrorCode ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -847,7 +847,7 @@ class BetaMcpToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -859,7 +859,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -1009,7 +1009,7 @@ required IReadOnlyList<AppliedEdit> AppliedEdits
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse:
 
@@ -1048,7 +1048,7 @@ required CacheMissReason? CacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged:
 
@@ -1096,7 +1096,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -1182,7 +1182,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"Cyber
 
@@ -1211,7 +1211,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"EndTurn
 
@@ -1291,7 +1291,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage:
 
@@ -1399,7 +1399,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -1497,7 +1497,7 @@ required ServiceTier? ServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -1509,7 +1509,7 @@ required Speed? Speed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -1523,7 +1523,7 @@ required [BetaErrorResponse](api/beta.md) Error
 
 required [BetaError](api/beta.md) Error
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError:
 

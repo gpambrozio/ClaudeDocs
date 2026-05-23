@@ -24,7 +24,7 @@ order?: "asc" | "desc"
 
 Query param: Query parameter for order
 
-Accepts one of the following:
+One of the following:
 
 "asc"
 
@@ -38,7 +38,7 @@ betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 (string & {})
 
@@ -114,7 +114,7 @@ relationship: "external" | "resold" | "internal"
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 "external"
 
@@ -130,7 +130,7 @@ status: "active" | "pending" | "rejected"
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 

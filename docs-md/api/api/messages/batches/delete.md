@@ -22,7 +22,7 @@ ID of the Message Batch.
 
 ##### ReturnsExpand Collapse
 
-DeletedMessageBatch = object { id, type }
+DeletedMessageBatch object { id, type }
 
 id: string
 

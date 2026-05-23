@@ -25,7 +25,7 @@ Opaque cursor token from previous response's `next_page` field.
 
 ##### ReturnsExpand Collapse
 
-ClaudeCodeUsageReport = object { data, has\_more, next\_page }
+ClaudeCodeUsageReport object { data, has\_more, next\_page }
 
 data: array of object { actor, core\_metrics, customer\_type, 6 more }
 
@@ -35,9 +35,9 @@ actor: object { email\_address, type }  or object { api\_key\_name, type }
 
 The user or API key that performed the Claude Code actions.
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, type }
+UserActor object { email\_address, type }
 
 email\_address: string
 
@@ -45,7 +45,7 @@ Email address of the user who performed Claude Code actions.
 
 type: "user\_actor"
 
-APIActor = object { api\_key\_name, type }
+APIActor object { api\_key\_name, type }
 
 api\_key\_name: string
 
@@ -85,7 +85,7 @@ customer\_type: "api" or "subscription"
 
 Type of customer account (api for API customers, subscription for Pro/Team customers).
 
-Accepts one of the following:
+One of the following:
 
 "api"
 
@@ -159,7 +159,7 @@ subscription\_type: optional "enterprise" or "team"
 
 Subscription tier for subscription customers. `null` for API customers.
 
-Accepts one of the following:
+One of the following:
 
 "enterprise"
 

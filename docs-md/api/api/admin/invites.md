@@ -22,7 +22,7 @@ DELETE/v1/organizations/invites/{invite\_id}
 
 ##### ModelsExpand Collapse
 
-Invite = object { id, email, expires\_at, 4 more }
+Invite object { id, email, expires\_at, 4 more }
 
 id: string
 
@@ -44,7 +44,7 @@ role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -60,7 +60,7 @@ status: "accepted" or "expired" or "deleted" or "pending"
 
 Status of the Invite.
 
-Accepts one of the following:
+One of the following:
 
 "accepted"
 
@@ -76,7 +76,7 @@ Object type.
 
 For Invites, this is always `"invite"`.
 
-InviteDeleteResponse = object { id, type }
+InviteDeleteResponse object { id, type }
 
 id: string
 

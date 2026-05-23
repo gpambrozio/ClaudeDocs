@@ -16,9 +16,9 @@ ActivityListResponse = object { actor, id, created\_at, 3 more }  or object { ac
 
 User-initiated self-service account deletion.
 
-Accepts one of the following:
+One of the following:
 
-AccountDeleted = object { actor, id, created\_at, 3 more }
+AccountDeleted object { actor, id, created\_at, 3 more }
 
 User-initiated self-service account deletion.
 
@@ -52,7 +52,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "account\_deleted"
 
-AdminAPIKeyCreated = object { actor, admin\_api\_key\_id, scopes, 5 more }
+AdminAPIKeyCreated object { actor, admin\_api\_key\_id, scopes, 5 more }
 
 An admin API key was created.
 
@@ -94,7 +94,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "admin\_api\_key\_created"
 
-AdminAPIKeyDeleted = object { actor, admin\_api\_key\_id, id, 4 more }
+AdminAPIKeyDeleted object { actor, admin\_api\_key\_id, id, 4 more }
 
 An admin API key was deleted.
 
@@ -132,7 +132,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "admin\_api\_key\_deleted"
 
-AdminAPIKeyUpdated = object { actor, admin\_api\_key\_id, updates, 5 more }
+AdminAPIKeyUpdated object { actor, admin\_api\_key\_id, updates, 5 more }
 
 An admin API key was updated (renamed or activated/deactivated).
 
@@ -160,7 +160,7 @@ previous\_value: string
 
 type: "name" or "status"
 
-Accepts one of the following:
+One of the following:
 
 "name"
 
@@ -184,7 +184,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "admin\_api\_key\_updated"
 
-AdminConnectorRequestResolved = object { actor, decision, mcp\_server\_id, 6 more }
+AdminConnectorRequestResolved object { actor, decision, mcp\_server\_id, 6 more }
 
 Admin approved or dismissed pending member requests to enable an MCP connector.
 
@@ -202,7 +202,7 @@ type: optional "user\_actor"
 
 decision: "approved" or "dismissed"
 
-Accepts one of the following:
+One of the following:
 
 "approved"
 
@@ -230,7 +230,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "admin\_connector\_request\_resolved"
 
-AdminRequestCreated = object { actor, request\_type, id, 4 more }
+AdminRequestCreated object { actor, request\_type, id, 4 more }
 
 Admin request created by an org member (seat upgrade, limit increase, join org, end-user invite).
 
@@ -266,7 +266,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "admin\_request\_created"
 
-AgeVerified = object { actor, id, created\_at, 3 more }
+AgeVerified object { actor, id, created\_at, 3 more }
 
 User age was verified.
 
@@ -300,7 +300,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "age\_verified"
 
-AnonymousMobileLoginAttempted = object { actor, id, created\_at, 3 more }
+AnonymousMobileLoginAttempted object { actor, id, created\_at, 3 more }
 
 Anonymous mobile login was attempted.
 
@@ -332,7 +332,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "anonymous\_mobile\_login\_attempted"
 
-APIKeyCreated = object { actor, api\_key\_id, scopes, 5 more }
+APIKeyCreated object { actor, api\_key\_id, scopes, 5 more }
 
 Activity logged when a new API key is created.
 
@@ -374,15 +374,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "api\_key\_created"
 
-ClaudeArtifactAccessFailed = object { actor, claude\_artifact\_id, claude\_artifact\_version\_id, 5 more }
+ClaudeArtifactAccessFailed object { actor, claude\_artifact\_id, claude\_artifact\_version\_id, 5 more }
 
 An attempt to access an artifact failed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -394,7 +394,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -426,7 +426,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_artifact\_access\_failed"
 
-ClaudeArtifactCreated = object { actor, claude\_artifact\_id, id, 4 more }
+ClaudeArtifactCreated object { actor, claude\_artifact\_id, id, 4 more }
 
 An artifact was created.
 
@@ -462,7 +462,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_artifact\_created"
 
-ClaudePublishedArtifactDeleted = object { actor, claude\_published\_artifact\_id, id, 4 more }
+ClaudePublishedArtifactDeleted object { actor, claude\_published\_artifact\_id, id, 4 more }
 
 A published artifact was unpublished/deleted by its creator.
 
@@ -498,7 +498,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_published\_artifact\_deleted"
 
-ClaudeArtifactPublished = object { actor, artifact\_type, claude\_published\_artifact\_id, 6 more }
+ClaudeArtifactPublished object { actor, artifact\_type, claude\_published\_artifact\_id, 6 more }
 
 An artifact was published and made publicly accessible.
 
@@ -542,7 +542,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_artifact\_published"
 
-ClaudeArtifactSharingUpdated = object { actor, audience, claude\_artifact\_id, 6 more }
+ClaudeArtifactSharingUpdated object { actor, audience, claude\_artifact\_id, 6 more }
 
 An artifact's sharing settings were updated.
 
@@ -586,7 +586,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_artifact\_sharing\_updated"
 
-ClaudeArtifactViewed = object { actor, claude\_artifact\_id, id, 4 more }
+ClaudeArtifactViewed object { actor, claude\_artifact\_id, id, 4 more }
 
 An artifact was viewed.
 
@@ -622,7 +622,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_artifact\_viewed"
 
-AuditLogExportAccessed = object { actor, id, created\_at, 3 more }
+AuditLogExportAccessed object { actor, id, created\_at, 3 more }
 
 Audit log export file was accessed/downloaded via signed URL.
 
@@ -656,7 +656,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "audit\_log\_export\_accessed"
 
-AuditLogExportStarted = object { actor, id, created\_at, 5 more }
+AuditLogExportStarted object { actor, id, created\_at, 5 more }
 
 Audit log export was initiated.
 
@@ -698,7 +698,7 @@ End date of the export range
 
 type: optional "audit\_log\_export\_started"
 
-BillingEmailsUpdated = object { actor, id, cc\_email\_count, 6 more }
+BillingEmailsUpdated object { actor, id, cc\_email\_count, 6 more }
 
 The organization's billing email recipients were updated.
 
@@ -744,15 +744,15 @@ Number of 'to' email recipients.
 
 type: optional "billing\_emails\_updated"
 
-ClaudeChatAccessFailed = object { actor, claude\_chat\_id, id, 4 more }
+ClaudeChatAccessFailed object { actor, claude\_chat\_id, id, 4 more }
 
 An attempt to access a chat failed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -764,7 +764,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -794,7 +794,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_chat\_access\_failed"
 
-ClaudeChatCreated = object { actor, claude\_chat\_id, id, 5 more }
+ClaudeChatCreated object { actor, claude\_chat\_id, id, 5 more }
 
 User created a chat.
 
@@ -834,7 +834,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_chat\_created"
 
-ClaudeChatDeleted = object { actor, claude\_chat\_id, id, 5 more }
+ClaudeChatDeleted object { actor, claude\_chat\_id, id, 5 more }
 
 User deleted a chat.
 
@@ -874,15 +874,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_chat\_deleted"
 
-ClaudeChatDeletionFailed = object { actor, claude\_chat\_id, id, 4 more }
+ClaudeChatDeletionFailed object { actor, claude\_chat\_id, id, 4 more }
 
 A request to delete a chat failed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -894,7 +894,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -924,7 +924,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_chat\_deletion\_failed"
 
-ClaudeChatSettingsUpdated = object { actor, claude\_chat\_id, id, 5 more }
+ClaudeChatSettingsUpdated object { actor, claude\_chat\_id, id, 5 more }
 
 User updated the settings for a conversation.
 
@@ -964,7 +964,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_chat\_settings\_updated"
 
-ClaudeChatSnapshotCreated = object { actor, claude\_chat\_id, claude\_chat\_snapshot\_id, 5 more }
+ClaudeChatSnapshotCreated object { actor, claude\_chat\_id, claude\_chat\_snapshot\_id, 5 more }
 
 User created/shared a chat snapshot.
 
@@ -1002,15 +1002,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_chat\_snapshot\_created"
 
-ClaudeChatSnapshotViewed = object { actor, claude\_chat\_snapshot\_id, id, 5 more }
+ClaudeChatSnapshotViewed object { actor, claude\_chat\_snapshot\_id, id, 5 more }
 
 User viewed a chat snapshot (authenticated or public/unauthenticated).
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -1022,7 +1022,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -1054,7 +1054,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_chat\_snapshot\_viewed"
 
-ClaudeChatUpdated = object { actor, claude\_chat\_id, id, 5 more }
+ClaudeChatUpdated object { actor, claude\_chat\_id, id, 5 more }
 
 User updated the chat metadata (e.g name, model).
 
@@ -1094,7 +1094,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_chat\_updated"
 
-ClaudeChatViewed = object { actor, claude\_chat\_id, id, 5 more }
+ClaudeChatViewed object { actor, claude\_chat\_id, id, 5 more }
 
 User viewed a chat.
 
@@ -1134,7 +1134,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_chat\_viewed"
 
-ClaudeCodeReviewConfigUpdated = object { actor, enabled, id, 7 more }
+ClaudeCodeReviewConfigUpdated object { actor, enabled, id, 7 more }
 
 Claude Code Review configuration was enabled/disabled for an org.
 
@@ -1184,7 +1184,7 @@ Per-review spend limit in USD
 
 type: optional "claude\_code\_review\_config\_updated"
 
-ClaudeCodeReviewRepositoryAdded = object { actor, config\_id, repo\_name, 7 more }
+ClaudeCodeReviewRepositoryAdded object { actor, config\_id, repo\_name, 7 more }
 
 A repository was added to org-level Claude Code Review configuration.
 
@@ -1234,7 +1234,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_review\_repository\_added"
 
-ClaudeCodeReviewRepositoryRemoved = object { actor, config\_id, repo\_name, 6 more }
+ClaudeCodeReviewRepositoryRemoved object { actor, config\_id, repo\_name, 6 more }
 
 A repository was removed from org-level Claude Code Review configuration.
 
@@ -1280,7 +1280,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_review\_repository\_removed"
 
-ClaudeCodeReviewRepositoryUpdated = object { actor, config\_id, repo\_name, 8 more }
+ClaudeCodeReviewRepositoryUpdated object { actor, config\_id, repo\_name, 8 more }
 
 A Claude Code Review repository configuration was updated.
 
@@ -1334,7 +1334,7 @@ Updated trigger mode
 
 type: optional "claude\_code\_review\_repository\_updated"
 
-ClaudeCodeSecurityCenterConfigUpdated = object { actor, enabled, id, 5 more }
+ClaudeCodeSecurityCenterConfigUpdated object { actor, enabled, id, 5 more }
 
 Claude Code Security Center scanning was enabled/disabled for an org.
 
@@ -1376,7 +1376,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_security\_center\_config\_updated"
 
-ClaudeCodeSecurityScanCancelled = object { actor, scan\_project\_id, scans\_cancelled, 5 more }
+ClaudeCodeSecurityScanCancelled object { actor, scan\_project\_id, scans\_cancelled, 5 more }
 
 In-flight Claude Code Security scans were cancelled for a project.
 
@@ -1416,13 +1416,13 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_security\_scan\_cancelled"
 
-ClaudeCodeSecurityScanProjectUpdated = object { action, actor, scan\_project\_id, 5 more }
+ClaudeCodeSecurityScanProjectUpdated object { action, actor, scan\_project\_id, 5 more }
 
 A Claude Code Security scan project was archived or unarchived.
 
 action: "archived" or "unarchived"
 
-Accepts one of the following:
+One of the following:
 
 "archived"
 
@@ -1462,7 +1462,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_security\_scan\_project\_updated"
 
-ClaudeCodeSecurityScanScheduleDeleted = object { actor, scan\_project\_id, id, 4 more }
+ClaudeCodeSecurityScanScheduleDeleted object { actor, scan\_project\_id, id, 4 more }
 
 A recurring scan schedule was deleted for a Claude Code Security project.
 
@@ -1500,7 +1500,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_security\_scan\_schedule\_deleted"
 
-ClaudeCodeSecurityScanScheduleUpdated = object { actor, cadence, scan\_project\_id, 5 more }
+ClaudeCodeSecurityScanScheduleUpdated object { actor, cadence, scan\_project\_id, 5 more }
 
 A recurring scan schedule was set or replaced for a Claude Code Security project.
 
@@ -1540,7 +1540,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_security\_scan\_schedule\_updated"
 
-ClaudeCodeSecurityWebhookCreated = object { actor, scan\_project\_id, url, 6 more }
+ClaudeCodeSecurityWebhookCreated object { actor, scan\_project\_id, url, 6 more }
 
 An outbound webhook was created for a Claude Code Security scan project.
 
@@ -1584,7 +1584,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_security\_webhook\_created"
 
-ClaudeCodeSecurityWebhookDeleted = object { actor, scan\_project\_id, webhook\_id, 5 more }
+ClaudeCodeSecurityWebhookDeleted object { actor, scan\_project\_id, webhook\_id, 5 more }
 
 An outbound webhook for a Claude Code Security scan project was deleted.
 
@@ -1626,7 +1626,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_security\_webhook\_deleted"
 
-ClaudeCodeSecurityWebhookSecretUpdated = object { actor, scan\_project\_id, webhook\_id, 5 more }
+ClaudeCodeSecurityWebhookSecretUpdated object { actor, scan\_project\_id, webhook\_id, 5 more }
 
 The HMAC signing secret for a Claude Code Security webhook was rotated.
 
@@ -1668,7 +1668,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_security\_webhook\_secret\_updated"
 
-ClaudeCodeSecurityWebhookUpdated = object { actor, scan\_project\_id, webhook\_id, 5 more }
+ClaudeCodeSecurityWebhookUpdated object { actor, scan\_project\_id, webhook\_id, 5 more }
 
 An outbound webhook for a Claude Code Security scan project was updated.
 
@@ -1710,7 +1710,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_security\_webhook\_updated"
 
-ClaudeCodeTeamMemoryACLUpdated = object { action, actor, group\_id, 6 more }
+ClaudeCodeTeamMemoryACLUpdated object { action, actor, group\_id, 6 more }
 
 An RBAC group was added to or removed from the Claude Code team-memory ACL.
 
@@ -1718,7 +1718,7 @@ action: "removed" or "set"
 
 Whether the group was set (added/updated) or removed
 
-Accepts one of the following:
+One of the following:
 
 "removed"
 
@@ -1762,7 +1762,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_code\_team\_memory\_acl\_updated"
 
-CliPluginExecPolicyUpdated = object { actor, cli\_name, marketplace\_id, 9 more }
+CliPluginExecPolicyUpdated object { actor, cli\_name, marketplace\_id, 9 more }
 
 Admin set or cleared the per-op permission ceiling for a plugin CLI.
 
@@ -1820,7 +1820,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "cli\_plugin\_exec\_policy\_updated"
 
-ClaudeCommandCreated = object { actor, id, command\_id, 5 more }
+ClaudeCommandCreated object { actor, id, command\_id, 5 more }
 
 Command was created.
 
@@ -1858,7 +1858,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_command\_created"
 
-ClaudeCommandDeleted = object { actor, id, command\_id, 5 more }
+ClaudeCommandDeleted object { actor, id, command\_id, 5 more }
 
 Command was deleted.
 
@@ -1896,7 +1896,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_command\_deleted"
 
-ClaudeCommandReplaced = object { actor, id, command\_id, 5 more }
+ClaudeCommandReplaced object { actor, id, command\_id, 5 more }
 
 Command was replaced.
 
@@ -1934,7 +1934,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_command\_replaced"
 
-ComplianceAPIAccessed = object { actor, request\_id, request\_method, 8 more }
+ComplianceAPIAccessed object { actor, request\_id, request\_method, 8 more }
 
 Logging event auto-generated for each compliance API request.
 
@@ -1952,7 +1952,7 @@ request\_id: string
 
 request\_method: "DELETE" or "GET" or "POST" or "PUT"
 
-Accepts one of the following:
+One of the following:
 
 "DELETE"
 
@@ -1990,7 +1990,7 @@ Serialized JSON request body
 
 type: optional "compliance\_api\_accessed"
 
-DesktopExtensionAllowlisted = object { actor, extension\_id, id, 4 more }
+DesktopExtensionAllowlisted object { actor, extension\_id, id, 4 more }
 
 A desktop extension was added to an org's allowlist.
 
@@ -2028,7 +2028,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "desktop\_extension\_allowlisted"
 
-DesktopExtensionBlocklisted = object { actor, extension\_id, id, 4 more }
+DesktopExtensionBlocklisted object { actor, extension\_id, id, 4 more }
 
 A desktop extension was added to the global blocklist.
 
@@ -2066,7 +2066,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "desktop\_extension\_blocklisted"
 
-DesktopExtensionDeleted = object { actor, extension\_id, id, 5 more }
+DesktopExtensionDeleted object { actor, extension\_id, id, 5 more }
 
 A desktop extension was deleted, either globally by an admin or org-scoped by an org owner.
 
@@ -2108,7 +2108,7 @@ version: optional string
 
 Specific version deleted (null if all versions)
 
-DesktopExtensionRemovedFromAllowlist = object { actor, extension\_id, id, 4 more }
+DesktopExtensionRemovedFromAllowlist object { actor, extension\_id, id, 4 more }
 
 A desktop extension was removed from an org's allowlist.
 
@@ -2146,7 +2146,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "desktop\_extension\_removed\_from\_allowlist"
 
-DesktopExtensionUnblocked = object { actor, extension\_id, id, 4 more }
+DesktopExtensionUnblocked object { actor, extension\_id, id, 4 more }
 
 A desktop extension was removed from the global blocklist.
 
@@ -2184,7 +2184,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "desktop\_extension\_unblocked"
 
-DesktopExtensionUploaded = object { actor, extension\_id, version, 5 more }
+DesktopExtensionUploaded object { actor, extension\_id, version, 5 more }
 
 A desktop extension was uploaded, either globally by an admin or org-scoped by an org owner.
 
@@ -2226,7 +2226,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "desktop\_extension\_uploaded"
 
-DesktopExtensionVersionUploaded = object { actor, extension\_id, version, 5 more }
+DesktopExtensionVersionUploaded object { actor, extension\_id, version, 5 more }
 
 A new version of an existing org-owned desktop extension was uploaded.
 
@@ -2268,7 +2268,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "desktop\_extension\_version\_uploaded"
 
-DomainClaimInitiated = object { actor, id, created\_at, 3 more }
+DomainClaimInitiated object { actor, id, created\_at, 3 more }
 
 Domain capture claim initiated over personal accounts on verified domains.
 
@@ -2302,7 +2302,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "domain\_claim\_initiated"
 
-EndUserInviteRequested = object { actor, invitee\_email, id, 4 more }
+EndUserInviteRequested object { actor, invitee\_email, id, 4 more }
 
 Non-admin member submitted an invite request for a new org member.
 
@@ -2338,15 +2338,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "end\_user\_invite\_requested"
 
-ExtraUsageBillingEnabled = object { actor, id, created\_at, 3 more }
+ExtraUsageBillingEnabled object { actor, id, created\_at, 3 more }
 
 Usage credit billing was enabled for an organization.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -2358,7 +2358,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -2382,15 +2382,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "extra\_usage\_billing\_enabled"
 
-ExtraUsageCreditGranted = object { actor, id, created\_at, 3 more }
+ExtraUsageCreditGranted object { actor, id, created\_at, 3 more }
 
 A promotional usage credit grant was claimed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -2402,7 +2402,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -2426,15 +2426,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "extra\_usage\_credit\_granted"
 
-ExtraUsageSpendLimitCreated = object { actor, id, amount, 8 more }
+ExtraUsageSpendLimitCreated object { actor, id, amount, 8 more }
 
 Usage credit spend limit was created.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -2446,13 +2446,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -2500,15 +2500,15 @@ user\_id: optional string
 
 Tagged ID of the user who performed the action.
 
-ExtraUsageSpendLimitDeleted = object { actor, id, created\_at, 5 more }
+ExtraUsageSpendLimitDeleted object { actor, id, created\_at, 5 more }
 
 Usage credit spend limit was deleted.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -2520,13 +2520,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -2562,7 +2562,7 @@ user\_id: optional string
 
 Tagged ID of the user who performed the action.
 
-ExtraUsageSpendLimitIncreaseRequestApproved = object { actor, id, amount, 7 more }
+ExtraUsageSpendLimitIncreaseRequestApproved object { actor, id, amount, 7 more }
 
 A usage credit spend limit increase request was approved.
 
@@ -2602,7 +2602,7 @@ spend\_limit\_increase\_request\_id: optional string
 
 type: optional "extra\_usage\_spend\_limit\_increase\_request\_approved"
 
-ExtraUsageSpendLimitIncreaseRequestDenied = object { actor, id, created\_at, 5 more }
+ExtraUsageSpendLimitIncreaseRequestDenied object { actor, id, created\_at, 5 more }
 
 A usage credit spend limit increase request was denied.
 
@@ -2638,15 +2638,15 @@ spend\_limit\_increase\_request\_id: optional string
 
 type: optional "extra\_usage\_spend\_limit\_increase\_request\_denied"
 
-ExtraUsageSpendLimitUpdated = object { actor, id, amount, 8 more }
+ExtraUsageSpendLimitUpdated object { actor, id, amount, 8 more }
 
 Usage credit spend limit was updated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -2658,13 +2658,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -2712,15 +2712,15 @@ user\_id: optional string
 
 Tagged ID of the user who performed the action.
 
-ClaudeFileAccessFailed = object { actor, claude\_file\_id, filename, 7 more }
+ClaudeFileAccessFailed object { actor, claude\_file\_id, filename, 7 more }
 
 An attempt to access a file failed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -2732,7 +2732,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -2772,7 +2772,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_file\_access\_failed"
 
-ClaudeFileDeleted = object { actor, claude\_file\_id, filename, 5 more }
+ClaudeFileDeleted object { actor, claude\_file\_id, filename, 5 more }
 
 A file was deleted.
 
@@ -2810,7 +2810,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_file\_deleted"
 
-ClaudeFileUploaded = object { actor, claude\_file\_id, filename, 7 more }
+ClaudeFileUploaded object { actor, claude\_file\_id, filename, 7 more }
 
 A file was uploaded.
 
@@ -2856,7 +2856,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_file\_uploaded"
 
-ClaudeFileViewed = object { actor, claude\_file\_id, filename, 7 more }
+ClaudeFileViewed object { actor, claude\_file\_id, filename, 7 more }
 
 A file was viewed.
 
@@ -2902,7 +2902,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_file\_viewed"
 
-GheConfigurationCreated = object { actor, ghe\_configuration\_id, id, 4 more }
+GheConfigurationCreated object { actor, ghe\_configuration\_id, id, 4 more }
 
 Admin created a GHE configuration.
 
@@ -2940,7 +2940,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "ghe\_configuration\_created"
 
-GheConfigurationDeleted = object { actor, ghe\_configuration\_id, id, 4 more }
+GheConfigurationDeleted object { actor, ghe\_configuration\_id, id, 4 more }
 
 Admin deleted a GHE configuration.
 
@@ -2978,7 +2978,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "ghe\_configuration\_deleted"
 
-GheConfigurationUpdated = object { actor, ghe\_configuration\_id, id, 4 more }
+GheConfigurationUpdated object { actor, ghe\_configuration\_id, id, 4 more }
 
 Admin updated a GHE configuration.
 
@@ -3016,7 +3016,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "ghe\_configuration\_updated"
 
-GheUserConnected = object { actor, id, created\_at, 4 more }
+GheUserConnected object { actor, id, created\_at, 4 more }
 
 User connected to a GHE instance.
 
@@ -3054,7 +3054,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "ghe\_user\_connected"
 
-GheUserDisconnected = object { actor, id, created\_at, 4 more }
+GheUserDisconnected object { actor, id, created\_at, 4 more }
 
 User disconnected from a GHE instance.
 
@@ -3092,7 +3092,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "ghe\_user\_disconnected"
 
-GheWebhookSignatureInvalid = object { actor, ghe\_configuration\_id, id, 4 more }
+GheWebhookSignatureInvalid object { actor, ghe\_configuration\_id, id, 4 more }
 
 Webhook signature validation failed.
 
@@ -3128,7 +3128,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "ghe\_webhook\_signature\_invalid"
 
-ClaudeGitHubIntegrationCreated = object { actor, integration\_id, id, 6 more }
+ClaudeGitHubIntegrationCreated object { actor, integration\_id, id, 6 more }
 
 A GitHub integration was enabled for the organization.
 
@@ -3168,7 +3168,7 @@ repository\_name: optional string
 
 type: optional "claude\_github\_integration\_created"
 
-ClaudeGitHubIntegrationDeleted = object { actor, integration\_id, id, 6 more }
+ClaudeGitHubIntegrationDeleted object { actor, integration\_id, id, 6 more }
 
 A GitHub integration was disabled for the organization.
 
@@ -3208,7 +3208,7 @@ repository\_name: optional string
 
 type: optional "claude\_github\_integration\_deleted"
 
-ClaudeGitHubIntegrationUpdated = object { actor, integration\_id, id, 6 more }
+ClaudeGitHubIntegrationUpdated object { actor, integration\_id, id, 6 more }
 
 A GitHub integration's configuration was updated.
 
@@ -3248,7 +3248,7 @@ repository\_name: optional string
 
 type: optional "claude\_github\_integration\_updated"
 
-ClaudeGdriveIntegrationCreated = object { actor, integration\_id, id, 5 more }
+ClaudeGdriveIntegrationCreated object { actor, integration\_id, id, 5 more }
 
 A Google Drive integration was enabled for the organization.
 
@@ -3286,7 +3286,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_gdrive\_integration\_created"
 
-ClaudeGdriveIntegrationDeleted = object { actor, integration\_id, id, 5 more }
+ClaudeGdriveIntegrationDeleted object { actor, integration\_id, id, 5 more }
 
 A Google Drive integration was disabled for the organization.
 
@@ -3324,7 +3324,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_gdrive\_integration\_deleted"
 
-ClaudeGdriveIntegrationUpdated = object { actor, integration\_id, id, 5 more }
+ClaudeGdriveIntegrationUpdated object { actor, integration\_id, id, 5 more }
 
 A Google Drive integration's configuration was updated.
 
@@ -3362,15 +3362,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_gdrive\_integration\_updated"
 
-GroupCreated = object { actor, group\_id, group\_name, 5 more }
+GroupCreated object { actor, group\_id, group\_name, 5 more }
 
 A group was created (RBAC admin or SCIM provisioning).
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -3382,7 +3382,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -3392,7 +3392,7 @@ user\_agent: string
 
 type: optional "api\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -3428,15 +3428,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "group\_created"
 
-GroupDeleted = object { actor, group\_id, id, 4 more }
+GroupDeleted object { actor, group\_id, id, 4 more }
 
 A group was deleted (RBAC admin or SCIM provisioning).
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -3448,7 +3448,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -3458,7 +3458,7 @@ user\_agent: string
 
 type: optional "api\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -3490,7 +3490,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "group\_deleted"
 
-GroupListViewed = object { actor, id, created\_at, 3 more }
+GroupListViewed object { actor, id, created\_at, 3 more }
 
 Admin viewed the list of RBAC groups.
 
@@ -3524,15 +3524,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "group\_list\_viewed"
 
-GroupMemberAdded = object { actor, group\_id, member\_ids, 5 more }
+GroupMemberAdded object { actor, group\_id, member\_ids, 5 more }
 
 One or more members were added to a group.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -3544,7 +3544,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -3554,7 +3554,7 @@ user\_agent: string
 
 type: optional "api\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -3590,7 +3590,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "group\_member\_added"
 
-GroupMemberListViewed = object { actor, group\_id, id, 4 more }
+GroupMemberListViewed object { actor, group\_id, id, 4 more }
 
 Admin viewed the members of an RBAC group.
 
@@ -3628,15 +3628,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "group\_member\_list\_viewed"
 
-GroupMemberRemoved = object { actor, group\_id, member\_ids, 5 more }
+GroupMemberRemoved object { actor, group\_id, member\_ids, 5 more }
 
 One or more members were removed from a group.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -3648,7 +3648,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -3658,7 +3658,7 @@ user\_agent: string
 
 type: optional "api\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -3694,15 +3694,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "group\_member\_removed"
 
-GroupUpdated = object { actor, group\_id, id, 4 more }
+GroupUpdated object { actor, group\_id, id, 4 more }
 
 A group was updated (RBAC admin or SCIM provisioning).
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -3714,7 +3714,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -3724,7 +3724,7 @@ user\_agent: string
 
 type: optional "api\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -3756,15 +3756,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "group\_updated"
 
-GroupViewed = object { actor, group\_id, id, 4 more }
+GroupViewed object { actor, group\_id, id, 4 more }
 
 A group was viewed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -3776,7 +3776,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -3808,7 +3808,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "group\_viewed"
 
-IntegrationUserConnected = object { actor, id, created\_at, 4 more }
+IntegrationUserConnected object { actor, id, created\_at, 4 more }
 
 User connected to an integration.
 
@@ -3844,7 +3844,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "integration\_user\_connected"
 
-IntegrationUserDisconnected = object { actor, id, created\_at, 4 more }
+IntegrationUserDisconnected object { actor, id, created\_at, 4 more }
 
 User disconnected from an integration.
 
@@ -3880,7 +3880,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "integration\_user\_disconnected"
 
-InvoiceCollectionMethodUpdated = object { actor, id, created\_at, 4 more }
+InvoiceCollectionMethodUpdated object { actor, id, created\_at, 4 more }
 
 Invoice collection method was changed.
 
@@ -3918,7 +3918,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "invoice\_collection\_method\_updated"
 
-UserLoggedOut = object { actor, id, created\_at, 3 more }
+UserLoggedOut object { actor, id, created\_at, 3 more }
 
 A user signed out of one or all sessions.
 
@@ -3952,15 +3952,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "user\_logged\_out"
 
-LtiLaunchInitiated = object { actor, id, created\_at, 3 more }
+LtiLaunchInitiated object { actor, id, created\_at, 3 more }
 
 LTI launch was initiated.
 
 actor: object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -3970,7 +3970,7 @@ type: optional "unauthenticated\_user\_actor"
 
 unauthenticated\_email\_address: optional string
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -4000,15 +4000,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "lti\_launch\_initiated"
 
-LtiLaunchSuccess = object { actor, id, created\_at, 3 more }
+LtiLaunchSuccess object { actor, id, created\_at, 3 more }
 
 LTI launch completed successfully.
 
 actor: object { ip\_address, user\_agent, type, unauthenticated\_email\_address }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -4018,7 +4018,7 @@ type: optional "unauthenticated\_user\_actor"
 
 unauthenticated\_email\_address: optional string
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -4048,7 +4048,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "lti\_launch\_success"
 
-LtiPlatformCreated = object { actor, lti\_platform\_id, lti\_platform\_issuer, 5 more }
+LtiPlatformCreated object { actor, lti\_platform\_id, lti\_platform\_issuer, 5 more }
 
 Admin created an LTI platform integration.
 
@@ -4090,7 +4090,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "lti\_platform\_created"
 
-LtiPlatformUpdated = object { actor, lti\_platform\_id, id, 5 more }
+LtiPlatformUpdated object { actor, lti\_platform\_id, id, 5 more }
 
 Admin updated an LTI platform integration.
 
@@ -4132,7 +4132,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "lti\_platform\_updated"
 
-MagicLinkLoginFailed = object { actor, id, created\_at, 3 more }
+MagicLinkLoginFailed object { actor, id, created\_at, 3 more }
 
 A magic link sign-in attempt failed.
 
@@ -4164,7 +4164,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "magic\_link\_login\_failed"
 
-MagicLinkLoginInitiated = object { actor, id, created\_at, 3 more }
+MagicLinkLoginInitiated object { actor, id, created\_at, 3 more }
 
 A user requested a magic link sign-in email.
 
@@ -4196,7 +4196,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "magic\_link\_login\_initiated"
 
-MagicLinkLoginSucceeded = object { actor, id, auth\_method, 5 more }
+MagicLinkLoginSucceeded object { actor, id, auth\_method, 5 more }
 
 A user successfully signed in with a magic link email.
 
@@ -4238,7 +4238,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "magic\_link\_login\_succeeded"
 
-ManagedOrganizationSetupCompleted = object { actor, id, created\_at, 3 more }
+ManagedOrganizationSetupCompleted object { actor, id, created\_at, 3 more }
 
 Managed (AWS Marketplace) organization setup was completed.
 
@@ -4272,7 +4272,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "managed\_organization\_setup\_completed"
 
-MarketplaceCreated = object { actor, marketplace\_id, id, 4 more }
+MarketplaceCreated object { actor, marketplace\_id, id, 4 more }
 
 Admin created an organization marketplace.
 
@@ -4310,7 +4310,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "marketplace\_created"
 
-MarketplaceDeleted = object { actor, marketplace\_id, id, 4 more }
+MarketplaceDeleted object { actor, marketplace\_id, id, 4 more }
 
 Admin deleted an organization marketplace.
 
@@ -4348,7 +4348,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "marketplace\_deleted"
 
-MarketplaceUpdated = object { actor, marketplace\_id, id, 4 more }
+MarketplaceUpdated object { actor, marketplace\_id, id, 4 more }
 
 Admin updated an organization marketplace.
 
@@ -4386,7 +4386,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "marketplace\_updated"
 
-MarketplaceWebhookDeleted = object { actor, marketplace\_id, id, 4 more }
+MarketplaceWebhookDeleted object { actor, marketplace\_id, id, 4 more }
 
 Admin removed the GitHub push webhook for a marketplace.
 
@@ -4424,7 +4424,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "marketplace\_webhook\_deleted"
 
-MarketplaceWebhookProvisioned = object { actor, marketplace\_id, id, 5 more }
+MarketplaceWebhookProvisioned object { actor, marketplace\_id, id, 5 more }
 
 Admin provisioned a GitHub push webhook for a marketplace.
 
@@ -4466,7 +4466,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "marketplace\_webhook\_provisioned"
 
-McpServerCreated = object { actor, mcp\_server\_id, mcp\_server\_name, 5 more }
+McpServerCreated object { actor, mcp\_server\_id, mcp\_server\_name, 5 more }
 
 An MCP server was added to the organization.
 
@@ -4508,7 +4508,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "mcp\_server\_created"
 
-McpServerDeleted = object { actor, mcp\_server\_id, mcp\_server\_name, 5 more }
+McpServerDeleted object { actor, mcp\_server\_id, mcp\_server\_name, 5 more }
 
 An MCP server was removed from the organization.
 
@@ -4550,7 +4550,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "mcp\_server\_deleted"
 
-McpServerUpdated = object { actor, mcp\_server\_id, mcp\_server\_name, 5 more }
+McpServerUpdated object { actor, mcp\_server\_id, mcp\_server\_name, 5 more }
 
 An MCP server's configuration was updated.
 
@@ -4592,7 +4592,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "mcp\_server\_updated"
 
-McpToolPolicyUpdated = object { actor, max\_permission, mcp\_server\_id, 7 more }
+McpToolPolicyUpdated object { actor, max\_permission, mcp\_server\_id, 7 more }
 
 The permission restriction for an MCP tool was set or cleared.
 
@@ -4642,15 +4642,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "mcp\_tool\_policy\_updated"
 
-OrgAnalyticsAPICapabilityUpdated = object { actor, id, created\_at, 3 more }
+OrgAnalyticsAPICapabilityUpdated object { actor, id, created\_at, 3 more }
 
 Organization analytics\_api capability was enabled or disabled.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -4662,7 +4662,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -4686,15 +4686,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_analytics\_api\_capability\_updated"
 
-OrgBulkDeleteInitiated = object { actor, id, created\_at, 3 more }
+OrgBulkDeleteInitiated object { actor, id, created\_at, 3 more }
 
 Organization bulk deletion was initiated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -4706,7 +4706,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -4730,15 +4730,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_bulk\_delete\_initiated"
 
-OrgClaudeCodeDataSharingDisabled = object { actor, id, created\_at, 3 more }
+OrgClaudeCodeDataSharingDisabled object { actor, id, created\_at, 3 more }
 
 Organization Claude Code data sharing was disabled.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -4750,7 +4750,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -4774,15 +4774,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_claude\_code\_data\_sharing\_disabled"
 
-OrgClaudeCodeDataSharingEnabled = object { actor, id, created\_at, 3 more }
+OrgClaudeCodeDataSharingEnabled object { actor, id, created\_at, 3 more }
 
 Organization Claude Code data sharing was enabled.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -4794,7 +4794,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -4818,7 +4818,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_claude\_code\_data\_sharing\_enabled"
 
-OrgClaudeCodeDesktopDisabled = object { actor, id, created\_at, 3 more }
+OrgClaudeCodeDesktopDisabled object { actor, id, created\_at, 3 more }
 
 Organization Claude Code Desktop was disabled.
 
@@ -4852,7 +4852,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_claude\_code\_desktop\_disabled"
 
-OrgClaudeCodeDesktopEnabled = object { actor, id, created\_at, 3 more }
+OrgClaudeCodeDesktopEnabled object { actor, id, created\_at, 3 more }
 
 Organization Claude Code Desktop was enabled.
 
@@ -4886,15 +4886,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_claude\_code\_desktop\_enabled"
 
-OrgComplianceAPISettingsUpdated = object { actor, id, compliance\_api\_enabled, 5 more }
+OrgComplianceAPISettingsUpdated object { actor, id, compliance\_api\_enabled, 5 more }
 
 Organization compliance API settings were updated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -4906,13 +4906,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -4944,7 +4944,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_compliance\_api\_settings\_updated"
 
-OrgCoworkAgentDisabled = object { actor, id, created\_at, 3 more }
+OrgCoworkAgentDisabled object { actor, id, created\_at, 3 more }
 
 Organization Cowork Agent was disabled.
 
@@ -4978,7 +4978,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_cowork\_agent\_disabled"
 
-OrgCoworkAgentEnabled = object { actor, id, created\_at, 3 more }
+OrgCoworkAgentEnabled object { actor, id, created\_at, 3 more }
 
 Organization Cowork Agent was enabled.
 
@@ -5012,7 +5012,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_cowork\_agent\_enabled"
 
-OrgCoworkDisabled = object { actor, id, created\_at, 3 more }
+OrgCoworkDisabled object { actor, id, created\_at, 3 more }
 
 Organization cowork was disabled.
 
@@ -5046,7 +5046,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_cowork\_disabled"
 
-OrgCoworkEnabled = object { actor, id, created\_at, 3 more }
+OrgCoworkEnabled object { actor, id, created\_at, 3 more }
 
 Organization cowork was enabled.
 
@@ -5080,15 +5080,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_cowork\_enabled"
 
-OrgCreationBlocked = object { actor, id, created\_at, 4 more }
+OrgCreationBlocked object { actor, id, created\_at, 4 more }
 
 Organization creation was blocked.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5100,7 +5100,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5126,7 +5126,7 @@ reason: optional string
 
 type: optional "org\_creation\_blocked"
 
-OrgDataExportAccessed = object { actor, id, created\_at, 3 more }
+OrgDataExportAccessed object { actor, id, created\_at, 3 more }
 
 Organization data export file was accessed/downloaded via signed URL.
 
@@ -5160,15 +5160,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_data\_export\_accessed"
 
-OrgDataExportCompleted = object { actor, id, created\_at, 3 more }
+OrgDataExportCompleted object { actor, id, created\_at, 3 more }
 
 Organization data export was completed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5180,7 +5180,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5204,15 +5204,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_data\_export\_completed"
 
-OrgDataExportStarted = object { actor, id, created\_at, 3 more }
+OrgDataExportStarted object { actor, id, created\_at, 3 more }
 
 Organization data export was started.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5224,7 +5224,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5248,15 +5248,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_data\_export\_started"
 
-OrgDeletedViaBulk = object { actor, id, created\_at, 3 more }
+OrgDeletedViaBulk object { actor, id, created\_at, 3 more }
 
 Organization was deleted via bulk operation.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5268,7 +5268,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5292,7 +5292,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_deleted\_via\_bulk"
 
-OrgDeletionRequested = object { actor, id, created\_at, 3 more }
+OrgDeletionRequested object { actor, id, created\_at, 3 more }
 
 Organization deletion was requested.
 
@@ -5326,15 +5326,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_deletion\_requested"
 
-OrgDirectoryResyncCompleted = object { actor, resync\_uuid, id, 4 more }
+OrgDirectoryResyncCompleted object { actor, resync\_uuid, id, 4 more }
 
 Organization directory resync completed successfully.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5346,7 +5346,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5372,15 +5372,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_directory\_resync\_completed"
 
-OrgDirectoryResyncFailed = object { actor, resync\_uuid, id, 4 more }
+OrgDirectoryResyncFailed object { actor, resync\_uuid, id, 4 more }
 
 Organization directory resync failed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5392,7 +5392,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5418,15 +5418,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_directory\_resync\_failed"
 
-OrgDirectoryResyncStarted = object { actor, resync\_uuid, sync\_destinations, 5 more }
+OrgDirectoryResyncStarted object { actor, resync\_uuid, sync\_destinations, 5 more }
 
 Organization directory resync was started asynchronously.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5438,7 +5438,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5466,15 +5466,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_directory\_resync\_started"
 
-OrgDirectorySyncActivated = object { actor, id, created\_at, 3 more }
+OrgDirectorySyncActivated object { actor, id, created\_at, 3 more }
 
 Organization directory sync was activated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5486,13 +5486,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -5520,15 +5520,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_directory\_sync\_activated"
 
-OrgDirectorySyncAddInitiated = object { actor, id, created\_at, 3 more }
+OrgDirectorySyncAddInitiated object { actor, id, created\_at, 3 more }
 
 Organization directory sync setup was initiated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5540,7 +5540,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5564,15 +5564,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_directory\_sync\_add\_initiated"
 
-OrgDirectorySyncDeleted = object { actor, id, created\_at, 3 more }
+OrgDirectorySyncDeleted object { actor, id, created\_at, 3 more }
 
 Organization directory sync was deleted.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5584,13 +5584,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -5618,7 +5618,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_directory\_sync\_deleted"
 
-OrgDiscoverabilityDisabled = object { actor, id, created\_at, 3 more }
+OrgDiscoverabilityDisabled object { actor, id, created\_at, 3 more }
 
 Admin disabled organization discoverability.
 
@@ -5652,7 +5652,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_discoverability\_disabled"
 
-OrgDiscoverabilityEnabled = object { actor, id, created\_at, 3 more }
+OrgDiscoverabilityEnabled object { actor, id, created\_at, 3 more }
 
 Admin enabled organization discoverability.
 
@@ -5686,7 +5686,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_discoverability\_enabled"
 
-OrgDiscoverabilitySettingsUpdated = object { actor, id, created\_at, 3 more }
+OrgDiscoverabilitySettingsUpdated object { actor, id, created\_at, 3 more }
 
 Admin updated organization discoverability settings.
 
@@ -5720,15 +5720,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_discoverability\_settings\_updated"
 
-OrgDomainAddInitiated = object { actor, id, created\_at, 3 more }
+OrgDomainAddInitiated object { actor, id, created\_at, 3 more }
 
 Organization domain verification was initiated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5740,7 +5740,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5764,15 +5764,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_domain\_add\_initiated"
 
-OrgDomainRemoved = object { actor, id, created\_at, 4 more }
+OrgDomainRemoved object { actor, id, created\_at, 4 more }
 
 Organization domain was removed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5784,7 +5784,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5810,15 +5810,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_domain\_removed"
 
-OrgDomainVerified = object { actor, id, created\_at, 4 more }
+OrgDomainVerified object { actor, id, created\_at, 4 more }
 
 Organization domain was verified.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5830,7 +5830,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5856,7 +5856,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_domain\_verified"
 
-OrgHipaaSelfServeEnabled = object { actor, baa\_content\_hash, baa\_version\_label, 6 more }
+OrgHipaaSelfServeEnabled object { actor, baa\_content\_hash, baa\_version\_label, 6 more }
 
 A primary owner click-accepted the BAA and enabled HIPAA protections
 for the organization via the self-serve flow.
@@ -5897,15 +5897,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_hipaa\_self\_serve\_enabled"
 
-OrgIPRestrictionCreated = object { actor, id, created\_at, 3 more }
+OrgIPRestrictionCreated object { actor, id, created\_at, 3 more }
 
 Organization IP restriction was created.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5917,7 +5917,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5941,15 +5941,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_ip\_restriction\_created"
 
-OrgIPRestrictionDeleted = object { actor, id, created\_at, 3 more }
+OrgIPRestrictionDeleted object { actor, id, created\_at, 3 more }
 
 Organization IP restriction was deleted.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -5961,7 +5961,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -5985,15 +5985,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_ip\_restriction\_deleted"
 
-OrgIPRestrictionUpdated = object { actor, id, created\_at, 3 more }
+OrgIPRestrictionUpdated object { actor, id, created\_at, 3 more }
 
 Organization IP restriction was updated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6005,7 +6005,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -6029,7 +6029,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_ip\_restriction\_updated"
 
-OrgInviteLinkDisabled = object { actor, id, created\_at, 3 more }
+OrgInviteLinkDisabled object { actor, id, created\_at, 3 more }
 
 Organization invite link was disabled.
 
@@ -6063,7 +6063,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_invite\_link\_disabled"
 
-OrgInviteLinkGenerated = object { actor, id, created\_at, 3 more }
+OrgInviteLinkGenerated object { actor, id, created\_at, 3 more }
 
 Organization invite link was generated.
 
@@ -6097,7 +6097,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_invite\_link\_generated"
 
-OrgInviteLinkRegenerated = object { actor, id, created\_at, 3 more }
+OrgInviteLinkRegenerated object { actor, id, created\_at, 3 more }
 
 Organization invite link was regenerated (previous link invalidated).
 
@@ -6131,15 +6131,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_invite\_link\_regenerated"
 
-OrgInviteViewed = object { actor, invite\_id, id, 4 more }
+OrgInviteViewed object { actor, invite\_id, id, 4 more }
 
 An organization invite was viewed.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -6149,7 +6149,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6183,15 +6183,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_invite\_viewed"
 
-OrgInvitesListed = object { actor, id, created\_at, 3 more }
+OrgInvitesListed object { actor, id, created\_at, 3 more }
 
 Organization invites were listed.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -6201,7 +6201,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6231,7 +6231,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_invites\_listed"
 
-OrgJoinProposalDecided = object { actor, approved, id, 4 more }
+OrgJoinProposalDecided object { actor, approved, id, 4 more }
 
 Approve or reject decision on a parent-org join proposal.
 
@@ -6267,7 +6267,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_join\_proposal\_decided"
 
-OrgJoinRequestApproved = object { actor, id, created\_at, 3 more }
+OrgJoinRequestApproved object { actor, id, created\_at, 3 more }
 
 Admin approved a join request.
 
@@ -6301,7 +6301,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_join\_request\_approved"
 
-OrgJoinRequestCreated = object { actor, id, created\_at, 3 more }
+OrgJoinRequestCreated object { actor, id, created\_at, 3 more }
 
 User requested to join an organization.
 
@@ -6335,7 +6335,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_join\_request\_created"
 
-OrgJoinRequestDismissed = object { actor, id, created\_at, 3 more }
+OrgJoinRequestDismissed object { actor, id, created\_at, 3 more }
 
 Admin dismissed a join request.
 
@@ -6369,7 +6369,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_join\_request\_dismissed"
 
-OrgJoinRequestInstantApproved = object { actor, id, created\_at, 3 more }
+OrgJoinRequestInstantApproved object { actor, id, created\_at, 3 more }
 
 Join request was instantly approved.
 
@@ -6403,7 +6403,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_join\_request\_instant\_approved"
 
-OrgJoinRequestsBulkDismissed = object { actor, id, created\_at, 3 more }
+OrgJoinRequestsBulkDismissed object { actor, id, created\_at, 3 more }
 
 Admin bulk-dismissed join requests.
 
@@ -6437,15 +6437,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_join\_requests\_bulk\_dismissed"
 
-OrgMagicLinkSecondFactorToggled = object { actor, enabled, id, 4 more }
+OrgMagicLinkSecondFactorToggled object { actor, enabled, id, 4 more }
 
 Organization magic link second factor was toggled.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6457,7 +6457,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -6483,7 +6483,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_magic\_link\_second\_factor\_toggled"
 
-OrgMemberInvitesDisabled = object { actor, id, created\_at, 3 more }
+OrgMemberInvitesDisabled object { actor, id, created\_at, 3 more }
 
 Admin disabled member invites for the organization.
 
@@ -6517,7 +6517,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_member\_invites\_disabled"
 
-OrgMemberInvitesEnabled = object { actor, id, created\_at, 3 more }
+OrgMemberInvitesEnabled object { actor, id, created\_at, 3 more }
 
 Admin enabled member invites for the organization.
 
@@ -6551,15 +6551,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_member\_invites\_enabled"
 
-OrgMembersExported = object { actor, id, created\_at, 3 more }
+OrgMembersExported object { actor, id, created\_at, 3 more }
 
 Organization members list was exported as CSV.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6571,7 +6571,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -6595,15 +6595,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_members\_exported"
 
-OrgParentJoinProposalCreated = object { actor, id, created\_at, 3 more }
+OrgParentJoinProposalCreated object { actor, id, created\_at, 3 more }
 
 Organization parent join proposal was created.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6615,7 +6615,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -6639,15 +6639,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_parent\_join\_proposal\_created"
 
-OrgParentSearchPerformed = object { actor, id, created\_at, 3 more }
+OrgParentSearchPerformed object { actor, id, created\_at, 3 more }
 
 Organization parent search was performed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6659,7 +6659,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -6683,15 +6683,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_parent\_search\_performed"
 
-OrgSSOAddInitiated = object { actor, id, created\_at, 3 more }
+OrgSSOAddInitiated object { actor, id, created\_at, 3 more }
 
 Organization SSO setup was initiated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6703,7 +6703,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -6727,15 +6727,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_sso\_add\_initiated"
 
-OrgSSOConnectionActivated = object { actor, id, connection\_id, 5 more }
+OrgSSOConnectionActivated object { actor, id, connection\_id, 5 more }
 
 Organization SSO connection was activated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6747,13 +6747,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -6785,15 +6785,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_sso\_connection\_activated"
 
-OrgSSOConnectionDeactivated = object { actor, id, connection\_id, 4 more }
+OrgSSOConnectionDeactivated object { actor, id, connection\_id, 4 more }
 
 Organization SSO connection was deactivated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6805,13 +6805,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -6841,15 +6841,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_sso\_connection\_deactivated"
 
-OrgSSOConnectionDeleted = object { actor, id, connection\_id, 4 more }
+OrgSSOConnectionDeleted object { actor, id, connection\_id, 4 more }
 
 Organization SSO connection was deleted.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6861,13 +6861,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -6897,15 +6897,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_sso\_connection\_deleted"
 
-OrgSSOGroupRoleMappingsUpdated = object { actor, id, created\_at, 3 more }
+OrgSSOGroupRoleMappingsUpdated object { actor, id, created\_at, 3 more }
 
 Organization SSO group role mappings were updated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6917,7 +6917,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -6941,15 +6941,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_sso\_group\_role\_mappings\_updated"
 
-OrgSSOProvisioningModeChanged = object { actor, id, created\_at, 5 more }
+OrgSSOProvisioningModeChanged object { actor, id, created\_at, 5 more }
 
 Organization SSO provisioning mode was changed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -6961,7 +6961,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -6989,15 +6989,15 @@ previous\_mode: optional string
 
 type: optional "org\_sso\_provisioning\_mode\_changed"
 
-OrgSSOSeatTierAssignmentToggled = object { actor, enabled, id, 4 more }
+OrgSSOSeatTierAssignmentToggled object { actor, enabled, id, 4 more }
 
 Organization SSO seat tier assignment was toggled.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7009,7 +7009,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -7035,15 +7035,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_sso\_seat\_tier\_assignment\_toggled"
 
-OrgSSOSeatTierMappingsUpdated = object { actor, id, created\_at, 3 more }
+OrgSSOSeatTierMappingsUpdated object { actor, id, created\_at, 3 more }
 
 Organization SSO seat tier mappings were updated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7055,7 +7055,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -7079,15 +7079,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_sso\_seat\_tier\_mappings\_updated"
 
-OrgSSOToggled = object { actor, enabled, id, 4 more }
+OrgSSOToggled object { actor, enabled, id, 4 more }
 
 Organization SSO was toggled on or off.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7099,7 +7099,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -7125,15 +7125,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_sso\_toggled"
 
-OrgSyncDeletingSynchronizedFilesStarted = object { actor, id, created\_at, 3 more }
+OrgSyncDeletingSynchronizedFilesStarted object { actor, id, created\_at, 3 more }
 
 Organization started deleting synchronized files.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7145,7 +7145,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -7169,15 +7169,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_sync\_deleting\_synchronized\_files\_started"
 
-OrgSyncSynchronizedFilesDeleted = object { actor, id, created\_at, 3 more }
+OrgSyncSynchronizedFilesDeleted object { actor, id, created\_at, 3 more }
 
 Organization synchronized files were deleted.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7189,7 +7189,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -7213,15 +7213,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_sync\_synchronized\_files\_deleted"
 
-OrgTaintAdded = object { actor, id, created\_at, 4 more }
+OrgTaintAdded object { actor, id, created\_at, 4 more }
 
 A taint was added to an organization.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7233,7 +7233,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -7259,15 +7259,15 @@ taint: optional string
 
 type: optional "org\_taint\_added"
 
-OrgTaintRemoved = object { actor, id, created\_at, 4 more }
+OrgTaintRemoved object { actor, id, created\_at, 4 more }
 
 A taint was removed from an organization.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7279,7 +7279,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -7305,15 +7305,15 @@ taint: optional string
 
 type: optional "org\_taint\_removed"
 
-OrgUserDeleted = object { actor, id, created\_at, 5 more }
+OrgUserDeleted object { actor, id, created\_at, 5 more }
 
 User was removed from organization.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7325,13 +7325,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -7363,7 +7363,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_user\_deleted"
 
-OrgUserInviteAccepted = object { actor, id, created\_at, 4 more }
+OrgUserInviteAccepted object { actor, id, created\_at, 4 more }
 
 Organization user invite was accepted.
 
@@ -7399,15 +7399,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_user\_invite\_accepted"
 
-OrgUserInviteDeleted = object { actor, id, created\_at, 4 more }
+OrgUserInviteDeleted object { actor, id, created\_at, 4 more }
 
 Organization user invite was deleted.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7419,13 +7419,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -7455,15 +7455,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_user\_invite\_deleted"
 
-OrgUserInviteReSent = object { actor, id, created\_at, 4 more }
+OrgUserInviteReSent object { actor, id, created\_at, 4 more }
 
 Organization user invite was re-sent.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7475,7 +7475,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -7501,7 +7501,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_user\_invite\_re\_sent"
 
-OrgUserInviteRejected = object { actor, id, created\_at, 4 more }
+OrgUserInviteRejected object { actor, id, created\_at, 4 more }
 
 Organization user invite was rejected.
 
@@ -7537,15 +7537,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_user\_invite\_rejected"
 
-OrgUserInviteSent = object { actor, id, created\_at, 5 more }
+OrgUserInviteSent object { actor, id, created\_at, 5 more }
 
 Organization user invite was sent.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }  or object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7557,13 +7557,13 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
 type: optional "anthropic\_actor"
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -7595,7 +7595,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_user\_invite\_sent"
 
-OrgUserLeft = object { actor, id, created\_at, 4 more }
+OrgUserLeft object { actor, id, created\_at, 4 more }
 
 User removed themselves from organization.
 
@@ -7631,15 +7631,15 @@ previous\_role: optional string
 
 type: optional "org\_user\_left"
 
-OrgUserViewed = object { actor, user\_id, id, 4 more }
+OrgUserViewed object { actor, user\_id, id, 4 more }
 
 An organization user was viewed.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -7649,7 +7649,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7683,15 +7683,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_user\_viewed"
 
-OrgUsersListed = object { actor, id, created\_at, 3 more }
+OrgUsersListed object { actor, id, created\_at, 3 more }
 
 Organization users were listed.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -7701,7 +7701,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7731,7 +7731,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_users\_listed"
 
-OrgWorkAcrossAppsDisabled = object { actor, id, created\_at, 3 more }
+OrgWorkAcrossAppsDisabled object { actor, id, created\_at, 3 more }
 
 Organization Work Across Apps was disabled.
 
@@ -7765,7 +7765,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_work\_across\_apps\_disabled"
 
-OrgWorkAcrossAppsEnabled = object { actor, id, created\_at, 3 more }
+OrgWorkAcrossAppsEnabled object { actor, id, created\_at, 3 more }
 
 Organization Work Across Apps was enabled.
 
@@ -7799,7 +7799,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "org\_work\_across\_apps\_enabled"
 
-OrganizationAddressUpdated = object { actor, id, billing\_address\_updated, 7 more }
+OrganizationAddressUpdated object { actor, id, billing\_address\_updated, 7 more }
 
 The organization's billing or shipping address was updated.
 
@@ -7841,7 +7841,7 @@ shipping\_name\_updated: optional boolean
 
 type: optional "organization\_address\_updated"
 
-OrganizationIconDeleted = object { actor, id, created\_at, 3 more }
+OrganizationIconDeleted object { actor, id, created\_at, 3 more }
 
 Organization's custom icon deleted.
 
@@ -7875,7 +7875,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "organization\_icon\_deleted"
 
-OrganizationIconUpdated = object { actor, id, created\_at, 3 more }
+OrganizationIconUpdated object { actor, id, created\_at, 3 more }
 
 Organization's custom icon uploaded or replaced.
 
@@ -7909,15 +7909,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "organization\_icon\_updated"
 
-ClaudeOrganizationSettingsUpdated = object { actor, updates, id, 4 more }
+ClaudeOrganizationSettingsUpdated object { actor, updates, id, 4 more }
 
 Organization settings were updated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -7929,7 +7929,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -7937,9 +7937,9 @@ type: optional "anthropic\_actor"
 
 updates: array of object { current\_value, previous\_value, type }  or object { current\_value, previous\_value, type }  or object { current\_value, previous\_value, type }  or 38 more
 
-Accepts one of the following:
+One of the following:
 
-OrganizationName = object { current\_value, previous\_value, type }
+OrganizationName object { current\_value, previous\_value, type }
 
 current\_value: string
 
@@ -7947,7 +7947,7 @@ previous\_value: string
 
 type: optional "name"
 
-OrganizationCapabilities = object { current\_value, previous\_value, type }
+OrganizationCapabilities object { current\_value, previous\_value, type }
 
 current\_value: array of string
 
@@ -7955,7 +7955,7 @@ previous\_value: array of string
 
 type: optional "capabilities"
 
-OrganizationRedactContent = object { current\_value, previous\_value, type }
+OrganizationRedactContent object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -7963,7 +7963,7 @@ previous\_value: boolean
 
 type: optional "redact\_content"
 
-PublicProjectsEnabled = object { current\_value, previous\_value, type }
+PublicProjectsEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -7971,7 +7971,7 @@ previous\_value: boolean
 
 type: optional "public\_projects\_enabled"
 
-WebSearchEnabled = object { current\_value, previous\_value, type }
+WebSearchEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -7979,7 +7979,7 @@ previous\_value: boolean
 
 type: optional "web\_search\_enabled"
 
-GeolocationEnabled = object { current\_value, previous\_value, type }
+GeolocationEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -7987,7 +7987,7 @@ previous\_value: boolean
 
 type: optional "geolocation\_enabled"
 
-OrgMemoryEnabledSetting = object { current\_value, previous\_value, type }
+OrgMemoryEnabledSetting object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -7995,13 +7995,13 @@ previous\_value: boolean
 
 type: optional "enabled\_saffron"
 
-DataRetentionPeriods = object { current\_value, previous\_value, type }
+DataRetentionPeriods object { current\_value, previous\_value, type }
 
 current\_value: array of object { data\_type, duration, timescale }
 
 data\_type: "all" or "chat" or "project"
 
-Accepts one of the following:
+One of the following:
 
 "all"
 
@@ -8013,7 +8013,7 @@ duration: number
 
 timescale: "day" or "indefinite" or "month"
 
-Accepts one of the following:
+One of the following:
 
 "day"
 
@@ -8025,7 +8025,7 @@ previous\_value: array of object { data\_type, duration, timescale }
 
 data\_type: "all" or "chat" or "project"
 
-Accepts one of the following:
+One of the following:
 
 "all"
 
@@ -8037,7 +8037,7 @@ duration: number
 
 timescale: "day" or "indefinite" or "month"
 
-Accepts one of the following:
+One of the following:
 
 "day"
 
@@ -8047,7 +8047,7 @@ Accepts one of the following:
 
 type: optional "data\_retention\_periods"
 
-MembersLimit = object { current\_value, previous\_value, type }
+MembersLimit object { current\_value, previous\_value, type }
 
 current\_value: number
 
@@ -8055,7 +8055,7 @@ previous\_value: number
 
 type: optional "members\_limit"
 
-ClaudeAPIInArtifactsEnabled = object { current\_value, previous\_value, type }
+ClaudeAPIInArtifactsEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8063,7 +8063,7 @@ previous\_value: boolean
 
 type: optional "claude\_api\_in\_artifacts\_enabled"
 
-WorkbenchCompletionFeedbackEnabled = object { current\_value, previous\_value, type }
+WorkbenchCompletionFeedbackEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8071,7 +8071,7 @@ previous\_value: boolean
 
 type: optional "workbench\_completion\_feedback\_enabled"
 
-ClaudeAICompletionFeedbackEnabled = object { current\_value, previous\_value, type }
+ClaudeAICompletionFeedbackEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8079,7 +8079,7 @@ previous\_value: boolean
 
 type: optional "claude\_ai\_completion\_feedback\_enabled"
 
-ClaudeAIIntegrationSharingEnabled = object { current\_value, previous\_value, type }
+ClaudeAIIntegrationSharingEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8087,7 +8087,7 @@ previous\_value: boolean
 
 type: optional "claude\_ai\_integration\_sharing\_enabled"
 
-ClaudeAIChatSharingEnabled = object { current\_value, previous\_value, type }
+ClaudeAIChatSharingEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8095,7 +8095,7 @@ previous\_value: boolean
 
 type: optional "claude\_ai\_chat\_sharing\_enabled"
 
-ClaudeAiccrSharingEnabled = object { current\_value, previous\_value, type }
+ClaudeAiccrSharingEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8103,11 +8103,11 @@ previous\_value: boolean
 
 type: optional "claude\_ai\_ccr\_sharing\_enabled"
 
-BatchesDownloadUiVisibility = object { current\_value, previous\_value, type }
+BatchesDownloadUiVisibility object { current\_value, previous\_value, type }
 
 current\_value: "all" or "none" or "selected"
 
-Accepts one of the following:
+One of the following:
 
 "all"
 
@@ -8117,7 +8117,7 @@ Accepts one of the following:
 
 previous\_value: "all" or "none" or "selected"
 
-Accepts one of the following:
+One of the following:
 
 "all"
 
@@ -8127,7 +8127,7 @@ Accepts one of the following:
 
 type: optional "batches\_download\_ui\_visibility"
 
-AllowedInviteDomains = object { current\_value, previous\_value, type }
+AllowedInviteDomains object { current\_value, previous\_value, type }
 
 current\_value: array of string
 
@@ -8135,7 +8135,7 @@ previous\_value: array of string
 
 type: optional "allowed\_invite\_domains"
 
-WebSearchAPISettingsChanged = object { current\_value, previous\_value, type }
+WebSearchAPISettingsChanged object { current\_value, previous\_value, type }
 
 current\_value: object { domain\_filters, is\_enabled }
 
@@ -8163,7 +8163,7 @@ is\_enabled: boolean
 
 type: optional "web\_search\_api\_settings"
 
-WebFetchAPISettingsChanged = object { current\_value, previous\_value, type }
+WebFetchAPISettingsChanged object { current\_value, previous\_value, type }
 
 current\_value: object { domain\_filters, is\_enabled }
 
@@ -8191,7 +8191,7 @@ is\_enabled: boolean
 
 type: optional "web\_fetch\_api\_settings"
 
-DefaultWorkspaceSettings = object { current\_value, previous\_value, type }
+DefaultWorkspaceSettings object { current\_value, previous\_value, type }
 
 current\_value: object { enable\_api\_keys }
 
@@ -8203,7 +8203,7 @@ enable\_api\_keys: optional boolean
 
 type: optional "default\_workspace\_settings"
 
-BatchesDownloadUiEnabledWorkspaceIDs = object { current\_value, previous\_value, type }
+BatchesDownloadUiEnabledWorkspaceIDs object { current\_value, previous\_value, type }
 
 current\_value: array of string
 
@@ -8211,7 +8211,7 @@ previous\_value: array of string
 
 type: optional "batches\_download\_ui\_enabled\_workspace\_ids"
 
-ClaudeCodeManagedSettings = object { current\_value, current\_version, previous\_value, 3 more }
+ClaudeCodeManagedSettings object { current\_value, current\_version, previous\_value, 3 more }
 
 The organization's Claude Code managed settings were changed.
 
@@ -8230,7 +8230,7 @@ settings\_uuid: optional string
 
 type: optional "claude\_code\_managed\_settings"
 
-AccountSessionDurationSeconds = object { current\_value, previous\_value, type }
+AccountSessionDurationSeconds object { current\_value, previous\_value, type }
 
 Tracks changes to the enterprise account session duration setting (in seconds).
 
@@ -8240,7 +8240,7 @@ previous\_value: number
 
 type: optional "account\_session\_duration\_seconds"
 
-VcsConnections = object { current\_value, previous\_value, type }
+VcsConnections object { current\_value, previous\_value, type }
 
 Tracks changes to VCS (GitHub, etc.) organization connections.
 
@@ -8270,7 +8270,7 @@ org\_id: optional string
 
 type: optional "vcs\_connections"
 
-DisabledAdminRequestTypes = object { current\_value, previous\_value, type }
+DisabledAdminRequestTypes object { current\_value, previous\_value, type }
 
 Tracks changes to which admin request types are disabled.
 
@@ -8280,7 +8280,7 @@ previous\_value: array of string
 
 type: optional "disabled\_admin\_request\_types"
 
-CodeExecutionNetworkEgressEnabled = object { current\_value, previous\_value, type }
+CodeExecutionNetworkEgressEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8288,7 +8288,7 @@ previous\_value: boolean
 
 type: optional "code\_execution\_network\_egress\_enabled"
 
-CodeExecutionDomainAllowlistChanged = object { current\_value, previous\_value, type }
+CodeExecutionDomainAllowlistChanged object { current\_value, previous\_value, type }
 
 current\_value: array of string
 
@@ -8296,11 +8296,11 @@ previous\_value: array of string
 
 type: optional "code\_execution\_domain\_allowlist\_changed"
 
-CodeExecutionDomainAllowlistTemplateChanged = object { current\_value, previous\_value, type }
+CodeExecutionDomainAllowlistTemplateChanged object { current\_value, previous\_value, type }
 
 current\_value: "custom" or "full\_egress" or "package\_managers"
 
-Accepts one of the following:
+One of the following:
 
 "custom"
 
@@ -8310,7 +8310,7 @@ Accepts one of the following:
 
 previous\_value: "custom" or "full\_egress" or "package\_managers"
 
-Accepts one of the following:
+One of the following:
 
 "custom"
 
@@ -8320,7 +8320,7 @@ Accepts one of the following:
 
 type: optional "code\_execution\_domain\_allowlist\_template\_changed"
 
-ChatEnabled = object { current\_value, previous\_value, type }
+ChatEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8328,7 +8328,7 @@ previous\_value: boolean
 
 type: optional "chat\_enabled"
 
-ClaudeCodeQuickWebSetupEnabled = object { current\_value, previous\_value, type }
+ClaudeCodeQuickWebSetupEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8336,11 +8336,11 @@ previous\_value: boolean
 
 type: optional "claude\_code\_quick\_web\_setup\_enabled"
 
-ClaudeCodeTeamMemoryMode = object { current\_value, previous\_value, type }
+ClaudeCodeTeamMemoryMode object { current\_value, previous\_value, type }
 
 current\_value: "all\_org\_members" or "github\_repo" or "off" or "specific\_groups"
 
-Accepts one of the following:
+One of the following:
 
 "all\_org\_members"
 
@@ -8352,7 +8352,7 @@ Accepts one of the following:
 
 previous\_value: "all\_org\_members" or "github\_repo" or "off" or "specific\_groups"
 
-Accepts one of the following:
+One of the following:
 
 "all\_org\_members"
 
@@ -8364,7 +8364,7 @@ Accepts one of the following:
 
 type: optional "claude\_code\_team\_memory\_mode"
 
-BrowserExtensionSettingsUpdated = object { current\_value, previous\_value, type }
+BrowserExtensionSettingsUpdated object { current\_value, previous\_value, type }
 
 current\_value: map[unknown]
 
@@ -8372,7 +8372,7 @@ previous\_value: map[unknown]
 
 type: optional "browser\_extension\_settings"
 
-DesktopExtensionAllowlistEnabled = object { current\_value, previous\_value, type }
+DesktopExtensionAllowlistEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8380,7 +8380,7 @@ previous\_value: boolean
 
 type: optional "is\_desktop\_extension\_allowlist\_enabled"
 
-ClaudeDesignEnabled = object { current\_value, previous\_value, type }
+ClaudeDesignEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8388,7 +8388,7 @@ previous\_value: boolean
 
 type: optional "claude\_ai\_design\_enabled"
 
-ClaudeAISkillSharingEnabled = object { current\_value, previous\_value, type }
+ClaudeAISkillSharingEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8396,7 +8396,7 @@ previous\_value: boolean
 
 type: optional "claude\_ai\_skill\_sharing\_enabled"
 
-ClaudeAISkillSharingOrgEnabled = object { current\_value, previous\_value, type }
+ClaudeAISkillSharingOrgEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8404,7 +8404,7 @@ previous\_value: boolean
 
 type: optional "claude\_ai\_skill\_sharing\_org\_enabled"
 
-ClaudeCodeRemoteControlEnabled = object { current\_value, previous\_value, type }
+ClaudeCodeRemoteControlEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8412,7 +8412,7 @@ previous\_value: boolean
 
 type: optional "claude\_code\_remote\_control\_enabled"
 
-ClaudeCodeRoutinesEnabled = object { current\_value, previous\_value, type }
+ClaudeCodeRoutinesEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8420,7 +8420,7 @@ previous\_value: boolean
 
 type: optional "claude\_code\_routines\_enabled"
 
-FrontierServicesDataUseEnabled = object { current\_value, previous\_value, type }
+FrontierServicesDataUseEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8428,7 +8428,7 @@ previous\_value: boolean
 
 type: optional "frontier\_services\_data\_use\_enabled"
 
-LtiCourseProjectsEnabled = object { current\_value, previous\_value, type }
+LtiCourseProjectsEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8436,7 +8436,7 @@ previous\_value: boolean
 
 type: optional "lti\_course\_projects\_enabled"
 
-ManagedAgentsEnabled = object { current\_value, previous\_value, type }
+ManagedAgentsEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -8462,15 +8462,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_organization\_settings\_updated"
 
-OwnedProjectsAccessRestored = object { actor, id, created\_at, 4 more }
+OwnedProjectsAccessRestored object { actor, id, created\_at, 4 more }
 
 Access to owned projects was restored.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -8482,7 +8482,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -8508,7 +8508,7 @@ type: optional "owned\_projects\_access\_restored"
 
 user\_id: optional string
 
-PaymentMethodUpdated = object { actor, id, created\_at, 3 more }
+PaymentMethodUpdated object { actor, id, created\_at, 3 more }
 
 The organization's default payment method was updated.
 
@@ -8542,15 +8542,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "payment\_method\_updated"
 
-PhoneCodeSent = object { actor, id, created\_at, 3 more }
+PhoneCodeSent object { actor, id, created\_at, 3 more }
 
 User requested a phone verification code.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -8562,7 +8562,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -8590,7 +8590,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "phone\_code\_sent"
 
-PhoneCodeVerified = object { actor, id, created\_at, 3 more }
+PhoneCodeVerified object { actor, id, created\_at, 3 more }
 
 User successfully verified their phone code.
 
@@ -8624,15 +8624,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "phone\_code\_verified"
 
-PlatformAPIKeyCreated = object { actor, api\_key\_id, id, 4 more }
+PlatformAPIKeyCreated object { actor, api\_key\_id, id, 4 more }
 
 An API key was created.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -8642,7 +8642,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -8676,15 +8676,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_api\_key\_created"
 
-PlatformAPIKeyUpdated = object { actor, api\_key\_id, updates, 5 more }
+PlatformAPIKeyUpdated object { actor, api\_key\_id, updates, 5 more }
 
 An API key was updated.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -8694,7 +8694,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -8718,7 +8718,7 @@ previous\_value: string
 
 type: "name" or "status" or "workspace"
 
-Accepts one of the following:
+One of the following:
 
 "name"
 
@@ -8744,15 +8744,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_api\_key\_updated"
 
-PlatformCostReportViewed = object { actor, id, created\_at, 3 more }
+PlatformCostReportViewed object { actor, id, created\_at, 3 more }
 
 The cost report was viewed.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -8762,7 +8762,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -8792,15 +8792,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_cost\_report\_viewed"
 
-PlatformFederationIssuerArchived = object { actor, federation\_issuer\_id, id, 4 more }
+PlatformFederationIssuerArchived object { actor, federation\_issuer\_id, id, 4 more }
 
 An OIDC federation issuer was archived.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -8810,7 +8810,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -8844,15 +8844,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_federation\_issuer\_archived"
 
-PlatformFederationIssuerUpdated = object { actor, federation\_issuer\_id, updates, 5 more }
+PlatformFederationIssuerUpdated object { actor, federation\_issuer\_id, updates, 5 more }
 
 An OIDC federation issuer was updated.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -8862,7 +8862,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -8886,7 +8886,7 @@ previous\_value: string
 
 type: "ca\_cert\_pem\_sha256" or "check\_jti" or "discovery\_base" or 7 more
 
-Accepts one of the following:
+One of the following:
 
 "ca\_cert\_pem\_sha256"
 
@@ -8926,15 +8926,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_federation\_issuer\_updated"
 
-PlatformFederationRuleArchived = object { actor, federation\_rule\_id, id, 4 more }
+PlatformFederationRuleArchived object { actor, federation\_rule\_id, id, 4 more }
 
 An OIDC federation rule was archived.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -8944,7 +8944,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -8978,15 +8978,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_federation\_rule\_archived"
 
-PlatformFederationRuleUpdated = object { actor, federation\_rule\_id, updates, 5 more }
+PlatformFederationRuleUpdated object { actor, federation\_rule\_id, updates, 5 more }
 
 An OIDC federation rule was updated.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -8996,7 +8996,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9020,7 +9020,7 @@ previous\_value: string
 
 type: "applies\_to\_all\_workspaces" or "attributes" or "description" or 11 more
 
-Accepts one of the following:
+One of the following:
 
 "applies\_to\_all\_workspaces"
 
@@ -9068,15 +9068,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_federation\_rule\_updated"
 
-PlatformFederationRuleWorkspaceAdded = object { actor, federation\_rule\_id, workspace\_id, 5 more }
+PlatformFederationRuleWorkspaceAdded object { actor, federation\_rule\_id, workspace\_id, 5 more }
 
 A federation rule was enabled for a workspace.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -9086,7 +9086,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9124,15 +9124,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_federation\_rule\_workspace\_added"
 
-PlatformFederationRuleWorkspaceRemoved = object { actor, federation\_rule\_id, workspace\_id, 5 more }
+PlatformFederationRuleWorkspaceRemoved object { actor, federation\_rule\_id, workspace\_id, 5 more }
 
 A federation rule was disabled for a workspace.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -9142,7 +9142,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9180,15 +9180,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_federation\_rule\_workspace\_removed"
 
-PlatformFileContentDownloaded = object { actor, file\_id, id, 4 more }
+PlatformFileContentDownloaded object { actor, file\_id, id, 4 more }
 
 Activity logged when file content is downloaded via GET /v1/files/{file\_id}/content.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9200,7 +9200,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -9232,15 +9232,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_file\_content\_downloaded"
 
-PlatformFileDeleted = object { actor, file\_id, id, 4 more }
+PlatformFileDeleted object { actor, file\_id, id, 4 more }
 
 Activity logged when a file is deleted via DELETE /v1/files/{file\_id}.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9252,7 +9252,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -9284,15 +9284,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_file\_deleted"
 
-PlatformFileUploaded = object { actor, file\_id, id, 5 more }
+PlatformFileUploaded object { actor, file\_id, id, 5 more }
 
 Activity logged when a file is uploaded via POST /v1/files.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9304,7 +9304,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -9340,15 +9340,15 @@ The tagged session ID (agent-api only)
 
 type: optional "platform\_file\_uploaded"
 
-PlatformServiceAccountArchived = object { actor, service\_account\_id, id, 4 more }
+PlatformServiceAccountArchived object { actor, service\_account\_id, id, 4 more }
 
 A service account was archived.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -9358,7 +9358,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9392,15 +9392,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_service\_account\_archived"
 
-PlatformServiceAccountUpdated = object { actor, service\_account\_id, updates, 5 more }
+PlatformServiceAccountUpdated object { actor, service\_account\_id, updates, 5 more }
 
 A service account was updated.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -9410,7 +9410,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9452,15 +9452,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_service\_account\_updated"
 
-PlatformServiceAccountWorkspaceMemberAdded = object { actor, service\_account\_id, workspace\_id, 5 more }
+PlatformServiceAccountWorkspaceMemberAdded object { actor, service\_account\_id, workspace\_id, 5 more }
 
 A service account was added as a member of a workspace.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -9470,7 +9470,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9508,15 +9508,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_service\_account\_workspace\_member\_added"
 
-PlatformServiceAccountWorkspaceMemberRemoved = object { actor, service\_account\_id, workspace\_id, 5 more }
+PlatformServiceAccountWorkspaceMemberRemoved object { actor, service\_account\_id, workspace\_id, 5 more }
 
 A service account was removed from a workspace.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -9526,7 +9526,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9564,15 +9564,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_service\_account\_workspace\_member\_removed"
 
-PlatformServiceAccountWorkspaceMemberUpdated = object { actor, service\_account\_id, updates, 6 more }
+PlatformServiceAccountWorkspaceMemberUpdated object { actor, service\_account\_id, updates, 6 more }
 
 A service account's workspace membership role was updated.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -9582,7 +9582,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9628,7 +9628,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_service\_account\_workspace\_member\_updated"
 
-PlatformSigningKeyCreated = object { actor, algorithm, key\_backing\_type, 7 more }
+PlatformSigningKeyCreated object { actor, algorithm, key\_backing\_type, 7 more }
 
 Activity logged when a new request-signing key is registered for the org.
 
@@ -9678,7 +9678,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_signing\_key\_created"
 
-PlatformSigningKeyDeleted = object { actor, algorithm, key\_backing\_type, 7 more }
+PlatformSigningKeyDeleted object { actor, algorithm, key\_backing\_type, 7 more }
 
 Activity logged when a signing key is permanently deleted.
 
@@ -9728,7 +9728,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_signing\_key\_deleted"
 
-PlatformSigningKeyRotated = object { actor, algorithm, key\_group\_identifier, 7 more }
+PlatformSigningKeyRotated object { actor, algorithm, key\_group\_identifier, 7 more }
 
 Activity logged when an in-memory signing key is rotated.
 
@@ -9778,15 +9778,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_signing\_key\_rotated"
 
-PlatformSkillVersionCreated = object { actor, skill\_id, version, 5 more }
+PlatformSkillVersionCreated object { actor, skill\_id, version, 5 more }
 
 Activity logged when a skill version is created via POST /v1/skills/{skill\_id}/versions.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9798,7 +9798,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -9834,15 +9834,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_skill\_version\_created"
 
-PlatformSkillVersionDeleted = object { actor, skill\_id, version, 5 more }
+PlatformSkillVersionDeleted object { actor, skill\_id, version, 5 more }
 
 Activity logged when a skill version is deleted via DELETE /v1/skills/{skill\_id}/versions/{version}.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -9854,7 +9854,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -9890,7 +9890,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_skill\_version\_deleted"
 
-PlatformSpendLimitAlertEmailsUpdated = object { actor, id, alert\_emails, 5 more }
+PlatformSpendLimitAlertEmailsUpdated object { actor, id, alert\_emails, 5 more }
 
 Spend limit alert email addresses and role targets were updated for an org.
 
@@ -9932,7 +9932,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_spend\_limit\_alert\_emails\_updated"
 
-PlatformSpendLimitCreated = object { actor, id, created\_at, 5 more }
+PlatformSpendLimitCreated object { actor, id, created\_at, 5 more }
 
 An org-level fixed-dollar spend limit was created.
 
@@ -9974,7 +9974,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_spend\_limit\_created"
 
-PlatformSpendLimitDeleted = object { actor, id, created\_at, 4 more }
+PlatformSpendLimitDeleted object { actor, id, created\_at, 4 more }
 
 An org-level spend limit was removed.
 
@@ -10012,7 +10012,7 @@ UUID of the deleted spend limit.
 
 type: optional "platform\_spend\_limit\_deleted"
 
-PlatformSpendLimitUpdated = object { actor, id, created\_at, 5 more }
+PlatformSpendLimitUpdated object { actor, id, created\_at, 5 more }
 
 An org-level spend limit snooze/ignore state was changed.
 
@@ -10054,15 +10054,15 @@ UUID of the spend limit.
 
 type: optional "platform\_spend\_limit\_updated"
 
-PlatformUsageReportClaudeCodeViewed = object { actor, id, created\_at, 3 more }
+PlatformUsageReportClaudeCodeViewed object { actor, id, created\_at, 3 more }
 
 The Claude Code usage report was viewed.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -10072,7 +10072,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -10102,15 +10102,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_usage\_report\_claude\_code\_viewed"
 
-PlatformUsageReportMessagesViewed = object { actor, id, created\_at, 3 more }
+PlatformUsageReportMessagesViewed object { actor, id, created\_at, 3 more }
 
 The messages usage report was viewed.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -10120,7 +10120,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -10150,15 +10150,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_usage\_report\_messages\_viewed"
 
-PlatformWorkspaceArchived = object { actor, workspace\_id, id, 4 more }
+PlatformWorkspaceArchived object { actor, workspace\_id, id, 4 more }
 
 A workspace was archived.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -10168,7 +10168,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -10202,15 +10202,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_workspace\_archived"
 
-PlatformWorkspaceCreated = object { actor, workspace\_id, id, 4 more }
+PlatformWorkspaceCreated object { actor, workspace\_id, id, 4 more }
 
 A workspace was created.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -10220,7 +10220,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -10254,15 +10254,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_workspace\_created"
 
-PlatformWorkspaceMemberAdded = object { actor, user\_id, workspace\_id, 5 more }
+PlatformWorkspaceMemberAdded object { actor, user\_id, workspace\_id, 5 more }
 
 A member was added to a workspace.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -10272,7 +10272,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -10310,15 +10310,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_workspace\_member\_added"
 
-PlatformWorkspaceMemberRemoved = object { actor, user\_id, workspace\_id, 5 more }
+PlatformWorkspaceMemberRemoved object { actor, user\_id, workspace\_id, 5 more }
 
 A member was removed from a workspace.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -10328,7 +10328,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -10366,15 +10366,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_workspace\_member\_removed"
 
-PlatformWorkspaceMemberUpdated = object { actor, updates, user\_id, 6 more }
+PlatformWorkspaceMemberUpdated object { actor, updates, user\_id, 6 more }
 
 A workspace member was updated.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -10384,7 +10384,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -10430,15 +10430,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_workspace\_member\_updated"
 
-PlatformWorkspaceMemberViewed = object { actor, user\_id, workspace\_id, 5 more }
+PlatformWorkspaceMemberViewed object { actor, user\_id, workspace\_id, 5 more }
 
 A workspace member was viewed.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -10448,7 +10448,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -10486,15 +10486,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_workspace\_member\_viewed"
 
-PlatformWorkspaceMembersListed = object { actor, workspace\_id, id, 4 more }
+PlatformWorkspaceMembersListed object { actor, workspace\_id, id, 4 more }
 
 Workspace members were listed.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -10504,7 +10504,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -10538,7 +10538,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_workspace\_members\_listed"
 
-PlatformWorkspaceRateLimitDeleted = object { actor, limiter\_type, model\_group, 6 more }
+PlatformWorkspaceRateLimitDeleted object { actor, limiter\_type, model\_group, 6 more }
 
 A workspace rate limit was deleted.
 
@@ -10584,7 +10584,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_workspace\_rate\_limit\_deleted"
 
-PlatformWorkspaceRateLimitUpdated = object { actor, limiter\_type, model\_group, 7 more }
+PlatformWorkspaceRateLimitUpdated object { actor, limiter\_type, model\_group, 7 more }
 
 A workspace rate limit was created or updated.
 
@@ -10634,15 +10634,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_workspace\_rate\_limit\_updated"
 
-PlatformWorkspaceUpdated = object { actor, updates, workspace\_id, 5 more }
+PlatformWorkspaceUpdated object { actor, updates, workspace\_id, 5 more }
 
 A workspace was updated.
 
 actor: object { admin\_api\_key\_id, ip\_address, user\_agent, type }  or object { email\_address, ip\_address, user\_agent, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -10652,7 +10652,7 @@ user\_agent: string
 
 type: optional "admin\_api\_key\_actor"
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -10672,7 +10672,7 @@ previous\_value: string
 
 type: "allowed\_inference\_geos" or "default\_inference\_geo" or "display\_color" or "name"
 
-Accepts one of the following:
+One of the following:
 
 "allowed\_inference\_geos"
 
@@ -10704,7 +10704,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "platform\_workspace\_updated"
 
-ClaudePluginCreated = object { actor, id, created\_at, 5 more }
+ClaudePluginCreated object { actor, id, created\_at, 5 more }
 
 Plugin was created.
 
@@ -10742,7 +10742,7 @@ plugin\_name: optional string
 
 type: optional "claude\_plugin\_created"
 
-ClaudePluginDeleted = object { actor, id, created\_at, 5 more }
+ClaudePluginDeleted object { actor, id, created\_at, 5 more }
 
 Plugin was deleted.
 
@@ -10780,7 +10780,7 @@ plugin\_name: optional string
 
 type: optional "claude\_plugin\_deleted"
 
-PluginInstallationPreferenceUpdated = object { actor, marketplace\_id, plugin\_name, 9 more }
+PluginInstallationPreferenceUpdated object { actor, marketplace\_id, plugin\_name, 9 more }
 
 An org admin changed the installation preference for a plugin.
 
@@ -10838,7 +10838,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "plugin\_installation\_preference\_updated"
 
-ClaudePluginReplaced = object { actor, id, created\_at, 5 more }
+ClaudePluginReplaced object { actor, id, created\_at, 5 more }
 
 Plugin was replaced.
 
@@ -10876,7 +10876,7 @@ plugin\_name: optional string
 
 type: optional "claude\_plugin\_replaced"
 
-ClaudePluginUpdated = object { actor, id, created\_at, 5 more }
+ClaudePluginUpdated object { actor, id, created\_at, 5 more }
 
 Plugin was updated.
 
@@ -10914,7 +10914,7 @@ plugin\_name: optional string
 
 type: optional "claude\_plugin\_updated"
 
-PrepaidAutoRechargeDisabled = object { actor, id, created\_at, 3 more }
+PrepaidAutoRechargeDisabled object { actor, id, created\_at, 3 more }
 
 Auto-recharge was disabled for API prepaid org.
 
@@ -10948,7 +10948,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "prepaid\_auto\_recharge\_disabled"
 
-PrepaidAutoRechargeUpdated = object { actor, id, created\_at, 5 more }
+PrepaidAutoRechargeUpdated object { actor, id, created\_at, 5 more }
 
 Auto-recharge settings were updated for API prepaid org.
 
@@ -10990,15 +10990,15 @@ Threshold amount to trigger recharge in minor units.
 
 type: optional "prepaid\_auto\_recharge\_updated"
 
-PrepaidExtraUsageAutoReloadDisabled = object { actor, id, created\_at, 3 more }
+PrepaidExtraUsageAutoReloadDisabled object { actor, id, created\_at, 3 more }
 
 Prepaid usage credit auto-reload was disabled.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -11010,7 +11010,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -11034,15 +11034,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "prepaid\_extra\_usage\_auto\_reload\_disabled"
 
-PrepaidExtraUsageAutoReloadEnabled = object { actor, id, created\_at, 3 more }
+PrepaidExtraUsageAutoReloadEnabled object { actor, id, created\_at, 3 more }
 
 Prepaid usage credit auto-reload was enabled.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -11054,7 +11054,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -11078,15 +11078,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "prepaid\_extra\_usage\_auto\_reload\_enabled"
 
-PrepaidExtraUsageAutoReloadSettingsUpdated = object { actor, id, created\_at, 3 more }
+PrepaidExtraUsageAutoReloadSettingsUpdated object { actor, id, created\_at, 3 more }
 
 Prepaid usage credit auto-reload settings were updated.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -11098,7 +11098,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -11122,7 +11122,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "prepaid\_extra\_usage\_auto\_reload\_settings\_updated"
 
-PrimaryOwnerTransferred = object { actor, new\_owner\_id, previous\_owner\_id, 5 more }
+PrimaryOwnerTransferred object { actor, new\_owner\_id, previous\_owner\_id, 5 more }
 
 Primary owner role was transferred to another org member.
 
@@ -11160,7 +11160,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "primary\_owner\_transferred"
 
-ClaudeProjectArchived = object { actor, claude\_project\_id, id, 4 more }
+ClaudeProjectArchived object { actor, claude\_project\_id, id, 4 more }
 
 A Claude project was archived.
 
@@ -11196,7 +11196,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_archived"
 
-ClaudeProjectCreated = object { actor, claude\_project\_id, id, 4 more }
+ClaudeProjectCreated object { actor, claude\_project\_id, id, 4 more }
 
 A Claude project was created.
 
@@ -11232,7 +11232,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_created"
 
-ClaudeProjectDeleted = object { actor, claude\_project\_id, id, 4 more }
+ClaudeProjectDeleted object { actor, claude\_project\_id, id, 4 more }
 
 A Claude project was deleted.
 
@@ -11268,15 +11268,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_deleted"
 
-ClaudeProjectDocumentAccessFailed = object { actor, claude\_project\_document\_id, claude\_project\_id, 6 more }
+ClaudeProjectDocumentAccessFailed object { actor, claude\_project\_document\_id, claude\_project\_id, 6 more }
 
 An attempt to access a document in a Claude project failed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -11288,7 +11288,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -11322,7 +11322,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_document\_access\_failed"
 
-ClaudeProjectDocumentDeleted = object { actor, claude\_project\_document\_id, claude\_project\_id, 6 more }
+ClaudeProjectDocumentDeleted object { actor, claude\_project\_document\_id, claude\_project\_id, 6 more }
 
 A document was deleted from a Claude project.
 
@@ -11362,15 +11362,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_document\_deleted"
 
-ClaudeProjectDocumentDeletionFailed = object { actor, claude\_project\_document\_id, claude\_project\_id, 6 more }
+ClaudeProjectDocumentDeletionFailed object { actor, claude\_project\_document\_id, claude\_project\_id, 6 more }
 
 A request to delete a document from a Claude project failed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -11382,7 +11382,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -11416,7 +11416,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_document\_deletion\_failed"
 
-ClaudeProjectDocumentUploaded = object { actor, claude\_project\_document\_id, claude\_project\_id, 6 more }
+ClaudeProjectDocumentUploaded object { actor, claude\_project\_document\_id, claude\_project\_id, 6 more }
 
 A document was uploaded to a Claude project.
 
@@ -11456,7 +11456,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_document\_uploaded"
 
-ClaudeProjectDocumentViewed = object { actor, claude\_project\_document\_id, claude\_project\_id, 6 more }
+ClaudeProjectDocumentViewed object { actor, claude\_project\_document\_id, claude\_project\_id, 6 more }
 
 A document in a Claude project was viewed.
 
@@ -11496,15 +11496,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_document\_viewed"
 
-ClaudeProjectFileAccessFailed = object { actor, claude\_file\_id, claude\_project\_id, 5 more }
+ClaudeProjectFileAccessFailed object { actor, claude\_file\_id, claude\_project\_id, 5 more }
 
 An attempt to access a file in a Claude project failed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -11516,7 +11516,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -11548,15 +11548,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_file\_access\_failed"
 
-ClaudeProjectFileDeleted = object { actor, claude\_file\_id, claude\_project\_id, 5 more }
+ClaudeProjectFileDeleted object { actor, claude\_file\_id, claude\_project\_id, 5 more }
 
 A file was deleted from a Claude project.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -11568,7 +11568,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -11600,15 +11600,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_file\_deleted"
 
-ClaudeProjectFileDeletionFailed = object { actor, claude\_file\_id, claude\_project\_id, 5 more }
+ClaudeProjectFileDeletionFailed object { actor, claude\_file\_id, claude\_project\_id, 5 more }
 
 A request to delete a file from a Claude project failed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -11620,7 +11620,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -11652,15 +11652,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_file\_deletion\_failed"
 
-ClaudeProjectFileUploaded = object { actor, claude\_file\_id, claude\_project\_id, 6 more }
+ClaudeProjectFileUploaded object { actor, claude\_file\_id, claude\_project\_id, 6 more }
 
 A file was uploaded to a Claude project.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -11672,7 +11672,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -11706,7 +11706,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_file\_uploaded"
 
-ClaudeProjectReported = object { actor, claude\_project\_id, id, 4 more }
+ClaudeProjectReported object { actor, claude\_project\_id, id, 4 more }
 
 A Claude project was reported.
 
@@ -11742,7 +11742,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_reported"
 
-ClaudeProjectSharingUpdated = object { actor, audience, claude\_project\_id, 5 more }
+ClaudeProjectSharingUpdated object { actor, audience, claude\_project\_id, 5 more }
 
 A Claude project's sharing settings were updated.
 
@@ -11762,13 +11762,13 @@ audience: array of object { type }  or object { type }
 
 Sharing audience for the project. If empty, this it's only visible to the creating user.
 
-Accepts one of the following:
+One of the following:
 
-ProjectSharingAudiencePublic = object { type }
+ProjectSharingAudiencePublic object { type }
 
 type: optional "public"
 
-ProjectSharingAudienceOrganization = object { type }
+ProjectSharingAudienceOrganization object { type }
 
 type: optional "organization"
 
@@ -11792,7 +11792,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_project\_sharing\_updated"
 
-ClaudeProjectViewed = object { actor, claude\_project\_id, id, 5 more }
+ClaudeProjectViewed object { actor, claude\_project\_id, id, 5 more }
 
 A Claude project was viewed.
 
@@ -11830,7 +11830,7 @@ preview\_only: optional boolean
 
 type: optional "claude\_project\_viewed"
 
-ClaudePubsecIdentityConfigured = object { actor, idp\_saml\_config\_updated, magic\_link\_toggled, 6 more }
+ClaudePubsecIdentityConfigured object { actor, idp\_saml\_config\_updated, magic\_link\_toggled, 6 more }
 
 SAML IdP configuration updated for a public sector organization.
 
@@ -11870,7 +11870,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_pubsec\_identity\_configured"
 
-RbacRoleAssigned = object { actor, principal\_id, principal\_type, 6 more }
+RbacRoleAssigned object { actor, principal\_id, principal\_type, 6 more }
 
 Admin assigned an RBAC custom role to a principal.
 
@@ -11916,7 +11916,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "rbac\_role\_assigned"
 
-RbacRoleCreated = object { actor, role\_id, role\_name, 5 more }
+RbacRoleCreated object { actor, role\_id, role\_name, 5 more }
 
 Admin created an RBAC custom role.
 
@@ -11958,7 +11958,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "rbac\_role\_created"
 
-RbacRoleDeleted = object { actor, role\_id, id, 4 more }
+RbacRoleDeleted object { actor, role\_id, id, 4 more }
 
 Admin deleted an RBAC custom role.
 
@@ -11996,7 +11996,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "rbac\_role\_deleted"
 
-RbacRolePermissionAdded = object { action, actor, resource\_id, 7 more }
+RbacRolePermissionAdded object { action, actor, resource\_id, 7 more }
 
 Admin added a permission to an RBAC custom role.
 
@@ -12046,7 +12046,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "rbac\_role\_permission\_added"
 
-RbacRolePermissionRemoved = object { action, actor, resource\_id, 7 more }
+RbacRolePermissionRemoved object { action, actor, resource\_id, 7 more }
 
 Admin removed a permission from an RBAC custom role.
 
@@ -12096,7 +12096,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "rbac\_role\_permission\_removed"
 
-RbacRoleUnassigned = object { actor, principal\_id, principal\_type, 6 more }
+RbacRoleUnassigned object { actor, principal\_id, principal\_type, 6 more }
 
 Admin unassigned an RBAC custom role from a principal.
 
@@ -12142,7 +12142,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "rbac\_role\_unassigned"
 
-RbacRoleUpdated = object { actor, role\_id, id, 4 more }
+RbacRoleUpdated object { actor, role\_id, id, 4 more }
 
 Admin updated an RBAC custom role.
 
@@ -12180,15 +12180,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "rbac\_role\_updated"
 
-RoleAssignmentGranted = object { actor, id, created\_at, 8 more }
+RoleAssignmentGranted object { actor, id, created\_at, 8 more }
 
 Role assignment was granted.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -12200,7 +12200,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -12234,15 +12234,15 @@ target\_type: optional string
 
 type: optional "role\_assignment\_granted"
 
-RoleAssignmentRevoked = object { actor, id, created\_at, 8 more }
+RoleAssignmentRevoked object { actor, id, created\_at, 8 more }
 
 Role assignment was revoked.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { email\_address, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -12254,7 +12254,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AnthropicActor = object { email\_address, type }
+AnthropicActor object { email\_address, type }
 
 email\_address: optional string
 
@@ -12288,7 +12288,7 @@ target\_type: optional string
 
 type: optional "role\_assignment\_revoked"
 
-SSOLoginFailed = object { actor, id, created\_at, 3 more }
+SSOLoginFailed object { actor, id, created\_at, 3 more }
 
 An SSO sign-in attempt failed.
 
@@ -12320,7 +12320,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "sso\_login\_failed"
 
-SSOLoginInitiated = object { actor, id, created\_at, 3 more }
+SSOLoginInitiated object { actor, id, created\_at, 3 more }
 
 A user started an SSO sign-in flow.
 
@@ -12352,7 +12352,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "sso\_login\_initiated"
 
-SSOLoginSucceeded = object { actor, id, auth\_method, 5 more }
+SSOLoginSucceeded object { actor, id, auth\_method, 5 more }
 
 A user successfully signed in with SSO.
 
@@ -12394,15 +12394,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "sso\_login\_succeeded"
 
-SSOSecondFactorMagicLink = object { actor, id, created\_at, 3 more }
+SSOSecondFactorMagicLink object { actor, id, created\_at, 3 more }
 
 SSO second factor magic link was used.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -12414,7 +12414,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -12442,15 +12442,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "sso\_second\_factor\_magic\_link"
 
-ScimUserCreated = object { actor, user\_id, id, 4 more }
+ScimUserCreated object { actor, user\_id, id, 4 more }
 
 A SCIM user was provisioned.
 
 actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -12460,7 +12460,7 @@ user\_agent: string
 
 type: optional "api\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -12490,15 +12490,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "scim\_user\_created"
 
-ScimUserDeleted = object { actor, user\_id, id, 4 more }
+ScimUserDeleted object { actor, user\_id, id, 4 more }
 
 A SCIM user was deleted.
 
 actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -12508,7 +12508,7 @@ user\_agent: string
 
 type: optional "api\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -12538,15 +12538,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "scim\_user\_deleted"
 
-ScimUserUpdated = object { actor, user\_id, id, 4 more }
+ScimUserUpdated object { actor, user\_id, id, 4 more }
 
 A SCIM user was updated.
 
 actor: object { api\_key\_id, ip\_address, user\_agent, type }  or object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -12556,7 +12556,7 @@ user\_agent: string
 
 type: optional "api\_actor"
 
-ScimDirectorySyncActor = object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
+ScimDirectorySyncActor object { directory\_id, workos\_event\_id, idp\_connection\_type, type }
 
 directory\_id: string
 
@@ -12586,7 +12586,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "scim\_user\_updated"
 
-ScopedAPIKeyDeleted = object { actor, api\_key\_id, api\_key\_name, 6 more }
+ScopedAPIKeyDeleted object { actor, api\_key\_id, api\_key\_name, 6 more }
 
 A scoped API key was deleted.
 
@@ -12632,7 +12632,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "scoped\_api\_key\_deleted"
 
-ScopedAPIKeyUpdated = object { actor, api\_key\_id, updates, 5 more }
+ScopedAPIKeyUpdated object { actor, api\_key\_id, updates, 5 more }
 
 A scoped API key was renamed or its activation state changed.
 
@@ -12660,7 +12660,7 @@ previous\_value: string
 
 type: "activation\_state" or "name"
 
-Accepts one of the following:
+One of the following:
 
 "activation\_state"
 
@@ -12684,7 +12684,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "scoped\_api\_key\_updated"
 
-SeatTierChangesCancelled = object { actor, id, created\_at, 3 more }
+SeatTierChangesCancelled object { actor, id, created\_at, 3 more }
 
 Scheduled seat tier downgrades were cancelled.
 
@@ -12718,7 +12718,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "seat\_tier\_changes\_cancelled"
 
-SeatTiersPurchased = object { actor, id, created\_at, 4 more }
+SeatTiersPurchased object { actor, id, created\_at, 4 more }
 
 Seat tiers were purchased or upgraded on a subscription.
 
@@ -12756,7 +12756,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "seat\_tiers\_purchased"
 
-ServiceCreated = object { actor, service\_name, id, 4 more }
+ServiceCreated object { actor, service\_name, id, 4 more }
 
 Activity logged when an org service is explicitly created.
 
@@ -12796,7 +12796,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "service\_created"
 
-ServiceDeleted = object { actor, service\_name, id, 4 more }
+ServiceDeleted object { actor, service\_name, id, 4 more }
 
 Activity logged when an org service is deleted.
 
@@ -12836,7 +12836,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "service\_deleted"
 
-ServiceKeyCreated = object { actor, is\_service\_created, key\_name, 8 more }
+ServiceKeyCreated object { actor, is\_service\_created, key\_name, 8 more }
 
 Activity logged when a new org service key is created.
 
@@ -12890,7 +12890,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "service\_key\_created"
 
-ServiceKeyRevoked = object { actor, service\_key\_id, service\_name, 5 more }
+ServiceKeyRevoked object { actor, service\_key\_id, service\_name, 5 more }
 
 Activity logged when an org service key is revoked.
 
@@ -12932,7 +12932,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "service\_key\_revoked"
 
-SessionRevoked = object { actor, id, created\_at, 3 more }
+SessionRevoked object { actor, id, created\_at, 3 more }
 
 User revoked a specific session.
 
@@ -12966,15 +12966,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "session\_revoked"
 
-SessionShareAccessed = object { actor, id, created\_at, 4 more }
+SessionShareAccessed object { actor, id, created\_at, 4 more }
 
 Session share was accessed.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -12986,7 +12986,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -13016,15 +13016,15 @@ share\_id: optional string
 
 type: optional "session\_share\_accessed"
 
-SessionShareCreated = object { actor, id, created\_at, 4 more }
+SessionShareCreated object { actor, id, created\_at, 4 more }
 
 Session share was created.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -13036,7 +13036,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -13066,15 +13066,15 @@ share\_id: optional string
 
 type: optional "session\_share\_created"
 
-SessionShareRevoked = object { actor, id, created\_at, 4 more }
+SessionShareRevoked object { actor, id, created\_at, 4 more }
 
 Session share was revoked.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -13086,7 +13086,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-UnauthenticatedUserActor = object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
+UnauthenticatedUserActor object { ip\_address, user\_agent, type, unauthenticated\_email\_address }
 
 ip\_address: string
 
@@ -13116,15 +13116,15 @@ share\_id: optional string
 
 type: optional "session\_share\_revoked"
 
-ClaudeSkillCreated = object { actor, id, created\_at, 5 more }
+ClaudeSkillCreated object { actor, id, created\_at, 5 more }
 
 Skill was created.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -13136,7 +13136,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -13168,15 +13168,15 @@ skill\_name: optional string
 
 type: optional "claude\_skill\_created"
 
-ClaudeSkillDeleted = object { actor, id, created\_at, 5 more }
+ClaudeSkillDeleted object { actor, id, created\_at, 5 more }
 
 Skill was deleted.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -13188,7 +13188,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -13220,7 +13220,7 @@ skill\_name: optional string
 
 type: optional "claude\_skill\_deleted"
 
-ClaudeSkillDisabled = object { actor, id, created\_at, 5 more }
+ClaudeSkillDisabled object { actor, id, created\_at, 5 more }
 
 User disabled a skill for their account.
 
@@ -13258,7 +13258,7 @@ skill\_name: optional string
 
 type: optional "claude\_skill\_disabled"
 
-ClaudeSkillEnabled = object { actor, id, created\_at, 5 more }
+ClaudeSkillEnabled object { actor, id, created\_at, 5 more }
 
 User enabled a skill for their account.
 
@@ -13296,15 +13296,15 @@ skill\_name: optional string
 
 type: optional "claude\_skill\_enabled"
 
-ClaudeSkillReplaced = object { actor, id, created\_at, 5 more }
+ClaudeSkillReplaced object { actor, id, created\_at, 5 more }
 
 Skill was replaced.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -13316,7 +13316,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-APIActor = object { api\_key\_id, ip\_address, user\_agent, type }
+APIActor object { api\_key\_id, ip\_address, user\_agent, type }
 
 api\_key\_id: string
 
@@ -13348,7 +13348,7 @@ skill\_name: optional string
 
 type: optional "claude\_skill\_replaced"
 
-SocialLoginSucceeded = object { actor, provider, id, 6 more }
+SocialLoginSucceeded object { actor, provider, id, 6 more }
 
 A user successfully signed in with a social identity provider (Google, Apple, or Microsoft).
 
@@ -13366,7 +13366,7 @@ type: optional "user\_actor"
 
 provider: "apple" or "google" or "microsoft"
 
-Accepts one of the following:
+One of the following:
 
 "apple"
 
@@ -13400,7 +13400,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "social\_login\_succeeded"
 
-SubscriptionCancellationScheduled = object { actor, id, created\_at, 3 more }
+SubscriptionCancellationScheduled object { actor, id, created\_at, 3 more }
 
 Subscription cancellation was scheduled at end of billing period.
 
@@ -13434,7 +13434,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "subscription\_cancellation\_scheduled"
 
-SubscriptionQuantityUpdated = object { actor, added\_seats, new\_quantity, 6 more }
+SubscriptionQuantityUpdated object { actor, added\_seats, new\_quantity, 6 more }
 
 Contracted subscription seat quantity was updated.
 
@@ -13474,7 +13474,7 @@ previous\_quantity: optional number
 
 type: optional "subscription\_quantity\_updated"
 
-SubscriptionRenewed = object { actor, id, billing\_interval, 5 more }
+SubscriptionRenewed object { actor, id, billing\_interval, 5 more }
 
 A cancelled subscription was renewed.
 
@@ -13516,7 +13516,7 @@ Plan type being renewed into (e.g. team).
 
 type: optional "subscription\_renewed"
 
-SubscriptionResumed = object { actor, id, created\_at, 3 more }
+SubscriptionResumed object { actor, id, created\_at, 3 more }
 
 A scheduled subscription cancellation was reversed.
 
@@ -13550,7 +13550,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "subscription\_resumed"
 
-SubscriptionStarted = object { actor, id, billing\_interval, 6 more }
+SubscriptionStarted object { actor, id, billing\_interval, 6 more }
 
 A new subscription was created (Team or Enterprise).
 
@@ -13596,7 +13596,7 @@ Number of seats purchased.
 
 type: optional "subscription\_started"
 
-SubscriptionUpgraded = object { actor, id, created\_at, 5 more }
+SubscriptionUpgraded object { actor, id, created\_at, 5 more }
 
 Subscription plan was upgraded (e.g. Team to Enterprise).
 
@@ -13638,7 +13638,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "subscription\_upgraded"
 
-TunnelTokenMinted = object { actor, token\_id, id, 5 more }
+TunnelTokenMinted object { actor, token\_id, id, 5 more }
 
 An OAuth bearer token for the tunnel management API was minted.
 
@@ -13676,7 +13676,7 @@ token\_name: optional string
 
 type: optional "tunnel\_token\_minted"
 
-TunnelTokenRevoked = object { actor, token\_id, id, 4 more }
+TunnelTokenRevoked object { actor, token\_id, id, 4 more }
 
 An OAuth bearer token for the tunnel management API was revoked.
 
@@ -13712,7 +13712,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "tunnel\_token\_revoked"
 
-UserConsentRecorded = object { actor, consent\_type, entity\_id, 6 more }
+UserConsentRecorded object { actor, consent\_type, entity\_id, 6 more }
 
 User granted a consent for a specific entity (e.g. consumer health consent for an MCP server).
 
@@ -13752,7 +13752,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "user\_consent\_recorded"
 
-UserConsentRevoked = object { actor, id, consent\_id, 7 more }
+UserConsentRevoked object { actor, id, consent\_id, 7 more }
 
 User revoked a previously granted consent for a specific entity.
 
@@ -13794,15 +13794,15 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "user\_consent\_revoked"
 
-ClaudeUserRoleUpdated = object { actor, current\_role, previous\_role, 7 more }
+ClaudeUserRoleUpdated object { actor, current\_role, previous\_role, 7 more }
 
 A user's role within the organization was changed, or the user was added to or removed from the organization.
 
 actor: object { email\_address, ip\_address, user\_agent, 2 more }  or object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, ip\_address, user\_agent, 2 more }
+UserActor object { email\_address, ip\_address, user\_agent, 2 more }
 
 email\_address: string
 
@@ -13814,7 +13814,7 @@ user\_id: string
 
 type: optional "user\_actor"
 
-AdminAPIKeyActor = object { admin\_api\_key\_id, ip\_address, user\_agent, type }
+AdminAPIKeyActor object { admin\_api\_key\_id, ip\_address, user\_agent, type }
 
 admin\_api\_key\_id: string
 
@@ -13858,7 +13858,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_user\_role\_updated"
 
-ClaudeUserSettingsUpdated = object { actor, updates, id, 4 more }
+ClaudeUserSettingsUpdated object { actor, updates, id, 4 more }
 
 User updated their personal settings.
 
@@ -13876,9 +13876,9 @@ type: optional "user\_actor"
 
 updates: array of object { current\_value, previous\_value, type }  or object { current\_value, previous\_value, type }  or object { current\_value, previous\_value, type }  or 19 more
 
-Accepts one of the following:
+One of the following:
 
-FullName = object { current\_value, previous\_value, type }
+FullName object { current\_value, previous\_value, type }
 
 current\_value: string
 
@@ -13886,7 +13886,7 @@ previous\_value: string
 
 type: optional "full\_name"
 
-DisplayName = object { current\_value, previous\_value, type }
+DisplayName object { current\_value, previous\_value, type }
 
 current\_value: string
 
@@ -13894,7 +13894,7 @@ previous\_value: string
 
 type: optional "display\_name"
 
-ArtifactsEnabled = object { current\_value, previous\_value, type }
+ArtifactsEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -13902,7 +13902,7 @@ previous\_value: boolean
 
 type: optional "artifacts\_enabled"
 
-LatexEnabled = object { current\_value, previous\_value, type }
+LatexEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -13910,7 +13910,7 @@ previous\_value: boolean
 
 type: optional "latex\_enabled"
 
-AnalysisToolEnabled = object { current\_value, previous\_value, type }
+AnalysisToolEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -13918,7 +13918,7 @@ previous\_value: boolean
 
 type: optional "analysis\_tool\_enabled"
 
-ChatSuggestionsEnabled = object { current\_value, previous\_value, type }
+ChatSuggestionsEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -13926,7 +13926,7 @@ previous\_value: boolean
 
 type: optional "chat\_suggestions\_enabled"
 
-MultimodalPdfsEnabled = object { current\_value, previous\_value, type }
+MultimodalPdfsEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -13934,7 +13934,7 @@ previous\_value: boolean
 
 type: optional "multimodal\_pdfs\_enabled"
 
-GDriveEnabled = object { current\_value, previous\_value, type }
+GDriveEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -13942,7 +13942,7 @@ previous\_value: boolean
 
 type: optional "gdrive\_enabled"
 
-GDriveIndexingEnabled = object { current\_value, previous\_value, type }
+GDriveIndexingEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -13950,7 +13950,7 @@ previous\_value: boolean
 
 type: optional "gdrive\_indexing\_enabled"
 
-WebSearchEnabled = object { current\_value, previous\_value, type }
+WebSearchEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -13958,7 +13958,7 @@ previous\_value: boolean
 
 type: optional "web\_search\_enabled"
 
-GeolocationEnabled = object { current\_value, previous\_value, type }
+GeolocationEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -13966,7 +13966,7 @@ previous\_value: boolean
 
 type: optional "geolocation\_enabled"
 
-UserMemoryEnabledSetting = object { current\_value, previous\_value, type }
+UserMemoryEnabledSetting object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -13974,7 +13974,7 @@ previous\_value: boolean
 
 type: optional "enabled\_saffron"
 
-McpToolsEnabled = object { current\_value, previous\_value, type }
+McpToolsEnabled object { current\_value, previous\_value, type }
 
 current\_value: map[boolean]
 
@@ -13982,7 +13982,7 @@ previous\_value: map[boolean]
 
 type: optional "mcp\_tools\_enabled"
 
-CliOpPermissionsEnabled = object { current\_value, previous\_value, type }
+CliOpPermissionsEnabled object { current\_value, previous\_value, type }
 
 current\_value: map[string]
 
@@ -13990,7 +13990,7 @@ previous\_value: map[string]
 
 type: optional "cli\_op\_permissions\_enabled"
 
-GoogleDriveSearchEnabled = object { current\_value, previous\_value, type }
+GoogleDriveSearchEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -13998,7 +13998,7 @@ previous\_value: boolean
 
 type: optional "google\_drive\_search\_enabled"
 
-GmailIntegrationEnabled = object { current\_value, previous\_value, type }
+GmailIntegrationEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -14006,7 +14006,7 @@ previous\_value: boolean
 
 type: optional "gmail\_integration\_enabled"
 
-GoogleCalendarIntegrationEnabled = object { current\_value, previous\_value, type }
+GoogleCalendarIntegrationEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -14014,11 +14014,11 @@ previous\_value: boolean
 
 type: optional "google\_calendar\_integration\_enabled"
 
-ThinkingModeEnabled = object { current\_value, previous\_value, type }
+ThinkingModeEnabled object { current\_value, previous\_value, type }
 
 current\_value: "adaptive" or "extended" or "off"
 
-Accepts one of the following:
+One of the following:
 
 "adaptive"
 
@@ -14028,7 +14028,7 @@ Accepts one of the following:
 
 previous\_value: "adaptive" or "extended" or "off"
 
-Accepts one of the following:
+One of the following:
 
 "adaptive"
 
@@ -14038,7 +14038,7 @@ Accepts one of the following:
 
 type: optional "thinking\_mode\_enabled"
 
-ResearchModeEnabled = object { current\_value, previous\_value, type }
+ResearchModeEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -14046,7 +14046,7 @@ previous\_value: boolean
 
 type: optional "research\_mode\_enabled"
 
-ComputerUseEnabled = object { current\_value, previous\_value, type }
+ComputerUseEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -14054,7 +14054,7 @@ previous\_value: boolean
 
 type: optional "computer\_use\_enabled"
 
-ClaudeAPIInArtifactsEnabled = object { current\_value, previous\_value, type }
+ClaudeAPIInArtifactsEnabled object { current\_value, previous\_value, type }
 
 current\_value: boolean
 
@@ -14062,7 +14062,7 @@ previous\_value: boolean
 
 type: optional "claude\_api\_in\_artifacts\_enabled"
 
-ConversationPreferences = object { type }
+ConversationPreferences object { type }
 
 The 'conversation\_preferences' for the user were updated. Values omitted.
 
@@ -14086,7 +14086,7 @@ Deprecated. Raw UUID form of `organization_id`, retained for backwards compatibi
 
 type: optional "claude\_user\_settings\_updated"
 
-WorkspaceMemberSpendLimitCreated = object { actor, id, account\_id, 7 more }
+WorkspaceMemberSpendLimitCreated object { actor, id, account\_id, 7 more }
 
 A per-member or workspace-default Claude Code spend limit was created.
 
@@ -14136,7 +14136,7 @@ workspace\_id: optional string
 
 Tagged ID of the workspace.
 
-WorkspaceMemberSpendLimitDeleted = object { actor, id, account\_id, 6 more }
+WorkspaceMemberSpendLimitDeleted object { actor, id, account\_id, 6 more }
 
 A per-member or workspace-default Claude Code spend limit was deleted.
 
@@ -14182,7 +14182,7 @@ workspace\_id: optional string
 
 Tagged ID of the workspace.
 
-WorkspaceMemberSpendLimitUpdated = object { actor, id, account\_id, 7 more }
+WorkspaceMemberSpendLimitUpdated object { actor, id, account\_id, 7 more }
 
 A per-member Claude Code spend limit amount was updated.
 
@@ -14232,7 +14232,7 @@ workspace\_id: optional string
 
 Tagged ID of the workspace.
 
-WorkspaceSpendLimitCreated = object { actor, id, created\_at, 6 more }
+WorkspaceSpendLimitCreated object { actor, id, created\_at, 6 more }
 
 A workspace-level API spend limit was created.
 
@@ -14278,7 +14278,7 @@ workspace\_id: optional string
 
 Tagged ID of the workspace.
 
-WorkspaceSpendLimitDeleted = object { actor, id, created\_at, 5 more }
+WorkspaceSpendLimitDeleted object { actor, id, created\_at, 5 more }
 
 A workspace-level API spend limit was deleted.
 

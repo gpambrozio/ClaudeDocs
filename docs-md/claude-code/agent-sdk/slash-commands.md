@@ -25,7 +25,7 @@ for await (const message of query({
 })) {
   if (message.type === "system" && message.subtype === "init") {
     console.log("Available slash commands:", message.slash_commands);
-    // Example output: ["/compact", "/context", "/usage"]
+    // Example output: ["clear", "compact", "context", "usage"]
   }
 }
 ```
@@ -54,7 +54,7 @@ for await (const message of query({
 
 ## [​](#common-slash-commands) Common Slash Commands
 
-### [​](#/compact-compact-conversation-history) `/compact` - Compact Conversation History
+### [​](#/compact-compact-conversation-history) `/compact` - Compact conversation history
 
 The `/compact` command reduces the size of your conversation history by summarizing older messages while preserving important context:
 
@@ -77,9 +77,12 @@ for await (const message of query({
 }
 ```
 
-### [​](#clearing-the-conversation) Clearing the conversation
+### [​](#/clear-reset-conversation-context) `/clear` - Reset conversation context
 
-The interactive `/clear` command is not available in the SDK. Each `query()` call already starts a fresh conversation, so to clear context, end the current `query()` and start a new one. The previous conversation stays on disk and can be returned to by passing its session ID to the [`resume` option](agent-sdk/sessions.md).
+The `/clear` command resets the conversation to an empty context, so subsequent prompts start with no prior conversation history. The previous conversation remains on disk and can be returned to by passing its session ID to the [`resume` option](agent-sdk/sessions.md).
+This is useful in [streaming input mode](agent-sdk/streaming-vs-single-mode.md), where you send multiple prompts over a single connection. For one-shot `query()` calls, each call already starts with empty context, so sending `/clear` has no practical effect; start a new `query()` instead.
+
+`/clear` in the SDK requires Claude Code v2.1.117 or later. In earlier versions it is omitted from `slash_commands`.
 
 ## [​](#creating-custom-slash-commands) Creating Custom Slash Commands
 
@@ -160,7 +163,7 @@ for await (const message of query({
   if (message.type === "system" && message.subtype === "init") {
     // Will include both built-in and custom commands
     console.log("Available commands:", message.slash_commands);
-    // Example: ["/compact", "/context", "/usage", "/refactor", "/security-check"]
+    // Example: ["clear", "compact", "context", "usage", "refactor", "security-check"]
   }
 }
 ```

@@ -32,7 +32,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -58,7 +58,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -222,13 +222,13 @@ betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 str
 
 Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -300,7 +300,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -326,7 +326,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -431,7 +431,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -457,7 +457,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 

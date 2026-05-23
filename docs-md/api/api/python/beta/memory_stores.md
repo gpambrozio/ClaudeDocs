@@ -150,7 +150,7 @@ type: Literal["memory\_deleted"]
 
 [BetaManagedAgentsError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError: …
 
@@ -274,7 +274,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsMemory: …
 
@@ -358,7 +358,7 @@ Literal["basic", "full"]
 
 Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-Accepts one of the following:
+One of the following:
 
 "basic"
 
@@ -400,7 +400,7 @@ POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionActor: …
 
@@ -466,7 +466,7 @@ operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 "created"
 
@@ -492,7 +492,7 @@ created\_by: Optional[BetaManagedAgentsActor]
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionActor: …
 
@@ -536,7 +536,7 @@ redacted\_by: Optional[BetaManagedAgentsActor]
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionActor: …
 
@@ -572,7 +572,7 @@ Literal["created", "modified", "deleted"]
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 "created"
 

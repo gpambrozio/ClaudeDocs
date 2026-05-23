@@ -51,9 +51,9 @@ data: array of object { id, created\_at, filename, 2 more }  or object { id, cre
 
 List of attachments sorted chronologically by created\_at, tie break by id
 
-Accepts one of the following:
+One of the following:
 
-ComplianceProjectFileReference = object { id, created\_at, filename, 2 more }
+ComplianceProjectFileReference object { id, created\_at, filename, 2 more }
 
 File attachment reference for compliance responses.
 
@@ -77,7 +77,7 @@ type: "project\_file"
 
 Discriminator marking this as a binary file
 
-ComplianceProjectDocReference = object { id, created\_at, filename, 2 more }
+ComplianceProjectDocReference object { id, created\_at, filename, 2 more }
 
 Project document attachment reference for compliance responses.
 

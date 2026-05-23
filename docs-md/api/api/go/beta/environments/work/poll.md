@@ -20,15 +20,15 @@ environmentID string
 
 params BetaEnvironmentWorkPollParams
 
-BlockMs param.Field[int64]optional
+BlockMs param.Field[int64]Optional
 
 Query param: How long to wait for work to arrive before returning. Must be 1-999 in milliseconds. Defaults to non-blocking (returns immediately if no work is available).
 
-ReclaimOlderThanMs param.Field[int64]optional
+ReclaimOlderThanMs param.Field[int64]Optional
 
 Query param: Reclaim unacknowledged work items older than this many milliseconds. If omitted, uses the default (5000ms).
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -36,7 +36,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -88,7 +88,7 @@ const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-202
 
 const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
 
-AnthropicWorkerID param.Field[string]optional
+AnthropicWorkerID param.Field[string]Optional
 
 Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console
 
@@ -146,7 +146,7 @@ State BetaSelfHostedWorkState
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
 

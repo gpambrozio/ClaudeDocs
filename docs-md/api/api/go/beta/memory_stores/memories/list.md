@@ -18,15 +18,15 @@ memoryStoreID string
 
 params BetaMemoryStoreMemoryListParams
 
-Depth param.Field[int64]optional
+Depth param.Field[int64]Optional
 
 Query param: Query parameter for depth
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Query param: Query parameter for limit
 
-Order param.Field[[BetaMemoryStoreMemoryListParamsOrder](api/beta/memory_stores/memories/list.md)]optional
+Order param.Field[[BetaMemoryStoreMemoryListParamsOrder](api/beta/memory_stores/memories/list.md)]Optional
 
 Query param: Query parameter for order
 
@@ -34,23 +34,23 @@ const BetaMemoryStoreMemoryListParamsOrderAsc [BetaMemoryStoreMemoryListParamsOr
 
 const BetaMemoryStoreMemoryListParamsOrderDesc [BetaMemoryStoreMemoryListParamsOrder](api/beta/memory_stores/memories/list.md) = "desc"
 
-OrderBy param.Field[string]optional
+OrderBy param.Field[string]Optional
 
 Query param: Query parameter for order\_by
 
-Page param.Field[string]optional
+Page param.Field[string]Optional
 
 Query param: Query parameter for page
 
-PathPrefix param.Field[string]optional
+PathPrefix param.Field[string]Optional
 
 Query param: Optional path prefix filter (raw string-prefix match; include a trailing slash for directory-scoped lists). This value appears in request URLs. Do not include secrets or personally identifiable information.
 
-View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]optional
+View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]Optional
 
 Query param: Query parameter for view
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -58,7 +58,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -116,7 +116,7 @@ type BetaManagedAgentsMemoryListItemUnion interface{…}
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsMemory struct{…}
 
@@ -156,7 +156,7 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 

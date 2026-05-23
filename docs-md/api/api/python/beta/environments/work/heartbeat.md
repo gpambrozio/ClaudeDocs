@@ -32,13 +32,13 @@ betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 str
 
 Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -108,7 +108,7 @@ state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 

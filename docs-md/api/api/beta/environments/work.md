@@ -40,7 +40,7 @@ GET/v1/environments/{environment\_id}/work/stats
 
 ##### ModelsExpand Collapse
 
-BetaSelfHostedWork = object { id, acknowledged\_at, created\_at, 9 more }
+BetaSelfHostedWork object { id, acknowledged\_at, created\_at, 9 more }
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -92,7 +92,7 @@ state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -116,7 +116,7 @@ type: "work"
 
 The type of object (always 'work')
 
-BetaSelfHostedWorkHeartbeatResponse = object { last\_heartbeat, lease\_extended, state, 2 more }
+BetaSelfHostedWorkHeartbeatResponse object { last\_heartbeat, lease\_extended, state, 2 more }
 
 Response after recording a heartbeat for a work item.
 
@@ -132,7 +132,7 @@ state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -152,7 +152,7 @@ type: "work\_heartbeat"
 
 The type of response
 
-BetaSelfHostedWorkListResponse = object { data, next\_page }
+BetaSelfHostedWorkListResponse object { data, next\_page }
 
 Response when listing work items with cursor-based pagination.
 
@@ -204,7 +204,7 @@ state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -232,7 +232,7 @@ next\_page: string
 
 Opaque cursor for fetching the next page of results
 
-BetaSelfHostedWorkQueueStats = object { depth, oldest\_queued\_at, pending, 2 more }
+BetaSelfHostedWorkQueueStats object { depth, oldest\_queued\_at, pending, 2 more }
 
 Statistics about the work queue for an environment.
 
@@ -258,7 +258,7 @@ workers\_polling: number
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 
-BetaSelfHostedWorkStopRequest = object { force }
+BetaSelfHostedWorkStopRequest object { force }
 
 Request to stop a work item.
 
@@ -266,7 +266,7 @@ force: optional boolean
 
 If true, immediately stop work without graceful shutdown
 
-BetaSelfHostedWorkUpdateRequest = object { metadata }
+BetaSelfHostedWorkUpdateRequest object { metadata }
 
 Request to update work item metadata.
 
@@ -274,7 +274,7 @@ metadata: map[string]
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-BetaSessionWorkData = object { id, type }
+BetaSessionWorkData object { id, type }
 
 Work data for session work items.
 

@@ -16,13 +16,13 @@ POST/v1/messages/count\_tokens
 
 ##### ModelsExpand Collapse
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -34,7 +34,7 @@ Accepts one of the following:
 
 type: "base64"
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -42,19 +42,19 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BashCodeExecutionOutputBlock = object { file\_id, type }
+BashCodeExecutionOutputBlock object { file\_id, type }
 
 file\_id: string
 
 type: "bash\_code\_execution\_output"
 
-BashCodeExecutionOutputBlockParam = object { file\_id, type }
+BashCodeExecutionOutputBlockParam object { file\_id, type }
 
 file\_id: string
 
 type: "bash\_code\_execution\_output"
 
-BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -70,7 +70,7 @@ stdout: string
 
 type: "bash\_code\_execution\_result"
 
-BashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
 
@@ -86,17 +86,17 @@ stdout: string
 
 type: "bash\_code\_execution\_result"
 
-BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultError = object { error\_code, type }
+BashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -110,7 +110,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -130,17 +130,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-BashCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BashCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultErrorParam = object { error\_code, type }
+BashCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -154,7 +154,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
 
@@ -191,17 +191,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BashCodeExecutionToolResultError = object { error\_code, type }
+BashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -217,7 +217,7 @@ type: "bash\_code\_execution\_tool\_result\_error"
 
 BashCodeExecutionToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -229,11 +229,11 @@ Accepts one of the following:
 
 "output\_file\_too\_large"
 
-BashCodeExecutionToolResultErrorParam = object { error\_code, type }
+BashCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -247,7 +247,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-CacheControlEphemeral = object { type, ttl }
+CacheControlEphemeral object { type, ttl }
 
 type: "ephemeral"
 
@@ -262,13 +262,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-CacheCreation = object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+CacheCreation object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
 ephemeral\_1h\_input\_tokens: number
 
@@ -278,7 +278,7 @@ ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -294,7 +294,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -308,7 +308,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -334,7 +334,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -358,7 +358,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -374,7 +374,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -388,7 +388,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -420,7 +420,7 @@ title: string
 
 type: "search\_result\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -432,21 +432,21 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsConfig = object { enabled }
+CitationsConfig object { enabled }
 
 enabled: boolean
 
-CitationsConfigParam = object { enabled }
+CitationsConfigParam object { enabled }
 
 enabled: optional boolean
 
-CitationsDelta = object { citation, type }
+CitationsDelta object { citation, type }
 
 citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -462,7 +462,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -478,7 +478,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -504,7 +504,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -516,7 +516,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -550,7 +550,7 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -582,7 +582,7 @@ title: string
 
 type: "search\_result\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -594,19 +594,19 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CodeExecutionOutputBlock = object { file\_id, type }
+CodeExecutionOutputBlock object { file\_id, type }
 
 file\_id: string
 
 type: "code\_execution\_output"
 
-CodeExecutionOutputBlockParam = object { file\_id, type }
+CodeExecutionOutputBlockParam object { file\_id, type }
 
 file\_id: string
 
 type: "code\_execution\_output"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -622,7 +622,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-CodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
 
@@ -638,7 +638,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-CodeExecutionTool20250522 = object { name, type, allowed\_callers, 3 more }
+CodeExecutionTool20250522 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -650,7 +650,7 @@ type: "code\_execution\_20250522"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -675,7 +675,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -689,7 +689,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionTool20250825 = object { name, type, allowed\_callers, 3 more }
+CodeExecutionTool20250825 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -701,7 +701,7 @@ type: "code\_execution\_20250825"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -726,7 +726,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -740,7 +740,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionTool20260120 = object { name, type, allowed\_callers, 3 more }
+CodeExecutionTool20260120 object { name, type, allowed\_callers, 3 more }
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -754,7 +754,7 @@ type: "code\_execution\_20260120"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -779,7 +779,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -793,19 +793,19 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -817,7 +817,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -833,7 +833,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -859,13 +859,13 @@ CodeExecutionToolResultBlockContent = [CodeExecutionToolResultError](api/message
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -877,7 +877,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -893,7 +893,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -911,19 +911,19 @@ stderr: string
 
 type: "encrypted\_code\_execution\_result"
 
-CodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+CodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultErrorParam = object { error\_code, type }
+CodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -935,7 +935,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
 
@@ -951,7 +951,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlockParam object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -990,7 +990,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1000,13 +1000,13 @@ CodeExecutionToolResultBlockParamContent = [CodeExecutionToolResultErrorParam](a
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultErrorParam = object { error\_code, type }
+CodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1018,7 +1018,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
 
@@ -1034,7 +1034,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlockParam object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -1052,11 +1052,11 @@ stderr: string
 
 type: "encrypted\_code\_execution\_result"
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1070,7 +1070,7 @@ type: "code\_execution\_tool\_result\_error"
 
 CodeExecutionToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1080,11 +1080,11 @@ Accepts one of the following:
 
 "execution\_time\_exceeded"
 
-CodeExecutionToolResultErrorParam = object { error\_code, type }
+CodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1096,7 +1096,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-Container = object { id, expires\_at }
+Container object { id, expires\_at }
 
 Information about the container used in the request (for the code execution tool)
 
@@ -1108,7 +1108,7 @@ expires\_at: string
 
 The time at which the container will expire.
 
-ContainerUploadBlock = object { file\_id, type }
+ContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -1116,7 +1116,7 @@ file\_id: string
 
 type: "container\_upload"
 
-ContainerUploadBlockParam = object { file\_id, type, cache\_control }
+ContainerUploadBlockParam object { file\_id, type, cache\_control }
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
@@ -1142,7 +1142,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1152,9 +1152,9 @@ ContentBlock = [TextBlock](api/messages.md) { citations, text, type }  or [Think
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
-TextBlock = object { citations, text, type }
+TextBlock object { citations, text, type }
 
 citations: array of [TextCitation](api/messages.md)
 
@@ -1162,9 +1162,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -1180,7 +1180,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -1196,7 +1196,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -1222,7 +1222,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -1234,7 +1234,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -1270,7 +1270,7 @@ text: string
 
 type: "text"
 
-ThinkingBlock = object { signature, thinking, type }
+ThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -1278,13 +1278,13 @@ thinking: string
 
 type: "thinking"
 
-RedactedThinkingBlock = object { data, type }
+RedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, caller, input, 2 more }
+ToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -1292,15 +1292,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -1308,7 +1308,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -1320,7 +1320,7 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, caller, input, 2 more }
+ServerToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -1328,15 +1328,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -1344,7 +1344,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -1354,7 +1354,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -1372,21 +1372,21 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -1394,7 +1394,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -1402,13 +1402,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1424,7 +1424,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -1440,21 +1440,21 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -1462,7 +1462,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -1470,13 +1470,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlock = object { error\_code, type }
+WebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1496,7 +1496,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlock = object { content, retrieved\_at, type, url }
+WebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [DocumentBlock](api/messages.md) { citations, source, title, type }
 
@@ -1508,9 +1508,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -1518,7 +1518,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -1546,19 +1546,19 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1570,7 +1570,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -1586,7 +1586,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -1608,17 +1608,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultError = object { error\_code, type }
+BashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1632,7 +1632,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -1652,17 +1652,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1678,13 +1678,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -1700,13 +1700,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -1724,17 +1724,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+ToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultError = object { error\_code, error\_message, type }
+ToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1748,7 +1748,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlock = object { tool\_references, type }
+ToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
 
@@ -1762,7 +1762,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-ContainerUploadBlock = object { file\_id, type }
+ContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -1774,9 +1774,9 @@ ContentBlockParam = [TextBlockParam](api/messages.md) { text, type, cache\_contr
 
 Regular text content.
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -1799,7 +1799,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1807,9 +1807,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1823,7 +1823,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1837,7 +1837,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1861,7 +1861,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -1873,7 +1873,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -1905,19 +1905,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1929,7 +1929,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -1954,19 +1954,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-DocumentBlockParam = object { source, type, cache\_control, 3 more }
+DocumentBlockParam object { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -1974,7 +1974,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -1982,19 +1982,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-ContentBlockSource = object { content, type }
+ContentBlockSource object { content, type }
 
 content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -2017,7 +2017,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2025,9 +2025,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2041,7 +2041,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2055,7 +2055,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2079,7 +2079,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -2091,7 +2091,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -2123,19 +2123,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -2147,7 +2147,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -2172,7 +2172,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2180,7 +2180,7 @@ Accepts one of the following:
 
 type: "content"
 
-URLPDFSource = object { type, url }
+URLPDFSource object { type, url }
 
 type: "url"
 
@@ -2205,7 +2205,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2219,7 +2219,7 @@ context: optional string
 
 title: optional string
 
-SearchResultBlockParam = object { content, source, title, 3 more }
+SearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
 
@@ -2244,7 +2244,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2252,9 +2252,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2268,7 +2268,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2282,7 +2282,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2306,7 +2306,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -2318,7 +2318,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -2373,7 +2373,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2383,7 +2383,7 @@ citations: optional [CitationsConfigParam](api/messages.md) { enabled }
 
 enabled: optional boolean
 
-ThinkingBlockParam = object { signature, thinking, type }
+ThinkingBlockParam object { signature, thinking, type }
 
 signature: string
 
@@ -2391,13 +2391,13 @@ thinking: string
 
 type: "thinking"
 
-RedactedThinkingBlockParam = object { data, type }
+RedactedThinkingBlockParam object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlockParam = object { id, input, name, 3 more }
+ToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -2424,7 +2424,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2434,15 +2434,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -2450,13 +2450,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-ToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
+ToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
 
@@ -2479,7 +2479,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2487,15 +2487,15 @@ Accepts one of the following:
 
 content: optional string or array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
+array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -2518,7 +2518,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2526,9 +2526,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2542,7 +2542,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2556,7 +2556,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2580,7 +2580,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -2592,7 +2592,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -2624,19 +2624,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -2648,7 +2648,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -2673,13 +2673,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-SearchResultBlockParam = object { content, source, title, 3 more }
+SearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
 
@@ -2704,7 +2704,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2712,9 +2712,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2728,7 +2728,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2742,7 +2742,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2766,7 +2766,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -2778,7 +2778,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -2833,7 +2833,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2843,13 +2843,13 @@ citations: optional [CitationsConfigParam](api/messages.md) { enabled }
 
 enabled: optional boolean
 
-DocumentBlockParam = object { source, type, cache\_control, 3 more }
+DocumentBlockParam object { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -2857,7 +2857,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -2865,19 +2865,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-ContentBlockSource = object { content, type }
+ContentBlockSource object { content, type }
 
 content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -2900,7 +2900,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2908,9 +2908,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2924,7 +2924,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2938,7 +2938,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2962,7 +2962,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -2974,7 +2974,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -3006,19 +3006,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -3030,7 +3030,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -3055,7 +3055,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3063,7 +3063,7 @@ Accepts one of the following:
 
 type: "content"
 
-URLPDFSource = object { type, url }
+URLPDFSource object { type, url }
 
 type: "url"
 
@@ -3088,7 +3088,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3102,7 +3102,7 @@ context: optional string
 
 title: optional string
 
-ToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+ToolReferenceBlockParam object { tool\_name, type, cache\_control }
 
 Tool reference block that can be included in tool\_result content.
 
@@ -3127,7 +3127,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3135,7 +3135,7 @@ Accepts one of the following:
 
 is\_error: optional boolean
 
-ServerToolUseBlockParam = object { id, input, name, 3 more }
+ServerToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -3143,7 +3143,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -3178,7 +3178,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3188,15 +3188,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -3204,17 +3204,17 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-WebSearchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+WebSearchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 WebSearchToolResultBlockItem = array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }
 
@@ -3228,11 +3228,11 @@ url: string
 
 page\_age: optional string
 
-WebSearchToolRequestError = object { error\_code, type }
+WebSearchToolRequestError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3269,7 +3269,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3279,15 +3279,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -3295,23 +3295,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-WebFetchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+WebFetchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlockParam = object { error\_code, type }
+WebFetchToolResultErrorBlockParam object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3331,15 +3331,15 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlockParam = object { content, type, url, retrieved\_at }
+WebFetchBlockParam object { content, type, url, retrieved\_at }
 
 content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -3347,7 +3347,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -3355,19 +3355,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-ContentBlockSource = object { content, type }
+ContentBlockSource object { content, type }
 
 content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -3390,7 +3390,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3398,9 +3398,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3414,7 +3414,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3428,7 +3428,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3452,7 +3452,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -3464,7 +3464,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -3496,19 +3496,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -3520,7 +3520,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -3545,7 +3545,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3553,7 +3553,7 @@ Accepts one of the following:
 
 type: "content"
 
-URLPDFSource = object { type, url }
+URLPDFSource object { type, url }
 
 type: "url"
 
@@ -3578,7 +3578,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3623,7 +3623,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3633,15 +3633,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -3649,25 +3649,25 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-CodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+CodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultErrorParam = object { error\_code, type }
+CodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3679,7 +3679,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
 
@@ -3695,7 +3695,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlockParam object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -3734,23 +3734,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BashCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BashCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultErrorParam = object { error\_code, type }
+BashCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3764,7 +3764,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
 
@@ -3801,23 +3801,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-TextEditorCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+TextEditorCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+TextEditorCodeExecutionToolResultErrorParam object { error\_code, type, error\_message }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3833,13 +3833,13 @@ type: "text\_editor\_code\_execution\_tool\_result\_error"
 
 error\_message: optional string
 
-TextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+TextEditorCodeExecutionViewResultBlockParam object { content, file\_type, type, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -3855,13 +3855,13 @@ start\_line: optional number
 
 total\_lines: optional number
 
-TextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlockParam object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\_lines, 3 more }
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -3896,23 +3896,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-ToolSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+ToolSearchToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultErrorParam = object { error\_code, type }
+ToolSearchToolResultErrorParam object { error\_code, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3924,7 +3924,7 @@ Accepts one of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+ToolSearchToolSearchResultBlockParam object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
 
@@ -3949,7 +3949,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3978,13 +3978,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-ContainerUploadBlockParam = object { file\_id, type, cache\_control }
+ContainerUploadBlockParam object { file\_id, type, cache\_control }
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
@@ -4010,25 +4010,25 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-ContentBlockSource = object { content, type }
+ContentBlockSource object { content, type }
 
 content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -4051,7 +4051,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4059,9 +4059,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4075,7 +4075,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4089,7 +4089,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4113,7 +4113,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -4125,7 +4125,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -4157,19 +4157,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -4181,7 +4181,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -4206,7 +4206,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4216,9 +4216,9 @@ type: "content"
 
 ContentBlockSourceContent = [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -4241,7 +4241,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4249,9 +4249,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4265,7 +4265,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4279,7 +4279,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4303,7 +4303,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -4315,7 +4315,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -4347,19 +4347,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -4371,7 +4371,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -4396,19 +4396,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-DocumentBlock = object { citations, source, title, type }
+DocumentBlock object { citations, source, title, type }
 
 citations: [CitationsConfig](api/messages.md) { enabled }
 
@@ -4418,9 +4418,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -4428,7 +4428,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -4442,13 +4442,13 @@ The title of the document
 
 type: "document"
 
-DocumentBlockParam = object { source, type, cache\_control, 3 more }
+DocumentBlockParam object { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -4456,7 +4456,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -4464,19 +4464,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-ContentBlockSource = object { content, type }
+ContentBlockSource object { content, type }
 
 content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -4499,7 +4499,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4507,9 +4507,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4523,7 +4523,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4537,7 +4537,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4561,7 +4561,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -4573,7 +4573,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -4605,19 +4605,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -4629,7 +4629,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -4654,7 +4654,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4662,7 +4662,7 @@ Accepts one of the following:
 
 type: "content"
 
-URLPDFSource = object { type, url }
+URLPDFSource object { type, url }
 
 type: "url"
 
@@ -4687,7 +4687,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4701,7 +4701,7 @@ context: optional string
 
 title: optional string
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -4719,7 +4719,7 @@ stderr: string
 
 type: "encrypted\_code\_execution\_result"
 
-EncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlockParam object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -4737,19 +4737,19 @@ stderr: string
 
 type: "encrypted\_code\_execution\_result"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -4761,7 +4761,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -4786,19 +4786,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-InputJSONDelta = object { partial\_json, type }
+InputJSONDelta object { partial\_json, type }
 
 partial\_json: string
 
 type: "input\_json\_delta"
 
-JSONOutputFormat = object { schema, type }
+JSONOutputFormat object { schema, type }
 
 schema: map[unknown]
 
@@ -4806,7 +4806,7 @@ The JSON schema of the format
 
 type: "json\_schema"
 
-MemoryTool20250818 = object { name, type, allowed\_callers, 4 more }
+MemoryTool20250818 object { name, type, allowed\_callers, 4 more }
 
 name: "memory"
 
@@ -4818,7 +4818,7 @@ type: "memory\_20250818"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4843,7 +4843,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4859,7 +4859,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-Message = object { id, container, content, 7 more }
+Message object { id, container, content, 7 more }
 
 id: string
 
@@ -4908,9 +4908,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-TextBlock = object { citations, text, type }
+TextBlock object { citations, text, type }
 
 citations: array of [TextCitation](api/messages.md)
 
@@ -4918,9 +4918,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -4936,7 +4936,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -4952,7 +4952,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -4978,7 +4978,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -4990,7 +4990,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -5026,7 +5026,7 @@ text: string
 
 type: "text"
 
-ThinkingBlock = object { signature, thinking, type }
+ThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -5034,13 +5034,13 @@ thinking: string
 
 type: "thinking"
 
-RedactedThinkingBlock = object { data, type }
+RedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, caller, input, 2 more }
+ToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -5048,15 +5048,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -5064,7 +5064,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -5076,7 +5076,7 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, caller, input, 2 more }
+ServerToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -5084,15 +5084,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -5100,7 +5100,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -5110,7 +5110,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -5128,21 +5128,21 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -5150,7 +5150,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -5158,13 +5158,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5180,7 +5180,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -5196,21 +5196,21 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -5218,7 +5218,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -5226,13 +5226,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlock = object { error\_code, type }
+WebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5252,7 +5252,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlock = object { content, retrieved\_at, type, url }
+WebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [DocumentBlock](api/messages.md) { citations, source, title, type }
 
@@ -5264,9 +5264,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -5274,7 +5274,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -5302,19 +5302,19 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5326,7 +5326,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -5342,7 +5342,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -5364,17 +5364,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultError = object { error\_code, type }
+BashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5388,7 +5388,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -5408,17 +5408,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5434,13 +5434,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -5456,13 +5456,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -5480,17 +5480,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+ToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultError = object { error\_code, error\_message, type }
+ToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5504,7 +5504,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlock = object { tool\_references, type }
+ToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
 
@@ -5518,7 +5518,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-ContainerUploadBlock = object { file\_id, type }
+ContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -5532,15 +5532,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -5610,7 +5610,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -5628,7 +5628,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -5657,7 +5657,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -5743,7 +5743,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -5755,9 +5755,9 @@ MessageCountTokensTool = [Tool](api/messages.md) { input\_schema, name, allowed\
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-Accepts one of the following:
+One of the following:
 
-Tool = object { input\_schema, name, allowed\_callers, 7 more }
+Tool object { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: object { type, properties, required }
 
@@ -5783,7 +5783,7 @@ minLength1
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -5808,7 +5808,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5836,7 +5836,7 @@ When true, guarantees schema validation on tool names and inputs
 
 type: optional "custom"
 
-ToolBash20250124 = object { name, type, allowed\_callers, 4 more }
+ToolBash20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -5848,7 +5848,7 @@ type: "bash\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -5873,7 +5873,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5889,7 +5889,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionTool20250522 = object { name, type, allowed\_callers, 3 more }
+CodeExecutionTool20250522 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -5901,7 +5901,7 @@ type: "code\_execution\_20250522"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -5926,7 +5926,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5940,7 +5940,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionTool20250825 = object { name, type, allowed\_callers, 3 more }
+CodeExecutionTool20250825 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -5952,7 +5952,7 @@ type: "code\_execution\_20250825"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -5977,7 +5977,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5991,7 +5991,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionTool20260120 = object { name, type, allowed\_callers, 3 more }
+CodeExecutionTool20260120 object { name, type, allowed\_callers, 3 more }
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -6005,7 +6005,7 @@ type: "code\_execution\_20260120"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6030,7 +6030,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6044,7 +6044,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-MemoryTool20250818 = object { name, type, allowed\_callers, 4 more }
+MemoryTool20250818 object { name, type, allowed\_callers, 4 more }
 
 name: "memory"
 
@@ -6056,7 +6056,7 @@ type: "memory\_20250818"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6081,7 +6081,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6097,7 +6097,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250124 = object { name, type, allowed\_callers, 4 more }
+ToolTextEditor20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -6109,7 +6109,7 @@ type: "text\_editor\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6134,7 +6134,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6150,7 +6150,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250429 = object { name, type, allowed\_callers, 4 more }
+ToolTextEditor20250429 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -6162,7 +6162,7 @@ type: "text\_editor\_20250429"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6187,7 +6187,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6203,7 +6203,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250728 = object { name, type, allowed\_callers, 5 more }
+ToolTextEditor20250728 object { name, type, allowed\_callers, 5 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -6215,7 +6215,7 @@ type: "text\_editor\_20250728"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6240,7 +6240,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6260,7 +6260,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-WebSearchTool20250305 = object { name, type, allowed\_callers, 7 more }
+WebSearchTool20250305 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -6272,7 +6272,7 @@ type: "web\_search\_20250305"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6305,7 +6305,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6345,7 +6345,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-WebFetchTool20250910 = object { name, type, allowed\_callers, 8 more }
+WebFetchTool20250910 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -6357,7 +6357,7 @@ type: "web\_fetch\_20250910"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6390,7 +6390,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6418,7 +6418,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-WebSearchTool20260209 = object { name, type, allowed\_callers, 7 more }
+WebSearchTool20260209 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -6430,7 +6430,7 @@ type: "web\_search\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6463,7 +6463,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6503,7 +6503,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-WebFetchTool20260209 = object { name, type, allowed\_callers, 8 more }
+WebFetchTool20260209 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -6515,7 +6515,7 @@ type: "web\_fetch\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6548,7 +6548,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6576,7 +6576,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-WebFetchTool20260309 = object { name, type, allowed\_callers, 9 more }
+WebFetchTool20260309 object { name, type, allowed\_callers, 9 more }
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
@@ -6590,7 +6590,7 @@ type: "web\_fetch\_20260309"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6623,7 +6623,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6655,7 +6655,7 @@ use\_cache: optional boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-ToolSearchToolBm25\_20251119 = object { name, type, allowed\_callers, 3 more }
+ToolSearchToolBm25\_20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_bm25"
 
@@ -6665,7 +6665,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -6673,7 +6673,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6698,7 +6698,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6712,7 +6712,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolSearchToolRegex20251119 = object { name, type, allowed\_callers, 3 more }
+ToolSearchToolRegex20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_regex"
 
@@ -6722,7 +6722,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -6730,7 +6730,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -6755,7 +6755,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6769,7 +6769,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-MessageDeltaUsage = object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+MessageDeltaUsage object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
 
 cache\_creation\_input\_tokens: number
 
@@ -6799,19 +6799,19 @@ web\_search\_requests: number
 
 The number of web search tool requests.
 
-MessageParam = object { content, role }
+MessageParam object { content, role }
 
 content: string or array of [ContentBlockParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = array of [ContentBlockParam](api/messages.md)
+array of [ContentBlockParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -6834,7 +6834,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6842,9 +6842,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -6858,7 +6858,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -6872,7 +6872,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -6896,7 +6896,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -6908,7 +6908,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -6940,19 +6940,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -6964,7 +6964,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -6989,19 +6989,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-DocumentBlockParam = object { source, type, cache\_control, 3 more }
+DocumentBlockParam object { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -7009,7 +7009,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -7017,19 +7017,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-ContentBlockSource = object { content, type }
+ContentBlockSource object { content, type }
 
 content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -7052,7 +7052,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7060,9 +7060,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7076,7 +7076,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7090,7 +7090,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7114,7 +7114,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -7126,7 +7126,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -7158,19 +7158,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -7182,7 +7182,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -7207,7 +7207,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7215,7 +7215,7 @@ Accepts one of the following:
 
 type: "content"
 
-URLPDFSource = object { type, url }
+URLPDFSource object { type, url }
 
 type: "url"
 
@@ -7240,7 +7240,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7254,7 +7254,7 @@ context: optional string
 
 title: optional string
 
-SearchResultBlockParam = object { content, source, title, 3 more }
+SearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
 
@@ -7279,7 +7279,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7287,9 +7287,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7303,7 +7303,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7317,7 +7317,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7341,7 +7341,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -7353,7 +7353,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -7408,7 +7408,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7418,7 +7418,7 @@ citations: optional [CitationsConfigParam](api/messages.md) { enabled }
 
 enabled: optional boolean
 
-ThinkingBlockParam = object { signature, thinking, type }
+ThinkingBlockParam object { signature, thinking, type }
 
 signature: string
 
@@ -7426,13 +7426,13 @@ thinking: string
 
 type: "thinking"
 
-RedactedThinkingBlockParam = object { data, type }
+RedactedThinkingBlockParam object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlockParam = object { id, input, name, 3 more }
+ToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -7459,7 +7459,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7469,15 +7469,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -7485,13 +7485,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-ToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
+ToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
 
@@ -7514,7 +7514,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7522,15 +7522,15 @@ Accepts one of the following:
 
 content: optional string or array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
+array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -7553,7 +7553,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7561,9 +7561,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7577,7 +7577,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7591,7 +7591,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7615,7 +7615,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -7627,7 +7627,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -7659,19 +7659,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -7683,7 +7683,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -7708,13 +7708,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-SearchResultBlockParam = object { content, source, title, 3 more }
+SearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
 
@@ -7739,7 +7739,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7747,9 +7747,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7763,7 +7763,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7777,7 +7777,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7801,7 +7801,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -7813,7 +7813,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -7868,7 +7868,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7878,13 +7878,13 @@ citations: optional [CitationsConfigParam](api/messages.md) { enabled }
 
 enabled: optional boolean
 
-DocumentBlockParam = object { source, type, cache\_control, 3 more }
+DocumentBlockParam object { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -7892,7 +7892,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -7900,19 +7900,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-ContentBlockSource = object { content, type }
+ContentBlockSource object { content, type }
 
 content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -7935,7 +7935,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7943,9 +7943,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7959,7 +7959,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7973,7 +7973,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -7997,7 +7997,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -8009,7 +8009,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -8041,19 +8041,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -8065,7 +8065,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -8090,7 +8090,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -8098,7 +8098,7 @@ Accepts one of the following:
 
 type: "content"
 
-URLPDFSource = object { type, url }
+URLPDFSource object { type, url }
 
 type: "url"
 
@@ -8123,7 +8123,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -8137,7 +8137,7 @@ context: optional string
 
 title: optional string
 
-ToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+ToolReferenceBlockParam object { tool\_name, type, cache\_control }
 
 Tool reference block that can be included in tool\_result content.
 
@@ -8162,7 +8162,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -8170,7 +8170,7 @@ Accepts one of the following:
 
 is\_error: optional boolean
 
-ServerToolUseBlockParam = object { id, input, name, 3 more }
+ServerToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -8178,7 +8178,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -8213,7 +8213,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -8223,15 +8223,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -8239,17 +8239,17 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-WebSearchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+WebSearchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 WebSearchToolResultBlockItem = array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }
 
@@ -8263,11 +8263,11 @@ url: string
 
 page\_age: optional string
 
-WebSearchToolRequestError = object { error\_code, type }
+WebSearchToolRequestError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8304,7 +8304,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -8314,15 +8314,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -8330,23 +8330,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-WebFetchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+WebFetchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlockParam = object { error\_code, type }
+WebFetchToolResultErrorBlockParam object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8366,15 +8366,15 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlockParam = object { content, type, url, retrieved\_at }
+WebFetchBlockParam object { content, type, url, retrieved\_at }
 
 content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -8382,7 +8382,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -8390,19 +8390,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-ContentBlockSource = object { content, type }
+ContentBlockSource object { content, type }
 
 content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -8425,7 +8425,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -8433,9 +8433,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -8449,7 +8449,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -8463,7 +8463,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -8487,7 +8487,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -8499,7 +8499,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -8531,19 +8531,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -8555,7 +8555,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -8580,7 +8580,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -8588,7 +8588,7 @@ Accepts one of the following:
 
 type: "content"
 
-URLPDFSource = object { type, url }
+URLPDFSource object { type, url }
 
 type: "url"
 
@@ -8613,7 +8613,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -8658,7 +8658,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -8668,15 +8668,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -8684,25 +8684,25 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-CodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+CodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultErrorParam = object { error\_code, type }
+CodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8714,7 +8714,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
 
@@ -8730,7 +8730,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlockParam object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -8769,23 +8769,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BashCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BashCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultErrorParam = object { error\_code, type }
+BashCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8799,7 +8799,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlockParam](api/messages.md) { file\_id, type }
 
@@ -8836,23 +8836,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-TextEditorCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+TextEditorCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+TextEditorCodeExecutionToolResultErrorParam object { error\_code, type, error\_message }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8868,13 +8868,13 @@ type: "text\_editor\_code\_execution\_tool\_result\_error"
 
 error\_message: optional string
 
-TextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+TextEditorCodeExecutionViewResultBlockParam object { content, file\_type, type, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -8890,13 +8890,13 @@ start\_line: optional number
 
 total\_lines: optional number
 
-TextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlockParam object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\_lines, 3 more }
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -8931,23 +8931,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-ToolSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+ToolSearchToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultErrorParam = object { error\_code, type }
+ToolSearchToolResultErrorParam object { error\_code, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8959,7 +8959,7 @@ Accepts one of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+ToolSearchToolSearchResultBlockParam object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
 
@@ -8984,7 +8984,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9013,13 +9013,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-ContainerUploadBlockParam = object { file\_id, type, cache\_control }
+ContainerUploadBlockParam object { file\_id, type, cache\_control }
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
@@ -9045,7 +9045,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9053,19 +9053,19 @@ Accepts one of the following:
 
 role: "user" or "assistant"
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
 "assistant"
 
-MessageTokensCount = object { input\_tokens }
+MessageTokensCount object { input\_tokens }
 
 input\_tokens: number
 
 The total number of tokens across the provided list of messages, system prompt, and tools.
 
-Metadata = object { user\_id }
+Metadata object { user\_id }
 
 user\_id: optional string
 
@@ -9081,15 +9081,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -9159,15 +9159,15 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
-OutputConfig = object { effort, format }
+OutputConfig object { effort, format }
 
 effort: optional "low" or "medium" or "high" or 2 more
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 "low"
 
@@ -9189,7 +9189,7 @@ The JSON schema of the format
 
 type: "json\_schema"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -9199,27 +9199,27 @@ type: "text"
 
 RawContentBlockDelta = [TextDelta](api/messages.md) { text, type }  or [InputJSONDelta](api/messages.md) { partial\_json, type }  or [CitationsDelta](api/messages.md) { citation, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-TextDelta = object { text, type }
+TextDelta object { text, type }
 
 text: string
 
 type: "text\_delta"
 
-InputJSONDelta = object { partial\_json, type }
+InputJSONDelta object { partial\_json, type }
 
 partial\_json: string
 
 type: "input\_json\_delta"
 
-CitationsDelta = object { citation, type }
+CitationsDelta object { citation, type }
 
 citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -9235,7 +9235,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -9251,7 +9251,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -9277,7 +9277,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -9289,7 +9289,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -9323,43 +9323,43 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-ThinkingDelta = object { thinking, type }
+ThinkingDelta object { thinking, type }
 
 thinking: string
 
 type: "thinking\_delta"
 
-SignatureDelta = object { signature, type }
+SignatureDelta object { signature, type }
 
 signature: string
 
 type: "signature\_delta"
 
-RawContentBlockDeltaEvent = object { delta, index, type }
+RawContentBlockDeltaEvent object { delta, index, type }
 
 delta: [RawContentBlockDelta](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextDelta = object { text, type }
+TextDelta object { text, type }
 
 text: string
 
 type: "text\_delta"
 
-InputJSONDelta = object { partial\_json, type }
+InputJSONDelta object { partial\_json, type }
 
 partial\_json: string
 
 type: "input\_json\_delta"
 
-CitationsDelta = object { citation, type }
+CitationsDelta object { citation, type }
 
 citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -9375,7 +9375,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -9391,7 +9391,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -9417,7 +9417,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -9429,7 +9429,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -9463,13 +9463,13 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-ThinkingDelta = object { thinking, type }
+ThinkingDelta object { thinking, type }
 
 thinking: string
 
 type: "thinking\_delta"
 
-SignatureDelta = object { signature, type }
+SignatureDelta object { signature, type }
 
 signature: string
 
@@ -9479,15 +9479,15 @@ index: number
 
 type: "content\_block\_delta"
 
-RawContentBlockStartEvent = object { content\_block, index, type }
+RawContentBlockStartEvent object { content\_block, index, type }
 
 content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 9 more
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
-TextBlock = object { citations, text, type }
+TextBlock object { citations, text, type }
 
 citations: array of [TextCitation](api/messages.md)
 
@@ -9495,9 +9495,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -9513,7 +9513,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -9529,7 +9529,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -9555,7 +9555,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -9567,7 +9567,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -9603,7 +9603,7 @@ text: string
 
 type: "text"
 
-ThinkingBlock = object { signature, thinking, type }
+ThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -9611,13 +9611,13 @@ thinking: string
 
 type: "thinking"
 
-RedactedThinkingBlock = object { data, type }
+RedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, caller, input, 2 more }
+ToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -9625,15 +9625,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -9641,7 +9641,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -9653,7 +9653,7 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, caller, input, 2 more }
+ServerToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -9661,15 +9661,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -9677,7 +9677,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -9687,7 +9687,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -9705,21 +9705,21 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -9727,7 +9727,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -9735,13 +9735,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -9757,7 +9757,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -9773,21 +9773,21 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -9795,7 +9795,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -9803,13 +9803,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlock = object { error\_code, type }
+WebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -9829,7 +9829,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlock = object { content, retrieved\_at, type, url }
+WebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [DocumentBlock](api/messages.md) { citations, source, title, type }
 
@@ -9841,9 +9841,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -9851,7 +9851,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -9879,19 +9879,19 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -9903,7 +9903,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -9919,7 +9919,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -9941,17 +9941,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultError = object { error\_code, type }
+BashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -9965,7 +9965,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -9985,17 +9985,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -10011,13 +10011,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -10033,13 +10033,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -10057,17 +10057,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+ToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultError = object { error\_code, error\_message, type }
+ToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -10081,7 +10081,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlock = object { tool\_references, type }
+ToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
 
@@ -10095,7 +10095,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-ContainerUploadBlock = object { file\_id, type }
+ContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -10107,13 +10107,13 @@ index: number
 
 type: "content\_block\_start"
 
-RawContentBlockStopEvent = object { index, type }
+RawContentBlockStopEvent object { index, type }
 
 index: number
 
 type: "content\_block\_stop"
 
-RawMessageDeltaEvent = object { delta, type, usage }
+RawMessageDeltaEvent object { delta, type, usage }
 
 delta: object { container, stop\_details, stop\_reason, stop\_sequence }
 
@@ -10139,7 +10139,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -10155,7 +10155,7 @@ type: "refusal"
 
 stop\_reason: [StopReason](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -10213,7 +10213,7 @@ web\_search\_requests: number
 
 The number of web search tool requests.
 
-RawMessageStartEvent = object { message, type }
+RawMessageStartEvent object { message, type }
 
 message: [Message](api/messages.md) { id, container, content, 7 more }
 
@@ -10264,9 +10264,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-TextBlock = object { citations, text, type }
+TextBlock object { citations, text, type }
 
 citations: array of [TextCitation](api/messages.md)
 
@@ -10274,9 +10274,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -10292,7 +10292,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -10308,7 +10308,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -10334,7 +10334,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -10346,7 +10346,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -10382,7 +10382,7 @@ text: string
 
 type: "text"
 
-ThinkingBlock = object { signature, thinking, type }
+ThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -10390,13 +10390,13 @@ thinking: string
 
 type: "thinking"
 
-RedactedThinkingBlock = object { data, type }
+RedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, caller, input, 2 more }
+ToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -10404,15 +10404,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -10420,7 +10420,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -10432,7 +10432,7 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, caller, input, 2 more }
+ServerToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -10440,15 +10440,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -10456,7 +10456,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -10466,7 +10466,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -10484,21 +10484,21 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -10506,7 +10506,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -10514,13 +10514,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -10536,7 +10536,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -10552,21 +10552,21 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -10574,7 +10574,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -10582,13 +10582,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlock = object { error\_code, type }
+WebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -10608,7 +10608,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlock = object { content, retrieved\_at, type, url }
+WebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [DocumentBlock](api/messages.md) { citations, source, title, type }
 
@@ -10620,9 +10620,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -10630,7 +10630,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -10658,19 +10658,19 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -10682,7 +10682,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -10698,7 +10698,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -10720,17 +10720,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultError = object { error\_code, type }
+BashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -10744,7 +10744,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -10764,17 +10764,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -10790,13 +10790,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -10812,13 +10812,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -10836,17 +10836,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+ToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultError = object { error\_code, error\_message, type }
+ToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -10860,7 +10860,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlock = object { tool\_references, type }
+ToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
 
@@ -10874,7 +10874,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-ContainerUploadBlock = object { file\_id, type }
+ContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -10888,15 +10888,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -10966,7 +10966,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -10984,7 +10984,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -11013,7 +11013,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -11099,7 +11099,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -11109,15 +11109,15 @@ Accepts one of the following:
 
 type: "message\_start"
 
-RawMessageStopEvent = object { type }
+RawMessageStopEvent object { type }
 
 type: "message\_stop"
 
 RawMessageStreamEvent = [RawMessageStartEvent](api/messages.md) { message, type }  or [RawMessageDeltaEvent](api/messages.md) { delta, type, usage }  or [RawMessageStopEvent](api/messages.md) { type }  or 3 more
 
-Accepts one of the following:
+One of the following:
 
-RawMessageStartEvent = object { message, type }
+RawMessageStartEvent object { message, type }
 
 message: [Message](api/messages.md) { id, container, content, 7 more }
 
@@ -11168,9 +11168,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-TextBlock = object { citations, text, type }
+TextBlock object { citations, text, type }
 
 citations: array of [TextCitation](api/messages.md)
 
@@ -11178,9 +11178,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -11196,7 +11196,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -11212,7 +11212,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -11238,7 +11238,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -11250,7 +11250,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -11286,7 +11286,7 @@ text: string
 
 type: "text"
 
-ThinkingBlock = object { signature, thinking, type }
+ThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -11294,13 +11294,13 @@ thinking: string
 
 type: "thinking"
 
-RedactedThinkingBlock = object { data, type }
+RedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, caller, input, 2 more }
+ToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -11308,15 +11308,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -11324,7 +11324,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -11336,7 +11336,7 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, caller, input, 2 more }
+ServerToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -11344,15 +11344,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -11360,7 +11360,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -11370,7 +11370,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -11388,21 +11388,21 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -11410,7 +11410,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -11418,13 +11418,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11440,7 +11440,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -11456,21 +11456,21 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -11478,7 +11478,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -11486,13 +11486,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlock = object { error\_code, type }
+WebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11512,7 +11512,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlock = object { content, retrieved\_at, type, url }
+WebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [DocumentBlock](api/messages.md) { citations, source, title, type }
 
@@ -11524,9 +11524,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -11534,7 +11534,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -11562,19 +11562,19 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11586,7 +11586,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -11602,7 +11602,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -11624,17 +11624,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultError = object { error\_code, type }
+BashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11648,7 +11648,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -11668,17 +11668,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11694,13 +11694,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -11716,13 +11716,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -11740,17 +11740,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+ToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultError = object { error\_code, error\_message, type }
+ToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11764,7 +11764,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlock = object { tool\_references, type }
+ToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
 
@@ -11778,7 +11778,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-ContainerUploadBlock = object { file\_id, type }
+ContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -11792,15 +11792,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -11870,7 +11870,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -11888,7 +11888,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -11917,7 +11917,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -12003,7 +12003,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -12013,7 +12013,7 @@ Accepts one of the following:
 
 type: "message\_start"
 
-RawMessageDeltaEvent = object { delta, type, usage }
+RawMessageDeltaEvent object { delta, type, usage }
 
 delta: object { container, stop\_details, stop\_reason, stop\_sequence }
 
@@ -12039,7 +12039,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -12055,7 +12055,7 @@ type: "refusal"
 
 stop\_reason: [StopReason](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -12113,19 +12113,19 @@ web\_search\_requests: number
 
 The number of web search tool requests.
 
-RawMessageStopEvent = object { type }
+RawMessageStopEvent object { type }
 
 type: "message\_stop"
 
-RawContentBlockStartEvent = object { content\_block, index, type }
+RawContentBlockStartEvent object { content\_block, index, type }
 
 content\_block: [TextBlock](api/messages.md) { citations, text, type }  or [ThinkingBlock](api/messages.md) { signature, thinking, type }  or [RedactedThinkingBlock](api/messages.md) { data, type }  or 9 more
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
-TextBlock = object { citations, text, type }
+TextBlock object { citations, text, type }
 
 citations: array of [TextCitation](api/messages.md)
 
@@ -12133,9 +12133,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12151,7 +12151,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12167,7 +12167,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12193,7 +12193,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -12205,7 +12205,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -12241,7 +12241,7 @@ text: string
 
 type: "text"
 
-ThinkingBlock = object { signature, thinking, type }
+ThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -12249,13 +12249,13 @@ thinking: string
 
 type: "thinking"
 
-RedactedThinkingBlock = object { data, type }
+RedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, caller, input, 2 more }
+ToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -12263,15 +12263,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -12279,7 +12279,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -12291,7 +12291,7 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, caller, input, 2 more }
+ServerToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -12299,15 +12299,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -12315,7 +12315,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -12325,7 +12325,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -12343,21 +12343,21 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -12365,7 +12365,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -12373,13 +12373,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12395,7 +12395,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -12411,21 +12411,21 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -12433,7 +12433,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -12441,13 +12441,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlock = object { error\_code, type }
+WebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12467,7 +12467,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlock = object { content, retrieved\_at, type, url }
+WebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [DocumentBlock](api/messages.md) { citations, source, title, type }
 
@@ -12479,9 +12479,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -12489,7 +12489,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -12517,19 +12517,19 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12541,7 +12541,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -12557,7 +12557,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -12579,17 +12579,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultError = object { error\_code, type }
+BashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12603,7 +12603,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -12623,17 +12623,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12649,13 +12649,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -12671,13 +12671,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -12695,17 +12695,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+ToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultError = object { error\_code, error\_message, type }
+ToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12719,7 +12719,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlock = object { tool\_references, type }
+ToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
 
@@ -12733,7 +12733,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-ContainerUploadBlock = object { file\_id, type }
+ContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -12745,31 +12745,31 @@ index: number
 
 type: "content\_block\_start"
 
-RawContentBlockDeltaEvent = object { delta, index, type }
+RawContentBlockDeltaEvent object { delta, index, type }
 
 delta: [RawContentBlockDelta](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextDelta = object { text, type }
+TextDelta object { text, type }
 
 text: string
 
 type: "text\_delta"
 
-InputJSONDelta = object { partial\_json, type }
+InputJSONDelta object { partial\_json, type }
 
 partial\_json: string
 
 type: "input\_json\_delta"
 
-CitationsDelta = object { citation, type }
+CitationsDelta object { citation, type }
 
 citation: [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12785,7 +12785,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12801,7 +12801,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12827,7 +12827,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -12839,7 +12839,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -12873,13 +12873,13 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-ThinkingDelta = object { thinking, type }
+ThinkingDelta object { thinking, type }
 
 thinking: string
 
 type: "thinking\_delta"
 
-SignatureDelta = object { signature, type }
+SignatureDelta object { signature, type }
 
 signature: string
 
@@ -12889,25 +12889,25 @@ index: number
 
 type: "content\_block\_delta"
 
-RawContentBlockStopEvent = object { index, type }
+RawContentBlockStopEvent object { index, type }
 
 index: number
 
 type: "content\_block\_stop"
 
-RedactedThinkingBlock = object { data, type }
+RedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-RedactedThinkingBlockParam = object { data, type }
+RedactedThinkingBlockParam object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-RefusalStopDetails = object { category, explanation, type }
+RefusalStopDetails object { category, explanation, type }
 
 Structured information about a refusal.
 
@@ -12917,7 +12917,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -12931,7 +12931,7 @@ This text is not guaranteed to be stable. `null` when no explanation is availabl
 
 type: "refusal"
 
-SearchResultBlockParam = object { content, source, title, 3 more }
+SearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
 
@@ -12956,7 +12956,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -12964,9 +12964,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -12980,7 +12980,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -12994,7 +12994,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -13018,7 +13018,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -13030,7 +13030,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -13085,7 +13085,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -13095,7 +13095,7 @@ citations: optional [CitationsConfigParam](api/messages.md) { enabled }
 
 enabled: optional boolean
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -13103,13 +13103,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-ServerToolUsage = object { web\_fetch\_requests, web\_search\_requests }
+ServerToolUsage object { web\_fetch\_requests, web\_search\_requests }
 
 web\_fetch\_requests: number
 
@@ -13119,7 +13119,7 @@ web\_search\_requests: number
 
 The number of web search tool requests.
 
-ServerToolUseBlock = object { id, caller, input, 2 more }
+ServerToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -13127,15 +13127,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -13143,7 +13143,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -13153,7 +13153,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -13171,7 +13171,7 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-ServerToolUseBlockParam = object { id, input, name, 3 more }
+ServerToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -13179,7 +13179,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -13214,7 +13214,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -13224,15 +13224,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -13240,13 +13240,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-SignatureDelta = object { signature, type }
+SignatureDelta object { signature, type }
 
 signature: string
 
@@ -13254,7 +13254,7 @@ type: "signature\_delta"
 
 StopReason = "end\_turn" or "max\_tokens" or "stop\_sequence" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -13268,7 +13268,7 @@ Accepts one of the following:
 
 "refusal"
 
-TextBlock = object { citations, text, type }
+TextBlock object { citations, text, type }
 
 citations: array of [TextCitation](api/messages.md)
 
@@ -13276,9 +13276,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -13294,7 +13294,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -13310,7 +13310,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -13336,7 +13336,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -13348,7 +13348,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -13384,7 +13384,7 @@ text: string
 
 type: "text"
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -13407,7 +13407,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -13415,9 +13415,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -13431,7 +13431,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -13445,7 +13445,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -13469,7 +13469,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -13481,7 +13481,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -13515,9 +13515,9 @@ type: "search\_result\_location"
 
 TextCitation = [CitationCharLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationPageLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or [CitationContentBlockLocation](api/messages.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -13533,7 +13533,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -13549,7 +13549,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -13575,7 +13575,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -13587,7 +13587,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -13621,9 +13621,9 @@ type: "search\_result\_location"
 
 TextCitationParam = [CitationCharLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  or [CitationPageLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  or [CitationContentBlockLocationParam](api/messages.md) { cited\_text, document\_index, document\_title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -13637,7 +13637,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -13651,7 +13651,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -13675,7 +13675,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -13687,7 +13687,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -13719,25 +13719,25 @@ title: string
 
 type: "search\_result\_location"
 
-TextDelta = object { text, type }
+TextDelta object { text, type }
 
 text: string
 
 type: "text\_delta"
 
-TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlockParam object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -13751,7 +13751,7 @@ old\_start: number
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\_lines, 3 more }
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -13765,17 +13765,17 @@ old\_lines: optional number
 
 old\_start: optional number
 
-TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -13791,13 +13791,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -13813,13 +13813,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -13837,17 +13837,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-TextEditorCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+TextEditorCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  or [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+TextEditorCodeExecutionToolResultErrorParam object { error\_code, type, error\_message }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -13863,13 +13863,13 @@ type: "text\_editor\_code\_execution\_tool\_result\_error"
 
 error\_message: optional string
 
-TextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+TextEditorCodeExecutionViewResultBlockParam object { content, file\_type, type, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -13885,13 +13885,13 @@ start\_line: optional number
 
 total\_lines: optional number
 
-TextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlockParam object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\_lines, 3 more }
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -13926,17 +13926,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -13954,7 +13954,7 @@ type: "text\_editor\_code\_execution\_tool\_result\_error"
 
 TextEditorCodeExecutionToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -13966,11 +13966,11 @@ Accepts one of the following:
 
 "file\_not\_found"
 
-TextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+TextEditorCodeExecutionToolResultErrorParam object { error\_code, type, error\_message }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -13986,13 +13986,13 @@ type: "text\_editor\_code\_execution\_tool\_result\_error"
 
 error\_message: optional string
 
-TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -14008,13 +14008,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-TextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+TextEditorCodeExecutionViewResultBlockParam object { content, file\_type, type, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -14030,7 +14030,7 @@ start\_line: optional number
 
 total\_lines: optional number
 
-ThinkingBlock = object { signature, thinking, type }
+ThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -14038,7 +14038,7 @@ thinking: string
 
 type: "thinking"
 
-ThinkingBlockParam = object { signature, thinking, type }
+ThinkingBlockParam object { signature, thinking, type }
 
 signature: string
 
@@ -14046,7 +14046,7 @@ thinking: string
 
 type: "thinking"
 
-ThinkingConfigAdaptive = object { type, display }
+ThinkingConfigAdaptive object { type, display }
 
 type: "adaptive"
 
@@ -14054,17 +14054,17 @@ display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
 "omitted"
 
-ThinkingConfigDisabled = object { type }
+ThinkingConfigDisabled object { type }
 
 type: "disabled"
 
-ThinkingConfigEnabled = object { budget\_tokens, type, display }
+ThinkingConfigEnabled object { budget\_tokens, type, display }
 
 budget\_tokens: number
 
@@ -14082,7 +14082,7 @@ display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -14096,9 +14096,9 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Accepts one of the following:
+One of the following:
 
-ThinkingConfigEnabled = object { budget\_tokens, type, display }
+ThinkingConfigEnabled object { budget\_tokens, type, display }
 
 budget\_tokens: number
 
@@ -14116,17 +14116,17 @@ display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
 "omitted"
 
-ThinkingConfigDisabled = object { type }
+ThinkingConfigDisabled object { type }
 
 type: "disabled"
 
-ThinkingConfigAdaptive = object { type, display }
+ThinkingConfigAdaptive object { type, display }
 
 type: "adaptive"
 
@@ -14134,19 +14134,19 @@ display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
 "omitted"
 
-ThinkingDelta = object { thinking, type }
+ThinkingDelta object { thinking, type }
 
 thinking: string
 
 type: "thinking\_delta"
 
-Tool = object { input\_schema, name, allowed\_callers, 7 more }
+Tool object { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: object { type, properties, required }
 
@@ -14172,7 +14172,7 @@ minLength1
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -14197,7 +14197,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -14225,7 +14225,7 @@ When true, guarantees schema validation on tool names and inputs
 
 type: optional "custom"
 
-ToolBash20250124 = object { name, type, allowed\_callers, 4 more }
+ToolBash20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -14237,7 +14237,7 @@ type: "bash\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -14262,7 +14262,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -14282,9 +14282,9 @@ ToolChoice = [ToolChoiceAuto](api/messages.md) { type, disable\_parallel\_tool\_
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Accepts one of the following:
+One of the following:
 
-ToolChoiceAuto = object { type, disable\_parallel\_tool\_use }
+ToolChoiceAuto object { type, disable\_parallel\_tool\_use }
 
 The model will automatically decide whether to use tools.
 
@@ -14296,7 +14296,7 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-ToolChoiceAny = object { type, disable\_parallel\_tool\_use }
+ToolChoiceAny object { type, disable\_parallel\_tool\_use }
 
 The model will use any available tools.
 
@@ -14308,7 +14308,7 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-ToolChoiceTool = object { name, type, disable\_parallel\_tool\_use }
+ToolChoiceTool object { name, type, disable\_parallel\_tool\_use }
 
 The model will use the specified tool with `tool_choice.name`.
 
@@ -14324,13 +14324,13 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-ToolChoiceNone = object { type }
+ToolChoiceNone object { type }
 
 The model will not be allowed to use tools.
 
 type: "none"
 
-ToolChoiceAny = object { type, disable\_parallel\_tool\_use }
+ToolChoiceAny object { type, disable\_parallel\_tool\_use }
 
 The model will use any available tools.
 
@@ -14342,7 +14342,7 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-ToolChoiceAuto = object { type, disable\_parallel\_tool\_use }
+ToolChoiceAuto object { type, disable\_parallel\_tool\_use }
 
 The model will automatically decide whether to use tools.
 
@@ -14354,13 +14354,13 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-ToolChoiceNone = object { type }
+ToolChoiceNone object { type }
 
 The model will not be allowed to use tools.
 
 type: "none"
 
-ToolChoiceTool = object { name, type, disable\_parallel\_tool\_use }
+ToolChoiceTool object { name, type, disable\_parallel\_tool\_use }
 
 The model will use the specified tool with `tool_choice.name`.
 
@@ -14376,13 +14376,13 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-ToolReferenceBlock = object { tool\_name, type }
+ToolReferenceBlock object { tool\_name, type }
 
 tool\_name: string
 
 type: "tool\_reference"
 
-ToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+ToolReferenceBlockParam object { tool\_name, type, cache\_control }
 
 Tool reference block that can be included in tool\_result content.
 
@@ -14407,13 +14407,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-ToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
+ToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
 
@@ -14436,7 +14436,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -14444,15 +14444,15 @@ Accepts one of the following:
 
 content: optional string or array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
+array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  or [ImageBlockParam](api/messages.md) { source, type, cache\_control }  or [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -14475,7 +14475,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -14483,9 +14483,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -14499,7 +14499,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -14513,7 +14513,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -14537,7 +14537,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -14549,7 +14549,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -14581,19 +14581,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -14605,7 +14605,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -14630,13 +14630,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-SearchResultBlockParam = object { content, source, title, 3 more }
+SearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
 
@@ -14661,7 +14661,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -14669,9 +14669,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -14685,7 +14685,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -14699,7 +14699,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -14723,7 +14723,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -14735,7 +14735,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -14790,7 +14790,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -14800,13 +14800,13 @@ citations: optional [CitationsConfigParam](api/messages.md) { enabled }
 
 enabled: optional boolean
 
-DocumentBlockParam = object { source, type, cache\_control, 3 more }
+DocumentBlockParam object { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -14814,7 +14814,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -14822,19 +14822,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-ContentBlockSource = object { content, type }
+ContentBlockSource object { content, type }
 
 content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -14857,7 +14857,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -14865,9 +14865,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -14881,7 +14881,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -14895,7 +14895,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -14919,7 +14919,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -14931,7 +14931,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -14963,19 +14963,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -14987,7 +14987,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -15012,7 +15012,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15020,7 +15020,7 @@ Accepts one of the following:
 
 type: "content"
 
-URLPDFSource = object { type, url }
+URLPDFSource object { type, url }
 
 type: "url"
 
@@ -15045,7 +15045,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15059,7 +15059,7 @@ context: optional string
 
 title: optional string
 
-ToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+ToolReferenceBlockParam object { tool\_name, type, cache\_control }
 
 Tool reference block that can be included in tool\_result content.
 
@@ -15084,7 +15084,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15092,7 +15092,7 @@ Accepts one of the following:
 
 is\_error: optional boolean
 
-ToolSearchToolBm25\_20251119 = object { name, type, allowed\_callers, 3 more }
+ToolSearchToolBm25\_20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_bm25"
 
@@ -15102,7 +15102,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -15110,7 +15110,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15135,7 +15135,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15149,7 +15149,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolSearchToolRegex20251119 = object { name, type, allowed\_callers, 3 more }
+ToolSearchToolRegex20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_regex"
 
@@ -15159,7 +15159,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -15167,7 +15167,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15192,7 +15192,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15206,17 +15206,17 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+ToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultError = object { error\_code, error\_message, type }
+ToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15230,7 +15230,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlock = object { tool\_references, type }
+ToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
 
@@ -15244,17 +15244,17 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-ToolSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+ToolSearchToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultErrorParam = object { error\_code, type }
+ToolSearchToolResultErrorParam object { error\_code, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15266,7 +15266,7 @@ Accepts one of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+ToolSearchToolSearchResultBlockParam object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
 
@@ -15291,7 +15291,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15320,17 +15320,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-ToolSearchToolResultError = object { error\_code, error\_message, type }
+ToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15346,7 +15346,7 @@ type: "tool\_search\_tool\_result\_error"
 
 ToolSearchToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15356,11 +15356,11 @@ Accepts one of the following:
 
 "execution\_time\_exceeded"
 
-ToolSearchToolResultErrorParam = object { error\_code, type }
+ToolSearchToolResultErrorParam object { error\_code, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15372,7 +15372,7 @@ Accepts one of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlock = object { tool\_references, type }
+ToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
 
@@ -15382,7 +15382,7 @@ type: "tool\_reference"
 
 type: "tool\_search\_tool\_search\_result"
 
-ToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+ToolSearchToolSearchResultBlockParam object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlockParam](api/messages.md) { tool\_name, type, cache\_control }
 
@@ -15407,7 +15407,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15415,7 +15415,7 @@ Accepts one of the following:
 
 type: "tool\_search\_tool\_search\_result"
 
-ToolTextEditor20250124 = object { name, type, allowed\_callers, 4 more }
+ToolTextEditor20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -15427,7 +15427,7 @@ type: "text\_editor\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15452,7 +15452,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15468,7 +15468,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250429 = object { name, type, allowed\_callers, 4 more }
+ToolTextEditor20250429 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -15480,7 +15480,7 @@ type: "text\_editor\_20250429"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15505,7 +15505,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15521,7 +15521,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250728 = object { name, type, allowed\_callers, 5 more }
+ToolTextEditor20250728 object { name, type, allowed\_callers, 5 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -15533,7 +15533,7 @@ type: "text\_editor\_20250728"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15558,7 +15558,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15582,9 +15582,9 @@ ToolUnion = [Tool](api/messages.md) { input\_schema, name, allowed\_callers, 7 m
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-Accepts one of the following:
+One of the following:
 
-Tool = object { input\_schema, name, allowed\_callers, 7 more }
+Tool object { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: object { type, properties, required }
 
@@ -15610,7 +15610,7 @@ minLength1
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15635,7 +15635,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15663,7 +15663,7 @@ When true, guarantees schema validation on tool names and inputs
 
 type: optional "custom"
 
-ToolBash20250124 = object { name, type, allowed\_callers, 4 more }
+ToolBash20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -15675,7 +15675,7 @@ type: "bash\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15700,7 +15700,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15716,7 +15716,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionTool20250522 = object { name, type, allowed\_callers, 3 more }
+CodeExecutionTool20250522 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -15728,7 +15728,7 @@ type: "code\_execution\_20250522"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15753,7 +15753,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15767,7 +15767,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionTool20250825 = object { name, type, allowed\_callers, 3 more }
+CodeExecutionTool20250825 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -15779,7 +15779,7 @@ type: "code\_execution\_20250825"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15804,7 +15804,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15818,7 +15818,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-CodeExecutionTool20260120 = object { name, type, allowed\_callers, 3 more }
+CodeExecutionTool20260120 object { name, type, allowed\_callers, 3 more }
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -15832,7 +15832,7 @@ type: "code\_execution\_20260120"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15857,7 +15857,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15871,7 +15871,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-MemoryTool20250818 = object { name, type, allowed\_callers, 4 more }
+MemoryTool20250818 object { name, type, allowed\_callers, 4 more }
 
 name: "memory"
 
@@ -15883,7 +15883,7 @@ type: "memory\_20250818"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15908,7 +15908,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15924,7 +15924,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250124 = object { name, type, allowed\_callers, 4 more }
+ToolTextEditor20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -15936,7 +15936,7 @@ type: "text\_editor\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -15961,7 +15961,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -15977,7 +15977,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250429 = object { name, type, allowed\_callers, 4 more }
+ToolTextEditor20250429 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -15989,7 +15989,7 @@ type: "text\_editor\_20250429"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -16014,7 +16014,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -16030,7 +16030,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolTextEditor20250728 = object { name, type, allowed\_callers, 5 more }
+ToolTextEditor20250728 object { name, type, allowed\_callers, 5 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -16042,7 +16042,7 @@ type: "text\_editor\_20250728"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -16067,7 +16067,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -16087,7 +16087,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-WebSearchTool20250305 = object { name, type, allowed\_callers, 7 more }
+WebSearchTool20250305 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -16099,7 +16099,7 @@ type: "web\_search\_20250305"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -16132,7 +16132,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -16172,7 +16172,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-WebFetchTool20250910 = object { name, type, allowed\_callers, 8 more }
+WebFetchTool20250910 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -16184,7 +16184,7 @@ type: "web\_fetch\_20250910"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -16217,7 +16217,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -16245,7 +16245,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-WebSearchTool20260209 = object { name, type, allowed\_callers, 7 more }
+WebSearchTool20260209 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -16257,7 +16257,7 @@ type: "web\_search\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -16290,7 +16290,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -16330,7 +16330,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-WebFetchTool20260209 = object { name, type, allowed\_callers, 8 more }
+WebFetchTool20260209 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -16342,7 +16342,7 @@ type: "web\_fetch\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -16375,7 +16375,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -16403,7 +16403,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-WebFetchTool20260309 = object { name, type, allowed\_callers, 9 more }
+WebFetchTool20260309 object { name, type, allowed\_callers, 9 more }
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
@@ -16417,7 +16417,7 @@ type: "web\_fetch\_20260309"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -16450,7 +16450,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -16482,7 +16482,7 @@ use\_cache: optional boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-ToolSearchToolBm25\_20251119 = object { name, type, allowed\_callers, 3 more }
+ToolSearchToolBm25\_20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_bm25"
 
@@ -16492,7 +16492,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -16500,7 +16500,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -16525,7 +16525,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -16539,7 +16539,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolSearchToolRegex20251119 = object { name, type, allowed\_callers, 3 more }
+ToolSearchToolRegex20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_regex"
 
@@ -16549,7 +16549,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -16557,7 +16557,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -16582,7 +16582,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -16596,7 +16596,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-ToolUseBlock = object { id, caller, input, 2 more }
+ToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -16604,15 +16604,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -16620,7 +16620,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -16632,7 +16632,7 @@ name: string
 
 type: "tool\_use"
 
-ToolUseBlockParam = object { id, input, name, 3 more }
+ToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -16659,7 +16659,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -16669,15 +16669,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -16685,25 +16685,25 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-URLPDFSource = object { type, url }
+URLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-Usage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+Usage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
 
 cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -16753,7 +16753,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -16761,7 +16761,7 @@ Accepts one of the following:
 
 "batch"
 
-UserLocation = object { type, city, country, 2 more }
+UserLocation object { type, city, country, 2 more }
 
 type: "approximate"
 
@@ -16781,7 +16781,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-WebFetchBlock = object { content, retrieved\_at, type, url }
+WebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [DocumentBlock](api/messages.md) { citations, source, title, type }
 
@@ -16793,9 +16793,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -16803,7 +16803,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -16827,15 +16827,15 @@ url: string
 
 Fetched content URL
 
-WebFetchBlockParam = object { content, type, url, retrieved\_at }
+WebFetchBlockParam object { content, type, url, retrieved\_at }
 
 content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -16843,7 +16843,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -16851,19 +16851,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-ContentBlockSource = object { content, type }
+ContentBlockSource object { content, type }
 
 content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -16886,7 +16886,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -16894,9 +16894,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -16910,7 +16910,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -16924,7 +16924,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -16948,7 +16948,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -16960,7 +16960,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -16992,19 +16992,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -17016,7 +17016,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -17041,7 +17041,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -17049,7 +17049,7 @@ Accepts one of the following:
 
 type: "content"
 
-URLPDFSource = object { type, url }
+URLPDFSource object { type, url }
 
 type: "url"
 
@@ -17074,7 +17074,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -17098,7 +17098,7 @@ retrieved\_at: optional string
 
 ISO 8601 timestamp when the content was retrieved
 
-WebFetchTool20250910 = object { name, type, allowed\_callers, 8 more }
+WebFetchTool20250910 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -17110,7 +17110,7 @@ type: "web\_fetch\_20250910"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -17143,7 +17143,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -17171,7 +17171,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-WebFetchTool20260209 = object { name, type, allowed\_callers, 8 more }
+WebFetchTool20260209 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -17183,7 +17183,7 @@ type: "web\_fetch\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -17216,7 +17216,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -17244,7 +17244,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-WebFetchTool20260309 = object { name, type, allowed\_callers, 9 more }
+WebFetchTool20260309 object { name, type, allowed\_callers, 9 more }
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
@@ -17258,7 +17258,7 @@ type: "web\_fetch\_20260309"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -17291,7 +17291,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -17323,21 +17323,21 @@ use\_cache: optional boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -17345,7 +17345,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -17353,13 +17353,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlock = object { error\_code, type }
+WebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17379,7 +17379,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlock = object { content, retrieved\_at, type, url }
+WebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [DocumentBlock](api/messages.md) { citations, source, title, type }
 
@@ -17391,9 +17391,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -17401,7 +17401,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -17429,17 +17429,17 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
-WebFetchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+WebFetchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  or [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlockParam = object { error\_code, type }
+WebFetchToolResultErrorBlockParam object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17459,15 +17459,15 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlockParam = object { content, type, url, retrieved\_at }
+WebFetchBlockParam object { content, type, url, retrieved\_at }
 
 content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }  or [ContentBlockSource](api/messages.md) { content, type }  or [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -17475,7 +17475,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -17483,19 +17483,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-ContentBlockSource = object { content, type }
+ContentBlockSource object { content, type }
 
 content: string or array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 ContentBlockSourceContent = array of [ContentBlockSourceContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-TextBlockParam = object { text, type, cache\_control, citations }
+TextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -17518,7 +17518,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -17526,9 +17526,9 @@ Accepts one of the following:
 
 citations: optional array of [TextCitationParam](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -17542,7 +17542,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -17556,7 +17556,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -17580,7 +17580,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -17592,7 +17592,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -17624,19 +17624,19 @@ title: string
 
 type: "search\_result\_location"
 
-ImageBlockParam = object { source, type, cache\_control }
+ImageBlockParam object { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  or [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
-Base64ImageSource = object { data, media\_type, type }
+Base64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -17648,7 +17648,7 @@ Accepts one of the following:
 
 type: "base64"
 
-URLImageSource = object { type, url }
+URLImageSource object { type, url }
 
 type: "url"
 
@@ -17673,7 +17673,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -17681,7 +17681,7 @@ Accepts one of the following:
 
 type: "content"
 
-URLPDFSource = object { type, url }
+URLPDFSource object { type, url }
 
 type: "url"
 
@@ -17706,7 +17706,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -17751,7 +17751,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -17761,15 +17761,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -17777,17 +17777,17 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-WebFetchToolResultErrorBlock = object { error\_code, type }
+WebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17807,11 +17807,11 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchToolResultErrorBlockParam = object { error\_code, type }
+WebFetchToolResultErrorBlockParam object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17833,7 +17833,7 @@ type: "web\_fetch\_tool\_result\_error"
 
 WebFetchToolResultErrorCode = "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17851,7 +17851,7 @@ Accepts one of the following:
 
 "unavailable"
 
-WebSearchResultBlock = object { encrypted\_content, page\_age, title, 2 more }
+WebSearchResultBlock object { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -17863,7 +17863,7 @@ type: "web\_search\_result"
 
 url: string
 
-WebSearchResultBlockParam = object { encrypted\_content, title, type, 2 more }
+WebSearchResultBlockParam object { encrypted\_content, title, type, 2 more }
 
 encrypted\_content: string
 
@@ -17875,7 +17875,7 @@ url: string
 
 page\_age: optional string
 
-WebSearchTool20250305 = object { name, type, allowed\_callers, 7 more }
+WebSearchTool20250305 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -17887,7 +17887,7 @@ type: "web\_search\_20250305"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -17920,7 +17920,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -17960,7 +17960,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-WebSearchTool20260209 = object { name, type, allowed\_callers, 7 more }
+WebSearchTool20260209 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -17972,7 +17972,7 @@ type: "web\_search\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -18005,7 +18005,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18045,11 +18045,11 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-WebSearchToolRequestError = object { error\_code, type }
+WebSearchToolRequestError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -18065,21 +18065,21 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -18087,7 +18087,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -18095,13 +18095,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -18117,7 +18117,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -18135,13 +18135,13 @@ type: "web\_search\_tool\_result"
 
 WebSearchToolResultBlockContent = [WebSearchToolResultError](api/messages.md) { error\_code, type }  or array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -18157,7 +18157,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -18169,11 +18169,11 @@ type: "web\_search\_result"
 
 url: string
 
-WebSearchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+WebSearchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 WebSearchToolResultBlockItem = array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }
 
@@ -18187,11 +18187,11 @@ url: string
 
 page\_age: optional string
 
-WebSearchToolRequestError = object { error\_code, type }
+WebSearchToolRequestError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -18228,7 +18228,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18238,15 +18238,15 @@ caller: optional [DirectCaller](api/messages.md) { type }  or [ServerToolCaller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -18254,7 +18254,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -18262,7 +18262,7 @@ type: "code\_execution\_20260120"
 
 WebSearchToolResultBlockParamContent = array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }  or [WebSearchToolRequestError](api/messages.md) { error\_code, type }
 
-Accepts one of the following:
+One of the following:
 
 WebSearchToolResultBlockItem = array of [WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more }
 
@@ -18276,11 +18276,11 @@ url: string
 
 page\_age: optional string
 
-WebSearchToolRequestError = object { error\_code, type }
+WebSearchToolRequestError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -18296,11 +18296,11 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -18318,7 +18318,7 @@ type: "web\_search\_tool\_result\_error"
 
 WebSearchToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -18360,7 +18360,7 @@ GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
-DeletedMessageBatch = object { id, type }
+DeletedMessageBatch object { id, type }
 
 id: string
 
@@ -18372,7 +18372,7 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-MessageBatch = object { id, archived\_at, cancel\_initiated\_at, 7 more }
+MessageBatch object { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 id: string
 
@@ -18408,7 +18408,7 @@ processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 
@@ -18462,67 +18462,67 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-MessageBatchCanceledResult = object { type }
+MessageBatchCanceledResult object { type }
 
 type: "canceled"
 
-MessageBatchErroredResult = object { error, type }
+MessageBatchErroredResult object { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
 
 error: [ErrorObject](api/$shared.md)
 
-Accepts one of the following:
+One of the following:
 
-InvalidRequestError = object { message, type }
+InvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-AuthenticationError = object { message, type }
+AuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BillingError = object { message, type }
+BillingError object { message, type }
 
 message: string
 
 type: "billing\_error"
 
-PermissionError = object { message, type }
+PermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-NotFoundError = object { message, type }
+NotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-RateLimitError = object { message, type }
+RateLimitError object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
 
-GatewayTimeoutError = object { message, type }
+GatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-APIErrorObject = object { message, type }
+APIErrorObject object { message, type }
 
 message: string
 
 type: "api\_error"
 
-OverloadedError = object { message, type }
+OverloadedError object { message, type }
 
 message: string
 
@@ -18534,11 +18534,11 @@ type: "error"
 
 type: "errored"
 
-MessageBatchExpiredResult = object { type }
+MessageBatchExpiredResult object { type }
 
 type: "expired"
 
-MessageBatchIndividualResponse = object { custom\_id, result }
+MessageBatchIndividualResponse object { custom\_id, result }
 
 This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -18554,9 +18554,9 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
-MessageBatchSucceededResult = object { message, type }
+MessageBatchSucceededResult object { message, type }
 
 message: [Message](api/messages.md) { id, container, content, 7 more }
 
@@ -18607,9 +18607,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-TextBlock = object { citations, text, type }
+TextBlock object { citations, text, type }
 
 citations: array of [TextCitation](api/messages.md)
 
@@ -18617,9 +18617,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -18635,7 +18635,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -18651,7 +18651,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -18677,7 +18677,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -18689,7 +18689,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -18725,7 +18725,7 @@ text: string
 
 type: "text"
 
-ThinkingBlock = object { signature, thinking, type }
+ThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -18733,13 +18733,13 @@ thinking: string
 
 type: "thinking"
 
-RedactedThinkingBlock = object { data, type }
+RedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, caller, input, 2 more }
+ToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -18747,15 +18747,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -18763,7 +18763,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -18775,7 +18775,7 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, caller, input, 2 more }
+ServerToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -18783,15 +18783,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -18799,7 +18799,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -18809,7 +18809,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -18827,21 +18827,21 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -18849,7 +18849,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -18857,13 +18857,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -18879,7 +18879,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -18895,21 +18895,21 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -18917,7 +18917,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -18925,13 +18925,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlock = object { error\_code, type }
+WebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -18951,7 +18951,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlock = object { content, retrieved\_at, type, url }
+WebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [DocumentBlock](api/messages.md) { citations, source, title, type }
 
@@ -18963,9 +18963,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -18973,7 +18973,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -19001,19 +19001,19 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19025,7 +19025,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -19041,7 +19041,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -19063,17 +19063,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultError = object { error\_code, type }
+BashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19087,7 +19087,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -19107,17 +19107,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19133,13 +19133,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -19155,13 +19155,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -19179,17 +19179,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+ToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultError = object { error\_code, error\_message, type }
+ToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19203,7 +19203,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlock = object { tool\_references, type }
+ToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
 
@@ -19217,7 +19217,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-ContainerUploadBlock = object { file\_id, type }
+ContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -19231,15 +19231,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -19309,7 +19309,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -19327,7 +19327,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -19356,7 +19356,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -19442,7 +19442,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -19452,63 +19452,63 @@ Accepts one of the following:
 
 type: "succeeded"
 
-MessageBatchErroredResult = object { error, type }
+MessageBatchErroredResult object { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
 
 error: [ErrorObject](api/$shared.md)
 
-Accepts one of the following:
+One of the following:
 
-InvalidRequestError = object { message, type }
+InvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-AuthenticationError = object { message, type }
+AuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BillingError = object { message, type }
+BillingError object { message, type }
 
 message: string
 
 type: "billing\_error"
 
-PermissionError = object { message, type }
+PermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-NotFoundError = object { message, type }
+NotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-RateLimitError = object { message, type }
+RateLimitError object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
 
-GatewayTimeoutError = object { message, type }
+GatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-APIErrorObject = object { message, type }
+APIErrorObject object { message, type }
 
 message: string
 
 type: "api\_error"
 
-OverloadedError = object { message, type }
+OverloadedError object { message, type }
 
 message: string
 
@@ -19520,15 +19520,15 @@ type: "error"
 
 type: "errored"
 
-MessageBatchCanceledResult = object { type }
+MessageBatchCanceledResult object { type }
 
 type: "canceled"
 
-MessageBatchExpiredResult = object { type }
+MessageBatchExpiredResult object { type }
 
 type: "expired"
 
-MessageBatchRequestCounts = object { canceled, errored, expired, 2 more }
+MessageBatchRequestCounts object { canceled, errored, expired, 2 more }
 
 canceled: number
 
@@ -19564,9 +19564,9 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
-MessageBatchSucceededResult = object { message, type }
+MessageBatchSucceededResult object { message, type }
 
 message: [Message](api/messages.md) { id, container, content, 7 more }
 
@@ -19617,9 +19617,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-TextBlock = object { citations, text, type }
+TextBlock object { citations, text, type }
 
 citations: array of [TextCitation](api/messages.md)
 
@@ -19627,9 +19627,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -19645,7 +19645,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -19661,7 +19661,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -19687,7 +19687,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -19699,7 +19699,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -19735,7 +19735,7 @@ text: string
 
 type: "text"
 
-ThinkingBlock = object { signature, thinking, type }
+ThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -19743,13 +19743,13 @@ thinking: string
 
 type: "thinking"
 
-RedactedThinkingBlock = object { data, type }
+RedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, caller, input, 2 more }
+ToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -19757,15 +19757,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -19773,7 +19773,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -19785,7 +19785,7 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, caller, input, 2 more }
+ServerToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -19793,15 +19793,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -19809,7 +19809,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -19819,7 +19819,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -19837,21 +19837,21 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -19859,7 +19859,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -19867,13 +19867,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19889,7 +19889,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -19905,21 +19905,21 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -19927,7 +19927,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -19935,13 +19935,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlock = object { error\_code, type }
+WebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19961,7 +19961,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlock = object { content, retrieved\_at, type, url }
+WebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [DocumentBlock](api/messages.md) { citations, source, title, type }
 
@@ -19973,9 +19973,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -19983,7 +19983,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -20011,19 +20011,19 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -20035,7 +20035,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -20051,7 +20051,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -20073,17 +20073,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultError = object { error\_code, type }
+BashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -20097,7 +20097,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -20117,17 +20117,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -20143,13 +20143,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -20165,13 +20165,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -20189,17 +20189,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+ToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultError = object { error\_code, error\_message, type }
+ToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -20213,7 +20213,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlock = object { tool\_references, type }
+ToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
 
@@ -20227,7 +20227,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-ContainerUploadBlock = object { file\_id, type }
+ContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -20241,15 +20241,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -20319,7 +20319,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -20337,7 +20337,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -20366,7 +20366,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -20452,7 +20452,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -20462,63 +20462,63 @@ Accepts one of the following:
 
 type: "succeeded"
 
-MessageBatchErroredResult = object { error, type }
+MessageBatchErroredResult object { error, type }
 
 error: [ErrorResponse](api/$shared.md) { error, request\_id, type }
 
 error: [ErrorObject](api/$shared.md)
 
-Accepts one of the following:
+One of the following:
 
-InvalidRequestError = object { message, type }
+InvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-AuthenticationError = object { message, type }
+AuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BillingError = object { message, type }
+BillingError object { message, type }
 
 message: string
 
 type: "billing\_error"
 
-PermissionError = object { message, type }
+PermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-NotFoundError = object { message, type }
+NotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-RateLimitError = object { message, type }
+RateLimitError object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
 
-GatewayTimeoutError = object { message, type }
+GatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-APIErrorObject = object { message, type }
+APIErrorObject object { message, type }
 
 message: string
 
 type: "api\_error"
 
-OverloadedError = object { message, type }
+OverloadedError object { message, type }
 
 message: string
 
@@ -20530,15 +20530,15 @@ type: "error"
 
 type: "errored"
 
-MessageBatchCanceledResult = object { type }
+MessageBatchCanceledResult object { type }
 
 type: "canceled"
 
-MessageBatchExpiredResult = object { type }
+MessageBatchExpiredResult object { type }
 
 type: "expired"
 
-MessageBatchSucceededResult = object { message, type }
+MessageBatchSucceededResult object { message, type }
 
 message: [Message](api/messages.md) { id, container, content, 7 more }
 
@@ -20589,9 +20589,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-TextBlock = object { citations, text, type }
+TextBlock object { citations, text, type }
 
 citations: array of [TextCitation](api/messages.md)
 
@@ -20599,9 +20599,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-CitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -20617,7 +20617,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-CitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -20633,7 +20633,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-CitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+CitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -20659,7 +20659,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-CitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+CitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -20671,7 +20671,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-CitationsSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+CitationsSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -20707,7 +20707,7 @@ text: string
 
 type: "text"
 
-ThinkingBlock = object { signature, thinking, type }
+ThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -20715,13 +20715,13 @@ thinking: string
 
 type: "thinking"
 
-RedactedThinkingBlock = object { data, type }
+RedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-ToolUseBlock = object { id, caller, input, 2 more }
+ToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -20729,15 +20729,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -20745,7 +20745,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -20757,7 +20757,7 @@ name: string
 
 type: "tool\_use"
 
-ServerToolUseBlock = object { id, caller, input, 2 more }
+ServerToolUseBlock object { id, caller, input, 2 more }
 
 id: string
 
@@ -20765,15 +20765,15 @@ caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/mess
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -20781,7 +20781,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -20791,7 +20791,7 @@ input: map[unknown]
 
 name: "web\_search" or "web\_fetch" or "code\_execution" or 4 more
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -20809,21 +20809,21 @@ Accepts one of the following:
 
 type: "server\_tool\_use"
 
-WebSearchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebSearchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -20831,7 +20831,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -20839,13 +20839,13 @@ type: "code\_execution\_20260120"
 
 content: [WebSearchToolResultBlockContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-WebSearchToolResultError = object { error\_code, type }
+WebSearchToolResultError object { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -20861,7 +20861,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
+array of [WebSearchResultBlock](api/messages.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -20877,21 +20877,21 @@ tool\_use\_id: string
 
 type: "web\_search\_tool\_result"
 
-WebFetchToolResultBlock = object { caller, content, tool\_use\_id, type }
+WebFetchToolResultBlock object { caller, content, tool\_use\_id, type }
 
 caller: [DirectCaller](api/messages.md) { type }  or [ServerToolCaller](api/messages.md) { tool\_id, type }  or [ServerToolCaller20260120](api/messages.md) { tool\_id, type }
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-DirectCaller = object { type }
+DirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-ServerToolCaller = object { tool\_id, type }
+ServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -20899,7 +20899,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-ServerToolCaller20260120 = object { tool\_id, type }
+ServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -20907,13 +20907,13 @@ type: "code\_execution\_20260120"
 
 content: [WebFetchToolResultErrorBlock](api/messages.md) { error\_code, type }  or [WebFetchBlock](api/messages.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-WebFetchToolResultErrorBlock = object { error\_code, type }
+WebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -20933,7 +20933,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-WebFetchBlock = object { content, retrieved\_at, type, url }
+WebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [DocumentBlock](api/messages.md) { citations, source, title, type }
 
@@ -20945,9 +20945,9 @@ enabled: boolean
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  or [PlainTextSource](api/messages.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-Base64PDFSource = object { data, media\_type, type }
+Base64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -20955,7 +20955,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-PlainTextSource = object { data, media\_type, type }
+PlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -20983,19 +20983,19 @@ tool\_use\_id: string
 
 type: "web\_fetch\_tool\_result"
 
-CodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+CodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [CodeExecutionToolResultBlockContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-CodeExecutionToolResultError = object { error\_code, type }
+CodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -21007,7 +21007,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-CodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+CodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [CodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -21023,7 +21023,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-EncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+EncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -21045,17 +21045,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BashCodeExecutionToolResultError](api/messages.md) { error\_code, type }  or [BashCodeExecutionResultBlock](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BashCodeExecutionToolResultError = object { error\_code, type }
+BashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -21069,7 +21069,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BashCodeExecutionOutputBlock](api/messages.md) { file\_id, type }
 
@@ -21089,17 +21089,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-TextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+TextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [TextEditorCodeExecutionToolResultError](api/messages.md) { error\_code, error\_message, type }  or [TextEditorCodeExecutionViewResultBlock](api/messages.md) { content, file\_type, num\_lines, 3 more }  or [TextEditorCodeExecutionCreateResultBlock](api/messages.md) { is\_file\_update, type }  or [TextEditorCodeExecutionStrReplaceResultBlock](api/messages.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-TextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+TextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -21115,13 +21115,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-TextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+TextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -21137,13 +21137,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-TextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+TextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-TextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+TextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -21161,17 +21161,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-ToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+ToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [ToolSearchToolResultError](api/messages.md) { error\_code, error\_message, type }  or [ToolSearchToolSearchResultBlock](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-ToolSearchToolResultError = object { error\_code, error\_message, type }
+ToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -21185,7 +21185,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-ToolSearchToolSearchResultBlock = object { tool\_references, type }
+ToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [ToolReferenceBlock](api/messages.md) { tool\_name, type }
 
@@ -21199,7 +21199,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-ContainerUploadBlock = object { file\_id, type }
+ContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -21213,15 +21213,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -21291,7 +21291,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -21309,7 +21309,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -21338,7 +21338,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -21424,7 +21424,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 

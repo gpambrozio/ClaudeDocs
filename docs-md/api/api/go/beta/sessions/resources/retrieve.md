@@ -22,7 +22,7 @@ SessionID param.Field[string]
 
 Path param: Path parameter session\_id
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -30,7 +30,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -88,7 +88,7 @@ type BetaSessionResourceGetResponseUnion interface{…}
 
 The requested session resource.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsGitHubRepositoryResource struct{…}
 
@@ -108,9 +108,9 @@ A timestamp in RFC 3339 format
 
 URL string
 
-Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionoptional
+Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionOptional
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBranchCheckout struct{…}
 
@@ -156,29 +156,29 @@ The memory store ID (memstore\_...). Must belong to the caller's organization an
 
 Type BetaManagedAgentsMemoryStoreResourceType
 
-Access BetaManagedAgentsMemoryStoreResourceAccessoptional
+Access BetaManagedAgentsMemoryStoreResourceAccessOptional
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryStoreResourceAccessReadWrite BetaManagedAgentsMemoryStoreResourceAccess = "read\_write"
 
 const BetaManagedAgentsMemoryStoreResourceAccessReadOnly BetaManagedAgentsMemoryStoreResourceAccess = "read\_only"
 
-Description stringoptional
+Description stringOptional
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-Instructions stringoptional
+Instructions stringOptional
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-MountPath stringoptional
+MountPath stringOptional
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-Name stringoptional
+Name stringOptional
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 

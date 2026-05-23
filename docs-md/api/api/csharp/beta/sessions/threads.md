@@ -60,7 +60,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -102,7 +102,7 @@ Speed Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -112,7 +112,7 @@ required string Name
 
 required IReadOnlyList<Skill> Skills
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill:
 
@@ -138,7 +138,7 @@ required string? System
 
 required IReadOnlyList<Tool> Tools
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401:
 
@@ -150,7 +150,7 @@ required Name Name
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"Bash
 
@@ -172,7 +172,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -196,7 +196,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -224,7 +224,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -248,7 +248,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -332,7 +332,7 @@ required [BetaManagedAgentsSessionThreadStatus](api/beta.md) Status
 
 SessionThreadStatus enum
 
-Accepts one of the following:
+One of the following:
 
 "running"Running
 
@@ -448,7 +448,7 @@ required IReadOnlyList<Content> Content
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -468,7 +468,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -514,7 +514,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -610,7 +610,7 @@ required Result Result
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"Allow
 
@@ -652,7 +652,7 @@ IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -672,7 +672,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -718,7 +718,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -916,7 +916,7 @@ EvaluatedPermission EvaluatedPermission
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"Allow
 
@@ -950,7 +950,7 @@ IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -970,7 +970,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -1016,7 +1016,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -1138,7 +1138,7 @@ EvaluatedPermission EvaluatedPermission
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"Allow
 
@@ -1172,7 +1172,7 @@ IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -1192,7 +1192,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -1238,7 +1238,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -1346,7 +1346,7 @@ required IReadOnlyList<Content> Content
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -1366,7 +1366,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -1412,7 +1412,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -1498,7 +1498,7 @@ required IReadOnlyList<Content> Content
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -1518,7 +1518,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -1564,7 +1564,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -1664,7 +1664,7 @@ required Error Error
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUnknownError:
 
@@ -1678,7 +1678,7 @@ required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying:
 
@@ -1712,7 +1712,7 @@ required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying:
 
@@ -1746,7 +1746,7 @@ required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying:
 
@@ -1780,7 +1780,7 @@ required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying:
 
@@ -1818,7 +1818,7 @@ required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying:
 
@@ -1856,7 +1856,7 @@ required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying:
 
@@ -1890,7 +1890,7 @@ required RetryStatus RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying:
 
@@ -1962,7 +1962,7 @@ required StopReason StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn:
 
@@ -2104,7 +2104,7 @@ Speed? Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -2164,7 +2164,7 @@ Speed? Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -2226,7 +2226,7 @@ required Rubric Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric:
 
@@ -2310,7 +2310,7 @@ required StopReason StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn:
 
@@ -2376,7 +2376,7 @@ IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -2396,7 +2396,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -2442,7 +2442,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -2608,7 +2608,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -2650,7 +2650,7 @@ Speed Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -2686,7 +2686,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -2728,7 +2728,7 @@ Speed Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -2738,7 +2738,7 @@ required string Name
 
 required IReadOnlyList<Skill> Skills
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill:
 
@@ -2764,7 +2764,7 @@ required string? System
 
 required IReadOnlyList<Tool> Tools
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401:
 
@@ -2776,7 +2776,7 @@ required Name Name
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"Bash
 
@@ -2798,7 +2798,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -2822,7 +2822,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -2850,7 +2850,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -2874,7 +2874,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -2928,7 +2928,7 @@ required string Name
 
 required IReadOnlyList<Skill> Skills
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill:
 
@@ -2954,7 +2954,7 @@ required string? System
 
 required IReadOnlyList<Tool> Tools
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401:
 
@@ -2966,7 +2966,7 @@ required Name Name
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"Bash
 
@@ -2988,7 +2988,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -3012,7 +3012,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -3040,7 +3040,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -3064,7 +3064,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 

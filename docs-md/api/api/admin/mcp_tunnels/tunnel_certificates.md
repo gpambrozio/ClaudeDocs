@@ -22,7 +22,7 @@ POST/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archiv
 
 ##### ModelsExpand Collapse
 
-TunnelCertificateCreateResponse = object { id, archived\_at, created\_at, 4 more }
+TunnelCertificateCreateResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 
@@ -54,7 +54,7 @@ type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-TunnelCertificateRetrieveResponse = object { id, archived\_at, created\_at, 4 more }
+TunnelCertificateRetrieveResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 
@@ -86,7 +86,7 @@ type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-TunnelCertificateListResponse = object { data, next\_page }
+TunnelCertificateListResponse object { data, next\_page }
 
 data: array of object { id, archived\_at, created\_at, 4 more }
 
@@ -124,7 +124,7 @@ next\_page: string
 
 Opaque cursor for the next page, or `null` if there are no more results.
 
-TunnelCertificateArchiveResponse = object { id, archived\_at, created\_at, 4 more }
+TunnelCertificateArchiveResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 

@@ -16,7 +16,7 @@ ID of the Invite.
 
 ##### ReturnsExpand Collapse
 
-Invite = object { id, email, expires\_at, 4 more }
+Invite object { id, email, expires\_at, 4 more }
 
 id: string
 
@@ -38,7 +38,7 @@ role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -54,7 +54,7 @@ status: "accepted" or "expired" or "deleted" or "pending"
 
 Status of the Invite.
 
-Accepts one of the following:
+One of the following:
 
 "accepted"
 

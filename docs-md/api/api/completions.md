@@ -12,7 +12,7 @@ POST/v1/complete
 
 ##### ModelsExpand Collapse
 
-Completion = object { id, completion, model, 2 more }
+Completion object { id, completion, model, 2 more }
 
 id: string
 
@@ -30,15 +30,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -108,7 +108,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 stop\_reason: string
 

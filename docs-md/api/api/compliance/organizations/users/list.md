@@ -59,7 +59,7 @@ organization\_role: "admin" or "billing" or "claude\_code\_user" or 6 more
 
 User's built-in role within the organization. This is distinct from any custom RBAC roles that may also be assigned.
 
-Accepts one of the following:
+One of the following:
 
 "admin"
 

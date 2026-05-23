@@ -16,7 +16,7 @@ GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}
 
 ##### ModelsExpand Collapse
 
-RoleListResponse = object { id, created\_at, description, 2 more }
+RoleListResponse object { id, created\_at, description, 2 more }
 
 Role information for compliance responses.
 
@@ -40,7 +40,7 @@ updated\_at: string
 
 Role last-updated timestamp (ISO 8601)
 
-RoleRetrieveResponse = object { id, created\_at, description, 2 more }
+RoleRetrieveResponse object { id, created\_at, description, 2 more }
 
 Role information for compliance responses.
 
@@ -72,7 +72,7 @@ GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
 
 ##### ModelsExpand Collapse
 
-PermissionListResponse = object { action, resource\_id, resource\_type }
+PermissionListResponse object { action, resource\_id, resource\_type }
 
 Permission granted by a role.
 

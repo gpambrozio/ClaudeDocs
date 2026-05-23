@@ -16,7 +16,7 @@ GET/v1/compliance/groups/{group\_id}
 
 ##### ModelsExpand Collapse
 
-GroupListResponse = object { id, created\_at, description, 4 more }
+GroupListResponse object { id, created\_at, description, 4 more }
 
 Group information for compliance responses.
 
@@ -48,7 +48,7 @@ updated\_at: string
 
 Group last-updated timestamp (ISO 8601)
 
-GroupRetrieveResponse = object { id, created\_at, description, 4 more }
+GroupRetrieveResponse object { id, created\_at, description, 4 more }
 
 Group information for compliance responses.
 
@@ -88,7 +88,7 @@ GET/v1/compliance/groups/{group\_id}/members
 
 ##### ModelsExpand Collapse
 
-MemberListResponse = object { created\_at, email, updated\_at, user\_id }
+MemberListResponse object { created\_at, email, updated\_at, user\_id }
 
 Group member for compliance responses.
 

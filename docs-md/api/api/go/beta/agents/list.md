@@ -16,27 +16,27 @@ List Agents
 
 params BetaAgentListParams
 
-CreatedAtGte param.Field[[Time](api/beta/agents/list.md)]optional
+CreatedAtGte param.Field[[Time](api/beta/agents/list.md)]Optional
 
 Query param: Return agents created at or after this time (inclusive).
 
-CreatedAtLte param.Field[[Time](api/beta/agents/list.md)]optional
+CreatedAtLte param.Field[[Time](api/beta/agents/list.md)]Optional
 
 Query param: Return agents created at or before this time (inclusive).
 
-IncludeArchived param.Field[bool]optional
+IncludeArchived param.Field[bool]Optional
 
 Query param: Include archived agents in results. Defaults to false.
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Query param: Maximum results per page. Default 20, maximum 100.
 
-Page param.Field[string]optional
+Page param.Field[string]Optional
 
 Query param: Opaque pagination cursor from a previous response.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -44,7 +44,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -134,7 +134,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -142,7 +142,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -182,11 +182,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -212,7 +212,7 @@ Name string
 
 Skills []BetaManagedAgentsAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -238,7 +238,7 @@ System string
 
 Tools []BetaManagedAgentsAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -250,7 +250,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -272,7 +272,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -296,7 +296,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -324,7 +324,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -348,7 +348,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -376,15 +376,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 

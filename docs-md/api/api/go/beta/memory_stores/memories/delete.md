@@ -22,11 +22,11 @@ MemoryStoreID param.Field[string]
 
 Path param: Path parameter memory\_store\_id
 
-ExpectedContentSha256 param.Field[string]optional
+ExpectedContentSha256 param.Field[string]Optional
 
 Query param: Query parameter for expected\_content\_sha256
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -34,7 +34,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 

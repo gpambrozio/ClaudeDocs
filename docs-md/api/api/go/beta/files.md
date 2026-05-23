@@ -54,7 +54,7 @@ ID string
 
 ID of the deleted file.
 
-Type DeletedFileTypeoptional
+Type DeletedFileTypeOptional
 
 Deleted object type.
 
@@ -90,11 +90,11 @@ Object type.
 
 For files, this is always `"file"`.
 
-Downloadable booloptional
+Downloadable boolOptional
 
 Whether the file can be downloaded.
 
-Scope [BetaFileScope](api/beta.md)optional
+Scope [BetaFileScope](api/beta.md)Optional
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 

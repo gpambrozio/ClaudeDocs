@@ -32,7 +32,7 @@ POST/v1/vaults/{vault\_id}/archive
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsDeletedVault = object { id, type }
+BetaManagedAgentsDeletedVault object { id, type }
 
 Confirmation of a deleted vault.
 
@@ -42,7 +42,7 @@ Unique identifier of the deleted vault.
 
 type: "vault\_deleted"
 
-BetaManagedAgentsVault = object { id, archived\_at, created\_at, 4 more }
+BetaManagedAgentsVault object { id, archived\_at, created\_at, 4 more }
 
 A vault that stores credentials for use by agents during sessions.
 
@@ -104,7 +104,7 @@ POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsCredential = object { id, archived\_at, auth, 6 more }
+BetaManagedAgentsCredential object { id, archived\_at, auth, 6 more }
 
 A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -120,9 +120,9 @@ auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, t
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsMCPOAuthAuthResponse = object { mcp\_server\_url, type, expires\_at, refresh }
+BetaManagedAgentsMCPOAuthAuthResponse object { mcp\_server\_url, type, expires\_at, refresh }
 
 OAuth credential details for an MCP server.
 
@@ -152,21 +152,21 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthPostResponse object { type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -180,7 +180,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsStaticBearerAuthResponse = object { mcp\_server\_url, type }
+BetaManagedAgentsStaticBearerAuthResponse object { mcp\_server\_url, type }
 
 Static bearer token credential details for an MCP server.
 
@@ -212,7 +212,7 @@ display\_name: optional string
 
 Human-readable name for the credential.
 
-BetaManagedAgentsCredentialValidation = object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
+BetaManagedAgentsCredentialValidation object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
 
 Result of live-probing a credential against its configured MCP server.
 
@@ -280,7 +280,7 @@ status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 "succeeded"
 
@@ -294,7 +294,7 @@ status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 "valid"
 
@@ -316,7 +316,7 @@ BetaManagedAgentsCredentialValidationStatus = "valid" or "invalid" or "unknown"
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 "valid"
 
@@ -324,7 +324,7 @@ Accepts one of the following:
 
 "unknown"
 
-BetaManagedAgentsDeletedCredential = object { id, type }
+BetaManagedAgentsDeletedCredential object { id, type }
 
 Confirmation of a deleted credential.
 
@@ -334,7 +334,7 @@ Unique identifier of the deleted credential.
 
 type: "vault\_credential\_deleted"
 
-BetaManagedAgentsMCPOAuthAuthResponse = object { mcp\_server\_url, type, expires\_at, refresh }
+BetaManagedAgentsMCPOAuthAuthResponse object { mcp\_server\_url, type, expires\_at, refresh }
 
 OAuth credential details for an MCP server.
 
@@ -364,21 +364,21 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthPostResponse object { type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -392,7 +392,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsMCPOAuthCreateParams = object { access\_token, mcp\_server\_url, type, 2 more }
+BetaManagedAgentsMCPOAuthCreateParams object { access\_token, mcp\_server\_url, type, 2 more }
 
 Parameters for creating an MCP OAuth credential.
 
@@ -430,15 +430,15 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneParam = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneParam object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthBasicParam object { client\_secret, type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -448,7 +448,7 @@ OAuth client secret.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthPostParam object { client\_secret, type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -466,7 +466,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsMCPOAuthRefreshParams = object { client\_id, refresh\_token, token\_endpoint, 3 more }
+BetaManagedAgentsMCPOAuthRefreshParams object { client\_id, refresh\_token, token\_endpoint, 3 more }
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -486,15 +486,15 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneParam = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneParam object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthBasicParam object { client\_secret, type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -504,7 +504,7 @@ OAuth client secret.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthPostParam object { client\_secret, type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -522,7 +522,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsMCPOAuthRefreshResponse = object { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }
+BetaManagedAgentsMCPOAuthRefreshResponse object { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -538,21 +538,21 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthPostResponse object { type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -566,7 +566,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsMCPOAuthRefreshUpdateParams = object { refresh\_token, scope, token\_endpoint\_auth }
+BetaManagedAgentsMCPOAuthRefreshUpdateParams object { refresh\_token, scope, token\_endpoint\_auth }
 
 Parameters for updating OAuth refresh token configuration.
 
@@ -582,9 +582,9 @@ token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdatePa
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthBasicUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object { type, client\_secret }
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -594,7 +594,7 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsTokenEndpointAuthPostUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthPostUpdateParam object { type, client\_secret }
 
 Updated POST body authentication parameters for the token endpoint.
 
@@ -604,7 +604,7 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsMCPOAuthUpdateParams = object { type, access\_token, expires\_at, refresh }
+BetaManagedAgentsMCPOAuthUpdateParams object { type, access\_token, expires\_at, refresh }
 
 Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
@@ -634,9 +634,9 @@ token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdatePa
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthBasicUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object { type, client\_secret }
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -646,7 +646,7 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsTokenEndpointAuthPostUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthPostUpdateParam object { type, client\_secret }
 
 Updated POST body authentication parameters for the token endpoint.
 
@@ -656,7 +656,7 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsMCPProbe = object { http\_response, method }
+BetaManagedAgentsMCPProbe object { http\_response, method }
 
 The failing step of an MCP validation probe.
 
@@ -684,7 +684,7 @@ method: string
 
 The MCP method that failed (for example `initialize` or `tools/list`).
 
-BetaManagedAgentsRefreshHTTPResponse = object { body, body\_truncated, content\_type, status\_code }
+BetaManagedAgentsRefreshHTTPResponse object { body, body\_truncated, content\_type, status\_code }
 
 An HTTP response captured during a credential validation probe.
 
@@ -704,7 +704,7 @@ status\_code: number
 
 HTTP status code.
 
-BetaManagedAgentsRefreshObject = object { http\_response, status }
+BetaManagedAgentsRefreshObject object { http\_response, status }
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
@@ -732,7 +732,7 @@ status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 "succeeded"
 
@@ -742,7 +742,7 @@ Accepts one of the following:
 
 "no\_refresh\_token"
 
-BetaManagedAgentsStaticBearerAuthResponse = object { mcp\_server\_url, type }
+BetaManagedAgentsStaticBearerAuthResponse object { mcp\_server\_url, type }
 
 Static bearer token credential details for an MCP server.
 
@@ -752,7 +752,7 @@ URL of the MCP server this credential authenticates against.
 
 type: "static\_bearer"
 
-BetaManagedAgentsStaticBearerCreateParams = object { token, mcp\_server\_url, type }
+BetaManagedAgentsStaticBearerCreateParams object { token, mcp\_server\_url, type }
 
 Parameters for creating a static bearer token credential.
 
@@ -766,7 +766,7 @@ URL of the MCP server this credential authenticates against.
 
 type: "static\_bearer"
 
-BetaManagedAgentsStaticBearerUpdateParams = object { type, token }
+BetaManagedAgentsStaticBearerUpdateParams object { type, token }
 
 Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
@@ -776,7 +776,7 @@ token: optional string
 
 Updated static bearer token value.
 
-BetaManagedAgentsTokenEndpointAuthBasicParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthBasicParam object { client\_secret, type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -786,13 +786,13 @@ OAuth client secret.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthBasicUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object { type, client\_secret }
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -802,19 +802,19 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsTokenEndpointAuthNoneParam = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneParam object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthPostParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthPostParam object { client\_secret, type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -824,13 +824,13 @@ OAuth client secret.
 
 type: "client\_secret\_post"
 
-BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthPostResponse object { type }
 
 Token endpoint uses POST body authentication with client credentials.
 
 type: "client\_secret\_post"
 
-BetaManagedAgentsTokenEndpointAuthPostUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthPostUpdateParam object { type, client\_secret }
 
 Updated POST body authentication parameters for the token endpoint.
 

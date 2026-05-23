@@ -52,7 +52,7 @@ networking: Networking
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 class BetaUnrestrictedNetwork: …
 
@@ -133,7 +133,7 @@ networking: Optional[Networking]
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-Accepts one of the following:
+One of the following:
 
 class BetaUnrestrictedNetwork: …
 
@@ -216,7 +216,7 @@ config: Config
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-Accepts one of the following:
+One of the following:
 
 class BetaCloudConfig: …
 
@@ -226,7 +226,7 @@ networking: Networking
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 class BetaUnrestrictedNetwork: …
 
@@ -328,7 +328,7 @@ scope: Optional[Literal["organization", "account"]]
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Accepts one of the following:
+One of the following:
 
 "organization"
 
@@ -583,7 +583,7 @@ state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -623,7 +623,7 @@ state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -695,7 +695,7 @@ state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 

@@ -108,7 +108,7 @@ Optional<TokenEndpointAuth> tokenEndpointAuth
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam:
 
@@ -166,7 +166,7 @@ Auth auth
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsMcpOAuthAuthResponse:
 
@@ -198,7 +198,7 @@ TokenEndpointAuth tokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneResponse:
 

@@ -28,7 +28,7 @@ DELETE/v1/skills/{skill\_id}/versions/{version}
 
 ##### ModelsExpand Collapse
 
-VersionCreateResponse = object { id, created\_at, description, 5 more }
+VersionCreateResponse object { id, created\_at, description, 5 more }
 
 id: string
 
@@ -74,7 +74,7 @@ Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-VersionListResponse = object { id, created\_at, description, 5 more }
+VersionListResponse object { id, created\_at, description, 5 more }
 
 id: string
 
@@ -120,7 +120,7 @@ Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-VersionRetrieveResponse = object { id, created\_at, description, 5 more }
+VersionRetrieveResponse object { id, created\_at, description, 5 more }
 
 id: string
 
@@ -166,7 +166,7 @@ Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-VersionDeleteResponse = object { id, type }
+VersionDeleteResponse object { id, type }
 
 id: string
 

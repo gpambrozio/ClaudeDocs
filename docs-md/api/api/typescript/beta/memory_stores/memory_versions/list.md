@@ -42,7 +42,7 @@ operation?: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 Query param: Query parameter for operation
 
-Accepts one of the following:
+One of the following:
 
 "created"
 
@@ -62,7 +62,7 @@ view?: [BetaManagedAgentsMemoryView](api/beta.md)
 
 Query param: Query parameter for view
 
-Accepts one of the following:
+One of the following:
 
 "basic"
 
@@ -72,7 +72,7 @@ betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 (string & {})
 
@@ -154,7 +154,7 @@ operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 "created"
 
@@ -180,7 +180,7 @@ created\_by?: [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsSessionActor { session\_id, type }
 
@@ -224,7 +224,7 @@ redacted\_by?: [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsSessionActor { session\_id, type }
 

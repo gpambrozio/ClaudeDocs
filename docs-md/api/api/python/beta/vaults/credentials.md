@@ -66,7 +66,7 @@ auth: Auth
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsMCPOAuthAuthResponse: …
 
@@ -98,7 +98,7 @@ token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
 
@@ -226,7 +226,7 @@ status: Literal["succeeded", "failed", "connect\_error", "no\_refresh\_token"]
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 "succeeded"
 
@@ -240,7 +240,7 @@ status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 "valid"
 
@@ -262,7 +262,7 @@ Literal["valid", "invalid", "unknown"]
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 "valid"
 
@@ -310,7 +310,7 @@ token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
 
@@ -376,7 +376,7 @@ token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneParam: …
 
@@ -432,7 +432,7 @@ token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneParam: …
 
@@ -484,7 +484,7 @@ token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
 
@@ -528,7 +528,7 @@ token\_endpoint\_auth: Optional[TokenEndpointAuth]
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …
 
@@ -580,7 +580,7 @@ token\_endpoint\_auth: Optional[TokenEndpointAuth]
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …
 
@@ -678,7 +678,7 @@ status: Literal["succeeded", "failed", "connect\_error", "no\_refresh\_token"]
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 "succeeded"
 

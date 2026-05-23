@@ -16,7 +16,7 @@ ID of the Workspace.
 
 ##### ReturnsExpand Collapse
 
-Workspace = object { id, archived\_at, created\_at, 5 more }
+Workspace object { id, archived\_at, created\_at, 5 more }
 
 id: string
 
@@ -38,11 +38,11 @@ allowed\_inference\_geos: array of string or "unrestricted"
 
 Permitted inference geo values. 'unrestricted' means all geos are allowed.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = array of string
+array of string
 
-UnionMember1 = "unrestricted"
+"unrestricted"
 
 default\_inference\_geo: string
 

@@ -20,13 +20,13 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -165,15 +165,15 @@ There is a limit of 100,000 messages in a single request.
 
 content: string or array of [BetaContentBlockParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = array of [BetaContentBlockParam](api/beta.md)
+array of [BetaContentBlockParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -196,7 +196,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -204,9 +204,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -220,7 +220,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -234,7 +234,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -258,7 +258,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -270,7 +270,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -302,19 +302,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -326,13 +326,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -357,19 +357,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaRequestDocumentBlock = object { source, type, cache\_control, 3 more }
+BetaRequestDocumentBlock object { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -377,7 +377,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -385,19 +385,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -420,7 +420,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -428,9 +428,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -444,7 +444,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -458,7 +458,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -482,7 +482,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -494,7 +494,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -526,19 +526,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -550,13 +550,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -581,7 +581,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -589,13 +589,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -620,7 +620,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -634,7 +634,7 @@ context: optional string
 
 title: optional string
 
-BetaSearchResultBlockParam = object { content, source, title, 3 more }
+BetaSearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -659,7 +659,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -667,9 +667,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -683,7 +683,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -697,7 +697,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -721,7 +721,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -733,7 +733,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -788,7 +788,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -798,7 +798,7 @@ citations: optional [BetaCitationsConfigParam](api/beta.md) { enabled }
 
 enabled: optional boolean
 
-BetaThinkingBlockParam = object { signature, thinking, type }
+BetaThinkingBlockParam object { signature, thinking, type }
 
 signature: string
 
@@ -806,13 +806,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlockParam = object { data, type }
+BetaRedactedThinkingBlockParam object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlockParam = object { id, input, name, 3 more }
+BetaToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -839,7 +839,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -849,15 +849,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -865,13 +865,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
+BetaToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
 
@@ -894,7 +894,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -902,15 +902,15 @@ Accepts one of the following:
 
 content: optional string or array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
+array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -933,7 +933,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -941,9 +941,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -957,7 +957,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -971,7 +971,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -995,7 +995,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -1007,7 +1007,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -1039,19 +1039,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1063,13 +1063,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -1094,13 +1094,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaSearchResultBlockParam = object { content, source, title, 3 more }
+BetaSearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -1125,7 +1125,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1133,9 +1133,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1149,7 +1149,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1163,7 +1163,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1187,7 +1187,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -1199,7 +1199,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -1254,7 +1254,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1264,13 +1264,13 @@ citations: optional [BetaCitationsConfigParam](api/beta.md) { enabled }
 
 enabled: optional boolean
 
-BetaRequestDocumentBlock = object { source, type, cache\_control, 3 more }
+BetaRequestDocumentBlock object { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -1278,7 +1278,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -1286,19 +1286,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -1321,7 +1321,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1329,9 +1329,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1345,7 +1345,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1359,7 +1359,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1383,7 +1383,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -1395,7 +1395,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -1427,19 +1427,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1451,13 +1451,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -1482,7 +1482,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1490,13 +1490,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -1521,7 +1521,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1535,7 +1535,7 @@ context: optional string
 
 title: optional string
 
-BetaToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+BetaToolReferenceBlockParam object { tool\_name, type, cache\_control }
 
 Tool reference block that can be included in tool\_result content.
 
@@ -1560,7 +1560,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1568,7 +1568,7 @@ Accepts one of the following:
 
 is\_error: optional boolean
 
-BetaServerToolUseBlockParam = object { id, input, name, 3 more }
+BetaServerToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -1576,7 +1576,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -1613,7 +1613,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1623,15 +1623,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -1639,17 +1639,17 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+BetaWebSearchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 ResultBlock = array of [BetaWebSearchResultBlockParam](api/beta.md) { encrypted\_content, title, type, 2 more }
 
@@ -1663,11 +1663,11 @@ url: string
 
 page\_age: optional string
 
-BetaWebSearchToolRequestError = object { error\_code, type }
+BetaWebSearchToolRequestError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1704,7 +1704,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1714,15 +1714,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -1730,23 +1730,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+BetaWebFetchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, type }  or [BetaWebFetchBlockParam](api/beta.md) { content, type, url, retrieved\_at }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlockParam = object { error\_code, type }
+BetaWebFetchToolResultErrorBlockParam object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1766,15 +1766,15 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlockParam = object { content, type, url, retrieved\_at }
+BetaWebFetchBlockParam object { content, type, url, retrieved\_at }
 
 content: [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -1782,7 +1782,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -1790,19 +1790,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -1825,7 +1825,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1833,9 +1833,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1849,7 +1849,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1863,7 +1863,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1887,7 +1887,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -1899,7 +1899,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -1931,19 +1931,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1955,13 +1955,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -1986,7 +1986,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1994,13 +1994,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -2025,7 +2025,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2070,7 +2070,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2080,15 +2080,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -2096,23 +2096,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaAdvisorToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlockParam](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultErrorParam = object { error\_code, type }
+BetaAdvisorToolResultErrorParam object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -2128,13 +2128,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlockParam = object { text, type }
+BetaAdvisorResultBlockParam object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlockParam = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlockParam object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -2163,25 +2163,25 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultErrorParam = object { error\_code, type }
+BetaCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2193,7 +2193,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type }
 
@@ -2209,7 +2209,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlockParam object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -2248,23 +2248,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaBashCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaBashCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaBashCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlockParam](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultErrorParam = object { error\_code, type }
+BetaBashCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2278,7 +2278,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type }
 
@@ -2315,23 +2315,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaTextEditorCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaTextEditorCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaTextEditorCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  or [BetaTextEditorCodeExecutionViewResultBlockParam](api/beta.md) { content, file\_type, type, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta.md) { type, lines, new\_lines, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+BetaTextEditorCodeExecutionToolResultErrorParam object { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2347,13 +2347,13 @@ type: "text\_editor\_code\_execution\_tool\_result\_error"
 
 error\_message: optional string
 
-BetaTextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+BetaTextEditorCodeExecutionViewResultBlockParam object { content, file\_type, type, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -2369,13 +2369,13 @@ start\_line: optional number
 
 total\_lines: optional number
 
-BetaTextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlockParam object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\_lines, 3 more }
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -2410,23 +2410,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaToolSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaToolSearchToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultErrorParam = object { error\_code, type }
+BetaToolSearchToolResultErrorParam object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2438,7 +2438,7 @@ Accepts one of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlockParam object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlockParam](api/beta.md) { tool\_name, type, cache\_control }
 
@@ -2463,7 +2463,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2492,13 +2492,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaMCPToolUseBlockParam = object { id, input, name, 3 more }
+BetaMCPToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -2529,13 +2529,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaRequestMCPToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
+BetaRequestMCPToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
 
@@ -2558,7 +2558,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2566,9 +2566,9 @@ Accepts one of the following:
 
 content: optional string or array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockParamContent = array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -2593,7 +2593,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2601,9 +2601,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2617,7 +2617,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2631,7 +2631,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -2655,7 +2655,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -2667,7 +2667,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -2701,7 +2701,7 @@ type: "search\_result\_location"
 
 is\_error: optional boolean
 
-BetaContainerUploadBlockParam = object { file\_id, type, cache\_control }
+BetaContainerUploadBlockParam object { file\_id, type, cache\_control }
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
@@ -2727,13 +2727,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaCompactionBlockParam = object { content, type, cache\_control, encrypted\_content }
+BetaCompactionBlockParam object { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -2766,7 +2766,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2778,7 +2778,7 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 role: "user" or "assistant"
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -2790,15 +2790,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -2868,7 +2868,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 cache\_control: optional [BetaCacheControlEphemeral](api/beta.md) { type, ttl }
 
@@ -2887,7 +2887,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2897,9 +2897,9 @@ container: optional [BetaContainerParams](api/beta.md) { id, skills }  or string
 
 Container identifier for reuse across requests.
 
-Accepts one of the following:
+One of the following:
 
-BetaContainerParams = object { id, skills }
+BetaContainerParams object { id, skills }
 
 Container parameters with skills to be loaded.
 
@@ -2919,7 +2919,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -2929,7 +2929,7 @@ version: optional string
 
 Skill version or 'latest' for most recent version
 
-UnionMember1 = string
+string
 
 context\_management: optional [BetaContextManagementConfig](api/beta.md) { edits }
 
@@ -2941,9 +2941,9 @@ edits: optional array of [BetaClearToolUses20250919Edit](api/beta.md) { type, cl
 
 List of context management edits to apply
 
-Accepts one of the following:
+One of the following:
 
-BetaClearToolUses20250919Edit = object { type, clear\_at\_least, clear\_tool\_inputs, 3 more }
+BetaClearToolUses20250919Edit object { type, clear\_at\_least, clear\_tool\_inputs, 3 more }
 
 type: "clear\_tool\_uses\_20250919"
 
@@ -2959,11 +2959,11 @@ clear\_tool\_inputs: optional boolean or array of string
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = boolean
+boolean
 
-UnionMember1 = array of string
+array of string
 
 exclude\_tools: optional array of string
 
@@ -2981,21 +2981,21 @@ trigger: optional [BetaInputTokensTrigger](api/beta.md) { type, value }  or [Bet
 
 Condition that triggers the context management strategy
 
-Accepts one of the following:
+One of the following:
 
-BetaInputTokensTrigger = object { type, value }
+BetaInputTokensTrigger object { type, value }
 
 type: "input\_tokens"
 
 value: number
 
-BetaToolUsesTrigger = object { type, value }
+BetaToolUsesTrigger object { type, value }
 
 type: "tool\_uses"
 
 value: number
 
-BetaClearThinking20251015Edit = object { type, keep }
+BetaClearThinking20251015Edit object { type, keep }
 
 type: "clear\_thinking\_20251015"
 
@@ -3003,21 +3003,21 @@ keep: optional [BetaThinkingTurns](api/beta.md) { type, value }  or [BetaAllThin
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Accepts one of the following:
+One of the following:
 
-BetaThinkingTurns = object { type, value }
+BetaThinkingTurns object { type, value }
 
 type: "thinking\_turns"
 
 value: number
 
-BetaAllThinkingTurns = object { type }
+BetaAllThinkingTurns object { type }
 
 type: "all"
 
-UnionMember2 = "all"
+"all"
 
-BetaCompact20260112Edit = object { type, instructions, pause\_after\_compaction, trigger }
+BetaCompact20260112Edit object { type, instructions, pause\_after\_compaction, trigger }
 
 Automatically compact older context when reaching the configured trigger threshold.
 
@@ -3090,7 +3090,7 @@ effort: optional "low" or "medium" or "high" or 2 more
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 "low"
 
@@ -3146,7 +3146,7 @@ Determines whether to use priority capacity (if available) or standard capacity 
 
 Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
-Accepts one of the following:
+One of the following:
 
 "auto"
 
@@ -3156,7 +3156,7 @@ speed: optional "standard" or "fast"
 
 The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -3182,11 +3182,11 @@ System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
+array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
 text: string
 
@@ -3209,7 +3209,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3217,9 +3217,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3233,7 +3233,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3247,7 +3247,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3271,7 +3271,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -3283,7 +3283,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -3337,9 +3337,9 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Accepts one of the following:
+One of the following:
 
-BetaThinkingConfigEnabled = object { budget\_tokens, type, display }
+BetaThinkingConfigEnabled object { budget\_tokens, type, display }
 
 budget\_tokens: number
 
@@ -3357,17 +3357,17 @@ display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
 "omitted"
 
-BetaThinkingConfigDisabled = object { type }
+BetaThinkingConfigDisabled object { type }
 
 type: "disabled"
 
-BetaThinkingConfigAdaptive = object { type, display }
+BetaThinkingConfigAdaptive object { type, display }
 
 type: "adaptive"
 
@@ -3375,7 +3375,7 @@ display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -3385,9 +3385,9 @@ tool\_choice: optional [BetaToolChoice](api/beta.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Accepts one of the following:
+One of the following:
 
-BetaToolChoiceAuto = object { type, disable\_parallel\_tool\_use }
+BetaToolChoiceAuto object { type, disable\_parallel\_tool\_use }
 
 The model will automatically decide whether to use tools.
 
@@ -3399,7 +3399,7 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-BetaToolChoiceAny = object { type, disable\_parallel\_tool\_use }
+BetaToolChoiceAny object { type, disable\_parallel\_tool\_use }
 
 The model will use any available tools.
 
@@ -3411,7 +3411,7 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-BetaToolChoiceTool = object { name, type, disable\_parallel\_tool\_use }
+BetaToolChoiceTool object { name, type, disable\_parallel\_tool\_use }
 
 The model will use the specified tool with `tool_choice.name`.
 
@@ -3427,7 +3427,7 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-BetaToolChoiceNone = object { type }
+BetaToolChoiceNone object { type }
 
 The model will not be allowed to use tools.
 
@@ -3497,9 +3497,9 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-Accepts one of the following:
+One of the following:
 
-BetaTool = object { input\_schema, name, allowed\_callers, 7 more }
+BetaTool object { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: object { type, properties, required }
 
@@ -3525,7 +3525,7 @@ minLength1
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3550,7 +3550,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3578,7 +3578,7 @@ When true, guarantees schema validation on tool names and inputs
 
 type: optional "custom"
 
-BetaToolBash20241022 = object { name, type, allowed\_callers, 4 more }
+BetaToolBash20241022 object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -3590,7 +3590,7 @@ type: "bash\_20241022"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3615,7 +3615,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3631,7 +3631,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolBash20250124 = object { name, type, allowed\_callers, 4 more }
+BetaToolBash20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -3643,7 +3643,7 @@ type: "bash\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3668,7 +3668,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3684,7 +3684,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionTool20250522 = object { name, type, allowed\_callers, 3 more }
+BetaCodeExecutionTool20250522 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -3696,7 +3696,7 @@ type: "code\_execution\_20250522"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3721,7 +3721,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3735,7 +3735,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionTool20250825 = object { name, type, allowed\_callers, 3 more }
+BetaCodeExecutionTool20250825 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -3747,7 +3747,7 @@ type: "code\_execution\_20250825"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3772,7 +3772,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3786,7 +3786,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionTool20260120 = object { name, type, allowed\_callers, 3 more }
+BetaCodeExecutionTool20260120 object { name, type, allowed\_callers, 3 more }
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -3800,7 +3800,7 @@ type: "code\_execution\_20260120"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3825,7 +3825,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3839,7 +3839,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolComputerUse20241022 = object { display\_height\_px, display\_width\_px, name, 7 more }
+BetaToolComputerUse20241022 object { display\_height\_px, display\_width\_px, name, 7 more }
 
 display\_height\_px: number
 
@@ -3859,7 +3859,7 @@ type: "computer\_20241022"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3884,7 +3884,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3904,7 +3904,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaMemoryTool20250818 = object { name, type, allowed\_callers, 4 more }
+BetaMemoryTool20250818 object { name, type, allowed\_callers, 4 more }
 
 name: "memory"
 
@@ -3916,7 +3916,7 @@ type: "memory\_20250818"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3941,7 +3941,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3957,7 +3957,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolComputerUse20250124 = object { display\_height\_px, display\_width\_px, name, 7 more }
+BetaToolComputerUse20250124 object { display\_height\_px, display\_width\_px, name, 7 more }
 
 display\_height\_px: number
 
@@ -3977,7 +3977,7 @@ type: "computer\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4002,7 +4002,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4022,7 +4022,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20241022 = object { name, type, allowed\_callers, 4 more }
+BetaToolTextEditor20241022 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -4034,7 +4034,7 @@ type: "text\_editor\_20241022"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4059,7 +4059,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4075,7 +4075,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolComputerUse20251124 = object { display\_height\_px, display\_width\_px, name, 8 more }
+BetaToolComputerUse20251124 object { display\_height\_px, display\_width\_px, name, 8 more }
 
 display\_height\_px: number
 
@@ -4095,7 +4095,7 @@ type: "computer\_20251124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4120,7 +4120,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4144,7 +4144,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250124 = object { name, type, allowed\_callers, 4 more }
+BetaToolTextEditor20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -4156,7 +4156,7 @@ type: "text\_editor\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4181,7 +4181,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4197,7 +4197,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250429 = object { name, type, allowed\_callers, 4 more }
+BetaToolTextEditor20250429 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -4209,7 +4209,7 @@ type: "text\_editor\_20250429"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4234,7 +4234,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4250,7 +4250,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250728 = object { name, type, allowed\_callers, 5 more }
+BetaToolTextEditor20250728 object { name, type, allowed\_callers, 5 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -4262,7 +4262,7 @@ type: "text\_editor\_20250728"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4287,7 +4287,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4307,7 +4307,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebSearchTool20250305 = object { name, type, allowed\_callers, 7 more }
+BetaWebSearchTool20250305 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -4319,7 +4319,7 @@ type: "web\_search\_20250305"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4352,7 +4352,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4392,7 +4392,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-BetaWebFetchTool20250910 = object { name, type, allowed\_callers, 8 more }
+BetaWebFetchTool20250910 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -4404,7 +4404,7 @@ type: "web\_fetch\_20250910"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4437,7 +4437,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4465,7 +4465,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebSearchTool20260209 = object { name, type, allowed\_callers, 7 more }
+BetaWebSearchTool20260209 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -4477,7 +4477,7 @@ type: "web\_search\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4510,7 +4510,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4550,7 +4550,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-BetaWebFetchTool20260209 = object { name, type, allowed\_callers, 8 more }
+BetaWebFetchTool20260209 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -4562,7 +4562,7 @@ type: "web\_fetch\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4595,7 +4595,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4623,7 +4623,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebFetchTool20260309 = object { name, type, allowed\_callers, 9 more }
+BetaWebFetchTool20260309 object { name, type, allowed\_callers, 9 more }
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
@@ -4637,7 +4637,7 @@ type: "web\_fetch\_20260309"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4670,7 +4670,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4702,7 +4702,7 @@ use\_cache: optional boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-BetaAdvisorTool20260301 = object { model, name, type, 6 more }
+BetaAdvisorTool20260301 object { model, name, type, 6 more }
 
 model: [Model](api/messages.md)
 
@@ -4710,15 +4710,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -4788,7 +4788,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 name: "advisor"
 
@@ -4800,7 +4800,7 @@ type: "advisor\_20260301"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4825,7 +4825,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4848,7 +4848,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4866,7 +4866,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolSearchToolBm25\_20251119 = object { name, type, allowed\_callers, 3 more }
+BetaToolSearchToolBm25\_20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_bm25"
 
@@ -4876,7 +4876,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -4884,7 +4884,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4909,7 +4909,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4923,7 +4923,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolSearchToolRegex20251119 = object { name, type, allowed\_callers, 3 more }
+BetaToolSearchToolRegex20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_regex"
 
@@ -4933,7 +4933,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -4941,7 +4941,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4966,7 +4966,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4980,7 +4980,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaMCPToolset = object { mcp\_server\_name, type, cache\_control, 2 more }
+BetaMCPToolset object { mcp\_server\_name, type, cache\_control, 2 more }
 
 Configuration for a group of tools from an MCP server.
 
@@ -5010,7 +5010,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5064,7 +5064,7 @@ The user profile ID to attribute this request to. Use when acting on behalf of a
 
 ##### ReturnsExpand Collapse
 
-BetaMessageBatch = object { id, archived\_at, cancel\_initiated\_at, 7 more }
+BetaMessageBatch object { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 id: string
 
@@ -5100,7 +5100,7 @@ processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 

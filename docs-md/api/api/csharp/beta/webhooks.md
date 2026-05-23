@@ -47,7 +47,7 @@ RFC 3339 timestamp when the event occurred.
 
 required [BetaWebhookEventData](api/beta.md) Data
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebhookSessionCreatedEventData:
 
@@ -907,7 +907,7 @@ RFC 3339 timestamp when the event occurred.
 
 required [BetaWebhookEventData](api/beta.md) Data
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebhookSessionCreatedEventData:
 

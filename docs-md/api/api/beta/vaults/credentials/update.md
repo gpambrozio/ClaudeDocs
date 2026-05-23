@@ -22,13 +22,13 @@ credential\_id: string
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -86,9 +86,9 @@ auth: optional [BetaManagedAgentsMCPOAuthUpdateParams](api/beta.md) { type, acce
 
 Updated authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsMCPOAuthUpdateParams = object { type, access\_token, expires\_at, refresh }
+BetaManagedAgentsMCPOAuthUpdateParams object { type, access\_token, expires\_at, refresh }
 
 Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
@@ -118,9 +118,9 @@ token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdatePa
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthBasicUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object { type, client\_secret }
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -130,7 +130,7 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsTokenEndpointAuthPostUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthPostUpdateParam object { type, client\_secret }
 
 Updated POST body authentication parameters for the token endpoint.
 
@@ -140,7 +140,7 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsStaticBearerUpdateParams = object { type, token }
+BetaManagedAgentsStaticBearerUpdateParams object { type, token }
 
 Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
@@ -160,7 +160,7 @@ Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsCredential = object { id, archived\_at, auth, 6 more }
+BetaManagedAgentsCredential object { id, archived\_at, auth, 6 more }
 
 A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -176,9 +176,9 @@ auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, t
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsMCPOAuthAuthResponse = object { mcp\_server\_url, type, expires\_at, refresh }
+BetaManagedAgentsMCPOAuthAuthResponse object { mcp\_server\_url, type, expires\_at, refresh }
 
 OAuth credential details for an MCP server.
 
@@ -208,21 +208,21 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthPostResponse object { type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -236,7 +236,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsStaticBearerAuthResponse = object { mcp\_server\_url, type }
+BetaManagedAgentsStaticBearerAuthResponse object { mcp\_server\_url, type }
 
 Static bearer token credential details for an MCP server.
 

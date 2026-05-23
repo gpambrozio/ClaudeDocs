@@ -20,7 +20,7 @@ role: "user" or "developer" or "billing" or "claude\_code\_user"
 
 New role for the User. Cannot be "admin".
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -32,7 +32,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-User = object { id, added\_at, email, 3 more }
+User object { id, added\_at, email, 3 more }
 
 id: string
 
@@ -54,7 +54,7 @@ role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
-Accepts one of the following:
+One of the following:
 
 "user"
 

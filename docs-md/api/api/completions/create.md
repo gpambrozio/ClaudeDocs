@@ -20,13 +20,13 @@ Future models and features will not be compatible with Text Completions. See our
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -94,15 +94,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -172,7 +172,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 prompt: string
 
@@ -264,7 +264,7 @@ minimum0
 
 ##### ReturnsExpand Collapse
 
-Completion = object { id, completion, model, 2 more }
+Completion object { id, completion, model, 2 more }
 
 id: string
 
@@ -282,15 +282,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -360,7 +360,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 stop\_reason: string
 
@@ -377,7 +377,7 @@ Object type.
 
 For Text Completions, this is always `"completion"`.
 
-Completion = object { id, completion, model, 2 more }
+Completion object { id, completion, model, 2 more }
 
 id: string
 
@@ -395,15 +395,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -473,7 +473,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 stop\_reason: string
 

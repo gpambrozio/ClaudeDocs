@@ -146,7 +146,7 @@ Auth BetaManagedAgentsCredentialAuthUnion
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsMCPOAuthAuthResponse struct{…}
 
@@ -158,11 +158,11 @@ URL of the MCP server this credential authenticates against.
 
 Type BetaManagedAgentsMCPOAuthAuthResponseType
 
-ExpiresAt Timeoptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -178,7 +178,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
@@ -198,11 +198,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -234,7 +234,7 @@ VaultID string
 
 Identifier of the vault this credential belongs to.
 
-DisplayName stringoptional
+DisplayName stringOptional
 
 Human-readable name for the credential.
 
@@ -306,7 +306,7 @@ Status BetaManagedAgentsRefreshObjectStatus
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsRefreshObjectStatusSucceeded BetaManagedAgentsRefreshObjectStatus = "succeeded"
 
@@ -320,7 +320,7 @@ Status [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
 
@@ -342,7 +342,7 @@ type BetaManagedAgentsCredentialValidationStatus string
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
 
@@ -370,11 +370,11 @@ URL of the MCP server this credential authenticates against.
 
 Type BetaManagedAgentsMCPOAuthAuthResponseType
 
-ExpiresAt Timeoptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -390,7 +390,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
@@ -410,11 +410,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -432,11 +432,11 @@ URL of the MCP server this credential authenticates against.
 
 Type BetaManagedAgentsMCPOAuthCreateParamsType
 
-ExpiresAt Timeoptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshParamsResp](api/beta.md)optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshParamsResp](api/beta.md)Optional
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -456,7 +456,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionRe
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}
 
@@ -484,11 +484,11 @@ OAuth client secret.
 
 Type BetaManagedAgentsTokenEndpointAuthPostParamType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -512,7 +512,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionRe
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}
 
@@ -540,11 +540,11 @@ OAuth client secret.
 
 Type BetaManagedAgentsTokenEndpointAuthPostParamType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -564,7 +564,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
@@ -584,11 +584,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -596,19 +596,19 @@ type BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp struct{…}
 
 Parameters for updating OAuth refresh token configuration.
 
-RefreshToken stringoptional
+RefreshToken stringOptional
 
 Updated OAuth refresh token.
 
-Scope stringoptional
+Scope stringOptional
 
 Updated OAuth scope for the refresh request.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespoptional
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespOptional
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
 
@@ -616,7 +616,7 @@ Updated HTTP Basic authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -626,7 +626,7 @@ Updated POST body authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -636,31 +636,31 @@ Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutab
 
 Type BetaManagedAgentsMCPOAuthUpdateParamsType
 
-AccessToken stringoptional
+AccessToken stringOptional
 
 Updated OAuth access token.
 
-ExpiresAt Timeoptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta.md)optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta.md)Optional
 
 Parameters for updating OAuth refresh token configuration.
 
-RefreshToken stringoptional
+RefreshToken stringOptional
 
 Updated OAuth refresh token.
 
-Scope stringoptional
+Scope stringOptional
 
 Updated OAuth scope for the refresh request.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespoptional
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespOptional
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
 
@@ -668,7 +668,7 @@ Updated HTTP Basic authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -678,7 +678,7 @@ Updated POST body authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -758,7 +758,7 @@ Status BetaManagedAgentsRefreshObjectStatus
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsRefreshObjectStatusSucceeded BetaManagedAgentsRefreshObjectStatus = "succeeded"
 
@@ -798,7 +798,7 @@ Parameters for updating a static bearer token credential. The `mcp_server_url` i
 
 Type BetaManagedAgentsStaticBearerUpdateParamsType
 
-Token stringoptional
+Token stringOptional
 
 Updated static bearer token value.
 
@@ -824,7 +824,7 @@ Updated HTTP Basic authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -862,7 +862,7 @@ Updated POST body authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 

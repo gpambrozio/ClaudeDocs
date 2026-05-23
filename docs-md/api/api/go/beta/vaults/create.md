@@ -20,11 +20,11 @@ DisplayName param.Field[string]
 
 Body param: Human-readable name for the vault. 1-255 characters.
 
-Metadata param.Field[map[string, string]]optional
+Metadata param.Field[map[string, string]]Optional
 
 Body param: Arbitrary key-value metadata to attach to the vault. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -32,7 +32,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 

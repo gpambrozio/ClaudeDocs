@@ -24,13 +24,13 @@ ID of the Message Batch.
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -84,7 +84,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-BetaMessageBatch = object { id, archived\_at, cancel\_initiated\_at, 7 more }
+BetaMessageBatch object { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 id: string
 
@@ -120,7 +120,7 @@ processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 

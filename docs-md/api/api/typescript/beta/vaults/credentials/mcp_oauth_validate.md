@@ -26,7 +26,7 @@ betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 (string & {})
 
@@ -152,7 +152,7 @@ status: "succeeded" | "failed" | "connect\_error" | "no\_refresh\_token"
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 "succeeded"
 
@@ -166,7 +166,7 @@ status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 "valid"
 

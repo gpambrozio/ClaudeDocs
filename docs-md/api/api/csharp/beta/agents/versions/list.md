@@ -124,7 +124,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -166,7 +166,7 @@ Speed Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -192,7 +192,7 @@ required string Name
 
 required IReadOnlyList<Skill> Skills
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill:
 
@@ -218,7 +218,7 @@ required string? System
 
 required IReadOnlyList<Tool> Tools
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401:
 
@@ -230,7 +230,7 @@ required Name Name
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"Bash
 
@@ -252,7 +252,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -276,7 +276,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -304,7 +304,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -328,7 +328,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 

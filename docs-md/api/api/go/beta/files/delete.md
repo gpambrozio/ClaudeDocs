@@ -20,7 +20,7 @@ ID of the File.
 
 body BetaFileDeleteParams
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -28,7 +28,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -88,7 +88,7 @@ ID string
 
 ID of the deleted file.
 
-Type DeletedFileTypeoptional
+Type DeletedFileTypeOptional
 
 Deleted object type.
 

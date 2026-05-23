@@ -14,7 +14,7 @@ GET/v1/organizations/usage\_report/claude\_code
 
 ##### ModelsExpand Collapse
 
-ClaudeCodeUsageReport = object { data, has\_more, next\_page }
+ClaudeCodeUsageReport object { data, has\_more, next\_page }
 
 data: array of object { actor, core\_metrics, customer\_type, 6 more }
 
@@ -24,9 +24,9 @@ actor: object { email\_address, type }  or object { api\_key\_name, type }
 
 The user or API key that performed the Claude Code actions.
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, type }
+UserActor object { email\_address, type }
 
 email\_address: string
 
@@ -34,7 +34,7 @@ Email address of the user who performed Claude Code actions.
 
 type: "user\_actor"
 
-APIActor = object { api\_key\_name, type }
+APIActor object { api\_key\_name, type }
 
 api\_key\_name: string
 
@@ -74,7 +74,7 @@ customer\_type: "api" or "subscription"
 
 Type of customer account (api for API customers, subscription for Pro/Team customers).
 
-Accepts one of the following:
+One of the following:
 
 "api"
 
@@ -148,7 +148,7 @@ subscription\_type: optional "enterprise" or "team"
 
 Subscription tier for subscription customers. `null` for API customers.
 
-Accepts one of the following:
+One of the following:
 
 "enterprise"
 
@@ -162,7 +162,7 @@ next\_page: string
 
 Opaque cursor token for fetching the next page of results, or null if no more pages are available.
 
-MessagesUsageReport = object { data, has\_more, next\_page }
+MessagesUsageReport object { data, has\_more, next\_page }
 
 data: array of object { ending\_at, results, starting\_at }
 
@@ -202,7 +202,7 @@ context\_window: "0-200k" or "200k-1M"
 
 Context window used. `null` if not grouping by context window.
 
-Accepts one of the following:
+One of the following:
 
 "0-200k"
 
@@ -237,7 +237,7 @@ service\_tier: "standard" or "batch" or "priority" or 3 more
 
 Service tier used. `null` if not grouping by service tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 

@@ -18,15 +18,15 @@ Learn more about the Message Batches API in our [user guide](https://docs.claude
 
 params BetaMessageBatchListParams
 
-AfterID param.Field[string]optional
+AfterID param.Field[string]Optional
 
 Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-BeforeID param.Field[string]optional
+BeforeID param.Field[string]Optional
 
 Query param: ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Query param: Number of items to return per page.
 
@@ -36,7 +36,7 @@ maximum1000
 
 minimum1
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -44,7 +44,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -134,7 +134,7 @@ ProcessingStatus BetaMessageBatchProcessingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 const BetaMessageBatchProcessingStatusInProgress BetaMessageBatchProcessingStatus = "in\_progress"
 

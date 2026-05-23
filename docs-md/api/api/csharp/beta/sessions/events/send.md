@@ -32,7 +32,7 @@ required IReadOnlyList<Content> Content
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -52,7 +52,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -98,7 +98,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -178,7 +178,7 @@ required Result Result
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"Allow
 
@@ -208,7 +208,7 @@ IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -228,7 +228,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -274,7 +274,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -382,7 +382,7 @@ required Rubric Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubricParams:
 
@@ -424,7 +424,7 @@ IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -444,7 +444,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -490,7 +490,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -650,7 +650,7 @@ IReadOnlyList<Data> Data
 
 Sent events
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEvent:
 
@@ -664,7 +664,7 @@ required IReadOnlyList<Content> Content
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -684,7 +684,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -730,7 +730,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -826,7 +826,7 @@ required Result Result
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"Allow
 
@@ -868,7 +868,7 @@ IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -888,7 +888,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -934,7 +934,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 
@@ -1066,7 +1066,7 @@ required Rubric Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric:
 
@@ -1108,7 +1108,7 @@ IReadOnlyList<Content> Content
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock:
 
@@ -1128,7 +1128,7 @@ required Source Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource:
 
@@ -1174,7 +1174,7 @@ required Source Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource:
 

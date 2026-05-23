@@ -16,7 +16,7 @@ DELETE/v1/compliance/apps/chats/{claude\_chat\_id}
 
 ##### ModelsExpand Collapse
 
-ChatListResponse = object { id, created\_at, deleted\_at, 8 more }
+ChatListResponse object { id, created\_at, deleted\_at, 8 more }
 
 Chat metadata for listing chats (without messages).
 
@@ -72,7 +72,7 @@ email\_address: string
 
 User's email address
 
-ChatDeleteResponse = object { id, type }
+ChatDeleteResponse object { id, type }
 
 Response for deleting a Claude chat.
 
@@ -92,7 +92,7 @@ GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
 
 ##### ModelsExpand Collapse
 
-MessageListResponse = object { id, artifacts, content, 4 more }
+MessageListResponse object { id, artifacts, content, 4 more }
 
 A single message in a chat conversation.
 
@@ -170,7 +170,7 @@ role: "assistant" or "user"
 
 Message sender (user or assistant)
 
-Accepts one of the following:
+One of the following:
 
 "assistant"
 
@@ -192,7 +192,7 @@ GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
 ##### ModelsExpand Collapse
 
-FileRetrieveResponse = object { id, created\_at, filename, 4 more }
+FileRetrieveResponse object { id, created\_at, filename, 4 more }
 
 File metadata for GET /v1/compliance/apps/chats/files/{claude\_file\_id}.
 
@@ -227,7 +227,7 @@ size\_bytes: number
 
 Size in bytes of the file's preferred downloadable variant, if known
 
-FileDeleteResponse = object { id, type }
+FileDeleteResponse object { id, type }
 
 Response for deleting a compliance file.
 
@@ -251,7 +251,7 @@ GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
 
 ##### ModelsExpand Collapse
 
-GeneratedFileRetrieveResponse = object { id, claude\_chat\_id, created\_at, 4 more }
+GeneratedFileRetrieveResponse object { id, claude\_chat\_id, created\_at, 4 more }
 
 Metadata for GET /v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}.
 

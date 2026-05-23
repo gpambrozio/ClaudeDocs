@@ -106,7 +106,7 @@ required State State
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 "queued"Queued
 

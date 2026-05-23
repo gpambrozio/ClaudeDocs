@@ -22,17 +22,17 @@ The format and length of IDs may change over time.
 
 params BetaSkillVersionListParams
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Query param: Number of items to return per page.
 
 Defaults to `20`. Ranges from `1` to `1000`.
 
-Page param.Field[string]optional
+Page param.Field[string]Optional
 
 Query param: Optionally set to the `next_page` token from the previous response.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -40,7 +40,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 

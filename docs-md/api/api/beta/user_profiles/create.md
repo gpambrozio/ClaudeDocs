@@ -16,13 +16,13 @@ Create User Profile
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -92,7 +92,7 @@ relationship: optional "external" or "resold" or "internal"
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 "external"
 
@@ -102,7 +102,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-BetaUserProfile = object { id, created\_at, metadata, 6 more }
+BetaUserProfile object { id, created\_at, metadata, 6 more }
 
 id: string
 
@@ -120,7 +120,7 @@ relationship: "external" or "resold" or "internal"
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 "external"
 
@@ -136,7 +136,7 @@ status: "active" or "pending" or "rejected"
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 

@@ -144,7 +144,7 @@ Status status
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 SUCCEEDED("succeeded")
 
@@ -158,7 +158,7 @@ NO\_REFRESH\_TOKEN("no\_refresh\_token")
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 VALID("valid")
 

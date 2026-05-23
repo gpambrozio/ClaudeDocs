@@ -20,13 +20,13 @@ vault\_id: string
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -90,7 +90,7 @@ Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omi
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsVault = object { id, archived\_at, created\_at, 4 more }
+BetaManagedAgentsVault object { id, archived\_at, created\_at, 4 more }
 
 A vault that stores credentials for use by agents during sessions.
 

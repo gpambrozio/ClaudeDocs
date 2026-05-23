@@ -92,7 +92,7 @@ processing\_status: "in\_progress" | "canceling" | "ended"
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 
@@ -156,7 +156,7 @@ error: [BetaErrorResponse](api/beta.md) { error, request\_id, type }
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 BetaInvalidRequestError { message, type }
 
@@ -238,7 +238,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 BetaMessageBatchSucceededResult { message, type }
 
@@ -274,7 +274,7 @@ type: "anthropic" | "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -313,7 +313,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 BetaTextBlock { citations, text, type }
 
@@ -323,7 +323,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -459,7 +459,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -489,7 +489,7 @@ input: Record<string, unknown>
 
 name: "advisor" | "web\_search" | "web\_fetch" | 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -513,7 +513,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -539,13 +539,13 @@ BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 BetaWebSearchToolResultError { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -581,7 +581,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -607,13 +607,13 @@ BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
 BetaWebFetchToolResultErrorBlock { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -645,7 +645,7 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaBase64PDFSource { data, media\_type, type }
 
@@ -687,7 +687,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -713,13 +713,13 @@ BetaAdvisorToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -759,13 +759,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 BetaCodeExecutionToolResultError { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -819,13 +819,13 @@ BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 BetaBashCodeExecutionToolResultError { error\_code, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -863,13 +863,13 @@ BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 BetaTextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -891,7 +891,7 @@ content: string
 
 file\_type: "text" | "image" | "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -935,13 +935,13 @@ BetaToolSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaToolSearchToolResultError { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -989,7 +989,7 @@ BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type }
 
 content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -1001,7 +1001,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -1151,7 +1151,7 @@ applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cle
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 BetaClearToolUses20250919EditResponse { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
@@ -1190,7 +1190,7 @@ cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_i
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 BetaCacheMissModelChanged { cache\_missed\_input\_tokens, type }
 
@@ -1238,7 +1238,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
 
@@ -1328,7 +1328,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -1357,7 +1357,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -1437,7 +1437,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
@@ -1545,7 +1545,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
 
@@ -1647,7 +1647,7 @@ service\_tier: "standard" | "priority" | "batch" | null
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -1659,7 +1659,7 @@ speed: "standard" | "fast" | null
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -1673,7 +1673,7 @@ error: [BetaErrorResponse](api/beta.md) { error, request\_id, type }
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 BetaInvalidRequestError { message, type }
 
@@ -1779,7 +1779,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 BetaMessageBatchSucceededResult { message, type }
 
@@ -1815,7 +1815,7 @@ type: "anthropic" | "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -1854,7 +1854,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 BetaTextBlock { citations, text, type }
 
@@ -1864,7 +1864,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -2000,7 +2000,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -2030,7 +2030,7 @@ input: Record<string, unknown>
 
 name: "advisor" | "web\_search" | "web\_fetch" | 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -2054,7 +2054,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -2080,13 +2080,13 @@ BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 BetaWebSearchToolResultError { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2122,7 +2122,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -2148,13 +2148,13 @@ BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
 BetaWebFetchToolResultErrorBlock { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2186,7 +2186,7 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaBase64PDFSource { data, media\_type, type }
 
@@ -2228,7 +2228,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -2254,13 +2254,13 @@ BetaAdvisorToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -2300,13 +2300,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 BetaCodeExecutionToolResultError { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2360,13 +2360,13 @@ BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 BetaBashCodeExecutionToolResultError { error\_code, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2404,13 +2404,13 @@ BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 BetaTextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2432,7 +2432,7 @@ content: string
 
 file\_type: "text" | "image" | "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -2476,13 +2476,13 @@ BetaToolSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaToolSearchToolResultError { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2530,7 +2530,7 @@ BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type }
 
 content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -2542,7 +2542,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -2692,7 +2692,7 @@ applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cle
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 BetaClearToolUses20250919EditResponse { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
@@ -2731,7 +2731,7 @@ cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_i
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 BetaCacheMissModelChanged { cache\_missed\_input\_tokens, type }
 
@@ -2779,7 +2779,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
 
@@ -2869,7 +2869,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -2898,7 +2898,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -2978,7 +2978,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
@@ -3086,7 +3086,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
 
@@ -3188,7 +3188,7 @@ service\_tier: "standard" | "priority" | "batch" | null
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -3200,7 +3200,7 @@ speed: "standard" | "fast" | null
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -3214,7 +3214,7 @@ error: [BetaErrorResponse](api/beta.md) { error, request\_id, type }
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 BetaInvalidRequestError { message, type }
 
@@ -3318,7 +3318,7 @@ type: "anthropic" | "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -3357,7 +3357,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 BetaTextBlock { citations, text, type }
 
@@ -3367,7 +3367,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -3503,7 +3503,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -3533,7 +3533,7 @@ input: Record<string, unknown>
 
 name: "advisor" | "web\_search" | "web\_fetch" | 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -3557,7 +3557,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -3583,13 +3583,13 @@ BetaWebSearchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 BetaWebSearchToolResultError { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3625,7 +3625,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -3651,13 +3651,13 @@ BetaWebFetchToolResultBlock { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  | [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
 BetaWebFetchToolResultErrorBlock { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3689,7 +3689,7 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaBase64PDFSource { data, media\_type, type }
 
@@ -3731,7 +3731,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -3757,13 +3757,13 @@ BetaAdvisorToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -3803,13 +3803,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 BetaCodeExecutionToolResultError { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3863,13 +3863,13 @@ BetaBashCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 BetaBashCodeExecutionToolResultError { error\_code, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3907,13 +3907,13 @@ BetaTextEditorCodeExecutionToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 BetaTextEditorCodeExecutionToolResultError { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3935,7 +3935,7 @@ content: string
 
 file\_type: "text" | "image" | "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -3979,13 +3979,13 @@ BetaToolSearchToolResultBlock { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  | [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaToolSearchToolResultError { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -4033,7 +4033,7 @@ BetaMCPToolResultBlock { content, is\_error, tool\_use\_id, type }
 
 content: string | Array<[BetaTextBlock](api/beta.md) { citations, text, type } >
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -4045,7 +4045,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocation { cited\_text, document\_index, document\_title, 4 more }
 
@@ -4195,7 +4195,7 @@ applied\_edits: Array<[BetaClearToolUses20250919EditResponse](api/beta.md) { cle
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 BetaClearToolUses20250919EditResponse { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
@@ -4234,7 +4234,7 @@ cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_i
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 BetaCacheMissModelChanged { cache\_missed\_input\_tokens, type }
 
@@ -4282,7 +4282,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
 
@@ -4372,7 +4372,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -4401,7 +4401,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -4481,7 +4481,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
@@ -4589,7 +4589,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
 
@@ -4691,7 +4691,7 @@ service\_tier: "standard" | "priority" | "batch" | null
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -4703,7 +4703,7 @@ speed: "standard" | "fast" | null
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 

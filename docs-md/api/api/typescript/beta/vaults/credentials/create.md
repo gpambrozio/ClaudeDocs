@@ -22,7 +22,7 @@ auth: [BetaManagedAgentsMCPOAuthCreateParams](api/beta.md) { access\_token, mcp\
 
 Body param: Authentication details for creating a credential.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsMCPOAuthCreateParams { access\_token, mcp\_server\_url, type, 2 more }
 
@@ -62,7 +62,7 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsTokenEndpointAuthNoneParam { type }
 
@@ -124,7 +124,7 @@ betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 (string & {})
 
@@ -198,7 +198,7 @@ auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, t
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsMCPOAuthAuthResponse { mcp\_server\_url, type, expires\_at, refresh }
 
@@ -230,7 +230,7 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsTokenEndpointAuthNoneResponse { type }
 

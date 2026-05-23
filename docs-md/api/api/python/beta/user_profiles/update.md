@@ -32,7 +32,7 @@ relationship: Optional[Literal["external", "resold", "internal"]]
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 "external"
 
@@ -44,13 +44,13 @@ betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 str
 
 Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -122,7 +122,7 @@ relationship: Literal["external", "resold", "internal"]
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 "external"
 
@@ -138,7 +138,7 @@ status: Literal["active", "pending", "rejected"]
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 

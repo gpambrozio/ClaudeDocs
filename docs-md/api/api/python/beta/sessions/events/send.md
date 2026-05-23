@@ -20,7 +20,7 @@ events: Iterable[[BetaManagedAgentsEventParams](api/beta.md)]
 
 Events to send to the `session`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEventParams: …
 
@@ -30,7 +30,7 @@ content: List[Content]
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -50,7 +50,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -96,7 +96,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -176,7 +176,7 @@ result: Literal["allow", "deny"]
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -206,7 +206,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -226,7 +226,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -272,7 +272,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -380,7 +380,7 @@ rubric: Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubricParams: …
 
@@ -422,7 +422,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -442,7 +442,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -488,7 +488,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -588,13 +588,13 @@ betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 str
 
 Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -656,7 +656,7 @@ data: Optional[List[Data]]
 
 Sent events
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEvent: …
 
@@ -670,7 +670,7 @@ content: List[Content]
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -690,7 +690,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -736,7 +736,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -832,7 +832,7 @@ result: Literal["allow", "deny"]
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -874,7 +874,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -894,7 +894,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -940,7 +940,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -1072,7 +1072,7 @@ rubric: Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric: …
 
@@ -1114,7 +1114,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -1134,7 +1134,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -1180,7 +1180,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 

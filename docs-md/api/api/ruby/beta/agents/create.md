@@ -18,7 +18,7 @@ model: [BetaManagedAgentsModel](api/beta.md) | [BetaManagedAgentsModelConfigPara
 
 Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more | String
 
@@ -26,15 +26,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -72,7 +72,7 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 class BetaManagedAgentsModelConfigParams { id, speed }
 
@@ -84,15 +84,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -130,13 +130,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -176,9 +176,9 @@ agents: Array[[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)]
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
 class BetaManagedAgentsAgentParams { id, type, version }
 
@@ -206,7 +206,7 @@ skills: Array[[BetaManagedAgentsSkillParams](api/beta.md)]
 
 Skills available to the agent. Maximum 20.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkillParams { skill\_id, type, version }
 
@@ -244,7 +244,7 @@ tools: Array[[BetaManagedAgentsAgentToolset20260401Params](api/beta.md) { type, 
 
 Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401Params { type, configs, default\_config }
 
@@ -260,7 +260,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -286,7 +286,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -312,7 +312,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -352,7 +352,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -378,7 +378,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -426,13 +426,13 @@ betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
 
-Accepts one of the following:
+One of the following:
 
 :"message-batches-2024-09-24"
 
@@ -522,15 +522,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -568,13 +568,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -600,7 +600,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -626,7 +626,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -638,7 +638,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -660,7 +660,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -684,7 +684,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -712,7 +712,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -736,7 +736,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 

@@ -27,7 +27,7 @@ bucket\_width: optional "1d" or "1m" or "1h"
 
 Time granularity of the response data.
 
-Accepts one of the following:
+One of the following:
 
 "1d"
 
@@ -39,7 +39,7 @@ context\_window: optional array of "0-200k" or "200k-1M"
 
 Restrict usage returned to the specified context window(s).
 
-Accepts one of the following:
+One of the following:
 
 "0-200k"
 
@@ -53,7 +53,7 @@ group\_by: optional array of "api\_key\_id" or "workspace\_id" or "model" or 6 m
 
 Group by any subset of the available options. Grouping by `speed` requires the `fast-mode-2026-02-01` beta header.
 
-Accepts one of the following:
+One of the following:
 
 "api\_key\_id"
 
@@ -77,7 +77,7 @@ inference\_geos: optional array of "global" or "us" or "not\_available"
 
 Restrict usage returned to the specified inference geo(s). Use `not_available` for models that do not support specifying `inference_geo`.
 
-Accepts one of the following:
+One of the following:
 
 "global"
 
@@ -110,7 +110,7 @@ service\_tiers: optional array of "standard" or "batch" or "priority" or 3 more
 
 Restrict usage returned to the specified service tier(s).
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -129,7 +129,7 @@ speeds: optional array of "standard" or "fast"
 Restrict usage returned to the specified speed(s) (Claude Code research preview).
 Requires the `fast-mode-2026-02-01` beta header.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -149,7 +149,7 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 ##### ReturnsExpand Collapse
 
-MessagesUsageReport = object { data, has\_more, next\_page }
+MessagesUsageReport object { data, has\_more, next\_page }
 
 data: array of object { ending\_at, results, starting\_at }
 
@@ -189,7 +189,7 @@ context\_window: "0-200k" or "200k-1M"
 
 Context window used. `null` if not grouping by context window.
 
-Accepts one of the following:
+One of the following:
 
 "0-200k"
 
@@ -224,7 +224,7 @@ service\_tier: "standard" or "batch" or "priority" or 3 more
 
 Service tier used. `null` if not grouping by service tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 

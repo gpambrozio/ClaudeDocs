@@ -12,7 +12,7 @@ GET/v1/compliance/organizations
 
 ##### ModelsExpand Collapse
 
-OrganizationListResponse = object { data }
+OrganizationListResponse object { data }
 
 List of organizations under a parent organization.
 
@@ -40,7 +40,7 @@ GET/v1/compliance/organizations/{org\_uuid}/users
 
 ##### ModelsExpand Collapse
 
-UserListResponse = object { id, created\_at, email, 2 more }
+UserListResponse object { id, created\_at, email, 2 more }
 
 User member information for compliance responses.
 
@@ -64,7 +64,7 @@ organization\_role: "admin" or "billing" or "claude\_code\_user" or 6 more
 
 User's built-in role within the organization. This is distinct from any custom RBAC roles that may also be assigned.
 
-Accepts one of the following:
+One of the following:
 
 "admin"
 
@@ -96,7 +96,7 @@ GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}
 
 ##### ModelsExpand Collapse
 
-RoleListResponse = object { id, created\_at, description, 2 more }
+RoleListResponse object { id, created\_at, description, 2 more }
 
 Role information for compliance responses.
 
@@ -120,7 +120,7 @@ updated\_at: string
 
 Role last-updated timestamp (ISO 8601)
 
-RoleRetrieveResponse = object { id, created\_at, description, 2 more }
+RoleRetrieveResponse object { id, created\_at, description, 2 more }
 
 Role information for compliance responses.
 
@@ -152,7 +152,7 @@ GET/v1/compliance/organizations/{org\_uuid}/roles/{role\_id}/permissions
 
 ##### ModelsExpand Collapse
 
-PermissionListResponse = object { action, resource\_id, resource\_type }
+PermissionListResponse object { action, resource\_id, resource\_type }
 
 Permission granted by a role.
 

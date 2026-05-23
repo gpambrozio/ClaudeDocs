@@ -24,7 +24,7 @@ ID of the Message Batch.
 
 body BetaMessageBatchCancelParams
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -32,7 +32,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -122,7 +122,7 @@ ProcessingStatus BetaMessageBatchProcessingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 const BetaMessageBatchProcessingStatusInProgress BetaMessageBatchProcessingStatus = "in\_progress"
 

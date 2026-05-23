@@ -22,13 +22,13 @@ credential\_id: string
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -82,7 +82,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsCredentialValidation = object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
+BetaManagedAgentsCredentialValidation object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
 
 Result of live-probing a credential against its configured MCP server.
 
@@ -150,7 +150,7 @@ status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 "succeeded"
 
@@ -164,7 +164,7 @@ status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 "valid"
 

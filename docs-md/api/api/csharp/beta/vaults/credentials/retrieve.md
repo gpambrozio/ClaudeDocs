@@ -96,7 +96,7 @@ required Auth Auth
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsMcpOAuthAuthResponse:
 
@@ -128,7 +128,7 @@ required TokenEndpointAuth TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneResponse:
 

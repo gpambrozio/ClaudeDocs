@@ -22,7 +22,7 @@ VaultID param.Field[string]
 
 Path param: Path parameter vault\_id
 
-Auth param.Field[[BetaVaultCredentialUpdateParamsAuthUnion](api/beta/vaults/credentials/update.md)]optional
+Auth param.Field[[BetaVaultCredentialUpdateParamsAuthUnion](api/beta/vaults/credentials/update.md)]Optional
 
 Body param: Updated authentication details for a credential.
 
@@ -32,31 +32,31 @@ Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutab
 
 Type BetaManagedAgentsMCPOAuthUpdateParamsType
 
-AccessToken stringoptional
+AccessToken stringOptional
 
 Updated OAuth access token.
 
-ExpiresAt Timeoptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta.md)optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta.md)Optional
 
 Parameters for updating OAuth refresh token configuration.
 
-RefreshToken stringoptional
+RefreshToken stringOptional
 
 Updated OAuth refresh token.
 
-Scope stringoptional
+Scope stringOptional
 
 Updated OAuth scope for the refresh request.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespoptional
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespOptional
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
 
@@ -64,7 +64,7 @@ Updated HTTP Basic authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -74,7 +74,7 @@ Updated POST body authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -84,19 +84,19 @@ Parameters for updating a static bearer token credential. The `mcp_server_url` i
 
 Type BetaManagedAgentsStaticBearerUpdateParamsType
 
-Token stringoptional
+Token stringOptional
 
 Updated static bearer token value.
 
-DisplayName param.Field[string]optional
+DisplayName param.Field[string]Optional
 
 Body param: Updated human-readable name for the credential. 1-255 characters.
 
-Metadata param.Field[map[string, string]]optional
+Metadata param.Field[map[string, string]]Optional
 
 Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omitted keys are preserved.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -104,7 +104,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -174,7 +174,7 @@ Auth BetaManagedAgentsCredentialAuthUnion
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsMCPOAuthAuthResponse struct{…}
 
@@ -186,11 +186,11 @@ URL of the MCP server this credential authenticates against.
 
 Type BetaManagedAgentsMCPOAuthAuthResponseType
 
-ExpiresAt Timeoptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -206,7 +206,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
@@ -226,11 +226,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -262,7 +262,7 @@ VaultID string
 
 Identifier of the vault this credential belongs to.
 
-DisplayName stringoptional
+DisplayName stringOptional
 
 Human-readable name for the credential.
 

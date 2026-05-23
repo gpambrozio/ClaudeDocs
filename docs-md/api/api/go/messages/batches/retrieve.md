@@ -58,7 +58,7 @@ ProcessingStatus MessageBatchProcessingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 const MessageBatchProcessingStatusInProgress MessageBatchProcessingStatus = "in\_progress"
 

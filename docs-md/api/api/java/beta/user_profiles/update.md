@@ -114,7 +114,7 @@ Relationship relationship
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 EXTERNAL("external")
 
@@ -130,7 +130,7 @@ Status status
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 ACTIVE("active")
 

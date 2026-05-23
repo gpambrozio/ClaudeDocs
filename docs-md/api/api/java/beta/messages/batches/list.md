@@ -128,7 +128,7 @@ ProcessingStatus processingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 IN\_PROGRESS("in\_progress")
 

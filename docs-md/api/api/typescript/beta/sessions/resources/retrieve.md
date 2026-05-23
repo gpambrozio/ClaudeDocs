@@ -26,7 +26,7 @@ betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 (string & {})
 
@@ -88,7 +88,7 @@ ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.
 
 The requested session resource.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsGitHubRepositoryResource { id, created\_at, mount\_path, 4 more }
 
@@ -110,7 +110,7 @@ url: string
 
 checkout?: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }  | null
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsBranchCheckout { name, type }
 
@@ -160,7 +160,7 @@ access?: "read\_write" | "read\_only" | null
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 

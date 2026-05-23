@@ -66,7 +66,7 @@ type: :memory\_deleted
 
 BetaManagedAgentsError = [BetaInvalidRequestError](api/beta.md) { message, type }  | [BetaAuthenticationError](api/beta.md) { message, type }  | [BetaBillingError](api/beta.md) { message, type }  | 9 more
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError { message, type }
 
@@ -190,7 +190,7 @@ BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta.md) { id, c
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsMemory { id, content\_sha256, content\_size\_bytes, 7 more }
 
@@ -274,7 +274,7 @@ BetaManagedAgentsMemoryView = :basic | :full
 
 Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-Accepts one of the following:
+One of the following:
 
 :basic
 

@@ -182,7 +182,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -285,7 +285,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 

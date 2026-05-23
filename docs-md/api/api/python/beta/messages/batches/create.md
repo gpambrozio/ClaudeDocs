@@ -103,13 +103,13 @@ There is a limit of 100,000 messages in a single request.
 
 content: Union[str, List[[BetaContentBlockParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockParam](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -134,7 +134,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -142,7 +142,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -244,7 +244,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -252,7 +252,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -295,7 +295,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -305,7 +305,7 @@ class BetaRequestDocumentBlock: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -327,13 +327,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -358,7 +358,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -366,7 +366,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -468,7 +468,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -476,7 +476,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -519,7 +519,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -558,7 +558,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -597,7 +597,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -605,7 +605,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -726,7 +726,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -777,7 +777,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -787,7 +787,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -832,7 +832,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -840,13 +840,13 @@ Accepts one of the following:
 
 content: Optional[Union[str, List[Content], null]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[Content]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -871,7 +871,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -879,7 +879,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -981,7 +981,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -989,7 +989,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1032,7 +1032,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1063,7 +1063,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1071,7 +1071,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -1192,7 +1192,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1206,7 +1206,7 @@ class BetaRequestDocumentBlock: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -1228,13 +1228,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -1259,7 +1259,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1267,7 +1267,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -1369,7 +1369,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -1377,7 +1377,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1420,7 +1420,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1459,7 +1459,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1498,7 +1498,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1514,7 +1514,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -1551,7 +1551,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1561,7 +1561,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -1587,7 +1587,7 @@ class BetaWebSearchToolResultBlockParam: …
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 List[[BetaWebSearchResultBlockParam](api/beta.md)]
 
@@ -1605,7 +1605,7 @@ class BetaWebSearchToolRequestError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1642,7 +1642,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1652,7 +1652,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -1678,13 +1678,13 @@ class BetaWebFetchToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlockParam: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1710,7 +1710,7 @@ content: [BetaRequestDocumentBlock](api/beta.md)
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -1732,13 +1732,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -1763,7 +1763,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1771,7 +1771,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -1873,7 +1873,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -1881,7 +1881,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1924,7 +1924,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1963,7 +1963,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2008,7 +2008,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2018,7 +2018,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -2044,13 +2044,13 @@ class BetaAdvisorToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultErrorParam: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -2101,7 +2101,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2113,13 +2113,13 @@ content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultErrorParam: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2186,7 +2186,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2196,13 +2196,13 @@ class BetaBashCodeExecutionToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2253,7 +2253,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2263,13 +2263,13 @@ class BetaTextEditorCodeExecutionToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2291,7 +2291,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -2348,7 +2348,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2358,13 +2358,13 @@ class BetaToolSearchToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2401,7 +2401,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2430,7 +2430,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2467,7 +2467,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2496,7 +2496,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2504,7 +2504,7 @@ Accepts one of the following:
 
 content: Optional[Union[str, List[[BetaTextBlockParam](api/beta.md)], null]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -2531,7 +2531,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2539,7 +2539,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -2665,7 +2665,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2704,7 +2704,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2716,7 +2716,7 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 role: Literal["user", "assistant"]
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -2728,7 +2728,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -2754,7 +2754,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -2843,7 +2843,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2853,7 +2853,7 @@ container: Optional[RequestParamsContainer]
 
 Container identifier for reuse across requests.
 
-Accepts one of the following:
+One of the following:
 
 class BetaContainerParams: …
 
@@ -2875,7 +2875,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -2897,7 +2897,7 @@ edits: Optional[List[Edit]]
 
 List of context management edits to apply
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919Edit: …
 
@@ -2915,7 +2915,7 @@ clear\_tool\_inputs: Optional[Union[bool, List[str], null]]
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-Accepts one of the following:
+One of the following:
 
 bool
 
@@ -2937,7 +2937,7 @@ trigger: Optional[Trigger]
 
 Condition that triggers the context management strategy
 
-Accepts one of the following:
+One of the following:
 
 class BetaInputTokensTrigger: …
 
@@ -2959,7 +2959,7 @@ keep: Optional[Keep]
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaThinkingTurns: …
 
@@ -3046,7 +3046,7 @@ effort: Optional[Literal["low", "medium", "high", 2 more]]
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 "low"
 
@@ -3102,7 +3102,7 @@ Determines whether to use priority capacity (if available) or standard capacity 
 
 Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
-Accepts one of the following:
+One of the following:
 
 "auto"
 
@@ -3112,7 +3112,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -3138,7 +3138,7 @@ System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -3165,7 +3165,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3173,7 +3173,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -3293,7 +3293,7 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Accepts one of the following:
+One of the following:
 
 class BetaThinkingConfigEnabled: …
 
@@ -3313,7 +3313,7 @@ display: Optional[Literal["summarized", "omitted"]]
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -3331,7 +3331,7 @@ display: Optional[Literal["summarized", "omitted"]]
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -3341,7 +3341,7 @@ tool\_choice: Optional[[BetaToolChoiceParam](api/beta.md)]
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolChoiceAuto: …
 
@@ -3453,7 +3453,7 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-Accepts one of the following:
+One of the following:
 
 class BetaTool: …
 
@@ -3481,7 +3481,7 @@ minLength1
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3506,7 +3506,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3546,7 +3546,7 @@ type: Literal["bash\_20241022"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3571,7 +3571,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3599,7 +3599,7 @@ type: Literal["bash\_20250124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3624,7 +3624,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3652,7 +3652,7 @@ type: Literal["code\_execution\_20250522"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3677,7 +3677,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3703,7 +3703,7 @@ type: Literal["code\_execution\_20250825"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3728,7 +3728,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3756,7 +3756,7 @@ type: Literal["code\_execution\_20260120"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3781,7 +3781,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3815,7 +3815,7 @@ type: Literal["computer\_20241022"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3840,7 +3840,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3872,7 +3872,7 @@ type: Literal["memory\_20250818"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3897,7 +3897,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3933,7 +3933,7 @@ type: Literal["computer\_20250124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3958,7 +3958,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3990,7 +3990,7 @@ type: Literal["text\_editor\_20241022"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4015,7 +4015,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4051,7 +4051,7 @@ type: Literal["computer\_20251124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4076,7 +4076,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4112,7 +4112,7 @@ type: Literal["text\_editor\_20250124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4137,7 +4137,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4165,7 +4165,7 @@ type: Literal["text\_editor\_20250429"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4190,7 +4190,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4218,7 +4218,7 @@ type: Literal["text\_editor\_20250728"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4243,7 +4243,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4275,7 +4275,7 @@ type: Literal["web\_search\_20250305"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4308,7 +4308,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4360,7 +4360,7 @@ type: Literal["web\_fetch\_20250910"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4393,7 +4393,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4433,7 +4433,7 @@ type: Literal["web\_search\_20260209"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4466,7 +4466,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4518,7 +4518,7 @@ type: Literal["web\_fetch\_20260209"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4551,7 +4551,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4593,7 +4593,7 @@ type: Literal["web\_fetch\_20260309"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4626,7 +4626,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4666,7 +4666,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -4692,7 +4692,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -4774,7 +4774,7 @@ type: Literal["advisor\_20260301"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4799,7 +4799,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4822,7 +4822,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4850,7 +4850,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["tool\_search\_tool\_bm25\_20251119", "tool\_search\_tool\_bm25"]
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -4858,7 +4858,7 @@ Accepts one of the following:
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4883,7 +4883,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4907,7 +4907,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["tool\_search\_tool\_regex\_20251119", "tool\_search\_tool\_regex"]
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -4915,7 +4915,7 @@ Accepts one of the following:
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4940,7 +4940,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4984,7 +4984,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5040,13 +5040,13 @@ betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 str
 
 Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -5136,7 +5136,7 @@ processing\_status: Literal["in\_progress", "canceling", "ended"]
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 

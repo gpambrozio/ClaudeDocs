@@ -92,7 +92,7 @@ ProcessingStatus MessageBatchProcessingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 const MessageBatchProcessingStatusInProgress MessageBatchProcessingStatus = "in\_progress"
 
@@ -156,7 +156,7 @@ Error [ErrorResponse](api/$shared.md)
 
 Error [ErrorObjectUnion](api/$shared.md)
 
-Accepts one of the following:
+One of the following:
 
 type InvalidRequestError struct{…}
 
@@ -238,7 +238,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 type MessageBatchSucceededResult struct{…}
 
@@ -291,7 +291,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type TextBlock struct{…}
 
@@ -301,7 +301,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type CitationCharLocation struct{…}
 
@@ -431,7 +431,7 @@ Caller ToolUseBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -467,7 +467,7 @@ Caller ServerToolUseBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -493,7 +493,7 @@ Input map[string, any]
 
 Name ServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const ServerToolUseBlockNameWebSearch ServerToolUseBlockName = "web\_search"
 
@@ -517,7 +517,7 @@ Caller WebSearchToolResultBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -541,13 +541,13 @@ Type CodeExecution20260120
 
 Content [WebSearchToolResultBlockContentUnion](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 type WebSearchToolResultError struct{…}
 
 ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -585,7 +585,7 @@ Caller WebFetchToolResultBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -609,13 +609,13 @@ Type CodeExecution20260120
 
 Content WebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type WebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const WebFetchToolResultErrorCodeInvalidToolInput [WebFetchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -647,7 +647,7 @@ Enabled bool
 
 Source DocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type Base64PDFSource struct{…}
 
@@ -691,13 +691,13 @@ Content [CodeExecutionToolResultBlockContentUnion](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type CodeExecutionToolResultError struct{…}
 
 ErrorCode [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const CodeExecutionToolResultErrorCodeInvalidToolInput [CodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -751,13 +751,13 @@ type BashCodeExecutionToolResultBlock struct{…}
 
 Content BashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BashCodeExecutionToolResultError struct{…}
 
 ErrorCode [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const BashCodeExecutionToolResultErrorCodeInvalidToolInput [BashCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -795,13 +795,13 @@ type TextEditorCodeExecutionToolResultBlock struct{…}
 
 Content TextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type TextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -823,7 +823,7 @@ Content string
 
 FileType TextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const TextEditorCodeExecutionViewResultBlockFileTypeText TextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -867,13 +867,13 @@ type ToolSearchToolResultBlock struct{…}
 
 Content ToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type ToolSearchToolResultError struct{…}
 
 ErrorCode [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const ToolSearchToolResultErrorCodeInvalidToolInput [ToolSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -915,7 +915,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -923,7 +923,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -1011,7 +1011,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
 
@@ -1040,7 +1040,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const StopReasonEndTurn [StopReason](api/messages.md) = "end\_turn"
 
@@ -1126,7 +1126,7 @@ ServiceTier UsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const UsageServiceTierStandard UsageServiceTier = "standard"
 
@@ -1142,7 +1142,7 @@ Error [ErrorResponse](api/$shared.md)
 
 Error [ErrorObjectUnion](api/$shared.md)
 
-Accepts one of the following:
+One of the following:
 
 type InvalidRequestError struct{…}
 
@@ -1248,7 +1248,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 type MessageBatchSucceededResult struct{…}
 
@@ -1301,7 +1301,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type TextBlock struct{…}
 
@@ -1311,7 +1311,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type CitationCharLocation struct{…}
 
@@ -1441,7 +1441,7 @@ Caller ToolUseBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -1477,7 +1477,7 @@ Caller ServerToolUseBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -1503,7 +1503,7 @@ Input map[string, any]
 
 Name ServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const ServerToolUseBlockNameWebSearch ServerToolUseBlockName = "web\_search"
 
@@ -1527,7 +1527,7 @@ Caller WebSearchToolResultBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -1551,13 +1551,13 @@ Type CodeExecution20260120
 
 Content [WebSearchToolResultBlockContentUnion](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 type WebSearchToolResultError struct{…}
 
 ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -1595,7 +1595,7 @@ Caller WebFetchToolResultBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -1619,13 +1619,13 @@ Type CodeExecution20260120
 
 Content WebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type WebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const WebFetchToolResultErrorCodeInvalidToolInput [WebFetchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -1657,7 +1657,7 @@ Enabled bool
 
 Source DocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type Base64PDFSource struct{…}
 
@@ -1701,13 +1701,13 @@ Content [CodeExecutionToolResultBlockContentUnion](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type CodeExecutionToolResultError struct{…}
 
 ErrorCode [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const CodeExecutionToolResultErrorCodeInvalidToolInput [CodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -1761,13 +1761,13 @@ type BashCodeExecutionToolResultBlock struct{…}
 
 Content BashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BashCodeExecutionToolResultError struct{…}
 
 ErrorCode [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const BashCodeExecutionToolResultErrorCodeInvalidToolInput [BashCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -1805,13 +1805,13 @@ type TextEditorCodeExecutionToolResultBlock struct{…}
 
 Content TextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type TextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -1833,7 +1833,7 @@ Content string
 
 FileType TextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const TextEditorCodeExecutionViewResultBlockFileTypeText TextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -1877,13 +1877,13 @@ type ToolSearchToolResultBlock struct{…}
 
 Content ToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type ToolSearchToolResultError struct{…}
 
 ErrorCode [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const ToolSearchToolResultErrorCodeInvalidToolInput [ToolSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -1925,7 +1925,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -1933,7 +1933,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -2021,7 +2021,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
 
@@ -2050,7 +2050,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const StopReasonEndTurn [StopReason](api/messages.md) = "end\_turn"
 
@@ -2136,7 +2136,7 @@ ServiceTier UsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const UsageServiceTierStandard UsageServiceTier = "standard"
 
@@ -2152,7 +2152,7 @@ Error [ErrorResponse](api/$shared.md)
 
 Error [ErrorObjectUnion](api/$shared.md)
 
-Accepts one of the following:
+One of the following:
 
 type InvalidRequestError struct{…}
 
@@ -2273,7 +2273,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type TextBlock struct{…}
 
@@ -2283,7 +2283,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type CitationCharLocation struct{…}
 
@@ -2413,7 +2413,7 @@ Caller ToolUseBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -2449,7 +2449,7 @@ Caller ServerToolUseBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -2475,7 +2475,7 @@ Input map[string, any]
 
 Name ServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const ServerToolUseBlockNameWebSearch ServerToolUseBlockName = "web\_search"
 
@@ -2499,7 +2499,7 @@ Caller WebSearchToolResultBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -2523,13 +2523,13 @@ Type CodeExecution20260120
 
 Content [WebSearchToolResultBlockContentUnion](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 type WebSearchToolResultError struct{…}
 
 ErrorCode [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const WebSearchToolResultErrorCodeInvalidToolInput [WebSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -2567,7 +2567,7 @@ Caller WebFetchToolResultBlockCallerUnion
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type DirectCaller struct{…}
 
@@ -2591,13 +2591,13 @@ Type CodeExecution20260120
 
 Content WebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type WebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const WebFetchToolResultErrorCodeInvalidToolInput [WebFetchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -2629,7 +2629,7 @@ Enabled bool
 
 Source DocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type Base64PDFSource struct{…}
 
@@ -2673,13 +2673,13 @@ Content [CodeExecutionToolResultBlockContentUnion](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type CodeExecutionToolResultError struct{…}
 
 ErrorCode [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const CodeExecutionToolResultErrorCodeInvalidToolInput [CodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -2733,13 +2733,13 @@ type BashCodeExecutionToolResultBlock struct{…}
 
 Content BashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BashCodeExecutionToolResultError struct{…}
 
 ErrorCode [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const BashCodeExecutionToolResultErrorCodeInvalidToolInput [BashCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -2777,13 +2777,13 @@ type TextEditorCodeExecutionToolResultBlock struct{…}
 
 Content TextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type TextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const TextEditorCodeExecutionToolResultErrorCodeInvalidToolInput [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -2805,7 +2805,7 @@ Content string
 
 FileType TextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const TextEditorCodeExecutionViewResultBlockFileTypeText TextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -2849,13 +2849,13 @@ type ToolSearchToolResultBlock struct{…}
 
 Content ToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type ToolSearchToolResultError struct{…}
 
 ErrorCode [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 const ToolSearchToolResultErrorCodeInvalidToolInput [ToolSearchToolResultErrorCode](api/messages.md) = "invalid\_tool\_input"
 
@@ -2897,7 +2897,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -2905,7 +2905,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -2993,7 +2993,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const RefusalStopDetailsCategoryCyber RefusalStopDetailsCategory = "cyber"
 
@@ -3022,7 +3022,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const StopReasonEndTurn [StopReason](api/messages.md) = "end\_turn"
 
@@ -3108,7 +3108,7 @@ ServiceTier UsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const UsageServiceTierStandard UsageServiceTier = "standard"
 

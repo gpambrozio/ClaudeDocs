@@ -18,7 +18,7 @@ DELETE/v1/compliance/apps/chats/{claude\_chat\_id}
 
 ##### ModelsExpand Collapse
 
-ChatListResponse = object { id, created\_at, deleted\_at, 8 more }
+ChatListResponse object { id, created\_at, deleted\_at, 8 more }
 
 Chat metadata for listing chats (without messages).
 
@@ -74,7 +74,7 @@ email\_address: string
 
 User's email address
 
-ChatDeleteResponse = object { id, type }
+ChatDeleteResponse object { id, type }
 
 Response for deleting a Claude chat.
 
@@ -94,7 +94,7 @@ GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
 
 ##### ModelsExpand Collapse
 
-MessageListResponse = object { id, artifacts, content, 4 more }
+MessageListResponse object { id, artifacts, content, 4 more }
 
 A single message in a chat conversation.
 
@@ -172,7 +172,7 @@ role: "assistant" or "user"
 
 Message sender (user or assistant)
 
-Accepts one of the following:
+One of the following:
 
 "assistant"
 
@@ -194,7 +194,7 @@ GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
 ##### ModelsExpand Collapse
 
-FileRetrieveResponse = object { id, created\_at, filename, 4 more }
+FileRetrieveResponse object { id, created\_at, filename, 4 more }
 
 File metadata for GET /v1/compliance/apps/chats/files/{claude\_file\_id}.
 
@@ -229,7 +229,7 @@ size\_bytes: number
 
 Size in bytes of the file's preferred downloadable variant, if known
 
-FileDeleteResponse = object { id, type }
+FileDeleteResponse object { id, type }
 
 Response for deleting a compliance file.
 
@@ -253,7 +253,7 @@ GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
 
 ##### ModelsExpand Collapse
 
-GeneratedFileRetrieveResponse = object { id, claude\_chat\_id, created\_at, 4 more }
+GeneratedFileRetrieveResponse object { id, claude\_chat\_id, created\_at, 4 more }
 
 Metadata for GET /v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}.
 
@@ -307,7 +307,7 @@ DELETE/v1/compliance/apps/projects/{project\_id}
 
 ##### ModelsExpand Collapse
 
-ProjectListResponse = object { id, created\_at, deleted\_at, 6 more }
+ProjectListResponse object { id, created\_at, deleted\_at, 6 more }
 
 Project information for compliance responses.
 
@@ -355,7 +355,7 @@ email\_address: string
 
 User's email address
 
-ProjectRetrieveResponse = object { id, attachments\_count, chats\_count, 10 more }
+ProjectRetrieveResponse object { id, attachments\_count, chats\_count, 10 more }
 
 Detailed project information for compliance responses.
 
@@ -419,7 +419,7 @@ email\_address: string
 
 User's email address
 
-ProjectDeleteResponse = object { id, type }
+ProjectDeleteResponse object { id, type }
 
 Response for deleting a Claude project.
 
@@ -443,9 +443,9 @@ AttachmentListResponse = object { id, created\_at, filename, 2 more }  or object
 
 File attachment reference for compliance responses.
 
-Accepts one of the following:
+One of the following:
 
-ComplianceProjectFileReference = object { id, created\_at, filename, 2 more }
+ComplianceProjectFileReference object { id, created\_at, filename, 2 more }
 
 File attachment reference for compliance responses.
 
@@ -469,7 +469,7 @@ type: "project\_file"
 
 Discriminator marking this as a binary file
 
-ComplianceProjectDocReference = object { id, created\_at, filename, 2 more }
+ComplianceProjectDocReference object { id, created\_at, filename, 2 more }
 
 Project document attachment reference for compliance responses.
 
@@ -509,7 +509,7 @@ DELETE/v1/compliance/apps/projects/documents/{document\_id}
 
 ##### ModelsExpand Collapse
 
-DocumentRetrieveResponse = object { id, content, created\_at, 2 more }
+DocumentRetrieveResponse object { id, content, created\_at, 2 more }
 
 Project document information for compliance responses.
 
@@ -541,7 +541,7 @@ email\_address: string
 
 User's email address
 
-DocumentMetadataResponse = object { id, claude\_project\_id, created\_at, 5 more }
+DocumentMetadataResponse object { id, claude\_project\_id, created\_at, 5 more }
 
 Project document metadata for GET /v1/compliance/apps/projects/documents/{document\_id}/metadata.
 
@@ -588,7 +588,7 @@ email\_address: string
 
 User's email address
 
-DocumentDeleteResponse = object { id, type }
+DocumentDeleteResponse object { id, type }
 
 Response for deleting a project document.
 
@@ -612,7 +612,7 @@ GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
 
 ##### ModelsExpand Collapse
 
-ArtifactRetrieveResponse = object { id, artifact\_type, claude\_chat\_id, 5 more }
+ArtifactRetrieveResponse object { id, artifact\_type, claude\_chat\_id, 5 more }
 
 Artifact version metadata for GET /v1/compliance/apps/artifacts/{artifact\_version\_id}.
 

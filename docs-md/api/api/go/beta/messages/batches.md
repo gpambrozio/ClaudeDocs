@@ -92,7 +92,7 @@ ProcessingStatus BetaMessageBatchProcessingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 const BetaMessageBatchProcessingStatusInProgress BetaMessageBatchProcessingStatus = "in\_progress"
 
@@ -156,7 +156,7 @@ Error [BetaErrorResponse](api/beta.md)
 
 Error [BetaErrorUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaInvalidRequestError struct{…}
 
@@ -238,7 +238,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageBatchSucceededResult struct{…}
 
@@ -274,7 +274,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -313,7 +313,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -323,7 +323,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -455,11 +455,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -489,7 +489,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -509,11 +509,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -539,13 +539,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -577,11 +577,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -607,13 +607,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -645,7 +645,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -683,11 +683,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -713,13 +713,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -759,13 +759,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -819,13 +819,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -863,13 +863,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -891,7 +891,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -935,13 +935,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -989,7 +989,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -1001,7 +1001,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -1151,7 +1151,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -1190,7 +1190,7 @@ CacheMissReason BetaDiagnosticsCacheMissReasonUnion
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCacheMissModelChanged struct{…}
 
@@ -1238,7 +1238,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -1246,7 +1246,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -1334,7 +1334,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -1363,7 +1363,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -1443,7 +1443,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -1551,7 +1551,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -1559,7 +1559,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -1659,7 +1659,7 @@ ServiceTier BetaUsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 
@@ -1671,7 +1671,7 @@ Speed BetaUsageSpeed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
 
@@ -1685,7 +1685,7 @@ Error [BetaErrorResponse](api/beta.md)
 
 Error [BetaErrorUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaInvalidRequestError struct{…}
 
@@ -1791,7 +1791,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageBatchSucceededResult struct{…}
 
@@ -1827,7 +1827,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -1866,7 +1866,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -1876,7 +1876,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -2008,11 +2008,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -2042,7 +2042,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -2062,11 +2062,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -2092,13 +2092,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -2130,11 +2130,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -2160,13 +2160,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -2198,7 +2198,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -2236,11 +2236,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -2266,13 +2266,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -2312,13 +2312,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -2372,13 +2372,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -2416,13 +2416,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -2444,7 +2444,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -2488,13 +2488,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -2542,7 +2542,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -2554,7 +2554,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -2704,7 +2704,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -2743,7 +2743,7 @@ CacheMissReason BetaDiagnosticsCacheMissReasonUnion
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCacheMissModelChanged struct{…}
 
@@ -2791,7 +2791,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -2799,7 +2799,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -2887,7 +2887,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -2916,7 +2916,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -2996,7 +2996,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -3104,7 +3104,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -3112,7 +3112,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -3212,7 +3212,7 @@ ServiceTier BetaUsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 
@@ -3224,7 +3224,7 @@ Speed BetaUsageSpeed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
 
@@ -3238,7 +3238,7 @@ Error [BetaErrorResponse](api/beta.md)
 
 Error [BetaErrorUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaInvalidRequestError struct{…}
 
@@ -3342,7 +3342,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -3381,7 +3381,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -3391,7 +3391,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -3523,11 +3523,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -3557,7 +3557,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -3577,11 +3577,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -3607,13 +3607,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -3645,11 +3645,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -3675,13 +3675,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -3713,7 +3713,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -3751,11 +3751,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -3781,13 +3781,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -3827,13 +3827,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -3887,13 +3887,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -3931,13 +3931,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -3959,7 +3959,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -4003,13 +4003,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -4057,7 +4057,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -4069,7 +4069,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -4219,7 +4219,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -4258,7 +4258,7 @@ CacheMissReason BetaDiagnosticsCacheMissReasonUnion
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCacheMissModelChanged struct{…}
 
@@ -4306,7 +4306,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -4314,7 +4314,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -4402,7 +4402,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -4431,7 +4431,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -4511,7 +4511,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -4619,7 +4619,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -4627,7 +4627,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -4727,7 +4727,7 @@ ServiceTier BetaUsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 
@@ -4739,7 +4739,7 @@ Speed BetaUsageSpeed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
 

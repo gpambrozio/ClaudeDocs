@@ -103,13 +103,13 @@ There is a limit of 100,000 messages in a single request.
 
 content: Union[str, List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 14 more]]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 14 more]]
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam: …
 
@@ -134,7 +134,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -142,7 +142,7 @@ Accepts one of the following:
 
 citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam: …
 
@@ -244,7 +244,7 @@ class ImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource: …
 
@@ -252,7 +252,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -289,7 +289,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -299,7 +299,7 @@ class DocumentBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PDFSource: …
 
@@ -321,13 +321,13 @@ class ContentBlockSource: …
 
 content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[ContentBlockSourceContent](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam: …
 
@@ -352,7 +352,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -360,7 +360,7 @@ Accepts one of the following:
 
 citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam: …
 
@@ -462,7 +462,7 @@ class ImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource: …
 
@@ -470,7 +470,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -507,7 +507,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -540,7 +540,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -579,7 +579,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -587,7 +587,7 @@ Accepts one of the following:
 
 citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam: …
 
@@ -708,7 +708,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -759,7 +759,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -769,7 +769,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller: …
 
@@ -814,7 +814,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -822,13 +822,13 @@ Accepts one of the following:
 
 content: Optional[Union[str, List[Content], null]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[Content]
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam: …
 
@@ -853,7 +853,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -861,7 +861,7 @@ Accepts one of the following:
 
 citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam: …
 
@@ -963,7 +963,7 @@ class ImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource: …
 
@@ -971,7 +971,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1008,7 +1008,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1039,7 +1039,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1047,7 +1047,7 @@ Accepts one of the following:
 
 citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam: …
 
@@ -1168,7 +1168,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1182,7 +1182,7 @@ class DocumentBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PDFSource: …
 
@@ -1204,13 +1204,13 @@ class ContentBlockSource: …
 
 content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[ContentBlockSourceContent](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam: …
 
@@ -1235,7 +1235,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1243,7 +1243,7 @@ Accepts one of the following:
 
 citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam: …
 
@@ -1345,7 +1345,7 @@ class ImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource: …
 
@@ -1353,7 +1353,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1390,7 +1390,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1423,7 +1423,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1462,7 +1462,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1478,7 +1478,7 @@ input: Dict[str, object]
 
 name: Literal["web\_search", "web\_fetch", "code\_execution", 4 more]
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"
 
@@ -1513,7 +1513,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1523,7 +1523,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller: …
 
@@ -1549,7 +1549,7 @@ class WebSearchToolResultBlockParam: …
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 List[[WebSearchResultBlockParam](api/messages.md)]
 
@@ -1567,7 +1567,7 @@ class WebSearchToolRequestError: …
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1604,7 +1604,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1614,7 +1614,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller: …
 
@@ -1640,13 +1640,13 @@ class WebFetchToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlockParam: …
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1672,7 +1672,7 @@ content: [DocumentBlockParam](api/messages.md)
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PDFSource: …
 
@@ -1694,13 +1694,13 @@ class ContentBlockSource: …
 
 content: Union[str, List[[ContentBlockSourceContent](api/messages.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[ContentBlockSourceContent](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam: …
 
@@ -1725,7 +1725,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1733,7 +1733,7 @@ Accepts one of the following:
 
 citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam: …
 
@@ -1835,7 +1835,7 @@ class ImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource: …
 
@@ -1843,7 +1843,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1880,7 +1880,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1913,7 +1913,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1958,7 +1958,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1968,7 +1968,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller: …
 
@@ -1996,13 +1996,13 @@ content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultErrorParam: …
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2069,7 +2069,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2079,13 +2079,13 @@ class BashCodeExecutionToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultErrorParam: …
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2136,7 +2136,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2146,13 +2146,13 @@ class TextEditorCodeExecutionToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultErrorParam: …
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2174,7 +2174,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -2231,7 +2231,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2241,13 +2241,13 @@ class ToolSearchToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultErrorParam: …
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2284,7 +2284,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2313,7 +2313,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2345,7 +2345,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2353,7 +2353,7 @@ Accepts one of the following:
 
 role: Literal["user", "assistant"]
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -2365,7 +2365,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -2391,7 +2391,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -2480,7 +2480,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2514,7 +2514,7 @@ effort: Optional[Literal["low", "medium", "high", 2 more]]
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 "low"
 
@@ -2542,7 +2542,7 @@ Determines whether to use priority capacity (if available) or standard capacity 
 
 Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
-Accepts one of the following:
+One of the following:
 
 "auto"
 
@@ -2568,7 +2568,7 @@ System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -2595,7 +2595,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2603,7 +2603,7 @@ Accepts one of the following:
 
 citations: Optional[List[[TextCitationParam](api/messages.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam: …
 
@@ -2723,7 +2723,7 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Accepts one of the following:
+One of the following:
 
 class ThinkingConfigEnabled: …
 
@@ -2743,7 +2743,7 @@ display: Optional[Literal["summarized", "omitted"]]
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -2761,7 +2761,7 @@ display: Optional[Literal["summarized", "omitted"]]
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -2771,7 +2771,7 @@ tool\_choice: Optional[[ToolChoiceParam](api/messages.md)]
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Accepts one of the following:
+One of the following:
 
 class ToolChoiceAuto: …
 
@@ -2883,7 +2883,7 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-Accepts one of the following:
+One of the following:
 
 class Tool: …
 
@@ -2911,7 +2911,7 @@ minLength1
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -2936,7 +2936,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2976,7 +2976,7 @@ type: Literal["bash\_20250124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3001,7 +3001,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3029,7 +3029,7 @@ type: Literal["code\_execution\_20250522"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3054,7 +3054,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3080,7 +3080,7 @@ type: Literal["code\_execution\_20250825"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3105,7 +3105,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3133,7 +3133,7 @@ type: Literal["code\_execution\_20260120"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3158,7 +3158,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3184,7 +3184,7 @@ type: Literal["memory\_20250818"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3209,7 +3209,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3237,7 +3237,7 @@ type: Literal["text\_editor\_20250124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3262,7 +3262,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3290,7 +3290,7 @@ type: Literal["text\_editor\_20250429"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3315,7 +3315,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3343,7 +3343,7 @@ type: Literal["text\_editor\_20250728"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3368,7 +3368,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3400,7 +3400,7 @@ type: Literal["web\_search\_20250305"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3433,7 +3433,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3485,7 +3485,7 @@ type: Literal["web\_fetch\_20250910"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3518,7 +3518,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3558,7 +3558,7 @@ type: Literal["web\_search\_20260209"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3591,7 +3591,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3643,7 +3643,7 @@ type: Literal["web\_fetch\_20260209"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3676,7 +3676,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3718,7 +3718,7 @@ type: Literal["web\_fetch\_20260309"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3751,7 +3751,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3793,7 +3793,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["tool\_search\_tool\_bm25\_20251119", "tool\_search\_tool\_bm25"]
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -3801,7 +3801,7 @@ Accepts one of the following:
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3826,7 +3826,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3850,7 +3850,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["tool\_search\_tool\_regex\_20251119", "tool\_search\_tool\_regex"]
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -3858,7 +3858,7 @@ Accepts one of the following:
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3883,7 +3883,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3961,7 +3961,7 @@ processing\_status: Literal["in\_progress", "canceling", "ended"]
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 

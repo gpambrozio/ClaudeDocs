@@ -18,43 +18,43 @@ memoryStoreID string
 
 params BetaMemoryStoreMemoryVersionListParams
 
-APIKeyID param.Field[string]optional
+APIKeyID param.Field[string]Optional
 
 Query param: Query parameter for api\_key\_id
 
-CreatedAtGte param.Field[[Time](api/beta/memory_stores/memory_versions/list.md)]optional
+CreatedAtGte param.Field[[Time](api/beta/memory_stores/memory_versions/list.md)]Optional
 
 Query param: Return versions created at or after this time (inclusive).
 
-CreatedAtLte param.Field[[Time](api/beta/memory_stores/memory_versions/list.md)]optional
+CreatedAtLte param.Field[[Time](api/beta/memory_stores/memory_versions/list.md)]Optional
 
 Query param: Return versions created at or before this time (inclusive).
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Query param: Query parameter for limit
 
-MemoryID param.Field[string]optional
+MemoryID param.Field[string]Optional
 
 Query param: Query parameter for memory\_id
 
-Operation param.Field[[BetaManagedAgentsMemoryVersionOperation](api/beta.md)]optional
+Operation param.Field[[BetaManagedAgentsMemoryVersionOperation](api/beta.md)]Optional
 
 Query param: Query parameter for operation
 
-Page param.Field[string]optional
+Page param.Field[string]Optional
 
 Query param: Query parameter for page
 
-SessionID param.Field[string]optional
+SessionID param.Field[string]Optional
 
 Query param: Query parameter for session\_id
 
-View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]optional
+View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]Optional
 
 Query param: Query parameter for view
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -62,7 +62,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -140,7 +140,7 @@ Operation [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryVersionOperationCreated [BetaManagedAgentsMemoryVersionOperation](api/beta.md) = "created"
 
@@ -150,23 +150,23 @@ const BetaManagedAgentsMemoryVersionOperationDeleted [BetaManagedAgentsMemoryVer
 
 Type BetaManagedAgentsMemoryVersionType
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-ContentSha256 stringoptional
+ContentSha256 stringOptional
 
 Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-ContentSizeBytes int64optional
+ContentSizeBytes int64Optional
 
 Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-CreatedBy [BetaManagedAgentsActorUnion](api/beta.md)optional
+CreatedBy [BetaManagedAgentsActorUnion](api/beta.md)Optional
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionActor struct{…}
 
@@ -198,19 +198,19 @@ UserID string
 
 ID of the user who performed the write (a `user_...` value).
 
-Path stringoptional
+Path stringOptional
 
 The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-RedactedAt Timeoptional
+RedactedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-RedactedBy [BetaManagedAgentsActorUnion](api/beta.md)optional
+RedactedBy [BetaManagedAgentsActorUnion](api/beta.md)Optional
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionActor struct{…}
 

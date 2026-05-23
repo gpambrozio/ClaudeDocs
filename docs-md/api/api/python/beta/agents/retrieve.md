@@ -24,13 +24,13 @@ betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 str
 
 Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -120,7 +120,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -138,7 +138,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -182,7 +182,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -208,7 +208,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -234,7 +234,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -246,7 +246,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -268,7 +268,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -292,7 +292,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -320,7 +320,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -344,7 +344,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 

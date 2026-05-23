@@ -71,13 +71,13 @@ There is a limit of 100,000 messages in a single request.
 
 content: String | Array[[ContentBlockParam](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-Array[[ContentBlockParam](api/messages.md)]
+UnionMember1 = Array[[ContentBlockParam](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam { text, type, cache\_control, citations }
 
@@ -102,7 +102,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -110,7 +110,7 @@ Accepts one of the following:
 
 citations: Array[[TextCitationParam](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -212,7 +212,7 @@ class ImageBlockParam { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource { data, media\_type, type }
 
@@ -220,7 +220,7 @@ data: String
 
 media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
 
-Accepts one of the following:
+One of the following:
 
 :"image/jpeg"
 
@@ -257,7 +257,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -267,7 +267,7 @@ class DocumentBlockParam { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }  | [ContentBlockSource](api/messages.md) { content, type }  | [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 class Base64PDFSource { data, media\_type, type }
 
@@ -289,13 +289,13 @@ class ContentBlockSource { content, type }
 
 content: String | Array[[ContentBlockSourceContent](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-Array[[ContentBlockSourceContent](api/messages.md)]
+ContentBlockSourceContent = Array[[ContentBlockSourceContent](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam { text, type, cache\_control, citations }
 
@@ -320,7 +320,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -328,7 +328,7 @@ Accepts one of the following:
 
 citations: Array[[TextCitationParam](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -430,7 +430,7 @@ class ImageBlockParam { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource { data, media\_type, type }
 
@@ -438,7 +438,7 @@ data: String
 
 media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
 
-Accepts one of the following:
+One of the following:
 
 :"image/jpeg"
 
@@ -475,7 +475,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -508,7 +508,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -547,7 +547,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -555,7 +555,7 @@ Accepts one of the following:
 
 citations: Array[[TextCitationParam](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -676,7 +676,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -727,7 +727,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -737,7 +737,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -782,7 +782,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -790,13 +790,13 @@ Accepts one of the following:
 
 content: String | Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | 2 more]
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | 2 more]
+Content = Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [SearchResultBlockParam](api/messages.md) { content, source, title, 3 more }  | 2 more]
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam { text, type, cache\_control, citations }
 
@@ -821,7 +821,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -829,7 +829,7 @@ Accepts one of the following:
 
 citations: Array[[TextCitationParam](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -931,7 +931,7 @@ class ImageBlockParam { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource { data, media\_type, type }
 
@@ -939,7 +939,7 @@ data: String
 
 media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
 
-Accepts one of the following:
+One of the following:
 
 :"image/jpeg"
 
@@ -976,7 +976,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1007,7 +1007,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1015,7 +1015,7 @@ Accepts one of the following:
 
 citations: Array[[TextCitationParam](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1136,7 +1136,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1150,7 +1150,7 @@ class DocumentBlockParam { source, type, cache\_control, 3 more }
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }  | [ContentBlockSource](api/messages.md) { content, type }  | [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 class Base64PDFSource { data, media\_type, type }
 
@@ -1172,13 +1172,13 @@ class ContentBlockSource { content, type }
 
 content: String | Array[[ContentBlockSourceContent](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-Array[[ContentBlockSourceContent](api/messages.md)]
+ContentBlockSourceContent = Array[[ContentBlockSourceContent](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam { text, type, cache\_control, citations }
 
@@ -1203,7 +1203,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1211,7 +1211,7 @@ Accepts one of the following:
 
 citations: Array[[TextCitationParam](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1313,7 +1313,7 @@ class ImageBlockParam { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource { data, media\_type, type }
 
@@ -1321,7 +1321,7 @@ data: String
 
 media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
 
-Accepts one of the following:
+One of the following:
 
 :"image/jpeg"
 
@@ -1358,7 +1358,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1391,7 +1391,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1430,7 +1430,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1446,7 +1446,7 @@ input: Hash[Symbol, untyped]
 
 name: :web\_search | :web\_fetch | :code\_execution | 4 more
 
-Accepts one of the following:
+One of the following:
 
 :web\_search
 
@@ -1481,7 +1481,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1491,7 +1491,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -1517,9 +1517,9 @@ class WebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [WebSearchToolResultBlockParamContent](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
-Array[[WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more } ]
+WebSearchToolResultBlockItem = Array[[WebSearchResultBlockParam](api/messages.md) { encrypted\_content, title, type, 2 more } ]
 
 encrypted\_content: String
 
@@ -1535,7 +1535,7 @@ class WebSearchToolRequestError { error\_code, type }
 
 error\_code: [WebSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -1572,7 +1572,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1582,7 +1582,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -1608,13 +1608,13 @@ class WebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [WebFetchToolResultErrorBlockParam](api/messages.md) { error\_code, type }  | [WebFetchBlockParam](api/messages.md) { content, type, url, retrieved\_at }
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlockParam { error\_code, type }
 
 error\_code: [WebFetchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -1640,7 +1640,7 @@ content: [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3
 
 source: [Base64PDFSource](api/messages.md) { data, media\_type, type }  | [PlainTextSource](api/messages.md) { data, media\_type, type }  | [ContentBlockSource](api/messages.md) { content, type }  | [URLPDFSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 class Base64PDFSource { data, media\_type, type }
 
@@ -1662,13 +1662,13 @@ class ContentBlockSource { content, type }
 
 content: String | Array[[ContentBlockSourceContent](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-Array[[ContentBlockSourceContent](api/messages.md)]
+ContentBlockSourceContent = Array[[ContentBlockSourceContent](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam { text, type, cache\_control, citations }
 
@@ -1693,7 +1693,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1701,7 +1701,7 @@ Accepts one of the following:
 
 citations: Array[[TextCitationParam](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1803,7 +1803,7 @@ class ImageBlockParam { source, type, cache\_control }
 
 source: [Base64ImageSource](api/messages.md) { data, media\_type, type }  | [URLImageSource](api/messages.md) { type, url }
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource { data, media\_type, type }
 
@@ -1811,7 +1811,7 @@ data: String
 
 media\_type: :"image/jpeg" | :"image/png" | :"image/gif" | :"image/webp"
 
-Accepts one of the following:
+One of the following:
 
 :"image/jpeg"
 
@@ -1848,7 +1848,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1881,7 +1881,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1926,7 +1926,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -1936,7 +1936,7 @@ caller\_: [DirectCaller](api/messages.md) { type }  | [ServerToolCaller](api/mes
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller { type }
 
@@ -1964,13 +1964,13 @@ content: [CodeExecutionToolResultBlockParamContent](api/messages.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultErrorParam { error\_code, type }
 
 error\_code: [CodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -2037,7 +2037,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -2047,13 +2047,13 @@ class BashCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cach
 
 content: [BashCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type }  | [BashCodeExecutionResultBlockParam](api/messages.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultErrorParam { error\_code, type }
 
 error\_code: [BashCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -2104,7 +2104,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -2114,13 +2114,13 @@ class TextEditorCodeExecutionToolResultBlockParam { content, tool\_use\_id, type
 
 content: [TextEditorCodeExecutionToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  | [TextEditorCodeExecutionViewResultBlockParam](api/messages.md) { content, file\_type, type, 3 more }  | [TextEditorCodeExecutionCreateResultBlockParam](api/messages.md) { is\_file\_update, type }  | [TextEditorCodeExecutionStrReplaceResultBlockParam](api/messages.md) { type, lines, new\_lines, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: [TextEditorCodeExecutionToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -2142,7 +2142,7 @@ content: String
 
 file\_type: :text | :image | :pdf
 
-Accepts one of the following:
+One of the following:
 
 :text
 
@@ -2199,7 +2199,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -2209,13 +2209,13 @@ class ToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_cont
 
 content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultErrorParam { error\_code, type }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
-Accepts one of the following:
+One of the following:
 
 :invalid\_tool\_input
 
@@ -2252,7 +2252,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -2281,7 +2281,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -2313,7 +2313,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -2321,7 +2321,7 @@ Accepts one of the following:
 
 role: :user | :assistant
 
-Accepts one of the following:
+One of the following:
 
 :user
 
@@ -2333,15 +2333,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -2411,7 +2411,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-String
+String = String
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -2430,7 +2430,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -2444,7 +2444,7 @@ effort: :low | :medium | :high | 2 more
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 :low
 
@@ -2472,11 +2472,11 @@ System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations } ]
+UnionMember1 = Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations } ]
 
 text: String
 
@@ -2499,7 +2499,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -2507,7 +2507,7 @@ Accepts one of the following:
 
 citations: Array[[TextCitationParam](api/messages.md)]
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -2613,7 +2613,7 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Accepts one of the following:
+One of the following:
 
 class ThinkingConfigEnabled { budget\_tokens, type, display\_ }
 
@@ -2633,7 +2633,7 @@ display\_: :summarized | :omitted
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 :summarized
 
@@ -2651,7 +2651,7 @@ display\_: :summarized | :omitted
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 :summarized
 
@@ -2661,7 +2661,7 @@ tool\_choice: [ToolChoice](api/messages.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Accepts one of the following:
+One of the following:
 
 class ToolChoiceAuto { type, disable\_parallel\_tool\_use }
 
@@ -2773,11 +2773,11 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-Accepts one of the following:
+One of the following:
 
 class Tool { input\_schema, name, allowed\_callers, 7 more }
 
-input\_schema: { type, properties, required}
+input\_schema: InputSchema{ type, properties, required}
 
 [JSON schema](https://json-schema.org/draft/2020-12) for this tool's input.
 
@@ -2801,7 +2801,7 @@ minLength1
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -2826,7 +2826,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -2866,7 +2866,7 @@ type: :bash\_20250124
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -2891,7 +2891,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -2919,7 +2919,7 @@ type: :code\_execution\_20250522
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -2944,7 +2944,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -2970,7 +2970,7 @@ type: :code\_execution\_20250825
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -2995,7 +2995,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3023,7 +3023,7 @@ type: :code\_execution\_20260120
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3048,7 +3048,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3074,7 +3074,7 @@ type: :memory\_20250818
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3099,7 +3099,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3127,7 +3127,7 @@ type: :text\_editor\_20250124
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3152,7 +3152,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3180,7 +3180,7 @@ type: :text\_editor\_20250429
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3205,7 +3205,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3233,7 +3233,7 @@ type: :text\_editor\_20250728
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3258,7 +3258,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3290,7 +3290,7 @@ type: :web\_search\_20250305
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3323,7 +3323,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3375,7 +3375,7 @@ type: :web\_fetch\_20250910
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3408,7 +3408,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3448,7 +3448,7 @@ type: :web\_search\_20260209
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3481,7 +3481,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3533,7 +3533,7 @@ type: :web\_fetch\_20260209
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3566,7 +3566,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3608,7 +3608,7 @@ type: :web\_fetch\_20260309
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3641,7 +3641,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3683,7 +3683,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :tool\_search\_tool\_bm25\_20251119 | :tool\_search\_tool\_bm25
 
-Accepts one of the following:
+One of the following:
 
 :tool\_search\_tool\_bm25\_20251119
 
@@ -3691,7 +3691,7 @@ Accepts one of the following:
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3716,7 +3716,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 
@@ -3740,7 +3740,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: :tool\_search\_tool\_regex\_20251119 | :tool\_search\_tool\_regex
 
-Accepts one of the following:
+One of the following:
 
 :tool\_search\_tool\_regex\_20251119
 
@@ -3748,7 +3748,7 @@ Accepts one of the following:
 
 allowed\_callers: Array[:direct | :code\_execution\_20250825 | :code\_execution\_20260120]
 
-Accepts one of the following:
+One of the following:
 
 :direct
 
@@ -3773,7 +3773,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 :"5m"
 

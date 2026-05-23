@@ -74,7 +74,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -82,7 +82,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -122,11 +122,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -152,7 +152,7 @@ Name string
 
 Skills []BetaManagedAgentsAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -178,7 +178,7 @@ System string
 
 Tools []BetaManagedAgentsAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -190,7 +190,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -212,7 +212,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -236,7 +236,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -264,7 +264,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -288,7 +288,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -316,15 +316,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -362,7 +362,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -384,7 +384,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -406,7 +406,7 @@ Name BetaManagedAgentsAgentToolConfigParamsName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigParamsNameBash BetaManagedAgentsAgentToolConfigParamsName = "bash"
 
@@ -424,15 +424,15 @@ const BetaManagedAgentsAgentToolConfigParamsNameWebFetch BetaManagedAgentsAgentT
 
 const BetaManagedAgentsAgentToolConfigParamsNameWebSearch BetaManagedAgentsAgentToolConfigParamsName = "web\_search"
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
 
-PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -456,7 +456,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -474,15 +474,15 @@ type BetaManagedAgentsAgentToolsetDefaultConfigParamsResp struct{…}
 
 Default configuration for all tools in a toolset.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -506,7 +506,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -528,7 +528,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -552,7 +552,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -575,17 +575,17 @@ Input payload for the `bash` tool of the
 a normal invocation supplies `command`, while `restart=true`
 (with no `command`) reboots the runner-side bash session.
 
-Command stringoptional
+Command stringOptional
 
 Shell command to execute. Omit only when `restart` is true.
 
-Restart booloptional
+Restart boolOptional
 
 When true, restart the persistent bash session instead of
 running a command. Subsequent calls without `restart` will
 run against the fresh session.
 
-TimeoutMs int64optional
+TimeoutMs int64Optional
 
 Per-call timeout in milliseconds. Defaults to the
 runner-wide tool timeout when omitted or zero.
@@ -608,7 +608,7 @@ OldString string
 
 Substring to find and replace.
 
-ReplaceAll booloptional
+ReplaceAll boolOptional
 
 When true, replace every occurrence of `old_string`
 instead of requiring a unique match.
@@ -624,7 +624,7 @@ Doublestar glob pattern (e.g. `**/*.go`). Absolute patterns
 are only permitted when the runner is configured to allow
 them.
 
-Path stringoptional
+Path stringOptional
 
 Optional directory root to search under. Defaults to the
 runner's working directory.
@@ -638,7 +638,7 @@ Pattern string
 
 Regular expression to search for.
 
-Path stringoptional
+Path stringOptional
 
 Optional directory root to search under. Defaults to the
 runner's working directory.
@@ -649,7 +649,7 @@ Configuration for built-in agent tools. Use this to enable or disable groups of 
 
 Type BetaManagedAgentsAgentToolset20260401ParamsType
 
-Configs [][BetaManagedAgentsAgentToolConfigParamsResp](api/beta.md)optional
+Configs [][BetaManagedAgentsAgentToolConfigParamsResp](api/beta.md)Optional
 
 Per-tool configuration overrides.
 
@@ -657,7 +657,7 @@ Name BetaManagedAgentsAgentToolConfigParamsName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigParamsNameBash BetaManagedAgentsAgentToolConfigParamsName = "bash"
 
@@ -675,15 +675,15 @@ const BetaManagedAgentsAgentToolConfigParamsNameWebFetch BetaManagedAgentsAgentT
 
 const BetaManagedAgentsAgentToolConfigParamsNameWebSearch BetaManagedAgentsAgentToolConfigParamsName = "web\_search"
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
 
-PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -697,19 +697,19 @@ Tool calls require user confirmation before execution.
 
 Type BetaManagedAgentsAlwaysAskPolicyType
 
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfigParamsResp](api/beta.md)optional
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfigParamsResp](api/beta.md)Optional
 
 Default configuration for all tools in a toolset.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -733,7 +733,7 @@ FilePath string
 
 Path of the file to read.
 
-ViewRange []int64optional
+ViewRange []int64Optional
 
 Optional `[start_line, end_line]` 1-indexed inclusive
 range. When omitted the entire file is returned.
@@ -784,7 +784,7 @@ Identifier of the Anthropic skill (e.g., "xlsx").
 
 Type BetaManagedAgentsAnthropicSkillParamsType
 
-Version stringoptional
+Version stringOptional
 
 Version to pin. Defaults to latest if omitted.
 
@@ -808,7 +808,7 @@ Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
 
 Type BetaManagedAgentsCustomSkillParamsType
 
-Version stringoptional
+Version stringOptional
 
 Version to pin. Defaults to latest if omitted.
 
@@ -822,15 +822,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -842,15 +842,15 @@ type BetaManagedAgentsCustomToolInputSchema struct{…}
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -866,15 +866,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -906,7 +906,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -928,15 +928,15 @@ Name string
 
 Name of the MCP tool to configure. 1-128 characters.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled. Overrides the `default_config` setting.
 
-PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -962,7 +962,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -986,7 +986,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -1014,7 +1014,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -1032,15 +1032,15 @@ type BetaManagedAgentsMCPToolsetDefaultConfigParamsResp struct{…}
 
 Default configuration for all tools from an MCP server.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -1064,7 +1064,7 @@ Name of the MCP server. Must match a server name from the mcp\_servers array. 1-
 
 Type BetaManagedAgentsMCPToolsetParamsType
 
-Configs [][BetaManagedAgentsMCPToolConfigParamsResp](api/beta.md)optional
+Configs [][BetaManagedAgentsMCPToolConfigParamsResp](api/beta.md)Optional
 
 Per-tool configuration overrides.
 
@@ -1072,15 +1072,15 @@ Name string
 
 Name of the MCP tool to configure. 1-128 characters.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled. Overrides the `default_config` setting.
 
-PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -1094,19 +1094,19 @@ Tool calls require user confirmation before execution.
 
 Type BetaManagedAgentsAlwaysAskPolicyType
 
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfigParamsResp](api/beta.md)optional
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfigParamsResp](api/beta.md)Optional
 
 Default configuration for all tools from an MCP server.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -1126,7 +1126,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -1134,7 +1134,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -1184,7 +1184,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -1192,7 +1192,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -1232,11 +1232,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -1252,7 +1252,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -1260,7 +1260,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -1300,11 +1300,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigParamsSpeedoptional
+Speed BetaManagedAgentsModelConfigParamsSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigParamsSpeedStandard BetaManagedAgentsModelConfigParamsSpeed = "standard"
 
@@ -1334,7 +1334,7 @@ Agents [][BetaManagedAgentsMultiagentRosterEntryParamsUnionResp](api/beta.md)
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -1348,7 +1348,7 @@ The `agent` ID.
 
 Type BetaManagedAgentsAgentParamsType
 
-Version int64optional
+Version int64Optional
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
@@ -1392,7 +1392,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -1400,7 +1400,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -1440,11 +1440,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -1454,7 +1454,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -1480,7 +1480,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -1492,7 +1492,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -1514,7 +1514,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -1538,7 +1538,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -1566,7 +1566,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -1590,7 +1590,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -1618,15 +1618,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -1642,7 +1642,7 @@ type BetaManagedAgentsSkillParamsUnionResp interface{…}
 
 Skill to load in the session container.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkillParamsResp struct{…}
 
@@ -1654,7 +1654,7 @@ Identifier of the Anthropic skill (e.g., "xlsx").
 
 Type BetaManagedAgentsAnthropicSkillParamsType
 
-Version stringoptional
+Version stringOptional
 
 Version to pin. Defaults to latest if omitted.
 
@@ -1668,7 +1668,7 @@ Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
 
 Type BetaManagedAgentsCustomSkillParamsType
 
-Version stringoptional
+Version stringOptional
 
 Version to pin. Defaults to latest if omitted.
 

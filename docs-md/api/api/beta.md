@@ -10,13 +10,13 @@ cURL
 
 AnthropicBeta = string or "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -68,19 +68,19 @@ Accepts one of the following:
 
 "cache-diagnosis-2026-04-07"
 
-BetaAPIError = object { message, type }
+BetaAPIError object { message, type }
 
 message: string
 
 type: "api\_error"
 
-BetaAuthenticationError = object { message, type }
+BetaAuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BetaBillingError = object { message, type }
+BetaBillingError object { message, type }
 
 message: string
 
@@ -88,117 +88,117 @@ type: "billing\_error"
 
 BetaError = [BetaInvalidRequestError](api/beta.md) { message, type }  or [BetaAuthenticationError](api/beta.md) { message, type }  or [BetaBillingError](api/beta.md) { message, type }  or 6 more
 
-Accepts one of the following:
+One of the following:
 
-BetaInvalidRequestError = object { message, type }
+BetaInvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-BetaAuthenticationError = object { message, type }
+BetaAuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BetaBillingError = object { message, type }
+BetaBillingError object { message, type }
 
 message: string
 
 type: "billing\_error"
 
-BetaPermissionError = object { message, type }
+BetaPermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-BetaNotFoundError = object { message, type }
+BetaNotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-BetaRateLimitError = object { message, type }
+BetaRateLimitError object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
 
-BetaGatewayTimeoutError = object { message, type }
+BetaGatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-BetaAPIError = object { message, type }
+BetaAPIError object { message, type }
 
 message: string
 
 type: "api\_error"
 
-BetaOverloadedError = object { message, type }
+BetaOverloadedError object { message, type }
 
 message: string
 
 type: "overloaded\_error"
 
-BetaErrorResponse = object { error, request\_id, type }
+BetaErrorResponse object { error, request\_id, type }
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaInvalidRequestError = object { message, type }
+BetaInvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-BetaAuthenticationError = object { message, type }
+BetaAuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BetaBillingError = object { message, type }
+BetaBillingError object { message, type }
 
 message: string
 
 type: "billing\_error"
 
-BetaPermissionError = object { message, type }
+BetaPermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-BetaNotFoundError = object { message, type }
+BetaNotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-BetaRateLimitError = object { message, type }
+BetaRateLimitError object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
 
-BetaGatewayTimeoutError = object { message, type }
+BetaGatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-BetaAPIError = object { message, type }
+BetaAPIError object { message, type }
 
 message: string
 
 type: "api\_error"
 
-BetaOverloadedError = object { message, type }
+BetaOverloadedError object { message, type }
 
 message: string
 
@@ -208,37 +208,37 @@ request\_id: string
 
 type: "error"
 
-BetaGatewayTimeoutError = object { message, type }
+BetaGatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-BetaInvalidRequestError = object { message, type }
+BetaInvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-BetaNotFoundError = object { message, type }
+BetaNotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-BetaOverloadedError = object { message, type }
+BetaOverloadedError object { message, type }
 
 message: string
 
 type: "overloaded\_error"
 
-BetaPermissionError = object { message, type }
+BetaPermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-BetaRateLimitError = object { message, type }
+BetaRateLimitError object { message, type }
 
 message: string
 
@@ -256,7 +256,7 @@ GET/v1/models/{model\_id}
 
 ##### ModelsExpand Collapse
 
-BetaCapabilitySupport = object { supported }
+BetaCapabilitySupport object { supported }
 
 Indicates whether a capability is supported.
 
@@ -264,7 +264,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaContextManagementCapability = object { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported }
+BetaContextManagementCapability object { clear\_thinking\_20251015, clear\_tool\_uses\_20250919, compact\_20260112, supported }
 
 Context management capability details.
 
@@ -296,7 +296,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaEffortCapability = object { high, low, max, 3 more }
+BetaEffortCapability object { high, low, max, 3 more }
 
 Effort (reasoning\_effort) capability details.
 
@@ -344,7 +344,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaModelCapabilities = object { batch, citations, code\_execution, 6 more }
+BetaModelCapabilities object { batch, citations, code\_execution, 6 more }
 
 Model capability information.
 
@@ -504,7 +504,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaModelInfo = object { id, capabilities, created\_at, 4 more }
+BetaModelInfo object { id, capabilities, created\_at, 4 more }
 
 id: string
 
@@ -692,7 +692,7 @@ Object type.
 
 For Models, this is always `"model"`.
 
-BetaThinkingCapability = object { supported, types }
+BetaThinkingCapability object { supported, types }
 
 Thinking capability details.
 
@@ -720,7 +720,7 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaThinkingTypes = object { adaptive, enabled }
+BetaThinkingTypes object { adaptive, enabled }
 
 Supported thinking type configurations.
 
@@ -752,7 +752,7 @@ POST/v1/messages/count\_tokens
 
 ##### ModelsExpand Collapse
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -786,15 +786,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -864,7 +864,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -874,7 +874,7 @@ type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
 
-BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -882,7 +882,7 @@ Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect
 
 type: "advisor\_redacted\_result"
 
-BetaAdvisorRedactedResultBlockParam = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlockParam object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -890,19 +890,19 @@ Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: "advisor\_redacted\_result"
 
-BetaAdvisorResultBlock = object { text, type }
+BetaAdvisorResultBlock object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorResultBlockParam = object { text, type }
+BetaAdvisorResultBlockParam object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorTool20260301 = object { model, name, type, 6 more }
+BetaAdvisorTool20260301 object { model, name, type, 6 more }
 
 model: [Model](api/messages.md)
 
@@ -910,15 +910,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -988,7 +988,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 name: "advisor"
 
@@ -1000,7 +1000,7 @@ type: "advisor\_20260301"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -1025,7 +1025,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1048,7 +1048,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1066,17 +1066,17 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+BetaAdvisorToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultError = object { error\_code, type }
+BetaAdvisorToolResultError object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -1092,13 +1092,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock = object { text, type }
+BetaAdvisorResultBlock object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -1110,17 +1110,17 @@ tool\_use\_id: string
 
 type: "advisor\_tool\_result"
 
-BetaAdvisorToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaAdvisorToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlockParam](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultErrorParam = object { error\_code, type }
+BetaAdvisorToolResultErrorParam object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -1136,13 +1136,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlockParam = object { text, type }
+BetaAdvisorResultBlockParam object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlockParam = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlockParam object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -1171,17 +1171,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaAdvisorToolResultError = object { error\_code, type }
+BetaAdvisorToolResultError object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -1197,11 +1197,11 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorToolResultErrorParam = object { error\_code, type }
+BetaAdvisorToolResultErrorParam object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -1217,17 +1217,17 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAllThinkingTurns = object { type }
+BetaAllThinkingTurns object { type }
 
 type: "all"
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1239,7 +1239,7 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -1247,19 +1247,19 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaBashCodeExecutionOutputBlock = object { file\_id, type }
+BetaBashCodeExecutionOutputBlock object { file\_id, type }
 
 file\_id: string
 
 type: "bash\_code\_execution\_output"
 
-BetaBashCodeExecutionOutputBlockParam = object { file\_id, type }
+BetaBashCodeExecutionOutputBlockParam object { file\_id, type }
 
 file\_id: string
 
 type: "bash\_code\_execution\_output"
 
-BetaBashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -1275,7 +1275,7 @@ stdout: string
 
 type: "bash\_code\_execution\_result"
 
-BetaBashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type }
 
@@ -1291,17 +1291,17 @@ stdout: string
 
 type: "bash\_code\_execution\_result"
 
-BetaBashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaBashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultError = object { error\_code, type }
+BetaBashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1315,7 +1315,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -1335,17 +1335,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-BetaBashCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaBashCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaBashCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlockParam](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultErrorParam = object { error\_code, type }
+BetaBashCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1359,7 +1359,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type }
 
@@ -1396,17 +1396,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaBashCodeExecutionToolResultError = object { error\_code, type }
+BetaBashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1420,11 +1420,11 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionToolResultErrorParam = object { error\_code, type }
+BetaBashCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1438,7 +1438,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaCacheControlEphemeral = object { type, ttl }
+BetaCacheControlEphemeral object { type, ttl }
 
 type: "ephemeral"
 
@@ -1453,13 +1453,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaCacheCreation = object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+BetaCacheCreation object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
 ephemeral\_1h\_input\_tokens: number
 
@@ -1469,7 +1469,7 @@ ephemeral\_5m\_input\_tokens: number
 
 The number of input tokens used to create the 5 minute cache entry.
 
-BetaCacheMissMessagesChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissMessagesChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -1477,7 +1477,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "messages\_changed"
 
-BetaCacheMissModelChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissModelChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -1485,11 +1485,11 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "model\_changed"
 
-BetaCacheMissPreviousMessageNotFound = object { type }
+BetaCacheMissPreviousMessageNotFound object { type }
 
 type: "previous\_message\_not\_found"
 
-BetaCacheMissSystemChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissSystemChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -1497,7 +1497,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "system\_changed"
 
-BetaCacheMissToolsChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissToolsChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -1505,11 +1505,11 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "tools\_changed"
 
-BetaCacheMissUnavailable = object { type }
+BetaCacheMissUnavailable object { type }
 
 type: "unavailable"
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -1525,7 +1525,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1539,11 +1539,11 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationConfig = object { enabled }
+BetaCitationConfig object { enabled }
 
 enabled: boolean
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -1569,7 +1569,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1593,7 +1593,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -1609,7 +1609,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -1623,7 +1623,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -1655,7 +1655,7 @@ title: string
 
 type: "search\_result\_location"
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -1687,7 +1687,7 @@ title: string
 
 type: "search\_result\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -1699,17 +1699,17 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationsConfigParam = object { enabled }
+BetaCitationsConfigParam object { enabled }
 
 enabled: optional boolean
 
-BetaCitationsDelta = object { citation, type }
+BetaCitationsDelta object { citation, type }
 
 citation: [BetaCitationCharLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationPageLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationContentBlockLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -1725,7 +1725,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -1741,7 +1741,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -1767,7 +1767,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -1779,7 +1779,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -1813,7 +1813,7 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -1825,7 +1825,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaClearThinking20251015Edit = object { type, keep }
+BetaClearThinking20251015Edit object { type, keep }
 
 type: "clear\_thinking\_20251015"
 
@@ -1833,21 +1833,21 @@ keep: optional [BetaThinkingTurns](api/beta.md) { type, value }  or [BetaAllThin
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Accepts one of the following:
+One of the following:
 
-BetaThinkingTurns = object { type, value }
+BetaThinkingTurns object { type, value }
 
 type: "thinking\_turns"
 
 value: number
 
-BetaAllThinkingTurns = object { type }
+BetaAllThinkingTurns object { type }
 
 type: "all"
 
-UnionMember2 = "all"
+"all"
 
-BetaClearThinking20251015EditResponse = object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+BetaClearThinking20251015EditResponse object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
 
 cleared\_input\_tokens: number
 
@@ -1861,7 +1861,7 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-BetaClearToolUses20250919Edit = object { type, clear\_at\_least, clear\_tool\_inputs, 3 more }
+BetaClearToolUses20250919Edit object { type, clear\_at\_least, clear\_tool\_inputs, 3 more }
 
 type: "clear\_tool\_uses\_20250919"
 
@@ -1877,11 +1877,11 @@ clear\_tool\_inputs: optional boolean or array of string
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = boolean
+boolean
 
-UnionMember1 = array of string
+array of string
 
 exclude\_tools: optional array of string
 
@@ -1899,21 +1899,21 @@ trigger: optional [BetaInputTokensTrigger](api/beta.md) { type, value }  or [Bet
 
 Condition that triggers the context management strategy
 
-Accepts one of the following:
+One of the following:
 
-BetaInputTokensTrigger = object { type, value }
+BetaInputTokensTrigger object { type, value }
 
 type: "input\_tokens"
 
 value: number
 
-BetaToolUsesTrigger = object { type, value }
+BetaToolUsesTrigger object { type, value }
 
 type: "tool\_uses"
 
 value: number
 
-BetaClearToolUses20250919EditResponse = object { cleared\_input\_tokens, cleared\_tool\_uses, type }
+BetaClearToolUses20250919EditResponse object { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
 cleared\_input\_tokens: number
 
@@ -1927,19 +1927,19 @@ type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaCodeExecutionOutputBlock = object { file\_id, type }
+BetaCodeExecutionOutputBlock object { file\_id, type }
 
 file\_id: string
 
 type: "code\_execution\_output"
 
-BetaCodeExecutionOutputBlockParam = object { file\_id, type }
+BetaCodeExecutionOutputBlockParam object { file\_id, type }
 
 file\_id: string
 
 type: "code\_execution\_output"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -1955,7 +1955,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type }
 
@@ -1971,7 +1971,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaCodeExecutionTool20250522 = object { name, type, allowed\_callers, 3 more }
+BetaCodeExecutionTool20250522 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -1983,7 +1983,7 @@ type: "code\_execution\_20250522"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -2008,7 +2008,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2022,7 +2022,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionTool20250825 = object { name, type, allowed\_callers, 3 more }
+BetaCodeExecutionTool20250825 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -2034,7 +2034,7 @@ type: "code\_execution\_20250825"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -2059,7 +2059,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2073,7 +2073,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionTool20260120 = object { name, type, allowed\_callers, 3 more }
+BetaCodeExecutionTool20260120 object { name, type, allowed\_callers, 3 more }
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -2087,7 +2087,7 @@ type: "code\_execution\_20260120"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -2112,7 +2112,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2126,19 +2126,19 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2150,7 +2150,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -2166,7 +2166,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -2192,13 +2192,13 @@ BetaCodeExecutionToolResultBlockContent = [BetaCodeExecutionToolResultError](api
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2210,7 +2210,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -2226,7 +2226,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -2244,19 +2244,19 @@ stderr: string
 
 type: "encrypted\_code\_execution\_result"
 
-BetaCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultErrorParam = object { error\_code, type }
+BetaCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2268,7 +2268,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type }
 
@@ -2284,7 +2284,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlockParam object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -2323,7 +2323,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2333,13 +2333,13 @@ BetaCodeExecutionToolResultBlockParamContent = [BetaCodeExecutionToolResultError
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultErrorParam = object { error\_code, type }
+BetaCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2351,7 +2351,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type }
 
@@ -2367,7 +2367,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlockParam object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -2385,11 +2385,11 @@ stderr: string
 
 type: "encrypted\_code\_execution\_result"
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2403,7 +2403,7 @@ type: "code\_execution\_tool\_result\_error"
 
 BetaCodeExecutionToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2413,11 +2413,11 @@ Accepts one of the following:
 
 "execution\_time\_exceeded"
 
-BetaCodeExecutionToolResultErrorParam = object { error\_code, type }
+BetaCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2429,7 +2429,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCompact20260112Edit = object { type, instructions, pause\_after\_compaction, trigger }
+BetaCompact20260112Edit object { type, instructions, pause\_after\_compaction, trigger }
 
 Automatically compact older context when reaching the configured trigger threshold.
 
@@ -2451,7 +2451,7 @@ type: "input\_tokens"
 
 value: number
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -2469,7 +2469,7 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
-BetaCompactionBlockParam = object { content, type, cache\_control, encrypted\_content }
+BetaCompactionBlockParam object { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -2502,7 +2502,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2512,7 +2512,7 @@ encrypted\_content: optional string
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-BetaCompactionContentBlockDelta = object { content, encrypted\_content, type }
+BetaCompactionContentBlockDelta object { content, encrypted\_content, type }
 
 content: string
 
@@ -2522,7 +2522,7 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -2558,7 +2558,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaContainer = object { id, expires\_at, skills }
+BetaContainer object { id, expires\_at, skills }
 
 Information about the container used in the request (for the code execution tool)
 
@@ -2582,7 +2582,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -2592,7 +2592,7 @@ version: string
 
 Skill version or 'latest' for most recent version
 
-BetaContainerParams = object { id, skills }
+BetaContainerParams object { id, skills }
 
 Container parameters with skills to be loaded.
 
@@ -2612,7 +2612,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -2622,7 +2622,7 @@ version: optional string
 
 Skill version or 'latest' for most recent version
 
-BetaContainerUploadBlock = object { file\_id, type }
+BetaContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -2630,7 +2630,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaContainerUploadBlockParam = object { file\_id, type, cache\_control }
+BetaContainerUploadBlockParam object { file\_id, type, cache\_control }
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
@@ -2656,7 +2656,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2666,9 +2666,9 @@ BetaContentBlock = [BetaTextBlock](api/beta.md) { citations, text, type }  or [B
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlock = object { citations, text, type }
+BetaTextBlock object { citations, text, type }
 
 citations: array of [BetaTextCitation](api/beta.md)
 
@@ -2676,9 +2676,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -2694,7 +2694,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -2710,7 +2710,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -2736,7 +2736,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -2748,7 +2748,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -2784,7 +2784,7 @@ text: string
 
 type: "text"
 
-BetaThinkingBlock = object { signature, thinking, type }
+BetaThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -2792,13 +2792,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlock = object { data, type }
+BetaRedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlock = object { id, input, name, 2 more }
+BetaToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -2812,15 +2812,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -2828,13 +2828,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaServerToolUseBlock = object { id, input, name, 2 more }
+BetaServerToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -2842,7 +2842,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -2866,15 +2866,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -2882,23 +2882,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebSearchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2914,7 +2914,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
+array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -2934,15 +2934,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -2950,23 +2950,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebFetchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlock = object { error\_code, type }
+BetaWebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2986,7 +2986,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock = object { content, retrieved\_at, type, url }
+BetaWebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
 
@@ -2998,9 +2998,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -3008,7 +3008,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -3040,15 +3040,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -3056,23 +3056,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+BetaAdvisorToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultError = object { error\_code, type }
+BetaAdvisorToolResultError object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -3088,13 +3088,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock = object { text, type }
+BetaAdvisorResultBlock object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -3106,19 +3106,19 @@ tool\_use\_id: string
 
 type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3130,7 +3130,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -3146,7 +3146,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -3168,17 +3168,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BetaBashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaBashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultError = object { error\_code, type }
+BetaBashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3192,7 +3192,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -3212,17 +3212,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-BetaTextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaTextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+BetaTextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3238,13 +3238,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-BetaTextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+BetaTextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -3260,13 +3260,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-BetaTextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -3284,17 +3284,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-BetaToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+BetaToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultError = object { error\_code, error\_message, type }
+BetaToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3308,7 +3308,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlock = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlock](api/beta.md) { tool\_name, type }
 
@@ -3322,7 +3322,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-BetaMCPToolUseBlock = object { id, input, name, 2 more }
+BetaMCPToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -3338,13 +3338,13 @@ The name of the MCP server
 
 type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock = object { content, is\_error, tool\_use\_id, type }
+BetaMCPToolResultBlock object { content, is\_error, tool\_use\_id, type }
 
 content: string or array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
@@ -3354,9 +3354,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -3372,7 +3372,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -3388,7 +3388,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -3414,7 +3414,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -3426,7 +3426,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -3468,7 +3468,7 @@ tool\_use\_id: string
 
 type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock = object { file\_id, type }
+BetaContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -3476,7 +3476,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -3498,9 +3498,9 @@ BetaContentBlockParam = [BetaTextBlockParam](api/beta.md) { text, type, cache\_c
 
 Regular text content.
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -3523,7 +3523,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3531,9 +3531,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3547,7 +3547,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3561,7 +3561,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3585,7 +3585,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -3597,7 +3597,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -3629,19 +3629,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -3653,13 +3653,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -3684,19 +3684,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaRequestDocumentBlock = object { source, type, cache\_control, 3 more }
+BetaRequestDocumentBlock object { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -3704,7 +3704,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -3712,19 +3712,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -3747,7 +3747,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3755,9 +3755,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3771,7 +3771,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3785,7 +3785,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -3809,7 +3809,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -3821,7 +3821,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -3853,19 +3853,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -3877,13 +3877,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -3908,7 +3908,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3916,13 +3916,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -3947,7 +3947,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3961,7 +3961,7 @@ context: optional string
 
 title: optional string
 
-BetaSearchResultBlockParam = object { content, source, title, 3 more }
+BetaSearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -3986,7 +3986,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3994,9 +3994,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4010,7 +4010,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4024,7 +4024,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4048,7 +4048,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -4060,7 +4060,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -4115,7 +4115,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4125,7 +4125,7 @@ citations: optional [BetaCitationsConfigParam](api/beta.md) { enabled }
 
 enabled: optional boolean
 
-BetaThinkingBlockParam = object { signature, thinking, type }
+BetaThinkingBlockParam object { signature, thinking, type }
 
 signature: string
 
@@ -4133,13 +4133,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlockParam = object { data, type }
+BetaRedactedThinkingBlockParam object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlockParam = object { id, input, name, 3 more }
+BetaToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -4166,7 +4166,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4176,15 +4176,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -4192,13 +4192,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
+BetaToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
 
@@ -4221,7 +4221,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4229,15 +4229,15 @@ Accepts one of the following:
 
 content: optional string or array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
+array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -4260,7 +4260,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4268,9 +4268,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4284,7 +4284,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4298,7 +4298,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4322,7 +4322,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -4334,7 +4334,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -4366,19 +4366,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -4390,13 +4390,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -4421,13 +4421,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaSearchResultBlockParam = object { content, source, title, 3 more }
+BetaSearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -4452,7 +4452,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4460,9 +4460,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4476,7 +4476,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4490,7 +4490,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4514,7 +4514,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -4526,7 +4526,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -4581,7 +4581,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4591,13 +4591,13 @@ citations: optional [BetaCitationsConfigParam](api/beta.md) { enabled }
 
 enabled: optional boolean
 
-BetaRequestDocumentBlock = object { source, type, cache\_control, 3 more }
+BetaRequestDocumentBlock object { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -4605,7 +4605,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -4613,19 +4613,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -4648,7 +4648,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4656,9 +4656,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4672,7 +4672,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4686,7 +4686,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -4710,7 +4710,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -4722,7 +4722,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -4754,19 +4754,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -4778,13 +4778,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -4809,7 +4809,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4817,13 +4817,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -4848,7 +4848,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4862,7 +4862,7 @@ context: optional string
 
 title: optional string
 
-BetaToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+BetaToolReferenceBlockParam object { tool\_name, type, cache\_control }
 
 Tool reference block that can be included in tool\_result content.
 
@@ -4887,7 +4887,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4895,7 +4895,7 @@ Accepts one of the following:
 
 is\_error: optional boolean
 
-BetaServerToolUseBlockParam = object { id, input, name, 3 more }
+BetaServerToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -4903,7 +4903,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -4940,7 +4940,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4950,15 +4950,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -4966,17 +4966,17 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+BetaWebSearchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 ResultBlock = array of [BetaWebSearchResultBlockParam](api/beta.md) { encrypted\_content, title, type, 2 more }
 
@@ -4990,11 +4990,11 @@ url: string
 
 page\_age: optional string
 
-BetaWebSearchToolRequestError = object { error\_code, type }
+BetaWebSearchToolRequestError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5031,7 +5031,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5041,15 +5041,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -5057,23 +5057,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+BetaWebFetchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, type }  or [BetaWebFetchBlockParam](api/beta.md) { content, type, url, retrieved\_at }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlockParam = object { error\_code, type }
+BetaWebFetchToolResultErrorBlockParam object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5093,15 +5093,15 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlockParam = object { content, type, url, retrieved\_at }
+BetaWebFetchBlockParam object { content, type, url, retrieved\_at }
 
 content: [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -5109,7 +5109,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -5117,19 +5117,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -5152,7 +5152,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5160,9 +5160,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -5176,7 +5176,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -5190,7 +5190,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -5214,7 +5214,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -5226,7 +5226,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -5258,19 +5258,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -5282,13 +5282,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -5313,7 +5313,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5321,13 +5321,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -5352,7 +5352,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5397,7 +5397,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5407,15 +5407,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -5423,23 +5423,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaAdvisorToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlockParam](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultErrorParam = object { error\_code, type }
+BetaAdvisorToolResultErrorParam object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -5455,13 +5455,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlockParam = object { text, type }
+BetaAdvisorResultBlockParam object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlockParam = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlockParam object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -5490,25 +5490,25 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultErrorParam = object { error\_code, type }
+BetaCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5520,7 +5520,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type }
 
@@ -5536,7 +5536,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlockParam object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -5575,23 +5575,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaBashCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaBashCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaBashCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlockParam](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultErrorParam = object { error\_code, type }
+BetaBashCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5605,7 +5605,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type }
 
@@ -5642,23 +5642,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaTextEditorCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaTextEditorCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaTextEditorCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  or [BetaTextEditorCodeExecutionViewResultBlockParam](api/beta.md) { content, file\_type, type, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta.md) { type, lines, new\_lines, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+BetaTextEditorCodeExecutionToolResultErrorParam object { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5674,13 +5674,13 @@ type: "text\_editor\_code\_execution\_tool\_result\_error"
 
 error\_message: optional string
 
-BetaTextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+BetaTextEditorCodeExecutionViewResultBlockParam object { content, file\_type, type, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -5696,13 +5696,13 @@ start\_line: optional number
 
 total\_lines: optional number
 
-BetaTextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlockParam object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\_lines, 3 more }
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -5737,23 +5737,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaToolSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaToolSearchToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultErrorParam = object { error\_code, type }
+BetaToolSearchToolResultErrorParam object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5765,7 +5765,7 @@ Accepts one of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlockParam object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlockParam](api/beta.md) { tool\_name, type, cache\_control }
 
@@ -5790,7 +5790,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5819,13 +5819,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaMCPToolUseBlockParam = object { id, input, name, 3 more }
+BetaMCPToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -5856,13 +5856,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaRequestMCPToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
+BetaRequestMCPToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
 
@@ -5885,7 +5885,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5893,9 +5893,9 @@ Accepts one of the following:
 
 content: optional string or array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockParamContent = array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -5920,7 +5920,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5928,9 +5928,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -5944,7 +5944,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -5958,7 +5958,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -5982,7 +5982,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -5994,7 +5994,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -6028,7 +6028,7 @@ type: "search\_result\_location"
 
 is\_error: optional boolean
 
-BetaContainerUploadBlockParam = object { file\_id, type, cache\_control }
+BetaContainerUploadBlockParam object { file\_id, type, cache\_control }
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
@@ -6054,13 +6054,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaCompactionBlockParam = object { content, type, cache\_control, encrypted\_content }
+BetaCompactionBlockParam object { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -6093,7 +6093,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6103,19 +6103,19 @@ encrypted\_content: optional string
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -6138,7 +6138,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6146,9 +6146,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -6162,7 +6162,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -6176,7 +6176,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -6200,7 +6200,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -6212,7 +6212,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -6244,19 +6244,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -6268,13 +6268,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -6299,7 +6299,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6309,9 +6309,9 @@ type: "content"
 
 BetaContentBlockSourceContent = [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -6334,7 +6334,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6342,9 +6342,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -6358,7 +6358,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -6372,7 +6372,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -6396,7 +6396,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -6408,7 +6408,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -6440,19 +6440,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -6464,13 +6464,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -6495,21 +6495,21 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaContextManagementConfig = object { edits }
+BetaContextManagementConfig object { edits }
 
 edits: optional array of [BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_least, clear\_tool\_inputs, 3 more }  or [BetaClearThinking20251015Edit](api/beta.md) { type, keep }  or [BetaCompact20260112Edit](api/beta.md) { type, instructions, pause\_after\_compaction, trigger }
 
 List of context management edits to apply
 
-Accepts one of the following:
+One of the following:
 
-BetaClearToolUses20250919Edit = object { type, clear\_at\_least, clear\_tool\_inputs, 3 more }
+BetaClearToolUses20250919Edit object { type, clear\_at\_least, clear\_tool\_inputs, 3 more }
 
 type: "clear\_tool\_uses\_20250919"
 
@@ -6525,11 +6525,11 @@ clear\_tool\_inputs: optional boolean or array of string
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = boolean
+boolean
 
-UnionMember1 = array of string
+array of string
 
 exclude\_tools: optional array of string
 
@@ -6547,21 +6547,21 @@ trigger: optional [BetaInputTokensTrigger](api/beta.md) { type, value }  or [Bet
 
 Condition that triggers the context management strategy
 
-Accepts one of the following:
+One of the following:
 
-BetaInputTokensTrigger = object { type, value }
+BetaInputTokensTrigger object { type, value }
 
 type: "input\_tokens"
 
 value: number
 
-BetaToolUsesTrigger = object { type, value }
+BetaToolUsesTrigger object { type, value }
 
 type: "tool\_uses"
 
 value: number
 
-BetaClearThinking20251015Edit = object { type, keep }
+BetaClearThinking20251015Edit object { type, keep }
 
 type: "clear\_thinking\_20251015"
 
@@ -6569,21 +6569,21 @@ keep: optional [BetaThinkingTurns](api/beta.md) { type, value }  or [BetaAllThin
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Accepts one of the following:
+One of the following:
 
-BetaThinkingTurns = object { type, value }
+BetaThinkingTurns object { type, value }
 
 type: "thinking\_turns"
 
 value: number
 
-BetaAllThinkingTurns = object { type }
+BetaAllThinkingTurns object { type }
 
 type: "all"
 
-UnionMember2 = "all"
+"all"
 
-BetaCompact20260112Edit = object { type, instructions, pause\_after\_compaction, trigger }
+BetaCompact20260112Edit object { type, instructions, pause\_after\_compaction, trigger }
 
 Automatically compact older context when reaching the configured trigger threshold.
 
@@ -6605,15 +6605,15 @@ type: "input\_tokens"
 
 value: number
 
-BetaContextManagementResponse = object { applied\_edits }
+BetaContextManagementResponse object { applied\_edits }
 
 applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_tool\_uses, type }  or [BetaClearThinking20251015EditResponse](api/beta.md) { cleared\_input\_tokens, cleared\_thinking\_turns, type }
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
-BetaClearToolUses20250919EditResponse = object { cleared\_input\_tokens, cleared\_tool\_uses, type }
+BetaClearToolUses20250919EditResponse object { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
 cleared\_input\_tokens: number
 
@@ -6627,7 +6627,7 @@ type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse = object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+BetaClearThinking20251015EditResponse object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
 
 cleared\_input\_tokens: number
 
@@ -6641,13 +6641,13 @@ type: "clear\_thinking\_20251015"
 
 The type of context management edit applied.
 
-BetaCountTokensContextManagementResponse = object { original\_input\_tokens }
+BetaCountTokensContextManagementResponse object { original\_input\_tokens }
 
 original\_input\_tokens: number
 
 The original token count before context management was applied
 
-BetaDiagnostics = object { cache\_miss\_reason }
+BetaDiagnostics object { cache\_miss\_reason }
 
 Response envelope for request-level diagnostics. Present (possibly
 null) whenever the caller supplied `diagnostics` on the request.
@@ -6656,9 +6656,9 @@ cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_i
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
-BetaCacheMissModelChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissModelChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -6666,7 +6666,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "model\_changed"
 
-BetaCacheMissSystemChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissSystemChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -6674,7 +6674,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "system\_changed"
 
-BetaCacheMissToolsChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissToolsChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -6682,7 +6682,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "tools\_changed"
 
-BetaCacheMissMessagesChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissMessagesChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -6690,15 +6690,15 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "messages\_changed"
 
-BetaCacheMissPreviousMessageNotFound = object { type }
+BetaCacheMissPreviousMessageNotFound object { type }
 
 type: "previous\_message\_not\_found"
 
-BetaCacheMissUnavailable = object { type }
+BetaCacheMissUnavailable object { type }
 
 type: "unavailable"
 
-BetaDiagnosticsParam = object { previous\_message\_id }
+BetaDiagnosticsParam object { previous\_message\_id }
 
 Request-level diagnostics. Currently carries the previous response
 id for prompt-cache divergence reporting.
@@ -6707,13 +6707,13 @@ previous\_message\_id: optional string
 
 The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaDocumentBlock = object { citations, source, title, type }
+BetaDocumentBlock object { citations, source, title, type }
 
 citations: [BetaCitationConfig](api/beta.md) { enabled }
 
@@ -6723,9 +6723,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -6733,7 +6733,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -6747,7 +6747,7 @@ The title of the document
 
 type: "document"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -6765,7 +6765,7 @@ stderr: string
 
 type: "encrypted\_code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlockParam object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -6783,31 +6783,31 @@ stderr: string
 
 type: "encrypted\_code\_execution\_result"
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
 type: "file"
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
 type: "file"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -6819,13 +6819,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -6850,25 +6850,25 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaInputJSONDelta = object { partial\_json, type }
+BetaInputJSONDelta object { partial\_json, type }
 
 partial\_json: string
 
 type: "input\_json\_delta"
 
-BetaInputTokensClearAtLeast = object { type, value }
+BetaInputTokensClearAtLeast object { type, value }
 
 type: "input\_tokens"
 
 value: number
 
-BetaInputTokensTrigger = object { type, value }
+BetaInputTokensTrigger object { type, value }
 
 type: "input\_tokens"
 
@@ -6884,9 +6884,9 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -6922,7 +6922,7 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -6958,7 +6958,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -6992,15 +6992,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -7070,7 +7070,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -7080,7 +7080,7 @@ type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
 
-BetaJSONOutputFormat = object { schema, type }
+BetaJSONOutputFormat object { schema, type }
 
 schema: map[unknown]
 
@@ -7088,7 +7088,7 @@ The JSON schema of the format
 
 type: "json\_schema"
 
-BetaMCPToolConfig = object { defer\_loading, enabled }
+BetaMCPToolConfig object { defer\_loading, enabled }
 
 Configuration for a specific tool in an MCP toolset.
 
@@ -7096,7 +7096,7 @@ defer\_loading: optional boolean
 
 enabled: optional boolean
 
-BetaMCPToolDefaultConfig = object { defer\_loading, enabled }
+BetaMCPToolDefaultConfig object { defer\_loading, enabled }
 
 Default configuration for tools in an MCP toolset.
 
@@ -7104,13 +7104,13 @@ defer\_loading: optional boolean
 
 enabled: optional boolean
 
-BetaMCPToolResultBlock = object { content, is\_error, tool\_use\_id, type }
+BetaMCPToolResultBlock object { content, is\_error, tool\_use\_id, type }
 
 content: string or array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
@@ -7120,9 +7120,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -7138,7 +7138,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -7154,7 +7154,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -7180,7 +7180,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -7192,7 +7192,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -7234,7 +7234,7 @@ tool\_use\_id: string
 
 type: "mcp\_tool\_result"
 
-BetaMCPToolUseBlock = object { id, input, name, 2 more }
+BetaMCPToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -7250,7 +7250,7 @@ The name of the MCP server
 
 type: "mcp\_tool\_use"
 
-BetaMCPToolUseBlockParam = object { id, input, name, 3 more }
+BetaMCPToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -7281,13 +7281,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaMCPToolset = object { mcp\_server\_name, type, cache\_control, 2 more }
+BetaMCPToolset object { mcp\_server\_name, type, cache\_control, 2 more }
 
 Configuration for a group of tools from an MCP server.
 
@@ -7317,7 +7317,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7339,7 +7339,7 @@ defer\_loading: optional boolean
 
 enabled: optional boolean
 
-BetaMemoryTool20250818 = object { name, type, allowed\_callers, 4 more }
+BetaMemoryTool20250818 object { name, type, allowed\_callers, 4 more }
 
 name: "memory"
 
@@ -7351,7 +7351,7 @@ type: "memory\_20250818"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -7376,7 +7376,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7394,9 +7394,9 @@ When true, guarantees schema validation on tool names and inputs
 
 BetaMemoryTool20250818Command = [BetaMemoryTool20250818ViewCommand](api/beta.md) { command, path, view\_range }  or [BetaMemoryTool20250818CreateCommand](api/beta.md) { command, file\_text, path }  or [BetaMemoryTool20250818StrReplaceCommand](api/beta.md) { command, new\_str, old\_str, path }  or 3 more
 
-Accepts one of the following:
+One of the following:
 
-BetaMemoryTool20250818ViewCommand = object { command, path, view\_range }
+BetaMemoryTool20250818ViewCommand object { command, path, view\_range }
 
 command: "view"
 
@@ -7410,7 +7410,7 @@ view\_range: optional array of number
 
 Optional line range for viewing specific lines
 
-BetaMemoryTool20250818CreateCommand = object { command, file\_text, path }
+BetaMemoryTool20250818CreateCommand object { command, file\_text, path }
 
 command: "create"
 
@@ -7424,7 +7424,7 @@ path: string
 
 Path where the file should be created
 
-BetaMemoryTool20250818StrReplaceCommand = object { command, new\_str, old\_str, path }
+BetaMemoryTool20250818StrReplaceCommand object { command, new\_str, old\_str, path }
 
 command: "str\_replace"
 
@@ -7442,7 +7442,7 @@ path: string
 
 Path to the file where text should be replaced
 
-BetaMemoryTool20250818InsertCommand = object { command, insert\_line, insert\_text, path }
+BetaMemoryTool20250818InsertCommand object { command, insert\_line, insert\_text, path }
 
 command: "insert"
 
@@ -7460,7 +7460,7 @@ path: string
 
 Path to the file where text should be inserted
 
-BetaMemoryTool20250818DeleteCommand = object { command, path }
+BetaMemoryTool20250818DeleteCommand object { command, path }
 
 command: "delete"
 
@@ -7470,7 +7470,7 @@ path: string
 
 Path to the file or directory to delete
 
-BetaMemoryTool20250818RenameCommand = object { command, new\_path, old\_path }
+BetaMemoryTool20250818RenameCommand object { command, new\_path, old\_path }
 
 command: "rename"
 
@@ -7484,7 +7484,7 @@ old\_path: string
 
 Current path of the file or directory
 
-BetaMemoryTool20250818CreateCommand = object { command, file\_text, path }
+BetaMemoryTool20250818CreateCommand object { command, file\_text, path }
 
 command: "create"
 
@@ -7498,7 +7498,7 @@ path: string
 
 Path where the file should be created
 
-BetaMemoryTool20250818DeleteCommand = object { command, path }
+BetaMemoryTool20250818DeleteCommand object { command, path }
 
 command: "delete"
 
@@ -7508,7 +7508,7 @@ path: string
 
 Path to the file or directory to delete
 
-BetaMemoryTool20250818InsertCommand = object { command, insert\_line, insert\_text, path }
+BetaMemoryTool20250818InsertCommand object { command, insert\_line, insert\_text, path }
 
 command: "insert"
 
@@ -7526,7 +7526,7 @@ path: string
 
 Path to the file where text should be inserted
 
-BetaMemoryTool20250818RenameCommand = object { command, new\_path, old\_path }
+BetaMemoryTool20250818RenameCommand object { command, new\_path, old\_path }
 
 command: "rename"
 
@@ -7540,7 +7540,7 @@ old\_path: string
 
 Current path of the file or directory
 
-BetaMemoryTool20250818StrReplaceCommand = object { command, new\_str, old\_str, path }
+BetaMemoryTool20250818StrReplaceCommand object { command, new\_str, old\_str, path }
 
 command: "str\_replace"
 
@@ -7558,7 +7558,7 @@ path: string
 
 Path to the file where text should be replaced
 
-BetaMemoryTool20250818ViewCommand = object { command, path, view\_range }
+BetaMemoryTool20250818ViewCommand object { command, path, view\_range }
 
 command: "view"
 
@@ -7572,7 +7572,7 @@ view\_range: optional array of number
 
 Optional line range for viewing specific lines
 
-BetaMessage = object { id, container, content, 9 more }
+BetaMessage object { id, container, content, 9 more }
 
 id: string
 
@@ -7604,7 +7604,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -7643,9 +7643,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlock = object { citations, text, type }
+BetaTextBlock object { citations, text, type }
 
 citations: array of [BetaTextCitation](api/beta.md)
 
@@ -7653,9 +7653,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -7671,7 +7671,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -7687,7 +7687,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -7713,7 +7713,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -7725,7 +7725,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -7761,7 +7761,7 @@ text: string
 
 type: "text"
 
-BetaThinkingBlock = object { signature, thinking, type }
+BetaThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -7769,13 +7769,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlock = object { data, type }
+BetaRedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlock = object { id, input, name, 2 more }
+BetaToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -7789,15 +7789,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -7805,13 +7805,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaServerToolUseBlock = object { id, input, name, 2 more }
+BetaServerToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -7819,7 +7819,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -7843,15 +7843,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -7859,23 +7859,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebSearchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -7891,7 +7891,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
+array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -7911,15 +7911,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -7927,23 +7927,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebFetchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlock = object { error\_code, type }
+BetaWebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -7963,7 +7963,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock = object { content, retrieved\_at, type, url }
+BetaWebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
 
@@ -7975,9 +7975,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -7985,7 +7985,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -8017,15 +8017,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -8033,23 +8033,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+BetaAdvisorToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultError = object { error\_code, type }
+BetaAdvisorToolResultError object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -8065,13 +8065,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock = object { text, type }
+BetaAdvisorResultBlock object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -8083,19 +8083,19 @@ tool\_use\_id: string
 
 type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8107,7 +8107,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -8123,7 +8123,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -8145,17 +8145,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BetaBashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaBashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultError = object { error\_code, type }
+BetaBashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8169,7 +8169,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -8189,17 +8189,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-BetaTextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaTextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+BetaTextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8215,13 +8215,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-BetaTextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+BetaTextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -8237,13 +8237,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-BetaTextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -8261,17 +8261,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-BetaToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+BetaToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultError = object { error\_code, error\_message, type }
+BetaToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8285,7 +8285,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlock = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlock](api/beta.md) { tool\_name, type }
 
@@ -8299,7 +8299,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-BetaMCPToolUseBlock = object { id, input, name, 2 more }
+BetaMCPToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -8315,13 +8315,13 @@ The name of the MCP server
 
 type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock = object { content, is\_error, tool\_use\_id, type }
+BetaMCPToolResultBlock object { content, is\_error, tool\_use\_id, type }
 
 content: string or array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
@@ -8331,9 +8331,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -8349,7 +8349,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -8365,7 +8365,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -8391,7 +8391,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -8403,7 +8403,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -8445,7 +8445,7 @@ tool\_use\_id: string
 
 type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock = object { file\_id, type }
+BetaContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -8453,7 +8453,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -8481,9 +8481,9 @@ applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta.md) { 
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
-BetaClearToolUses20250919EditResponse = object { cleared\_input\_tokens, cleared\_tool\_uses, type }
+BetaClearToolUses20250919EditResponse object { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
 cleared\_input\_tokens: number
 
@@ -8497,7 +8497,7 @@ type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse = object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+BetaClearThinking20251015EditResponse object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
 
 cleared\_input\_tokens: number
 
@@ -8520,9 +8520,9 @@ cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_i
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
-BetaCacheMissModelChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissModelChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -8530,7 +8530,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "model\_changed"
 
-BetaCacheMissSystemChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissSystemChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -8538,7 +8538,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "system\_changed"
 
-BetaCacheMissToolsChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissToolsChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -8546,7 +8546,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "tools\_changed"
 
-BetaCacheMissMessagesChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissMessagesChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -8554,11 +8554,11 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "messages\_changed"
 
-BetaCacheMissPreviousMessageNotFound = object { type }
+BetaCacheMissPreviousMessageNotFound object { type }
 
 type: "previous\_message\_not\_found"
 
-BetaCacheMissUnavailable = object { type }
+BetaCacheMissUnavailable object { type }
 
 type: "unavailable"
 
@@ -8568,15 +8568,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -8646,7 +8646,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -8664,7 +8664,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -8693,7 +8693,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -8773,9 +8773,9 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -8811,7 +8811,7 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -8847,7 +8847,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -8881,15 +8881,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -8959,7 +8959,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -8989,7 +8989,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -9001,13 +9001,13 @@ speed: "standard" or "fast"
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaMessageDeltaUsage = object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
+BetaMessageDeltaUsage object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
 
 cache\_creation\_input\_tokens: number
 
@@ -9031,9 +9031,9 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -9069,7 +9069,7 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -9105,7 +9105,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -9139,15 +9139,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -9217,7 +9217,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -9243,7 +9243,7 @@ web\_search\_requests: number
 
 The number of web search tool requests.
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -9279,19 +9279,19 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaMessageParam = object { content, role }
+BetaMessageParam object { content, role }
 
 content: string or array of [BetaContentBlockParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = array of [BetaContentBlockParam](api/beta.md)
+array of [BetaContentBlockParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -9314,7 +9314,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9322,9 +9322,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -9338,7 +9338,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -9352,7 +9352,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -9376,7 +9376,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -9388,7 +9388,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -9420,19 +9420,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -9444,13 +9444,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -9475,19 +9475,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaRequestDocumentBlock = object { source, type, cache\_control, 3 more }
+BetaRequestDocumentBlock object { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -9495,7 +9495,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -9503,19 +9503,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -9538,7 +9538,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9546,9 +9546,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -9562,7 +9562,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -9576,7 +9576,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -9600,7 +9600,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -9612,7 +9612,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -9644,19 +9644,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -9668,13 +9668,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -9699,7 +9699,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9707,13 +9707,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -9738,7 +9738,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9752,7 +9752,7 @@ context: optional string
 
 title: optional string
 
-BetaSearchResultBlockParam = object { content, source, title, 3 more }
+BetaSearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -9777,7 +9777,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9785,9 +9785,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -9801,7 +9801,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -9815,7 +9815,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -9839,7 +9839,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -9851,7 +9851,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -9906,7 +9906,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9916,7 +9916,7 @@ citations: optional [BetaCitationsConfigParam](api/beta.md) { enabled }
 
 enabled: optional boolean
 
-BetaThinkingBlockParam = object { signature, thinking, type }
+BetaThinkingBlockParam object { signature, thinking, type }
 
 signature: string
 
@@ -9924,13 +9924,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlockParam = object { data, type }
+BetaRedactedThinkingBlockParam object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlockParam = object { id, input, name, 3 more }
+BetaToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -9957,7 +9957,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9967,15 +9967,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -9983,13 +9983,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
+BetaToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
 
@@ -10012,7 +10012,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10020,15 +10020,15 @@ Accepts one of the following:
 
 content: optional string or array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
+array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -10051,7 +10051,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10059,9 +10059,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -10075,7 +10075,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -10089,7 +10089,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -10113,7 +10113,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -10125,7 +10125,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -10157,19 +10157,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -10181,13 +10181,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -10212,13 +10212,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaSearchResultBlockParam = object { content, source, title, 3 more }
+BetaSearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -10243,7 +10243,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10251,9 +10251,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -10267,7 +10267,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -10281,7 +10281,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -10305,7 +10305,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -10317,7 +10317,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -10372,7 +10372,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10382,13 +10382,13 @@ citations: optional [BetaCitationsConfigParam](api/beta.md) { enabled }
 
 enabled: optional boolean
 
-BetaRequestDocumentBlock = object { source, type, cache\_control, 3 more }
+BetaRequestDocumentBlock object { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -10396,7 +10396,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -10404,19 +10404,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -10439,7 +10439,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10447,9 +10447,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -10463,7 +10463,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -10477,7 +10477,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -10501,7 +10501,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -10513,7 +10513,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -10545,19 +10545,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -10569,13 +10569,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -10600,7 +10600,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10608,13 +10608,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -10639,7 +10639,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10653,7 +10653,7 @@ context: optional string
 
 title: optional string
 
-BetaToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+BetaToolReferenceBlockParam object { tool\_name, type, cache\_control }
 
 Tool reference block that can be included in tool\_result content.
 
@@ -10678,7 +10678,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10686,7 +10686,7 @@ Accepts one of the following:
 
 is\_error: optional boolean
 
-BetaServerToolUseBlockParam = object { id, input, name, 3 more }
+BetaServerToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -10694,7 +10694,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -10731,7 +10731,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10741,15 +10741,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -10757,17 +10757,17 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+BetaWebSearchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 ResultBlock = array of [BetaWebSearchResultBlockParam](api/beta.md) { encrypted\_content, title, type, 2 more }
 
@@ -10781,11 +10781,11 @@ url: string
 
 page\_age: optional string
 
-BetaWebSearchToolRequestError = object { error\_code, type }
+BetaWebSearchToolRequestError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -10822,7 +10822,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10832,15 +10832,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -10848,23 +10848,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+BetaWebFetchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, type }  or [BetaWebFetchBlockParam](api/beta.md) { content, type, url, retrieved\_at }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlockParam = object { error\_code, type }
+BetaWebFetchToolResultErrorBlockParam object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -10884,15 +10884,15 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlockParam = object { content, type, url, retrieved\_at }
+BetaWebFetchBlockParam object { content, type, url, retrieved\_at }
 
 content: [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -10900,7 +10900,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -10908,19 +10908,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -10943,7 +10943,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10951,9 +10951,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -10967,7 +10967,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -10981,7 +10981,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -11005,7 +11005,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -11017,7 +11017,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -11049,19 +11049,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -11073,13 +11073,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -11104,7 +11104,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11112,13 +11112,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -11143,7 +11143,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11188,7 +11188,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11198,15 +11198,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -11214,23 +11214,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaAdvisorToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlockParam](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultErrorParam = object { error\_code, type }
+BetaAdvisorToolResultErrorParam object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -11246,13 +11246,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlockParam = object { text, type }
+BetaAdvisorResultBlockParam object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlockParam = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlockParam object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -11281,25 +11281,25 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultErrorParam = object { error\_code, type }
+BetaCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11311,7 +11311,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type }
 
@@ -11327,7 +11327,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlockParam = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlockParam object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -11366,23 +11366,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaBashCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaBashCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaBashCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlockParam](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultErrorParam = object { error\_code, type }
+BetaBashCodeExecutionToolResultErrorParam object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11396,7 +11396,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlockParam = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlockParam object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlockParam](api/beta.md) { file\_id, type }
 
@@ -11433,23 +11433,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaTextEditorCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaTextEditorCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaTextEditorCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  or [BetaTextEditorCodeExecutionViewResultBlockParam](api/beta.md) { content, file\_type, type, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta.md) { type, lines, new\_lines, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+BetaTextEditorCodeExecutionToolResultErrorParam object { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11465,13 +11465,13 @@ type: "text\_editor\_code\_execution\_tool\_result\_error"
 
 error\_message: optional string
 
-BetaTextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+BetaTextEditorCodeExecutionViewResultBlockParam object { content, file\_type, type, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -11487,13 +11487,13 @@ start\_line: optional number
 
 total\_lines: optional number
 
-BetaTextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlockParam object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\_lines, 3 more }
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -11528,23 +11528,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaToolSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaToolSearchToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultErrorParam = object { error\_code, type }
+BetaToolSearchToolResultErrorParam object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11556,7 +11556,7 @@ Accepts one of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlockParam object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlockParam](api/beta.md) { tool\_name, type, cache\_control }
 
@@ -11581,7 +11581,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11610,13 +11610,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaMCPToolUseBlockParam = object { id, input, name, 3 more }
+BetaMCPToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -11647,13 +11647,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaRequestMCPToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
+BetaRequestMCPToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
 
@@ -11676,7 +11676,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11684,9 +11684,9 @@ Accepts one of the following:
 
 content: optional string or array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockParamContent = array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -11711,7 +11711,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11719,9 +11719,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -11735,7 +11735,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -11749,7 +11749,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -11773,7 +11773,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -11785,7 +11785,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -11819,7 +11819,7 @@ type: "search\_result\_location"
 
 is\_error: optional boolean
 
-BetaContainerUploadBlockParam = object { file\_id, type, cache\_control }
+BetaContainerUploadBlockParam object { file\_id, type, cache\_control }
 
 A content block that represents a file to be uploaded to the container
 Files uploaded via this block will be available in the container's input directory.
@@ -11845,13 +11845,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaCompactionBlockParam = object { content, type, cache\_control, encrypted\_content }
+BetaCompactionBlockParam object { content, type, cache\_control, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -11884,7 +11884,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11896,13 +11896,13 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 role: "user" or "assistant"
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
 "assistant"
 
-BetaMessageTokensCount = object { context\_management, input\_tokens }
+BetaMessageTokensCount object { context\_management, input\_tokens }
 
 context\_management: [BetaCountTokensContextManagementResponse](api/beta.md) { original\_input\_tokens }
 
@@ -11916,7 +11916,7 @@ input\_tokens: number
 
 The total number of tokens across the provided list of messages, system prompt, and tools.
 
-BetaMetadata = object { user\_id }
+BetaMetadata object { user\_id }
 
 user\_id: optional string
 
@@ -11926,13 +11926,13 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-BetaOutputConfig = object { effort, format, task\_budget }
+BetaOutputConfig object { effort, format, task\_budget }
 
 effort: optional "low" or "medium" or "high" or 2 more
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 "low"
 
@@ -11970,7 +11970,7 @@ remaining: optional number
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -11980,27 +11980,27 @@ type: "text"
 
 BetaRawContentBlockDelta = [BetaTextDelta](api/beta.md) { text, type }  or [BetaInputJSONDelta](api/beta.md) { partial\_json, type }  or [BetaCitationsDelta](api/beta.md) { citation, type }  or 3 more
 
-Accepts one of the following:
+One of the following:
 
-BetaTextDelta = object { text, type }
+BetaTextDelta object { text, type }
 
 text: string
 
 type: "text\_delta"
 
-BetaInputJSONDelta = object { partial\_json, type }
+BetaInputJSONDelta object { partial\_json, type }
 
 partial\_json: string
 
 type: "input\_json\_delta"
 
-BetaCitationsDelta = object { citation, type }
+BetaCitationsDelta object { citation, type }
 
 citation: [BetaCitationCharLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationPageLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationContentBlockLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12016,7 +12016,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12032,7 +12032,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12058,7 +12058,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -12070,7 +12070,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -12104,19 +12104,19 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-BetaThinkingDelta = object { thinking, type }
+BetaThinkingDelta object { thinking, type }
 
 thinking: string
 
 type: "thinking\_delta"
 
-BetaSignatureDelta = object { signature, type }
+BetaSignatureDelta object { signature, type }
 
 signature: string
 
 type: "signature\_delta"
 
-BetaCompactionContentBlockDelta = object { content, encrypted\_content, type }
+BetaCompactionContentBlockDelta object { content, encrypted\_content, type }
 
 content: string
 
@@ -12126,31 +12126,31 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction\_delta"
 
-BetaRawContentBlockDeltaEvent = object { delta, index, type }
+BetaRawContentBlockDeltaEvent object { delta, index, type }
 
 delta: [BetaRawContentBlockDelta](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextDelta = object { text, type }
+BetaTextDelta object { text, type }
 
 text: string
 
 type: "text\_delta"
 
-BetaInputJSONDelta = object { partial\_json, type }
+BetaInputJSONDelta object { partial\_json, type }
 
 partial\_json: string
 
 type: "input\_json\_delta"
 
-BetaCitationsDelta = object { citation, type }
+BetaCitationsDelta object { citation, type }
 
 citation: [BetaCitationCharLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationPageLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationContentBlockLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12166,7 +12166,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12182,7 +12182,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12208,7 +12208,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -12220,7 +12220,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -12254,19 +12254,19 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-BetaThinkingDelta = object { thinking, type }
+BetaThinkingDelta object { thinking, type }
 
 thinking: string
 
 type: "thinking\_delta"
 
-BetaSignatureDelta = object { signature, type }
+BetaSignatureDelta object { signature, type }
 
 signature: string
 
 type: "signature\_delta"
 
-BetaCompactionContentBlockDelta = object { content, encrypted\_content, type }
+BetaCompactionContentBlockDelta object { content, encrypted\_content, type }
 
 content: string
 
@@ -12280,15 +12280,15 @@ index: number
 
 type: "content\_block\_delta"
 
-BetaRawContentBlockStartEvent = object { content\_block, index, type }
+BetaRawContentBlockStartEvent object { content\_block, index, type }
 
 content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  or [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  or [BetaRedactedThinkingBlock](api/beta.md) { data, type }  or 13 more
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlock = object { citations, text, type }
+BetaTextBlock object { citations, text, type }
 
 citations: array of [BetaTextCitation](api/beta.md)
 
@@ -12296,9 +12296,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12314,7 +12314,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12330,7 +12330,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12356,7 +12356,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -12368,7 +12368,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -12404,7 +12404,7 @@ text: string
 
 type: "text"
 
-BetaThinkingBlock = object { signature, thinking, type }
+BetaThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -12412,13 +12412,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlock = object { data, type }
+BetaRedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlock = object { id, input, name, 2 more }
+BetaToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -12432,15 +12432,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -12448,13 +12448,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaServerToolUseBlock = object { id, input, name, 2 more }
+BetaServerToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -12462,7 +12462,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -12486,15 +12486,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -12502,23 +12502,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebSearchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12534,7 +12534,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
+array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -12554,15 +12554,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -12570,23 +12570,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebFetchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlock = object { error\_code, type }
+BetaWebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12606,7 +12606,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock = object { content, retrieved\_at, type, url }
+BetaWebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
 
@@ -12618,9 +12618,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -12628,7 +12628,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -12660,15 +12660,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -12676,23 +12676,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+BetaAdvisorToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultError = object { error\_code, type }
+BetaAdvisorToolResultError object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -12708,13 +12708,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock = object { text, type }
+BetaAdvisorResultBlock object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -12726,19 +12726,19 @@ tool\_use\_id: string
 
 type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12750,7 +12750,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -12766,7 +12766,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -12788,17 +12788,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BetaBashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaBashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultError = object { error\_code, type }
+BetaBashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12812,7 +12812,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -12832,17 +12832,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-BetaTextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaTextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+BetaTextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12858,13 +12858,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-BetaTextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+BetaTextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -12880,13 +12880,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-BetaTextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -12904,17 +12904,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-BetaToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+BetaToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultError = object { error\_code, error\_message, type }
+BetaToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12928,7 +12928,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlock = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlock](api/beta.md) { tool\_name, type }
 
@@ -12942,7 +12942,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-BetaMCPToolUseBlock = object { id, input, name, 2 more }
+BetaMCPToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -12958,13 +12958,13 @@ The name of the MCP server
 
 type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock = object { content, is\_error, tool\_use\_id, type }
+BetaMCPToolResultBlock object { content, is\_error, tool\_use\_id, type }
 
 content: string or array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
@@ -12974,9 +12974,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -12992,7 +12992,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -13008,7 +13008,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -13034,7 +13034,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -13046,7 +13046,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -13088,7 +13088,7 @@ tool\_use\_id: string
 
 type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock = object { file\_id, type }
+BetaContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -13096,7 +13096,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -13118,13 +13118,13 @@ index: number
 
 type: "content\_block\_start"
 
-BetaRawContentBlockStopEvent = object { index, type }
+BetaRawContentBlockStopEvent object { index, type }
 
 index: number
 
 type: "content\_block\_stop"
 
-BetaRawMessageDeltaEvent = object { context\_management, delta, type, usage }
+BetaRawMessageDeltaEvent object { context\_management, delta, type, usage }
 
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }
 
@@ -13134,9 +13134,9 @@ applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta.md) { 
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
-BetaClearToolUses20250919EditResponse = object { cleared\_input\_tokens, cleared\_tool\_uses, type }
+BetaClearToolUses20250919EditResponse object { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
 cleared\_input\_tokens: number
 
@@ -13150,7 +13150,7 @@ type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse = object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+BetaClearThinking20251015EditResponse object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
 
 cleared\_input\_tokens: number
 
@@ -13190,7 +13190,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -13210,7 +13210,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -13226,7 +13226,7 @@ type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -13282,9 +13282,9 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -13320,7 +13320,7 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -13356,7 +13356,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -13390,15 +13390,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -13468,7 +13468,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -13494,7 +13494,7 @@ web\_search\_requests: number
 
 The number of web search tool requests.
 
-BetaRawMessageStartEvent = object { message, type }
+BetaRawMessageStartEvent object { message, type }
 
 message: [BetaMessage](api/beta.md) { id, container, content, 9 more }
 
@@ -13528,7 +13528,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -13567,9 +13567,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlock = object { citations, text, type }
+BetaTextBlock object { citations, text, type }
 
 citations: array of [BetaTextCitation](api/beta.md)
 
@@ -13577,9 +13577,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -13595,7 +13595,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -13611,7 +13611,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -13637,7 +13637,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -13649,7 +13649,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -13685,7 +13685,7 @@ text: string
 
 type: "text"
 
-BetaThinkingBlock = object { signature, thinking, type }
+BetaThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -13693,13 +13693,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlock = object { data, type }
+BetaRedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlock = object { id, input, name, 2 more }
+BetaToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -13713,15 +13713,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -13729,13 +13729,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaServerToolUseBlock = object { id, input, name, 2 more }
+BetaServerToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -13743,7 +13743,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -13767,15 +13767,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -13783,23 +13783,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebSearchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -13815,7 +13815,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
+array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -13835,15 +13835,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -13851,23 +13851,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebFetchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlock = object { error\_code, type }
+BetaWebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -13887,7 +13887,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock = object { content, retrieved\_at, type, url }
+BetaWebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
 
@@ -13899,9 +13899,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -13909,7 +13909,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -13941,15 +13941,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -13957,23 +13957,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+BetaAdvisorToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultError = object { error\_code, type }
+BetaAdvisorToolResultError object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -13989,13 +13989,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock = object { text, type }
+BetaAdvisorResultBlock object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -14007,19 +14007,19 @@ tool\_use\_id: string
 
 type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -14031,7 +14031,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -14047,7 +14047,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -14069,17 +14069,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BetaBashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaBashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultError = object { error\_code, type }
+BetaBashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -14093,7 +14093,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -14113,17 +14113,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-BetaTextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaTextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+BetaTextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -14139,13 +14139,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-BetaTextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+BetaTextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -14161,13 +14161,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-BetaTextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -14185,17 +14185,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-BetaToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+BetaToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultError = object { error\_code, error\_message, type }
+BetaToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -14209,7 +14209,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlock = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlock](api/beta.md) { tool\_name, type }
 
@@ -14223,7 +14223,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-BetaMCPToolUseBlock = object { id, input, name, 2 more }
+BetaMCPToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -14239,13 +14239,13 @@ The name of the MCP server
 
 type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock = object { content, is\_error, tool\_use\_id, type }
+BetaMCPToolResultBlock object { content, is\_error, tool\_use\_id, type }
 
 content: string or array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
@@ -14255,9 +14255,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -14273,7 +14273,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -14289,7 +14289,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -14315,7 +14315,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -14327,7 +14327,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -14369,7 +14369,7 @@ tool\_use\_id: string
 
 type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock = object { file\_id, type }
+BetaContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -14377,7 +14377,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -14405,9 +14405,9 @@ applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta.md) { 
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
-BetaClearToolUses20250919EditResponse = object { cleared\_input\_tokens, cleared\_tool\_uses, type }
+BetaClearToolUses20250919EditResponse object { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
 cleared\_input\_tokens: number
 
@@ -14421,7 +14421,7 @@ type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse = object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+BetaClearThinking20251015EditResponse object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
 
 cleared\_input\_tokens: number
 
@@ -14444,9 +14444,9 @@ cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_i
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
-BetaCacheMissModelChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissModelChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -14454,7 +14454,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "model\_changed"
 
-BetaCacheMissSystemChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissSystemChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -14462,7 +14462,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "system\_changed"
 
-BetaCacheMissToolsChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissToolsChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -14470,7 +14470,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "tools\_changed"
 
-BetaCacheMissMessagesChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissMessagesChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -14478,11 +14478,11 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "messages\_changed"
 
-BetaCacheMissPreviousMessageNotFound = object { type }
+BetaCacheMissPreviousMessageNotFound object { type }
 
 type: "previous\_message\_not\_found"
 
-BetaCacheMissUnavailable = object { type }
+BetaCacheMissUnavailable object { type }
 
 type: "unavailable"
 
@@ -14492,15 +14492,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -14570,7 +14570,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -14588,7 +14588,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -14617,7 +14617,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -14697,9 +14697,9 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -14735,7 +14735,7 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -14771,7 +14771,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -14805,15 +14805,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -14883,7 +14883,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -14913,7 +14913,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -14925,7 +14925,7 @@ speed: "standard" or "fast"
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -14933,15 +14933,15 @@ Accepts one of the following:
 
 type: "message\_start"
 
-BetaRawMessageStopEvent = object { type }
+BetaRawMessageStopEvent object { type }
 
 type: "message\_stop"
 
 BetaRawMessageStreamEvent = [BetaRawMessageStartEvent](api/beta.md) { message, type }  or [BetaRawMessageDeltaEvent](api/beta.md) { context\_management, delta, type, usage }  or [BetaRawMessageStopEvent](api/beta.md) { type }  or 3 more
 
-Accepts one of the following:
+One of the following:
 
-BetaRawMessageStartEvent = object { message, type }
+BetaRawMessageStartEvent object { message, type }
 
 message: [BetaMessage](api/beta.md) { id, container, content, 9 more }
 
@@ -14975,7 +14975,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -15014,9 +15014,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlock = object { citations, text, type }
+BetaTextBlock object { citations, text, type }
 
 citations: array of [BetaTextCitation](api/beta.md)
 
@@ -15024,9 +15024,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -15042,7 +15042,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -15058,7 +15058,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -15084,7 +15084,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -15096,7 +15096,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -15132,7 +15132,7 @@ text: string
 
 type: "text"
 
-BetaThinkingBlock = object { signature, thinking, type }
+BetaThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -15140,13 +15140,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlock = object { data, type }
+BetaRedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlock = object { id, input, name, 2 more }
+BetaToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -15160,15 +15160,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -15176,13 +15176,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaServerToolUseBlock = object { id, input, name, 2 more }
+BetaServerToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -15190,7 +15190,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -15214,15 +15214,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -15230,23 +15230,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebSearchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15262,7 +15262,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
+array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -15282,15 +15282,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -15298,23 +15298,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebFetchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlock = object { error\_code, type }
+BetaWebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15334,7 +15334,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock = object { content, retrieved\_at, type, url }
+BetaWebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
 
@@ -15346,9 +15346,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -15356,7 +15356,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -15388,15 +15388,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -15404,23 +15404,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+BetaAdvisorToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultError = object { error\_code, type }
+BetaAdvisorToolResultError object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -15436,13 +15436,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock = object { text, type }
+BetaAdvisorResultBlock object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -15454,19 +15454,19 @@ tool\_use\_id: string
 
 type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15478,7 +15478,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -15494,7 +15494,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -15516,17 +15516,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BetaBashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaBashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultError = object { error\_code, type }
+BetaBashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15540,7 +15540,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -15560,17 +15560,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-BetaTextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaTextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+BetaTextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15586,13 +15586,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-BetaTextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+BetaTextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -15608,13 +15608,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-BetaTextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -15632,17 +15632,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-BetaToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+BetaToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultError = object { error\_code, error\_message, type }
+BetaToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15656,7 +15656,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlock = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlock](api/beta.md) { tool\_name, type }
 
@@ -15670,7 +15670,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-BetaMCPToolUseBlock = object { id, input, name, 2 more }
+BetaMCPToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -15686,13 +15686,13 @@ The name of the MCP server
 
 type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock = object { content, is\_error, tool\_use\_id, type }
+BetaMCPToolResultBlock object { content, is\_error, tool\_use\_id, type }
 
 content: string or array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
@@ -15702,9 +15702,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -15720,7 +15720,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -15736,7 +15736,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -15762,7 +15762,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -15774,7 +15774,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -15816,7 +15816,7 @@ tool\_use\_id: string
 
 type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock = object { file\_id, type }
+BetaContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -15824,7 +15824,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -15852,9 +15852,9 @@ applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta.md) { 
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
-BetaClearToolUses20250919EditResponse = object { cleared\_input\_tokens, cleared\_tool\_uses, type }
+BetaClearToolUses20250919EditResponse object { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
 cleared\_input\_tokens: number
 
@@ -15868,7 +15868,7 @@ type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse = object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+BetaClearThinking20251015EditResponse object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
 
 cleared\_input\_tokens: number
 
@@ -15891,9 +15891,9 @@ cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_i
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
-BetaCacheMissModelChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissModelChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -15901,7 +15901,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "model\_changed"
 
-BetaCacheMissSystemChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissSystemChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -15909,7 +15909,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "system\_changed"
 
-BetaCacheMissToolsChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissToolsChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -15917,7 +15917,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "tools\_changed"
 
-BetaCacheMissMessagesChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissMessagesChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -15925,11 +15925,11 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "messages\_changed"
 
-BetaCacheMissPreviousMessageNotFound = object { type }
+BetaCacheMissPreviousMessageNotFound object { type }
 
 type: "previous\_message\_not\_found"
 
-BetaCacheMissUnavailable = object { type }
+BetaCacheMissUnavailable object { type }
 
 type: "unavailable"
 
@@ -15939,15 +15939,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -16017,7 +16017,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -16035,7 +16035,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -16064,7 +16064,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -16144,9 +16144,9 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -16182,7 +16182,7 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -16218,7 +16218,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -16252,15 +16252,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -16330,7 +16330,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -16360,7 +16360,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -16372,7 +16372,7 @@ speed: "standard" or "fast"
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -16380,7 +16380,7 @@ Accepts one of the following:
 
 type: "message\_start"
 
-BetaRawMessageDeltaEvent = object { context\_management, delta, type, usage }
+BetaRawMessageDeltaEvent object { context\_management, delta, type, usage }
 
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }
 
@@ -16390,9 +16390,9 @@ applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta.md) { 
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
-BetaClearToolUses20250919EditResponse = object { cleared\_input\_tokens, cleared\_tool\_uses, type }
+BetaClearToolUses20250919EditResponse object { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
 cleared\_input\_tokens: number
 
@@ -16406,7 +16406,7 @@ type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse = object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+BetaClearThinking20251015EditResponse object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
 
 cleared\_input\_tokens: number
 
@@ -16446,7 +16446,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -16466,7 +16466,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -16482,7 +16482,7 @@ type: "refusal"
 
 stop\_reason: [BetaStopReason](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -16538,9 +16538,9 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -16576,7 +16576,7 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -16612,7 +16612,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -16646,15 +16646,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -16724,7 +16724,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -16750,19 +16750,19 @@ web\_search\_requests: number
 
 The number of web search tool requests.
 
-BetaRawMessageStopEvent = object { type }
+BetaRawMessageStopEvent object { type }
 
 type: "message\_stop"
 
-BetaRawContentBlockStartEvent = object { content\_block, index, type }
+BetaRawContentBlockStartEvent object { content\_block, index, type }
 
 content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  or [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  or [BetaRedactedThinkingBlock](api/beta.md) { data, type }  or 13 more
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlock = object { citations, text, type }
+BetaTextBlock object { citations, text, type }
 
 citations: array of [BetaTextCitation](api/beta.md)
 
@@ -16770,9 +16770,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -16788,7 +16788,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -16804,7 +16804,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -16830,7 +16830,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -16842,7 +16842,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -16878,7 +16878,7 @@ text: string
 
 type: "text"
 
-BetaThinkingBlock = object { signature, thinking, type }
+BetaThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -16886,13 +16886,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlock = object { data, type }
+BetaRedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlock = object { id, input, name, 2 more }
+BetaToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -16906,15 +16906,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -16922,13 +16922,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaServerToolUseBlock = object { id, input, name, 2 more }
+BetaServerToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -16936,7 +16936,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -16960,15 +16960,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -16976,23 +16976,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebSearchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17008,7 +17008,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
+array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -17028,15 +17028,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -17044,23 +17044,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebFetchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlock = object { error\_code, type }
+BetaWebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17080,7 +17080,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock = object { content, retrieved\_at, type, url }
+BetaWebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
 
@@ -17092,9 +17092,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -17102,7 +17102,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -17134,15 +17134,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -17150,23 +17150,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+BetaAdvisorToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultError = object { error\_code, type }
+BetaAdvisorToolResultError object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -17182,13 +17182,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock = object { text, type }
+BetaAdvisorResultBlock object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -17200,19 +17200,19 @@ tool\_use\_id: string
 
 type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17224,7 +17224,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -17240,7 +17240,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -17262,17 +17262,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BetaBashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaBashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultError = object { error\_code, type }
+BetaBashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17286,7 +17286,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -17306,17 +17306,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-BetaTextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaTextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+BetaTextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17332,13 +17332,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-BetaTextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+BetaTextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -17354,13 +17354,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-BetaTextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -17378,17 +17378,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-BetaToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+BetaToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultError = object { error\_code, error\_message, type }
+BetaToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17402,7 +17402,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlock = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlock](api/beta.md) { tool\_name, type }
 
@@ -17416,7 +17416,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-BetaMCPToolUseBlock = object { id, input, name, 2 more }
+BetaMCPToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -17432,13 +17432,13 @@ The name of the MCP server
 
 type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock = object { content, is\_error, tool\_use\_id, type }
+BetaMCPToolResultBlock object { content, is\_error, tool\_use\_id, type }
 
 content: string or array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
@@ -17448,9 +17448,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -17466,7 +17466,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -17482,7 +17482,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -17508,7 +17508,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -17520,7 +17520,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -17562,7 +17562,7 @@ tool\_use\_id: string
 
 type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock = object { file\_id, type }
+BetaContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -17570,7 +17570,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -17592,31 +17592,31 @@ index: number
 
 type: "content\_block\_start"
 
-BetaRawContentBlockDeltaEvent = object { delta, index, type }
+BetaRawContentBlockDeltaEvent object { delta, index, type }
 
 delta: [BetaRawContentBlockDelta](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextDelta = object { text, type }
+BetaTextDelta object { text, type }
 
 text: string
 
 type: "text\_delta"
 
-BetaInputJSONDelta = object { partial\_json, type }
+BetaInputJSONDelta object { partial\_json, type }
 
 partial\_json: string
 
 type: "input\_json\_delta"
 
-BetaCitationsDelta = object { citation, type }
+BetaCitationsDelta object { citation, type }
 
 citation: [BetaCitationCharLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationPageLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationContentBlockLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -17632,7 +17632,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -17648,7 +17648,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -17674,7 +17674,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -17686,7 +17686,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -17720,19 +17720,19 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-BetaThinkingDelta = object { thinking, type }
+BetaThinkingDelta object { thinking, type }
 
 thinking: string
 
 type: "thinking\_delta"
 
-BetaSignatureDelta = object { signature, type }
+BetaSignatureDelta object { signature, type }
 
 signature: string
 
 type: "signature\_delta"
 
-BetaCompactionContentBlockDelta = object { content, encrypted\_content, type }
+BetaCompactionContentBlockDelta object { content, encrypted\_content, type }
 
 content: string
 
@@ -17746,25 +17746,25 @@ index: number
 
 type: "content\_block\_delta"
 
-BetaRawContentBlockStopEvent = object { index, type }
+BetaRawContentBlockStopEvent object { index, type }
 
 index: number
 
 type: "content\_block\_stop"
 
-BetaRedactedThinkingBlock = object { data, type }
+BetaRedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaRedactedThinkingBlockParam = object { data, type }
+BetaRedactedThinkingBlockParam object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaRefusalStopDetails = object { category, explanation, type }
+BetaRefusalStopDetails object { category, explanation, type }
 
 Structured information about a refusal.
 
@@ -17774,7 +17774,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -17788,13 +17788,13 @@ This text is not guaranteed to be stable. `null` when no explanation is availabl
 
 type: "refusal"
 
-BetaRequestDocumentBlock = object { source, type, cache\_control, 3 more }
+BetaRequestDocumentBlock object { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -17802,7 +17802,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -17810,19 +17810,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -17845,7 +17845,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -17853,9 +17853,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -17869,7 +17869,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -17883,7 +17883,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -17907,7 +17907,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -17919,7 +17919,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -17951,19 +17951,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -17975,13 +17975,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -18006,7 +18006,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18014,13 +18014,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -18045,7 +18045,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18059,13 +18059,13 @@ context: optional string
 
 title: optional string
 
-BetaRequestMCPServerToolConfiguration = object { allowed\_tools, enabled }
+BetaRequestMCPServerToolConfiguration object { allowed\_tools, enabled }
 
 allowed\_tools: optional array of string
 
 enabled: optional boolean
 
-BetaRequestMCPServerURLDefinition = object { name, type, url, 2 more }
+BetaRequestMCPServerURLDefinition object { name, type, url, 2 more }
 
 name: string
 
@@ -18081,7 +18081,7 @@ allowed\_tools: optional array of string
 
 enabled: optional boolean
 
-BetaRequestMCPToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
+BetaRequestMCPToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
 
@@ -18104,7 +18104,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18112,9 +18112,9 @@ Accepts one of the following:
 
 content: optional string or array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockParamContent = array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -18139,7 +18139,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18147,9 +18147,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -18163,7 +18163,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -18177,7 +18177,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -18201,7 +18201,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -18213,7 +18213,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -18247,7 +18247,7 @@ type: "search\_result\_location"
 
 is\_error: optional boolean
 
-BetaSearchResultBlockParam = object { content, source, title, 3 more }
+BetaSearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -18272,7 +18272,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18280,9 +18280,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -18296,7 +18296,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -18310,7 +18310,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -18334,7 +18334,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -18346,7 +18346,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -18401,7 +18401,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18411,7 +18411,7 @@ citations: optional [BetaCitationsConfigParam](api/beta.md) { enabled }
 
 enabled: optional boolean
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -18419,13 +18419,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaServerToolUsage = object { web\_fetch\_requests, web\_search\_requests }
+BetaServerToolUsage object { web\_fetch\_requests, web\_search\_requests }
 
 web\_fetch\_requests: number
 
@@ -18435,7 +18435,7 @@ web\_search\_requests: number
 
 The number of web search tool requests.
 
-BetaServerToolUseBlock = object { id, input, name, 2 more }
+BetaServerToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -18443,7 +18443,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -18467,15 +18467,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -18483,13 +18483,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaServerToolUseBlockParam = object { id, input, name, 3 more }
+BetaServerToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -18497,7 +18497,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -18534,7 +18534,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18544,15 +18544,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -18560,19 +18560,19 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaSignatureDelta = object { signature, type }
+BetaSignatureDelta object { signature, type }
 
 signature: string
 
 type: "signature\_delta"
 
-BetaSkill = object { skill\_id, type, version }
+BetaSkill object { skill\_id, type, version }
 
 A skill that was loaded in a container (response model).
 
@@ -18584,7 +18584,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -18594,7 +18594,7 @@ version: string
 
 Skill version or 'latest' for most recent version
 
-BetaSkillParams = object { skill\_id, type, version }
+BetaSkillParams object { skill\_id, type, version }
 
 Specification for a skill to be loaded in a container (request model).
 
@@ -18606,7 +18606,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -18618,7 +18618,7 @@ Skill version or 'latest' for most recent version
 
 BetaStopReason = "end\_turn" or "max\_tokens" or "stop\_sequence" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -18636,7 +18636,7 @@ Accepts one of the following:
 
 "model\_context\_window\_exceeded"
 
-BetaTextBlock = object { citations, text, type }
+BetaTextBlock object { citations, text, type }
 
 citations: array of [BetaTextCitation](api/beta.md)
 
@@ -18644,9 +18644,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -18662,7 +18662,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -18678,7 +18678,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -18704,7 +18704,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -18716,7 +18716,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -18752,7 +18752,7 @@ text: string
 
 type: "text"
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -18775,7 +18775,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18783,9 +18783,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -18799,7 +18799,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -18813,7 +18813,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -18837,7 +18837,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -18849,7 +18849,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -18883,9 +18883,9 @@ type: "search\_result\_location"
 
 BetaTextCitation = [BetaCitationCharLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationPageLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or [BetaCitationContentBlockLocation](api/beta.md) { cited\_text, document\_index, document\_title, 4 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -18901,7 +18901,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -18917,7 +18917,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -18943,7 +18943,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -18955,7 +18955,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -18989,9 +18989,9 @@ type: "search\_result\_location"
 
 BetaTextCitationParam = [BetaCitationCharLocationParam](api/beta.md) { cited\_text, document\_index, document\_title, 3 more }  or [BetaCitationPageLocationParam](api/beta.md) { cited\_text, document\_index, document\_title, 3 more }  or [BetaCitationContentBlockLocationParam](api/beta.md) { cited\_text, document\_index, document\_title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -19005,7 +19005,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -19019,7 +19019,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -19043,7 +19043,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -19055,7 +19055,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -19087,25 +19087,25 @@ title: string
 
 type: "search\_result\_location"
 
-BetaTextDelta = object { text, type }
+BetaTextDelta object { text, type }
 
 text: string
 
 type: "text\_delta"
 
-BetaTextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlockParam object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -19119,7 +19119,7 @@ old\_start: number
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\_lines, 3 more }
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -19133,17 +19133,17 @@ old\_lines: optional number
 
 old\_start: optional number
 
-BetaTextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaTextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+BetaTextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19159,13 +19159,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-BetaTextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+BetaTextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -19181,13 +19181,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-BetaTextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -19205,17 +19205,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-BetaTextEditorCodeExecutionToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaTextEditorCodeExecutionToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaTextEditorCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  or [BetaTextEditorCodeExecutionViewResultBlockParam](api/beta.md) { content, file\_type, type, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta.md) { type, lines, new\_lines, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+BetaTextEditorCodeExecutionToolResultErrorParam object { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19231,13 +19231,13 @@ type: "text\_editor\_code\_execution\_tool\_result\_error"
 
 error\_message: optional string
 
-BetaTextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+BetaTextEditorCodeExecutionViewResultBlockParam object { content, file\_type, type, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -19253,13 +19253,13 @@ start\_line: optional number
 
 total\_lines: optional number
 
-BetaTextEditorCodeExecutionCreateResultBlockParam = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlockParam object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlockParam = object { type, lines, new\_lines, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlockParam object { type, lines, new\_lines, 3 more }
 
 type: "text\_editor\_code\_execution\_str\_replace\_result"
 
@@ -19294,17 +19294,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaTextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+BetaTextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19320,11 +19320,11 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-BetaTextEditorCodeExecutionToolResultErrorParam = object { error\_code, type, error\_message }
+BetaTextEditorCodeExecutionToolResultErrorParam object { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19340,13 +19340,13 @@ type: "text\_editor\_code\_execution\_tool\_result\_error"
 
 error\_message: optional string
 
-BetaTextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+BetaTextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -19362,13 +19362,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-BetaTextEditorCodeExecutionViewResultBlockParam = object { content, file\_type, type, 3 more }
+BetaTextEditorCodeExecutionViewResultBlockParam object { content, file\_type, type, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -19384,7 +19384,7 @@ start\_line: optional number
 
 total\_lines: optional number
 
-BetaThinkingBlock = object { signature, thinking, type }
+BetaThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -19392,7 +19392,7 @@ thinking: string
 
 type: "thinking"
 
-BetaThinkingBlockParam = object { signature, thinking, type }
+BetaThinkingBlockParam object { signature, thinking, type }
 
 signature: string
 
@@ -19400,7 +19400,7 @@ thinking: string
 
 type: "thinking"
 
-BetaThinkingConfigAdaptive = object { type, display }
+BetaThinkingConfigAdaptive object { type, display }
 
 type: "adaptive"
 
@@ -19408,17 +19408,17 @@ display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
 "omitted"
 
-BetaThinkingConfigDisabled = object { type }
+BetaThinkingConfigDisabled object { type }
 
 type: "disabled"
 
-BetaThinkingConfigEnabled = object { budget\_tokens, type, display }
+BetaThinkingConfigEnabled object { budget\_tokens, type, display }
 
 budget\_tokens: number
 
@@ -19436,7 +19436,7 @@ display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -19450,9 +19450,9 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Accepts one of the following:
+One of the following:
 
-BetaThinkingConfigEnabled = object { budget\_tokens, type, display }
+BetaThinkingConfigEnabled object { budget\_tokens, type, display }
 
 budget\_tokens: number
 
@@ -19470,17 +19470,17 @@ display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
 "omitted"
 
-BetaThinkingConfigDisabled = object { type }
+BetaThinkingConfigDisabled object { type }
 
 type: "disabled"
 
-BetaThinkingConfigAdaptive = object { type, display }
+BetaThinkingConfigAdaptive object { type, display }
 
 type: "adaptive"
 
@@ -19488,25 +19488,25 @@ display: optional "summarized" or "omitted"
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
 "omitted"
 
-BetaThinkingDelta = object { thinking, type }
+BetaThinkingDelta object { thinking, type }
 
 thinking: string
 
 type: "thinking\_delta"
 
-BetaThinkingTurns = object { type, value }
+BetaThinkingTurns object { type, value }
 
 type: "thinking\_turns"
 
 value: number
 
-BetaTokenTaskBudget = object { total, type, remaining }
+BetaTokenTaskBudget object { total, type, remaining }
 
 User-configurable total token budget across contexts.
 
@@ -19522,7 +19522,7 @@ remaining: optional number
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
-BetaTool = object { input\_schema, name, allowed\_callers, 7 more }
+BetaTool object { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: object { type, properties, required }
 
@@ -19548,7 +19548,7 @@ minLength1
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -19573,7 +19573,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -19601,7 +19601,7 @@ When true, guarantees schema validation on tool names and inputs
 
 type: optional "custom"
 
-BetaToolBash20241022 = object { name, type, allowed\_callers, 4 more }
+BetaToolBash20241022 object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -19613,7 +19613,7 @@ type: "bash\_20241022"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -19638,7 +19638,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -19654,7 +19654,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolBash20250124 = object { name, type, allowed\_callers, 4 more }
+BetaToolBash20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -19666,7 +19666,7 @@ type: "bash\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -19691,7 +19691,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -19711,9 +19711,9 @@ BetaToolChoice = [BetaToolChoiceAuto](api/beta.md) { type, disable\_parallel\_to
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Accepts one of the following:
+One of the following:
 
-BetaToolChoiceAuto = object { type, disable\_parallel\_tool\_use }
+BetaToolChoiceAuto object { type, disable\_parallel\_tool\_use }
 
 The model will automatically decide whether to use tools.
 
@@ -19725,7 +19725,7 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-BetaToolChoiceAny = object { type, disable\_parallel\_tool\_use }
+BetaToolChoiceAny object { type, disable\_parallel\_tool\_use }
 
 The model will use any available tools.
 
@@ -19737,7 +19737,7 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-BetaToolChoiceTool = object { name, type, disable\_parallel\_tool\_use }
+BetaToolChoiceTool object { name, type, disable\_parallel\_tool\_use }
 
 The model will use the specified tool with `tool_choice.name`.
 
@@ -19753,13 +19753,13 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-BetaToolChoiceNone = object { type }
+BetaToolChoiceNone object { type }
 
 The model will not be allowed to use tools.
 
 type: "none"
 
-BetaToolChoiceAny = object { type, disable\_parallel\_tool\_use }
+BetaToolChoiceAny object { type, disable\_parallel\_tool\_use }
 
 The model will use any available tools.
 
@@ -19771,7 +19771,7 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-BetaToolChoiceAuto = object { type, disable\_parallel\_tool\_use }
+BetaToolChoiceAuto object { type, disable\_parallel\_tool\_use }
 
 The model will automatically decide whether to use tools.
 
@@ -19783,13 +19783,13 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output at most one tool use.
 
-BetaToolChoiceNone = object { type }
+BetaToolChoiceNone object { type }
 
 The model will not be allowed to use tools.
 
 type: "none"
 
-BetaToolChoiceTool = object { name, type, disable\_parallel\_tool\_use }
+BetaToolChoiceTool object { name, type, disable\_parallel\_tool\_use }
 
 The model will use the specified tool with `tool_choice.name`.
 
@@ -19805,7 +19805,7 @@ Whether to disable parallel tool use.
 
 Defaults to `false`. If set to `true`, the model will output exactly one tool use.
 
-BetaToolComputerUse20241022 = object { display\_height\_px, display\_width\_px, name, 7 more }
+BetaToolComputerUse20241022 object { display\_height\_px, display\_width\_px, name, 7 more }
 
 display\_height\_px: number
 
@@ -19825,7 +19825,7 @@ type: "computer\_20241022"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -19850,7 +19850,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -19870,7 +19870,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolComputerUse20250124 = object { display\_height\_px, display\_width\_px, name, 7 more }
+BetaToolComputerUse20250124 object { display\_height\_px, display\_width\_px, name, 7 more }
 
 display\_height\_px: number
 
@@ -19890,7 +19890,7 @@ type: "computer\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -19915,7 +19915,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -19935,7 +19935,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolComputerUse20251124 = object { display\_height\_px, display\_width\_px, name, 8 more }
+BetaToolComputerUse20251124 object { display\_height\_px, display\_width\_px, name, 8 more }
 
 display\_height\_px: number
 
@@ -19955,7 +19955,7 @@ type: "computer\_20251124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -19980,7 +19980,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20004,13 +20004,13 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolReferenceBlock = object { tool\_name, type }
+BetaToolReferenceBlock object { tool\_name, type }
 
 tool\_name: string
 
 type: "tool\_reference"
 
-BetaToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+BetaToolReferenceBlockParam object { tool\_name, type, cache\_control }
 
 Tool reference block that can be included in tool\_result content.
 
@@ -20035,13 +20035,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaToolResultBlockParam = object { tool\_use\_id, type, cache\_control, 2 more }
+BetaToolResultBlockParam object { tool\_use\_id, type, cache\_control, 2 more }
 
 tool\_use\_id: string
 
@@ -20064,7 +20064,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20072,15 +20072,15 @@ Accepts one of the following:
 
 content: optional string or array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
+array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -20103,7 +20103,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20111,9 +20111,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -20127,7 +20127,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -20141,7 +20141,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -20165,7 +20165,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -20177,7 +20177,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -20209,19 +20209,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -20233,13 +20233,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -20264,13 +20264,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaSearchResultBlockParam = object { content, source, title, 3 more }
+BetaSearchResultBlockParam object { content, source, title, 3 more }
 
 content: array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
 
@@ -20295,7 +20295,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20303,9 +20303,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -20319,7 +20319,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -20333,7 +20333,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -20357,7 +20357,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -20369,7 +20369,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -20424,7 +20424,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20434,13 +20434,13 @@ citations: optional [BetaCitationsConfigParam](api/beta.md) { enabled }
 
 enabled: optional boolean
 
-BetaRequestDocumentBlock = object { source, type, cache\_control, 3 more }
+BetaRequestDocumentBlock object { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -20448,7 +20448,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -20456,19 +20456,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -20491,7 +20491,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20499,9 +20499,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -20515,7 +20515,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -20529,7 +20529,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -20553,7 +20553,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -20565,7 +20565,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -20597,19 +20597,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -20621,13 +20621,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -20652,7 +20652,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20660,13 +20660,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -20691,7 +20691,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20705,7 +20705,7 @@ context: optional string
 
 title: optional string
 
-BetaToolReferenceBlockParam = object { tool\_name, type, cache\_control }
+BetaToolReferenceBlockParam object { tool\_name, type, cache\_control }
 
 Tool reference block that can be included in tool\_result content.
 
@@ -20730,7 +20730,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20738,7 +20738,7 @@ Accepts one of the following:
 
 is\_error: optional boolean
 
-BetaToolSearchToolBm25\_20251119 = object { name, type, allowed\_callers, 3 more }
+BetaToolSearchToolBm25\_20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_bm25"
 
@@ -20748,7 +20748,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -20756,7 +20756,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -20781,7 +20781,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20795,7 +20795,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolSearchToolRegex20251119 = object { name, type, allowed\_callers, 3 more }
+BetaToolSearchToolRegex20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_regex"
 
@@ -20805,7 +20805,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -20813,7 +20813,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -20838,7 +20838,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20852,17 +20852,17 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+BetaToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultError = object { error\_code, error\_message, type }
+BetaToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -20876,7 +20876,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlock = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlock](api/beta.md) { tool\_name, type }
 
@@ -20890,17 +20890,17 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-BetaToolSearchToolResultBlockParam = object { content, tool\_use\_id, type, cache\_control }
+BetaToolSearchToolResultBlockParam object { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultErrorParam = object { error\_code, type }
+BetaToolSearchToolResultErrorParam object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -20912,7 +20912,7 @@ Accepts one of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlockParam object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlockParam](api/beta.md) { tool\_name, type, cache\_control }
 
@@ -20937,7 +20937,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20966,17 +20966,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
 "1h"
 
-BetaToolSearchToolResultError = object { error\_code, error\_message, type }
+BetaToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -20990,11 +20990,11 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolResultErrorParam = object { error\_code, type }
+BetaToolSearchToolResultErrorParam object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -21006,7 +21006,7 @@ Accepts one of the following:
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlock = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlock](api/beta.md) { tool\_name, type }
 
@@ -21016,7 +21016,7 @@ type: "tool\_reference"
 
 type: "tool\_search\_tool\_search\_result"
 
-BetaToolSearchToolSearchResultBlockParam = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlockParam object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlockParam](api/beta.md) { tool\_name, type, cache\_control }
 
@@ -21041,7 +21041,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21049,7 +21049,7 @@ Accepts one of the following:
 
 type: "tool\_search\_tool\_search\_result"
 
-BetaToolTextEditor20241022 = object { name, type, allowed\_callers, 4 more }
+BetaToolTextEditor20241022 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -21061,7 +21061,7 @@ type: "text\_editor\_20241022"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21086,7 +21086,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21102,7 +21102,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250124 = object { name, type, allowed\_callers, 4 more }
+BetaToolTextEditor20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -21114,7 +21114,7 @@ type: "text\_editor\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21139,7 +21139,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21155,7 +21155,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250429 = object { name, type, allowed\_callers, 4 more }
+BetaToolTextEditor20250429 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -21167,7 +21167,7 @@ type: "text\_editor\_20250429"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21192,7 +21192,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21208,7 +21208,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250728 = object { name, type, allowed\_callers, 5 more }
+BetaToolTextEditor20250728 object { name, type, allowed\_callers, 5 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -21220,7 +21220,7 @@ type: "text\_editor\_20250728"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21245,7 +21245,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21269,9 +21269,9 @@ BetaToolUnion = [BetaTool](api/beta.md) { input\_schema, name, allowed\_callers,
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-Accepts one of the following:
+One of the following:
 
-BetaTool = object { input\_schema, name, allowed\_callers, 7 more }
+BetaTool object { input\_schema, name, allowed\_callers, 7 more }
 
 input\_schema: object { type, properties, required }
 
@@ -21297,7 +21297,7 @@ minLength1
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21322,7 +21322,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21350,7 +21350,7 @@ When true, guarantees schema validation on tool names and inputs
 
 type: optional "custom"
 
-BetaToolBash20241022 = object { name, type, allowed\_callers, 4 more }
+BetaToolBash20241022 object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -21362,7 +21362,7 @@ type: "bash\_20241022"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21387,7 +21387,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21403,7 +21403,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolBash20250124 = object { name, type, allowed\_callers, 4 more }
+BetaToolBash20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "bash"
 
@@ -21415,7 +21415,7 @@ type: "bash\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21440,7 +21440,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21456,7 +21456,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionTool20250522 = object { name, type, allowed\_callers, 3 more }
+BetaCodeExecutionTool20250522 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -21468,7 +21468,7 @@ type: "code\_execution\_20250522"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21493,7 +21493,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21507,7 +21507,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionTool20250825 = object { name, type, allowed\_callers, 3 more }
+BetaCodeExecutionTool20250825 object { name, type, allowed\_callers, 3 more }
 
 name: "code\_execution"
 
@@ -21519,7 +21519,7 @@ type: "code\_execution\_20250825"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21544,7 +21544,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21558,7 +21558,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaCodeExecutionTool20260120 = object { name, type, allowed\_callers, 3 more }
+BetaCodeExecutionTool20260120 object { name, type, allowed\_callers, 3 more }
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
@@ -21572,7 +21572,7 @@ type: "code\_execution\_20260120"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21597,7 +21597,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21611,7 +21611,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolComputerUse20241022 = object { display\_height\_px, display\_width\_px, name, 7 more }
+BetaToolComputerUse20241022 object { display\_height\_px, display\_width\_px, name, 7 more }
 
 display\_height\_px: number
 
@@ -21631,7 +21631,7 @@ type: "computer\_20241022"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21656,7 +21656,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21676,7 +21676,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaMemoryTool20250818 = object { name, type, allowed\_callers, 4 more }
+BetaMemoryTool20250818 object { name, type, allowed\_callers, 4 more }
 
 name: "memory"
 
@@ -21688,7 +21688,7 @@ type: "memory\_20250818"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21713,7 +21713,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21729,7 +21729,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolComputerUse20250124 = object { display\_height\_px, display\_width\_px, name, 7 more }
+BetaToolComputerUse20250124 object { display\_height\_px, display\_width\_px, name, 7 more }
 
 display\_height\_px: number
 
@@ -21749,7 +21749,7 @@ type: "computer\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21774,7 +21774,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21794,7 +21794,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20241022 = object { name, type, allowed\_callers, 4 more }
+BetaToolTextEditor20241022 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -21806,7 +21806,7 @@ type: "text\_editor\_20241022"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21831,7 +21831,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21847,7 +21847,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolComputerUse20251124 = object { display\_height\_px, display\_width\_px, name, 8 more }
+BetaToolComputerUse20251124 object { display\_height\_px, display\_width\_px, name, 8 more }
 
 display\_height\_px: number
 
@@ -21867,7 +21867,7 @@ type: "computer\_20251124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21892,7 +21892,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21916,7 +21916,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250124 = object { name, type, allowed\_callers, 4 more }
+BetaToolTextEditor20250124 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_editor"
 
@@ -21928,7 +21928,7 @@ type: "text\_editor\_20250124"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21953,7 +21953,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21969,7 +21969,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250429 = object { name, type, allowed\_callers, 4 more }
+BetaToolTextEditor20250429 object { name, type, allowed\_callers, 4 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -21981,7 +21981,7 @@ type: "text\_editor\_20250429"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22006,7 +22006,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22022,7 +22022,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolTextEditor20250728 = object { name, type, allowed\_callers, 5 more }
+BetaToolTextEditor20250728 object { name, type, allowed\_callers, 5 more }
 
 name: "str\_replace\_based\_edit\_tool"
 
@@ -22034,7 +22034,7 @@ type: "text\_editor\_20250728"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22059,7 +22059,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22079,7 +22079,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebSearchTool20250305 = object { name, type, allowed\_callers, 7 more }
+BetaWebSearchTool20250305 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -22091,7 +22091,7 @@ type: "web\_search\_20250305"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22124,7 +22124,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22164,7 +22164,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-BetaWebFetchTool20250910 = object { name, type, allowed\_callers, 8 more }
+BetaWebFetchTool20250910 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -22176,7 +22176,7 @@ type: "web\_fetch\_20250910"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22209,7 +22209,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22237,7 +22237,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebSearchTool20260209 = object { name, type, allowed\_callers, 7 more }
+BetaWebSearchTool20260209 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -22249,7 +22249,7 @@ type: "web\_search\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22282,7 +22282,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22322,7 +22322,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-BetaWebFetchTool20260209 = object { name, type, allowed\_callers, 8 more }
+BetaWebFetchTool20260209 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -22334,7 +22334,7 @@ type: "web\_fetch\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22367,7 +22367,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22395,7 +22395,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebFetchTool20260309 = object { name, type, allowed\_callers, 9 more }
+BetaWebFetchTool20260309 object { name, type, allowed\_callers, 9 more }
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
@@ -22409,7 +22409,7 @@ type: "web\_fetch\_20260309"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22442,7 +22442,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22474,7 +22474,7 @@ use\_cache: optional boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-BetaAdvisorTool20260301 = object { model, name, type, 6 more }
+BetaAdvisorTool20260301 object { model, name, type, 6 more }
 
 model: [Model](api/messages.md)
 
@@ -22482,15 +22482,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -22560,7 +22560,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 name: "advisor"
 
@@ -22572,7 +22572,7 @@ type: "advisor\_20260301"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22597,7 +22597,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22620,7 +22620,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22638,7 +22638,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolSearchToolBm25\_20251119 = object { name, type, allowed\_callers, 3 more }
+BetaToolSearchToolBm25\_20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_bm25"
 
@@ -22648,7 +22648,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_bm25\_20251119" or "tool\_search\_tool\_bm25"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -22656,7 +22656,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22681,7 +22681,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22695,7 +22695,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaToolSearchToolRegex20251119 = object { name, type, allowed\_callers, 3 more }
+BetaToolSearchToolRegex20251119 object { name, type, allowed\_callers, 3 more }
 
 name: "tool\_search\_tool\_regex"
 
@@ -22705,7 +22705,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_regex\_20251119" or "tool\_search\_tool\_regex"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -22713,7 +22713,7 @@ Accepts one of the following:
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22738,7 +22738,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22752,7 +22752,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaMCPToolset = object { mcp\_server\_name, type, cache\_control, 2 more }
+BetaMCPToolset object { mcp\_server\_name, type, cache\_control, 2 more }
 
 Configuration for a group of tools from an MCP server.
 
@@ -22782,7 +22782,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22804,7 +22804,7 @@ defer\_loading: optional boolean
 
 enabled: optional boolean
 
-BetaToolUseBlock = object { id, input, name, 2 more }
+BetaToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -22818,15 +22818,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -22834,13 +22834,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaToolUseBlockParam = object { id, input, name, 3 more }
+BetaToolUseBlockParam object { id, input, name, 3 more }
 
 id: string
 
@@ -22867,7 +22867,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22877,15 +22877,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -22893,37 +22893,37 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaToolUsesKeep = object { type, value }
+BetaToolUsesKeep object { type, value }
 
 type: "tool\_uses"
 
 value: number
 
-BetaToolUsesTrigger = object { type, value }
+BetaToolUsesTrigger object { type, value }
 
 type: "tool\_uses"
 
 value: number
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
+BetaUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
 
 cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -22963,9 +22963,9 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -23001,7 +23001,7 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -23037,7 +23037,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -23071,15 +23071,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -23149,7 +23149,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -23179,7 +23179,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -23191,13 +23191,13 @@ speed: "standard" or "fast"
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaUserLocation = object { type, city, country, 2 more }
+BetaUserLocation object { type, city, country, 2 more }
 
 type: "approximate"
 
@@ -23217,7 +23217,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-BetaWebFetchBlock = object { content, retrieved\_at, type, url }
+BetaWebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
 
@@ -23229,9 +23229,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -23239,7 +23239,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -23263,15 +23263,15 @@ url: string
 
 Fetched content URL
 
-BetaWebFetchBlockParam = object { content, type, url, retrieved\_at }
+BetaWebFetchBlockParam object { content, type, url, retrieved\_at }
 
 content: [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -23279,7 +23279,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -23287,19 +23287,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -23322,7 +23322,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23330,9 +23330,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -23346,7 +23346,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -23360,7 +23360,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -23384,7 +23384,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -23396,7 +23396,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -23428,19 +23428,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -23452,13 +23452,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -23483,7 +23483,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23491,13 +23491,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -23522,7 +23522,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23546,7 +23546,7 @@ retrieved\_at: optional string
 
 ISO 8601 timestamp when the content was retrieved
 
-BetaWebFetchTool20250910 = object { name, type, allowed\_callers, 8 more }
+BetaWebFetchTool20250910 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -23558,7 +23558,7 @@ type: "web\_fetch\_20250910"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -23591,7 +23591,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23619,7 +23619,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebFetchTool20260209 = object { name, type, allowed\_callers, 8 more }
+BetaWebFetchTool20260209 object { name, type, allowed\_callers, 8 more }
 
 name: "web\_fetch"
 
@@ -23631,7 +23631,7 @@ type: "web\_fetch\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -23664,7 +23664,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23692,7 +23692,7 @@ strict: optional boolean
 
 When true, guarantees schema validation on tool names and inputs
 
-BetaWebFetchTool20260309 = object { name, type, allowed\_callers, 9 more }
+BetaWebFetchTool20260309 object { name, type, allowed\_callers, 9 more }
 
 Web fetch tool with use\_cache parameter for bypassing cached content.
 
@@ -23706,7 +23706,7 @@ type: "web\_fetch\_20260309"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -23739,7 +23739,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23771,17 +23771,17 @@ use\_cache: optional boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-BetaWebFetchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebFetchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlock = object { error\_code, type }
+BetaWebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -23801,7 +23801,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock = object { content, retrieved\_at, type, url }
+BetaWebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
 
@@ -23813,9 +23813,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -23823,7 +23823,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -23855,15 +23855,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -23871,23 +23871,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+BetaWebFetchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, type }  or [BetaWebFetchBlockParam](api/beta.md) { content, type, url, retrieved\_at }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlockParam = object { error\_code, type }
+BetaWebFetchToolResultErrorBlockParam object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -23907,15 +23907,15 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlockParam = object { content, type, url, retrieved\_at }
+BetaWebFetchBlockParam object { content, type, url, retrieved\_at }
 
 content: [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  or [BetaContentBlockSource](api/beta.md) { content, type }  or 2 more
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -23923,7 +23923,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -23931,19 +23931,19 @@ media\_type: "text/plain"
 
 type: "text"
 
-BetaContentBlockSource = object { content, type }
+BetaContentBlockSource object { content, type }
 
 content: string or array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaContentBlockSourceContent = array of [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlockParam = object { text, type, cache\_control, citations }
+BetaTextBlockParam object { text, type, cache\_control, citations }
 
 text: string
 
@@ -23966,7 +23966,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23974,9 +23974,9 @@ Accepts one of the following:
 
 citations: optional array of [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -23990,7 +23990,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -24004,7 +24004,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocationParam = object { cited\_text, document\_index, document\_title, 3 more }
+BetaCitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
 
 cited\_text: string
 
@@ -24028,7 +24028,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationWebSearchResultLocationParam = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -24040,7 +24040,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocationParam = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -24072,19 +24072,19 @@ title: string
 
 type: "search\_result\_location"
 
-BetaImageBlockParam = object { source, type, cache\_control }
+BetaImageBlockParam object { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  or [BetaURLImageSource](api/beta.md) { type, url }  or [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64ImageSource = object { data, media\_type, type }
+BetaBase64ImageSource object { data, media\_type, type }
 
 data: string
 
 media\_type: "image/jpeg" or "image/png" or "image/gif" or "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -24096,13 +24096,13 @@ Accepts one of the following:
 
 type: "base64"
 
-BetaURLImageSource = object { type, url }
+BetaURLImageSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileImageSource = object { file\_id, type }
+BetaFileImageSource object { file\_id, type }
 
 file\_id: string
 
@@ -24127,7 +24127,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24135,13 +24135,13 @@ Accepts one of the following:
 
 type: "content"
 
-BetaURLPDFSource = object { type, url }
+BetaURLPDFSource object { type, url }
 
 type: "url"
 
 url: string
 
-BetaFileDocumentSource = object { file\_id, type }
+BetaFileDocumentSource object { file\_id, type }
 
 file\_id: string
 
@@ -24166,7 +24166,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24211,7 +24211,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24221,15 +24221,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -24237,17 +24237,17 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultErrorBlock = object { error\_code, type }
+BetaWebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24267,11 +24267,11 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchToolResultErrorBlockParam = object { error\_code, type }
+BetaWebFetchToolResultErrorBlockParam object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24293,7 +24293,7 @@ type: "web\_fetch\_tool\_result\_error"
 
 BetaWebFetchToolResultErrorCode = "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24311,7 +24311,7 @@ Accepts one of the following:
 
 "unavailable"
 
-BetaWebSearchResultBlock = object { encrypted\_content, page\_age, title, 2 more }
+BetaWebSearchResultBlock object { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -24323,7 +24323,7 @@ type: "web\_search\_result"
 
 url: string
 
-BetaWebSearchResultBlockParam = object { encrypted\_content, title, type, 2 more }
+BetaWebSearchResultBlockParam object { encrypted\_content, title, type, 2 more }
 
 encrypted\_content: string
 
@@ -24335,7 +24335,7 @@ url: string
 
 page\_age: optional string
 
-BetaWebSearchTool20250305 = object { name, type, allowed\_callers, 7 more }
+BetaWebSearchTool20250305 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -24347,7 +24347,7 @@ type: "web\_search\_20250305"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -24380,7 +24380,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24420,7 +24420,7 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-BetaWebSearchTool20260209 = object { name, type, allowed\_callers, 7 more }
+BetaWebSearchTool20260209 object { name, type, allowed\_callers, 7 more }
 
 name: "web\_search"
 
@@ -24432,7 +24432,7 @@ type: "web\_search\_20260209"
 
 allowed\_callers: optional array of "direct" or "code\_execution\_20250825" or "code\_execution\_20260120"
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -24465,7 +24465,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24505,11 +24505,11 @@ timezone: optional string
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
-BetaWebSearchToolRequestError = object { error\_code, type }
+BetaWebSearchToolRequestError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24525,17 +24525,17 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-BetaWebSearchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebSearchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24551,7 +24551,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
+array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -24571,15 +24571,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -24587,7 +24587,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -24595,13 +24595,13 @@ type: "code\_execution\_20260120"
 
 BetaWebSearchToolResultBlockContent = [BetaWebSearchToolResultError](api/beta.md) { error\_code, type }  or array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24617,7 +24617,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
+array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -24629,11 +24629,11 @@ type: "web\_search\_result"
 
 url: string
 
-BetaWebSearchToolResultBlockParam = object { content, tool\_use\_id, type, 2 more }
+BetaWebSearchToolResultBlockParam object { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 ResultBlock = array of [BetaWebSearchResultBlockParam](api/beta.md) { encrypted\_content, title, type, 2 more }
 
@@ -24647,11 +24647,11 @@ url: string
 
 page\_age: optional string
 
-BetaWebSearchToolRequestError = object { error\_code, type }
+BetaWebSearchToolRequestError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24688,7 +24688,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24698,15 +24698,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -24714,7 +24714,7 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
@@ -24722,7 +24722,7 @@ type: "code\_execution\_20260120"
 
 BetaWebSearchToolResultBlockParamContent = array of [BetaWebSearchResultBlockParam](api/beta.md) { encrypted\_content, title, type, 2 more }  or [BetaWebSearchToolRequestError](api/beta.md) { error\_code, type }
 
-Accepts one of the following:
+One of the following:
 
 ResultBlock = array of [BetaWebSearchResultBlockParam](api/beta.md) { encrypted\_content, title, type, 2 more }
 
@@ -24736,11 +24736,11 @@ url: string
 
 page\_age: optional string
 
-BetaWebSearchToolRequestError = object { error\_code, type }
+BetaWebSearchToolRequestError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24756,11 +24756,11 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24778,7 +24778,7 @@ type: "web\_search\_tool\_result\_error"
 
 BetaWebSearchToolResultErrorCode = "invalid\_tool\_input" or "unavailable" or "max\_uses\_exceeded" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24820,7 +24820,7 @@ GET/v1/messages/batches/{message\_batch\_id}/results
 
 ##### ModelsExpand Collapse
 
-BetaDeletedMessageBatch = object { id, type }
+BetaDeletedMessageBatch object { id, type }
 
 id: string
 
@@ -24832,7 +24832,7 @@ Deleted object type.
 
 For Message Batches, this is always `"message_batch_deleted"`.
 
-BetaMessageBatch = object { id, archived\_at, cancel\_initiated\_at, 7 more }
+BetaMessageBatch object { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 id: string
 
@@ -24868,7 +24868,7 @@ processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 
@@ -24922,67 +24922,67 @@ Object type.
 
 For Message Batches, this is always `"message_batch"`.
 
-BetaMessageBatchCanceledResult = object { type }
+BetaMessageBatchCanceledResult object { type }
 
 type: "canceled"
 
-BetaMessageBatchErroredResult = object { error, type }
+BetaMessageBatchErroredResult object { error, type }
 
 error: [BetaErrorResponse](api/beta.md) { error, request\_id, type }
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaInvalidRequestError = object { message, type }
+BetaInvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-BetaAuthenticationError = object { message, type }
+BetaAuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BetaBillingError = object { message, type }
+BetaBillingError object { message, type }
 
 message: string
 
 type: "billing\_error"
 
-BetaPermissionError = object { message, type }
+BetaPermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-BetaNotFoundError = object { message, type }
+BetaNotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-BetaRateLimitError = object { message, type }
+BetaRateLimitError object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
 
-BetaGatewayTimeoutError = object { message, type }
+BetaGatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-BetaAPIError = object { message, type }
+BetaAPIError object { message, type }
 
 message: string
 
 type: "api\_error"
 
-BetaOverloadedError = object { message, type }
+BetaOverloadedError object { message, type }
 
 message: string
 
@@ -24994,11 +24994,11 @@ type: "error"
 
 type: "errored"
 
-BetaMessageBatchExpiredResult = object { type }
+BetaMessageBatchExpiredResult object { type }
 
 type: "expired"
 
-BetaMessageBatchIndividualResponse = object { custom\_id, result }
+BetaMessageBatchIndividualResponse object { custom\_id, result }
 
 This is a single line in the response `.jsonl` file and does not represent the response as a whole.
 
@@ -25014,9 +25014,9 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageBatchSucceededResult = object { message, type }
+BetaMessageBatchSucceededResult object { message, type }
 
 message: [BetaMessage](api/beta.md) { id, container, content, 9 more }
 
@@ -25050,7 +25050,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -25089,9 +25089,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlock = object { citations, text, type }
+BetaTextBlock object { citations, text, type }
 
 citations: array of [BetaTextCitation](api/beta.md)
 
@@ -25099,9 +25099,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -25117,7 +25117,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -25133,7 +25133,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -25159,7 +25159,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -25171,7 +25171,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -25207,7 +25207,7 @@ text: string
 
 type: "text"
 
-BetaThinkingBlock = object { signature, thinking, type }
+BetaThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -25215,13 +25215,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlock = object { data, type }
+BetaRedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlock = object { id, input, name, 2 more }
+BetaToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -25235,15 +25235,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -25251,13 +25251,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaServerToolUseBlock = object { id, input, name, 2 more }
+BetaServerToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -25265,7 +25265,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -25289,15 +25289,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -25305,23 +25305,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebSearchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25337,7 +25337,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
+array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -25357,15 +25357,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -25373,23 +25373,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebFetchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlock = object { error\_code, type }
+BetaWebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25409,7 +25409,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock = object { content, retrieved\_at, type, url }
+BetaWebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
 
@@ -25421,9 +25421,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -25431,7 +25431,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -25463,15 +25463,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -25479,23 +25479,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+BetaAdvisorToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultError = object { error\_code, type }
+BetaAdvisorToolResultError object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -25511,13 +25511,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock = object { text, type }
+BetaAdvisorResultBlock object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -25529,19 +25529,19 @@ tool\_use\_id: string
 
 type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25553,7 +25553,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -25569,7 +25569,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -25591,17 +25591,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BetaBashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaBashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultError = object { error\_code, type }
+BetaBashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25615,7 +25615,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -25635,17 +25635,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-BetaTextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaTextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+BetaTextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25661,13 +25661,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-BetaTextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+BetaTextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -25683,13 +25683,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-BetaTextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -25707,17 +25707,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-BetaToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+BetaToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultError = object { error\_code, error\_message, type }
+BetaToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25731,7 +25731,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlock = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlock](api/beta.md) { tool\_name, type }
 
@@ -25745,7 +25745,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-BetaMCPToolUseBlock = object { id, input, name, 2 more }
+BetaMCPToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -25761,13 +25761,13 @@ The name of the MCP server
 
 type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock = object { content, is\_error, tool\_use\_id, type }
+BetaMCPToolResultBlock object { content, is\_error, tool\_use\_id, type }
 
 content: string or array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
@@ -25777,9 +25777,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -25795,7 +25795,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -25811,7 +25811,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -25837,7 +25837,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -25849,7 +25849,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -25891,7 +25891,7 @@ tool\_use\_id: string
 
 type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock = object { file\_id, type }
+BetaContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -25899,7 +25899,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -25927,9 +25927,9 @@ applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta.md) { 
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
-BetaClearToolUses20250919EditResponse = object { cleared\_input\_tokens, cleared\_tool\_uses, type }
+BetaClearToolUses20250919EditResponse object { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
 cleared\_input\_tokens: number
 
@@ -25943,7 +25943,7 @@ type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse = object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+BetaClearThinking20251015EditResponse object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
 
 cleared\_input\_tokens: number
 
@@ -25966,9 +25966,9 @@ cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_i
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
-BetaCacheMissModelChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissModelChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -25976,7 +25976,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "model\_changed"
 
-BetaCacheMissSystemChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissSystemChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -25984,7 +25984,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "system\_changed"
 
-BetaCacheMissToolsChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissToolsChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -25992,7 +25992,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "tools\_changed"
 
-BetaCacheMissMessagesChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissMessagesChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -26000,11 +26000,11 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "messages\_changed"
 
-BetaCacheMissPreviousMessageNotFound = object { type }
+BetaCacheMissPreviousMessageNotFound object { type }
 
 type: "previous\_message\_not\_found"
 
-BetaCacheMissUnavailable = object { type }
+BetaCacheMissUnavailable object { type }
 
 type: "unavailable"
 
@@ -26014,15 +26014,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -26092,7 +26092,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -26110,7 +26110,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -26139,7 +26139,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -26219,9 +26219,9 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -26257,7 +26257,7 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -26293,7 +26293,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -26327,15 +26327,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -26405,7 +26405,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -26435,7 +26435,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -26447,7 +26447,7 @@ speed: "standard" or "fast"
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -26455,63 +26455,63 @@ Accepts one of the following:
 
 type: "succeeded"
 
-BetaMessageBatchErroredResult = object { error, type }
+BetaMessageBatchErroredResult object { error, type }
 
 error: [BetaErrorResponse](api/beta.md) { error, request\_id, type }
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaInvalidRequestError = object { message, type }
+BetaInvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-BetaAuthenticationError = object { message, type }
+BetaAuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BetaBillingError = object { message, type }
+BetaBillingError object { message, type }
 
 message: string
 
 type: "billing\_error"
 
-BetaPermissionError = object { message, type }
+BetaPermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-BetaNotFoundError = object { message, type }
+BetaNotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-BetaRateLimitError = object { message, type }
+BetaRateLimitError object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
 
-BetaGatewayTimeoutError = object { message, type }
+BetaGatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-BetaAPIError = object { message, type }
+BetaAPIError object { message, type }
 
 message: string
 
 type: "api\_error"
 
-BetaOverloadedError = object { message, type }
+BetaOverloadedError object { message, type }
 
 message: string
 
@@ -26523,15 +26523,15 @@ type: "error"
 
 type: "errored"
 
-BetaMessageBatchCanceledResult = object { type }
+BetaMessageBatchCanceledResult object { type }
 
 type: "canceled"
 
-BetaMessageBatchExpiredResult = object { type }
+BetaMessageBatchExpiredResult object { type }
 
 type: "expired"
 
-BetaMessageBatchRequestCounts = object { canceled, errored, expired, 2 more }
+BetaMessageBatchRequestCounts object { canceled, errored, expired, 2 more }
 
 canceled: number
 
@@ -26567,9 +26567,9 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageBatchSucceededResult = object { message, type }
+BetaMessageBatchSucceededResult object { message, type }
 
 message: [BetaMessage](api/beta.md) { id, container, content, 9 more }
 
@@ -26603,7 +26603,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -26642,9 +26642,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlock = object { citations, text, type }
+BetaTextBlock object { citations, text, type }
 
 citations: array of [BetaTextCitation](api/beta.md)
 
@@ -26652,9 +26652,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -26670,7 +26670,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -26686,7 +26686,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -26712,7 +26712,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -26724,7 +26724,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -26760,7 +26760,7 @@ text: string
 
 type: "text"
 
-BetaThinkingBlock = object { signature, thinking, type }
+BetaThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -26768,13 +26768,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlock = object { data, type }
+BetaRedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlock = object { id, input, name, 2 more }
+BetaToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -26788,15 +26788,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -26804,13 +26804,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaServerToolUseBlock = object { id, input, name, 2 more }
+BetaServerToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -26818,7 +26818,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -26842,15 +26842,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -26858,23 +26858,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebSearchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -26890,7 +26890,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
+array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -26910,15 +26910,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -26926,23 +26926,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebFetchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlock = object { error\_code, type }
+BetaWebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -26962,7 +26962,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock = object { content, retrieved\_at, type, url }
+BetaWebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
 
@@ -26974,9 +26974,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -26984,7 +26984,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -27016,15 +27016,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -27032,23 +27032,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+BetaAdvisorToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultError = object { error\_code, type }
+BetaAdvisorToolResultError object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -27064,13 +27064,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock = object { text, type }
+BetaAdvisorResultBlock object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -27082,19 +27082,19 @@ tool\_use\_id: string
 
 type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -27106,7 +27106,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -27122,7 +27122,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -27144,17 +27144,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BetaBashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaBashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultError = object { error\_code, type }
+BetaBashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -27168,7 +27168,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -27188,17 +27188,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-BetaTextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaTextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+BetaTextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -27214,13 +27214,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-BetaTextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+BetaTextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -27236,13 +27236,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-BetaTextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -27260,17 +27260,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-BetaToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+BetaToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultError = object { error\_code, error\_message, type }
+BetaToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -27284,7 +27284,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlock = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlock](api/beta.md) { tool\_name, type }
 
@@ -27298,7 +27298,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-BetaMCPToolUseBlock = object { id, input, name, 2 more }
+BetaMCPToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -27314,13 +27314,13 @@ The name of the MCP server
 
 type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock = object { content, is\_error, tool\_use\_id, type }
+BetaMCPToolResultBlock object { content, is\_error, tool\_use\_id, type }
 
 content: string or array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
@@ -27330,9 +27330,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -27348,7 +27348,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -27364,7 +27364,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -27390,7 +27390,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -27402,7 +27402,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -27444,7 +27444,7 @@ tool\_use\_id: string
 
 type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock = object { file\_id, type }
+BetaContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -27452,7 +27452,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -27480,9 +27480,9 @@ applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta.md) { 
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
-BetaClearToolUses20250919EditResponse = object { cleared\_input\_tokens, cleared\_tool\_uses, type }
+BetaClearToolUses20250919EditResponse object { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
 cleared\_input\_tokens: number
 
@@ -27496,7 +27496,7 @@ type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse = object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+BetaClearThinking20251015EditResponse object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
 
 cleared\_input\_tokens: number
 
@@ -27519,9 +27519,9 @@ cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_i
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
-BetaCacheMissModelChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissModelChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -27529,7 +27529,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "model\_changed"
 
-BetaCacheMissSystemChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissSystemChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -27537,7 +27537,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "system\_changed"
 
-BetaCacheMissToolsChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissToolsChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -27545,7 +27545,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "tools\_changed"
 
-BetaCacheMissMessagesChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissMessagesChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -27553,11 +27553,11 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "messages\_changed"
 
-BetaCacheMissPreviousMessageNotFound = object { type }
+BetaCacheMissPreviousMessageNotFound object { type }
 
 type: "previous\_message\_not\_found"
 
-BetaCacheMissUnavailable = object { type }
+BetaCacheMissUnavailable object { type }
 
 type: "unavailable"
 
@@ -27567,15 +27567,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -27645,7 +27645,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -27663,7 +27663,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -27692,7 +27692,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -27772,9 +27772,9 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -27810,7 +27810,7 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -27846,7 +27846,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -27880,15 +27880,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -27958,7 +27958,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -27988,7 +27988,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -28000,7 +28000,7 @@ speed: "standard" or "fast"
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -28008,63 +28008,63 @@ Accepts one of the following:
 
 type: "succeeded"
 
-BetaMessageBatchErroredResult = object { error, type }
+BetaMessageBatchErroredResult object { error, type }
 
 error: [BetaErrorResponse](api/beta.md) { error, request\_id, type }
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaInvalidRequestError = object { message, type }
+BetaInvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-BetaAuthenticationError = object { message, type }
+BetaAuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BetaBillingError = object { message, type }
+BetaBillingError object { message, type }
 
 message: string
 
 type: "billing\_error"
 
-BetaPermissionError = object { message, type }
+BetaPermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-BetaNotFoundError = object { message, type }
+BetaNotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-BetaRateLimitError = object { message, type }
+BetaRateLimitError object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
 
-BetaGatewayTimeoutError = object { message, type }
+BetaGatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-BetaAPIError = object { message, type }
+BetaAPIError object { message, type }
 
 message: string
 
 type: "api\_error"
 
-BetaOverloadedError = object { message, type }
+BetaOverloadedError object { message, type }
 
 message: string
 
@@ -28076,15 +28076,15 @@ type: "error"
 
 type: "errored"
 
-BetaMessageBatchCanceledResult = object { type }
+BetaMessageBatchCanceledResult object { type }
 
 type: "canceled"
 
-BetaMessageBatchExpiredResult = object { type }
+BetaMessageBatchExpiredResult object { type }
 
 type: "expired"
 
-BetaMessageBatchSucceededResult = object { message, type }
+BetaMessageBatchSucceededResult object { message, type }
 
 message: [BetaMessage](api/beta.md) { id, container, content, 9 more }
 
@@ -28118,7 +28118,7 @@ type: "anthropic" or "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -28157,9 +28157,9 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
-BetaTextBlock = object { citations, text, type }
+BetaTextBlock object { citations, text, type }
 
 citations: array of [BetaTextCitation](api/beta.md)
 
@@ -28167,9 +28167,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -28185,7 +28185,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -28201,7 +28201,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -28227,7 +28227,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -28239,7 +28239,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -28275,7 +28275,7 @@ text: string
 
 type: "text"
 
-BetaThinkingBlock = object { signature, thinking, type }
+BetaThinkingBlock object { signature, thinking, type }
 
 signature: string
 
@@ -28283,13 +28283,13 @@ thinking: string
 
 type: "thinking"
 
-BetaRedactedThinkingBlock = object { data, type }
+BetaRedactedThinkingBlock object { data, type }
 
 data: string
 
 type: "redacted\_thinking"
 
-BetaToolUseBlock = object { id, input, name, 2 more }
+BetaToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -28303,15 +28303,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -28319,13 +28319,13 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaServerToolUseBlock = object { id, input, name, 2 more }
+BetaServerToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -28333,7 +28333,7 @@ input: map[unknown]
 
 name: "advisor" or "web\_search" or "web\_fetch" or 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -28357,15 +28357,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -28373,23 +28373,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebSearchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebSearchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebSearchToolResultError = object { error\_code, type }
+BetaWebSearchToolResultError object { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -28405,7 +28405,7 @@ Accepts one of the following:
 
 type: "web\_search\_tool\_result\_error"
 
-UnionMember1 = array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
+array of [BetaWebSearchResultBlock](api/beta.md) { encrypted\_content, page\_age, title, 2 more }
 
 encrypted\_content: string
 
@@ -28425,15 +28425,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -28441,23 +28441,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaWebFetchToolResultBlock = object { content, tool\_use\_id, type, caller }
+BetaWebFetchToolResultBlock object { content, tool\_use\_id, type, caller }
 
 content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  or [BetaWebFetchBlock](api/beta.md) { content, retrieved\_at, type, url }
 
-Accepts one of the following:
+One of the following:
 
-BetaWebFetchToolResultErrorBlock = object { error\_code, type }
+BetaWebFetchToolResultErrorBlock object { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -28477,7 +28477,7 @@ Accepts one of the following:
 
 type: "web\_fetch\_tool\_result\_error"
 
-BetaWebFetchBlock = object { content, retrieved\_at, type, url }
+BetaWebFetchBlock object { content, retrieved\_at, type, url }
 
 content: [BetaDocumentBlock](api/beta.md) { citations, source, title, type }
 
@@ -28489,9 +28489,9 @@ enabled: boolean
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  or [BetaPlainTextSource](api/beta.md) { data, media\_type, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaBase64PDFSource = object { data, media\_type, type }
+BetaBase64PDFSource object { data, media\_type, type }
 
 data: string
 
@@ -28499,7 +28499,7 @@ media\_type: "application/pdf"
 
 type: "base64"
 
-BetaPlainTextSource = object { data, media\_type, type }
+BetaPlainTextSource object { data, media\_type, type }
 
 data: string
 
@@ -28531,15 +28531,15 @@ caller: optional [BetaDirectCaller](api/beta.md) { type }  or [BetaServerToolCal
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
-BetaDirectCaller = object { type }
+BetaDirectCaller object { type }
 
 Tool invocation directly from the model.
 
 type: "direct"
 
-BetaServerToolCaller = object { tool\_id, type }
+BetaServerToolCaller object { tool\_id, type }
 
 Tool invocation generated by a server-side tool.
 
@@ -28547,23 +28547,23 @@ tool\_id: string
 
 type: "code\_execution\_20250825"
 
-BetaServerToolCaller20260120 = object { tool\_id, type }
+BetaServerToolCaller20260120 object { tool\_id, type }
 
 tool\_id: string
 
 type: "code\_execution\_20260120"
 
-BetaAdvisorToolResultBlock = object { content, tool\_use\_id, type }
+BetaAdvisorToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaAdvisorToolResultError = object { error\_code, type }
+BetaAdvisorToolResultError object { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_requests" or 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -28579,13 +28579,13 @@ Accepts one of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock = object { text, type }
+BetaAdvisorResultBlock object { text, type }
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock = object { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock object { encrypted\_content, type }
 
 encrypted\_content: string
 
@@ -28597,19 +28597,19 @@ tool\_use\_id: string
 
 type: "advisor\_tool\_result"
 
-BetaCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
-BetaCodeExecutionToolResultError = object { error\_code, type }
+BetaCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -28621,7 +28621,7 @@ Accepts one of the following:
 
 type: "code\_execution\_tool\_result\_error"
 
-BetaCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -28637,7 +28637,7 @@ stdout: string
 
 type: "code\_execution\_result"
 
-BetaEncryptedCodeExecutionResultBlock = object { content, encrypted\_stdout, return\_code, 2 more }
+BetaEncryptedCodeExecutionResultBlock object { content, encrypted\_stdout, return\_code, 2 more }
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
@@ -28659,17 +28659,17 @@ tool\_use\_id: string
 
 type: "code\_execution\_tool\_result"
 
-BetaBashCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaBashCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaBashCodeExecutionToolResultError](api/beta.md) { error\_code, type }  or [BetaBashCodeExecutionResultBlock](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaBashCodeExecutionToolResultError = object { error\_code, type }
+BetaBashCodeExecutionToolResultError object { error\_code, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -28683,7 +28683,7 @@ Accepts one of the following:
 
 type: "bash\_code\_execution\_tool\_result\_error"
 
-BetaBashCodeExecutionResultBlock = object { content, return\_code, stderr, 2 more }
+BetaBashCodeExecutionResultBlock object { content, return\_code, stderr, 2 more }
 
 content: array of [BetaBashCodeExecutionOutputBlock](api/beta.md) { file\_id, type }
 
@@ -28703,17 +28703,17 @@ tool\_use\_id: string
 
 type: "bash\_code\_execution\_tool\_result"
 
-BetaTextEditorCodeExecutionToolResultBlock = object { content, tool\_use\_id, type }
+BetaTextEditorCodeExecutionToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaTextEditorCodeExecutionToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaTextEditorCodeExecutionViewResultBlock](api/beta.md) { content, file\_type, num\_lines, 3 more }  or [BetaTextEditorCodeExecutionCreateResultBlock](api/beta.md) { is\_file\_update, type }  or [BetaTextEditorCodeExecutionStrReplaceResultBlock](api/beta.md) { lines, new\_lines, new\_start, 3 more }
 
-Accepts one of the following:
+One of the following:
 
-BetaTextEditorCodeExecutionToolResultError = object { error\_code, error\_message, type }
+BetaTextEditorCodeExecutionToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -28729,13 +28729,13 @@ error\_message: string
 
 type: "text\_editor\_code\_execution\_tool\_result\_error"
 
-BetaTextEditorCodeExecutionViewResultBlock = object { content, file\_type, num\_lines, 3 more }
+BetaTextEditorCodeExecutionViewResultBlock object { content, file\_type, num\_lines, 3 more }
 
 content: string
 
 file\_type: "text" or "image" or "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -28751,13 +28751,13 @@ total\_lines: number
 
 type: "text\_editor\_code\_execution\_view\_result"
 
-BetaTextEditorCodeExecutionCreateResultBlock = object { is\_file\_update, type }
+BetaTextEditorCodeExecutionCreateResultBlock object { is\_file\_update, type }
 
 is\_file\_update: boolean
 
 type: "text\_editor\_code\_execution\_create\_result"
 
-BetaTextEditorCodeExecutionStrReplaceResultBlock = object { lines, new\_lines, new\_start, 3 more }
+BetaTextEditorCodeExecutionStrReplaceResultBlock object { lines, new\_lines, new\_start, 3 more }
 
 lines: array of string
 
@@ -28775,17 +28775,17 @@ tool\_use\_id: string
 
 type: "text\_editor\_code\_execution\_tool\_result"
 
-BetaToolSearchToolResultBlock = object { content, tool\_use\_id, type }
+BetaToolSearchToolResultBlock object { content, tool\_use\_id, type }
 
 content: [BetaToolSearchToolResultError](api/beta.md) { error\_code, error\_message, type }  or [BetaToolSearchToolSearchResultBlock](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaToolSearchToolResultError = object { error\_code, error\_message, type }
+BetaToolSearchToolResultError object { error\_code, error\_message, type }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -28799,7 +28799,7 @@ error\_message: string
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolSearchResultBlock = object { tool\_references, type }
+BetaToolSearchToolSearchResultBlock object { tool\_references, type }
 
 tool\_references: array of [BetaToolReferenceBlock](api/beta.md) { tool\_name, type }
 
@@ -28813,7 +28813,7 @@ tool\_use\_id: string
 
 type: "tool\_search\_tool\_result"
 
-BetaMCPToolUseBlock = object { id, input, name, 2 more }
+BetaMCPToolUseBlock object { id, input, name, 2 more }
 
 id: string
 
@@ -28829,13 +28829,13 @@ The name of the MCP server
 
 type: "mcp\_tool\_use"
 
-BetaMCPToolResultBlock = object { content, is\_error, tool\_use\_id, type }
+BetaMCPToolResultBlock object { content, is\_error, tool\_use\_id, type }
 
 content: string or array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
 BetaMCPToolResultBlockContent = array of [BetaTextBlock](api/beta.md) { citations, text, type }
 
@@ -28845,9 +28845,9 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
-BetaCitationCharLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationCharLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -28863,7 +28863,7 @@ start\_char\_index: number
 
 type: "char\_location"
 
-BetaCitationPageLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationPageLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -28879,7 +28879,7 @@ start\_page\_number: number
 
 type: "page\_location"
 
-BetaCitationContentBlockLocation = object { cited\_text, document\_index, document\_title, 4 more }
+BetaCitationContentBlockLocation object { cited\_text, document\_index, document\_title, 4 more }
 
 cited\_text: string
 
@@ -28905,7 +28905,7 @@ start\_block\_index: number
 
 type: "content\_block\_location"
 
-BetaCitationsWebSearchResultLocation = object { cited\_text, encrypted\_index, title, 2 more }
+BetaCitationsWebSearchResultLocation object { cited\_text, encrypted\_index, title, 2 more }
 
 cited\_text: string
 
@@ -28917,7 +28917,7 @@ type: "web\_search\_result\_location"
 
 url: string
 
-BetaCitationSearchResultLocation = object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+BetaCitationSearchResultLocation object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
 
 cited\_text: string
 
@@ -28959,7 +28959,7 @@ tool\_use\_id: string
 
 type: "mcp\_tool\_result"
 
-BetaContainerUploadBlock = object { file\_id, type }
+BetaContainerUploadBlock object { file\_id, type }
 
 Response model for a file uploaded to the container.
 
@@ -28967,7 +28967,7 @@ file\_id: string
 
 type: "container\_upload"
 
-BetaCompactionBlock = object { content, encrypted\_content, type }
+BetaCompactionBlock object { content, encrypted\_content, type }
 
 A compaction block returned when autocompact is triggered.
 
@@ -28995,9 +28995,9 @@ applied\_edits: array of [BetaClearToolUses20250919EditResponse](api/beta.md) { 
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
-BetaClearToolUses20250919EditResponse = object { cleared\_input\_tokens, cleared\_tool\_uses, type }
+BetaClearToolUses20250919EditResponse object { cleared\_input\_tokens, cleared\_tool\_uses, type }
 
 cleared\_input\_tokens: number
 
@@ -29011,7 +29011,7 @@ type: "clear\_tool\_uses\_20250919"
 
 The type of context management edit applied.
 
-BetaClearThinking20251015EditResponse = object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
+BetaClearThinking20251015EditResponse object { cleared\_input\_tokens, cleared\_thinking\_turns, type }
 
 cleared\_input\_tokens: number
 
@@ -29034,9 +29034,9 @@ cache\_miss\_reason: [BetaCacheMissModelChanged](api/beta.md) { cache\_missed\_i
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
-BetaCacheMissModelChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissModelChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -29044,7 +29044,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "model\_changed"
 
-BetaCacheMissSystemChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissSystemChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -29052,7 +29052,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "system\_changed"
 
-BetaCacheMissToolsChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissToolsChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -29060,7 +29060,7 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "tools\_changed"
 
-BetaCacheMissMessagesChanged = object { cache\_missed\_input\_tokens, type }
+BetaCacheMissMessagesChanged object { cache\_missed\_input\_tokens, type }
 
 cache\_missed\_input\_tokens: number
 
@@ -29068,11 +29068,11 @@ Approximate number of input tokens that would have been read from cache had the 
 
 type: "messages\_changed"
 
-BetaCacheMissPreviousMessageNotFound = object { type }
+BetaCacheMissPreviousMessageNotFound object { type }
 
 type: "previous\_message\_not\_found"
 
-BetaCacheMissUnavailable = object { type }
+BetaCacheMissUnavailable object { type }
 
 type: "unavailable"
 
@@ -29082,15 +29082,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -29160,7 +29160,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 role: "assistant"
 
@@ -29178,7 +29178,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -29207,7 +29207,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -29287,9 +29287,9 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
-BetaMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a sampling iteration.
 
@@ -29325,7 +29325,7 @@ type: "message"
 
 Usage for a sampling iteration
 
-BetaCompactionIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaCompactionIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
 
 Token usage for a compaction iteration.
 
@@ -29361,7 +29361,7 @@ type: "compaction"
 
 Usage for a compaction iteration
 
-BetaAdvisorMessageIterationUsage = object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+BetaAdvisorMessageIterationUsage object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for an advisor sub-inference iteration.
 
@@ -29395,15 +29395,15 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -29473,7 +29473,7 @@ High-performance model with extended thinking
 
 Fast and cost-effective model
 
-UnionMember1 = string
+string
 
 output\_tokens: number
 
@@ -29503,7 +29503,7 @@ service\_tier: "standard" or "priority" or "batch"
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -29515,7 +29515,7 @@ speed: "standard" or "fast"
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -29547,7 +29547,7 @@ POST/v1/agents/{agent\_id}/archive
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsAgent = object { id, archived\_at, created\_at, 12 more }
+BetaManagedAgentsAgent object { id, archived\_at, created\_at, 12 more }
 
 A Managed Agents `agent`.
 
@@ -29583,15 +29583,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -29629,13 +29629,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -29661,9 +29661,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -29673,7 +29673,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -29687,9 +29687,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -29699,7 +29699,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -29721,15 +29721,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -29745,15 +29745,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -29761,7 +29761,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -29773,15 +29773,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -29797,15 +29797,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -29815,7 +29815,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -29851,7 +29851,7 @@ version: number
 
 The agent's current version. Starts at 1 and increments when the agent is modified.
 
-BetaManagedAgentsAgentReference = object { id, type, version }
+BetaManagedAgentsAgentReference object { id, type, version }
 
 A resolved agent reference with a concrete version.
 
@@ -29861,7 +29861,7 @@ type: "agent"
 
 version: number
 
-BetaManagedAgentsAgentToolConfig = object { enabled, name, permission\_policy }
+BetaManagedAgentsAgentToolConfig object { enabled, name, permission\_policy }
 
 Configuration for a specific agent tool.
 
@@ -29871,7 +29871,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -29893,21 +29893,21 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsAgentToolConfigParams = object { name, enabled, permission\_policy }
+BetaManagedAgentsAgentToolConfigParams object { name, enabled, permission\_policy }
 
 Configuration override for a specific tool within a toolset.
 
@@ -29915,7 +29915,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -29941,21 +29941,21 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsAgentToolsetDefaultConfig = object { enabled, permission\_policy }
+BetaManagedAgentsAgentToolsetDefaultConfig object { enabled, permission\_policy }
 
 Resolved default configuration for agent tools.
 
@@ -29965,21 +29965,21 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsAgentToolsetDefaultConfigParams = object { enabled, permission\_policy }
+BetaManagedAgentsAgentToolsetDefaultConfigParams object { enabled, permission\_policy }
 
 Default configuration for all tools in a toolset.
 
@@ -29991,21 +29991,21 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -30015,7 +30015,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -30037,15 +30037,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -30061,15 +30061,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -30077,7 +30077,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsAgentToolset20260401BashInput = object { command, restart, timeout\_ms }
+BetaManagedAgentsAgentToolset20260401BashInput object { command, restart, timeout\_ms }
 
 Input payload for the `bash` tool of the
 `agent_toolset_20260401` toolset. All fields are optional;
@@ -30099,7 +30099,7 @@ timeout\_ms: optional number
 Per-call timeout in milliseconds. Defaults to the
 runner-wide tool timeout when omitted or zero.
 
-BetaManagedAgentsAgentToolset20260401EditInput = object { file\_path, new\_string, old\_string, replace\_all }
+BetaManagedAgentsAgentToolset20260401EditInput object { file\_path, new\_string, old\_string, replace\_all }
 
 Input payload for the `edit` tool. Performs a string
 replacement in the named file; by default `old_string` must
@@ -30122,7 +30122,7 @@ replace\_all: optional boolean
 When true, replace every occurrence of `old_string`
 instead of requiring a unique match.
 
-BetaManagedAgentsAgentToolset20260401GlobInput = object { pattern, path }
+BetaManagedAgentsAgentToolset20260401GlobInput object { pattern, path }
 
 Input payload for the `glob` tool. Returns paths matching a
 doublestar glob pattern, newest first.
@@ -30138,7 +30138,7 @@ path: optional string
 Optional directory root to search under. Defaults to the
 runner's working directory.
 
-BetaManagedAgentsAgentToolset20260401GrepInput = object { pattern, path }
+BetaManagedAgentsAgentToolset20260401GrepInput object { pattern, path }
 
 Input payload for the `grep` tool. Searches file contents for
 a regular expression, returning matching lines.
@@ -30152,7 +30152,7 @@ path: optional string
 Optional directory root to search under. Defaults to the
 runner's working directory.
 
-BetaManagedAgentsAgentToolset20260401Params = object { type, configs, default\_config }
+BetaManagedAgentsAgentToolset20260401Params object { type, configs, default\_config }
 
 Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
@@ -30166,7 +30166,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -30192,15 +30192,15 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -30218,21 +30218,21 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsAgentToolset20260401ReadInput = object { file\_path, view\_range }
+BetaManagedAgentsAgentToolset20260401ReadInput object { file\_path, view\_range }
 
 Input payload for the `read` tool. Reads file contents
 relative to the runner's working directory (or absolute when
@@ -30248,7 +30248,7 @@ Optional `[start_line, end_line]` 1-indexed inclusive
 range. When omitted the entire file is returned.
 `end_line` of 0 or negative means "to end of file".
 
-BetaManagedAgentsAgentToolset20260401WriteInput = object { content, file\_path }
+BetaManagedAgentsAgentToolset20260401WriteInput object { content, file\_path }
 
 Input payload for the `write` tool. Writes (overwriting) the
 entire file contents.
@@ -30261,19 +30261,19 @@ file\_path: string
 
 Path of the file to write.
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -30283,7 +30283,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsAnthropicSkillParams = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkillParams object { skill\_id, type, version }
 
 An Anthropic-managed skill.
 
@@ -30297,7 +30297,7 @@ version: optional string
 
 Version to pin. Defaults to latest if omitted.
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -30307,7 +30307,7 @@ type: "custom"
 
 version: string
 
-BetaManagedAgentsCustomSkillParams = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkillParams object { skill\_id, type, version }
 
 A user-created custom skill.
 
@@ -30321,7 +30321,7 @@ version: optional string
 
 Version to pin. Defaults to latest if omitted.
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -30347,7 +30347,7 @@ name: string
 
 type: "custom"
 
-BetaManagedAgentsCustomToolInputSchema = object { properties, required, type }
+BetaManagedAgentsCustomToolInputSchema object { properties, required, type }
 
 JSON Schema for custom tool input parameters.
 
@@ -30363,7 +30363,7 @@ type: optional "object"
 
 Must be 'object' for tool input schemas.
 
-BetaManagedAgentsCustomToolParams = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomToolParams object { description, input\_schema, name, type }
 
 A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -30393,7 +30393,7 @@ Unique name for the tool. 1-128 characters; letters, digits, underscores, and hy
 
 type: "custom"
 
-BetaManagedAgentsMCPServerURLDefinition = object { name, type, url }
+BetaManagedAgentsMCPServerURLDefinition object { name, type, url }
 
 URL-based MCP server connection as returned in API responses.
 
@@ -30403,7 +30403,7 @@ type: "url"
 
 url: string
 
-BetaManagedAgentsMCPToolConfig = object { enabled, name, permission\_policy }
+BetaManagedAgentsMCPToolConfig object { enabled, name, permission\_policy }
 
 Resolved configuration for a specific MCP tool.
 
@@ -30415,21 +30415,21 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsMCPToolConfigParams = object { name, enabled, permission\_policy }
+BetaManagedAgentsMCPToolConfigParams object { name, enabled, permission\_policy }
 
 Configuration override for a specific MCP tool.
 
@@ -30445,21 +30445,21 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -30471,15 +30471,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -30495,15 +30495,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -30513,7 +30513,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsMCPToolsetDefaultConfig = object { enabled, permission\_policy }
+BetaManagedAgentsMCPToolsetDefaultConfig object { enabled, permission\_policy }
 
 Resolved default configuration for all tools from an MCP server.
 
@@ -30523,21 +30523,21 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsMCPToolsetDefaultConfigParams = object { enabled, permission\_policy }
+BetaManagedAgentsMCPToolsetDefaultConfigParams object { enabled, permission\_policy }
 
 Default configuration for all tools from an MCP server.
 
@@ -30549,21 +30549,21 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsMCPToolsetParams = object { mcp\_server\_name, type, configs, default\_config }
+BetaManagedAgentsMCPToolsetParams object { mcp\_server\_name, type, configs, default\_config }
 
 Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -30589,15 +30589,15 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -30615,15 +30615,15 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -30635,15 +30635,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -30681,9 +30681,9 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
-BetaManagedAgentsModelConfig = object { id, speed }
+BetaManagedAgentsModelConfig object { id, speed }
 
 Model identifier and configuration.
 
@@ -30693,15 +30693,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -30739,19 +30739,19 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaManagedAgentsModelConfigParams = object { id, speed }
+BetaManagedAgentsModelConfigParams object { id, speed }
 
 An object that defines additional configuration control over model use
 
@@ -30761,15 +30761,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -30807,19 +30807,19 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaManagedAgentsMultiagentCoordinator = object { agents, type }
+BetaManagedAgentsMultiagentCoordinator object { agents, type }
 
 Resolved coordinator topology with a concrete agent roster.
 
@@ -30835,7 +30835,7 @@ version: number
 
 type: "coordinator"
 
-BetaManagedAgentsMultiagentCoordinatorParams = object { agents, type }
+BetaManagedAgentsMultiagentCoordinatorParams object { agents, type }
 
 A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
@@ -30843,11 +30843,11 @@ agents: array of [BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-BetaManagedAgentsAgentParams = object { id, type, version }
+BetaManagedAgentsAgentParams object { id, type, version }
 
 Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -30861,7 +30861,7 @@ version: optional number
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
-BetaManagedAgentsMultiagentSelfParams = object { type }
+BetaManagedAgentsMultiagentSelfParams object { type }
 
 Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
@@ -30869,13 +30869,13 @@ type: "self"
 
 type: "coordinator"
 
-BetaManagedAgentsMultiagentSelfParams = object { type }
+BetaManagedAgentsMultiagentSelfParams object { type }
 
 Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
 type: "self"
 
-BetaManagedAgentsSessionThreadAgent = object { id, description, mcp\_servers, 7 more }
+BetaManagedAgentsSessionThreadAgent object { id, description, mcp\_servers, 7 more }
 
 Resolved `agent` definition for a single `session_thread`. Snapshot of the agent at thread creation time. The multiagent roster is not repeated here; read it from `Session.agent`.
 
@@ -30901,15 +30901,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -30947,13 +30947,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -30963,9 +30963,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -30975,7 +30975,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -30989,9 +30989,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -31001,7 +31001,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -31023,15 +31023,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -31047,15 +31047,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -31063,7 +31063,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -31075,15 +31075,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -31099,15 +31099,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -31117,7 +31117,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -31151,9 +31151,9 @@ BetaManagedAgentsSkillParams = [BetaManagedAgentsAnthropicSkillParams](api/beta.
 
 Skill to load in the session container.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkillParams = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkillParams object { skill\_id, type, version }
 
 An Anthropic-managed skill.
 
@@ -31167,7 +31167,7 @@ version: optional string
 
 Version to pin. Defaults to latest if omitted.
 
-BetaManagedAgentsCustomSkillParams = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkillParams object { skill\_id, type, version }
 
 A user-created custom skill.
 
@@ -31181,7 +31181,7 @@ version: optional string
 
 Version to pin. Defaults to latest if omitted.
 
-BetaManagedAgentsURLMCPServerParams = object { name, type, url }
+BetaManagedAgentsURLMCPServerParams object { name, type, url }
 
 URL-based MCP server connection.
 
@@ -31229,7 +31229,7 @@ POST/v1/environments/{environment\_id}/archive
 
 ##### ModelsExpand Collapse
 
-BetaCloudConfig = object { networking, packages, type }
+BetaCloudConfig object { networking, packages, type }
 
 `cloud` environment configuration.
 
@@ -31237,9 +31237,9 @@ networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLimitedNetw
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
-BetaUnrestrictedNetwork = object { type }
+BetaUnrestrictedNetwork object { type }
 
 Unrestricted network access.
 
@@ -31247,7 +31247,7 @@ type: "unrestricted"
 
 Network policy type
 
-BetaLimitedNetwork = object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+BetaLimitedNetwork object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
 
 Limited network access.
 
@@ -31303,7 +31303,7 @@ type: "cloud"
 
 Environment type
 
-BetaCloudConfigParams = object { type, networking, packages }
+BetaCloudConfigParams object { type, networking, packages }
 
 Request params for `cloud` environment configuration.
 
@@ -31318,9 +31318,9 @@ networking: optional [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLi
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-Accepts one of the following:
+One of the following:
 
-BetaUnrestrictedNetwork = object { type }
+BetaUnrestrictedNetwork object { type }
 
 Unrestricted network access.
 
@@ -31328,7 +31328,7 @@ type: "unrestricted"
 
 Network policy type
 
-BetaLimitedNetworkParams = object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
+BetaLimitedNetworkParams object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
 
 Limited network request params.
 
@@ -31385,7 +31385,7 @@ type: optional "packages"
 
 Package configuration type
 
-BetaEnvironment = object { id, archived\_at, config, 7 more }
+BetaEnvironment object { id, archived\_at, config, 7 more }
 
 Unified Environment resource for both cloud and self-hosted environments.
 
@@ -31401,9 +31401,9 @@ config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  or [BetaS
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-Accepts one of the following:
+One of the following:
 
-BetaCloudConfig = object { networking, packages, type }
+BetaCloudConfig object { networking, packages, type }
 
 `cloud` environment configuration.
 
@@ -31411,9 +31411,9 @@ networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLimitedNetw
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
-BetaUnrestrictedNetwork = object { type }
+BetaUnrestrictedNetwork object { type }
 
 Unrestricted network access.
 
@@ -31421,7 +31421,7 @@ type: "unrestricted"
 
 Network policy type
 
-BetaLimitedNetwork = object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+BetaLimitedNetwork object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
 
 Limited network access.
 
@@ -31477,7 +31477,7 @@ type: "cloud"
 
 Environment type
 
-BetaSelfHostedConfig = object { type }
+BetaSelfHostedConfig object { type }
 
 Configuration for self-hosted environments.
 
@@ -31513,13 +31513,13 @@ scope: optional "organization" or "account"
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Accepts one of the following:
+One of the following:
 
 "organization"
 
 "account"
 
-BetaEnvironmentDeleteResponse = object { id, type }
+BetaEnvironmentDeleteResponse object { id, type }
 
 Response after deleting an environment.
 
@@ -31531,7 +31531,7 @@ type: "environment\_deleted"
 
 The type of response
 
-BetaLimitedNetwork = object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+BetaLimitedNetwork object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
 
 Limited network access.
 
@@ -31551,7 +31551,7 @@ type: "limited"
 
 Network policy type
 
-BetaLimitedNetworkParams = object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
+BetaLimitedNetworkParams object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
 
 Limited network request params.
 
@@ -31574,7 +31574,7 @@ allowed\_hosts: optional array of string
 
 Specifies domains the container can reach.
 
-BetaPackages = object { apt, cargo, gem, 4 more }
+BetaPackages object { apt, cargo, gem, 4 more }
 
 Packages (and their versions) available in this environment.
 
@@ -31606,7 +31606,7 @@ type: optional "packages"
 
 Package configuration type
 
-BetaPackagesParams = object { apt, cargo, gem, 4 more }
+BetaPackagesParams object { apt, cargo, gem, 4 more }
 
 Specify packages (and optionally their versions) available in this environment.
 
@@ -31640,7 +31640,7 @@ type: optional "packages"
 
 Package configuration type
 
-BetaSelfHostedConfig = object { type }
+BetaSelfHostedConfig object { type }
 
 Configuration for self-hosted environments.
 
@@ -31648,7 +31648,7 @@ type: "self\_hosted"
 
 Environment type
 
-BetaSelfHostedConfigParams = object { type }
+BetaSelfHostedConfigParams object { type }
 
 Request params for `self_hosted` environment configuration.
 
@@ -31656,7 +31656,7 @@ type: "self\_hosted"
 
 Environment type
 
-BetaUnrestrictedNetwork = object { type }
+BetaUnrestrictedNetwork object { type }
 
 Unrestricted network access.
 
@@ -31700,7 +31700,7 @@ GET/v1/environments/{environment\_id}/work/stats
 
 ##### ModelsExpand Collapse
 
-BetaSelfHostedWork = object { id, acknowledged\_at, created\_at, 9 more }
+BetaSelfHostedWork object { id, acknowledged\_at, created\_at, 9 more }
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -31752,7 +31752,7 @@ state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -31776,7 +31776,7 @@ type: "work"
 
 The type of object (always 'work')
 
-BetaSelfHostedWorkHeartbeatResponse = object { last\_heartbeat, lease\_extended, state, 2 more }
+BetaSelfHostedWorkHeartbeatResponse object { last\_heartbeat, lease\_extended, state, 2 more }
 
 Response after recording a heartbeat for a work item.
 
@@ -31792,7 +31792,7 @@ state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -31812,7 +31812,7 @@ type: "work\_heartbeat"
 
 The type of response
 
-BetaSelfHostedWorkListResponse = object { data, next\_page }
+BetaSelfHostedWorkListResponse object { data, next\_page }
 
 Response when listing work items with cursor-based pagination.
 
@@ -31864,7 +31864,7 @@ state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -31892,7 +31892,7 @@ next\_page: string
 
 Opaque cursor for fetching the next page of results
 
-BetaSelfHostedWorkQueueStats = object { depth, oldest\_queued\_at, pending, 2 more }
+BetaSelfHostedWorkQueueStats object { depth, oldest\_queued\_at, pending, 2 more }
 
 Statistics about the work queue for an environment.
 
@@ -31918,7 +31918,7 @@ workers\_polling: number
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 
-BetaSelfHostedWorkStopRequest = object { force }
+BetaSelfHostedWorkStopRequest object { force }
 
 Request to stop a work item.
 
@@ -31926,7 +31926,7 @@ force: optional boolean
 
 If true, immediately stop work without graceful shutdown
 
-BetaSelfHostedWorkUpdateRequest = object { metadata }
+BetaSelfHostedWorkUpdateRequest object { metadata }
 
 Request to update work item metadata.
 
@@ -31934,7 +31934,7 @@ metadata: map[string]
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-BetaSessionWorkData = object { id, type }
+BetaSessionWorkData object { id, type }
 
 Work data for session work items.
 
@@ -31977,7 +31977,7 @@ POST/v1/sessions/{session\_id}/archive
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsAgentParams = object { id, type, version }
+BetaManagedAgentsAgentParams object { id, type, version }
 
 Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -31991,7 +31991,7 @@ version: optional number
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -31999,7 +31999,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCacheCreationUsage = object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
+BetaManagedAgentsCacheCreationUsage object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
@@ -32011,7 +32011,7 @@ ephemeral\_5m\_input\_tokens: optional number
 
 Tokens used to create 5-minute ephemeral cache entries.
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -32019,7 +32019,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsDeletedSession = object { id, type }
+BetaManagedAgentsDeletedSession object { id, type }
 
 Confirmation that a `session` has been permanently deleted.
 
@@ -32027,7 +32027,7 @@ id: string
 
 type: "session\_deleted"
 
-BetaManagedAgentsFileResourceParams = object { file\_id, type, mount\_path }
+BetaManagedAgentsFileResourceParams object { file\_id, type, mount\_path }
 
 Mount a file uploaded via the Files API into the session.
 
@@ -32041,7 +32041,7 @@ mount\_path: optional string
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
-BetaManagedAgentsGitHubRepositoryResourceParams = object { authorization\_token, type, url, 2 more }
+BetaManagedAgentsGitHubRepositoryResourceParams object { authorization\_token, type, url, 2 more }
 
 Mount a GitHub repository into the session's container.
 
@@ -32059,9 +32059,9 @@ checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -32069,7 +32069,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -32081,7 +32081,7 @@ mount\_path: optional string
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
-BetaManagedAgentsMemoryStoreResourceParam = object { memory\_store\_id, type, access, instructions }
+BetaManagedAgentsMemoryStoreResourceParam object { memory\_store\_id, type, access, instructions }
 
 Parameters for attaching a memory store to an agent session.
 
@@ -32095,7 +32095,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -32105,7 +32105,7 @@ instructions: optional string
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-BetaManagedAgentsMultiagent = object { agents, type }
+BetaManagedAgentsMultiagent object { agents, type }
 
 Resolved coordinator topology with a concrete agent roster.
 
@@ -32121,7 +32121,7 @@ version: number
 
 type: "coordinator"
 
-BetaManagedAgentsMultiagentParams = object { agents, type }
+BetaManagedAgentsMultiagentParams object { agents, type }
 
 A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
@@ -32129,11 +32129,11 @@ agents: array of [BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-BetaManagedAgentsAgentParams = object { id, type, version }
+BetaManagedAgentsAgentParams object { id, type, version }
 
 Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -32147,7 +32147,7 @@ version: optional number
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
-BetaManagedAgentsMultiagentSelfParams = object { type }
+BetaManagedAgentsMultiagentSelfParams object { type }
 
 Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
@@ -32159,11 +32159,11 @@ BetaManagedAgentsMultiagentRosterEntryParams = string or [BetaManagedAgentsAgent
 
 An entry in a multiagent roster: an agent ID string, a versioned agent reference, or `self`.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-BetaManagedAgentsAgentParams = object { id, type, version }
+BetaManagedAgentsAgentParams object { id, type, version }
 
 Specification for an Agent. Provide a specific `version` or use the short-form `agent="agent_id"` for the most recent version
 
@@ -32177,13 +32177,13 @@ version: optional number
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
-BetaManagedAgentsMultiagentSelfParams = object { type }
+BetaManagedAgentsMultiagentSelfParams object { type }
 
 Sentinel roster entry meaning "the agent that owns this configuration". Resolved server-side to a concrete agent reference.
 
 type: "self"
 
-BetaManagedAgentsOutcomeEvaluationResource = object { completed\_at, description, explanation, 4 more }
+BetaManagedAgentsOutcomeEvaluationResource object { completed\_at, description, explanation, 4 more }
 
 Evaluation state for a single outcome defined via a define\_outcome event.
 
@@ -32213,7 +32213,7 @@ Current evaluation state. `pending` before the agent begins work; `running` whil
 
 type: "outcome\_evaluation"
 
-BetaManagedAgentsSession = object { id, agent, archived\_at, 12 more }
+BetaManagedAgentsSession object { id, agent, archived\_at, 12 more }
 
 A Managed Agents `session`.
 
@@ -32245,15 +32245,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -32291,13 +32291,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -32333,15 +32333,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -32379,13 +32379,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -32395,9 +32395,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -32407,7 +32407,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -32421,9 +32421,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -32433,7 +32433,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -32455,15 +32455,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -32479,15 +32479,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -32495,7 +32495,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -32507,15 +32507,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -32531,15 +32531,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -32549,7 +32549,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -32585,9 +32585,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -32597,7 +32597,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -32611,9 +32611,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -32623,7 +32623,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -32645,15 +32645,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -32669,15 +32669,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -32685,7 +32685,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -32697,15 +32697,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -32721,15 +32721,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -32739,7 +32739,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -32813,9 +32813,9 @@ type: "outcome\_evaluation"
 
 resources: array of [BetaManagedAgentsSessionResource](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object { id, created\_at, mount\_path, 4 more }
 
 id: string
 
@@ -32835,9 +32835,9 @@ url: string
 
 checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -32845,7 +32845,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -32853,7 +32853,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsFileResource object { id, created\_at, file\_id, 3 more }
 
 id: string
 
@@ -32871,7 +32871,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -32885,7 +32885,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -32923,7 +32923,7 @@ status: "rescheduling" or "running" or "idle" or "terminated"
 
 SessionStatus enum
 
-Accepts one of the following:
+One of the following:
 
 "rescheduling"
 
@@ -32973,7 +32973,7 @@ vault\_ids: array of string
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
-BetaManagedAgentsSessionAgent = object { id, description, mcp\_servers, 8 more }
+BetaManagedAgentsSessionAgent object { id, description, mcp\_servers, 8 more }
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -32999,15 +32999,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -33045,13 +33045,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -33087,15 +33087,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -33133,13 +33133,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -33149,9 +33149,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -33161,7 +33161,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -33175,9 +33175,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -33187,7 +33187,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -33209,15 +33209,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33233,15 +33233,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33249,7 +33249,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -33261,15 +33261,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33285,15 +33285,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33303,7 +33303,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -33339,9 +33339,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -33351,7 +33351,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -33365,9 +33365,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -33377,7 +33377,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -33399,15 +33399,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33423,15 +33423,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33439,7 +33439,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -33451,15 +33451,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33475,15 +33475,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33493,7 +33493,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -33523,7 +33523,7 @@ type: "agent"
 
 version: number
 
-BetaManagedAgentsSessionAgentUpdate = object { mcp\_servers, tools }
+BetaManagedAgentsSessionAgentUpdate object { mcp\_servers, tools }
 
 Mid-session agent configuration update. Only `tools` and `mcp_servers` are updatable. Full replacement: the provided array becomes the new value. To preserve existing entries, GET the session, modify the array, and POST it back.
 
@@ -33545,9 +33545,9 @@ tools: optional array of [BetaManagedAgentsAgentToolset20260401Params](api/beta.
 
 Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401Params = object { type, configs, default\_config }
+BetaManagedAgentsAgentToolset20260401Params object { type, configs, default\_config }
 
 Configuration for built-in agent tools. Use this to enable or disable groups of tools available to the agent.
 
@@ -33561,7 +33561,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -33587,15 +33587,15 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33613,21 +33613,21 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsMCPToolsetParams = object { mcp\_server\_name, type, configs, default\_config }
+BetaManagedAgentsMCPToolsetParams object { mcp\_server\_name, type, configs, default\_config }
 
 Configuration for tools from an MCP server defined in `mcp_servers`.
 
@@ -33653,15 +33653,15 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33679,21 +33679,21 @@ permission\_policy: optional [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) {
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsCustomToolParams = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomToolParams object { description, input\_schema, name, type }
 
 A custom tool that is executed by the API client rather than the agent. When the agent calls this tool, an `agent.custom_tool_use` event is emitted and the session goes idle, waiting for the client to provide the result via a `user.custom_tool_result` event.
 
@@ -33723,7 +33723,7 @@ Unique name for the tool. 1-128 characters; letters, digits, underscores, and hy
 
 type: "custom"
 
-BetaManagedAgentsSessionMultiagentCoordinator = object { agents, type }
+BetaManagedAgentsSessionMultiagentCoordinator object { agents, type }
 
 Resolved coordinator topology with full agent definitions for each roster member.
 
@@ -33753,15 +33753,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -33799,13 +33799,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -33815,9 +33815,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -33827,7 +33827,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -33841,9 +33841,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -33853,7 +33853,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -33875,15 +33875,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33899,15 +33899,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33915,7 +33915,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -33927,15 +33927,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33951,15 +33951,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -33969,7 +33969,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -34001,7 +34001,7 @@ version: number
 
 type: "coordinator"
 
-BetaManagedAgentsSessionStats = object { active\_seconds, duration\_seconds }
+BetaManagedAgentsSessionStats object { active\_seconds, duration\_seconds }
 
 Timing statistics for a session.
 
@@ -34013,7 +34013,7 @@ duration\_seconds: optional number
 
 Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
 
-BetaManagedAgentsSessionUpdatedEvent = object { id, processed\_at, type, 3 more }
+BetaManagedAgentsSessionUpdatedEvent object { id, processed\_at, type, 3 more }
 
 Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -34053,15 +34053,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -34099,13 +34099,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -34141,15 +34141,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -34187,13 +34187,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -34203,9 +34203,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -34215,7 +34215,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -34229,9 +34229,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -34241,7 +34241,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -34263,15 +34263,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -34287,15 +34287,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -34303,7 +34303,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -34315,15 +34315,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -34339,15 +34339,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -34357,7 +34357,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -34393,9 +34393,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -34405,7 +34405,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -34419,9 +34419,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -34431,7 +34431,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -34453,15 +34453,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -34477,15 +34477,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -34493,7 +34493,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -34505,15 +34505,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -34529,15 +34529,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -34547,7 +34547,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -34585,7 +34585,7 @@ title: optional string
 
 The session's new title. Present only when the update changed it.
 
-BetaManagedAgentsSessionUsage = object { cache\_creation, cache\_read\_input\_tokens, input\_tokens, output\_tokens }
+BetaManagedAgentsSessionUsage object { cache\_creation, cache\_read\_input\_tokens, input\_tokens, output\_tokens }
 
 Cumulative token usage for a session across all turns.
 
@@ -34613,7 +34613,7 @@ output\_tokens: optional number
 
 Total output tokens generated across all turns.
 
-BetaManagedAgentsUserToolResultEvent = object { id, tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserToolResultEvent object { id, tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -34631,9 +34631,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -34643,7 +34643,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -34651,9 +34651,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -34667,7 +34667,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -34677,7 +34677,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -34689,7 +34689,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -34697,9 +34697,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -34713,7 +34713,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -34727,7 +34727,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -34737,7 +34737,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -34757,7 +34757,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -34817,7 +34817,7 @@ GET/v1/sessions/{session\_id}/events/stream
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsAgentCustomToolUseEvent = object { id, input, name, 3 more }
+BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -34843,7 +34843,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-BetaManagedAgentsAgentMCPToolResultEvent = object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
+BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
 
 Event representing the result of an MCP tool execution.
 
@@ -34865,9 +34865,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -34877,7 +34877,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -34885,9 +34885,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -34901,7 +34901,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -34911,7 +34911,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -34923,7 +34923,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -34931,9 +34931,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -34947,7 +34947,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -34961,7 +34961,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -34971,7 +34971,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -34991,7 +34991,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -35027,7 +35027,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentMCPToolUseEvent = object { id, input, mcp\_server\_name, 5 more }
+BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp\_server\_name, 5 more }
 
 Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -35057,7 +35057,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -35069,7 +35069,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentMessageEvent = object { id, content, processed\_at, type }
+BetaManagedAgentsAgentMessageEvent object { id, content, processed\_at, type }
 
 An agent response event in the session conversation.
 
@@ -35093,7 +35093,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.message"
 
-BetaManagedAgentsAgentThinkingEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThinkingEvent object { id, processed\_at, type }
 
 Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -35107,7 +35107,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thinking"
 
-BetaManagedAgentsAgentThreadContextCompactedEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed\_at, type }
 
 Indicates that context compaction (summarization) occurred during the session.
 
@@ -35121,7 +35121,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thread\_context\_compacted"
 
-BetaManagedAgentsAgentThreadMessageReceivedEvent = object { id, content, from\_session\_thread\_id, 3 more }
+BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from\_session\_thread\_id, 3 more }
 
 Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -35133,9 +35133,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -35145,7 +35145,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -35153,9 +35153,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -35169,7 +35169,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -35179,7 +35179,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -35191,7 +35191,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -35199,9 +35199,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -35215,7 +35215,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -35229,7 +35229,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -35239,7 +35239,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -35273,7 +35273,7 @@ from\_agent\_name: optional string
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-BetaManagedAgentsAgentThreadMessageSentEvent = object { id, content, processed\_at, 3 more }
+BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed\_at, 3 more }
 
 Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -35285,9 +35285,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -35297,7 +35297,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -35305,9 +35305,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -35321,7 +35321,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -35331,7 +35331,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -35343,7 +35343,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -35351,9 +35351,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -35367,7 +35367,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -35381,7 +35381,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -35391,7 +35391,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -35425,7 +35425,7 @@ to\_agent\_name: optional string
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-BetaManagedAgentsAgentToolResultEvent = object { id, processed\_at, tool\_use\_id, 3 more }
+BetaManagedAgentsAgentToolResultEvent object { id, processed\_at, tool\_use\_id, 3 more }
 
 Event representing the result of an agent tool execution.
 
@@ -35447,9 +35447,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -35459,7 +35459,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -35467,9 +35467,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -35483,7 +35483,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -35493,7 +35493,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -35505,7 +35505,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -35513,9 +35513,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -35529,7 +35529,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -35543,7 +35543,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -35553,7 +35553,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -35573,7 +35573,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -35609,7 +35609,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentToolUseEvent = object { id, input, name, 4 more }
+BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }
 
 Event emitted when the agent invokes a built-in agent tool.
 
@@ -35635,7 +35635,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -35647,7 +35647,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -35661,7 +35661,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -35675,7 +35675,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsBillingError = object { message, retry\_status, type }
+BetaManagedAgentsBillingError object { message, retry\_status, type }
 
 The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -35687,21 +35687,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -35709,7 +35709,7 @@ type: "terminal"
 
 type: "billing\_error"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -35717,9 +35717,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -35733,7 +35733,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -35747,7 +35747,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -35757,7 +35757,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -35781,9 +35781,9 @@ BetaManagedAgentsEventParams = [BetaManagedAgentsUserMessageEventParams](api/bet
 
 Union type for event parameters that can be sent to a session.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUserMessageEventParams = object { content, type }
+BetaManagedAgentsUserMessageEventParams object { content, type }
 
 Parameters for sending a user message to the session.
 
@@ -35791,9 +35791,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -35803,7 +35803,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -35811,9 +35811,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -35827,7 +35827,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -35837,7 +35837,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -35849,7 +35849,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -35857,9 +35857,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -35873,7 +35873,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -35887,7 +35887,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -35897,7 +35897,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -35919,7 +35919,7 @@ The title of the document.
 
 type: "user.message"
 
-BetaManagedAgentsUserInterruptEventParams = object { type, session\_thread\_id }
+BetaManagedAgentsUserInterruptEventParams object { type, session\_thread\_id }
 
 Parameters for sending an interrupt to pause the agent.
 
@@ -35929,7 +35929,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserToolConfirmationEventParams = object { result, tool\_use\_id, type, deny\_message }
+BetaManagedAgentsUserToolConfirmationEventParams object { result, tool\_use\_id, type, deny\_message }
 
 Parameters for confirming or denying a tool execution request.
 
@@ -35937,7 +35937,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -35953,7 +35953,7 @@ deny\_message: optional string
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-BetaManagedAgentsUserCustomToolResultEventParams = object { custom\_tool\_use\_id, type, content, is\_error }
+BetaManagedAgentsUserCustomToolResultEventParams object { custom\_tool\_use\_id, type, content, is\_error }
 
 Parameters for providing the result of a custom tool execution.
 
@@ -35967,9 +35967,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -35979,7 +35979,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -35987,9 +35987,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -36003,7 +36003,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -36013,7 +36013,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -36025,7 +36025,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -36033,9 +36033,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -36049,7 +36049,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -36063,7 +36063,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -36073,7 +36073,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -36093,7 +36093,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -36129,7 +36129,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsUserDefineOutcomeEventParams = object { description, rubric, type, max\_iterations }
+BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max\_iterations }
 
 Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -36141,9 +36141,9 @@ rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  or 
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubricParams = object { file\_id, type }
+BetaManagedAgentsFileRubricParams object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -36153,7 +36153,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubricParams = object { content, type }
+BetaManagedAgentsTextRubricParams object { content, type }
 
 Rubric content provided inline as text.
 
@@ -36169,7 +36169,7 @@ max\_iterations: optional number
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-BetaManagedAgentsUserToolResultEventParams = object { tool\_use\_id, type, content, is\_error }
+BetaManagedAgentsUserToolResultEventParams object { tool\_use\_id, type, content, is\_error }
 
 Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -36183,9 +36183,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -36195,7 +36195,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -36203,9 +36203,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -36219,7 +36219,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -36229,7 +36229,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -36241,7 +36241,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -36249,9 +36249,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -36265,7 +36265,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -36279,7 +36279,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -36289,7 +36289,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -36309,7 +36309,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -36345,7 +36345,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -36355,7 +36355,7 @@ ID of a previously uploaded file.
 
 type: "file"
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -36365,7 +36365,7 @@ ID of a previously uploaded file.
 
 type: "file"
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -36375,7 +36375,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsFileRubricParams = object { file\_id, type }
+BetaManagedAgentsFileRubricParams object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -36385,7 +36385,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -36393,9 +36393,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -36409,7 +36409,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -36419,7 +36419,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -36431,7 +36431,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPAuthenticationFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Authentication to an MCP server failed.
 
@@ -36447,21 +36447,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -36469,7 +36469,7 @@ type: "terminal"
 
 type: "mcp\_authentication\_failed\_error"
 
-BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPConnectionFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Failed to connect to an MCP server.
 
@@ -36485,21 +36485,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -36507,7 +36507,7 @@ type: "terminal"
 
 type: "mcp\_connection\_failed\_error"
 
-BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+BetaManagedAgentsModelOverloadedError object { message, retry\_status, type }
 
 The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -36519,21 +36519,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -36541,7 +36541,7 @@ type: "terminal"
 
 type: "model\_overloaded\_error"
 
-BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRateLimitedError object { message, retry\_status, type }
 
 The model request was rate-limited.
 
@@ -36553,21 +36553,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -36575,7 +36575,7 @@ type: "terminal"
 
 type: "model\_rate\_limited\_error"
 
-BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRequestFailedError object { message, retry\_status, type }
 
 A model request failed for a reason other than overload or rate-limiting.
 
@@ -36587,21 +36587,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -36609,7 +36609,7 @@ type: "terminal"
 
 type: "model\_request\_failed\_error"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -36623,25 +36623,25 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
 type: "terminal"
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -36673,7 +36673,7 @@ The title of the search result.
 
 type: "search\_result"
 
-BetaManagedAgentsSearchResultCitations = object { enabled }
+BetaManagedAgentsSearchResultCitations object { enabled }
 
 Citation settings for a search result.
 
@@ -36681,7 +36681,7 @@ enabled: boolean
 
 Whether citations are enabled for this search result.
 
-BetaManagedAgentsSearchResultContent = object { text, type }
+BetaManagedAgentsSearchResultContent object { text, type }
 
 Text content within a search result.
 
@@ -36691,7 +36691,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsSendSessionEvents = object { data }
+BetaManagedAgentsSendSessionEvents object { data }
 
 Events that were successfully sent to the session.
 
@@ -36699,9 +36699,9 @@ data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, c
 
 Sent events
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+BetaManagedAgentsUserMessageEvent object { id, content, type, processed\_at }
 
 A user message event in the session conversation.
 
@@ -36713,9 +36713,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -36725,7 +36725,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -36733,9 +36733,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -36749,7 +36749,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -36759,7 +36759,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -36771,7 +36771,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -36779,9 +36779,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -36795,7 +36795,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -36809,7 +36809,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -36819,7 +36819,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -36845,7 +36845,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at, session\_thread\_id }
+BetaManagedAgentsUserInterruptEvent object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -36863,7 +36863,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 4 more }
+BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -36875,7 +36875,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -36899,7 +36899,7 @@ session\_thread\_id: optional string
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserCustomToolResultEvent object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -36917,9 +36917,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -36929,7 +36929,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -36937,9 +36937,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -36953,7 +36953,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -36963,7 +36963,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -36975,7 +36975,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -36983,9 +36983,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -36999,7 +36999,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -37013,7 +37013,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -37023,7 +37023,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -37043,7 +37043,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -37087,7 +37087,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsUserDefineOutcomeEvent = object { id, description, max\_iterations, 4 more }
+BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max\_iterations, 4 more }
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -37115,9 +37115,9 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaM
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -37127,7 +37127,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -37139,7 +37139,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-BetaManagedAgentsUserToolResultEvent = object { id, tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserToolResultEvent object { id, tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -37157,9 +37157,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -37169,7 +37169,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -37177,9 +37177,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -37193,7 +37193,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -37203,7 +37203,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -37215,7 +37215,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -37223,9 +37223,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -37239,7 +37239,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -37253,7 +37253,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -37263,7 +37263,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -37283,7 +37283,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -37327,7 +37327,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsSessionDeletedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionDeletedEvent object { id, processed\_at, type }
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -37341,13 +37341,13 @@ A timestamp in RFC 3339 format
 
 type: "session.deleted"
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionErrorEvent = object { id, error, processed\_at, type }
+BetaManagedAgentsSessionErrorEvent object { id, error, processed\_at, type }
 
 An error event indicating a problem occurred during session execution.
 
@@ -37359,9 +37359,9 @@ error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, ty
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+BetaManagedAgentsUnknownError object { message, retry\_status, type }
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -37373,21 +37373,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -37395,7 +37395,7 @@ type: "terminal"
 
 type: "unknown\_error"
 
-BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+BetaManagedAgentsModelOverloadedError object { message, retry\_status, type }
 
 The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -37407,21 +37407,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -37429,7 +37429,7 @@ type: "terminal"
 
 type: "model\_overloaded\_error"
 
-BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRateLimitedError object { message, retry\_status, type }
 
 The model request was rate-limited.
 
@@ -37441,21 +37441,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -37463,7 +37463,7 @@ type: "terminal"
 
 type: "model\_rate\_limited\_error"
 
-BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRequestFailedError object { message, retry\_status, type }
 
 A model request failed for a reason other than overload or rate-limiting.
 
@@ -37475,21 +37475,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -37497,7 +37497,7 @@ type: "terminal"
 
 type: "model\_request\_failed\_error"
 
-BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPConnectionFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Failed to connect to an MCP server.
 
@@ -37513,21 +37513,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -37535,7 +37535,7 @@ type: "terminal"
 
 type: "mcp\_connection\_failed\_error"
 
-BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPAuthenticationFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Authentication to an MCP server failed.
 
@@ -37551,21 +37551,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -37573,7 +37573,7 @@ type: "terminal"
 
 type: "mcp\_authentication\_failed\_error"
 
-BetaManagedAgentsBillingError = object { message, retry\_status, type }
+BetaManagedAgentsBillingError object { message, retry\_status, type }
 
 The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -37585,21 +37585,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -37617,9 +37617,9 @@ BetaManagedAgentsSessionEvent = [BetaManagedAgentsUserMessageEvent](api/beta.md)
 
 Union type for all event types in a session.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+BetaManagedAgentsUserMessageEvent object { id, content, type, processed\_at }
 
 A user message event in the session conversation.
 
@@ -37631,9 +37631,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -37643,7 +37643,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -37651,9 +37651,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -37667,7 +37667,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -37677,7 +37677,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -37689,7 +37689,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -37697,9 +37697,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -37713,7 +37713,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -37727,7 +37727,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -37737,7 +37737,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -37763,7 +37763,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at, session\_thread\_id }
+BetaManagedAgentsUserInterruptEvent object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -37781,7 +37781,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 4 more }
+BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -37793,7 +37793,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -37817,7 +37817,7 @@ session\_thread\_id: optional string
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserCustomToolResultEvent object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -37835,9 +37835,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -37847,7 +37847,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -37855,9 +37855,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -37871,7 +37871,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -37881,7 +37881,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -37893,7 +37893,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -37901,9 +37901,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -37917,7 +37917,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -37931,7 +37931,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -37941,7 +37941,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -37961,7 +37961,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -38005,7 +38005,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsAgentCustomToolUseEvent = object { id, input, name, 3 more }
+BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -38031,7 +38031,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-BetaManagedAgentsAgentMessageEvent = object { id, content, processed\_at, type }
+BetaManagedAgentsAgentMessageEvent object { id, content, processed\_at, type }
 
 An agent response event in the session conversation.
 
@@ -38055,7 +38055,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.message"
 
-BetaManagedAgentsAgentThinkingEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThinkingEvent object { id, processed\_at, type }
 
 Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -38069,7 +38069,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thinking"
 
-BetaManagedAgentsAgentMCPToolUseEvent = object { id, input, mcp\_server\_name, 5 more }
+BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp\_server\_name, 5 more }
 
 Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -38099,7 +38099,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -38111,7 +38111,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentMCPToolResultEvent = object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
+BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
 
 Event representing the result of an MCP tool execution.
 
@@ -38133,9 +38133,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -38145,7 +38145,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -38153,9 +38153,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -38169,7 +38169,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -38179,7 +38179,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -38191,7 +38191,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -38199,9 +38199,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -38215,7 +38215,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -38229,7 +38229,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -38239,7 +38239,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -38259,7 +38259,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -38295,7 +38295,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentToolUseEvent = object { id, input, name, 4 more }
+BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }
 
 Event emitted when the agent invokes a built-in agent tool.
 
@@ -38321,7 +38321,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -38333,7 +38333,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentToolResultEvent = object { id, processed\_at, tool\_use\_id, 3 more }
+BetaManagedAgentsAgentToolResultEvent object { id, processed\_at, tool\_use\_id, 3 more }
 
 Event representing the result of an agent tool execution.
 
@@ -38355,9 +38355,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -38367,7 +38367,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -38375,9 +38375,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -38391,7 +38391,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -38401,7 +38401,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -38413,7 +38413,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -38421,9 +38421,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -38437,7 +38437,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -38451,7 +38451,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -38461,7 +38461,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -38481,7 +38481,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -38517,7 +38517,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentThreadMessageReceivedEvent = object { id, content, from\_session\_thread\_id, 3 more }
+BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from\_session\_thread\_id, 3 more }
 
 Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -38529,9 +38529,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -38541,7 +38541,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -38549,9 +38549,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -38565,7 +38565,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -38575,7 +38575,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -38587,7 +38587,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -38595,9 +38595,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -38611,7 +38611,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -38625,7 +38625,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -38635,7 +38635,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -38669,7 +38669,7 @@ from\_agent\_name: optional string
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-BetaManagedAgentsAgentThreadMessageSentEvent = object { id, content, processed\_at, 3 more }
+BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed\_at, 3 more }
 
 Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -38681,9 +38681,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -38693,7 +38693,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -38701,9 +38701,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -38717,7 +38717,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -38727,7 +38727,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -38739,7 +38739,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -38747,9 +38747,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -38763,7 +38763,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -38777,7 +38777,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -38787,7 +38787,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -38821,7 +38821,7 @@ to\_agent\_name: optional string
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-BetaManagedAgentsAgentThreadContextCompactedEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed\_at, type }
 
 Indicates that context compaction (summarization) occurred during the session.
 
@@ -38835,7 +38835,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thread\_context\_compacted"
 
-BetaManagedAgentsSessionErrorEvent = object { id, error, processed\_at, type }
+BetaManagedAgentsSessionErrorEvent object { id, error, processed\_at, type }
 
 An error event indicating a problem occurred during session execution.
 
@@ -38847,9 +38847,9 @@ error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, ty
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+BetaManagedAgentsUnknownError object { message, retry\_status, type }
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -38861,21 +38861,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -38883,7 +38883,7 @@ type: "terminal"
 
 type: "unknown\_error"
 
-BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+BetaManagedAgentsModelOverloadedError object { message, retry\_status, type }
 
 The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -38895,21 +38895,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -38917,7 +38917,7 @@ type: "terminal"
 
 type: "model\_overloaded\_error"
 
-BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRateLimitedError object { message, retry\_status, type }
 
 The model request was rate-limited.
 
@@ -38929,21 +38929,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -38951,7 +38951,7 @@ type: "terminal"
 
 type: "model\_rate\_limited\_error"
 
-BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRequestFailedError object { message, retry\_status, type }
 
 A model request failed for a reason other than overload or rate-limiting.
 
@@ -38963,21 +38963,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -38985,7 +38985,7 @@ type: "terminal"
 
 type: "model\_request\_failed\_error"
 
-BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPConnectionFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Failed to connect to an MCP server.
 
@@ -39001,21 +39001,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -39023,7 +39023,7 @@ type: "terminal"
 
 type: "mcp\_connection\_failed\_error"
 
-BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPAuthenticationFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Authentication to an MCP server failed.
 
@@ -39039,21 +39039,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -39061,7 +39061,7 @@ type: "terminal"
 
 type: "mcp\_authentication\_failed\_error"
 
-BetaManagedAgentsBillingError = object { message, retry\_status, type }
+BetaManagedAgentsBillingError object { message, retry\_status, type }
 
 The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -39073,21 +39073,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -39101,7 +39101,7 @@ A timestamp in RFC 3339 format
 
 type: "session.error"
 
-BetaManagedAgentsSessionStatusRescheduledEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed\_at, type }
 
 Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -39115,7 +39115,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_rescheduled"
 
-BetaManagedAgentsSessionStatusRunningEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRunningEvent object { id, processed\_at, type }
 
 Indicates the session is actively running and the agent is working.
 
@@ -39129,7 +39129,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_running"
 
-BetaManagedAgentsSessionStatusIdleEvent = object { id, processed\_at, stop\_reason, type }
+BetaManagedAgentsSessionStatusIdleEvent object { id, processed\_at, stop\_reason, type }
 
 Indicates the agent has paused and is awaiting user input.
 
@@ -39145,15 +39145,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -39163,7 +39163,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -39171,7 +39171,7 @@ type: "retries\_exhausted"
 
 type: "session.status\_idle"
 
-BetaManagedAgentsSessionStatusTerminatedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed\_at, type }
 
 Indicates the session has terminated, either due to an error or completion.
 
@@ -39185,7 +39185,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_terminated"
 
-BetaManagedAgentsSessionThreadCreatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadCreatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -39207,7 +39207,7 @@ Public `sthr_` ID of the newly created thread.
 
 type: "session.thread\_created"
 
-BetaManagedAgentsSpanOutcomeEvaluationStartEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome\_id, 2 more }
 
 Emitted when an outcome evaluation cycle begins.
 
@@ -39229,7 +39229,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_start"
 
-BetaManagedAgentsSpanOutcomeEvaluationEndEvent = object { id, explanation, iteration, 6 more }
+BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }
 
 Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -39287,13 +39287,13 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaManagedAgentsSpanModelRequestStartEvent = object { id, processed\_at, type }
+BetaManagedAgentsSpanModelRequestStartEvent object { id, processed\_at, type }
 
 Emitted when a model request is initiated by the agent.
 
@@ -39307,7 +39307,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_start"
 
-BetaManagedAgentsSpanModelRequestEndEvent = object { id, is\_error, model\_request\_start\_id, 3 more }
+BetaManagedAgentsSpanModelRequestEndEvent object { id, is\_error, model\_request\_start\_id, 3 more }
 
 Emitted when a model request completes.
 
@@ -39347,7 +39347,7 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -39359,7 +39359,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_end"
 
-BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome\_id, 2 more }
 
 Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -39381,7 +39381,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_ongoing"
 
-BetaManagedAgentsUserDefineOutcomeEvent = object { id, description, max\_iterations, 4 more }
+BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max\_iterations, 4 more }
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -39409,9 +39409,9 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaM
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -39421,7 +39421,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -39433,7 +39433,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-BetaManagedAgentsSessionDeletedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionDeletedEvent object { id, processed\_at, type }
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -39447,7 +39447,7 @@ A timestamp in RFC 3339 format
 
 type: "session.deleted"
 
-BetaManagedAgentsSessionThreadStatusRunningEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -39469,7 +39469,7 @@ Public sthr\_ ID of the thread that started running.
 
 type: "session.thread\_status\_running"
 
-BetaManagedAgentsSessionThreadStatusIdleEvent = object { id, agent\_name, processed\_at, 3 more }
+BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent\_name, processed\_at, 3 more }
 
 A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -39493,15 +39493,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -39511,7 +39511,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -39519,7 +39519,7 @@ type: "retries\_exhausted"
 
 type: "session.thread\_status\_idle"
 
-BetaManagedAgentsSessionThreadStatusTerminatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -39541,7 +39541,7 @@ Public sthr\_ ID of the thread that terminated.
 
 type: "session.thread\_status\_terminated"
 
-BetaManagedAgentsUserToolResultEvent = object { id, tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserToolResultEvent object { id, tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -39559,9 +39559,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -39571,7 +39571,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -39579,9 +39579,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -39595,7 +39595,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -39605,7 +39605,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -39617,7 +39617,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -39625,9 +39625,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -39641,7 +39641,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -39655,7 +39655,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -39665,7 +39665,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -39685,7 +39685,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -39729,7 +39729,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsSessionThreadStatusRescheduledEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -39751,7 +39751,7 @@ Public sthr\_ ID of the thread that is retrying.
 
 type: "session.thread\_status\_rescheduled"
 
-BetaManagedAgentsSessionUpdatedEvent = object { id, processed\_at, type, 3 more }
+BetaManagedAgentsSessionUpdatedEvent object { id, processed\_at, type, 3 more }
 
 Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -39791,15 +39791,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -39837,13 +39837,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -39879,15 +39879,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -39925,13 +39925,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -39941,9 +39941,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -39953,7 +39953,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -39967,9 +39967,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -39979,7 +39979,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -40001,15 +40001,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -40025,15 +40025,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -40041,7 +40041,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -40053,15 +40053,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -40077,15 +40077,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -40095,7 +40095,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -40131,9 +40131,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -40143,7 +40143,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -40157,9 +40157,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -40169,7 +40169,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -40191,15 +40191,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -40215,15 +40215,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -40231,7 +40231,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -40243,15 +40243,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -40267,15 +40267,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -40285,7 +40285,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -40323,7 +40323,7 @@ title: optional string
 
 The session's new title. Present only when the update changed it.
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -40333,13 +40333,13 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
 type: "retries\_exhausted"
 
-BetaManagedAgentsSessionStatusIdleEvent = object { id, processed\_at, stop\_reason, type }
+BetaManagedAgentsSessionStatusIdleEvent object { id, processed\_at, stop\_reason, type }
 
 Indicates the agent has paused and is awaiting user input.
 
@@ -40355,15 +40355,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -40373,7 +40373,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -40381,7 +40381,7 @@ type: "retries\_exhausted"
 
 type: "session.status\_idle"
 
-BetaManagedAgentsSessionStatusRescheduledEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed\_at, type }
 
 Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -40395,7 +40395,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_rescheduled"
 
-BetaManagedAgentsSessionStatusRunningEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRunningEvent object { id, processed\_at, type }
 
 Indicates the session is actively running and the agent is working.
 
@@ -40409,7 +40409,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_running"
 
-BetaManagedAgentsSessionStatusTerminatedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed\_at, type }
 
 Indicates the session has terminated, either due to an error or completion.
 
@@ -40423,7 +40423,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_terminated"
 
-BetaManagedAgentsSessionThreadCreatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadCreatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -40445,7 +40445,7 @@ Public `sthr_` ID of the newly created thread.
 
 type: "session.thread\_created"
 
-BetaManagedAgentsSessionThreadStatusIdleEvent = object { id, agent\_name, processed\_at, 3 more }
+BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent\_name, processed\_at, 3 more }
 
 A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -40469,15 +40469,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -40487,7 +40487,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -40495,7 +40495,7 @@ type: "retries\_exhausted"
 
 type: "session.thread\_status\_idle"
 
-BetaManagedAgentsSessionThreadStatusRescheduledEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -40517,7 +40517,7 @@ Public sthr\_ ID of the thread that is retrying.
 
 type: "session.thread\_status\_rescheduled"
 
-BetaManagedAgentsSessionThreadStatusRunningEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -40539,7 +40539,7 @@ Public sthr\_ ID of the thread that started running.
 
 type: "session.thread\_status\_running"
 
-BetaManagedAgentsSessionThreadStatusTerminatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -40561,7 +40561,7 @@ Public sthr\_ ID of the thread that terminated.
 
 type: "session.thread\_status\_terminated"
 
-BetaManagedAgentsSpanModelRequestEndEvent = object { id, is\_error, model\_request\_start\_id, 3 more }
+BetaManagedAgentsSpanModelRequestEndEvent object { id, is\_error, model\_request\_start\_id, 3 more }
 
 Emitted when a model request completes.
 
@@ -40601,7 +40601,7 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -40613,7 +40613,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_end"
 
-BetaManagedAgentsSpanModelRequestStartEvent = object { id, processed\_at, type }
+BetaManagedAgentsSpanModelRequestStartEvent object { id, processed\_at, type }
 
 Emitted when a model request is initiated by the agent.
 
@@ -40627,7 +40627,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_start"
 
-BetaManagedAgentsSpanModelUsage = object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+BetaManagedAgentsSpanModelUsage object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
 
 Token usage for a single model request.
 
@@ -40651,13 +40651,13 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaManagedAgentsSpanOutcomeEvaluationEndEvent = object { id, explanation, iteration, 6 more }
+BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }
 
 Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -40715,13 +40715,13 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome\_id, 2 more }
 
 Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -40743,7 +40743,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_ongoing"
 
-BetaManagedAgentsSpanOutcomeEvaluationStartEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome\_id, 2 more }
 
 Emitted when an outcome evaluation cycle begins.
 
@@ -40769,9 +40769,9 @@ BetaManagedAgentsStreamSessionEvents = [BetaManagedAgentsUserMessageEvent](api/b
 
 Server-sent event in the session stream.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+BetaManagedAgentsUserMessageEvent object { id, content, type, processed\_at }
 
 A user message event in the session conversation.
 
@@ -40783,9 +40783,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -40795,7 +40795,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -40803,9 +40803,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -40819,7 +40819,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -40829,7 +40829,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -40841,7 +40841,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -40849,9 +40849,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -40865,7 +40865,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -40879,7 +40879,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -40889,7 +40889,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -40915,7 +40915,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at, session\_thread\_id }
+BetaManagedAgentsUserInterruptEvent object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -40933,7 +40933,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 4 more }
+BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -40945,7 +40945,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -40969,7 +40969,7 @@ session\_thread\_id: optional string
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserCustomToolResultEvent object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -40987,9 +40987,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -40999,7 +40999,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -41007,9 +41007,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -41023,7 +41023,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -41033,7 +41033,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -41045,7 +41045,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -41053,9 +41053,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -41069,7 +41069,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -41083,7 +41083,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -41093,7 +41093,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -41113,7 +41113,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -41157,7 +41157,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsAgentCustomToolUseEvent = object { id, input, name, 3 more }
+BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -41183,7 +41183,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-BetaManagedAgentsAgentMessageEvent = object { id, content, processed\_at, type }
+BetaManagedAgentsAgentMessageEvent object { id, content, processed\_at, type }
 
 An agent response event in the session conversation.
 
@@ -41207,7 +41207,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.message"
 
-BetaManagedAgentsAgentThinkingEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThinkingEvent object { id, processed\_at, type }
 
 Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -41221,7 +41221,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thinking"
 
-BetaManagedAgentsAgentMCPToolUseEvent = object { id, input, mcp\_server\_name, 5 more }
+BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp\_server\_name, 5 more }
 
 Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -41251,7 +41251,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -41263,7 +41263,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentMCPToolResultEvent = object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
+BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
 
 Event representing the result of an MCP tool execution.
 
@@ -41285,9 +41285,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -41297,7 +41297,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -41305,9 +41305,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -41321,7 +41321,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -41331,7 +41331,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -41343,7 +41343,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -41351,9 +41351,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -41367,7 +41367,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -41381,7 +41381,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -41391,7 +41391,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -41411,7 +41411,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -41447,7 +41447,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentToolUseEvent = object { id, input, name, 4 more }
+BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }
 
 Event emitted when the agent invokes a built-in agent tool.
 
@@ -41473,7 +41473,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -41485,7 +41485,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentToolResultEvent = object { id, processed\_at, tool\_use\_id, 3 more }
+BetaManagedAgentsAgentToolResultEvent object { id, processed\_at, tool\_use\_id, 3 more }
 
 Event representing the result of an agent tool execution.
 
@@ -41507,9 +41507,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -41519,7 +41519,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -41527,9 +41527,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -41543,7 +41543,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -41553,7 +41553,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -41565,7 +41565,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -41573,9 +41573,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -41589,7 +41589,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -41603,7 +41603,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -41613,7 +41613,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -41633,7 +41633,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -41669,7 +41669,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentThreadMessageReceivedEvent = object { id, content, from\_session\_thread\_id, 3 more }
+BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from\_session\_thread\_id, 3 more }
 
 Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -41681,9 +41681,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -41693,7 +41693,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -41701,9 +41701,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -41717,7 +41717,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -41727,7 +41727,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -41739,7 +41739,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -41747,9 +41747,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -41763,7 +41763,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -41777,7 +41777,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -41787,7 +41787,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -41821,7 +41821,7 @@ from\_agent\_name: optional string
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-BetaManagedAgentsAgentThreadMessageSentEvent = object { id, content, processed\_at, 3 more }
+BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed\_at, 3 more }
 
 Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -41833,9 +41833,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -41845,7 +41845,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -41853,9 +41853,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -41869,7 +41869,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -41879,7 +41879,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -41891,7 +41891,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -41899,9 +41899,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -41915,7 +41915,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -41929,7 +41929,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -41939,7 +41939,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -41973,7 +41973,7 @@ to\_agent\_name: optional string
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-BetaManagedAgentsAgentThreadContextCompactedEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed\_at, type }
 
 Indicates that context compaction (summarization) occurred during the session.
 
@@ -41987,7 +41987,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thread\_context\_compacted"
 
-BetaManagedAgentsSessionErrorEvent = object { id, error, processed\_at, type }
+BetaManagedAgentsSessionErrorEvent object { id, error, processed\_at, type }
 
 An error event indicating a problem occurred during session execution.
 
@@ -41999,9 +41999,9 @@ error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, ty
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+BetaManagedAgentsUnknownError object { message, retry\_status, type }
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -42013,21 +42013,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -42035,7 +42035,7 @@ type: "terminal"
 
 type: "unknown\_error"
 
-BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+BetaManagedAgentsModelOverloadedError object { message, retry\_status, type }
 
 The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -42047,21 +42047,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -42069,7 +42069,7 @@ type: "terminal"
 
 type: "model\_overloaded\_error"
 
-BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRateLimitedError object { message, retry\_status, type }
 
 The model request was rate-limited.
 
@@ -42081,21 +42081,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -42103,7 +42103,7 @@ type: "terminal"
 
 type: "model\_rate\_limited\_error"
 
-BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRequestFailedError object { message, retry\_status, type }
 
 A model request failed for a reason other than overload or rate-limiting.
 
@@ -42115,21 +42115,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -42137,7 +42137,7 @@ type: "terminal"
 
 type: "model\_request\_failed\_error"
 
-BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPConnectionFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Failed to connect to an MCP server.
 
@@ -42153,21 +42153,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -42175,7 +42175,7 @@ type: "terminal"
 
 type: "mcp\_connection\_failed\_error"
 
-BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPAuthenticationFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Authentication to an MCP server failed.
 
@@ -42191,21 +42191,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -42213,7 +42213,7 @@ type: "terminal"
 
 type: "mcp\_authentication\_failed\_error"
 
-BetaManagedAgentsBillingError = object { message, retry\_status, type }
+BetaManagedAgentsBillingError object { message, retry\_status, type }
 
 The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -42225,21 +42225,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -42253,7 +42253,7 @@ A timestamp in RFC 3339 format
 
 type: "session.error"
 
-BetaManagedAgentsSessionStatusRescheduledEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed\_at, type }
 
 Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -42267,7 +42267,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_rescheduled"
 
-BetaManagedAgentsSessionStatusRunningEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRunningEvent object { id, processed\_at, type }
 
 Indicates the session is actively running and the agent is working.
 
@@ -42281,7 +42281,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_running"
 
-BetaManagedAgentsSessionStatusIdleEvent = object { id, processed\_at, stop\_reason, type }
+BetaManagedAgentsSessionStatusIdleEvent object { id, processed\_at, stop\_reason, type }
 
 Indicates the agent has paused and is awaiting user input.
 
@@ -42297,15 +42297,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -42315,7 +42315,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -42323,7 +42323,7 @@ type: "retries\_exhausted"
 
 type: "session.status\_idle"
 
-BetaManagedAgentsSessionStatusTerminatedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed\_at, type }
 
 Indicates the session has terminated, either due to an error or completion.
 
@@ -42337,7 +42337,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_terminated"
 
-BetaManagedAgentsSessionThreadCreatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadCreatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -42359,7 +42359,7 @@ Public `sthr_` ID of the newly created thread.
 
 type: "session.thread\_created"
 
-BetaManagedAgentsSpanOutcomeEvaluationStartEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome\_id, 2 more }
 
 Emitted when an outcome evaluation cycle begins.
 
@@ -42381,7 +42381,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_start"
 
-BetaManagedAgentsSpanOutcomeEvaluationEndEvent = object { id, explanation, iteration, 6 more }
+BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }
 
 Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -42439,13 +42439,13 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaManagedAgentsSpanModelRequestStartEvent = object { id, processed\_at, type }
+BetaManagedAgentsSpanModelRequestStartEvent object { id, processed\_at, type }
 
 Emitted when a model request is initiated by the agent.
 
@@ -42459,7 +42459,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_start"
 
-BetaManagedAgentsSpanModelRequestEndEvent = object { id, is\_error, model\_request\_start\_id, 3 more }
+BetaManagedAgentsSpanModelRequestEndEvent object { id, is\_error, model\_request\_start\_id, 3 more }
 
 Emitted when a model request completes.
 
@@ -42499,7 +42499,7 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -42511,7 +42511,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_end"
 
-BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome\_id, 2 more }
 
 Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -42533,7 +42533,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_ongoing"
 
-BetaManagedAgentsUserDefineOutcomeEvent = object { id, description, max\_iterations, 4 more }
+BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max\_iterations, 4 more }
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -42561,9 +42561,9 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaM
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -42573,7 +42573,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -42585,7 +42585,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-BetaManagedAgentsSessionDeletedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionDeletedEvent object { id, processed\_at, type }
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -42599,7 +42599,7 @@ A timestamp in RFC 3339 format
 
 type: "session.deleted"
 
-BetaManagedAgentsSessionThreadStatusRunningEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -42621,7 +42621,7 @@ Public sthr\_ ID of the thread that started running.
 
 type: "session.thread\_status\_running"
 
-BetaManagedAgentsSessionThreadStatusIdleEvent = object { id, agent\_name, processed\_at, 3 more }
+BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent\_name, processed\_at, 3 more }
 
 A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -42645,15 +42645,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -42663,7 +42663,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -42671,7 +42671,7 @@ type: "retries\_exhausted"
 
 type: "session.thread\_status\_idle"
 
-BetaManagedAgentsSessionThreadStatusTerminatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -42693,7 +42693,7 @@ Public sthr\_ ID of the thread that terminated.
 
 type: "session.thread\_status\_terminated"
 
-BetaManagedAgentsUserToolResultEvent = object { id, tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserToolResultEvent object { id, tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -42711,9 +42711,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -42723,7 +42723,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -42731,9 +42731,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -42747,7 +42747,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -42757,7 +42757,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -42769,7 +42769,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -42777,9 +42777,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -42793,7 +42793,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -42807,7 +42807,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -42817,7 +42817,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -42837,7 +42837,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -42881,7 +42881,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsSessionThreadStatusRescheduledEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -42903,7 +42903,7 @@ Public sthr\_ ID of the thread that is retrying.
 
 type: "session.thread\_status\_rescheduled"
 
-BetaManagedAgentsSessionUpdatedEvent = object { id, processed\_at, type, 3 more }
+BetaManagedAgentsSessionUpdatedEvent object { id, processed\_at, type, 3 more }
 
 Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -42943,15 +42943,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -42989,13 +42989,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -43031,15 +43031,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -43077,13 +43077,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -43093,9 +43093,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -43105,7 +43105,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -43119,9 +43119,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -43131,7 +43131,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -43153,15 +43153,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -43177,15 +43177,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -43193,7 +43193,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -43205,15 +43205,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -43229,15 +43229,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -43247,7 +43247,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -43283,9 +43283,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -43295,7 +43295,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -43309,9 +43309,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -43321,7 +43321,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -43343,15 +43343,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -43367,15 +43367,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -43383,7 +43383,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -43395,15 +43395,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -43419,15 +43419,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -43437,7 +43437,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -43475,7 +43475,7 @@ title: optional string
 
 The session's new title. Present only when the update changed it.
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -43485,7 +43485,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -43495,7 +43495,7 @@ Rubric content. Plain text or markdown — the grader treats it as freeform text
 
 type: "text"
 
-BetaManagedAgentsTextRubricParams = object { content, type }
+BetaManagedAgentsTextRubricParams object { content, type }
 
 Rubric content provided inline as text.
 
@@ -43505,7 +43505,7 @@ Rubric content. Plain text or markdown — the grader treats it as freeform text
 
 type: "text"
 
-BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+BetaManagedAgentsUnknownError object { message, retry\_status, type }
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -43517,21 +43517,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -43539,7 +43539,7 @@ type: "terminal"
 
 type: "unknown\_error"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -43549,7 +43549,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -43559,7 +43559,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserCustomToolResultEvent object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -43577,9 +43577,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -43589,7 +43589,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -43597,9 +43597,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -43613,7 +43613,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -43623,7 +43623,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -43635,7 +43635,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -43643,9 +43643,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -43659,7 +43659,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -43673,7 +43673,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -43683,7 +43683,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -43703,7 +43703,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -43747,7 +43747,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsUserCustomToolResultEventParams = object { custom\_tool\_use\_id, type, content, is\_error }
+BetaManagedAgentsUserCustomToolResultEventParams object { custom\_tool\_use\_id, type, content, is\_error }
 
 Parameters for providing the result of a custom tool execution.
 
@@ -43761,9 +43761,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -43773,7 +43773,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -43781,9 +43781,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -43797,7 +43797,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -43807,7 +43807,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -43819,7 +43819,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -43827,9 +43827,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -43843,7 +43843,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -43857,7 +43857,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -43867,7 +43867,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -43887,7 +43887,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -43923,7 +43923,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsUserDefineOutcomeEvent = object { id, description, max\_iterations, 4 more }
+BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max\_iterations, 4 more }
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -43951,9 +43951,9 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaM
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -43963,7 +43963,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -43975,7 +43975,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-BetaManagedAgentsUserDefineOutcomeEventParams = object { description, rubric, type, max\_iterations }
+BetaManagedAgentsUserDefineOutcomeEventParams object { description, rubric, type, max\_iterations }
 
 Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
 
@@ -43987,9 +43987,9 @@ rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  or 
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubricParams = object { file\_id, type }
+BetaManagedAgentsFileRubricParams object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -43999,7 +43999,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubricParams = object { content, type }
+BetaManagedAgentsTextRubricParams object { content, type }
 
 Rubric content provided inline as text.
 
@@ -44015,7 +44015,7 @@ max\_iterations: optional number
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
-BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at, session\_thread\_id }
+BetaManagedAgentsUserInterruptEvent object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -44033,7 +44033,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserInterruptEventParams = object { type, session\_thread\_id }
+BetaManagedAgentsUserInterruptEventParams object { type, session\_thread\_id }
 
 Parameters for sending an interrupt to pause the agent.
 
@@ -44043,7 +44043,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+BetaManagedAgentsUserMessageEvent object { id, content, type, processed\_at }
 
 A user message event in the session conversation.
 
@@ -44055,9 +44055,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -44067,7 +44067,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -44075,9 +44075,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -44091,7 +44091,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -44101,7 +44101,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -44113,7 +44113,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -44121,9 +44121,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -44137,7 +44137,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -44151,7 +44151,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -44161,7 +44161,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -44187,7 +44187,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserMessageEventParams = object { content, type }
+BetaManagedAgentsUserMessageEventParams object { content, type }
 
 Parameters for sending a user message to the session.
 
@@ -44195,9 +44195,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -44207,7 +44207,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -44215,9 +44215,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -44231,7 +44231,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -44241,7 +44241,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -44253,7 +44253,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -44261,9 +44261,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -44277,7 +44277,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -44291,7 +44291,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -44301,7 +44301,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -44323,7 +44323,7 @@ The title of the document.
 
 type: "user.message"
 
-BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 4 more }
+BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -44335,7 +44335,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -44359,7 +44359,7 @@ session\_thread\_id: optional string
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-BetaManagedAgentsUserToolConfirmationEventParams = object { result, tool\_use\_id, type, deny\_message }
+BetaManagedAgentsUserToolConfirmationEventParams object { result, tool\_use\_id, type, deny\_message }
 
 Parameters for confirming or denying a tool execution request.
 
@@ -44367,7 +44367,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -44383,7 +44383,7 @@ deny\_message: optional string
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-BetaManagedAgentsUserToolResultEventParams = object { tool\_use\_id, type, content, is\_error }
+BetaManagedAgentsUserToolResultEventParams object { tool\_use\_id, type, content, is\_error }
 
 Parameters for providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -44397,9 +44397,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -44409,7 +44409,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -44417,9 +44417,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -44433,7 +44433,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -44443,7 +44443,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -44455,7 +44455,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -44463,9 +44463,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -44479,7 +44479,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -44493,7 +44493,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -44503,7 +44503,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -44523,7 +44523,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -44583,7 +44583,7 @@ DELETE/v1/sessions/{session\_id}/resources/{resource\_id}
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsDeleteSessionResource = object { id, type }
+BetaManagedAgentsDeleteSessionResource object { id, type }
 
 Confirmation of resource deletion.
 
@@ -44591,7 +44591,7 @@ id: string
 
 type: "session\_resource\_deleted"
 
-BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsFileResource object { id, created\_at, file\_id, 3 more }
 
 id: string
 
@@ -44609,7 +44609,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object { id, created\_at, mount\_path, 4 more }
 
 id: string
 
@@ -44629,9 +44629,9 @@ url: string
 
 checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -44639,7 +44639,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -44647,7 +44647,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -44661,7 +44661,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -44687,9 +44687,9 @@ BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](a
 
 A memory store attached to an agent session.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object { id, created\_at, mount\_path, 4 more }
 
 id: string
 
@@ -44709,9 +44709,9 @@ url: string
 
 checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -44719,7 +44719,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -44727,7 +44727,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsFileResource object { id, created\_at, file\_id, 3 more }
 
 id: string
 
@@ -44745,7 +44745,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -44759,7 +44759,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -44785,9 +44785,9 @@ ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.
 
 The requested session resource.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object { id, created\_at, mount\_path, 4 more }
 
 id: string
 
@@ -44807,9 +44807,9 @@ url: string
 
 checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -44817,7 +44817,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -44825,7 +44825,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsFileResource object { id, created\_at, file\_id, 3 more }
 
 id: string
 
@@ -44843,7 +44843,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -44857,7 +44857,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -44883,9 +44883,9 @@ ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md
 
 The updated session resource.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsGitHubRepositoryResource = object { id, created\_at, mount\_path, 4 more }
+BetaManagedAgentsGitHubRepositoryResource object { id, created\_at, mount\_path, 4 more }
 
 id: string
 
@@ -44905,9 +44905,9 @@ url: string
 
 checkout: optional [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  or [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBranchCheckout = object { name, type }
+BetaManagedAgentsBranchCheckout object { name, type }
 
 name: string
 
@@ -44915,7 +44915,7 @@ Branch name to check out.
 
 type: "branch"
 
-BetaManagedAgentsCommitCheckout = object { sha, type }
+BetaManagedAgentsCommitCheckout object { sha, type }
 
 sha: string
 
@@ -44923,7 +44923,7 @@ Full commit SHA to check out.
 
 type: "commit"
 
-BetaManagedAgentsFileResource = object { id, created\_at, file\_id, 3 more }
+BetaManagedAgentsFileResource object { id, created\_at, file\_id, 3 more }
 
 id: string
 
@@ -44941,7 +44941,7 @@ updated\_at: string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsMemoryStoreResource = object { memory\_store\_id, type, access, 4 more }
+BetaManagedAgentsMemoryStoreResource object { memory\_store\_id, type, access, 4 more }
 
 A memory store attached to an agent session.
 
@@ -44955,7 +44955,7 @@ access: optional "read\_write" or "read\_only"
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -44993,7 +44993,7 @@ POST/v1/sessions/{session\_id}/threads/{thread\_id}/archive
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsSessionThread = object { id, agent, archived\_at, 8 more }
+BetaManagedAgentsSessionThread object { id, agent, archived\_at, 8 more }
 
 An execution thread within a `session`. Each session has one primary thread plus zero or more child threads spawned by the coordinator.
 
@@ -45027,15 +45027,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -45073,13 +45073,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -45089,9 +45089,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -45101,7 +45101,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -45115,9 +45115,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -45127,7 +45127,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -45149,15 +45149,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -45173,15 +45173,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -45189,7 +45189,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -45201,15 +45201,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -45225,15 +45225,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -45243,7 +45243,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -45309,7 +45309,7 @@ status: [BetaManagedAgentsSessionThreadStatus](api/beta.md)
 
 SessionThreadStatus enum
 
-Accepts one of the following:
+One of the following:
 
 "running"
 
@@ -45353,7 +45353,7 @@ output\_tokens: optional number
 
 Total output tokens generated across all turns.
 
-BetaManagedAgentsSessionThreadStats = object { active\_seconds, duration\_seconds, startup\_seconds }
+BetaManagedAgentsSessionThreadStats object { active\_seconds, duration\_seconds, startup\_seconds }
 
 Timing statistics for a session thread.
 
@@ -45373,7 +45373,7 @@ BetaManagedAgentsSessionThreadStatus = "running" or "idle" or "rescheduling" or 
 
 SessionThreadStatus enum
 
-Accepts one of the following:
+One of the following:
 
 "running"
 
@@ -45383,7 +45383,7 @@ Accepts one of the following:
 
 "terminated"
 
-BetaManagedAgentsSessionThreadUsage = object { cache\_creation, cache\_read\_input\_tokens, input\_tokens, output\_tokens }
+BetaManagedAgentsSessionThreadUsage object { cache\_creation, cache\_read\_input\_tokens, input\_tokens, output\_tokens }
 
 Cumulative token usage for a session thread across all turns.
 
@@ -45415,9 +45415,9 @@ BetaManagedAgentsStreamSessionThreadEvents = [BetaManagedAgentsUserMessageEvent]
 
 Server-sent event in a single thread's stream.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUserMessageEvent = object { id, content, type, processed\_at }
+BetaManagedAgentsUserMessageEvent object { id, content, type, processed\_at }
 
 A user message event in the session conversation.
 
@@ -45429,9 +45429,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -45441,7 +45441,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -45449,9 +45449,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -45465,7 +45465,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -45475,7 +45475,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -45487,7 +45487,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -45495,9 +45495,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -45511,7 +45511,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -45525,7 +45525,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -45535,7 +45535,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -45561,7 +45561,7 @@ processed\_at: optional string
 
 A timestamp in RFC 3339 format
 
-BetaManagedAgentsUserInterruptEvent = object { id, type, processed\_at, session\_thread\_id }
+BetaManagedAgentsUserInterruptEvent object { id, type, processed\_at, session\_thread\_id }
 
 An interrupt event that pauses agent execution and returns control to the user.
 
@@ -45579,7 +45579,7 @@ session\_thread\_id: optional string
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
-BetaManagedAgentsUserToolConfirmationEvent = object { id, result, tool\_use\_id, 4 more }
+BetaManagedAgentsUserToolConfirmationEvent object { id, result, tool\_use\_id, 4 more }
 
 A tool confirmation event that approves or denies a pending tool execution.
 
@@ -45591,7 +45591,7 @@ result: "allow" or "deny"
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -45615,7 +45615,7 @@ session\_thread\_id: optional string
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
-BetaManagedAgentsUserCustomToolResultEvent = object { id, custom\_tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserCustomToolResultEvent object { id, custom\_tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of a custom tool execution.
 
@@ -45633,9 +45633,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -45645,7 +45645,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -45653,9 +45653,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -45669,7 +45669,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -45679,7 +45679,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -45691,7 +45691,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -45699,9 +45699,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -45715,7 +45715,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -45729,7 +45729,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -45739,7 +45739,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -45759,7 +45759,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -45803,7 +45803,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsAgentCustomToolUseEvent = object { id, input, name, 3 more }
+BetaManagedAgentsAgentCustomToolUseEvent object { id, input, name, 3 more }
 
 Event emitted when the agent calls a custom tool. The session goes idle until the client sends a `user.custom_tool_result` event with the result.
 
@@ -45829,7 +45829,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
-BetaManagedAgentsAgentMessageEvent = object { id, content, processed\_at, type }
+BetaManagedAgentsAgentMessageEvent object { id, content, processed\_at, type }
 
 An agent response event in the session conversation.
 
@@ -45853,7 +45853,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.message"
 
-BetaManagedAgentsAgentThinkingEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThinkingEvent object { id, processed\_at, type }
 
 Indicates the agent is making forward progress via extended thinking. A progress signal, not a content carrier.
 
@@ -45867,7 +45867,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thinking"
 
-BetaManagedAgentsAgentMCPToolUseEvent = object { id, input, mcp\_server\_name, 5 more }
+BetaManagedAgentsAgentMCPToolUseEvent object { id, input, mcp\_server\_name, 5 more }
 
 Event emitted when the agent invokes a tool provided by an MCP server.
 
@@ -45897,7 +45897,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -45909,7 +45909,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentMCPToolResultEvent = object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
+BetaManagedAgentsAgentMCPToolResultEvent object { id, mcp\_tool\_use\_id, processed\_at, 3 more }
 
 Event representing the result of an MCP tool execution.
 
@@ -45931,9 +45931,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -45943,7 +45943,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -45951,9 +45951,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -45967,7 +45967,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -45977,7 +45977,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -45989,7 +45989,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -45997,9 +45997,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -46013,7 +46013,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -46027,7 +46027,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -46037,7 +46037,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -46057,7 +46057,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -46093,7 +46093,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentToolUseEvent = object { id, input, name, 4 more }
+BetaManagedAgentsAgentToolUseEvent object { id, input, name, 4 more }
 
 Event emitted when the agent invokes a built-in agent tool.
 
@@ -46119,7 +46119,7 @@ evaluated\_permission: optional "allow" or "ask" or "deny"
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -46131,7 +46131,7 @@ session\_thread\_id: optional string
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
-BetaManagedAgentsAgentToolResultEvent = object { id, processed\_at, tool\_use\_id, 3 more }
+BetaManagedAgentsAgentToolResultEvent object { id, processed\_at, tool\_use\_id, 3 more }
 
 Event representing the result of an agent tool execution.
 
@@ -46153,9 +46153,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -46165,7 +46165,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -46173,9 +46173,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -46189,7 +46189,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -46199,7 +46199,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -46211,7 +46211,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -46219,9 +46219,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -46235,7 +46235,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -46249,7 +46249,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -46259,7 +46259,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -46279,7 +46279,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -46315,7 +46315,7 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
-BetaManagedAgentsAgentThreadMessageReceivedEvent = object { id, content, from\_session\_thread\_id, 3 more }
+BetaManagedAgentsAgentThreadMessageReceivedEvent object { id, content, from\_session\_thread\_id, 3 more }
 
 Delivery event written to the target thread's input stream when an agent-to-agent message arrives.
 
@@ -46327,9 +46327,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -46339,7 +46339,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -46347,9 +46347,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -46363,7 +46363,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -46373,7 +46373,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -46385,7 +46385,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -46393,9 +46393,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -46409,7 +46409,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -46423,7 +46423,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -46433,7 +46433,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -46467,7 +46467,7 @@ from\_agent\_name: optional string
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
-BetaManagedAgentsAgentThreadMessageSentEvent = object { id, content, processed\_at, 3 more }
+BetaManagedAgentsAgentThreadMessageSentEvent object { id, content, processed\_at, 3 more }
 
 Observability event emitted to the sender's output stream when an agent-to-agent message is sent.
 
@@ -46479,9 +46479,9 @@ content: array of [BetaManagedAgentsTextBlock](api/beta.md) { text, type }  or [
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -46491,7 +46491,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -46499,9 +46499,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -46515,7 +46515,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -46525,7 +46525,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -46537,7 +46537,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -46545,9 +46545,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -46561,7 +46561,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -46575,7 +46575,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -46585,7 +46585,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -46619,7 +46619,7 @@ to\_agent\_name: optional string
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
-BetaManagedAgentsAgentThreadContextCompactedEvent = object { id, processed\_at, type }
+BetaManagedAgentsAgentThreadContextCompactedEvent object { id, processed\_at, type }
 
 Indicates that context compaction (summarization) occurred during the session.
 
@@ -46633,7 +46633,7 @@ A timestamp in RFC 3339 format
 
 type: "agent.thread\_context\_compacted"
 
-BetaManagedAgentsSessionErrorEvent = object { id, error, processed\_at, type }
+BetaManagedAgentsSessionErrorEvent object { id, error, processed\_at, type }
 
 An error event indicating a problem occurred during session execution.
 
@@ -46645,9 +46645,9 @@ error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, ty
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsUnknownError = object { message, retry\_status, type }
+BetaManagedAgentsUnknownError object { message, retry\_status, type }
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -46659,21 +46659,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -46681,7 +46681,7 @@ type: "terminal"
 
 type: "unknown\_error"
 
-BetaManagedAgentsModelOverloadedError = object { message, retry\_status, type }
+BetaManagedAgentsModelOverloadedError object { message, retry\_status, type }
 
 The model is currently overloaded. Emitted after automatic retries are exhausted.
 
@@ -46693,21 +46693,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -46715,7 +46715,7 @@ type: "terminal"
 
 type: "model\_overloaded\_error"
 
-BetaManagedAgentsModelRateLimitedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRateLimitedError object { message, retry\_status, type }
 
 The model request was rate-limited.
 
@@ -46727,21 +46727,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -46749,7 +46749,7 @@ type: "terminal"
 
 type: "model\_rate\_limited\_error"
 
-BetaManagedAgentsModelRequestFailedError = object { message, retry\_status, type }
+BetaManagedAgentsModelRequestFailedError object { message, retry\_status, type }
 
 A model request failed for a reason other than overload or rate-limiting.
 
@@ -46761,21 +46761,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -46783,7 +46783,7 @@ type: "terminal"
 
 type: "model\_request\_failed\_error"
 
-BetaManagedAgentsMCPConnectionFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPConnectionFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Failed to connect to an MCP server.
 
@@ -46799,21 +46799,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -46821,7 +46821,7 @@ type: "terminal"
 
 type: "mcp\_connection\_failed\_error"
 
-BetaManagedAgentsMCPAuthenticationFailedError = object { mcp\_server\_name, message, retry\_status, type }
+BetaManagedAgentsMCPAuthenticationFailedError object { mcp\_server\_name, message, retry\_status, type }
 
 Authentication to an MCP server failed.
 
@@ -46837,21 +46837,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -46859,7 +46859,7 @@ type: "terminal"
 
 type: "mcp\_authentication\_failed\_error"
 
-BetaManagedAgentsBillingError = object { message, retry\_status, type }
+BetaManagedAgentsBillingError object { message, retry\_status, type }
 
 The caller's organization or workspace cannot make model requests — out of credits or spend limit reached. Retrying with the same credentials will not succeed; the caller must resolve the billing state.
 
@@ -46871,21 +46871,21 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or 
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsRetryStatusRetrying = object { type }
+BetaManagedAgentsRetryStatusRetrying object { type }
 
 The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
 
 type: "retrying"
 
-BetaManagedAgentsRetryStatusExhausted = object { type }
+BetaManagedAgentsRetryStatusExhausted object { type }
 
 This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
 
 type: "exhausted"
 
-BetaManagedAgentsRetryStatusTerminal = object { type }
+BetaManagedAgentsRetryStatusTerminal object { type }
 
 The session encountered a terminal error and will transition to `terminated` state.
 
@@ -46899,7 +46899,7 @@ A timestamp in RFC 3339 format
 
 type: "session.error"
 
-BetaManagedAgentsSessionStatusRescheduledEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRescheduledEvent object { id, processed\_at, type }
 
 Indicates the session is recovering from an error state and is rescheduled for execution.
 
@@ -46913,7 +46913,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_rescheduled"
 
-BetaManagedAgentsSessionStatusRunningEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusRunningEvent object { id, processed\_at, type }
 
 Indicates the session is actively running and the agent is working.
 
@@ -46927,7 +46927,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_running"
 
-BetaManagedAgentsSessionStatusIdleEvent = object { id, processed\_at, stop\_reason, type }
+BetaManagedAgentsSessionStatusIdleEvent object { id, processed\_at, stop\_reason, type }
 
 Indicates the agent has paused and is awaiting user input.
 
@@ -46943,15 +46943,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -46961,7 +46961,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -46969,7 +46969,7 @@ type: "retries\_exhausted"
 
 type: "session.status\_idle"
 
-BetaManagedAgentsSessionStatusTerminatedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionStatusTerminatedEvent object { id, processed\_at, type }
 
 Indicates the session has terminated, either due to an error or completion.
 
@@ -46983,7 +46983,7 @@ A timestamp in RFC 3339 format
 
 type: "session.status\_terminated"
 
-BetaManagedAgentsSessionThreadCreatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadCreatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 Emitted when a subagent is spawned as a new thread. Written to the parent thread's output stream so clients observing the session see child creation.
 
@@ -47005,7 +47005,7 @@ Public `sthr_` ID of the newly created thread.
 
 type: "session.thread\_created"
 
-BetaManagedAgentsSpanOutcomeEvaluationStartEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationStartEvent object { id, iteration, outcome\_id, 2 more }
 
 Emitted when an outcome evaluation cycle begins.
 
@@ -47027,7 +47027,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_start"
 
-BetaManagedAgentsSpanOutcomeEvaluationEndEvent = object { id, explanation, iteration, 6 more }
+BetaManagedAgentsSpanOutcomeEvaluationEndEvent object { id, explanation, iteration, 6 more }
 
 Emitted when an outcome evaluation cycle completes. Carries the verdict and aggregate token usage. A verdict of `needs_revision` means another evaluation cycle follows; `satisfied`, `max_iterations_reached`, `failed`, or `interrupted` are terminal — no further evaluation cycles follow.
 
@@ -47085,13 +47085,13 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
 "fast"
 
-BetaManagedAgentsSpanModelRequestStartEvent = object { id, processed\_at, type }
+BetaManagedAgentsSpanModelRequestStartEvent object { id, processed\_at, type }
 
 Emitted when a model request is initiated by the agent.
 
@@ -47105,7 +47105,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_start"
 
-BetaManagedAgentsSpanModelRequestEndEvent = object { id, is\_error, model\_request\_start\_id, 3 more }
+BetaManagedAgentsSpanModelRequestEndEvent object { id, is\_error, model\_request\_start\_id, 3 more }
 
 Emitted when a model request completes.
 
@@ -47145,7 +47145,7 @@ speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -47157,7 +47157,7 @@ A timestamp in RFC 3339 format
 
 type: "span.model\_request\_end"
 
-BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent = object { id, iteration, outcome\_id, 2 more }
+BetaManagedAgentsSpanOutcomeEvaluationOngoingEvent object { id, iteration, outcome\_id, 2 more }
 
 Periodic heartbeat emitted while an outcome evaluation cycle is in progress. Distinguishes 'evaluation is actively running' from 'evaluation is stuck' between the corresponding `span.outcome_evaluation_start` and `span.outcome_evaluation_end` events.
 
@@ -47179,7 +47179,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_ongoing"
 
-BetaManagedAgentsUserDefineOutcomeEvent = object { id, description, max\_iterations, 4 more }
+BetaManagedAgentsUserDefineOutcomeEvent object { id, description, max\_iterations, 4 more }
 
 Echo of a `user.define_outcome` input event. Carries the server-generated `outcome_id` that subsequent `span.outcome_evaluation_*` events reference.
 
@@ -47207,9 +47207,9 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  or [BetaM
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsFileRubric = object { file\_id, type }
+BetaManagedAgentsFileRubric object { file\_id, type }
 
 Rubric referenced by a file uploaded via the Files API.
 
@@ -47219,7 +47219,7 @@ ID of the rubric file.
 
 type: "file"
 
-BetaManagedAgentsTextRubric = object { content, type }
+BetaManagedAgentsTextRubric object { content, type }
 
 Rubric content provided inline as text.
 
@@ -47231,7 +47231,7 @@ type: "text"
 
 type: "user.define\_outcome"
 
-BetaManagedAgentsSessionDeletedEvent = object { id, processed\_at, type }
+BetaManagedAgentsSessionDeletedEvent object { id, processed\_at, type }
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
 
@@ -47245,7 +47245,7 @@ A timestamp in RFC 3339 format
 
 type: "session.deleted"
 
-BetaManagedAgentsSessionThreadStatusRunningEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRunningEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has begun executing. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -47267,7 +47267,7 @@ Public sthr\_ ID of the thread that started running.
 
 type: "session.thread\_status\_running"
 
-BetaManagedAgentsSessionThreadStatusIdleEvent = object { id, agent\_name, processed\_at, 3 more }
+BetaManagedAgentsSessionThreadStatusIdleEvent object { id, agent\_name, processed\_at, 3 more }
 
 A session thread has yielded and is awaiting input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -47291,15 +47291,15 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  or [BetaM
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionEndTurn = object { type }
+BetaManagedAgentsSessionEndTurn object { type }
 
 The agent completed its turn naturally and is ready for the next user message.
 
 type: "end\_turn"
 
-BetaManagedAgentsSessionRequiresAction = object { event\_ids, type }
+BetaManagedAgentsSessionRequiresAction object { event\_ids, type }
 
 The agent is idle waiting on one or more blocking user-input events (tool confirmation, custom tool result, etc.). Resolving all of them transitions the session back to running.
 
@@ -47309,7 +47309,7 @@ The ids of events the agent is blocked on. Resolving fewer than all re-emits `se
 
 type: "requires\_action"
 
-BetaManagedAgentsSessionRetriesExhausted = object { type }
+BetaManagedAgentsSessionRetriesExhausted object { type }
 
 The turn ended because the retry budget was exhausted (`max_iterations` hit or an error escalated to `retry_status: 'exhausted'`).
 
@@ -47317,7 +47317,7 @@ type: "retries\_exhausted"
 
 type: "session.thread\_status\_idle"
 
-BetaManagedAgentsSessionThreadStatusTerminatedEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusTerminatedEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread has terminated and will accept no further input. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -47339,7 +47339,7 @@ Public sthr\_ ID of the thread that terminated.
 
 type: "session.thread\_status\_terminated"
 
-BetaManagedAgentsUserToolResultEvent = object { id, tool\_use\_id, type, 4 more }
+BetaManagedAgentsUserToolResultEvent object { id, tool\_use\_id, type, 4 more }
 
 Event sent by the client providing the result of an agent-toolset tool execution. Only valid on `self_hosted` environments, where sandbox-routed tools are executed by the client rather than the server.
 
@@ -47357,9 +47357,9 @@ content: optional array of [BetaManagedAgentsTextBlock](api/beta.md) { text, typ
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTextBlock = object { text, type }
+BetaManagedAgentsTextBlock object { text, type }
 
 Regular text content.
 
@@ -47369,7 +47369,7 @@ The text content.
 
 type: "text"
 
-BetaManagedAgentsImageBlock = object { source, type }
+BetaManagedAgentsImageBlock object { source, type }
 
 Image content specified directly as base64 data or as a reference via a URL.
 
@@ -47377,9 +47377,9 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64ImageSource = object { data, media\_type, type }
+BetaManagedAgentsBase64ImageSource object { data, media\_type, type }
 
 Base64-encoded image data.
 
@@ -47393,7 +47393,7 @@ MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/web
 
 type: "base64"
 
-BetaManagedAgentsURLImageSource = object { type, url }
+BetaManagedAgentsURLImageSource object { type, url }
 
 Image referenced by URL.
 
@@ -47403,7 +47403,7 @@ url: string
 
 URL of the image to fetch.
 
-BetaManagedAgentsFileImageSource = object { file\_id, type }
+BetaManagedAgentsFileImageSource object { file\_id, type }
 
 Image referenced by file ID.
 
@@ -47415,7 +47415,7 @@ type: "file"
 
 type: "image"
 
-BetaManagedAgentsDocumentBlock = object { source, type, context, title }
+BetaManagedAgentsDocumentBlock object { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
 
@@ -47423,9 +47423,9 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsBase64DocumentSource = object { data, media\_type, type }
+BetaManagedAgentsBase64DocumentSource object { data, media\_type, type }
 
 Base64-encoded document data.
 
@@ -47439,7 +47439,7 @@ MIME type of the document (e.g., "application/pdf").
 
 type: "base64"
 
-BetaManagedAgentsPlainTextDocumentSource = object { data, media\_type, type }
+BetaManagedAgentsPlainTextDocumentSource object { data, media\_type, type }
 
 Plain text document content.
 
@@ -47453,7 +47453,7 @@ MIME type of the text content. Must be "text/plain".
 
 type: "text"
 
-BetaManagedAgentsURLDocumentSource = object { type, url }
+BetaManagedAgentsURLDocumentSource object { type, url }
 
 Document referenced by URL.
 
@@ -47463,7 +47463,7 @@ url: string
 
 URL of the document to fetch.
 
-BetaManagedAgentsFileDocumentSource = object { file\_id, type }
+BetaManagedAgentsFileDocumentSource object { file\_id, type }
 
 Document referenced by file ID.
 
@@ -47483,7 +47483,7 @@ title: optional string
 
 The title of the document.
 
-BetaManagedAgentsSearchResultBlock = object { citations, content, source, 2 more }
+BetaManagedAgentsSearchResultBlock object { citations, content, source, 2 more }
 
 A block containing a web search result.
 
@@ -47527,7 +47527,7 @@ session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
-BetaManagedAgentsSessionThreadStatusRescheduledEvent = object { id, agent\_name, processed\_at, 2 more }
+BetaManagedAgentsSessionThreadStatusRescheduledEvent object { id, agent\_name, processed\_at, 2 more }
 
 A session thread hit a transient error and is retrying automatically. Emitted on the thread's own stream and cross-posted to the primary stream for child threads.
 
@@ -47549,7 +47549,7 @@ Public sthr\_ ID of the thread that is retrying.
 
 type: "session.thread\_status\_rescheduled"
 
-BetaManagedAgentsSessionUpdatedEvent = object { id, processed\_at, type, 3 more }
+BetaManagedAgentsSessionUpdatedEvent object { id, processed\_at, type, 3 more }
 
 Emitted when an UpdateSession request changed at least one field. Carries only the fields that changed; absent fields were not part of the update. The new configuration applies from the next turn.
 
@@ -47589,15 +47589,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -47635,13 +47635,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -47677,15 +47677,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
+"claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -47723,13 +47723,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-UnionMember1 = string
+string
 
 speed: optional "standard" or "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -47739,9 +47739,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -47751,7 +47751,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -47765,9 +47765,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -47777,7 +47777,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -47799,15 +47799,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -47823,15 +47823,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -47839,7 +47839,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -47851,15 +47851,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -47875,15 +47875,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -47893,7 +47893,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -47929,9 +47929,9 @@ name: string
 
 skills: array of [BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  or [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAnthropicSkill = object { skill\_id, type, version }
+BetaManagedAgentsAnthropicSkill object { skill\_id, type, version }
 
 A resolved Anthropic-managed skill.
 
@@ -47941,7 +47941,7 @@ type: "anthropic"
 
 version: string
 
-BetaManagedAgentsCustomSkill = object { skill\_id, type, version }
+BetaManagedAgentsCustomSkill object { skill\_id, type, version }
 
 A resolved user-created custom skill.
 
@@ -47955,9 +47955,9 @@ system: string
 
 tools: array of [BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  or [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  or [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type }
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAgentToolset20260401 = object { configs, default\_config, type }
+BetaManagedAgentsAgentToolset20260401 object { configs, default\_config, type }
 
 configs: array of [BetaManagedAgentsAgentToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -47967,7 +47967,7 @@ name: "bash" or "edit" or "read" or 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -47989,15 +47989,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -48013,15 +48013,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -48029,7 +48029,7 @@ type: "always\_ask"
 
 type: "agent\_toolset\_20260401"
 
-BetaManagedAgentsMCPToolset = object { configs, default\_config, mcp\_server\_name, type }
+BetaManagedAgentsMCPToolset object { configs, default\_config, mcp\_server\_name, type }
 
 configs: array of [BetaManagedAgentsMCPToolConfig](api/beta.md) { enabled, name, permission\_policy }
 
@@ -48041,15 +48041,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -48065,15 +48065,15 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsAlwaysAllowPolicy = object { type }
+BetaManagedAgentsAlwaysAllowPolicy object { type }
 
 Tool calls are automatically approved without user confirmation.
 
 type: "always\_allow"
 
-BetaManagedAgentsAlwaysAskPolicy = object { type }
+BetaManagedAgentsAlwaysAskPolicy object { type }
 
 Tool calls require user confirmation before execution.
 
@@ -48083,7 +48083,7 @@ mcp\_server\_name: string
 
 type: "mcp\_toolset"
 
-BetaManagedAgentsCustomTool = object { description, input\_schema, name, type }
+BetaManagedAgentsCustomTool object { description, input\_schema, name, type }
 
 A custom tool as returned in API responses.
 
@@ -48159,7 +48159,7 @@ POST/v1/vaults/{vault\_id}/archive
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsDeletedVault = object { id, type }
+BetaManagedAgentsDeletedVault object { id, type }
 
 Confirmation of a deleted vault.
 
@@ -48169,7 +48169,7 @@ Unique identifier of the deleted vault.
 
 type: "vault\_deleted"
 
-BetaManagedAgentsVault = object { id, archived\_at, created\_at, 4 more }
+BetaManagedAgentsVault object { id, archived\_at, created\_at, 4 more }
 
 A vault that stores credentials for use by agents during sessions.
 
@@ -48231,7 +48231,7 @@ POST/v1/vaults/{vault\_id}/credentials/{credential\_id}/mcp\_oauth\_validate
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsCredential = object { id, archived\_at, auth, 6 more }
+BetaManagedAgentsCredential object { id, archived\_at, auth, 6 more }
 
 A credential stored in a vault. Sensitive fields are never returned in responses.
 
@@ -48247,9 +48247,9 @@ auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, t
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsMCPOAuthAuthResponse = object { mcp\_server\_url, type, expires\_at, refresh }
+BetaManagedAgentsMCPOAuthAuthResponse object { mcp\_server\_url, type, expires\_at, refresh }
 
 OAuth credential details for an MCP server.
 
@@ -48279,21 +48279,21 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthPostResponse object { type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -48307,7 +48307,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsStaticBearerAuthResponse = object { mcp\_server\_url, type }
+BetaManagedAgentsStaticBearerAuthResponse object { mcp\_server\_url, type }
 
 Static bearer token credential details for an MCP server.
 
@@ -48339,7 +48339,7 @@ display\_name: optional string
 
 Human-readable name for the credential.
 
-BetaManagedAgentsCredentialValidation = object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
+BetaManagedAgentsCredentialValidation object { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
 
 Result of live-probing a credential against its configured MCP server.
 
@@ -48407,7 +48407,7 @@ status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 "succeeded"
 
@@ -48421,7 +48421,7 @@ status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 "valid"
 
@@ -48443,7 +48443,7 @@ BetaManagedAgentsCredentialValidationStatus = "valid" or "invalid" or "unknown"
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 "valid"
 
@@ -48451,7 +48451,7 @@ Accepts one of the following:
 
 "unknown"
 
-BetaManagedAgentsDeletedCredential = object { id, type }
+BetaManagedAgentsDeletedCredential object { id, type }
 
 Confirmation of a deleted credential.
 
@@ -48461,7 +48461,7 @@ Unique identifier of the deleted credential.
 
 type: "vault\_credential\_deleted"
 
-BetaManagedAgentsMCPOAuthAuthResponse = object { mcp\_server\_url, type, expires\_at, refresh }
+BetaManagedAgentsMCPOAuthAuthResponse object { mcp\_server\_url, type, expires\_at, refresh }
 
 OAuth credential details for an MCP server.
 
@@ -48491,21 +48491,21 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthPostResponse object { type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -48519,7 +48519,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsMCPOAuthCreateParams = object { access\_token, mcp\_server\_url, type, 2 more }
+BetaManagedAgentsMCPOAuthCreateParams object { access\_token, mcp\_server\_url, type, 2 more }
 
 Parameters for creating an MCP OAuth credential.
 
@@ -48557,15 +48557,15 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneParam = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneParam object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthBasicParam object { client\_secret, type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -48575,7 +48575,7 @@ OAuth client secret.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthPostParam object { client\_secret, type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -48593,7 +48593,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsMCPOAuthRefreshParams = object { client\_id, refresh\_token, token\_endpoint, 3 more }
+BetaManagedAgentsMCPOAuthRefreshParams object { client\_id, refresh\_token, token\_endpoint, 3 more }
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -48613,15 +48613,15 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneParam](api/beta.md
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneParam = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneParam object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthBasicParam object { client\_secret, type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -48631,7 +48631,7 @@ OAuth client secret.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthPostParam object { client\_secret, type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -48649,7 +48649,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsMCPOAuthRefreshResponse = object { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }
+BetaManagedAgentsMCPOAuthRefreshResponse object { client\_id, token\_endpoint, token\_endpoint\_auth, 2 more }
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -48665,21 +48665,21 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthPostResponse object { type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -48693,7 +48693,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsMCPOAuthRefreshUpdateParams = object { refresh\_token, scope, token\_endpoint\_auth }
+BetaManagedAgentsMCPOAuthRefreshUpdateParams object { refresh\_token, scope, token\_endpoint\_auth }
 
 Parameters for updating OAuth refresh token configuration.
 
@@ -48709,9 +48709,9 @@ token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdatePa
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthBasicUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object { type, client\_secret }
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -48721,7 +48721,7 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsTokenEndpointAuthPostUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthPostUpdateParam object { type, client\_secret }
 
 Updated POST body authentication parameters for the token endpoint.
 
@@ -48731,7 +48731,7 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsMCPOAuthUpdateParams = object { type, access\_token, expires\_at, refresh }
+BetaManagedAgentsMCPOAuthUpdateParams object { type, access\_token, expires\_at, refresh }
 
 Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutable.
 
@@ -48761,9 +48761,9 @@ token\_endpoint\_auth: optional [BetaManagedAgentsTokenEndpointAuthBasicUpdatePa
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthBasicUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object { type, client\_secret }
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -48773,7 +48773,7 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsTokenEndpointAuthPostUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthPostUpdateParam object { type, client\_secret }
 
 Updated POST body authentication parameters for the token endpoint.
 
@@ -48783,7 +48783,7 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsMCPProbe = object { http\_response, method }
+BetaManagedAgentsMCPProbe object { http\_response, method }
 
 The failing step of an MCP validation probe.
 
@@ -48811,7 +48811,7 @@ method: string
 
 The MCP method that failed (for example `initialize` or `tools/list`).
 
-BetaManagedAgentsRefreshHTTPResponse = object { body, body\_truncated, content\_type, status\_code }
+BetaManagedAgentsRefreshHTTPResponse object { body, body\_truncated, content\_type, status\_code }
 
 An HTTP response captured during a credential validation probe.
 
@@ -48831,7 +48831,7 @@ status\_code: number
 
 HTTP status code.
 
-BetaManagedAgentsRefreshObject = object { http\_response, status }
+BetaManagedAgentsRefreshObject object { http\_response, status }
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
@@ -48859,7 +48859,7 @@ status: "succeeded" or "failed" or "connect\_error" or "no\_refresh\_token"
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 "succeeded"
 
@@ -48869,7 +48869,7 @@ Accepts one of the following:
 
 "no\_refresh\_token"
 
-BetaManagedAgentsStaticBearerAuthResponse = object { mcp\_server\_url, type }
+BetaManagedAgentsStaticBearerAuthResponse object { mcp\_server\_url, type }
 
 Static bearer token credential details for an MCP server.
 
@@ -48879,7 +48879,7 @@ URL of the MCP server this credential authenticates against.
 
 type: "static\_bearer"
 
-BetaManagedAgentsStaticBearerCreateParams = object { token, mcp\_server\_url, type }
+BetaManagedAgentsStaticBearerCreateParams object { token, mcp\_server\_url, type }
 
 Parameters for creating a static bearer token credential.
 
@@ -48893,7 +48893,7 @@ URL of the MCP server this credential authenticates against.
 
 type: "static\_bearer"
 
-BetaManagedAgentsStaticBearerUpdateParams = object { type, token }
+BetaManagedAgentsStaticBearerUpdateParams object { type, token }
 
 Parameters for updating a static bearer token credential. The `mcp_server_url` is immutable.
 
@@ -48903,7 +48903,7 @@ token: optional string
 
 Updated static bearer token value.
 
-BetaManagedAgentsTokenEndpointAuthBasicParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthBasicParam object { client\_secret, type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
@@ -48913,13 +48913,13 @@ OAuth client secret.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthBasicUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthBasicUpdateParam object { type, client\_secret }
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
@@ -48929,19 +48929,19 @@ client\_secret: optional string
 
 Updated OAuth client secret.
 
-BetaManagedAgentsTokenEndpointAuthNoneParam = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneParam object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthPostParam = object { client\_secret, type }
+BetaManagedAgentsTokenEndpointAuthPostParam object { client\_secret, type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -48951,13 +48951,13 @@ OAuth client secret.
 
 type: "client\_secret\_post"
 
-BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthPostResponse object { type }
 
 Token endpoint uses POST body authentication with client credentials.
 
 type: "client\_secret\_post"
 
-BetaManagedAgentsTokenEndpointAuthPostUpdateParam = object { type, client\_secret }
+BetaManagedAgentsTokenEndpointAuthPostUpdateParam object { type, client\_secret }
 
 Updated POST body authentication parameters for the token endpoint.
 
@@ -48995,7 +48995,7 @@ POST/v1/memory\_stores/{memory\_store\_id}/archive
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsDeletedMemoryStore = object { id, type }
+BetaManagedAgentsDeletedMemoryStore object { id, type }
 
 Confirmation that a `memory_store` was deleted.
 
@@ -49005,7 +49005,7 @@ ID of the deleted memory store (a `memstore_...` identifier). The store and all 
 
 type: "memory\_store\_deleted"
 
-BetaManagedAgentsMemoryStore = object { id, created\_at, name, 5 more }
+BetaManagedAgentsMemoryStore object { id, created\_at, name, 5 more }
 
 A `memory_store`: a named container for agent memories, scoped to a workspace. Attach a store to a session via `resources[]` to mount it as a directory the agent can read and write.
 
@@ -49063,13 +49063,13 @@ DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsConflictError = object { type, message }
+BetaManagedAgentsConflictError object { type, message }
 
 type: "conflict\_error"
 
 message: optional string
 
-BetaManagedAgentsContentSha256Precondition = object { type, content\_sha256 }
+BetaManagedAgentsContentSha256Precondition object { type, content\_sha256 }
 
 Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 
@@ -49079,7 +49079,7 @@ content\_sha256: optional string
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
-BetaManagedAgentsDeletedMemory = object { id, type }
+BetaManagedAgentsDeletedMemory object { id, type }
 
 Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). The memory's version history persists and remains listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) until the store itself is deleted.
 
@@ -49091,69 +49091,69 @@ type: "memory\_deleted"
 
 BetaManagedAgentsError = [BetaInvalidRequestError](api/beta.md) { message, type }  or [BetaAuthenticationError](api/beta.md) { message, type }  or [BetaBillingError](api/beta.md) { message, type }  or 9 more
 
-Accepts one of the following:
+One of the following:
 
-BetaInvalidRequestError = object { message, type }
+BetaInvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-BetaAuthenticationError = object { message, type }
+BetaAuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BetaBillingError = object { message, type }
+BetaBillingError object { message, type }
 
 message: string
 
 type: "billing\_error"
 
-BetaPermissionError = object { message, type }
+BetaPermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-BetaNotFoundError = object { message, type }
+BetaNotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-BetaRateLimitError = object { message, type }
+BetaRateLimitError object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
 
-BetaGatewayTimeoutError = object { message, type }
+BetaGatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-BetaAPIError = object { message, type }
+BetaAPIError object { message, type }
 
 message: string
 
 type: "api\_error"
 
-BetaOverloadedError = object { message, type }
+BetaOverloadedError object { message, type }
 
 message: string
 
 type: "overloaded\_error"
 
-BetaManagedAgentsMemoryPreconditionFailedError = object { type, message }
+BetaManagedAgentsMemoryPreconditionFailedError object { type, message }
 
 type: "memory\_precondition\_failed\_error"
 
 message: optional string
 
-BetaManagedAgentsMemoryPathConflictError = object { type, conflicting\_memory\_id, conflicting\_path, message }
+BetaManagedAgentsMemoryPathConflictError object { type, conflicting\_memory\_id, conflicting\_path, message }
 
 type: "memory\_path\_conflict\_error"
 
@@ -49163,13 +49163,13 @@ conflicting\_path: optional string
 
 message: optional string
 
-BetaManagedAgentsConflictError = object { type, message }
+BetaManagedAgentsConflictError object { type, message }
 
 type: "conflict\_error"
 
 message: optional string
 
-BetaManagedAgentsMemory = object { id, content\_sha256, content\_size\_bytes, 7 more }
+BetaManagedAgentsMemory object { id, content\_sha256, content\_size\_bytes, 7 more }
 
 A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -49215,9 +49215,9 @@ BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta.md) { id, c
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsMemory = object { id, content\_sha256, content\_size\_bytes, 7 more }
+BetaManagedAgentsMemory object { id, content\_sha256, content\_size\_bytes, 7 more }
 
 A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -49259,7 +49259,7 @@ content: optional string
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-BetaManagedAgentsMemoryPrefix = object { path, type }
+BetaManagedAgentsMemoryPrefix object { path, type }
 
 A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
@@ -49269,7 +49269,7 @@ The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pas
 
 type: "memory\_prefix"
 
-BetaManagedAgentsMemoryPathConflictError = object { type, conflicting\_memory\_id, conflicting\_path, message }
+BetaManagedAgentsMemoryPathConflictError object { type, conflicting\_memory\_id, conflicting\_path, message }
 
 type: "memory\_path\_conflict\_error"
 
@@ -49279,13 +49279,13 @@ conflicting\_path: optional string
 
 message: optional string
 
-BetaManagedAgentsMemoryPreconditionFailedError = object { type, message }
+BetaManagedAgentsMemoryPreconditionFailedError object { type, message }
 
 type: "memory\_precondition\_failed\_error"
 
 message: optional string
 
-BetaManagedAgentsMemoryPrefix = object { path, type }
+BetaManagedAgentsMemoryPrefix object { path, type }
 
 A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
@@ -49299,13 +49299,13 @@ BetaManagedAgentsMemoryView = "basic" or "full"
 
 Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-Accepts one of the following:
+One of the following:
 
 "basic"
 
 "full"
 
-BetaManagedAgentsPrecondition = object { type, content\_sha256 }
+BetaManagedAgentsPrecondition object { type, content\_sha256 }
 
 Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 
@@ -49335,9 +49335,9 @@ BetaManagedAgentsActor = [BetaManagedAgentsSessionActor](api/beta.md) { session\
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionActor = object { session\_id, type }
+BetaManagedAgentsSessionActor object { session\_id, type }
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -49347,7 +49347,7 @@ ID of the session that performed the write (a `sesn_...` value). Look up the ses
 
 type: "session\_actor"
 
-BetaManagedAgentsAPIActor = object { api\_key\_id, type }
+BetaManagedAgentsAPIActor object { api\_key\_id, type }
 
 Attribution for a write made directly via the public API (outside of any session).
 
@@ -49357,7 +49357,7 @@ ID of the API key that performed the write. This identifies the key, not the sec
 
 type: "api\_actor"
 
-BetaManagedAgentsUserActor = object { type, user\_id }
+BetaManagedAgentsUserActor object { type, user\_id }
 
 Attribution for a write made by a human user through the Anthropic Console.
 
@@ -49367,7 +49367,7 @@ user\_id: string
 
 ID of the user who performed the write (a `user_...` value).
 
-BetaManagedAgentsAPIActor = object { api\_key\_id, type }
+BetaManagedAgentsAPIActor object { api\_key\_id, type }
 
 Attribution for a write made directly via the public API (outside of any session).
 
@@ -49377,7 +49377,7 @@ ID of the API key that performed the write. This identifies the key, not the sec
 
 type: "api\_actor"
 
-BetaManagedAgentsMemoryVersion = object { id, created\_at, memory\_id, 10 more }
+BetaManagedAgentsMemoryVersion object { id, created\_at, memory\_id, 10 more }
 
 A `memory_version` object: one immutable, attributed row in a memory's append-only history. Every non-no-op mutation to a memory produces a new version. Versions belong to the store (not the individual memory) and persist after the memory is deleted. Retrieving a redacted version returns 200 with `content`, `path`, `content_size_bytes`, and `content_sha256` set to `null`; branch on `redacted_at`, not HTTP status.
 
@@ -49401,7 +49401,7 @@ operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 "created"
 
@@ -49427,9 +49427,9 @@ created\_by: optional [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionActor = object { session\_id, type }
+BetaManagedAgentsSessionActor object { session\_id, type }
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -49439,7 +49439,7 @@ ID of the session that performed the write (a `sesn_...` value). Look up the ses
 
 type: "session\_actor"
 
-BetaManagedAgentsAPIActor = object { api\_key\_id, type }
+BetaManagedAgentsAPIActor object { api\_key\_id, type }
 
 Attribution for a write made directly via the public API (outside of any session).
 
@@ -49449,7 +49449,7 @@ ID of the API key that performed the write. This identifies the key, not the sec
 
 type: "api\_actor"
 
-BetaManagedAgentsUserActor = object { type, user\_id }
+BetaManagedAgentsUserActor object { type, user\_id }
 
 Attribution for a write made by a human user through the Anthropic Console.
 
@@ -49471,9 +49471,9 @@ redacted\_by: optional [BetaManagedAgentsActor](api/beta.md)
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsSessionActor = object { session\_id, type }
+BetaManagedAgentsSessionActor object { session\_id, type }
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -49483,7 +49483,7 @@ ID of the session that performed the write (a `sesn_...` value). Look up the ses
 
 type: "session\_actor"
 
-BetaManagedAgentsAPIActor = object { api\_key\_id, type }
+BetaManagedAgentsAPIActor object { api\_key\_id, type }
 
 Attribution for a write made directly via the public API (outside of any session).
 
@@ -49493,7 +49493,7 @@ ID of the API key that performed the write. This identifies the key, not the sec
 
 type: "api\_actor"
 
-BetaManagedAgentsUserActor = object { type, user\_id }
+BetaManagedAgentsUserActor object { type, user\_id }
 
 Attribution for a write made by a human user through the Anthropic Console.
 
@@ -49507,7 +49507,7 @@ BetaManagedAgentsMemoryVersionOperation = "created" or "modified" or "deleted"
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 "created"
 
@@ -49515,7 +49515,7 @@ Accepts one of the following:
 
 "deleted"
 
-BetaManagedAgentsSessionActor = object { session\_id, type }
+BetaManagedAgentsSessionActor object { session\_id, type }
 
 Attribution for a write made by an agent during a session, through the mounted filesystem at `/mnt/memory/`.
 
@@ -49525,7 +49525,7 @@ ID of the session that performed the write (a `sesn_...` value). Look up the ses
 
 type: "session\_actor"
 
-BetaManagedAgentsUserActor = object { type, user\_id }
+BetaManagedAgentsUserActor object { type, user\_id }
 
 Attribution for a write made by a human user through the Anthropic Console.
 
@@ -49559,7 +49559,7 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
-BetaFileScope = object { id, type }
+BetaFileScope object { id, type }
 
 id: string
 
@@ -49569,7 +49569,7 @@ type: "session"
 
 The type of scope (e.g., `"session"`).
 
-DeletedFile = object { id, type }
+DeletedFile object { id, type }
 
 id: string
 
@@ -49581,7 +49581,7 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-FileMetadata = object { id, created\_at, filename, 5 more }
+FileMetadata object { id, created\_at, filename, 5 more }
 
 id: string
 
@@ -49647,7 +49647,7 @@ DELETE/v1/skills/{skill\_id}
 
 ##### ModelsExpand Collapse
 
-SkillCreateResponse = object { id, created\_at, display\_title, 4 more }
+SkillCreateResponse object { id, created\_at, display\_title, 4 more }
 
 id: string
 
@@ -49690,7 +49690,7 @@ updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
-SkillListResponse = object { id, created\_at, display\_title, 4 more }
+SkillListResponse object { id, created\_at, display\_title, 4 more }
 
 id: string
 
@@ -49733,7 +49733,7 @@ updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
-SkillRetrieveResponse = object { id, created\_at, display\_title, 4 more }
+SkillRetrieveResponse object { id, created\_at, display\_title, 4 more }
 
 id: string
 
@@ -49776,7 +49776,7 @@ updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
-SkillDeleteResponse = object { id, type }
+SkillDeleteResponse object { id, type }
 
 id: string
 
@@ -49814,7 +49814,7 @@ DELETE/v1/skills/{skill\_id}/versions/{version}
 
 ##### ModelsExpand Collapse
 
-VersionCreateResponse = object { id, created\_at, description, 5 more }
+VersionCreateResponse object { id, created\_at, description, 5 more }
 
 id: string
 
@@ -49860,7 +49860,7 @@ Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-VersionListResponse = object { id, created\_at, description, 5 more }
+VersionListResponse object { id, created\_at, description, 5 more }
 
 id: string
 
@@ -49906,7 +49906,7 @@ Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-VersionRetrieveResponse = object { id, created\_at, description, 5 more }
+VersionRetrieveResponse object { id, created\_at, description, 5 more }
 
 id: string
 
@@ -49952,7 +49952,7 @@ Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-VersionDeleteResponse = object { id, type }
+VersionDeleteResponse object { id, type }
 
 id: string
 
@@ -49990,7 +49990,7 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-BetaUserProfile = object { id, created\_at, metadata, 6 more }
+BetaUserProfile object { id, created\_at, metadata, 6 more }
 
 id: string
 
@@ -50008,7 +50008,7 @@ relationship: "external" or "resold" or "internal"
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 "external"
 
@@ -50024,7 +50024,7 @@ status: "active" or "pending" or "rejected"
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 
@@ -50048,7 +50048,7 @@ name: optional string
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
-BetaUserProfileEnrollmentURL = object { expires\_at, type, url }
+BetaUserProfileEnrollmentURL object { expires\_at, type, url }
 
 expires\_at: string
 
@@ -50062,13 +50062,13 @@ url: string
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 
-BetaUserProfileTrustGrant = object { status }
+BetaUserProfileTrustGrant object { status }
 
 status: "active" or "pending" or "rejected"
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 
@@ -50107,7 +50107,7 @@ Possible `data.type` values:
 
 ##### ModelsExpand Collapse
 
-BetaWebhookEvent = object { id, created\_at, data, type }
+BetaWebhookEvent object { id, created\_at, data, type }
 
 id: string
 
@@ -50119,9 +50119,9 @@ RFC 3339 timestamp when the event occurred.
 
 data: [BetaWebhookEventData](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebhookSessionCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50133,7 +50133,7 @@ type: "session.created"
 
 workspace\_id: string
 
-BetaWebhookSessionPendingEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionPendingEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50145,7 +50145,7 @@ type: "session.pending"
 
 workspace\_id: string
 
-BetaWebhookSessionRunningEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionRunningEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50157,7 +50157,7 @@ type: "session.running"
 
 workspace\_id: string
 
-BetaWebhookSessionIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50169,7 +50169,7 @@ type: "session.idled"
 
 workspace\_id: string
 
-BetaWebhookSessionRequiresActionEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionRequiresActionEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50181,7 +50181,7 @@ type: "session.requires\_action"
 
 workspace\_id: string
 
-BetaWebhookSessionArchivedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionArchivedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50193,7 +50193,7 @@ type: "session.archived"
 
 workspace\_id: string
 
-BetaWebhookSessionDeletedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionDeletedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50205,7 +50205,7 @@ type: "session.deleted"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRescheduledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusRescheduledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50217,7 +50217,7 @@ type: "session.status\_rescheduled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRunStartedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusRunStartedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50229,7 +50229,7 @@ type: "session.status\_run\_started"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50241,7 +50241,7 @@ type: "session.status\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusTerminatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusTerminatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50253,7 +50253,7 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50265,7 +50265,7 @@ type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50277,7 +50277,7 @@ type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50289,7 +50289,7 @@ type: "session.thread\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionOutcomeEvaluationEndedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50301,7 +50301,7 @@ type: "session.outcome\_evaluation\_ended"
 
 workspace\_id: string
 
-BetaWebhookVaultCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50313,7 +50313,7 @@ type: "vault.created"
 
 workspace\_id: string
 
-BetaWebhookVaultArchivedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultArchivedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50325,7 +50325,7 @@ type: "vault.archived"
 
 workspace\_id: string
 
-BetaWebhookVaultDeletedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultDeletedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50337,7 +50337,7 @@ type: "vault.deleted"
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialCreatedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialCreatedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50353,7 +50353,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialArchivedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialArchivedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50369,7 +50369,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialDeletedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialDeletedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50385,7 +50385,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialRefreshFailedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50407,9 +50407,9 @@ Object type. Always `event` for webhook payloads.
 
 BetaWebhookEventData = [BetaWebhookSessionCreatedEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionPendingEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or [BetaWebhookSessionRunningEventData](api/beta.md) { id, organization\_id, type, workspace\_id }  or 19 more
 
-Accepts one of the following:
+One of the following:
 
-BetaWebhookSessionCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50421,7 +50421,7 @@ type: "session.created"
 
 workspace\_id: string
 
-BetaWebhookSessionPendingEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionPendingEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50433,7 +50433,7 @@ type: "session.pending"
 
 workspace\_id: string
 
-BetaWebhookSessionRunningEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionRunningEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50445,7 +50445,7 @@ type: "session.running"
 
 workspace\_id: string
 
-BetaWebhookSessionIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50457,7 +50457,7 @@ type: "session.idled"
 
 workspace\_id: string
 
-BetaWebhookSessionRequiresActionEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionRequiresActionEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50469,7 +50469,7 @@ type: "session.requires\_action"
 
 workspace\_id: string
 
-BetaWebhookSessionArchivedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionArchivedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50481,7 +50481,7 @@ type: "session.archived"
 
 workspace\_id: string
 
-BetaWebhookSessionDeletedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionDeletedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50493,7 +50493,7 @@ type: "session.deleted"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRescheduledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusRescheduledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50505,7 +50505,7 @@ type: "session.status\_rescheduled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRunStartedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusRunStartedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50517,7 +50517,7 @@ type: "session.status\_run\_started"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50529,7 +50529,7 @@ type: "session.status\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusTerminatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusTerminatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50541,7 +50541,7 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50553,7 +50553,7 @@ type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50565,7 +50565,7 @@ type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50577,7 +50577,7 @@ type: "session.thread\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionOutcomeEvaluationEndedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50589,7 +50589,7 @@ type: "session.outcome\_evaluation\_ended"
 
 workspace\_id: string
 
-BetaWebhookVaultCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50601,7 +50601,7 @@ type: "vault.created"
 
 workspace\_id: string
 
-BetaWebhookVaultArchivedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultArchivedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50613,7 +50613,7 @@ type: "vault.archived"
 
 workspace\_id: string
 
-BetaWebhookVaultDeletedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultDeletedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50625,7 +50625,7 @@ type: "vault.deleted"
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialCreatedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialCreatedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50641,7 +50641,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialArchivedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialArchivedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50657,7 +50657,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialDeletedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialDeletedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50673,7 +50673,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialRefreshFailedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50689,7 +50689,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookSessionArchivedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionArchivedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50701,7 +50701,7 @@ type: "session.archived"
 
 workspace\_id: string
 
-BetaWebhookSessionCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50713,7 +50713,7 @@ type: "session.created"
 
 workspace\_id: string
 
-BetaWebhookSessionDeletedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionDeletedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50725,7 +50725,7 @@ type: "session.deleted"
 
 workspace\_id: string
 
-BetaWebhookSessionIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50737,7 +50737,7 @@ type: "session.idled"
 
 workspace\_id: string
 
-BetaWebhookSessionOutcomeEvaluationEndedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50749,7 +50749,7 @@ type: "session.outcome\_evaluation\_ended"
 
 workspace\_id: string
 
-BetaWebhookSessionPendingEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionPendingEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50761,7 +50761,7 @@ type: "session.pending"
 
 workspace\_id: string
 
-BetaWebhookSessionRequiresActionEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionRequiresActionEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50773,7 +50773,7 @@ type: "session.requires\_action"
 
 workspace\_id: string
 
-BetaWebhookSessionRunningEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionRunningEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50785,7 +50785,7 @@ type: "session.running"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50797,7 +50797,7 @@ type: "session.status\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRescheduledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusRescheduledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50809,7 +50809,7 @@ type: "session.status\_rescheduled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRunStartedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusRunStartedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50821,7 +50821,7 @@ type: "session.status\_run\_started"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusTerminatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusTerminatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50833,7 +50833,7 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50845,7 +50845,7 @@ type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50857,7 +50857,7 @@ type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50869,7 +50869,7 @@ type: "session.thread\_terminated"
 
 workspace\_id: string
 
-BetaWebhookVaultArchivedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultArchivedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50881,7 +50881,7 @@ type: "vault.archived"
 
 workspace\_id: string
 
-BetaWebhookVaultCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50893,7 +50893,7 @@ type: "vault.created"
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialArchivedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialArchivedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50909,7 +50909,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialCreatedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialCreatedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50925,7 +50925,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialDeletedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialDeletedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50941,7 +50941,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialRefreshFailedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -50957,7 +50957,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultDeletedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultDeletedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50969,7 +50969,7 @@ type: "vault.deleted"
 
 workspace\_id: string
 
-UnwrapWebhookEvent = object { id, created\_at, data, type }
+UnwrapWebhookEvent object { id, created\_at, data, type }
 
 id: string
 
@@ -50981,9 +50981,9 @@ RFC 3339 timestamp when the event occurred.
 
 data: [BetaWebhookEventData](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
-BetaWebhookSessionCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -50995,7 +50995,7 @@ type: "session.created"
 
 workspace\_id: string
 
-BetaWebhookSessionPendingEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionPendingEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51007,7 +51007,7 @@ type: "session.pending"
 
 workspace\_id: string
 
-BetaWebhookSessionRunningEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionRunningEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51019,7 +51019,7 @@ type: "session.running"
 
 workspace\_id: string
 
-BetaWebhookSessionIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51031,7 +51031,7 @@ type: "session.idled"
 
 workspace\_id: string
 
-BetaWebhookSessionRequiresActionEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionRequiresActionEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51043,7 +51043,7 @@ type: "session.requires\_action"
 
 workspace\_id: string
 
-BetaWebhookSessionArchivedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionArchivedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51055,7 +51055,7 @@ type: "session.archived"
 
 workspace\_id: string
 
-BetaWebhookSessionDeletedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionDeletedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51067,7 +51067,7 @@ type: "session.deleted"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRescheduledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusRescheduledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51079,7 +51079,7 @@ type: "session.status\_rescheduled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusRunStartedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusRunStartedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51091,7 +51091,7 @@ type: "session.status\_run\_started"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51103,7 +51103,7 @@ type: "session.status\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionStatusTerminatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionStatusTerminatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51115,7 +51115,7 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51127,7 +51127,7 @@ type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51139,7 +51139,7 @@ type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51151,7 +51151,7 @@ type: "session.thread\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionOutcomeEvaluationEndedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51163,7 +51163,7 @@ type: "session.outcome\_evaluation\_ended"
 
 workspace\_id: string
 
-BetaWebhookVaultCreatedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultCreatedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51175,7 +51175,7 @@ type: "vault.created"
 
 workspace\_id: string
 
-BetaWebhookVaultArchivedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultArchivedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51187,7 +51187,7 @@ type: "vault.archived"
 
 workspace\_id: string
 
-BetaWebhookVaultDeletedEventData = object { id, organization\_id, type, workspace\_id }
+BetaWebhookVaultDeletedEventData object { id, organization\_id, type, workspace\_id }
 
 id: string
 
@@ -51199,7 +51199,7 @@ type: "vault.deleted"
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialCreatedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialCreatedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -51215,7 +51215,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialArchivedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialArchivedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -51231,7 +51231,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialDeletedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialDeletedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 
@@ -51247,7 +51247,7 @@ ID of the vault that owns this credential.
 
 workspace\_id: string
 
-BetaWebhookVaultCredentialRefreshFailedEventData = object { id, organization\_id, type, 2 more }
+BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization\_id, type, 2 more }
 
 id: string
 

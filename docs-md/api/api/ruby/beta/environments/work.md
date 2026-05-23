@@ -108,7 +108,7 @@ state: :queued | :starting | :active | 2 more
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 :queued
 
@@ -148,7 +148,7 @@ state: :queued | :starting | :active | 2 more
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 :queued
 
@@ -220,7 +220,7 @@ state: :queued | :starting | :active | 2 more
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 :queued
 

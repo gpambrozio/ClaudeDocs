@@ -20,7 +20,7 @@ DELETE/v1/compliance/apps/projects/documents/{document\_id}
 
 ##### ModelsExpand Collapse
 
-DocumentRetrieveResponse = object { id, content, created\_at, 2 more }
+DocumentRetrieveResponse object { id, content, created\_at, 2 more }
 
 Project document information for compliance responses.
 
@@ -52,7 +52,7 @@ email\_address: string
 
 User's email address
 
-DocumentMetadataResponse = object { id, claude\_project\_id, created\_at, 5 more }
+DocumentMetadataResponse object { id, claude\_project\_id, created\_at, 5 more }
 
 Project document metadata for GET /v1/compliance/apps/projects/documents/{document\_id}/metadata.
 
@@ -99,7 +99,7 @@ email\_address: string
 
 User's email address
 
-DocumentDeleteResponse = object { id, type }
+DocumentDeleteResponse object { id, type }
 
 Response for deleting a project document.
 

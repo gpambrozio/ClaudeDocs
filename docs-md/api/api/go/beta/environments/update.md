@@ -18,7 +18,7 @@ environmentID string
 
 params BetaEnvironmentUpdateParams
 
-Config param.Field[[BetaEnvironmentUpdateParamsConfigUnion](api/beta/environments/update.md)]optional
+Config param.Field[[BetaEnvironmentUpdateParamsConfigUnion](api/beta/environments/update.md)]Optional
 
 Body param: Updated environment configuration
 
@@ -33,11 +33,11 @@ Type Cloud
 
 Environment type
 
-Networking BetaCloudConfigParamsNetworkingUnionRespoptional
+Networking BetaCloudConfigParamsNetworkingUnionRespOptional
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-Accepts one of the following:
+One of the following:
 
 type BetaUnrestrictedNetwork struct{…}
 
@@ -58,49 +58,49 @@ Type Limited
 
 Network policy type
 
-AllowMCPServers booloptional
+AllowMCPServers boolOptional
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowPackageManagers booloptional
+AllowPackageManagers boolOptional
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowedHosts []stringoptional
+AllowedHosts []stringOptional
 
 Specifies domains the container can reach.
 
-Packages [BetaPackagesParamsResp](api/beta.md)optional
+Packages [BetaPackagesParamsResp](api/beta.md)Optional
 
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-Apt []stringoptional
+Apt []stringOptional
 
 Ubuntu/Debian packages to install
 
-Cargo []stringoptional
+Cargo []stringOptional
 
 Rust packages to install
 
-Gem []stringoptional
+Gem []stringOptional
 
 Ruby packages to install
 
-Go []stringoptional
+Go []stringOptional
 
 Go packages to install
 
-Npm []stringoptional
+Npm []stringOptional
 
 Node.js packages to install
 
-Pip []stringoptional
+Pip []stringOptional
 
 Python packages to install
 
-Type BetaPackagesParamsTypeoptional
+Type BetaPackagesParamsTypeOptional
 
 Package configuration type
 
@@ -112,19 +112,19 @@ Type SelfHosted
 
 Environment type
 
-Description param.Field[string]optional
+Description param.Field[string]Optional
 
 Body param: Updated description of the environment
 
-Metadata param.Field[map[string, string]]optional
+Metadata param.Field[map[string, string]]Optional
 
 Body param: User-provided metadata key-value pairs. Set a value to null or empty string to delete the key.
 
-Name param.Field[string]optional
+Name param.Field[string]Optional
 
 Body param: Updated name for the environment
 
-Scope param.Field[[BetaEnvironmentUpdateParamsScope](api/beta/environments/update.md)]optional
+Scope param.Field[[BetaEnvironmentUpdateParamsScope](api/beta/environments/update.md)]Optional
 
 Body param: The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only.
 
@@ -132,7 +132,7 @@ const BetaEnvironmentUpdateParamsScopeOrganization [BetaEnvironmentUpdateParamsS
 
 const BetaEnvironmentUpdateParamsScopeAccount [BetaEnvironmentUpdateParamsScope](api/beta/environments/update.md) = "account"
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -140,7 +140,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -210,7 +210,7 @@ Config BetaEnvironmentConfigUnion
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-Accepts one of the following:
+One of the following:
 
 type BetaCloudConfig struct{…}
 
@@ -220,7 +220,7 @@ Networking BetaCloudConfigNetworkingUnion
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 type BetaUnrestrictedNetwork struct{…}
 
@@ -278,7 +278,7 @@ Pip []string
 
 Python packages to install
 
-Type BetaPackagesTypeoptional
+Type BetaPackagesTypeOptional
 
 Package configuration type
 
@@ -318,11 +318,11 @@ UpdatedAt string
 
 RFC 3339 timestamp when environment was last updated
 
-Scope BetaEnvironmentScopeoptional
+Scope BetaEnvironmentScopeOptional
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Accepts one of the following:
+One of the following:
 
 const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"
 

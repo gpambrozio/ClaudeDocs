@@ -18,7 +18,7 @@ userProfileID string
 
 query BetaUserProfileGetParams
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -26,7 +26,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -98,7 +98,7 @@ Relationship BetaUserProfileRelationship
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"
 
@@ -114,7 +114,7 @@ Status BetaUserProfileTrustGrantStatus
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
 
@@ -130,11 +130,11 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-ExternalID stringoptional
+ExternalID stringOptional
 
 Platform's own identifier for this user. Not enforced unique.
 
-Name stringoptional
+Name stringOptional
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 

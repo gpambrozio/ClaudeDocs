@@ -73,13 +73,13 @@ There is a limit of 100,000 messages in a single request.
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockParam](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -104,7 +104,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -112,7 +112,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -214,7 +214,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -222,7 +222,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -259,7 +259,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -269,7 +269,7 @@ class DocumentBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -291,13 +291,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -322,7 +322,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -330,7 +330,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -432,7 +432,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -440,7 +440,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -477,7 +477,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -510,7 +510,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -549,7 +549,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -557,7 +557,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -678,7 +678,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -729,7 +729,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -739,7 +739,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -784,7 +784,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -792,13 +792,13 @@ Accepts one of the following:
 
 Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<Block>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -823,7 +823,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -831,7 +831,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -933,7 +933,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -941,7 +941,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -978,7 +978,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1009,7 +1009,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1017,7 +1017,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -1138,7 +1138,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1152,7 +1152,7 @@ class DocumentBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -1174,13 +1174,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -1205,7 +1205,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1213,7 +1213,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -1315,7 +1315,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -1323,7 +1323,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -1360,7 +1360,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1393,7 +1393,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1432,7 +1432,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1448,7 +1448,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -1483,7 +1483,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1493,7 +1493,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -1519,7 +1519,7 @@ class WebSearchToolResultBlockParam:
 
 required [WebSearchToolResultBlockParamContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 IReadOnlyList<[WebSearchResultBlockParam](api/messages.md)>
 
@@ -1537,7 +1537,7 @@ class WebSearchToolRequestError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -1574,7 +1574,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1584,7 +1584,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -1610,13 +1610,13 @@ class WebFetchToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlockParam:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -1642,7 +1642,7 @@ required [DocumentBlockParam](api/messages.md) Content
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -1664,13 +1664,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -1695,7 +1695,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1703,7 +1703,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -1805,7 +1805,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -1813,7 +1813,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -1850,7 +1850,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1883,7 +1883,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1928,7 +1928,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1938,7 +1938,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -1966,13 +1966,13 @@ required [CodeExecutionToolResultBlockParamContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultErrorParam:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -2039,7 +2039,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2049,13 +2049,13 @@ class BashCodeExecutionToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultErrorParam:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -2106,7 +2106,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2116,13 +2116,13 @@ class TextEditorCodeExecutionToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultErrorParam:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -2144,7 +2144,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -2201,7 +2201,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2211,13 +2211,13 @@ class ToolSearchToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultErrorParam:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -2254,7 +2254,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2283,7 +2283,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2315,7 +2315,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2323,7 +2323,7 @@ Accepts one of the following:
 
 required Role Role
 
-Accepts one of the following:
+One of the following:
 
 "user"User
 
@@ -2374,7 +2374,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2382,7 +2382,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -2582,7 +2582,7 @@ minLength1
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -2607,7 +2607,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2647,7 +2647,7 @@ JsonElement Type "bash\_20250124"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -2672,7 +2672,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2700,7 +2700,7 @@ JsonElement Type "code\_execution\_20250522"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -2725,7 +2725,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2751,7 +2751,7 @@ JsonElement Type "code\_execution\_20250825"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -2776,7 +2776,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2804,7 +2804,7 @@ JsonElement Type "code\_execution\_20260120"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -2829,7 +2829,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2855,7 +2855,7 @@ JsonElement Type "memory\_20250818"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -2880,7 +2880,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2908,7 +2908,7 @@ JsonElement Type "text\_editor\_20250124"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -2933,7 +2933,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2961,7 +2961,7 @@ JsonElement Type "text\_editor\_20250429"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -2986,7 +2986,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3014,7 +3014,7 @@ JsonElement Type "text\_editor\_20250728"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -3039,7 +3039,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3071,7 +3071,7 @@ JsonElement Type "web\_search\_20250305"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -3104,7 +3104,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3156,7 +3156,7 @@ JsonElement Type "web\_fetch\_20250910"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -3189,7 +3189,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3229,7 +3229,7 @@ JsonElement Type "web\_search\_20260209"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -3262,7 +3262,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3314,7 +3314,7 @@ JsonElement Type "web\_fetch\_20260209"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -3347,7 +3347,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3389,7 +3389,7 @@ JsonElement Type "web\_fetch\_20260309"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -3422,7 +3422,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3464,7 +3464,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 required Type Type
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"ToolSearchToolBm25\_20251119
 
@@ -3472,7 +3472,7 @@ Accepts one of the following:
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -3497,7 +3497,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3521,7 +3521,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 required Type Type
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"ToolSearchToolRegex20251119
 
@@ -3529,7 +3529,7 @@ Accepts one of the following:
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -3554,7 +3554,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 

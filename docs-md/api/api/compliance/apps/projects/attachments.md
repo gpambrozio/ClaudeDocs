@@ -16,9 +16,9 @@ AttachmentListResponse = object { id, created\_at, filename, 2 more }  or object
 
 File attachment reference for compliance responses.
 
-Accepts one of the following:
+One of the following:
 
-ComplianceProjectFileReference = object { id, created\_at, filename, 2 more }
+ComplianceProjectFileReference object { id, created\_at, filename, 2 more }
 
 File attachment reference for compliance responses.
 
@@ -42,7 +42,7 @@ type: "project\_file"
 
 Discriminator marking this as a binary file
 
-ComplianceProjectDocReference = object { id, created\_at, filename, 2 more }
+ComplianceProjectDocReference object { id, created\_at, filename, 2 more }
 
 Project document attachment reference for compliance responses.
 

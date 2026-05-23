@@ -24,7 +24,7 @@ DELETE/v1/skills/{skill\_id}
 
 ##### ModelsExpand Collapse
 
-SkillCreateResponse = object { id, created\_at, display\_title, 4 more }
+SkillCreateResponse object { id, created\_at, display\_title, 4 more }
 
 id: string
 
@@ -67,7 +67,7 @@ updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
-SkillListResponse = object { id, created\_at, display\_title, 4 more }
+SkillListResponse object { id, created\_at, display\_title, 4 more }
 
 id: string
 
@@ -110,7 +110,7 @@ updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
-SkillRetrieveResponse = object { id, created\_at, display\_title, 4 more }
+SkillRetrieveResponse object { id, created\_at, display\_title, 4 more }
 
 id: string
 
@@ -153,7 +153,7 @@ updated\_at: string
 
 ISO 8601 timestamp of when the skill was last updated.
 
-SkillDeleteResponse = object { id, type }
+SkillDeleteResponse object { id, type }
 
 id: string
 
@@ -191,7 +191,7 @@ DELETE/v1/skills/{skill\_id}/versions/{version}
 
 ##### ModelsExpand Collapse
 
-VersionCreateResponse = object { id, created\_at, description, 5 more }
+VersionCreateResponse object { id, created\_at, description, 5 more }
 
 id: string
 
@@ -237,7 +237,7 @@ Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-VersionListResponse = object { id, created\_at, description, 5 more }
+VersionListResponse object { id, created\_at, description, 5 more }
 
 id: string
 
@@ -283,7 +283,7 @@ Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-VersionRetrieveResponse = object { id, created\_at, description, 5 more }
+VersionRetrieveResponse object { id, created\_at, description, 5 more }
 
 id: string
 
@@ -329,7 +329,7 @@ Version identifier for the skill.
 
 Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
-VersionDeleteResponse = object { id, type }
+VersionDeleteResponse object { id, type }
 
 id: string
 

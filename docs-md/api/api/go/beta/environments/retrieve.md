@@ -18,7 +18,7 @@ environmentID string
 
 query BetaEnvironmentGetParams
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -26,7 +26,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -96,7 +96,7 @@ Config BetaEnvironmentConfigUnion
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-Accepts one of the following:
+One of the following:
 
 type BetaCloudConfig struct{…}
 
@@ -106,7 +106,7 @@ Networking BetaCloudConfigNetworkingUnion
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 type BetaUnrestrictedNetwork struct{…}
 
@@ -164,7 +164,7 @@ Pip []string
 
 Python packages to install
 
-Type BetaPackagesTypeoptional
+Type BetaPackagesTypeOptional
 
 Package configuration type
 
@@ -204,11 +204,11 @@ UpdatedAt string
 
 RFC 3339 timestamp when environment was last updated
 
-Scope BetaEnvironmentScopeoptional
+Scope BetaEnvironmentScopeOptional
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Accepts one of the following:
+One of the following:
 
 const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"
 

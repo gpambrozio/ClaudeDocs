@@ -22,7 +22,7 @@ config: Optional[[Config](api/beta/environments/create.md)]
 
 Environment configuration
 
-Accepts one of the following:
+One of the following:
 
 class BetaCloudConfigParams: …
 
@@ -39,7 +39,7 @@ networking: Optional[Networking]
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-Accepts one of the following:
+One of the following:
 
 class BetaUnrestrictedNetwork: …
 
@@ -126,7 +126,7 @@ scope: Optional[Literal["organization", "account"]]
 
 The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
 
-Accepts one of the following:
+One of the following:
 
 "organization"
 
@@ -136,13 +136,13 @@ betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 str
 
 Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -212,7 +212,7 @@ config: Config
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-Accepts one of the following:
+One of the following:
 
 class BetaCloudConfig: …
 
@@ -222,7 +222,7 @@ networking: Networking
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 class BetaUnrestrictedNetwork: …
 
@@ -324,7 +324,7 @@ scope: Optional[Literal["organization", "account"]]
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Accepts one of the following:
+One of the following:
 
 "organization"
 

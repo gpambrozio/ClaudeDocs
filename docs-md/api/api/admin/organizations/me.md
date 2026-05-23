@@ -10,7 +10,7 @@ Retrieve information about the organization associated with the authenticated AP
 
 ##### ReturnsExpand Collapse
 
-Organization = object { id, name, type }
+Organization object { id, name, type }
 
 id: string
 

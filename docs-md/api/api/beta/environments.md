@@ -32,7 +32,7 @@ POST/v1/environments/{environment\_id}/archive
 
 ##### ModelsExpand Collapse
 
-BetaCloudConfig = object { networking, packages, type }
+BetaCloudConfig object { networking, packages, type }
 
 `cloud` environment configuration.
 
@@ -40,9 +40,9 @@ networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLimitedNetw
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
-BetaUnrestrictedNetwork = object { type }
+BetaUnrestrictedNetwork object { type }
 
 Unrestricted network access.
 
@@ -50,7 +50,7 @@ type: "unrestricted"
 
 Network policy type
 
-BetaLimitedNetwork = object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+BetaLimitedNetwork object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
 
 Limited network access.
 
@@ -106,7 +106,7 @@ type: "cloud"
 
 Environment type
 
-BetaCloudConfigParams = object { type, networking, packages }
+BetaCloudConfigParams object { type, networking, packages }
 
 Request params for `cloud` environment configuration.
 
@@ -121,9 +121,9 @@ networking: optional [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLi
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-Accepts one of the following:
+One of the following:
 
-BetaUnrestrictedNetwork = object { type }
+BetaUnrestrictedNetwork object { type }
 
 Unrestricted network access.
 
@@ -131,7 +131,7 @@ type: "unrestricted"
 
 Network policy type
 
-BetaLimitedNetworkParams = object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
+BetaLimitedNetworkParams object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
 
 Limited network request params.
 
@@ -188,7 +188,7 @@ type: optional "packages"
 
 Package configuration type
 
-BetaEnvironment = object { id, archived\_at, config, 7 more }
+BetaEnvironment object { id, archived\_at, config, 7 more }
 
 Unified Environment resource for both cloud and self-hosted environments.
 
@@ -204,9 +204,9 @@ config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  or [BetaS
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-Accepts one of the following:
+One of the following:
 
-BetaCloudConfig = object { networking, packages, type }
+BetaCloudConfig object { networking, packages, type }
 
 `cloud` environment configuration.
 
@@ -214,9 +214,9 @@ networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLimitedNetw
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
-BetaUnrestrictedNetwork = object { type }
+BetaUnrestrictedNetwork object { type }
 
 Unrestricted network access.
 
@@ -224,7 +224,7 @@ type: "unrestricted"
 
 Network policy type
 
-BetaLimitedNetwork = object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+BetaLimitedNetwork object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
 
 Limited network access.
 
@@ -280,7 +280,7 @@ type: "cloud"
 
 Environment type
 
-BetaSelfHostedConfig = object { type }
+BetaSelfHostedConfig object { type }
 
 Configuration for self-hosted environments.
 
@@ -316,13 +316,13 @@ scope: optional "organization" or "account"
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Accepts one of the following:
+One of the following:
 
 "organization"
 
 "account"
 
-BetaEnvironmentDeleteResponse = object { id, type }
+BetaEnvironmentDeleteResponse object { id, type }
 
 Response after deleting an environment.
 
@@ -334,7 +334,7 @@ type: "environment\_deleted"
 
 The type of response
 
-BetaLimitedNetwork = object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+BetaLimitedNetwork object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
 
 Limited network access.
 
@@ -354,7 +354,7 @@ type: "limited"
 
 Network policy type
 
-BetaLimitedNetworkParams = object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
+BetaLimitedNetworkParams object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
 
 Limited network request params.
 
@@ -377,7 +377,7 @@ allowed\_hosts: optional array of string
 
 Specifies domains the container can reach.
 
-BetaPackages = object { apt, cargo, gem, 4 more }
+BetaPackages object { apt, cargo, gem, 4 more }
 
 Packages (and their versions) available in this environment.
 
@@ -409,7 +409,7 @@ type: optional "packages"
 
 Package configuration type
 
-BetaPackagesParams = object { apt, cargo, gem, 4 more }
+BetaPackagesParams object { apt, cargo, gem, 4 more }
 
 Specify packages (and optionally their versions) available in this environment.
 
@@ -443,7 +443,7 @@ type: optional "packages"
 
 Package configuration type
 
-BetaSelfHostedConfig = object { type }
+BetaSelfHostedConfig object { type }
 
 Configuration for self-hosted environments.
 
@@ -451,7 +451,7 @@ type: "self\_hosted"
 
 Environment type
 
-BetaSelfHostedConfigParams = object { type }
+BetaSelfHostedConfigParams object { type }
 
 Request params for `self_hosted` environment configuration.
 
@@ -459,7 +459,7 @@ type: "self\_hosted"
 
 Environment type
 
-BetaUnrestrictedNetwork = object { type }
+BetaUnrestrictedNetwork object { type }
 
 Unrestricted network access.
 
@@ -503,7 +503,7 @@ GET/v1/environments/{environment\_id}/work/stats
 
 ##### ModelsExpand Collapse
 
-BetaSelfHostedWork = object { id, acknowledged\_at, created\_at, 9 more }
+BetaSelfHostedWork object { id, acknowledged\_at, created\_at, 9 more }
 
 Work resource representing a unit of work in a self-hosted environment.
 
@@ -555,7 +555,7 @@ state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -579,7 +579,7 @@ type: "work"
 
 The type of object (always 'work')
 
-BetaSelfHostedWorkHeartbeatResponse = object { last\_heartbeat, lease\_extended, state, 2 more }
+BetaSelfHostedWorkHeartbeatResponse object { last\_heartbeat, lease\_extended, state, 2 more }
 
 Response after recording a heartbeat for a work item.
 
@@ -595,7 +595,7 @@ state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -615,7 +615,7 @@ type: "work\_heartbeat"
 
 The type of response
 
-BetaSelfHostedWorkListResponse = object { data, next\_page }
+BetaSelfHostedWorkListResponse object { data, next\_page }
 
 Response when listing work items with cursor-based pagination.
 
@@ -667,7 +667,7 @@ state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -695,7 +695,7 @@ next\_page: string
 
 Opaque cursor for fetching the next page of results
 
-BetaSelfHostedWorkQueueStats = object { depth, oldest\_queued\_at, pending, 2 more }
+BetaSelfHostedWorkQueueStats object { depth, oldest\_queued\_at, pending, 2 more }
 
 Statistics about the work queue for an environment.
 
@@ -721,7 +721,7 @@ workers\_polling: number
 
 Number of workers that have polled for work in the last 30 seconds. Requires worker\_id to be sent with poll requests.
 
-BetaSelfHostedWorkStopRequest = object { force }
+BetaSelfHostedWorkStopRequest object { force }
 
 Request to stop a work item.
 
@@ -729,7 +729,7 @@ force: optional boolean
 
 If true, immediately stop work without graceful shutdown
 
-BetaSelfHostedWorkUpdateRequest = object { metadata }
+BetaSelfHostedWorkUpdateRequest object { metadata }
 
 Request to update work item metadata.
 
@@ -737,7 +737,7 @@ metadata: map[string]
 
 Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve existing metadata.
 
-BetaSessionWorkData = object { id, type }
+BetaSessionWorkData object { id, type }
 
 Work data for session work items.
 

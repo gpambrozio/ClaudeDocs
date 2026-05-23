@@ -42,7 +42,7 @@ type BetaManagedAgentsConflictError struct{…}
 
 Type BetaManagedAgentsConflictErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsContentSha256Precondition struct{…}
 
@@ -50,7 +50,7 @@ Optimistic-concurrency precondition: the update applies only if the memory's sto
 
 Type BetaManagedAgentsContentSha256PreconditionType
 
-ContentSha256 stringoptional
+ContentSha256 stringOptional
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
@@ -66,7 +66,7 @@ Type BetaManagedAgentsDeletedMemoryType
 
 type BetaManagedAgentsErrorUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaInvalidRequestError struct{…}
 
@@ -126,23 +126,23 @@ type BetaManagedAgentsMemoryPreconditionFailedError struct{…}
 
 Type BetaManagedAgentsMemoryPreconditionFailedErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemoryPathConflictError struct{…}
 
 Type BetaManagedAgentsMemoryPathConflictErrorType
 
-ConflictingMemoryID stringoptional
+ConflictingMemoryID stringOptional
 
-ConflictingPath stringoptional
+ConflictingPath stringOptional
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsConflictError struct{…}
 
 Type BetaManagedAgentsConflictErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemory struct{…}
 
@@ -182,7 +182,7 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
@@ -190,7 +190,7 @@ type BetaManagedAgentsMemoryListItemUnion interface{…}
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsMemory struct{…}
 
@@ -230,7 +230,7 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
@@ -248,17 +248,17 @@ type BetaManagedAgentsMemoryPathConflictError struct{…}
 
 Type BetaManagedAgentsMemoryPathConflictErrorType
 
-ConflictingMemoryID stringoptional
+ConflictingMemoryID stringOptional
 
-ConflictingPath stringoptional
+ConflictingPath stringOptional
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemoryPreconditionFailedError struct{…}
 
 Type BetaManagedAgentsMemoryPreconditionFailedErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemoryPrefix struct{…}
 
@@ -274,7 +274,7 @@ type BetaManagedAgentsMemoryView string
 
 Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryViewBasic [BetaManagedAgentsMemoryView](api/beta.md) = "basic"
 
@@ -286,7 +286,7 @@ Optimistic-concurrency precondition: the update applies only if the memory's sto
 
 Type BetaManagedAgentsPreconditionType
 
-ContentSha256 stringoptional
+ContentSha256 stringOptional
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 

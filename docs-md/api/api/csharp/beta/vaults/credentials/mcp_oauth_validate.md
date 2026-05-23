@@ -148,7 +148,7 @@ required Status Status
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 "succeeded"Succeeded
 
@@ -162,7 +162,7 @@ required [BetaManagedAgentsCredentialValidationStatus](api/beta.md) Status
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 "valid"Valid
 

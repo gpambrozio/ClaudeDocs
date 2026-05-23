@@ -108,7 +108,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -150,7 +150,7 @@ Speed Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -186,7 +186,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -228,7 +228,7 @@ Speed Speed
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -238,7 +238,7 @@ required string Name
 
 required IReadOnlyList<Skill> Skills
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill:
 
@@ -264,7 +264,7 @@ required string? System
 
 required IReadOnlyList<Tool> Tools
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401:
 
@@ -276,7 +276,7 @@ required Name Name
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"Bash
 
@@ -298,7 +298,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -322,7 +322,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -350,7 +350,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -374,7 +374,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -428,7 +428,7 @@ required string Name
 
 required IReadOnlyList<Skill> Skills
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill:
 
@@ -454,7 +454,7 @@ required string? System
 
 required IReadOnlyList<Tool> Tools
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401:
 
@@ -466,7 +466,7 @@ required Name Name
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"Bash
 
@@ -488,7 +488,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -512,7 +512,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -540,7 +540,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -564,7 +564,7 @@ required PermissionPolicy PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy:
 
@@ -656,7 +656,7 @@ required Type Type
 
 required IReadOnlyList<[BetaManagedAgentsSessionResource](api/beta.md)> Resources
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource:
 
@@ -678,7 +678,7 @@ required string Url
 
 Checkout? Checkout
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout:
 
@@ -728,7 +728,7 @@ Access? Access
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"ReadWrite
 
@@ -766,7 +766,7 @@ required Status Status
 
 SessionStatus enum
 
-Accepts one of the following:
+One of the following:
 
 "rescheduling"Rescheduling
 

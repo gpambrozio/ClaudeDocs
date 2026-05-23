@@ -26,7 +26,7 @@ POST/v1/organizations/tunnels/{tunnel\_id}/archive
 
 ##### ModelsExpand Collapse
 
-MCPTunnelRetrieveResponse = object { id, archived\_at, created\_at, 4 more }
+MCPTunnelRetrieveResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 
@@ -60,7 +60,7 @@ workspace\_id: string
 ID of the Workspace this Tunnel belongs to, or `null` for the default
 Workspace. Immutable after creation.
 
-MCPTunnelListResponse = object { data, next\_page }
+MCPTunnelListResponse object { data, next\_page }
 
 data: array of object { id, archived\_at, created\_at, 4 more }
 
@@ -100,7 +100,7 @@ next\_page: string
 
 Opaque cursor for the next page, or `null` if there are no more results.
 
-MCPTunnelRevealTokenResponse = object { id, tunnel\_token, type }
+MCPTunnelRevealTokenResponse object { id, tunnel\_token, type }
 
 id: string
 
@@ -115,7 +115,7 @@ type: "tunnel\_token"
 
 Object type. Always `tunnel_token` for Tunnel Tokens.
 
-MCPTunnelRotateTokenResponse = object { id, tunnel\_token, type }
+MCPTunnelRotateTokenResponse object { id, tunnel\_token, type }
 
 id: string
 
@@ -130,7 +130,7 @@ type: "tunnel\_token"
 
 Object type. Always `tunnel_token` for Tunnel Tokens.
 
-MCPTunnelArchiveResponse = object { id, archived\_at, created\_at, 4 more }
+MCPTunnelArchiveResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 
@@ -184,7 +184,7 @@ POST/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archiv
 
 ##### ModelsExpand Collapse
 
-TunnelCertificateCreateResponse = object { id, archived\_at, created\_at, 4 more }
+TunnelCertificateCreateResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 
@@ -216,7 +216,7 @@ type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-TunnelCertificateRetrieveResponse = object { id, archived\_at, created\_at, 4 more }
+TunnelCertificateRetrieveResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 
@@ -248,7 +248,7 @@ type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-TunnelCertificateListResponse = object { data, next\_page }
+TunnelCertificateListResponse object { data, next\_page }
 
 data: array of object { id, archived\_at, created\_at, 4 more }
 
@@ -286,7 +286,7 @@ next\_page: string
 
 Opaque cursor for the next page, or `null` if there are no more results.
 
-TunnelCertificateArchiveResponse = object { id, archived\_at, created\_at, 4 more }
+TunnelCertificateArchiveResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 

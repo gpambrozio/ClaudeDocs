@@ -126,7 +126,7 @@ checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [Beta
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout { name, type }
 
@@ -162,7 +162,7 @@ access: :read\_write | :read\_only
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 :read\_write
 
@@ -196,9 +196,9 @@ agents: Array[[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)]
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
 class BetaManagedAgentsAgentParams { id, type, version }
 
@@ -226,9 +226,9 @@ BetaManagedAgentsMultiagentRosterEntryParams = String | [BetaManagedAgentsAgentP
 
 An entry in a multiagent roster: an agent ID string, a versioned agent reference, or `self`.
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
 class BetaManagedAgentsAgentParams { id, type, version }
 
@@ -312,15 +312,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -358,13 +358,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -400,15 +400,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -446,13 +446,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -462,7 +462,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -488,7 +488,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -500,7 +500,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -522,7 +522,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -546,7 +546,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -574,7 +574,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -598,7 +598,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -652,7 +652,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -678,7 +678,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -690,7 +690,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -712,7 +712,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -736,7 +736,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -764,7 +764,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -788,7 +788,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -880,7 +880,7 @@ type: :outcome\_evaluation
 
 resources: Array[[BetaManagedAgentsSessionResource](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource { id, created\_at, mount\_path, 4 more }
 
@@ -902,7 +902,7 @@ url: String
 
 checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout { name, type }
 
@@ -952,7 +952,7 @@ access: :read\_write | :read\_only
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 :read\_write
 
@@ -990,7 +990,7 @@ status: :rescheduling | :running | :idle | :terminated
 
 SessionStatus enum
 
-Accepts one of the following:
+One of the following:
 
 :rescheduling
 
@@ -1066,15 +1066,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -1112,13 +1112,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -1154,15 +1154,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -1200,13 +1200,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -1216,7 +1216,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -1242,7 +1242,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -1254,7 +1254,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -1276,7 +1276,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1300,7 +1300,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1328,7 +1328,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1352,7 +1352,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1406,7 +1406,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -1432,7 +1432,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -1444,7 +1444,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -1466,7 +1466,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1490,7 +1490,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1518,7 +1518,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1542,7 +1542,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1612,7 +1612,7 @@ tools: Array[[BetaManagedAgentsAgentToolset20260401Params](api/beta.md) { type, 
 
 Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401Params { type, configs, default\_config }
 
@@ -1628,7 +1628,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -1654,7 +1654,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1680,7 +1680,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1720,7 +1720,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1746,7 +1746,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1820,15 +1820,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -1866,13 +1866,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -1882,7 +1882,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -1908,7 +1908,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -1920,7 +1920,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -1942,7 +1942,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1966,7 +1966,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1994,7 +1994,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -2018,7 +2018,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -2120,15 +2120,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -2166,13 +2166,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -2208,15 +2208,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -2254,13 +2254,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -2270,7 +2270,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -2296,7 +2296,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -2308,7 +2308,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -2330,7 +2330,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -2354,7 +2354,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -2382,7 +2382,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -2406,7 +2406,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -2460,7 +2460,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -2486,7 +2486,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -2498,7 +2498,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -2520,7 +2520,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -2544,7 +2544,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -2572,7 +2572,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -2596,7 +2596,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -2698,7 +2698,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -2718,7 +2718,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -2764,7 +2764,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -2938,7 +2938,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -2958,7 +2958,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -3004,7 +3004,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -3130,7 +3130,7 @@ evaluated\_permission: :allow | :ask | :deny
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -3206,7 +3206,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -3226,7 +3226,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -3272,7 +3272,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -3358,7 +3358,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -3378,7 +3378,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -3424,7 +3424,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -3520,7 +3520,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -3540,7 +3540,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -3586,7 +3586,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -3708,7 +3708,7 @@ evaluated\_permission: :allow | :ask | :deny
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -3760,7 +3760,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -3790,7 +3790,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -3854,7 +3854,7 @@ BetaManagedAgentsEventParams = [BetaManagedAgentsUserMessageEventParams](api/bet
 
 Union type for event parameters that can be sent to a session.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEventParams { content, type }
 
@@ -3864,7 +3864,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -3884,7 +3884,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -3930,7 +3930,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -4010,7 +4010,7 @@ result: :allow | :deny
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -4040,7 +4040,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -4060,7 +4060,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -4106,7 +4106,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -4214,7 +4214,7 @@ rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  | [
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubricParams { file\_id, type }
 
@@ -4256,7 +4256,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -4276,7 +4276,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -4322,7 +4322,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -4466,7 +4466,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -4520,7 +4520,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -4558,7 +4558,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -4592,7 +4592,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -4626,7 +4626,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -4660,7 +4660,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -4772,7 +4772,7 @@ data: Array[[BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type
 
 Sent events
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEvent { id, content, type, processed\_at }
 
@@ -4786,7 +4786,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -4806,7 +4806,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -4852,7 +4852,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -4948,7 +4948,7 @@ result: :allow | :deny
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -4990,7 +4990,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -5010,7 +5010,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -5056,7 +5056,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -5188,7 +5188,7 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  | [BetaMa
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric { file\_id, type }
 
@@ -5230,7 +5230,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -5250,7 +5250,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -5296,7 +5296,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -5432,7 +5432,7 @@ error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, ty
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUnknownError { message, retry\_status, type }
 
@@ -5446,7 +5446,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -5480,7 +5480,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -5514,7 +5514,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -5548,7 +5548,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -5586,7 +5586,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -5624,7 +5624,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -5658,7 +5658,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -5690,7 +5690,7 @@ BetaManagedAgentsSessionEvent = [BetaManagedAgentsUserMessageEvent](api/beta.md)
 
 Union type for all event types in a session.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEvent { id, content, type, processed\_at }
 
@@ -5704,7 +5704,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -5724,7 +5724,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -5770,7 +5770,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -5866,7 +5866,7 @@ result: :allow | :deny
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -5908,7 +5908,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -5928,7 +5928,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -5974,7 +5974,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -6172,7 +6172,7 @@ evaluated\_permission: :allow | :ask | :deny
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -6206,7 +6206,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -6226,7 +6226,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -6272,7 +6272,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -6394,7 +6394,7 @@ evaluated\_permission: :allow | :ask | :deny
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -6428,7 +6428,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -6448,7 +6448,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -6494,7 +6494,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -6602,7 +6602,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -6622,7 +6622,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -6668,7 +6668,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -6754,7 +6754,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -6774,7 +6774,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -6820,7 +6820,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -6920,7 +6920,7 @@ error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, ty
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUnknownError { message, retry\_status, type }
 
@@ -6934,7 +6934,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -6968,7 +6968,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -7002,7 +7002,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -7036,7 +7036,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -7074,7 +7074,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -7112,7 +7112,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -7146,7 +7146,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -7218,7 +7218,7 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  | [BetaMa
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn { type }
 
@@ -7360,7 +7360,7 @@ speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -7420,7 +7420,7 @@ speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -7482,7 +7482,7 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  | [BetaMa
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric { file\_id, type }
 
@@ -7566,7 +7566,7 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  | [BetaMa
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn { type }
 
@@ -7632,7 +7632,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -7652,7 +7652,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -7698,7 +7698,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -7864,15 +7864,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -7910,13 +7910,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -7952,15 +7952,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -7998,13 +7998,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -8014,7 +8014,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -8040,7 +8040,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -8052,7 +8052,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -8074,7 +8074,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -8098,7 +8098,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -8126,7 +8126,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -8150,7 +8150,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -8204,7 +8204,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -8230,7 +8230,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -8242,7 +8242,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -8264,7 +8264,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -8288,7 +8288,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -8316,7 +8316,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -8340,7 +8340,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -8428,7 +8428,7 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  | [BetaMa
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn { type }
 
@@ -8542,7 +8542,7 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  | [BetaMa
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn { type }
 
@@ -8674,7 +8674,7 @@ speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -8724,7 +8724,7 @@ speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -8788,7 +8788,7 @@ speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -8842,7 +8842,7 @@ BetaManagedAgentsStreamSessionEvents = [BetaManagedAgentsUserMessageEvent](api/b
 
 Server-sent event in the session stream.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEvent { id, content, type, processed\_at }
 
@@ -8856,7 +8856,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -8876,7 +8876,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -8922,7 +8922,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -9018,7 +9018,7 @@ result: :allow | :deny
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -9060,7 +9060,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -9080,7 +9080,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -9126,7 +9126,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -9324,7 +9324,7 @@ evaluated\_permission: :allow | :ask | :deny
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -9358,7 +9358,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -9378,7 +9378,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -9424,7 +9424,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -9546,7 +9546,7 @@ evaluated\_permission: :allow | :ask | :deny
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -9580,7 +9580,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -9600,7 +9600,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -9646,7 +9646,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -9754,7 +9754,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -9774,7 +9774,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -9820,7 +9820,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -9906,7 +9906,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -9926,7 +9926,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -9972,7 +9972,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -10072,7 +10072,7 @@ error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, ty
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUnknownError { message, retry\_status, type }
 
@@ -10086,7 +10086,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -10120,7 +10120,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -10154,7 +10154,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -10188,7 +10188,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -10226,7 +10226,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -10264,7 +10264,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -10298,7 +10298,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -10370,7 +10370,7 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  | [BetaMa
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn { type }
 
@@ -10512,7 +10512,7 @@ speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -10572,7 +10572,7 @@ speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -10634,7 +10634,7 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  | [BetaMa
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric { file\_id, type }
 
@@ -10718,7 +10718,7 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  | [BetaMa
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn { type }
 
@@ -10784,7 +10784,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -10804,7 +10804,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -10850,7 +10850,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -11016,15 +11016,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -11062,13 +11062,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -11104,15 +11104,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -11150,13 +11150,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -11166,7 +11166,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -11192,7 +11192,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -11204,7 +11204,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -11226,7 +11226,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -11250,7 +11250,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -11278,7 +11278,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -11302,7 +11302,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -11356,7 +11356,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -11382,7 +11382,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -11394,7 +11394,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -11416,7 +11416,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -11440,7 +11440,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -11468,7 +11468,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -11492,7 +11492,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -11590,7 +11590,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -11650,7 +11650,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -11670,7 +11670,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -11716,7 +11716,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -11834,7 +11834,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -11854,7 +11854,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -11900,7 +11900,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -12024,7 +12024,7 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  | [BetaMa
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric { file\_id, type }
 
@@ -12060,7 +12060,7 @@ rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  | [
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubricParams { file\_id, type }
 
@@ -12128,7 +12128,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -12148,7 +12148,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -12194,7 +12194,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -12268,7 +12268,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -12288,7 +12288,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -12334,7 +12334,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -12408,7 +12408,7 @@ result: :allow | :deny
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -12440,7 +12440,7 @@ result: :allow | :deny
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -12470,7 +12470,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -12490,7 +12490,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -12536,7 +12536,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -12712,7 +12712,7 @@ url: String
 
 checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout { name, type }
 
@@ -12744,7 +12744,7 @@ access: :read\_write | :read\_only
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 :read\_write
 
@@ -12770,7 +12770,7 @@ BetaManagedAgentsSessionResource = [BetaManagedAgentsGitHubRepositoryResource](a
 
 A memory store attached to an agent session.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource { id, created\_at, mount\_path, 4 more }
 
@@ -12792,7 +12792,7 @@ url: String
 
 checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout { name, type }
 
@@ -12842,7 +12842,7 @@ access: :read\_write | :read\_only
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 :read\_write
 
@@ -12868,7 +12868,7 @@ ResourceRetrieveResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.
 
 The requested session resource.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource { id, created\_at, mount\_path, 4 more }
 
@@ -12890,7 +12890,7 @@ url: String
 
 checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout { name, type }
 
@@ -12940,7 +12940,7 @@ access: :read\_write | :read\_only
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 :read\_write
 
@@ -12966,7 +12966,7 @@ ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md
 
 The updated session resource.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource { id, created\_at, mount\_path, 4 more }
 
@@ -12988,7 +12988,7 @@ url: String
 
 checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout { name, type }
 
@@ -13038,7 +13038,7 @@ access: :read\_write | :read\_only
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 :read\_write
 
@@ -13116,15 +13116,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -13162,13 +13162,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -13178,7 +13178,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -13204,7 +13204,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -13216,7 +13216,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -13238,7 +13238,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -13262,7 +13262,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -13290,7 +13290,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -13314,7 +13314,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -13398,7 +13398,7 @@ status: [BetaManagedAgentsSessionThreadStatus](api/beta.md)
 
 SessionThreadStatus enum
 
-Accepts one of the following:
+One of the following:
 
 :running
 
@@ -13462,7 +13462,7 @@ BetaManagedAgentsSessionThreadStatus = :running | :idle | :rescheduling | :termi
 
 SessionThreadStatus enum
 
-Accepts one of the following:
+One of the following:
 
 :running
 
@@ -13504,7 +13504,7 @@ BetaManagedAgentsStreamSessionThreadEvents = [BetaManagedAgentsUserMessageEvent]
 
 Server-sent event in a single thread's stream.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEvent { id, content, type, processed\_at }
 
@@ -13518,7 +13518,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -13538,7 +13538,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -13584,7 +13584,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -13680,7 +13680,7 @@ result: :allow | :deny
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -13722,7 +13722,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -13742,7 +13742,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -13788,7 +13788,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -13986,7 +13986,7 @@ evaluated\_permission: :allow | :ask | :deny
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -14020,7 +14020,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -14040,7 +14040,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -14086,7 +14086,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -14208,7 +14208,7 @@ evaluated\_permission: :allow | :ask | :deny
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 :allow
 
@@ -14242,7 +14242,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -14262,7 +14262,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -14308,7 +14308,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -14416,7 +14416,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -14436,7 +14436,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -14482,7 +14482,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -14568,7 +14568,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -14588,7 +14588,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -14634,7 +14634,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -14734,7 +14734,7 @@ error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, ty
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUnknownError { message, retry\_status, type }
 
@@ -14748,7 +14748,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -14782,7 +14782,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -14816,7 +14816,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -14850,7 +14850,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -14888,7 +14888,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -14926,7 +14926,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -14960,7 +14960,7 @@ retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying { type }
 
@@ -15032,7 +15032,7 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  | [BetaMa
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn { type }
 
@@ -15174,7 +15174,7 @@ speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -15234,7 +15234,7 @@ speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -15296,7 +15296,7 @@ rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  | [BetaMa
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric { file\_id, type }
 
@@ -15380,7 +15380,7 @@ stop\_reason: [BetaManagedAgentsSessionEndTurn](api/beta.md) { type }  | [BetaMa
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn { type }
 
@@ -15446,7 +15446,7 @@ content: Array[[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [Beta
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock { text, type }
 
@@ -15466,7 +15466,7 @@ source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, t
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource { data, media\_type, type }
 
@@ -15512,7 +15512,7 @@ source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
 
@@ -15678,15 +15678,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -15724,13 +15724,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -15766,15 +15766,15 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
-:"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
+BetaManagedAgentsModel = :"claude-opus-4-7" | :"claude-opus-4-6" | :"claude-sonnet-4-6" | 6 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 :"claude-opus-4-7"
 
@@ -15812,13 +15812,13 @@ High-performance model for agents and coding
 
 High-performance model for agents and coding
 
-String
+String = String
 
 speed: :standard | :fast
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 :standard
 
@@ -15828,7 +15828,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -15854,7 +15854,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -15866,7 +15866,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -15888,7 +15888,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -15912,7 +15912,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -15940,7 +15940,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -15964,7 +15964,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -16018,7 +16018,7 @@ name: String
 
 skills: Array[[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -16044,7 +16044,7 @@ system\_: String
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } ]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -16056,7 +16056,7 @@ name: :bash | :edit | :read | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 :bash
 
@@ -16078,7 +16078,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -16102,7 +16102,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -16130,7 +16130,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -16154,7 +16154,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy { type }
 

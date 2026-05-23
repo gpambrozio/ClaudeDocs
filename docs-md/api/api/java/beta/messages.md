@@ -54,7 +54,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -168,7 +168,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -248,7 +248,7 @@ JsonValue; type "advisor\_20260301"constant"advisor\_20260301"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -273,7 +273,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -296,7 +296,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -318,13 +318,13 @@ class BetaAdvisorToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -362,13 +362,13 @@ class BetaAdvisorToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -419,7 +419,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -429,7 +429,7 @@ class BetaAdvisorToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -449,7 +449,7 @@ class BetaAdvisorToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -475,7 +475,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -543,13 +543,13 @@ class BetaBashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -587,13 +587,13 @@ class BetaBashCodeExecutionToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -644,7 +644,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -654,7 +654,7 @@ class BetaBashCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -672,7 +672,7 @@ class BetaBashCodeExecutionToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -701,7 +701,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -955,7 +955,7 @@ class BetaCitationsDelta:
 
 Citation citation
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -1081,7 +1081,7 @@ Optional<Keep> keep
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaThinkingTurns:
 
@@ -1125,7 +1125,7 @@ Optional<ClearToolInputs> clearToolInputs
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-Accepts one of the following:
+One of the following:
 
 boolean
 
@@ -1147,7 +1147,7 @@ Optional<Trigger> trigger
 
 Condition that triggers the context management strategy
 
-Accepts one of the following:
+One of the following:
 
 class BetaInputTokensTrigger:
 
@@ -1231,7 +1231,7 @@ JsonValue; type "code\_execution\_20250522"constant"code\_execution\_20250522"co
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -1256,7 +1256,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -1282,7 +1282,7 @@ JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"co
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -1307,7 +1307,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -1335,7 +1335,7 @@ JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"co
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -1360,7 +1360,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -1380,13 +1380,13 @@ class BetaCodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1444,7 +1444,7 @@ class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1496,13 +1496,13 @@ class BetaCodeExecutionToolResultBlockParam:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultErrorParam:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1569,7 +1569,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -1583,7 +1583,7 @@ class BetaCodeExecutionToolResultErrorParam:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1633,7 +1633,7 @@ class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1659,7 +1659,7 @@ class BetaCodeExecutionToolResultErrorParam:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1744,7 +1744,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -1824,7 +1824,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -1854,7 +1854,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -1898,7 +1898,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -1916,7 +1916,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -2052,7 +2052,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -2082,7 +2082,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -2106,7 +2106,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -2132,13 +2132,13 @@ class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2174,7 +2174,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -2200,13 +2200,13 @@ class BetaWebFetchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2238,7 +2238,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -2280,7 +2280,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -2306,13 +2306,13 @@ class BetaAdvisorToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -2352,13 +2352,13 @@ class BetaCodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2412,13 +2412,13 @@ class BetaBashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2456,13 +2456,13 @@ class BetaTextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2484,7 +2484,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -2528,13 +2528,13 @@ class BetaToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2582,7 +2582,7 @@ class BetaMcpToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -2594,7 +2594,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -2761,7 +2761,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -2769,7 +2769,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -2871,7 +2871,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -2879,7 +2879,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -2922,7 +2922,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -2932,7 +2932,7 @@ class BetaRequestDocumentBlock:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -2954,13 +2954,13 @@ class BetaContentBlockSource:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -2985,7 +2985,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -2993,7 +2993,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -3095,7 +3095,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -3103,7 +3103,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -3146,7 +3146,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -3185,7 +3185,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -3224,7 +3224,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -3232,7 +3232,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -3353,7 +3353,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -3404,7 +3404,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -3414,7 +3414,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -3459,7 +3459,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -3467,13 +3467,13 @@ TTL\_1H("1h")
 
 Optional<Content> content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<Block>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -3498,7 +3498,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -3506,7 +3506,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -3608,7 +3608,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -3616,7 +3616,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -3659,7 +3659,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -3690,7 +3690,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -3698,7 +3698,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -3819,7 +3819,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -3833,7 +3833,7 @@ class BetaRequestDocumentBlock:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -3855,13 +3855,13 @@ class BetaContentBlockSource:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -3886,7 +3886,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -3894,7 +3894,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -3996,7 +3996,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -4004,7 +4004,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -4047,7 +4047,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4086,7 +4086,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4125,7 +4125,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4141,7 +4141,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -4178,7 +4178,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4188,7 +4188,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -4214,7 +4214,7 @@ class BetaWebSearchToolResultBlockParam:
 
 [BetaWebSearchToolResultBlockParamContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 List<[BetaWebSearchResultBlockParam](api/beta.md)>
 
@@ -4232,7 +4232,7 @@ class BetaWebSearchToolRequestError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -4269,7 +4269,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4279,7 +4279,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -4305,13 +4305,13 @@ class BetaWebFetchToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlockParam:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -4337,7 +4337,7 @@ class BetaWebFetchBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -4359,13 +4359,13 @@ class BetaContentBlockSource:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -4390,7 +4390,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4398,7 +4398,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -4500,7 +4500,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -4508,7 +4508,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -4551,7 +4551,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4590,7 +4590,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4635,7 +4635,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4645,7 +4645,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -4671,13 +4671,13 @@ class BetaAdvisorToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -4728,7 +4728,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4740,13 +4740,13 @@ class BetaCodeExecutionToolResultBlockParam:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultErrorParam:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -4813,7 +4813,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4823,13 +4823,13 @@ class BetaBashCodeExecutionToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -4880,7 +4880,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4890,13 +4890,13 @@ class BetaTextEditorCodeExecutionToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -4918,7 +4918,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -4975,7 +4975,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -4985,13 +4985,13 @@ class BetaToolSearchToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -5028,7 +5028,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -5057,7 +5057,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -5094,7 +5094,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -5123,7 +5123,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -5131,7 +5131,7 @@ TTL\_1H("1h")
 
 Optional<Content> content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -5158,7 +5158,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -5166,7 +5166,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -5292,7 +5292,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -5331,7 +5331,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -5345,13 +5345,13 @@ class BetaContentBlockSource:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -5376,7 +5376,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -5384,7 +5384,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -5486,7 +5486,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -5494,7 +5494,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -5537,7 +5537,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -5570,7 +5570,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -5578,7 +5578,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -5680,7 +5680,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -5688,7 +5688,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -5731,7 +5731,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -5743,7 +5743,7 @@ Optional<List<Edit>> edits
 
 List of context management edits to apply
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919Edit:
 
@@ -5761,7 +5761,7 @@ Optional<ClearToolInputs> clearToolInputs
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-Accepts one of the following:
+One of the following:
 
 boolean
 
@@ -5783,7 +5783,7 @@ Optional<Trigger> trigger
 
 Condition that triggers the context management strategy
 
-Accepts one of the following:
+One of the following:
 
 class BetaInputTokensTrigger:
 
@@ -5805,7 +5805,7 @@ Optional<Keep> keep
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaThinkingTurns:
 
@@ -5847,7 +5847,7 @@ List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse:
 
@@ -5892,7 +5892,7 @@ Optional<CacheMissReason> cacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged:
 
@@ -5959,7 +5959,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -6035,7 +6035,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -6043,7 +6043,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -6086,7 +6086,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -6138,7 +6138,7 @@ class BetaMcpToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -6150,7 +6150,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -6311,7 +6311,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -6347,7 +6347,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -6381,7 +6381,7 @@ JsonValue; type "memory\_20250818"constant"memory\_20250818"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -6406,7 +6406,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -6632,7 +6632,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -6671,7 +6671,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock:
 
@@ -6681,7 +6681,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -6817,7 +6817,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -6847,7 +6847,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -6871,7 +6871,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -6897,13 +6897,13 @@ class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -6939,7 +6939,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -6965,13 +6965,13 @@ class BetaWebFetchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -7003,7 +7003,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -7045,7 +7045,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -7071,13 +7071,13 @@ class BetaAdvisorToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -7117,13 +7117,13 @@ class BetaCodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -7177,13 +7177,13 @@ class BetaBashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -7221,13 +7221,13 @@ class BetaTextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -7249,7 +7249,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -7293,13 +7293,13 @@ class BetaToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -7347,7 +7347,7 @@ class BetaMcpToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -7359,7 +7359,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -7509,7 +7509,7 @@ List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse:
 
@@ -7548,7 +7548,7 @@ Optional<CacheMissReason> cacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged:
 
@@ -7596,7 +7596,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -7682,7 +7682,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -7711,7 +7711,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 END\_TURN("end\_turn")
 
@@ -7791,7 +7791,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage:
 
@@ -7899,7 +7899,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -7997,7 +7997,7 @@ Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -8009,7 +8009,7 @@ Optional<Speed> speed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -8039,7 +8039,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage:
 
@@ -8147,7 +8147,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -8281,13 +8281,13 @@ class BetaMessageParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockParam](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -8312,7 +8312,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -8320,7 +8320,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -8422,7 +8422,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -8430,7 +8430,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -8473,7 +8473,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -8483,7 +8483,7 @@ class BetaRequestDocumentBlock:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -8505,13 +8505,13 @@ class BetaContentBlockSource:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -8536,7 +8536,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -8544,7 +8544,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -8646,7 +8646,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -8654,7 +8654,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -8697,7 +8697,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -8736,7 +8736,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -8775,7 +8775,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -8783,7 +8783,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -8904,7 +8904,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -8955,7 +8955,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -8965,7 +8965,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -9010,7 +9010,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9018,13 +9018,13 @@ TTL\_1H("1h")
 
 Optional<Content> content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<Block>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -9049,7 +9049,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9057,7 +9057,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -9159,7 +9159,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -9167,7 +9167,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -9210,7 +9210,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9241,7 +9241,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9249,7 +9249,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -9370,7 +9370,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9384,7 +9384,7 @@ class BetaRequestDocumentBlock:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -9406,13 +9406,13 @@ class BetaContentBlockSource:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -9437,7 +9437,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9445,7 +9445,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -9547,7 +9547,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -9555,7 +9555,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -9598,7 +9598,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9637,7 +9637,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9676,7 +9676,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9692,7 +9692,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -9729,7 +9729,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9739,7 +9739,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -9765,7 +9765,7 @@ class BetaWebSearchToolResultBlockParam:
 
 [BetaWebSearchToolResultBlockParamContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 List<[BetaWebSearchResultBlockParam](api/beta.md)>
 
@@ -9783,7 +9783,7 @@ class BetaWebSearchToolRequestError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -9820,7 +9820,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9830,7 +9830,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -9856,13 +9856,13 @@ class BetaWebFetchToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlockParam:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -9888,7 +9888,7 @@ class BetaWebFetchBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -9910,13 +9910,13 @@ class BetaContentBlockSource:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -9941,7 +9941,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -9949,7 +9949,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -10051,7 +10051,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -10059,7 +10059,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -10102,7 +10102,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10141,7 +10141,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10186,7 +10186,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10196,7 +10196,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -10222,13 +10222,13 @@ class BetaAdvisorToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -10279,7 +10279,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10291,13 +10291,13 @@ class BetaCodeExecutionToolResultBlockParam:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultErrorParam:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -10364,7 +10364,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10374,13 +10374,13 @@ class BetaBashCodeExecutionToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -10431,7 +10431,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10441,13 +10441,13 @@ class BetaTextEditorCodeExecutionToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -10469,7 +10469,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -10526,7 +10526,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10536,13 +10536,13 @@ class BetaToolSearchToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -10579,7 +10579,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10608,7 +10608,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10645,7 +10645,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10674,7 +10674,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10682,7 +10682,7 @@ TTL\_1H("1h")
 
 Optional<Content> content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -10709,7 +10709,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10717,7 +10717,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -10843,7 +10843,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10882,7 +10882,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -10894,7 +10894,7 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Role role
 
-Accepts one of the following:
+One of the following:
 
 USER("user")
 
@@ -10930,7 +10930,7 @@ Optional<Effort> effort
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 LOW("low")
 
@@ -10994,7 +10994,7 @@ class BetaCitationsDelta:
 
 Citation citation
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -11126,7 +11126,7 @@ class BetaRawContentBlockDeltaEvent:
 
 [BetaRawContentBlockDelta](api/beta.md) delta
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextDelta:
 
@@ -11144,7 +11144,7 @@ class BetaCitationsDelta:
 
 Citation citation
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -11282,7 +11282,7 @@ ContentBlock contentBlock
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock:
 
@@ -11292,7 +11292,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -11428,7 +11428,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -11458,7 +11458,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -11482,7 +11482,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -11508,13 +11508,13 @@ class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -11550,7 +11550,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -11576,13 +11576,13 @@ class BetaWebFetchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -11614,7 +11614,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -11656,7 +11656,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -11682,13 +11682,13 @@ class BetaAdvisorToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -11728,13 +11728,13 @@ class BetaCodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -11788,13 +11788,13 @@ class BetaBashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -11832,13 +11832,13 @@ class BetaTextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -11860,7 +11860,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -11904,13 +11904,13 @@ class BetaToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -11958,7 +11958,7 @@ class BetaMcpToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -11970,7 +11970,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -12130,7 +12130,7 @@ List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse:
 
@@ -12186,7 +12186,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -12206,7 +12206,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -12222,7 +12222,7 @@ JsonValue; type "refusal"constant"refusal"constant
 
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
-Accepts one of the following:
+One of the following:
 
 END\_TURN("end\_turn")
 
@@ -12278,7 +12278,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage:
 
@@ -12386,7 +12386,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -12514,7 +12514,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -12553,7 +12553,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock:
 
@@ -12563,7 +12563,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -12699,7 +12699,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -12729,7 +12729,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -12753,7 +12753,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -12779,13 +12779,13 @@ class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -12821,7 +12821,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -12847,13 +12847,13 @@ class BetaWebFetchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -12885,7 +12885,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -12927,7 +12927,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -12953,13 +12953,13 @@ class BetaAdvisorToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -12999,13 +12999,13 @@ class BetaCodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -13059,13 +13059,13 @@ class BetaBashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -13103,13 +13103,13 @@ class BetaTextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -13131,7 +13131,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -13175,13 +13175,13 @@ class BetaToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -13229,7 +13229,7 @@ class BetaMcpToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -13241,7 +13241,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -13391,7 +13391,7 @@ List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse:
 
@@ -13430,7 +13430,7 @@ Optional<CacheMissReason> cacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged:
 
@@ -13478,7 +13478,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -13564,7 +13564,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -13593,7 +13593,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 END\_TURN("end\_turn")
 
@@ -13673,7 +13673,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage:
 
@@ -13781,7 +13781,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -13879,7 +13879,7 @@ Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -13891,7 +13891,7 @@ Optional<Speed> speed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -13939,7 +13939,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -13978,7 +13978,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock:
 
@@ -13988,7 +13988,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -14124,7 +14124,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -14154,7 +14154,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -14178,7 +14178,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -14204,13 +14204,13 @@ class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -14246,7 +14246,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -14272,13 +14272,13 @@ class BetaWebFetchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -14310,7 +14310,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -14352,7 +14352,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -14378,13 +14378,13 @@ class BetaAdvisorToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -14424,13 +14424,13 @@ class BetaCodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -14484,13 +14484,13 @@ class BetaBashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -14528,13 +14528,13 @@ class BetaTextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -14556,7 +14556,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -14600,13 +14600,13 @@ class BetaToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -14654,7 +14654,7 @@ class BetaMcpToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -14666,7 +14666,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -14816,7 +14816,7 @@ List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse:
 
@@ -14855,7 +14855,7 @@ Optional<CacheMissReason> cacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged:
 
@@ -14903,7 +14903,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -14989,7 +14989,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -15018,7 +15018,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 END\_TURN("end\_turn")
 
@@ -15098,7 +15098,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage:
 
@@ -15206,7 +15206,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -15304,7 +15304,7 @@ Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -15316,7 +15316,7 @@ Optional<Speed> speed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -15334,7 +15334,7 @@ List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse:
 
@@ -15390,7 +15390,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -15410,7 +15410,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -15426,7 +15426,7 @@ JsonValue; type "refusal"constant"refusal"constant
 
 Optional<[BetaStopReason](api/beta.md)> stopReason
 
-Accepts one of the following:
+One of the following:
 
 END\_TURN("end\_turn")
 
@@ -15482,7 +15482,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage:
 
@@ -15590,7 +15590,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -15694,7 +15694,7 @@ ContentBlock contentBlock
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock:
 
@@ -15704,7 +15704,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -15840,7 +15840,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -15870,7 +15870,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -15894,7 +15894,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -15920,13 +15920,13 @@ class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -15962,7 +15962,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -15988,13 +15988,13 @@ class BetaWebFetchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -16026,7 +16026,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -16068,7 +16068,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -16094,13 +16094,13 @@ class BetaAdvisorToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -16140,13 +16140,13 @@ class BetaCodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -16200,13 +16200,13 @@ class BetaBashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -16244,13 +16244,13 @@ class BetaTextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -16272,7 +16272,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -16316,13 +16316,13 @@ class BetaToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -16370,7 +16370,7 @@ class BetaMcpToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -16382,7 +16382,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -16530,7 +16530,7 @@ class BetaRawContentBlockDeltaEvent:
 
 [BetaRawContentBlockDelta](api/beta.md) delta
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextDelta:
 
@@ -16548,7 +16548,7 @@ class BetaCitationsDelta:
 
 Citation citation
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -16708,7 +16708,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -16726,7 +16726,7 @@ class BetaRequestDocumentBlock:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -16748,13 +16748,13 @@ class BetaContentBlockSource:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -16779,7 +16779,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -16787,7 +16787,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -16889,7 +16889,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -16897,7 +16897,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -16940,7 +16940,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -16979,7 +16979,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -17038,7 +17038,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -17046,7 +17046,7 @@ TTL\_1H("1h")
 
 Optional<Content> content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -17073,7 +17073,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -17081,7 +17081,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -17206,7 +17206,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -17214,7 +17214,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -17335,7 +17335,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -17377,7 +17377,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -17401,7 +17401,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -17431,7 +17431,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -17468,7 +17468,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -17478,7 +17478,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -17518,7 +17518,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -17540,7 +17540,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -17576,7 +17576,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -17707,7 +17707,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -17715,7 +17715,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -18065,13 +18065,13 @@ class BetaTextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -18093,7 +18093,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -18137,13 +18137,13 @@ class BetaTextEditorCodeExecutionToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -18165,7 +18165,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -18222,7 +18222,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -18232,7 +18232,7 @@ class BetaTextEditorCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -18252,7 +18252,7 @@ class BetaTextEditorCodeExecutionToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -18274,7 +18274,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -18296,7 +18296,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -18336,7 +18336,7 @@ Optional<Display> display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 SUMMARIZED("summarized")
 
@@ -18364,7 +18364,7 @@ Optional<Display> display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 SUMMARIZED("summarized")
 
@@ -18396,7 +18396,7 @@ Optional<Display> display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 SUMMARIZED("summarized")
 
@@ -18414,7 +18414,7 @@ Optional<Display> display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 SUMMARIZED("summarized")
 
@@ -18474,7 +18474,7 @@ minLength1
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -18499,7 +18499,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -18539,7 +18539,7 @@ JsonValue; type "bash\_20241022"constant"bash\_20241022"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -18564,7 +18564,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -18592,7 +18592,7 @@ JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -18617,7 +18617,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -18749,7 +18749,7 @@ JsonValue; type "computer\_20241022"constant"computer\_20241022"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -18774,7 +18774,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -18814,7 +18814,7 @@ JsonValue; type "computer\_20250124"constant"computer\_20250124"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -18839,7 +18839,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -18879,7 +18879,7 @@ JsonValue; type "computer\_20251124"constant"computer\_20251124"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -18904,7 +18904,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -18959,7 +18959,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -18988,7 +18988,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -18996,13 +18996,13 @@ TTL\_1H("1h")
 
 Optional<Content> content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<Block>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -19027,7 +19027,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19035,7 +19035,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -19137,7 +19137,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -19145,7 +19145,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -19188,7 +19188,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19219,7 +19219,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19227,7 +19227,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -19348,7 +19348,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19362,7 +19362,7 @@ class BetaRequestDocumentBlock:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -19384,13 +19384,13 @@ class BetaContentBlockSource:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -19415,7 +19415,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19423,7 +19423,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -19525,7 +19525,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -19533,7 +19533,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -19576,7 +19576,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19615,7 +19615,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19654,7 +19654,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19672,7 +19672,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type type
 
-Accepts one of the following:
+One of the following:
 
 TOOL\_SEARCH\_TOOL\_BM25\_20251119("tool\_search\_tool\_bm25\_20251119")
 
@@ -19680,7 +19680,7 @@ TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -19705,7 +19705,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19729,7 +19729,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type type
 
-Accepts one of the following:
+One of the following:
 
 TOOL\_SEARCH\_TOOL\_REGEX\_20251119("tool\_search\_tool\_regex\_20251119")
 
@@ -19737,7 +19737,7 @@ TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -19762,7 +19762,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19780,13 +19780,13 @@ class BetaToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -19818,13 +19818,13 @@ class BetaToolSearchToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -19861,7 +19861,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19890,7 +19890,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19900,7 +19900,7 @@ class BetaToolSearchToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -19918,7 +19918,7 @@ class BetaToolSearchToolResultErrorParam:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -19965,7 +19965,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -19985,7 +19985,7 @@ JsonValue; type "text\_editor\_20241022"constant"text\_editor\_20241022"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20010,7 +20010,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20038,7 +20038,7 @@ JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20063,7 +20063,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20091,7 +20091,7 @@ JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20116,7 +20116,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20144,7 +20144,7 @@ JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20169,7 +20169,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20219,7 +20219,7 @@ minLength1
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20244,7 +20244,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20284,7 +20284,7 @@ JsonValue; type "bash\_20241022"constant"bash\_20241022"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20309,7 +20309,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20337,7 +20337,7 @@ JsonValue; type "bash\_20250124"constant"bash\_20250124"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20362,7 +20362,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20390,7 +20390,7 @@ JsonValue; type "code\_execution\_20250522"constant"code\_execution\_20250522"co
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20415,7 +20415,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20441,7 +20441,7 @@ JsonValue; type "code\_execution\_20250825"constant"code\_execution\_20250825"co
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20466,7 +20466,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20494,7 +20494,7 @@ JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"co
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20519,7 +20519,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20553,7 +20553,7 @@ JsonValue; type "computer\_20241022"constant"computer\_20241022"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20578,7 +20578,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20610,7 +20610,7 @@ JsonValue; type "memory\_20250818"constant"memory\_20250818"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20635,7 +20635,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20671,7 +20671,7 @@ JsonValue; type "computer\_20250124"constant"computer\_20250124"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20696,7 +20696,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20728,7 +20728,7 @@ JsonValue; type "text\_editor\_20241022"constant"text\_editor\_20241022"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20753,7 +20753,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20789,7 +20789,7 @@ JsonValue; type "computer\_20251124"constant"computer\_20251124"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20814,7 +20814,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20850,7 +20850,7 @@ JsonValue; type "text\_editor\_20250124"constant"text\_editor\_20250124"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20875,7 +20875,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20903,7 +20903,7 @@ JsonValue; type "text\_editor\_20250429"constant"text\_editor\_20250429"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20928,7 +20928,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -20956,7 +20956,7 @@ JsonValue; type "text\_editor\_20250728"constant"text\_editor\_20250728"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -20981,7 +20981,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21013,7 +21013,7 @@ JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -21046,7 +21046,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21098,7 +21098,7 @@ JsonValue; type "web\_fetch\_20250910"constant"web\_fetch\_20250910"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -21131,7 +21131,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21171,7 +21171,7 @@ JsonValue; type "web\_search\_20260209"constant"web\_search\_20260209"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -21204,7 +21204,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21256,7 +21256,7 @@ JsonValue; type "web\_fetch\_20260209"constant"web\_fetch\_20260209"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -21289,7 +21289,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21331,7 +21331,7 @@ JsonValue; type "web\_fetch\_20260309"constant"web\_fetch\_20260309"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -21364,7 +21364,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21404,7 +21404,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -21484,7 +21484,7 @@ JsonValue; type "advisor\_20260301"constant"advisor\_20260301"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -21509,7 +21509,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21532,7 +21532,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21560,7 +21560,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type type
 
-Accepts one of the following:
+One of the following:
 
 TOOL\_SEARCH\_TOOL\_BM25\_20251119("tool\_search\_tool\_bm25\_20251119")
 
@@ -21568,7 +21568,7 @@ TOOL\_SEARCH\_TOOL\_BM25("tool\_search\_tool\_bm25")
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -21593,7 +21593,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21617,7 +21617,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type type
 
-Accepts one of the following:
+One of the following:
 
 TOOL\_SEARCH\_TOOL\_REGEX\_20251119("tool\_search\_tool\_regex\_20251119")
 
@@ -21625,7 +21625,7 @@ TOOL\_SEARCH\_TOOL\_REGEX("tool\_search\_tool\_regex")
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -21650,7 +21650,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21694,7 +21694,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21730,7 +21730,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -21779,7 +21779,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -21789,7 +21789,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -21875,7 +21875,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage:
 
@@ -21983,7 +21983,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -22081,7 +22081,7 @@ Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -22093,7 +22093,7 @@ Optional<Speed> speed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -22131,7 +22131,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -22171,7 +22171,7 @@ class BetaWebFetchBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -22193,13 +22193,13 @@ class BetaContentBlockSource:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -22224,7 +22224,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -22232,7 +22232,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -22334,7 +22334,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -22342,7 +22342,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -22385,7 +22385,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -22424,7 +22424,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -22460,7 +22460,7 @@ JsonValue; type "web\_fetch\_20250910"constant"web\_fetch\_20250910"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -22493,7 +22493,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -22533,7 +22533,7 @@ JsonValue; type "web\_fetch\_20260209"constant"web\_fetch\_20260209"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -22566,7 +22566,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -22608,7 +22608,7 @@ JsonValue; type "web\_fetch\_20260309"constant"web\_fetch\_20260309"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -22641,7 +22641,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -22677,13 +22677,13 @@ class BetaWebFetchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -22715,7 +22715,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -22757,7 +22757,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -22783,13 +22783,13 @@ class BetaWebFetchToolResultBlockParam:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlockParam:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -22815,7 +22815,7 @@ class BetaWebFetchBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -22837,13 +22837,13 @@ class BetaContentBlockSource:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
 List<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam:
 
@@ -22868,7 +22868,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -22876,7 +22876,7 @@ TTL\_1H("1h")
 
 Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam:
 
@@ -22978,7 +22978,7 @@ class BetaImageBlockParam:
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource:
 
@@ -22986,7 +22986,7 @@ String data
 
 MediaType mediaType
 
-Accepts one of the following:
+One of the following:
 
 IMAGE\_JPEG("image/jpeg")
 
@@ -23029,7 +23029,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -23068,7 +23068,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -23113,7 +23113,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -23123,7 +23123,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -23149,7 +23149,7 @@ class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -23173,7 +23173,7 @@ class BetaWebFetchToolResultErrorBlockParam:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -23247,7 +23247,7 @@ JsonValue; type "web\_search\_20250305"constant"web\_search\_20250305"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -23280,7 +23280,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -23332,7 +23332,7 @@ JsonValue; type "web\_search\_20260209"constant"web\_search\_20260209"constant
 
 Optional<List<AllowedCaller>> allowedCallers
 
-Accepts one of the following:
+One of the following:
 
 DIRECT("direct")
 
@@ -23365,7 +23365,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -23409,7 +23409,7 @@ class BetaWebSearchToolRequestError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -23429,13 +23429,13 @@ class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -23471,7 +23471,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -23499,7 +23499,7 @@ class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -23531,7 +23531,7 @@ class BetaWebSearchToolResultBlockParam:
 
 [BetaWebSearchToolResultBlockParamContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 List<[BetaWebSearchResultBlockParam](api/beta.md)>
 
@@ -23549,7 +23549,7 @@ class BetaWebSearchToolRequestError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -23586,7 +23586,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 TTL\_5M("5m")
 
@@ -23596,7 +23596,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -23636,7 +23636,7 @@ class BetaWebSearchToolRequestError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -23656,7 +23656,7 @@ class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -23774,7 +23774,7 @@ ProcessingStatus processingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 IN\_PROGRESS("in\_progress")
 
@@ -23838,7 +23838,7 @@ class BetaMessageBatchErroredResult:
 
 [BetaError](api/beta.md) error
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError:
 
@@ -23920,7 +23920,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageBatchSucceededResult:
 
@@ -23956,7 +23956,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -23995,7 +23995,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock:
 
@@ -24005,7 +24005,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -24141,7 +24141,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -24171,7 +24171,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -24195,7 +24195,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -24221,13 +24221,13 @@ class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -24263,7 +24263,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -24289,13 +24289,13 @@ class BetaWebFetchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -24327,7 +24327,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -24369,7 +24369,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -24395,13 +24395,13 @@ class BetaAdvisorToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -24441,13 +24441,13 @@ class BetaCodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -24501,13 +24501,13 @@ class BetaBashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -24545,13 +24545,13 @@ class BetaTextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -24573,7 +24573,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -24617,13 +24617,13 @@ class BetaToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -24671,7 +24671,7 @@ class BetaMcpToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -24683,7 +24683,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -24833,7 +24833,7 @@ List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse:
 
@@ -24872,7 +24872,7 @@ Optional<CacheMissReason> cacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged:
 
@@ -24920,7 +24920,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -25006,7 +25006,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -25035,7 +25035,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 END\_TURN("end\_turn")
 
@@ -25115,7 +25115,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage:
 
@@ -25223,7 +25223,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -25321,7 +25321,7 @@ Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -25333,7 +25333,7 @@ Optional<Speed> speed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -25347,7 +25347,7 @@ class BetaMessageBatchErroredResult:
 
 [BetaError](api/beta.md) error
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError:
 
@@ -25487,7 +25487,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -25526,7 +25526,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock:
 
@@ -25536,7 +25536,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -25672,7 +25672,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -25702,7 +25702,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -25726,7 +25726,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -25752,13 +25752,13 @@ class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -25794,7 +25794,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -25820,13 +25820,13 @@ class BetaWebFetchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -25858,7 +25858,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -25900,7 +25900,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -25926,13 +25926,13 @@ class BetaAdvisorToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -25972,13 +25972,13 @@ class BetaCodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -26032,13 +26032,13 @@ class BetaBashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -26076,13 +26076,13 @@ class BetaTextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -26104,7 +26104,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -26148,13 +26148,13 @@ class BetaToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -26202,7 +26202,7 @@ class BetaMcpToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -26214,7 +26214,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -26364,7 +26364,7 @@ List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse:
 
@@ -26403,7 +26403,7 @@ Optional<CacheMissReason> cacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged:
 
@@ -26451,7 +26451,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -26537,7 +26537,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -26566,7 +26566,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 END\_TURN("end\_turn")
 
@@ -26646,7 +26646,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage:
 
@@ -26754,7 +26754,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -26852,7 +26852,7 @@ Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -26864,7 +26864,7 @@ Optional<Speed> speed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -26878,7 +26878,7 @@ class BetaMessageBatchErroredResult:
 
 [BetaError](api/beta.md) error
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError:
 
@@ -26982,7 +26982,7 @@ Type type
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 ANTHROPIC("anthropic")
 
@@ -27021,7 +27021,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock:
 
@@ -27031,7 +27031,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -27167,7 +27167,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -27197,7 +27197,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 ADVISOR("advisor")
 
@@ -27221,7 +27221,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -27247,13 +27247,13 @@ class BetaWebSearchToolResultBlock:
 
 [BetaWebSearchToolResultBlockContent](api/beta.md) content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError:
 
 [BetaWebSearchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -27289,7 +27289,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -27315,13 +27315,13 @@ class BetaWebFetchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock:
 
 [BetaWebFetchToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -27353,7 +27353,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PdfSource:
 
@@ -27395,7 +27395,7 @@ Optional<Caller> caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller:
 
@@ -27421,13 +27421,13 @@ class BetaAdvisorToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 MAX\_USES\_EXCEEDED("max\_uses\_exceeded")
 
@@ -27467,13 +27467,13 @@ class BetaCodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError:
 
 [BetaCodeExecutionToolResultErrorCode](api/beta.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -27527,13 +27527,13 @@ class BetaBashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -27571,13 +27571,13 @@ class BetaTextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -27599,7 +27599,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -27643,13 +27643,13 @@ class BetaToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError:
 
 ErrorCode errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -27697,7 +27697,7 @@ class BetaMcpToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 String
 
@@ -27709,7 +27709,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation:
 
@@ -27859,7 +27859,7 @@ List<AppliedEdit> appliedEdits
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse:
 
@@ -27898,7 +27898,7 @@ Optional<CacheMissReason> cacheMissReason
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged:
 
@@ -27946,7 +27946,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -28032,7 +28032,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -28061,7 +28061,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 END\_TURN("end\_turn")
 
@@ -28141,7 +28141,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage:
 
@@ -28249,7 +28249,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -28347,7 +28347,7 @@ Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -28359,7 +28359,7 @@ Optional<Speed> speed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 

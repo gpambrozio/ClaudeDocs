@@ -36,7 +36,7 @@ status: optional "active" or "inactive" or "archived" or "expired"
 
 Filter by API key status.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 
@@ -90,7 +90,7 @@ status: "active" or "inactive" or "archived" or "expired"
 
 Status of the API key.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 

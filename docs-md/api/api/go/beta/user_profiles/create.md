@@ -16,19 +16,19 @@ Create User Profile
 
 params BetaUserProfileNewParams
 
-ExternalID param.Field[string]optional
+ExternalID param.Field[string]Optional
 
 Body param: Platform's own identifier for this user. Not enforced unique. Maximum 255 characters.
 
-Metadata param.Field[map[string, string]]optional
+Metadata param.Field[map[string, string]]Optional
 
 Body param: Free-form key-value data to attach to this user profile. Maximum 16 keys, with keys up to 64 characters and values up to 512 characters. Values must be non-empty strings.
 
-Name param.Field[string]optional
+Name param.Field[string]Optional
 
 Body param: Display name of the entity this profile represents. Required when relationship is `resold` (the resold-to company's name); optional otherwise. Maximum 255 characters.
 
-Relationship param.Field[[BetaUserProfileNewParamsRelationship](api/beta/user_profiles/create.md)]optional
+Relationship param.Field[[BetaUserProfileNewParamsRelationship](api/beta/user_profiles/create.md)]Optional
 
 Body param: How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
@@ -38,7 +38,7 @@ const BetaUserProfileNewParamsRelationshipResold [BetaUserProfileNewParamsRelati
 
 const BetaUserProfileNewParamsRelationshipInternal [BetaUserProfileNewParamsRelationship](api/beta/user_profiles/create.md) = "internal"
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -46,7 +46,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -118,7 +118,7 @@ Relationship BetaUserProfileRelationship
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"
 
@@ -134,7 +134,7 @@ Status BetaUserProfileTrustGrantStatus
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
 
@@ -150,11 +150,11 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-ExternalID stringoptional
+ExternalID stringOptional
 
 Platform's own identifier for this user. Not enforced unique.
 
-Name stringoptional
+Name stringOptional
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 

@@ -16,19 +16,19 @@ List Skills
 
 params BetaSkillListParams
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Query param: Number of results to return per page.
 
 Maximum value is 100. Defaults to 20.
 
-Page param.Field[string]optional
+Page param.Field[string]Optional
 
 Query param: Pagination token for fetching a specific page of results.
 
 Pass the value from a previous response's `next_page` field to get the next page of results.
 
-Source param.Field[string]optional
+Source param.Field[string]Optional
 
 Query param: Filter skills by source.
 
@@ -37,7 +37,7 @@ If provided, only skills from the specified source will be returned:
 - `"custom"`: only return user-created skills
 - `"anthropic"`: only return Anthropic-created skills
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -45,7 +45,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 

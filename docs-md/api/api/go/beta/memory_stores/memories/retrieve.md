@@ -22,11 +22,11 @@ MemoryStoreID param.Field[string]
 
 Path param: Path parameter memory\_store\_id
 
-View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]optional
+View param.Field[[BetaManagedAgentsMemoryView](api/beta.md)]Optional
 
 Query param: Query parameter for view
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -34,7 +34,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -126,7 +126,7 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 

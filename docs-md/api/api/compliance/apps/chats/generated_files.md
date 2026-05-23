@@ -16,7 +16,7 @@ GET/v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}/content
 
 ##### ModelsExpand Collapse
 
-GeneratedFileRetrieveResponse = object { id, claude\_chat\_id, created\_at, 4 more }
+GeneratedFileRetrieveResponse object { id, claude\_chat\_id, created\_at, 4 more }
 
 Metadata for GET /v1/compliance/apps/chats/generated-files/{claude\_gen\_file\_id}.
 

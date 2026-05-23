@@ -34,13 +34,13 @@ Opaque pagination token from a previous `list_credentials` response.
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -110,9 +110,9 @@ auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, t
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsMCPOAuthAuthResponse = object { mcp\_server\_url, type, expires\_at, refresh }
+BetaManagedAgentsMCPOAuthAuthResponse object { mcp\_server\_url, type, expires\_at, refresh }
 
 OAuth credential details for an MCP server.
 
@@ -142,21 +142,21 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsTokenEndpointAuthNoneResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthNoneResponse object { type }
 
 Token endpoint requires no client authentication.
 
 type: "none"
 
-BetaManagedAgentsTokenEndpointAuthBasicResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthBasicResponse object { type }
 
 Token endpoint uses HTTP Basic authentication with client credentials.
 
 type: "client\_secret\_basic"
 
-BetaManagedAgentsTokenEndpointAuthPostResponse = object { type }
+BetaManagedAgentsTokenEndpointAuthPostResponse object { type }
 
 Token endpoint uses POST body authentication with client credentials.
 
@@ -170,7 +170,7 @@ scope: optional string
 
 OAuth scope for the refresh request.
 
-BetaManagedAgentsStaticBearerAuthResponse = object { mcp\_server\_url, type }
+BetaManagedAgentsStaticBearerAuthResponse object { mcp\_server\_url, type }
 
 Static bearer token credential details for an MCP server.
 

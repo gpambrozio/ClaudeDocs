@@ -28,7 +28,7 @@ DELETE/v1/files/{file\_id}
 
 ##### ModelsExpand Collapse
 
-BetaFileScope = object { id, type }
+BetaFileScope object { id, type }
 
 id: string
 
@@ -38,7 +38,7 @@ type: "session"
 
 The type of scope (e.g., `"session"`).
 
-DeletedFile = object { id, type }
+DeletedFile object { id, type }
 
 id: string
 
@@ -50,7 +50,7 @@ Deleted object type.
 
 For file deletion, this is always `"file_deleted"`.
 
-FileMetadata = object { id, created\_at, filename, 5 more }
+FileMetadata object { id, created\_at, filename, 5 more }
 
 id: string
 

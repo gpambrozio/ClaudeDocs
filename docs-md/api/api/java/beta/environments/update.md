@@ -91,7 +91,7 @@ Optional<Networking> networking
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-Accepts one of the following:
+One of the following:
 
 class BetaUnrestrictedNetwork:
 
@@ -204,7 +204,7 @@ Config config
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-Accepts one of the following:
+One of the following:
 
 class BetaCloudConfig:
 
@@ -214,7 +214,7 @@ Networking networking
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 class BetaUnrestrictedNetwork:
 
@@ -316,7 +316,7 @@ Optional<Scope> scope
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Accepts one of the following:
+One of the following:
 
 ORGANIZATION("organization")
 

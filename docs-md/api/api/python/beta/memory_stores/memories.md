@@ -66,7 +66,7 @@ type: Literal["memory\_deleted"]
 
 [BetaManagedAgentsError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError: …
 
@@ -190,7 +190,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsMemory: …
 
@@ -274,7 +274,7 @@ Literal["basic", "full"]
 
 Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-Accepts one of the following:
+One of the following:
 
 "basic"
 

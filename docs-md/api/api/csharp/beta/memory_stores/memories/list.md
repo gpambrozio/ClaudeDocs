@@ -116,7 +116,7 @@ IReadOnlyList<[BetaManagedAgentsMemoryListItem](api/beta.md)> Data
 
 One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items appear in the requested `order_by`/`order`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsMemory:
 

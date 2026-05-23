@@ -28,7 +28,7 @@ BetaSelfHostedWorkUpdateRequest param.Field[[BetaSelfHostedWorkUpdateRequest](ap
 
 Body param: Request to update work item metadata.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -36,7 +36,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -142,7 +142,7 @@ State BetaSelfHostedWorkState
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
 

@@ -76,15 +76,15 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-ArchivedAt Timeoptional
+ArchivedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Description stringoptional
+Description stringOptional
 
 Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-Metadata map[string, string]optional
+Metadata map[string, string]Optional
 
 Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
@@ -126,7 +126,7 @@ type BetaManagedAgentsConflictError struct{…}
 
 Type BetaManagedAgentsConflictErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsContentSha256Precondition struct{…}
 
@@ -134,7 +134,7 @@ Optimistic-concurrency precondition: the update applies only if the memory's sto
 
 Type BetaManagedAgentsContentSha256PreconditionType
 
-ContentSha256 stringoptional
+ContentSha256 stringOptional
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
@@ -150,7 +150,7 @@ Type BetaManagedAgentsDeletedMemoryType
 
 type BetaManagedAgentsErrorUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaInvalidRequestError struct{…}
 
@@ -210,23 +210,23 @@ type BetaManagedAgentsMemoryPreconditionFailedError struct{…}
 
 Type BetaManagedAgentsMemoryPreconditionFailedErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemoryPathConflictError struct{…}
 
 Type BetaManagedAgentsMemoryPathConflictErrorType
 
-ConflictingMemoryID stringoptional
+ConflictingMemoryID stringOptional
 
-ConflictingPath stringoptional
+ConflictingPath stringOptional
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsConflictError struct{…}
 
 Type BetaManagedAgentsConflictErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemory struct{…}
 
@@ -266,7 +266,7 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
@@ -274,7 +274,7 @@ type BetaManagedAgentsMemoryListItemUnion interface{…}
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsMemory struct{…}
 
@@ -314,7 +314,7 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
@@ -332,17 +332,17 @@ type BetaManagedAgentsMemoryPathConflictError struct{…}
 
 Type BetaManagedAgentsMemoryPathConflictErrorType
 
-ConflictingMemoryID stringoptional
+ConflictingMemoryID stringOptional
 
-ConflictingPath stringoptional
+ConflictingPath stringOptional
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemoryPreconditionFailedError struct{…}
 
 Type BetaManagedAgentsMemoryPreconditionFailedErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemoryPrefix struct{…}
 
@@ -358,7 +358,7 @@ type BetaManagedAgentsMemoryView string
 
 Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryViewBasic [BetaManagedAgentsMemoryView](api/beta.md) = "basic"
 
@@ -370,7 +370,7 @@ Optimistic-concurrency precondition: the update applies only if the memory's sto
 
 Type BetaManagedAgentsPreconditionType
 
-ContentSha256 stringoptional
+ContentSha256 stringOptional
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
@@ -400,7 +400,7 @@ type BetaManagedAgentsActorUnion interface{…}
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionActor struct{…}
 
@@ -466,7 +466,7 @@ Operation [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryVersionOperationCreated [BetaManagedAgentsMemoryVersionOperation](api/beta.md) = "created"
 
@@ -476,23 +476,23 @@ const BetaManagedAgentsMemoryVersionOperationDeleted [BetaManagedAgentsMemoryVer
 
 Type BetaManagedAgentsMemoryVersionType
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-ContentSha256 stringoptional
+ContentSha256 stringOptional
 
 Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-ContentSizeBytes int64optional
+ContentSizeBytes int64Optional
 
 Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-CreatedBy [BetaManagedAgentsActorUnion](api/beta.md)optional
+CreatedBy [BetaManagedAgentsActorUnion](api/beta.md)Optional
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionActor struct{…}
 
@@ -524,19 +524,19 @@ UserID string
 
 ID of the user who performed the write (a `user_...` value).
 
-Path stringoptional
+Path stringOptional
 
 The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-RedactedAt Timeoptional
+RedactedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-RedactedBy [BetaManagedAgentsActorUnion](api/beta.md)optional
+RedactedBy [BetaManagedAgentsActorUnion](api/beta.md)Optional
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionActor struct{…}
 
@@ -572,7 +572,7 @@ type BetaManagedAgentsMemoryVersionOperation string
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryVersionOperationCreated [BetaManagedAgentsMemoryVersionOperation](api/beta.md) = "created"
 

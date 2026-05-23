@@ -16,27 +16,27 @@ List memory stores
 
 params BetaMemoryStoreListParams
 
-CreatedAtGte param.Field[[Time](api/beta/memory_stores/list.md)]optional
+CreatedAtGte param.Field[[Time](api/beta/memory_stores/list.md)]Optional
 
 Query param: Return only stores whose `created_at` is at or after this time (inclusive). Sent on the wire as `created_at[gte]`.
 
-CreatedAtLte param.Field[[Time](api/beta/memory_stores/list.md)]optional
+CreatedAtLte param.Field[[Time](api/beta/memory_stores/list.md)]Optional
 
 Query param: Return only stores whose `created_at` is at or before this time (inclusive). Sent on the wire as `created_at[lte]`.
 
-IncludeArchived param.Field[bool]optional
+IncludeArchived param.Field[bool]Optional
 
 Query param: When `true`, archived stores are included in the results. Defaults to `false` (archived stores are excluded).
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Query param: Maximum number of stores to return per page. Must be between 1 and 100. Defaults to 20 when omitted.
 
-Page param.Field[string]optional
+Page param.Field[string]Optional
 
 Query param: Opaque pagination cursor (a `page_...` value). Pass the `next_page` value from a previous response to fetch the next page; omit for the first page.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -44,7 +44,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -120,15 +120,15 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-ArchivedAt Timeoptional
+ArchivedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Description stringoptional
+Description stringOptional
 
 Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-Metadata map[string, string]optional
+Metadata map[string, string]Optional
 
 Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 

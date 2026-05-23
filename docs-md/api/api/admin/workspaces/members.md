@@ -26,7 +26,7 @@ DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### ModelsExpand Collapse
 
-WorkspaceMember = object { type, user\_id, workspace\_id, workspace\_role }
+WorkspaceMember object { type, user\_id, workspace\_id, workspace\_role }
 
 type: "workspace\_member"
 
@@ -46,7 +46,7 @@ workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_rest
 
 Role of the Workspace Member.
 
-Accepts one of the following:
+One of the following:
 
 "workspace\_user"
 
@@ -58,7 +58,7 @@ Accepts one of the following:
 
 "workspace\_billing"
 
-MemberDeleteResponse = object { type, user\_id, workspace\_id }
+MemberDeleteResponse object { type, user\_id, workspace\_id }
 
 type: "workspace\_member\_deleted"
 

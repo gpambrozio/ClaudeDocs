@@ -56,7 +56,7 @@ role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
-Accepts one of the following:
+One of the following:
 
 "user"
 

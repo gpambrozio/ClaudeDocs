@@ -105,7 +105,7 @@ There is a limit of 100,000 messages in a single request.
 
 content: string | Array<[BetaContentBlockParam](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -134,7 +134,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -142,7 +142,7 @@ Accepts one of the following:
 
 citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -244,7 +244,7 @@ BetaImageBlockParam { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaBase64ImageSource { data, media\_type, type }
 
@@ -252,7 +252,7 @@ data: string
 
 media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -295,7 +295,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -305,7 +305,7 @@ BetaRequestDocumentBlock { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
 
-Accepts one of the following:
+One of the following:
 
 BetaBase64PDFSource { data, media\_type, type }
 
@@ -327,7 +327,7 @@ BetaContentBlockSource { content, type }
 
 content: string | Array<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -356,7 +356,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -364,7 +364,7 @@ Accepts one of the following:
 
 citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -466,7 +466,7 @@ BetaImageBlockParam { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaBase64ImageSource { data, media\_type, type }
 
@@ -474,7 +474,7 @@ data: string
 
 media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -517,7 +517,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -556,7 +556,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -595,7 +595,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -603,7 +603,7 @@ Accepts one of the following:
 
 citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -724,7 +724,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -775,7 +775,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -785,7 +785,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -830,7 +830,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -838,7 +838,7 @@ Accepts one of the following:
 
 content?: string | Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  | [BetaSearchResultBlockParam](api/beta.md) { content, source, title, 3 more }  | 2 more>
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -867,7 +867,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -875,7 +875,7 @@ Accepts one of the following:
 
 citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -977,7 +977,7 @@ BetaImageBlockParam { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaBase64ImageSource { data, media\_type, type }
 
@@ -985,7 +985,7 @@ data: string
 
 media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1028,7 +1028,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1059,7 +1059,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1067,7 +1067,7 @@ Accepts one of the following:
 
 citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1188,7 +1188,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1202,7 +1202,7 @@ BetaRequestDocumentBlock { source, type, cache\_control, 3 more }
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
 
-Accepts one of the following:
+One of the following:
 
 BetaBase64PDFSource { data, media\_type, type }
 
@@ -1224,7 +1224,7 @@ BetaContentBlockSource { content, type }
 
 content: string | Array<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -1253,7 +1253,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1261,7 +1261,7 @@ Accepts one of the following:
 
 citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1363,7 +1363,7 @@ BetaImageBlockParam { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaBase64ImageSource { data, media\_type, type }
 
@@ -1371,7 +1371,7 @@ data: string
 
 media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1414,7 +1414,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1453,7 +1453,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1492,7 +1492,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1508,7 +1508,7 @@ input: Record<string, unknown>
 
 name: "advisor" | "web\_search" | "web\_fetch" | 5 more
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -1545,7 +1545,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1555,7 +1555,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -1581,7 +1581,7 @@ BetaWebSearchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 Array<[BetaWebSearchResultBlockParam](api/beta.md) { encrypted\_content, title, type, 2 more } >
 
@@ -1599,7 +1599,7 @@ BetaWebSearchToolRequestError { error\_code, type }
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1636,7 +1636,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1646,7 +1646,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -1672,13 +1672,13 @@ BetaWebFetchToolResultBlockParam { content, tool\_use\_id, type, 2 more }
 
 content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, type }  | [BetaWebFetchBlockParam](api/beta.md) { content, type, url, retrieved\_at }
 
-Accepts one of the following:
+One of the following:
 
 BetaWebFetchToolResultErrorBlockParam { error\_code, type }
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1704,7 +1704,7 @@ content: [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control,
 
 source: [BetaBase64PDFSource](api/beta.md) { data, media\_type, type }  | [BetaPlainTextSource](api/beta.md) { data, media\_type, type }  | [BetaContentBlockSource](api/beta.md) { content, type }  | 2 more
 
-Accepts one of the following:
+One of the following:
 
 BetaBase64PDFSource { data, media\_type, type }
 
@@ -1726,7 +1726,7 @@ BetaContentBlockSource { content, type }
 
 content: string | Array<[BetaContentBlockSourceContent](api/beta.md)>
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -1755,7 +1755,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1763,7 +1763,7 @@ Accepts one of the following:
 
 citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -1865,7 +1865,7 @@ BetaImageBlockParam { source, type, cache\_control }
 
 source: [BetaBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaURLImageSource](api/beta.md) { type, url }  | [BetaFileImageSource](api/beta.md) { file\_id, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaBase64ImageSource { data, media\_type, type }
 
@@ -1873,7 +1873,7 @@ data: string
 
 media\_type: "image/jpeg" | "image/png" | "image/gif" | "image/webp"
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1916,7 +1916,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1955,7 +1955,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2000,7 +2000,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2010,7 +2010,7 @@ caller?: [BetaDirectCaller](api/beta.md) { type }  | [BetaServerToolCaller](api/
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 BetaDirectCaller { type }
 
@@ -2036,13 +2036,13 @@ BetaAdvisorToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
 content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlockParam](api/beta.md) { text, type }  | [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaAdvisorToolResultErrorParam { error\_code, type }
 
 error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -2093,7 +2093,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2105,13 +2105,13 @@ content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 BetaCodeExecutionToolResultErrorParam { error\_code, type }
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2178,7 +2178,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2188,13 +2188,13 @@ BetaBashCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, cache\
 
 content: [BetaBashCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaBashCodeExecutionResultBlockParam](api/beta.md) { content, return\_code, stderr, 2 more }
 
-Accepts one of the following:
+One of the following:
 
 BetaBashCodeExecutionToolResultErrorParam { error\_code, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2245,7 +2245,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2255,13 +2255,13 @@ BetaTextEditorCodeExecutionToolResultBlockParam { content, tool\_use\_id, type, 
 
 content: [BetaTextEditorCodeExecutionToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  | [BetaTextEditorCodeExecutionViewResultBlockParam](api/beta.md) { content, file\_type, type, 3 more }  | [BetaTextEditorCodeExecutionCreateResultBlockParam](api/beta.md) { is\_file\_update, type }  | [BetaTextEditorCodeExecutionStrReplaceResultBlockParam](api/beta.md) { type, lines, new\_lines, 3 more }
 
-Accepts one of the following:
+One of the following:
 
 BetaTextEditorCodeExecutionToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | 2 more
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2283,7 +2283,7 @@ content: string
 
 file\_type: "text" | "image" | "pdf"
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -2340,7 +2340,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2350,13 +2350,13 @@ BetaToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_contro
 
 content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
 
-Accepts one of the following:
+One of the following:
 
 BetaToolSearchToolResultErrorParam { error\_code, type }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2393,7 +2393,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2422,7 +2422,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2459,7 +2459,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2488,7 +2488,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2496,7 +2496,7 @@ Accepts one of the following:
 
 content?: string | Array<[BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations } >
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -2523,7 +2523,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2531,7 +2531,7 @@ Accepts one of the following:
 
 citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -2657,7 +2657,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2696,7 +2696,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2708,7 +2708,7 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 role: "user" | "assistant"
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -2720,7 +2720,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
 
@@ -2811,7 +2811,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2821,7 +2821,7 @@ container?: [BetaContainerParams](api/beta.md) { id, skills }  | string | null
 
 Container identifier for reuse across requests.
 
-Accepts one of the following:
+One of the following:
 
 BetaContainerParams { id, skills }
 
@@ -2843,7 +2843,7 @@ type: "anthropic" | "custom"
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -2865,7 +2865,7 @@ edits?: Array<[BetaClearToolUses20250919Edit](api/beta.md) { type, clear\_at\_le
 
 List of context management edits to apply
 
-Accepts one of the following:
+One of the following:
 
 BetaClearToolUses20250919Edit { type, clear\_at\_least, clear\_tool\_inputs, 3 more }
 
@@ -2883,7 +2883,7 @@ clear\_tool\_inputs?: boolean | Array<string> | null
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-Accepts one of the following:
+One of the following:
 
 boolean
 
@@ -2905,7 +2905,7 @@ trigger?: [BetaInputTokensTrigger](api/beta.md) { type, value }  | [BetaToolUses
 
 Condition that triggers the context management strategy
 
-Accepts one of the following:
+One of the following:
 
 BetaInputTokensTrigger { type, value }
 
@@ -2927,7 +2927,7 @@ keep?: [BetaThinkingTurns](api/beta.md) { type, value }  | [BetaAllThinkingTurns
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Accepts one of the following:
+One of the following:
 
 BetaThinkingTurns { type, value }
 
@@ -3016,7 +3016,7 @@ effort?: "low" | "medium" | "high" | 2 more | null
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 "low"
 
@@ -3072,7 +3072,7 @@ Determines whether to use priority capacity (if available) or standard capacity 
 
 Anthropic offers different levels of service for your API requests. See [service-tiers](https://docs.claude.com/en/api/service-tiers) for details.
 
-Accepts one of the following:
+One of the following:
 
 "auto"
 
@@ -3082,7 +3082,7 @@ speed?: "standard" | "fast" | null
 
 The inference speed mode for this request. `"fast"` enables high output-tokens-per-second inference.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -3108,7 +3108,7 @@ System prompt.
 
 A system prompt is a way of providing context and instructions to Claude, such as specifying a particular goal or role. See our [guide to system prompts](https://docs.claude.com/en/docs/system-prompts).
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -3135,7 +3135,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3143,7 +3143,7 @@ Accepts one of the following:
 
 citations?: Array<[BetaTextCitationParam](api/beta.md)> | null
 
-Accepts one of the following:
+One of the following:
 
 BetaCitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
 
@@ -3263,7 +3263,7 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Accepts one of the following:
+One of the following:
 
 BetaThinkingConfigEnabled { budget\_tokens, type, display }
 
@@ -3283,7 +3283,7 @@ display?: "summarized" | "omitted" | null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -3301,7 +3301,7 @@ display?: "summarized" | "omitted" | null
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -3311,7 +3311,7 @@ tool\_choice?: [BetaToolChoice](api/beta.md)
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Accepts one of the following:
+One of the following:
 
 BetaToolChoiceAuto { type, disable\_parallel\_tool\_use }
 
@@ -3423,7 +3423,7 @@ Tools can be used for workflows that include running client-side tools and funct
 
 See our [guide](https://docs.claude.com/en/docs/tool-use) for more details.
 
-Accepts one of the following:
+One of the following:
 
 BetaTool { input\_schema, name, allowed\_callers, 7 more }
 
@@ -3451,7 +3451,7 @@ minLength1
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3476,7 +3476,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3516,7 +3516,7 @@ type: "bash\_20241022"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3541,7 +3541,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3569,7 +3569,7 @@ type: "bash\_20250124"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3594,7 +3594,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3622,7 +3622,7 @@ type: "code\_execution\_20250522"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3647,7 +3647,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3673,7 +3673,7 @@ type: "code\_execution\_20250825"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3698,7 +3698,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3726,7 +3726,7 @@ type: "code\_execution\_20260120"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3751,7 +3751,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3785,7 +3785,7 @@ type: "computer\_20241022"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3810,7 +3810,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3842,7 +3842,7 @@ type: "memory\_20250818"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3867,7 +3867,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3903,7 +3903,7 @@ type: "computer\_20250124"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3928,7 +3928,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3960,7 +3960,7 @@ type: "text\_editor\_20241022"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -3985,7 +3985,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4021,7 +4021,7 @@ type: "computer\_20251124"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4046,7 +4046,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4082,7 +4082,7 @@ type: "text\_editor\_20250124"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4107,7 +4107,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4135,7 +4135,7 @@ type: "text\_editor\_20250429"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4160,7 +4160,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4188,7 +4188,7 @@ type: "text\_editor\_20250728"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4213,7 +4213,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4245,7 +4245,7 @@ type: "web\_search\_20250305"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4278,7 +4278,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4330,7 +4330,7 @@ type: "web\_fetch\_20250910"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4363,7 +4363,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4403,7 +4403,7 @@ type: "web\_search\_20260209"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4436,7 +4436,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4488,7 +4488,7 @@ type: "web\_fetch\_20260209"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4521,7 +4521,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4563,7 +4563,7 @@ type: "web\_fetch\_20260309"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4596,7 +4596,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4636,7 +4636,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
 
@@ -4720,7 +4720,7 @@ type: "advisor\_20260301"
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4745,7 +4745,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4768,7 +4768,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4796,7 +4796,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_bm25\_20251119" | "tool\_search\_tool\_bm25"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -4804,7 +4804,7 @@ Accepts one of the following:
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4829,7 +4829,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4853,7 +4853,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: "tool\_search\_tool\_regex\_20251119" | "tool\_search\_tool\_regex"
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -4861,7 +4861,7 @@ Accepts one of the following:
 
 allowed\_callers?: Array<"direct" | "code\_execution\_20250825" | "code\_execution\_20260120">
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -4886,7 +4886,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4930,7 +4930,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4986,7 +4986,7 @@ betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 (string & {})
 
@@ -5080,7 +5080,7 @@ processing\_status: "in\_progress" | "canceling" | "ended"
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 

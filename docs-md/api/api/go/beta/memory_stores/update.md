@@ -18,19 +18,19 @@ memoryStoreID string
 
 params BetaMemoryStoreUpdateParams
 
-Description param.Field[string]optional
+Description param.Field[string]Optional
 
 Body param: New description for the store, up to 1024 characters. Pass an empty string to clear it.
 
-Metadata param.Field[map[string, string]]optional
+Metadata param.Field[map[string, string]]Optional
 
 Body param: Metadata patch. Set a key to a string to upsert it, or to null to delete it. Omit the field to preserve. The stored bag is limited to 16 keys (up to 64 chars each) with values up to 512 chars.
 
-Name param.Field[string]optional
+Name param.Field[string]Optional
 
 Body param: New human-readable name for the store. 1–255 characters; no control characters. Renaming changes the slug used for the store's `mount_path` in sessions created after the update.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -38,7 +38,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -114,15 +114,15 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-ArchivedAt Timeoptional
+ArchivedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Description stringoptional
+Description stringOptional
 
 Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-Metadata map[string, string]optional
+Metadata map[string, string]Optional
 
 Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 

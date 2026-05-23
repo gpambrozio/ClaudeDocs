@@ -32,7 +32,7 @@ betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 (string & {})
 
@@ -140,7 +140,7 @@ state: "queued" | "starting" | "active" | 2 more
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 

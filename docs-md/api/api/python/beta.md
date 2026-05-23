@@ -10,13 +10,13 @@ Python
 
 Union[str, Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 22 more]
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -88,7 +88,7 @@ type: Literal["billing\_error"]
 
 [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError: …
 
@@ -148,7 +148,7 @@ class BetaErrorResponse: …
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError: …
 
@@ -794,7 +794,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -820,7 +820,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -936,7 +936,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -962,7 +962,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -1044,7 +1044,7 @@ type: Literal["advisor\_20260301"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -1069,7 +1069,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1092,7 +1092,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1114,13 +1114,13 @@ class BetaAdvisorToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -1158,13 +1158,13 @@ class BetaAdvisorToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultErrorParam: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -1215,7 +1215,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1225,7 +1225,7 @@ class BetaAdvisorToolResultError: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -1245,7 +1245,7 @@ class BetaAdvisorToolResultErrorParam: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -1271,7 +1271,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -1339,13 +1339,13 @@ class BetaBashCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1383,13 +1383,13 @@ class BetaBashCodeExecutionToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1440,7 +1440,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1450,7 +1450,7 @@ class BetaBashCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1468,7 +1468,7 @@ class BetaBashCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -1497,7 +1497,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -1751,7 +1751,7 @@ class BetaCitationsDelta: …
 
 citation: Citation
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -1877,7 +1877,7 @@ keep: Optional[Keep]
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaThinkingTurns: …
 
@@ -1921,7 +1921,7 @@ clear\_tool\_inputs: Optional[Union[bool, List[str], null]]
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-Accepts one of the following:
+One of the following:
 
 bool
 
@@ -1943,7 +1943,7 @@ trigger: Optional[Trigger]
 
 Condition that triggers the context management strategy
 
-Accepts one of the following:
+One of the following:
 
 class BetaInputTokensTrigger: …
 
@@ -2027,7 +2027,7 @@ type: Literal["code\_execution\_20250522"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -2052,7 +2052,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2078,7 +2078,7 @@ type: Literal["code\_execution\_20250825"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -2103,7 +2103,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2131,7 +2131,7 @@ type: Literal["code\_execution\_20260120"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -2156,7 +2156,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2176,13 +2176,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2236,13 +2236,13 @@ type: Literal["code\_execution\_tool\_result"]
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2294,13 +2294,13 @@ content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultErrorParam: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2367,7 +2367,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2377,13 +2377,13 @@ Accepts one of the following:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultErrorParam: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2433,7 +2433,7 @@ class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2447,7 +2447,7 @@ type: Literal["code\_execution\_tool\_result\_error"]
 
 Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2461,7 +2461,7 @@ class BetaCodeExecutionToolResultErrorParam: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2546,7 +2546,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2626,7 +2626,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -2656,7 +2656,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -2700,7 +2700,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -2710,7 +2710,7 @@ Accepts one of the following:
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock: …
 
@@ -2720,7 +2720,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -2856,7 +2856,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -2886,7 +2886,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -2910,7 +2910,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -2936,13 +2936,13 @@ class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -2978,7 +2978,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -3004,13 +3004,13 @@ class BetaWebFetchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3042,7 +3042,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -3084,7 +3084,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -3110,13 +3110,13 @@ class BetaAdvisorToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -3156,13 +3156,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3216,13 +3216,13 @@ class BetaBashCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3260,13 +3260,13 @@ class BetaTextEditorCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3288,7 +3288,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -3332,13 +3332,13 @@ class BetaToolSearchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -3386,7 +3386,7 @@ class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -3398,7 +3398,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -3542,7 +3542,7 @@ type: Literal["compaction"]
 
 Regular text content.
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -3567,7 +3567,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3575,7 +3575,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -3677,7 +3677,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -3685,7 +3685,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -3728,7 +3728,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3738,7 +3738,7 @@ class BetaRequestDocumentBlock: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -3760,13 +3760,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -3791,7 +3791,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3799,7 +3799,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -3901,7 +3901,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -3909,7 +3909,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -3952,7 +3952,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -3991,7 +3991,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4030,7 +4030,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4038,7 +4038,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -4159,7 +4159,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4210,7 +4210,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4220,7 +4220,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -4265,7 +4265,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4273,13 +4273,13 @@ Accepts one of the following:
 
 content: Optional[Union[str, List[Content], null]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[Content]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -4304,7 +4304,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4312,7 +4312,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -4414,7 +4414,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -4422,7 +4422,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -4465,7 +4465,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4496,7 +4496,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4504,7 +4504,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -4625,7 +4625,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4639,7 +4639,7 @@ class BetaRequestDocumentBlock: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -4661,13 +4661,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -4692,7 +4692,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4700,7 +4700,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -4802,7 +4802,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -4810,7 +4810,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -4853,7 +4853,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4892,7 +4892,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4931,7 +4931,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4947,7 +4947,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -4984,7 +4984,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -4994,7 +4994,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -5020,7 +5020,7 @@ class BetaWebSearchToolResultBlockParam: …
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 List[[BetaWebSearchResultBlockParam](api/beta.md)]
 
@@ -5038,7 +5038,7 @@ class BetaWebSearchToolRequestError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5075,7 +5075,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5085,7 +5085,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -5111,13 +5111,13 @@ class BetaWebFetchToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlockParam: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5143,7 +5143,7 @@ content: [BetaRequestDocumentBlock](api/beta.md)
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -5165,13 +5165,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -5196,7 +5196,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5204,7 +5204,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -5306,7 +5306,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -5314,7 +5314,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -5357,7 +5357,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5396,7 +5396,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5441,7 +5441,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5451,7 +5451,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -5477,13 +5477,13 @@ class BetaAdvisorToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultErrorParam: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -5534,7 +5534,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5546,13 +5546,13 @@ content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultErrorParam: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5619,7 +5619,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5629,13 +5629,13 @@ class BetaBashCodeExecutionToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5686,7 +5686,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5696,13 +5696,13 @@ class BetaTextEditorCodeExecutionToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5724,7 +5724,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -5781,7 +5781,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5791,13 +5791,13 @@ class BetaToolSearchToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -5834,7 +5834,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5863,7 +5863,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5900,7 +5900,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5929,7 +5929,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5937,7 +5937,7 @@ Accepts one of the following:
 
 content: Optional[Union[str, List[[BetaTextBlockParam](api/beta.md)], null]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -5964,7 +5964,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -5972,7 +5972,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -6098,7 +6098,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6137,7 +6137,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6151,13 +6151,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -6182,7 +6182,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6190,7 +6190,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -6292,7 +6292,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -6300,7 +6300,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -6343,7 +6343,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6353,7 +6353,7 @@ type: Literal["content"]
 
 [BetaContentBlockSourceContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -6378,7 +6378,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6386,7 +6386,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -6488,7 +6488,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -6496,7 +6496,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -6539,7 +6539,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6551,7 +6551,7 @@ edits: Optional[List[Edit]]
 
 List of context management edits to apply
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919Edit: …
 
@@ -6569,7 +6569,7 @@ clear\_tool\_inputs: Optional[Union[bool, List[str], null]]
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-Accepts one of the following:
+One of the following:
 
 bool
 
@@ -6591,7 +6591,7 @@ trigger: Optional[Trigger]
 
 Condition that triggers the context management strategy
 
-Accepts one of the following:
+One of the following:
 
 class BetaInputTokensTrigger: …
 
@@ -6613,7 +6613,7 @@ keep: Optional[Keep]
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaThinkingTurns: …
 
@@ -6655,7 +6655,7 @@ applied\_edits: List[AppliedEdit]
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse: …
 
@@ -6700,7 +6700,7 @@ cache\_miss\_reason: Optional[CacheMissReason]
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged: …
 
@@ -6767,7 +6767,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -6843,7 +6843,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -6851,7 +6851,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -6894,7 +6894,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -6928,7 +6928,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage: …
 
@@ -7036,7 +7036,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -7062,7 +7062,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -7170,7 +7170,7 @@ class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -7182,7 +7182,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -7343,7 +7343,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7379,7 +7379,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7413,7 +7413,7 @@ type: Literal["memory\_20250818"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -7438,7 +7438,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -7456,7 +7456,7 @@ When true, guarantees schema validation on tool names and inputs
 
 [BetaMemoryTool20250818Command](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaMemoryTool20250818ViewCommand: …
 
@@ -7666,7 +7666,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -7705,7 +7705,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock: …
 
@@ -7715,7 +7715,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -7851,7 +7851,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -7881,7 +7881,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -7905,7 +7905,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -7931,13 +7931,13 @@ class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -7973,7 +7973,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -7999,13 +7999,13 @@ class BetaWebFetchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8037,7 +8037,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -8079,7 +8079,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -8105,13 +8105,13 @@ class BetaAdvisorToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -8151,13 +8151,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8211,13 +8211,13 @@ class BetaBashCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8255,13 +8255,13 @@ class BetaTextEditorCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8283,7 +8283,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -8327,13 +8327,13 @@ class BetaToolSearchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -8381,7 +8381,7 @@ class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -8393,7 +8393,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -8543,7 +8543,7 @@ applied\_edits: List[AppliedEdit]
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse: …
 
@@ -8582,7 +8582,7 @@ cache\_miss\_reason: Optional[CacheMissReason]
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged: …
 
@@ -8630,7 +8630,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -8656,7 +8656,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -8744,7 +8744,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -8773,7 +8773,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -8853,7 +8853,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage: …
 
@@ -8961,7 +8961,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -8987,7 +8987,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -9087,7 +9087,7 @@ service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -9099,7 +9099,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -9129,7 +9129,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage: …
 
@@ -9237,7 +9237,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -9263,7 +9263,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -9399,13 +9399,13 @@ class BetaMessageParam: …
 
 content: Union[str, List[[BetaContentBlockParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockParam](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -9430,7 +9430,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9438,7 +9438,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -9540,7 +9540,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -9548,7 +9548,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -9591,7 +9591,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9601,7 +9601,7 @@ class BetaRequestDocumentBlock: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -9623,13 +9623,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -9654,7 +9654,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9662,7 +9662,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -9764,7 +9764,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -9772,7 +9772,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -9815,7 +9815,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9854,7 +9854,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9893,7 +9893,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -9901,7 +9901,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -10022,7 +10022,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10073,7 +10073,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10083,7 +10083,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -10128,7 +10128,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10136,13 +10136,13 @@ Accepts one of the following:
 
 content: Optional[Union[str, List[Content], null]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[Content]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -10167,7 +10167,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10175,7 +10175,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -10277,7 +10277,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -10285,7 +10285,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -10328,7 +10328,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10359,7 +10359,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10367,7 +10367,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -10488,7 +10488,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10502,7 +10502,7 @@ class BetaRequestDocumentBlock: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -10524,13 +10524,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -10555,7 +10555,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10563,7 +10563,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -10665,7 +10665,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -10673,7 +10673,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -10716,7 +10716,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10755,7 +10755,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10794,7 +10794,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10810,7 +10810,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -10847,7 +10847,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10857,7 +10857,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -10883,7 +10883,7 @@ class BetaWebSearchToolResultBlockParam: …
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 List[[BetaWebSearchResultBlockParam](api/beta.md)]
 
@@ -10901,7 +10901,7 @@ class BetaWebSearchToolRequestError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -10938,7 +10938,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -10948,7 +10948,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -10974,13 +10974,13 @@ class BetaWebFetchToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlockParam: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11006,7 +11006,7 @@ content: [BetaRequestDocumentBlock](api/beta.md)
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -11028,13 +11028,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -11059,7 +11059,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11067,7 +11067,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -11169,7 +11169,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -11177,7 +11177,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -11220,7 +11220,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11259,7 +11259,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11304,7 +11304,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11314,7 +11314,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -11340,13 +11340,13 @@ class BetaAdvisorToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultErrorParam: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -11397,7 +11397,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11409,13 +11409,13 @@ content: [BetaCodeExecutionToolResultBlockParamContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultErrorParam: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11482,7 +11482,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11492,13 +11492,13 @@ class BetaBashCodeExecutionToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11549,7 +11549,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11559,13 +11559,13 @@ class BetaTextEditorCodeExecutionToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11587,7 +11587,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -11644,7 +11644,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11654,13 +11654,13 @@ class BetaToolSearchToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -11697,7 +11697,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11726,7 +11726,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11763,7 +11763,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11792,7 +11792,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11800,7 +11800,7 @@ Accepts one of the following:
 
 content: Optional[Union[str, List[[BetaTextBlockParam](api/beta.md)], null]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -11827,7 +11827,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -11835,7 +11835,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -11961,7 +11961,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -12000,7 +12000,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -12012,7 +12012,7 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 role: Literal["user", "assistant"]
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -12048,7 +12048,7 @@ effort: Optional[Literal["low", "medium", "high", 2 more]]
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 "low"
 
@@ -12096,7 +12096,7 @@ type: Literal["text"]
 
 [BetaRawContentBlockDelta](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextDelta: …
 
@@ -12114,7 +12114,7 @@ class BetaCitationsDelta: …
 
 citation: Citation
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -12246,7 +12246,7 @@ class BetaRawContentBlockDeltaEvent: …
 
 delta: [BetaRawContentBlockDelta](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextDelta: …
 
@@ -12264,7 +12264,7 @@ class BetaCitationsDelta: …
 
 citation: Citation
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -12402,7 +12402,7 @@ content\_block: ContentBlock
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock: …
 
@@ -12412,7 +12412,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -12548,7 +12548,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -12578,7 +12578,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -12602,7 +12602,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -12628,13 +12628,13 @@ class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12670,7 +12670,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -12696,13 +12696,13 @@ class BetaWebFetchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12734,7 +12734,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -12776,7 +12776,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -12802,13 +12802,13 @@ class BetaAdvisorToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -12848,13 +12848,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12908,13 +12908,13 @@ class BetaBashCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12952,13 +12952,13 @@ class BetaTextEditorCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -12980,7 +12980,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -13024,13 +13024,13 @@ class BetaToolSearchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -13078,7 +13078,7 @@ class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -13090,7 +13090,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -13250,7 +13250,7 @@ applied\_edits: List[AppliedEdit]
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse: …
 
@@ -13306,7 +13306,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -13326,7 +13326,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -13342,7 +13342,7 @@ type: Literal["refusal"]
 
 stop\_reason: Optional[BetaStopReason]
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -13398,7 +13398,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage: …
 
@@ -13506,7 +13506,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -13532,7 +13532,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -13662,7 +13662,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -13701,7 +13701,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock: …
 
@@ -13711,7 +13711,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -13847,7 +13847,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -13877,7 +13877,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -13901,7 +13901,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -13927,13 +13927,13 @@ class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -13969,7 +13969,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -13995,13 +13995,13 @@ class BetaWebFetchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -14033,7 +14033,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -14075,7 +14075,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -14101,13 +14101,13 @@ class BetaAdvisorToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -14147,13 +14147,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -14207,13 +14207,13 @@ class BetaBashCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -14251,13 +14251,13 @@ class BetaTextEditorCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -14279,7 +14279,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -14323,13 +14323,13 @@ class BetaToolSearchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -14377,7 +14377,7 @@ class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -14389,7 +14389,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -14539,7 +14539,7 @@ applied\_edits: List[AppliedEdit]
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse: …
 
@@ -14578,7 +14578,7 @@ cache\_miss\_reason: Optional[CacheMissReason]
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged: …
 
@@ -14626,7 +14626,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -14652,7 +14652,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -14740,7 +14740,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -14769,7 +14769,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -14849,7 +14849,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage: …
 
@@ -14957,7 +14957,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -14983,7 +14983,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -15083,7 +15083,7 @@ service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -15095,7 +15095,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -15109,7 +15109,7 @@ type: Literal["message\_stop"]
 
 [BetaRawMessageStreamEvent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaRawMessageStartEvent: …
 
@@ -15145,7 +15145,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -15184,7 +15184,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock: …
 
@@ -15194,7 +15194,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -15330,7 +15330,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -15360,7 +15360,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -15384,7 +15384,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -15410,13 +15410,13 @@ class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15452,7 +15452,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -15478,13 +15478,13 @@ class BetaWebFetchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15516,7 +15516,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -15558,7 +15558,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -15584,13 +15584,13 @@ class BetaAdvisorToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -15630,13 +15630,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15690,13 +15690,13 @@ class BetaBashCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15734,13 +15734,13 @@ class BetaTextEditorCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15762,7 +15762,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -15806,13 +15806,13 @@ class BetaToolSearchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -15860,7 +15860,7 @@ class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -15872,7 +15872,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -16022,7 +16022,7 @@ applied\_edits: List[AppliedEdit]
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse: …
 
@@ -16061,7 +16061,7 @@ cache\_miss\_reason: Optional[CacheMissReason]
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged: …
 
@@ -16109,7 +16109,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -16135,7 +16135,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -16223,7 +16223,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -16252,7 +16252,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -16332,7 +16332,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage: …
 
@@ -16440,7 +16440,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -16466,7 +16466,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -16566,7 +16566,7 @@ service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -16578,7 +16578,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -16596,7 +16596,7 @@ applied\_edits: List[AppliedEdit]
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse: …
 
@@ -16652,7 +16652,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -16672,7 +16672,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -16688,7 +16688,7 @@ type: Literal["refusal"]
 
 stop\_reason: Optional[BetaStopReason]
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -16744,7 +16744,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage: …
 
@@ -16852,7 +16852,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -16878,7 +16878,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -16984,7 +16984,7 @@ content\_block: ContentBlock
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock: …
 
@@ -16994,7 +16994,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -17130,7 +17130,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -17160,7 +17160,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -17184,7 +17184,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -17210,13 +17210,13 @@ class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17252,7 +17252,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -17278,13 +17278,13 @@ class BetaWebFetchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17316,7 +17316,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -17358,7 +17358,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -17384,13 +17384,13 @@ class BetaAdvisorToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -17430,13 +17430,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17490,13 +17490,13 @@ class BetaBashCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17534,13 +17534,13 @@ class BetaTextEditorCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17562,7 +17562,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -17606,13 +17606,13 @@ class BetaToolSearchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -17660,7 +17660,7 @@ class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -17672,7 +17672,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -17820,7 +17820,7 @@ class BetaRawContentBlockDeltaEvent: …
 
 delta: [BetaRawContentBlockDelta](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextDelta: …
 
@@ -17838,7 +17838,7 @@ class BetaCitationsDelta: …
 
 citation: Citation
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -17998,7 +17998,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -18016,7 +18016,7 @@ class BetaRequestDocumentBlock: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -18038,13 +18038,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -18069,7 +18069,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18077,7 +18077,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -18179,7 +18179,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -18187,7 +18187,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -18230,7 +18230,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18269,7 +18269,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18328,7 +18328,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18336,7 +18336,7 @@ Accepts one of the following:
 
 content: Optional[Union[str, List[[BetaTextBlockParam](api/beta.md)], null]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -18363,7 +18363,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18371,7 +18371,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -18496,7 +18496,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18504,7 +18504,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -18625,7 +18625,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18667,7 +18667,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -18691,7 +18691,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -18721,7 +18721,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -18758,7 +18758,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -18768,7 +18768,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -18808,7 +18808,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -18830,7 +18830,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -18842,7 +18842,7 @@ Skill version or 'latest' for most recent version
 
 Literal["end\_turn", "max\_tokens", "stop\_sequence", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -18868,7 +18868,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -18999,7 +18999,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -19007,7 +19007,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -19107,7 +19107,7 @@ type: Literal["search\_result\_location"]
 
 [BetaTextCitation](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -19213,7 +19213,7 @@ type: Literal["search\_result\_location"]
 
 [BetaTextCitationParam](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -19361,13 +19361,13 @@ class BetaTextEditorCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19389,7 +19389,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -19433,13 +19433,13 @@ class BetaTextEditorCodeExecutionToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19461,7 +19461,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -19518,7 +19518,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -19528,7 +19528,7 @@ class BetaTextEditorCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19548,7 +19548,7 @@ class BetaTextEditorCodeExecutionToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -19570,7 +19570,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -19592,7 +19592,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -19632,7 +19632,7 @@ display: Optional[Literal["summarized", "omitted"]]
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -19660,7 +19660,7 @@ display: Optional[Literal["summarized", "omitted"]]
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -19674,7 +19674,7 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Accepts one of the following:
+One of the following:
 
 class BetaThinkingConfigEnabled: …
 
@@ -19694,7 +19694,7 @@ display: Optional[Literal["summarized", "omitted"]]
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -19712,7 +19712,7 @@ display: Optional[Literal["summarized", "omitted"]]
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"
 
@@ -19772,7 +19772,7 @@ minLength1
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -19797,7 +19797,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -19837,7 +19837,7 @@ type: Literal["bash\_20241022"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -19862,7 +19862,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -19890,7 +19890,7 @@ type: Literal["bash\_20250124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -19915,7 +19915,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -19935,7 +19935,7 @@ When true, guarantees schema validation on tool names and inputs
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolChoiceAuto: …
 
@@ -20049,7 +20049,7 @@ type: Literal["computer\_20241022"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -20074,7 +20074,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20114,7 +20114,7 @@ type: Literal["computer\_20250124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -20139,7 +20139,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20179,7 +20179,7 @@ type: Literal["computer\_20251124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -20204,7 +20204,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20259,7 +20259,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20288,7 +20288,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20296,13 +20296,13 @@ Accepts one of the following:
 
 content: Optional[Union[str, List[Content], null]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[Content]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -20327,7 +20327,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20335,7 +20335,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -20437,7 +20437,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -20445,7 +20445,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -20488,7 +20488,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20519,7 +20519,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20527,7 +20527,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -20648,7 +20648,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20662,7 +20662,7 @@ class BetaRequestDocumentBlock: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -20684,13 +20684,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -20715,7 +20715,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20723,7 +20723,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -20825,7 +20825,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -20833,7 +20833,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -20876,7 +20876,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20915,7 +20915,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20954,7 +20954,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -20972,7 +20972,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["tool\_search\_tool\_bm25\_20251119", "tool\_search\_tool\_bm25"]
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -20980,7 +20980,7 @@ Accepts one of the following:
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21005,7 +21005,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21029,7 +21029,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["tool\_search\_tool\_regex\_20251119", "tool\_search\_tool\_regex"]
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -21037,7 +21037,7 @@ Accepts one of the following:
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21062,7 +21062,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21080,13 +21080,13 @@ class BetaToolSearchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -21118,13 +21118,13 @@ class BetaToolSearchToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -21161,7 +21161,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21190,7 +21190,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21200,7 +21200,7 @@ class BetaToolSearchToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -21218,7 +21218,7 @@ class BetaToolSearchToolResultErrorParam: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -21265,7 +21265,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21285,7 +21285,7 @@ type: Literal["text\_editor\_20241022"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21310,7 +21310,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21338,7 +21338,7 @@ type: Literal["text\_editor\_20250124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21363,7 +21363,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21391,7 +21391,7 @@ type: Literal["text\_editor\_20250429"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21416,7 +21416,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21444,7 +21444,7 @@ type: Literal["text\_editor\_20250728"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21469,7 +21469,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21493,7 +21493,7 @@ When true, guarantees schema validation on tool names and inputs
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-Accepts one of the following:
+One of the following:
 
 class BetaTool: …
 
@@ -21521,7 +21521,7 @@ minLength1
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21546,7 +21546,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21586,7 +21586,7 @@ type: Literal["bash\_20241022"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21611,7 +21611,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21639,7 +21639,7 @@ type: Literal["bash\_20250124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21664,7 +21664,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21692,7 +21692,7 @@ type: Literal["code\_execution\_20250522"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21717,7 +21717,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21743,7 +21743,7 @@ type: Literal["code\_execution\_20250825"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21768,7 +21768,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21796,7 +21796,7 @@ type: Literal["code\_execution\_20260120"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21821,7 +21821,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21855,7 +21855,7 @@ type: Literal["computer\_20241022"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21880,7 +21880,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21912,7 +21912,7 @@ type: Literal["memory\_20250818"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21937,7 +21937,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -21973,7 +21973,7 @@ type: Literal["computer\_20250124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -21998,7 +21998,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22030,7 +22030,7 @@ type: Literal["text\_editor\_20241022"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22055,7 +22055,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22091,7 +22091,7 @@ type: Literal["computer\_20251124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22116,7 +22116,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22152,7 +22152,7 @@ type: Literal["text\_editor\_20250124"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22177,7 +22177,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22205,7 +22205,7 @@ type: Literal["text\_editor\_20250429"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22230,7 +22230,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22258,7 +22258,7 @@ type: Literal["text\_editor\_20250728"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22283,7 +22283,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22315,7 +22315,7 @@ type: Literal["web\_search\_20250305"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22348,7 +22348,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22400,7 +22400,7 @@ type: Literal["web\_fetch\_20250910"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22433,7 +22433,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22473,7 +22473,7 @@ type: Literal["web\_search\_20260209"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22506,7 +22506,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22558,7 +22558,7 @@ type: Literal["web\_fetch\_20260209"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22591,7 +22591,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22633,7 +22633,7 @@ type: Literal["web\_fetch\_20260309"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22666,7 +22666,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22706,7 +22706,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -22732,7 +22732,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -22814,7 +22814,7 @@ type: Literal["advisor\_20260301"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22839,7 +22839,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22862,7 +22862,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22890,7 +22890,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["tool\_search\_tool\_bm25\_20251119", "tool\_search\_tool\_bm25"]
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"
 
@@ -22898,7 +22898,7 @@ Accepts one of the following:
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22923,7 +22923,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -22947,7 +22947,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 type: Literal["tool\_search\_tool\_regex\_20251119", "tool\_search\_tool\_regex"]
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"
 
@@ -22955,7 +22955,7 @@ Accepts one of the following:
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -22980,7 +22980,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23024,7 +23024,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23060,7 +23060,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -23109,7 +23109,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23119,7 +23119,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -23205,7 +23205,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage: …
 
@@ -23313,7 +23313,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -23339,7 +23339,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -23439,7 +23439,7 @@ service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -23451,7 +23451,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -23489,7 +23489,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -23529,7 +23529,7 @@ content: [BetaRequestDocumentBlock](api/beta.md)
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -23551,13 +23551,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -23582,7 +23582,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23590,7 +23590,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -23692,7 +23692,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -23700,7 +23700,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -23743,7 +23743,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23782,7 +23782,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23818,7 +23818,7 @@ type: Literal["web\_fetch\_20250910"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -23851,7 +23851,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23891,7 +23891,7 @@ type: Literal["web\_fetch\_20260209"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -23924,7 +23924,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -23966,7 +23966,7 @@ type: Literal["web\_fetch\_20260309"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -23999,7 +23999,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24035,13 +24035,13 @@ class BetaWebFetchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24073,7 +24073,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -24115,7 +24115,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -24141,13 +24141,13 @@ class BetaWebFetchToolResultBlockParam: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlockParam: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24173,7 +24173,7 @@ content: [BetaRequestDocumentBlock](api/beta.md)
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -24195,13 +24195,13 @@ class BetaContentBlockSource: …
 
 content: Union[str, List[[BetaContentBlockSourceContent](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
 List[[BetaContentBlockSourceContent](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlockParam: …
 
@@ -24226,7 +24226,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24234,7 +24234,7 @@ Accepts one of the following:
 
 citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocationParam: …
 
@@ -24336,7 +24336,7 @@ class BetaImageBlockParam: …
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64ImageSource: …
 
@@ -24344,7 +24344,7 @@ data: str
 
 media\_type: Literal["image/jpeg", "image/png", "image/gif", "image/webp"]
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"
 
@@ -24387,7 +24387,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24426,7 +24426,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24471,7 +24471,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24481,7 +24481,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -24507,7 +24507,7 @@ class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24531,7 +24531,7 @@ class BetaWebFetchToolResultErrorBlockParam: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24553,7 +24553,7 @@ type: Literal["web\_fetch\_tool\_result\_error"]
 
 Literal["invalid\_tool\_input", "url\_too\_long", "url\_not\_allowed", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24607,7 +24607,7 @@ type: Literal["web\_search\_20250305"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -24640,7 +24640,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24692,7 +24692,7 @@ type: Literal["web\_search\_20260209"]
 
 allowed\_callers: Optional[List[Literal["direct", "code\_execution\_20250825", "code\_execution\_20260120"]]]
 
-Accepts one of the following:
+One of the following:
 
 "direct"
 
@@ -24725,7 +24725,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24769,7 +24769,7 @@ class BetaWebSearchToolRequestError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24789,13 +24789,13 @@ class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24831,7 +24831,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -24855,13 +24855,13 @@ type: Literal["code\_execution\_20260120"]
 
 [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24893,7 +24893,7 @@ class BetaWebSearchToolResultBlockParam: …
 
 content: [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 List[[BetaWebSearchResultBlockParam](api/beta.md)]
 
@@ -24911,7 +24911,7 @@ class BetaWebSearchToolRequestError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -24948,7 +24948,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"
 
@@ -24958,7 +24958,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -24982,7 +24982,7 @@ type: Literal["code\_execution\_20260120"]
 
 [BetaWebSearchToolResultBlockParamContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 List[[BetaWebSearchResultBlockParam](api/beta.md)]
 
@@ -25000,7 +25000,7 @@ class BetaWebSearchToolRequestError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25020,7 +25020,7 @@ class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25038,7 +25038,7 @@ type: Literal["web\_search\_tool\_result\_error"]
 
 Literal["invalid\_tool\_input", "unavailable", "max\_uses\_exceeded", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25140,7 +25140,7 @@ processing\_status: Literal["in\_progress", "canceling", "ended"]
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 
@@ -25204,7 +25204,7 @@ error: [BetaErrorResponse](api/beta.md)
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError: …
 
@@ -25286,7 +25286,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageBatchSucceededResult: …
 
@@ -25322,7 +25322,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -25361,7 +25361,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock: …
 
@@ -25371,7 +25371,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -25507,7 +25507,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -25537,7 +25537,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -25561,7 +25561,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -25587,13 +25587,13 @@ class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25629,7 +25629,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -25655,13 +25655,13 @@ class BetaWebFetchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25693,7 +25693,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -25735,7 +25735,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -25761,13 +25761,13 @@ class BetaAdvisorToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -25807,13 +25807,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25867,13 +25867,13 @@ class BetaBashCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25911,13 +25911,13 @@ class BetaTextEditorCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -25939,7 +25939,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -25983,13 +25983,13 @@ class BetaToolSearchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -26037,7 +26037,7 @@ class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -26049,7 +26049,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -26199,7 +26199,7 @@ applied\_edits: List[AppliedEdit]
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse: …
 
@@ -26238,7 +26238,7 @@ cache\_miss\_reason: Optional[CacheMissReason]
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged: …
 
@@ -26286,7 +26286,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -26312,7 +26312,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -26400,7 +26400,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -26429,7 +26429,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -26509,7 +26509,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage: …
 
@@ -26617,7 +26617,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -26643,7 +26643,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -26743,7 +26743,7 @@ service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -26755,7 +26755,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -26769,7 +26769,7 @@ error: [BetaErrorResponse](api/beta.md)
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError: …
 
@@ -26875,7 +26875,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageBatchSucceededResult: …
 
@@ -26911,7 +26911,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -26950,7 +26950,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock: …
 
@@ -26960,7 +26960,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -27096,7 +27096,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -27126,7 +27126,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -27150,7 +27150,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -27176,13 +27176,13 @@ class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -27218,7 +27218,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -27244,13 +27244,13 @@ class BetaWebFetchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -27282,7 +27282,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -27324,7 +27324,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -27350,13 +27350,13 @@ class BetaAdvisorToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -27396,13 +27396,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -27456,13 +27456,13 @@ class BetaBashCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -27500,13 +27500,13 @@ class BetaTextEditorCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -27528,7 +27528,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -27572,13 +27572,13 @@ class BetaToolSearchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -27626,7 +27626,7 @@ class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -27638,7 +27638,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -27788,7 +27788,7 @@ applied\_edits: List[AppliedEdit]
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse: …
 
@@ -27827,7 +27827,7 @@ cache\_miss\_reason: Optional[CacheMissReason]
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged: …
 
@@ -27875,7 +27875,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -27901,7 +27901,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -27989,7 +27989,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -28018,7 +28018,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -28098,7 +28098,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage: …
 
@@ -28206,7 +28206,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -28232,7 +28232,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -28332,7 +28332,7 @@ service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -28344,7 +28344,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -28358,7 +28358,7 @@ error: [BetaErrorResponse](api/beta.md)
 
 error: [BetaError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError: …
 
@@ -28462,7 +28462,7 @@ type: Literal["anthropic", "custom"]
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 "anthropic"
 
@@ -28501,7 +28501,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextBlock: …
 
@@ -28511,7 +28511,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -28647,7 +28647,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -28677,7 +28677,7 @@ input: Dict[str, object]
 
 name: Literal["advisor", "web\_search", "web\_fetch", 5 more]
 
-Accepts one of the following:
+One of the following:
 
 "advisor"
 
@@ -28701,7 +28701,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -28727,13 +28727,13 @@ class BetaWebSearchToolResultBlock: …
 
 content: [BetaWebSearchToolResultBlockContent](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebSearchToolResultError: …
 
 error\_code: [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -28769,7 +28769,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -28795,13 +28795,13 @@ class BetaWebFetchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebFetchToolResultErrorBlock: …
 
 error\_code: [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -28833,7 +28833,7 @@ enabled: bool
 
 source: Source
 
-Accepts one of the following:
+One of the following:
 
 class BetaBase64PDFSource: …
 
@@ -28875,7 +28875,7 @@ caller: Optional[Caller]
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class BetaDirectCaller: …
 
@@ -28901,13 +28901,13 @@ class BetaAdvisorToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaAdvisorToolResultError: …
 
 error\_code: Literal["max\_uses\_exceeded", "prompt\_too\_long", "too\_many\_requests", 3 more]
 
-Accepts one of the following:
+One of the following:
 
 "max\_uses\_exceeded"
 
@@ -28947,13 +28947,13 @@ content: [BetaCodeExecutionToolResultBlockContent](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCodeExecutionToolResultError: …
 
 error\_code: [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -29007,13 +29007,13 @@ class BetaBashCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaBashCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -29051,13 +29051,13 @@ class BetaTextEditorCodeExecutionToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaTextEditorCodeExecutionToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", 2 more]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -29079,7 +29079,7 @@ content: str
 
 file\_type: Literal["text", "image", "pdf"]
 
-Accepts one of the following:
+One of the following:
 
 "text"
 
@@ -29123,13 +29123,13 @@ class BetaToolSearchToolResultBlock: …
 
 content: Content
 
-Accepts one of the following:
+One of the following:
 
 class BetaToolSearchToolResultError: …
 
 error\_code: Literal["invalid\_tool\_input", "unavailable", "too\_many\_requests", "execution\_time\_exceeded"]
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"
 
@@ -29177,7 +29177,7 @@ class BetaMCPToolResultBlock: …
 
 content: Union[str, List[[BetaTextBlock](api/beta.md)]]
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -29189,7 +29189,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCitationCharLocation: …
 
@@ -29339,7 +29339,7 @@ applied\_edits: List[AppliedEdit]
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 class BetaClearToolUses20250919EditResponse: …
 
@@ -29378,7 +29378,7 @@ cache\_miss\_reason: Optional[CacheMissReason]
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 class BetaCacheMissModelChanged: …
 
@@ -29426,7 +29426,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -29452,7 +29452,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -29540,7 +29540,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"
 
@@ -29569,7 +29569,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"
 
@@ -29649,7 +29649,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 class BetaMessageIterationUsage: …
 
@@ -29757,7 +29757,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
 
@@ -29783,7 +29783,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-20250514` - Deprecated: Will reach end-of-life on June 15th, 2026. Please migrate to a newer model. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -29883,7 +29883,7 @@ service\_tier: Optional[Literal["standard", "priority", "batch"]]
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -29895,7 +29895,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -29973,7 +29973,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -29991,7 +29991,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -30035,7 +30035,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -30061,7 +30061,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -30087,7 +30087,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -30099,7 +30099,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -30121,7 +30121,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30145,7 +30145,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30173,7 +30173,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30197,7 +30197,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30271,7 +30271,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -30293,7 +30293,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30315,7 +30315,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -30341,7 +30341,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30365,7 +30365,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30391,7 +30391,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30415,7 +30415,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -30437,7 +30437,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30461,7 +30461,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30566,7 +30566,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -30592,7 +30592,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30618,7 +30618,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30815,7 +30815,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30845,7 +30845,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30871,7 +30871,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30895,7 +30895,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30923,7 +30923,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30949,7 +30949,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -30989,7 +30989,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -31015,7 +31015,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -31035,7 +31035,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -31053,7 +31053,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -31103,7 +31103,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -31121,7 +31121,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -31165,7 +31165,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -31181,7 +31181,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -31199,7 +31199,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -31243,7 +31243,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -31273,7 +31273,7 @@ agents: List[[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)]
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -31331,7 +31331,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -31349,7 +31349,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -31393,7 +31393,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -31403,7 +31403,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -31429,7 +31429,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -31441,7 +31441,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -31463,7 +31463,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -31487,7 +31487,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -31515,7 +31515,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -31539,7 +31539,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -31591,7 +31591,7 @@ version: int
 
 Skill to load in the session container.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkillParams: …
 
@@ -31691,7 +31691,7 @@ networking: Networking
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 class BetaUnrestrictedNetwork: …
 
@@ -31772,7 +31772,7 @@ networking: Optional[Networking]
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-Accepts one of the following:
+One of the following:
 
 class BetaUnrestrictedNetwork: …
 
@@ -31855,7 +31855,7 @@ config: Config
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-Accepts one of the following:
+One of the following:
 
 class BetaCloudConfig: …
 
@@ -31865,7 +31865,7 @@ networking: Networking
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 class BetaUnrestrictedNetwork: …
 
@@ -31967,7 +31967,7 @@ scope: Optional[Literal["organization", "account"]]
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Accepts one of the following:
+One of the following:
 
 "organization"
 
@@ -32222,7 +32222,7 @@ state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -32262,7 +32262,7 @@ state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -32334,7 +32334,7 @@ state: Literal["queued", "starting", "active", 2 more]
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -32541,7 +32541,7 @@ checkout: Optional[Checkout]
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout: …
 
@@ -32577,7 +32577,7 @@ access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -32611,7 +32611,7 @@ agents: Sequence[[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)]
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -32641,7 +32641,7 @@ type: Literal["coordinator"]
 
 An entry in a multiagent roster: an agent ID string, a versioned agent reference, or `self`.
 
-Accepts one of the following:
+One of the following:
 
 str
 
@@ -32727,7 +32727,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -32745,7 +32745,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -32789,7 +32789,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -32825,7 +32825,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -32843,7 +32843,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -32887,7 +32887,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -32897,7 +32897,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -32923,7 +32923,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -32935,7 +32935,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -32957,7 +32957,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -32981,7 +32981,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33009,7 +33009,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33033,7 +33033,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33087,7 +33087,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -33113,7 +33113,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -33125,7 +33125,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -33147,7 +33147,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33171,7 +33171,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33199,7 +33199,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33223,7 +33223,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33315,7 +33315,7 @@ type: Literal["outcome\_evaluation"]
 
 resources: List[[BetaManagedAgentsSessionResource](api/beta.md)]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource: …
 
@@ -33337,7 +33337,7 @@ url: str
 
 checkout: Optional[Checkout]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout: …
 
@@ -33387,7 +33387,7 @@ access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -33425,7 +33425,7 @@ status: Literal["rescheduling", "running", "idle", "terminated"]
 
 SessionStatus enum
 
-Accepts one of the following:
+One of the following:
 
 "rescheduling"
 
@@ -33501,7 +33501,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -33519,7 +33519,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -33563,7 +33563,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -33599,7 +33599,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -33617,7 +33617,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -33661,7 +33661,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -33671,7 +33671,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -33697,7 +33697,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -33709,7 +33709,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -33731,7 +33731,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33755,7 +33755,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33783,7 +33783,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33807,7 +33807,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33861,7 +33861,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -33887,7 +33887,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -33899,7 +33899,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -33921,7 +33921,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33945,7 +33945,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33973,7 +33973,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -33997,7 +33997,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34067,7 +34067,7 @@ tools: Optional[List[Tool]]
 
 Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401Params: …
 
@@ -34083,7 +34083,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -34109,7 +34109,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34135,7 +34135,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34175,7 +34175,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34201,7 +34201,7 @@ permission\_policy: Optional[PermissionPolicy]
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34275,7 +34275,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -34293,7 +34293,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -34337,7 +34337,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -34347,7 +34347,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -34373,7 +34373,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -34385,7 +34385,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -34407,7 +34407,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34431,7 +34431,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34459,7 +34459,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34483,7 +34483,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34585,7 +34585,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -34603,7 +34603,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -34647,7 +34647,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -34683,7 +34683,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -34701,7 +34701,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -34745,7 +34745,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -34755,7 +34755,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -34781,7 +34781,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -34793,7 +34793,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -34815,7 +34815,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34839,7 +34839,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34867,7 +34867,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34891,7 +34891,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -34945,7 +34945,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -34971,7 +34971,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -34983,7 +34983,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -35005,7 +35005,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -35029,7 +35029,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -35057,7 +35057,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -35081,7 +35081,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -35183,7 +35183,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -35203,7 +35203,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -35249,7 +35249,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -35423,7 +35423,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -35443,7 +35443,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -35489,7 +35489,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -35615,7 +35615,7 @@ evaluated\_permission: Optional[Literal["allow", "ask", "deny"]]
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -35691,7 +35691,7 @@ content: List[Content]
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -35711,7 +35711,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -35757,7 +35757,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -35843,7 +35843,7 @@ content: List[Content]
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -35863,7 +35863,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -35909,7 +35909,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -36005,7 +36005,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -36025,7 +36025,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -36071,7 +36071,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -36193,7 +36193,7 @@ evaluated\_permission: Optional[Literal["allow", "ask", "deny"]]
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -36245,7 +36245,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -36275,7 +36275,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -36339,7 +36339,7 @@ The title of the document.
 
 Union type for event parameters that can be sent to a session.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEventParams: …
 
@@ -36349,7 +36349,7 @@ content: List[Content]
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -36369,7 +36369,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -36415,7 +36415,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -36495,7 +36495,7 @@ result: Literal["allow", "deny"]
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -36525,7 +36525,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -36545,7 +36545,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -36591,7 +36591,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -36699,7 +36699,7 @@ rubric: Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubricParams: …
 
@@ -36741,7 +36741,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -36761,7 +36761,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -36807,7 +36807,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -36951,7 +36951,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -37005,7 +37005,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -37043,7 +37043,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -37077,7 +37077,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -37111,7 +37111,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -37145,7 +37145,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -37257,7 +37257,7 @@ data: Optional[List[Data]]
 
 Sent events
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEvent: …
 
@@ -37271,7 +37271,7 @@ content: List[Content]
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -37291,7 +37291,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -37337,7 +37337,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -37433,7 +37433,7 @@ result: Literal["allow", "deny"]
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -37475,7 +37475,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -37495,7 +37495,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -37541,7 +37541,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -37673,7 +37673,7 @@ rubric: Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric: …
 
@@ -37715,7 +37715,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -37735,7 +37735,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -37781,7 +37781,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -37917,7 +37917,7 @@ error: Error
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUnknownError: …
 
@@ -37931,7 +37931,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -37965,7 +37965,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -37999,7 +37999,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -38033,7 +38033,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -38071,7 +38071,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -38109,7 +38109,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -38143,7 +38143,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -38175,7 +38175,7 @@ type: Literal["session.error"]
 
 Union type for all event types in a session.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEvent: …
 
@@ -38189,7 +38189,7 @@ content: List[Content]
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -38209,7 +38209,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -38255,7 +38255,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -38351,7 +38351,7 @@ result: Literal["allow", "deny"]
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -38393,7 +38393,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -38413,7 +38413,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -38459,7 +38459,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -38657,7 +38657,7 @@ evaluated\_permission: Optional[Literal["allow", "ask", "deny"]]
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -38691,7 +38691,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -38711,7 +38711,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -38757,7 +38757,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -38879,7 +38879,7 @@ evaluated\_permission: Optional[Literal["allow", "ask", "deny"]]
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -38913,7 +38913,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -38933,7 +38933,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -38979,7 +38979,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -39087,7 +39087,7 @@ content: List[Content]
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -39107,7 +39107,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -39153,7 +39153,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -39239,7 +39239,7 @@ content: List[Content]
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -39259,7 +39259,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -39305,7 +39305,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -39405,7 +39405,7 @@ error: Error
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUnknownError: …
 
@@ -39419,7 +39419,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -39453,7 +39453,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -39487,7 +39487,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -39521,7 +39521,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -39559,7 +39559,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -39597,7 +39597,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -39631,7 +39631,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -39703,7 +39703,7 @@ stop\_reason: StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn: …
 
@@ -39845,7 +39845,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -39905,7 +39905,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -39967,7 +39967,7 @@ rubric: Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric: …
 
@@ -40051,7 +40051,7 @@ stop\_reason: StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn: …
 
@@ -40117,7 +40117,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -40137,7 +40137,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -40183,7 +40183,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -40349,7 +40349,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -40367,7 +40367,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -40411,7 +40411,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -40447,7 +40447,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -40465,7 +40465,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -40509,7 +40509,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -40519,7 +40519,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -40545,7 +40545,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -40557,7 +40557,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -40579,7 +40579,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -40603,7 +40603,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -40631,7 +40631,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -40655,7 +40655,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -40709,7 +40709,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -40735,7 +40735,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -40747,7 +40747,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -40769,7 +40769,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -40793,7 +40793,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -40821,7 +40821,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -40845,7 +40845,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -40933,7 +40933,7 @@ stop\_reason: StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn: …
 
@@ -41047,7 +41047,7 @@ stop\_reason: StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn: …
 
@@ -41179,7 +41179,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -41229,7 +41229,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -41293,7 +41293,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -41347,7 +41347,7 @@ type: Literal["span.outcome\_evaluation\_start"]
 
 Server-sent event in the session stream.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEvent: …
 
@@ -41361,7 +41361,7 @@ content: List[Content]
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -41381,7 +41381,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -41427,7 +41427,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -41523,7 +41523,7 @@ result: Literal["allow", "deny"]
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -41565,7 +41565,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -41585,7 +41585,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -41631,7 +41631,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -41829,7 +41829,7 @@ evaluated\_permission: Optional[Literal["allow", "ask", "deny"]]
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -41863,7 +41863,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -41883,7 +41883,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -41929,7 +41929,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -42051,7 +42051,7 @@ evaluated\_permission: Optional[Literal["allow", "ask", "deny"]]
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -42085,7 +42085,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -42105,7 +42105,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -42151,7 +42151,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -42259,7 +42259,7 @@ content: List[Content]
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -42279,7 +42279,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -42325,7 +42325,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -42411,7 +42411,7 @@ content: List[Content]
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -42431,7 +42431,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -42477,7 +42477,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -42577,7 +42577,7 @@ error: Error
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUnknownError: …
 
@@ -42591,7 +42591,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -42625,7 +42625,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -42659,7 +42659,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -42693,7 +42693,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -42731,7 +42731,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -42769,7 +42769,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -42803,7 +42803,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -42875,7 +42875,7 @@ stop\_reason: StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn: …
 
@@ -43017,7 +43017,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -43077,7 +43077,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -43139,7 +43139,7 @@ rubric: Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric: …
 
@@ -43223,7 +43223,7 @@ stop\_reason: StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn: …
 
@@ -43289,7 +43289,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -43309,7 +43309,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -43355,7 +43355,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -43521,7 +43521,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -43539,7 +43539,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -43583,7 +43583,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -43619,7 +43619,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -43637,7 +43637,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -43681,7 +43681,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -43691,7 +43691,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -43717,7 +43717,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -43729,7 +43729,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -43751,7 +43751,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -43775,7 +43775,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -43803,7 +43803,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -43827,7 +43827,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -43881,7 +43881,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -43907,7 +43907,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -43919,7 +43919,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -43941,7 +43941,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -43965,7 +43965,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -43993,7 +43993,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -44017,7 +44017,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -44115,7 +44115,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -44175,7 +44175,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -44195,7 +44195,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -44241,7 +44241,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -44359,7 +44359,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -44379,7 +44379,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -44425,7 +44425,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -44549,7 +44549,7 @@ rubric: Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric: …
 
@@ -44585,7 +44585,7 @@ rubric: Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubricParams: …
 
@@ -44653,7 +44653,7 @@ content: List[Content]
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -44673,7 +44673,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -44719,7 +44719,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -44793,7 +44793,7 @@ content: List[Content]
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -44813,7 +44813,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -44859,7 +44859,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -44933,7 +44933,7 @@ result: Literal["allow", "deny"]
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -44965,7 +44965,7 @@ result: Literal["allow", "deny"]
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -44995,7 +44995,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -45015,7 +45015,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -45061,7 +45061,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -45237,7 +45237,7 @@ url: str
 
 checkout: Optional[Checkout]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout: …
 
@@ -45269,7 +45269,7 @@ access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -45295,7 +45295,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 A memory store attached to an agent session.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource: …
 
@@ -45317,7 +45317,7 @@ url: str
 
 checkout: Optional[Checkout]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout: …
 
@@ -45367,7 +45367,7 @@ access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -45393,7 +45393,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 The requested session resource.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource: …
 
@@ -45415,7 +45415,7 @@ url: str
 
 checkout: Optional[Checkout]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout: …
 
@@ -45465,7 +45465,7 @@ access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -45491,7 +45491,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 The updated session resource.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource: …
 
@@ -45513,7 +45513,7 @@ url: str
 
 checkout: Optional[Checkout]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout: …
 
@@ -45563,7 +45563,7 @@ access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -45641,7 +45641,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -45659,7 +45659,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -45703,7 +45703,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -45713,7 +45713,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -45739,7 +45739,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -45751,7 +45751,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -45773,7 +45773,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -45797,7 +45797,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -45825,7 +45825,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -45849,7 +45849,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -45933,7 +45933,7 @@ status: [BetaManagedAgentsSessionThreadStatus](api/beta.md)
 
 SessionThreadStatus enum
 
-Accepts one of the following:
+One of the following:
 
 "running"
 
@@ -45997,7 +45997,7 @@ Literal["running", "idle", "rescheduling", "terminated"]
 
 SessionThreadStatus enum
 
-Accepts one of the following:
+One of the following:
 
 "running"
 
@@ -46039,7 +46039,7 @@ Total output tokens generated across all turns.
 
 Server-sent event in a single thread's stream.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUserMessageEvent: …
 
@@ -46053,7 +46053,7 @@ content: List[Content]
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -46073,7 +46073,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -46119,7 +46119,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -46215,7 +46215,7 @@ result: Literal["allow", "deny"]
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -46257,7 +46257,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -46277,7 +46277,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -46323,7 +46323,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -46521,7 +46521,7 @@ evaluated\_permission: Optional[Literal["allow", "ask", "deny"]]
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -46555,7 +46555,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -46575,7 +46575,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -46621,7 +46621,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -46743,7 +46743,7 @@ evaluated\_permission: Optional[Literal["allow", "ask", "deny"]]
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 "allow"
 
@@ -46777,7 +46777,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -46797,7 +46797,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -46843,7 +46843,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -46951,7 +46951,7 @@ content: List[Content]
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -46971,7 +46971,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -47017,7 +47017,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -47103,7 +47103,7 @@ content: List[Content]
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -47123,7 +47123,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -47169,7 +47169,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -47269,7 +47269,7 @@ error: Error
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsUnknownError: …
 
@@ -47283,7 +47283,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -47317,7 +47317,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -47351,7 +47351,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -47385,7 +47385,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -47423,7 +47423,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -47461,7 +47461,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -47495,7 +47495,7 @@ retry\_status: RetryStatus
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsRetryStatusRetrying: …
 
@@ -47567,7 +47567,7 @@ stop\_reason: StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn: …
 
@@ -47709,7 +47709,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -47769,7 +47769,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -47831,7 +47831,7 @@ rubric: Rubric
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsFileRubric: …
 
@@ -47915,7 +47915,7 @@ stop\_reason: StopReason
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionEndTurn: …
 
@@ -47981,7 +47981,7 @@ content: Optional[List[Content]]
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTextBlock: …
 
@@ -48001,7 +48001,7 @@ source: Source
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64ImageSource: …
 
@@ -48047,7 +48047,7 @@ source: Source
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBase64DocumentSource: …
 
@@ -48213,7 +48213,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -48231,7 +48231,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -48275,7 +48275,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -48311,7 +48311,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 Literal["claude-opus-4-7", "claude-opus-4-6", "claude-sonnet-4-6", 6 more]
 
@@ -48329,7 +48329,7 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5` - High-performance model for agents and coding
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"
 
@@ -48373,7 +48373,7 @@ speed: Optional[Literal["standard", "fast"]]
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -48383,7 +48383,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -48409,7 +48409,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -48421,7 +48421,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -48443,7 +48443,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -48467,7 +48467,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -48495,7 +48495,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -48519,7 +48519,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -48573,7 +48573,7 @@ name: str
 
 skills: List[Skill]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAnthropicSkill: …
 
@@ -48599,7 +48599,7 @@ system: Optional[str]
 
 tools: List[Tool]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAgentToolset20260401: …
 
@@ -48611,7 +48611,7 @@ name: Literal["bash", "edit", "read", 5 more]
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -48633,7 +48633,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -48657,7 +48657,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -48685,7 +48685,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -48709,7 +48709,7 @@ permission\_policy: PermissionPolicy
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsAlwaysAllowPolicy: …
 
@@ -48921,7 +48921,7 @@ auth: Auth
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsMCPOAuthAuthResponse: …
 
@@ -48953,7 +48953,7 @@ token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
 
@@ -49081,7 +49081,7 @@ status: Literal["succeeded", "failed", "connect\_error", "no\_refresh\_token"]
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 "succeeded"
 
@@ -49095,7 +49095,7 @@ status: [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 "valid"
 
@@ -49117,7 +49117,7 @@ Literal["valid", "invalid", "unknown"]
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 "valid"
 
@@ -49165,7 +49165,7 @@ token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
 
@@ -49231,7 +49231,7 @@ token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneParam: …
 
@@ -49287,7 +49287,7 @@ token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneParam: …
 
@@ -49339,7 +49339,7 @@ token\_endpoint\_auth: TokenEndpointAuth
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthNoneResponse: …
 
@@ -49383,7 +49383,7 @@ token\_endpoint\_auth: Optional[TokenEndpointAuth]
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …
 
@@ -49435,7 +49435,7 @@ token\_endpoint\_auth: Optional[TokenEndpointAuth]
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsTokenEndpointAuthBasicUpdateParam: …
 
@@ -49533,7 +49533,7 @@ status: Literal["succeeded", "failed", "connect\_error", "no\_refresh\_token"]
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 "succeeded"
 
@@ -49787,7 +49787,7 @@ type: Literal["memory\_deleted"]
 
 [BetaManagedAgentsError](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaInvalidRequestError: …
 
@@ -49911,7 +49911,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsMemory: …
 
@@ -49995,7 +49995,7 @@ Literal["basic", "full"]
 
 Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-Accepts one of the following:
+One of the following:
 
 "basic"
 
@@ -50037,7 +50037,7 @@ POST/v1/memory\_stores/{memory\_store\_id}/memory\_versions/{memory\_version\_id
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionActor: …
 
@@ -50103,7 +50103,7 @@ operation: [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 "created"
 
@@ -50129,7 +50129,7 @@ created\_by: Optional[BetaManagedAgentsActor]
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionActor: …
 
@@ -50173,7 +50173,7 @@ redacted\_by: Optional[BetaManagedAgentsActor]
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsSessionActor: …
 
@@ -50209,7 +50209,7 @@ Literal["created", "modified", "deleted"]
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 "created"
 
@@ -50748,7 +50748,7 @@ relationship: Literal["external", "resold", "internal"]
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 "external"
 
@@ -50764,7 +50764,7 @@ status: Literal["active", "pending", "rejected"]
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 
@@ -50808,7 +50808,7 @@ status: Literal["active", "pending", "rejected"]
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 
@@ -50859,7 +50859,7 @@ RFC 3339 timestamp when the event occurred.
 
 data: [BetaWebhookEventData](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebhookSessionCreatedEventData: …
 
@@ -51147,7 +51147,7 @@ Object type. Always `event` for webhook payloads.
 
 [BetaWebhookEventData](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebhookSessionCreatedEventData: …
 
@@ -51721,7 +51721,7 @@ RFC 3339 timestamp when the event occurred.
 
 data: [BetaWebhookEventData](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 class BetaWebhookSessionCreatedEventData: …
 

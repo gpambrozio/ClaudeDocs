@@ -20,7 +20,7 @@ ID of the Message Batch.
 
 ##### ReturnsExpand Collapse
 
-MessageBatch = object { id, archived\_at, cancel\_initiated\_at, 7 more }
+MessageBatch object { id, archived\_at, cancel\_initiated\_at, 7 more }
 
 id: string
 
@@ -56,7 +56,7 @@ processing\_status: "in\_progress" or "canceling" or "ended"
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"
 

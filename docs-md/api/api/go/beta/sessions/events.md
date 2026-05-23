@@ -48,7 +48,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentCustomToolUseEventType
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -70,11 +70,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolResultEventType
 
-Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -94,7 +94,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -140,7 +140,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -192,11 +192,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -232,7 +232,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -262,11 +262,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "allow"
 
@@ -274,7 +274,7 @@ const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAsk BetaManagedAge
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -342,7 +342,7 @@ Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -362,7 +362,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -408,7 +408,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -460,11 +460,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -478,7 +478,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentThreadMessageReceivedEventType
 
-FromAgentName stringoptional
+FromAgentName stringOptional
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -494,7 +494,7 @@ Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -514,7 +514,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -560,7 +560,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -612,11 +612,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -630,7 +630,7 @@ Public `sthr_` ID of the thread the message was sent to.
 
 Type BetaManagedAgentsAgentThreadMessageSentEventType
 
-ToAgentName stringoptional
+ToAgentName stringOptional
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -652,11 +652,11 @@ The id of the `agent.tool_use` event this result corresponds to.
 
 Type BetaManagedAgentsAgentToolResultEventType
 
-Content []BetaManagedAgentsAgentToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -676,7 +676,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -722,7 +722,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -774,11 +774,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -814,7 +814,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -840,11 +840,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "allow"
 
@@ -852,7 +852,7 @@ const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAsk BetaManagedAgents
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -896,7 +896,7 @@ RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -926,7 +926,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -978,11 +978,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -990,7 +990,7 @@ type BetaManagedAgentsEventParamsUnionResp interface{…}
 
 Union type for event parameters that can be sent to a session.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUserMessageEventParamsResp struct{…}
 
@@ -1000,7 +1000,7 @@ Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -1020,7 +1020,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -1066,7 +1066,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -1118,11 +1118,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -1134,7 +1134,7 @@ Parameters for sending an interrupt to pause the agent.
 
 Type BetaManagedAgentsUserInterruptEventParamsType
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -1146,7 +1146,7 @@ Result BetaManagedAgentsUserToolConfirmationEventParamsResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventParamsResultAllow BetaManagedAgentsUserToolConfirmationEventParamsResult = "allow"
 
@@ -1158,7 +1158,7 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventParamsType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
@@ -1172,11 +1172,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventParamsType
 
-Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionRespoptional
+Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionRespOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -1196,7 +1196,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -1242,7 +1242,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -1294,11 +1294,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -1334,7 +1334,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -1350,7 +1350,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubricParamsResp struct{…}
 
@@ -1374,7 +1374,7 @@ Type BetaManagedAgentsTextRubricParamsType
 
 Type BetaManagedAgentsUserDefineOutcomeEventParamsType
 
-MaxIterations int64optional
+MaxIterations int64Optional
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -1388,11 +1388,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventParamsType
 
-Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespoptional
+Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -1412,7 +1412,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -1458,7 +1458,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -1510,11 +1510,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -1550,7 +1550,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -1602,7 +1602,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -1656,7 +1656,7 @@ RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -1694,7 +1694,7 @@ RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -1728,7 +1728,7 @@ RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -1762,7 +1762,7 @@ RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -1796,7 +1796,7 @@ RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -1904,11 +1904,11 @@ type BetaManagedAgentsSendSessionEvents struct{…}
 
 Events that were successfully sent to the session.
 
-Data []BetaManagedAgentsSendSessionEventsDataUnionoptional
+Data []BetaManagedAgentsSendSessionEventsDataUnionOptional
 
 Sent events
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUserMessageEvent struct{…}
 
@@ -1922,7 +1922,7 @@ Content []BetaManagedAgentsUserMessageEventContentUnion
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -1942,7 +1942,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -1988,7 +1988,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -2040,17 +2040,17 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
 Type BetaManagedAgentsUserMessageEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
@@ -2064,11 +2064,11 @@ Unique identifier for this event.
 
 Type BetaManagedAgentsUserInterruptEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -2084,7 +2084,7 @@ Result BetaManagedAgentsUserToolConfirmationEventResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventResultAllow BetaManagedAgentsUserToolConfirmationEventResult = "allow"
 
@@ -2096,15 +2096,15 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -2122,11 +2122,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventType
 
-Content []BetaManagedAgentsUserCustomToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserCustomToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -2146,7 +2146,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -2192,7 +2192,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -2244,11 +2244,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -2284,15 +2284,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -2324,7 +2324,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubric struct{…}
 
@@ -2362,11 +2362,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventType
 
-Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -2386,7 +2386,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -2432,7 +2432,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -2484,11 +2484,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -2524,15 +2524,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -2568,7 +2568,7 @@ Error BetaManagedAgentsSessionErrorEventErrorUnion
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUnknownError struct{…}
 
@@ -2582,7 +2582,7 @@ RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -2616,7 +2616,7 @@ RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -2650,7 +2650,7 @@ RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -2684,7 +2684,7 @@ RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -2722,7 +2722,7 @@ RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -2760,7 +2760,7 @@ RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -2794,7 +2794,7 @@ RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -2826,7 +2826,7 @@ type BetaManagedAgentsSessionEventUnion interface{…}
 
 Union type for all event types in a session.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUserMessageEvent struct{…}
 
@@ -2840,7 +2840,7 @@ Content []BetaManagedAgentsUserMessageEventContentUnion
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -2860,7 +2860,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -2906,7 +2906,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -2958,17 +2958,17 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
 Type BetaManagedAgentsUserMessageEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
@@ -2982,11 +2982,11 @@ Unique identifier for this event.
 
 Type BetaManagedAgentsUserInterruptEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -3002,7 +3002,7 @@ Result BetaManagedAgentsUserToolConfirmationEventResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventResultAllow BetaManagedAgentsUserToolConfirmationEventResult = "allow"
 
@@ -3014,15 +3014,15 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -3040,11 +3040,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventType
 
-Content []BetaManagedAgentsUserCustomToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserCustomToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -3064,7 +3064,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -3110,7 +3110,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -3162,11 +3162,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -3202,15 +3202,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -3236,7 +3236,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentCustomToolUseEventType
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -3304,11 +3304,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "allow"
 
@@ -3316,7 +3316,7 @@ const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAsk BetaManagedAge
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -3338,11 +3338,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolResultEventType
 
-Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -3362,7 +3362,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -3408,7 +3408,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -3460,11 +3460,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -3500,7 +3500,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -3526,11 +3526,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "allow"
 
@@ -3538,7 +3538,7 @@ const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAsk BetaManagedAgents
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -3560,11 +3560,11 @@ The id of the `agent.tool_use` event this result corresponds to.
 
 Type BetaManagedAgentsAgentToolResultEventType
 
-Content []BetaManagedAgentsAgentToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -3584,7 +3584,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -3630,7 +3630,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -3682,11 +3682,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -3722,7 +3722,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -3738,7 +3738,7 @@ Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -3758,7 +3758,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -3804,7 +3804,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -3856,11 +3856,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -3874,7 +3874,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentThreadMessageReceivedEventType
 
-FromAgentName stringoptional
+FromAgentName stringOptional
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -3890,7 +3890,7 @@ Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -3910,7 +3910,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -3956,7 +3956,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -4008,11 +4008,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -4026,7 +4026,7 @@ Public `sthr_` ID of the thread the message was sent to.
 
 Type BetaManagedAgentsAgentThreadMessageSentEventType
 
-ToAgentName stringoptional
+ToAgentName stringOptional
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -4056,7 +4056,7 @@ Error BetaManagedAgentsSessionErrorEventErrorUnion
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUnknownError struct{…}
 
@@ -4070,7 +4070,7 @@ RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -4104,7 +4104,7 @@ RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -4138,7 +4138,7 @@ RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -4172,7 +4172,7 @@ RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -4210,7 +4210,7 @@ RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -4248,7 +4248,7 @@ RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -4282,7 +4282,7 @@ RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -4354,7 +4354,7 @@ StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -4492,11 +4492,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -4552,11 +4552,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -4618,7 +4618,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubric struct{…}
 
@@ -4702,7 +4702,7 @@ StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -4764,11 +4764,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventType
 
-Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -4788,7 +4788,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -4834,7 +4834,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -4886,11 +4886,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -4926,15 +4926,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -4974,7 +4974,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsSessionUpdatedEventType
 
-Agent [BetaManagedAgentsSessionAgent](api/beta.md)optional
+Agent [BetaManagedAgentsSessionAgent](api/beta.md)Optional
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -5000,7 +5000,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -5008,7 +5008,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -5048,11 +5048,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -5088,7 +5088,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -5096,7 +5096,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -5136,11 +5136,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -5150,7 +5150,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -5176,7 +5176,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -5188,7 +5188,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -5210,7 +5210,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -5234,7 +5234,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -5262,7 +5262,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -5286,7 +5286,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -5314,15 +5314,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -5340,7 +5340,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -5366,7 +5366,7 @@ System string
 
 Tools []BetaManagedAgentsSessionAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -5378,7 +5378,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -5400,7 +5400,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -5424,7 +5424,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -5452,7 +5452,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -5476,7 +5476,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -5504,15 +5504,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -5524,11 +5524,11 @@ Type BetaManagedAgentsSessionAgentType
 
 Version int64
 
-Metadata map[string, string]optional
+Metadata map[string, string]Optional
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-Title stringoptional
+Title stringOptional
 
 The session's new title. Present only when the update changed it.
 
@@ -5564,7 +5564,7 @@ StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -5678,7 +5678,7 @@ StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -5806,11 +5806,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -5856,11 +5856,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -5920,11 +5920,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -5978,7 +5978,7 @@ type BetaManagedAgentsStreamSessionEventsUnion interface{…}
 
 Server-sent event in the session stream.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUserMessageEvent struct{…}
 
@@ -5992,7 +5992,7 @@ Content []BetaManagedAgentsUserMessageEventContentUnion
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -6012,7 +6012,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -6058,7 +6058,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -6110,17 +6110,17 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
 Type BetaManagedAgentsUserMessageEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
@@ -6134,11 +6134,11 @@ Unique identifier for this event.
 
 Type BetaManagedAgentsUserInterruptEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -6154,7 +6154,7 @@ Result BetaManagedAgentsUserToolConfirmationEventResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventResultAllow BetaManagedAgentsUserToolConfirmationEventResult = "allow"
 
@@ -6166,15 +6166,15 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -6192,11 +6192,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventType
 
-Content []BetaManagedAgentsUserCustomToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserCustomToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -6216,7 +6216,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -6262,7 +6262,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -6314,11 +6314,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -6354,15 +6354,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -6388,7 +6388,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentCustomToolUseEventType
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -6456,11 +6456,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "allow"
 
@@ -6468,7 +6468,7 @@ const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAsk BetaManagedAge
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -6490,11 +6490,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolResultEventType
 
-Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -6514,7 +6514,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -6560,7 +6560,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -6612,11 +6612,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -6652,7 +6652,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -6678,11 +6678,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "allow"
 
@@ -6690,7 +6690,7 @@ const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAsk BetaManagedAgents
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -6712,11 +6712,11 @@ The id of the `agent.tool_use` event this result corresponds to.
 
 Type BetaManagedAgentsAgentToolResultEventType
 
-Content []BetaManagedAgentsAgentToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -6736,7 +6736,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -6782,7 +6782,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -6834,11 +6834,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -6874,7 +6874,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -6890,7 +6890,7 @@ Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -6910,7 +6910,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -6956,7 +6956,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -7008,11 +7008,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -7026,7 +7026,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentThreadMessageReceivedEventType
 
-FromAgentName stringoptional
+FromAgentName stringOptional
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -7042,7 +7042,7 @@ Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -7062,7 +7062,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -7108,7 +7108,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -7160,11 +7160,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -7178,7 +7178,7 @@ Public `sthr_` ID of the thread the message was sent to.
 
 Type BetaManagedAgentsAgentThreadMessageSentEventType
 
-ToAgentName stringoptional
+ToAgentName stringOptional
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -7208,7 +7208,7 @@ Error BetaManagedAgentsSessionErrorEventErrorUnion
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUnknownError struct{…}
 
@@ -7222,7 +7222,7 @@ RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -7256,7 +7256,7 @@ RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -7290,7 +7290,7 @@ RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -7324,7 +7324,7 @@ RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -7362,7 +7362,7 @@ RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -7400,7 +7400,7 @@ RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -7434,7 +7434,7 @@ RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -7506,7 +7506,7 @@ StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -7644,11 +7644,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -7704,11 +7704,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -7770,7 +7770,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubric struct{…}
 
@@ -7854,7 +7854,7 @@ StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -7916,11 +7916,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventType
 
-Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -7940,7 +7940,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -7986,7 +7986,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -8038,11 +8038,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -8078,15 +8078,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -8126,7 +8126,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsSessionUpdatedEventType
 
-Agent [BetaManagedAgentsSessionAgent](api/beta.md)optional
+Agent [BetaManagedAgentsSessionAgent](api/beta.md)Optional
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -8152,7 +8152,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -8160,7 +8160,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -8200,11 +8200,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -8240,7 +8240,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -8248,7 +8248,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -8288,11 +8288,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -8302,7 +8302,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -8328,7 +8328,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -8340,7 +8340,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -8362,7 +8362,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -8386,7 +8386,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -8414,7 +8414,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -8438,7 +8438,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -8466,15 +8466,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -8492,7 +8492,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -8518,7 +8518,7 @@ System string
 
 Tools []BetaManagedAgentsSessionAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -8530,7 +8530,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -8552,7 +8552,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -8576,7 +8576,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -8604,7 +8604,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -8628,7 +8628,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -8656,15 +8656,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -8676,11 +8676,11 @@ Type BetaManagedAgentsSessionAgentType
 
 Version int64
 
-Metadata map[string, string]optional
+Metadata map[string, string]Optional
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-Title stringoptional
+Title stringOptional
 
 The session's new title. Present only when the update changed it.
 
@@ -8726,7 +8726,7 @@ RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -8782,11 +8782,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventType
 
-Content []BetaManagedAgentsUserCustomToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserCustomToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -8806,7 +8806,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -8852,7 +8852,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -8904,11 +8904,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -8944,15 +8944,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -8966,11 +8966,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventParamsType
 
-Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionRespoptional
+Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionRespOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -8990,7 +8990,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -9036,7 +9036,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -9088,11 +9088,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -9128,7 +9128,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -9160,7 +9160,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubric struct{…}
 
@@ -9196,7 +9196,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubricParamsResp struct{…}
 
@@ -9220,7 +9220,7 @@ Type BetaManagedAgentsTextRubricParamsType
 
 Type BetaManagedAgentsUserDefineOutcomeEventParamsType
 
-MaxIterations int64optional
+MaxIterations int64Optional
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -9234,11 +9234,11 @@ Unique identifier for this event.
 
 Type BetaManagedAgentsUserInterruptEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -9248,7 +9248,7 @@ Parameters for sending an interrupt to pause the agent.
 
 Type BetaManagedAgentsUserInterruptEventParamsType
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -9264,7 +9264,7 @@ Content []BetaManagedAgentsUserMessageEventContentUnion
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -9284,7 +9284,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -9330,7 +9330,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -9382,17 +9382,17 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
 Type BetaManagedAgentsUserMessageEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
@@ -9404,7 +9404,7 @@ Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -9424,7 +9424,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -9470,7 +9470,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -9522,11 +9522,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -9544,7 +9544,7 @@ Result BetaManagedAgentsUserToolConfirmationEventResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventResultAllow BetaManagedAgentsUserToolConfirmationEventResult = "allow"
 
@@ -9556,15 +9556,15 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -9576,7 +9576,7 @@ Result BetaManagedAgentsUserToolConfirmationEventParamsResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventParamsResultAllow BetaManagedAgentsUserToolConfirmationEventParamsResult = "allow"
 
@@ -9588,7 +9588,7 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventParamsType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
@@ -9602,11 +9602,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventParamsType
 
-Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespoptional
+Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -9626,7 +9626,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -9672,7 +9672,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -9724,11 +9724,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -9764,7 +9764,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 

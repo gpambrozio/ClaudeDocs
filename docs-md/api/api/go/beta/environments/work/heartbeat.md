@@ -24,15 +24,15 @@ EnvironmentID param.Field[string]
 
 Path param
 
-DesiredTTLSeconds param.Field[int64]optional
+DesiredTTLSeconds param.Field[int64]Optional
 
 Query param: Desired TTL in seconds
 
-ExpectedLastHeartbeat param.Field[string]optional
+ExpectedLastHeartbeat param.Field[string]Optional
 
 Query param: Expected last\_heartbeat for conditional update (optimistic concurrency). Use literal 'NO\_HEARTBEAT' to claim an unclaimed lease (first heartbeat). For subsequent heartbeats, echo the server's previous last\_heartbeat value exactly. Returns 412 Precondition Failed if the actual value doesn't match.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -40,7 +40,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -110,7 +110,7 @@ State BetaSelfHostedWorkHeartbeatResponseState
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSelfHostedWorkHeartbeatResponseStateQueued BetaSelfHostedWorkHeartbeatResponseState = "queued"
 

@@ -16,13 +16,13 @@ Create a new environment with the specified configuration.
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -84,9 +84,9 @@ config: optional [BetaCloudConfigParams](api/beta.md) { type, networking, packag
 
 Environment configuration
 
-Accepts one of the following:
+One of the following:
 
-BetaCloudConfigParams = object { type, networking, packages }
+BetaCloudConfigParams object { type, networking, packages }
 
 Request params for `cloud` environment configuration.
 
@@ -101,9 +101,9 @@ networking: optional [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLi
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-Accepts one of the following:
+One of the following:
 
-BetaUnrestrictedNetwork = object { type }
+BetaUnrestrictedNetwork object { type }
 
 Unrestricted network access.
 
@@ -111,7 +111,7 @@ type: "unrestricted"
 
 Network policy type
 
-BetaLimitedNetworkParams = object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
+BetaLimitedNetworkParams object { type, allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts }
 
 Limited network request params.
 
@@ -168,7 +168,7 @@ type: optional "packages"
 
 Package configuration type
 
-BetaSelfHostedConfigParams = object { type }
+BetaSelfHostedConfigParams object { type }
 
 Request params for `self_hosted` environment configuration.
 
@@ -188,7 +188,7 @@ scope: optional "organization" or "account"
 
 The visibility scope for this environment. 'organization' makes the environment visible to all accounts. 'account' restricts visibility to the owning account only. Only applicable for self-hosted environments. If not specified, defaults based on organization type.
 
-Accepts one of the following:
+One of the following:
 
 "organization"
 
@@ -196,7 +196,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-BetaEnvironment = object { id, archived\_at, config, 7 more }
+BetaEnvironment object { id, archived\_at, config, 7 more }
 
 Unified Environment resource for both cloud and self-hosted environments.
 
@@ -212,9 +212,9 @@ config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  or [BetaS
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-Accepts one of the following:
+One of the following:
 
-BetaCloudConfig = object { networking, packages, type }
+BetaCloudConfig object { networking, packages, type }
 
 `cloud` environment configuration.
 
@@ -222,9 +222,9 @@ networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  or [BetaLimitedNetw
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
-BetaUnrestrictedNetwork = object { type }
+BetaUnrestrictedNetwork object { type }
 
 Unrestricted network access.
 
@@ -232,7 +232,7 @@ type: "unrestricted"
 
 Network policy type
 
-BetaLimitedNetwork = object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
+BetaLimitedNetwork object { allow\_mcp\_servers, allow\_package\_managers, allowed\_hosts, type }
 
 Limited network access.
 
@@ -288,7 +288,7 @@ type: "cloud"
 
 Environment type
 
-BetaSelfHostedConfig = object { type }
+BetaSelfHostedConfig object { type }
 
 Configuration for self-hosted environments.
 
@@ -324,7 +324,7 @@ scope: optional "organization" or "account"
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Accepts one of the following:
+One of the following:
 
 "organization"
 

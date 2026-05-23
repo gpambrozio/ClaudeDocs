@@ -20,7 +20,7 @@ GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
 ##### ModelsExpand Collapse
 
-FileRetrieveResponse = object { id, created\_at, filename, 4 more }
+FileRetrieveResponse object { id, created\_at, filename, 4 more }
 
 File metadata for GET /v1/compliance/apps/chats/files/{claude\_file\_id}.
 
@@ -55,7 +55,7 @@ size\_bytes: number
 
 Size in bytes of the file's preferred downloadable variant, if known
 
-FileDeleteResponse = object { id, type }
+FileDeleteResponse object { id, type }
 
 Response for deleting a compliance file.
 

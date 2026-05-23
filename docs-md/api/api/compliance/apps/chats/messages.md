@@ -12,7 +12,7 @@ GET/v1/compliance/apps/chats/{claude\_chat\_id}/messages
 
 ##### ModelsExpand Collapse
 
-MessageListResponse = object { id, artifacts, content, 4 more }
+MessageListResponse object { id, artifacts, content, 4 more }
 
 A single message in a chat conversation.
 
@@ -90,7 +90,7 @@ role: "assistant" or "user"
 
 Message sender (user or assistant)
 
-Accepts one of the following:
+One of the following:
 
 "assistant"
 

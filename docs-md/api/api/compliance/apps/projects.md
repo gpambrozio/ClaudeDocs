@@ -20,7 +20,7 @@ DELETE/v1/compliance/apps/projects/{project\_id}
 
 ##### ModelsExpand Collapse
 
-ProjectListResponse = object { id, created\_at, deleted\_at, 6 more }
+ProjectListResponse object { id, created\_at, deleted\_at, 6 more }
 
 Project information for compliance responses.
 
@@ -68,7 +68,7 @@ email\_address: string
 
 User's email address
 
-ProjectRetrieveResponse = object { id, attachments\_count, chats\_count, 10 more }
+ProjectRetrieveResponse object { id, attachments\_count, chats\_count, 10 more }
 
 Detailed project information for compliance responses.
 
@@ -132,7 +132,7 @@ email\_address: string
 
 User's email address
 
-ProjectDeleteResponse = object { id, type }
+ProjectDeleteResponse object { id, type }
 
 Response for deleting a Claude project.
 
@@ -156,9 +156,9 @@ AttachmentListResponse = object { id, created\_at, filename, 2 more }  or object
 
 File attachment reference for compliance responses.
 
-Accepts one of the following:
+One of the following:
 
-ComplianceProjectFileReference = object { id, created\_at, filename, 2 more }
+ComplianceProjectFileReference object { id, created\_at, filename, 2 more }
 
 File attachment reference for compliance responses.
 
@@ -182,7 +182,7 @@ type: "project\_file"
 
 Discriminator marking this as a binary file
 
-ComplianceProjectDocReference = object { id, created\_at, filename, 2 more }
+ComplianceProjectDocReference object { id, created\_at, filename, 2 more }
 
 Project document attachment reference for compliance responses.
 
@@ -222,7 +222,7 @@ DELETE/v1/compliance/apps/projects/documents/{document\_id}
 
 ##### ModelsExpand Collapse
 
-DocumentRetrieveResponse = object { id, content, created\_at, 2 more }
+DocumentRetrieveResponse object { id, content, created\_at, 2 more }
 
 Project document information for compliance responses.
 
@@ -254,7 +254,7 @@ email\_address: string
 
 User's email address
 
-DocumentMetadataResponse = object { id, claude\_project\_id, created\_at, 5 more }
+DocumentMetadataResponse object { id, claude\_project\_id, created\_at, 5 more }
 
 Project document metadata for GET /v1/compliance/apps/projects/documents/{document\_id}/metadata.
 
@@ -301,7 +301,7 @@ email\_address: string
 
 User's email address
 
-DocumentDeleteResponse = object { id, type }
+DocumentDeleteResponse object { id, type }
 
 Response for deleting a project document.
 

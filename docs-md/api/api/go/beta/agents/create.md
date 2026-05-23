@@ -30,7 +30,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -38,7 +38,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -78,11 +78,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigParamsSpeedoptional
+Speed BetaManagedAgentsModelConfigParamsSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigParamsSpeedStandard BetaManagedAgentsModelConfigParamsSpeed = "standard"
 
@@ -92,11 +92,11 @@ Name param.Field[string]
 
 Body param: Human-readable name for the agent. 1-256 characters.
 
-Description param.Field[string]optional
+Description param.Field[string]Optional
 
 Body param: Description of what the agent does. Up to 2048 characters.
 
-MCPServers param.Field[[][BetaManagedAgentsURLMCPServerParamsResp](api/beta.md)]optional
+MCPServers param.Field[[][BetaManagedAgentsURLMCPServerParamsResp](api/beta.md)]Optional
 
 Body param: MCP servers this agent connects to. Maximum 20. Names must be unique within the array.
 
@@ -110,15 +110,15 @@ URL string
 
 Endpoint URL for the MCP server.
 
-Metadata param.Field[map[string, string]]optional
+Metadata param.Field[map[string, string]]Optional
 
 Body param: Arbitrary key-value metadata. Maximum 16 pairs, keys up to 64 chars, values up to 512 chars.
 
-Multiagent param.Field[[BetaManagedAgentsMultiagentParamsResp](api/beta.md)]optional
+Multiagent param.Field[[BetaManagedAgentsMultiagentParamsResp](api/beta.md)]Optional
 
 Body param: A coordinator topology: the session's primary thread orchestrates work by spawning session threads, each running an agent drawn from the `agents` roster.
 
-Skills param.Field[[][BetaManagedAgentsSkillParamsUnionResp](api/beta.md)]optional
+Skills param.Field[[][BetaManagedAgentsSkillParamsUnionResp](api/beta.md)]Optional
 
 Body param: Skills available to the agent. Maximum 20.
 
@@ -132,7 +132,7 @@ Identifier of the Anthropic skill (e.g., "xlsx").
 
 Type BetaManagedAgentsAnthropicSkillParamsType
 
-Version stringoptional
+Version stringOptional
 
 Version to pin. Defaults to latest if omitted.
 
@@ -146,15 +146,15 @@ Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
 
 Type BetaManagedAgentsCustomSkillParamsType
 
-Version stringoptional
+Version stringOptional
 
 Version to pin. Defaults to latest if omitted.
 
-System param.Field[string]optional
+System param.Field[string]Optional
 
 Body param: System prompt for the agent. Up to 100,000 characters.
 
-Tools param.Field[[]BetaAgentNewParamsToolUnion]optional
+Tools param.Field[[]BetaAgentNewParamsToolUnion]Optional
 
 Body param: Tool configurations available to the agent. Maximum of 128 tools across all toolsets allowed.
 
@@ -164,7 +164,7 @@ Configuration for built-in agent tools. Use this to enable or disable groups of 
 
 Type BetaManagedAgentsAgentToolset20260401ParamsType
 
-Configs [][BetaManagedAgentsAgentToolConfigParamsResp](api/beta.md)optional
+Configs [][BetaManagedAgentsAgentToolConfigParamsResp](api/beta.md)Optional
 
 Per-tool configuration overrides.
 
@@ -172,7 +172,7 @@ Name BetaManagedAgentsAgentToolConfigParamsName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigParamsNameBash BetaManagedAgentsAgentToolConfigParamsName = "bash"
 
@@ -190,15 +190,15 @@ const BetaManagedAgentsAgentToolConfigParamsNameWebFetch BetaManagedAgentsAgentT
 
 const BetaManagedAgentsAgentToolConfigParamsNameWebSearch BetaManagedAgentsAgentToolConfigParamsName = "web\_search"
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
 
-PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -212,19 +212,19 @@ Tool calls require user confirmation before execution.
 
 Type BetaManagedAgentsAlwaysAskPolicyType
 
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfigParamsResp](api/beta.md)optional
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfigParamsResp](api/beta.md)Optional
 
 Default configuration for all tools in a toolset.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -248,7 +248,7 @@ Name of the MCP server. Must match a server name from the mcp\_servers array. 1-
 
 Type BetaManagedAgentsMCPToolsetParamsType
 
-Configs [][BetaManagedAgentsMCPToolConfigParamsResp](api/beta.md)optional
+Configs [][BetaManagedAgentsMCPToolConfigParamsResp](api/beta.md)Optional
 
 Per-tool configuration overrides.
 
@@ -256,15 +256,15 @@ Name string
 
 Name of the MCP tool to configure. 1-128 characters.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled. Overrides the `default_config` setting.
 
-PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -278,19 +278,19 @@ Tool calls require user confirmation before execution.
 
 Type BetaManagedAgentsAlwaysAskPolicyType
 
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfigParamsResp](api/beta.md)optional
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfigParamsResp](api/beta.md)Optional
 
 Default configuration for all tools from an MCP server.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -316,15 +316,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -334,7 +334,7 @@ Unique name for the tool. 1-128 characters; letters, digits, underscores, and hy
 
 Type BetaManagedAgentsCustomToolParamsType
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -342,7 +342,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -432,7 +432,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -440,7 +440,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -480,11 +480,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -510,7 +510,7 @@ Name string
 
 Skills []BetaManagedAgentsAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -536,7 +536,7 @@ System string
 
 Tools []BetaManagedAgentsAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -548,7 +548,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -570,7 +570,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -594,7 +594,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -622,7 +622,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -646,7 +646,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -674,15 +674,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 

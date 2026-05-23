@@ -47,7 +47,7 @@ RFC 3339 timestamp when the event occurred.
 
 Data [BetaWebhookEventDataUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebhookSessionCreatedEventData struct{…}
 
@@ -335,7 +335,7 @@ Object type. Always `event` for webhook payloads.
 
 type BetaWebhookEventDataUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebhookSessionCreatedEventData struct{…}
 
@@ -909,7 +909,7 @@ RFC 3339 timestamp when the event occurred.
 
 Data [BetaWebhookEventDataUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebhookSessionCreatedEventData struct{…}
 

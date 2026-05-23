@@ -108,7 +108,7 @@ State BetaSelfHostedWorkState
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
 
@@ -148,7 +148,7 @@ State BetaSelfHostedWorkHeartbeatResponseState
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSelfHostedWorkHeartbeatResponseStateQueued BetaSelfHostedWorkHeartbeatResponseState = "queued"
 
@@ -220,7 +220,7 @@ State BetaSelfHostedWorkState
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
 
@@ -278,7 +278,7 @@ type BetaSelfHostedWorkStopRequest struct{…}
 
 Request to stop a work item.
 
-Force booloptional
+Force boolOptional
 
 If true, immediately stop work without graceful shutdown
 

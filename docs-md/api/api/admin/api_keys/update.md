@@ -24,7 +24,7 @@ status: optional "active" or "inactive" or "archived"
 
 Status of the API key.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 
@@ -34,7 +34,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-APIKey = object { id, created\_at, created\_by, 6 more }
+APIKey object { id, created\_at, created\_by, 6 more }
 
 id: string
 
@@ -72,7 +72,7 @@ status: "active" or "inactive" or "archived" or "expired"
 
 Status of the API key.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 

@@ -52,7 +52,7 @@ networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  | [BetaLimitedNetwo
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 BetaUnrestrictedNetwork { type }
 
@@ -133,7 +133,7 @@ networking?: [BetaUnrestrictedNetwork](api/beta.md) { type }  | [BetaLimitedNetw
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-Accepts one of the following:
+One of the following:
 
 BetaUnrestrictedNetwork { type }
 
@@ -216,7 +216,7 @@ config: [BetaCloudConfig](api/beta.md) { networking, packages, type }  | [BetaSe
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-Accepts one of the following:
+One of the following:
 
 BetaCloudConfig { networking, packages, type }
 
@@ -226,7 +226,7 @@ networking: [BetaUnrestrictedNetwork](api/beta.md) { type }  | [BetaLimitedNetwo
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 BetaUnrestrictedNetwork { type }
 
@@ -328,7 +328,7 @@ scope?: "organization" | "account"
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Accepts one of the following:
+One of the following:
 
 "organization"
 
@@ -583,7 +583,7 @@ state: "queued" | "starting" | "active" | 2 more
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -623,7 +623,7 @@ state: "queued" | "starting" | "active" | 2 more
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 
@@ -695,7 +695,7 @@ state: "queued" | "starting" | "active" | 2 more
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 

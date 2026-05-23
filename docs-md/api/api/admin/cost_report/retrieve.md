@@ -27,7 +27,7 @@ group\_by: optional array of "workspace\_id" or "description"
 
 Group by any subset of the available options.
 
-Accepts one of the following:
+One of the following:
 
 "workspace\_id"
 
@@ -51,7 +51,7 @@ To use multiple betas, use a comma separated list like `beta1,beta2` or specify 
 
 ##### ReturnsExpand Collapse
 
-CostReport = object { data, has\_more, next\_page }
+CostReport object { data, has\_more, next\_page }
 
 data: array of object { ending\_at, results, starting\_at }
 
@@ -71,7 +71,7 @@ context\_window: "0-200k" or "200k-1M"
 
 Input context window used. `null` if not grouping by description or for non-token costs.
 
-Accepts one of the following:
+One of the following:
 
 "0-200k"
 
@@ -81,7 +81,7 @@ cost\_type: "tokens" or "web\_search" or "code\_execution" or "session\_usage"
 
 Type of cost. `null` if not grouping by description.
 
-Accepts one of the following:
+One of the following:
 
 "tokens"
 
@@ -112,7 +112,7 @@ service\_tier: "standard" or "batch"
 
 Service tier used. `null` if not grouping by description or for non-token costs.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -122,7 +122,7 @@ token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_inpu
 
 Type of token. `null` if not grouping by description or for non-token costs.
 
-Accepts one of the following:
+One of the following:
 
 "uncached\_input\_tokens"
 

@@ -16,19 +16,19 @@ List Vaults
 
 params BetaVaultListParams
 
-IncludeArchived param.Field[bool]optional
+IncludeArchived param.Field[bool]Optional
 
 Query param: Whether to include archived vaults in the results.
 
-Limit param.Field[int64]optional
+Limit param.Field[int64]Optional
 
 Query param: Maximum number of vaults to return per page. Defaults to 20, maximum 100.
 
-Page param.Field[string]optional
+Page param.Field[string]Optional
 
 Query param: Opaque pagination token from a previous `list_vaults` response.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -36,7 +36,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 

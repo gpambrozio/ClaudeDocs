@@ -16,7 +16,7 @@ GET/v1/compliance/apps/artifacts/{artifact\_version\_id}/content
 
 ##### ModelsExpand Collapse
 
-ArtifactRetrieveResponse = object { id, artifact\_type, claude\_chat\_id, 5 more }
+ArtifactRetrieveResponse object { id, artifact\_type, claude\_chat\_id, 5 more }
 
 Artifact version metadata for GET /v1/compliance/apps/artifacts/{artifact\_version\_id}.
 

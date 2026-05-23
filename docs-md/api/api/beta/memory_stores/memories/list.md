@@ -28,7 +28,7 @@ order: optional "asc" or "desc"
 
 Query parameter for order
 
-Accepts one of the following:
+One of the following:
 
 "asc"
 
@@ -50,7 +50,7 @@ view: optional [BetaManagedAgentsMemoryView](api/beta.md)
 
 Query parameter for view
 
-Accepts one of the following:
+One of the following:
 
 "basic"
 
@@ -62,13 +62,13 @@ Accepts one of the following:
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -126,9 +126,9 @@ data: optional array of [BetaManagedAgentsMemoryListItem](api/beta.md)
 
 One page of results. Each item is either a `memory` object or, when `depth` was set, a `memory_prefix` rollup marker. Items appear in the requested `order_by`/`order`.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsMemory = object { id, content\_sha256, content\_size\_bytes, 7 more }
+BetaManagedAgentsMemory object { id, content\_sha256, content\_size\_bytes, 7 more }
 
 A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -170,7 +170,7 @@ content: optional string
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-BetaManagedAgentsMemoryPrefix = object { path, type }
+BetaManagedAgentsMemoryPrefix object { path, type }
 
 A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 

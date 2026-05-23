@@ -48,7 +48,7 @@ DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### ModelsExpand Collapse
 
-WorkspaceMember = object { type, user\_id, workspace\_id, workspace\_role }
+WorkspaceMember object { type, user\_id, workspace\_id, workspace\_role }
 
 type: "workspace\_member"
 
@@ -68,7 +68,7 @@ workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_rest
 
 Role of the Workspace Member.
 
-Accepts one of the following:
+One of the following:
 
 "workspace\_user"
 
@@ -80,7 +80,7 @@ Accepts one of the following:
 
 "workspace\_billing"
 
-MemberDeleteResponse = object { type, user\_id, workspace\_id }
+MemberDeleteResponse object { type, user\_id, workspace\_id }
 
 type: "workspace\_member\_deleted"
 
@@ -104,7 +104,7 @@ GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
 ##### ModelsExpand Collapse
 
-RateLimitListResponse = object { data, next\_page }
+RateLimitListResponse object { data, next\_page }
 
 data: array of object { group\_type, limits, models, type }
 
@@ -114,7 +114,7 @@ group\_type: "model\_group" or "batch" or "token\_count" or 3 more
 
 The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
-Accepts one of the following:
+One of the following:
 
 "model\_group"
 

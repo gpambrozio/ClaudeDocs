@@ -92,7 +92,7 @@ ProcessingStatus processingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 IN\_PROGRESS("in\_progress")
 
@@ -156,7 +156,7 @@ class MessageBatchErroredResult:
 
 [ErrorObject](api/$shared.md) error
 
-Accepts one of the following:
+One of the following:
 
 class InvalidRequestError:
 
@@ -238,7 +238,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 class MessageBatchSucceededResult:
 
@@ -291,7 +291,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock:
 
@@ -301,7 +301,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -431,7 +431,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -467,7 +467,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -493,7 +493,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 WEB\_SEARCH("web\_search")
 
@@ -517,7 +517,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -541,13 +541,13 @@ JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"co
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 [WebSearchToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -585,7 +585,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -609,13 +609,13 @@ JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"co
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 [WebFetchToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -647,7 +647,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -691,13 +691,13 @@ class CodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 [CodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -751,13 +751,13 @@ class BashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 [BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -795,13 +795,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -823,7 +823,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -867,13 +867,13 @@ class ToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 [ToolSearchToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -915,7 +915,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -1001,7 +1001,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -1030,7 +1030,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 END\_TURN("end\_turn")
 
@@ -1116,7 +1116,7 @@ Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -1132,7 +1132,7 @@ class MessageBatchErroredResult:
 
 [ErrorObject](api/$shared.md) error
 
-Accepts one of the following:
+One of the following:
 
 class InvalidRequestError:
 
@@ -1289,7 +1289,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock:
 
@@ -1299,7 +1299,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -1429,7 +1429,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -1465,7 +1465,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -1491,7 +1491,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 WEB\_SEARCH("web\_search")
 
@@ -1515,7 +1515,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -1539,13 +1539,13 @@ JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"co
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 [WebSearchToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1583,7 +1583,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -1607,13 +1607,13 @@ JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"co
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 [WebFetchToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1645,7 +1645,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -1689,13 +1689,13 @@ class CodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 [CodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1749,13 +1749,13 @@ class BashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 [BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1793,13 +1793,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1821,7 +1821,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -1865,13 +1865,13 @@ class ToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 [ToolSearchToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -1913,7 +1913,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -1999,7 +1999,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -2028,7 +2028,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 END\_TURN("end\_turn")
 
@@ -2114,7 +2114,7 @@ Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 
@@ -2130,7 +2130,7 @@ class MessageBatchErroredResult:
 
 [ErrorObject](api/$shared.md) error
 
-Accepts one of the following:
+One of the following:
 
 class InvalidRequestError:
 
@@ -2251,7 +2251,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock:
 
@@ -2261,7 +2261,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -2391,7 +2391,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -2427,7 +2427,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -2453,7 +2453,7 @@ Input input
 
 Name name
 
-Accepts one of the following:
+One of the following:
 
 WEB\_SEARCH("web\_search")
 
@@ -2477,7 +2477,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -2501,13 +2501,13 @@ JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"co
 
 [WebSearchToolResultBlockContent](api/messages.md) content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 [WebSearchToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2545,7 +2545,7 @@ Caller caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -2569,13 +2569,13 @@ JsonValue; type "code\_execution\_20260120"constant"code\_execution\_20260120"co
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 [WebFetchToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2607,7 +2607,7 @@ boolean enabled
 
 Source source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -2651,13 +2651,13 @@ class CodeExecutionToolResultBlock:
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 [CodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2711,13 +2711,13 @@ class BashCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 [BashCodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2755,13 +2755,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2783,7 +2783,7 @@ String content
 
 FileType fileType
 
-Accepts one of the following:
+One of the following:
 
 TEXT("text")
 
@@ -2827,13 +2827,13 @@ class ToolSearchToolResultBlock:
 
 Content content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 [ToolSearchToolResultErrorCode](api/messages.md) errorCode
 
-Accepts one of the following:
+One of the following:
 
 INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 
@@ -2875,7 +2875,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -2961,7 +2961,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 CYBER("cyber")
 
@@ -2990,7 +2990,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 END\_TURN("end\_turn")
 
@@ -3076,7 +3076,7 @@ Optional<ServiceTier> serviceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 STANDARD("standard")
 

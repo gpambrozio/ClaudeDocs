@@ -34,13 +34,13 @@ Expected last\_heartbeat for conditional update (optimistic concurrency). Use li
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-UnionMember0 = string
+string
 
-UnionMember1 = "message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 22 more
 
-Accepts one of the following:
+One of the following:
 
 "message-batches-2024-09-24"
 
@@ -94,7 +94,7 @@ Accepts one of the following:
 
 ##### ReturnsExpand Collapse
 
-BetaSelfHostedWorkHeartbeatResponse = object { last\_heartbeat, lease\_extended, state, 2 more }
+BetaSelfHostedWorkHeartbeatResponse object { last\_heartbeat, lease\_extended, state, 2 more }
 
 Response after recording a heartbeat for a work item.
 
@@ -110,7 +110,7 @@ state: "queued" or "starting" or "active" or 2 more
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 "queued"
 

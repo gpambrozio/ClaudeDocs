@@ -28,7 +28,7 @@ POST/v1/user\_profiles/{user\_profile\_id}/enrollment\_url
 
 ##### ModelsExpand Collapse
 
-BetaUserProfile = object { id, created\_at, metadata, 6 more }
+BetaUserProfile object { id, created\_at, metadata, 6 more }
 
 id: string
 
@@ -46,7 +46,7 @@ relationship: "external" or "resold" or "internal"
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 "external"
 
@@ -62,7 +62,7 @@ status: "active" or "pending" or "rejected"
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 
@@ -86,7 +86,7 @@ name: optional string
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
-BetaUserProfileEnrollmentURL = object { expires\_at, type, url }
+BetaUserProfileEnrollmentURL object { expires\_at, type, url }
 
 expires\_at: string
 
@@ -100,13 +100,13 @@ url: string
 
 Enrollment URL to send to the end user. Valid until `expires_at`.
 
-BetaUserProfileTrustGrant = object { status }
+BetaUserProfileTrustGrant object { status }
 
 status: "active" or "pending" or "rejected"
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 "active"
 

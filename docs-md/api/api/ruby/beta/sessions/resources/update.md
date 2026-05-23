@@ -26,13 +26,13 @@ betas: Array[[AnthropicBeta](api/beta.md)]
 
 Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
-String
+String = String
 
-:"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 22 more
 
-Accepts one of the following:
+One of the following:
 
 :"message-batches-2024-09-24"
 
@@ -90,7 +90,7 @@ ResourceUpdateResponse = [BetaManagedAgentsGitHubRepositoryResource](api/beta.md
 
 The updated session resource.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource { id, created\_at, mount\_path, 4 more }
 
@@ -112,7 +112,7 @@ url: String
 
 checkout: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout { name, type }
 
@@ -162,7 +162,7 @@ access: :read\_write | :read\_only
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 :read\_write
 

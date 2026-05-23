@@ -30,7 +30,7 @@ order?: "asc" | "desc"
 
 Query param: Query parameter for order
 
-Accepts one of the following:
+One of the following:
 
 "asc"
 
@@ -52,7 +52,7 @@ view?: [BetaManagedAgentsMemoryView](api/beta.md)
 
 Query param: Query parameter for view
 
-Accepts one of the following:
+One of the following:
 
 "basic"
 
@@ -62,7 +62,7 @@ betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 (string & {})
 
@@ -124,7 +124,7 @@ BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta.md) { id, c
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsMemory { id, content\_sha256, content\_size\_bytes, 7 more }
 

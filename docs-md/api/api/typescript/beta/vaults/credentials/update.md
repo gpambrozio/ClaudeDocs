@@ -26,7 +26,7 @@ auth?: [BetaManagedAgentsMCPOAuthUpdateParams](api/beta.md) { type, access\_toke
 
 Body param: Updated authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsMCPOAuthUpdateParams { type, access\_token, expires\_at, refresh }
 
@@ -58,7 +58,7 @@ token\_endpoint\_auth?: [BetaManagedAgentsTokenEndpointAuthBasicUpdateParam](api
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsTokenEndpointAuthBasicUpdateParam { type, client\_secret }
 
@@ -102,7 +102,7 @@ betas?: Array<[AnthropicBeta](api/beta.md)>
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
-Accepts one of the following:
+One of the following:
 
 (string & {})
 
@@ -176,7 +176,7 @@ auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, t
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsMCPOAuthAuthResponse { mcp\_server\_url, type, expires\_at, refresh }
 
@@ -208,7 +208,7 @@ token\_endpoint\_auth: [BetaManagedAgentsTokenEndpointAuthNoneResponse](api/beta
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsTokenEndpointAuthNoneResponse { type }
 

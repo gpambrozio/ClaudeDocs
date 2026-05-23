@@ -74,7 +74,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more
 
@@ -120,7 +120,7 @@ speed?: "standard" | "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -146,7 +146,7 @@ name: string
 
 skills: Array<[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } >
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -172,7 +172,7 @@ system: string | null
 
 tools: Array<[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } >
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -184,7 +184,7 @@ name: "bash" | "edit" | "read" | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -206,7 +206,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -230,7 +230,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -258,7 +258,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -282,7 +282,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -356,7 +356,7 @@ name: "bash" | "edit" | "read" | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -378,7 +378,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -400,7 +400,7 @@ name: "bash" | "edit" | "read" | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -426,7 +426,7 @@ permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type } 
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -450,7 +450,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -476,7 +476,7 @@ permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type } 
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -500,7 +500,7 @@ name: "bash" | "edit" | "read" | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -522,7 +522,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -546,7 +546,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -651,7 +651,7 @@ name: "bash" | "edit" | "read" | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -677,7 +677,7 @@ permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type } 
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -703,7 +703,7 @@ permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type } 
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -900,7 +900,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -930,7 +930,7 @@ permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type } 
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -956,7 +956,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -980,7 +980,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1008,7 +1008,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1034,7 +1034,7 @@ permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type } 
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1074,7 +1074,7 @@ permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type } 
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1100,7 +1100,7 @@ permission\_policy?: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type } 
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1120,7 +1120,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more
 
@@ -1172,7 +1172,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more
 
@@ -1218,7 +1218,7 @@ speed?: "standard" | "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -1234,7 +1234,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more
 
@@ -1280,7 +1280,7 @@ speed?: "standard" | "fast" | null
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -1310,7 +1310,7 @@ agents: Array<[BetaManagedAgentsMultiagentRosterEntryParams](api/beta.md)>
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -1368,7 +1368,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7" | "claude-opus-4-6" | "claude-sonnet-4-6" | 6 more
 
@@ -1414,7 +1414,7 @@ speed?: "standard" | "fast"
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -1424,7 +1424,7 @@ name: string
 
 skills: Array<[BetaManagedAgentsAnthropicSkill](api/beta.md) { skill\_id, type, version }  | [BetaManagedAgentsCustomSkill](api/beta.md) { skill\_id, type, version } >
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAnthropicSkill { skill\_id, type, version }
 
@@ -1450,7 +1450,7 @@ system: string | null
 
 tools: Array<[BetaManagedAgentsAgentToolset20260401](api/beta.md) { configs, default\_config, type }  | [BetaManagedAgentsMCPToolset](api/beta.md) { configs, default\_config, mcp\_server\_name, type }  | [BetaManagedAgentsCustomTool](api/beta.md) { description, input\_schema, name, type } >
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAgentToolset20260401 { configs, default\_config, type }
 
@@ -1462,7 +1462,7 @@ name: "bash" | "edit" | "read" | 5 more
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 "bash"
 
@@ -1484,7 +1484,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1508,7 +1508,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1536,7 +1536,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1560,7 +1560,7 @@ permission\_policy: [BetaManagedAgentsAlwaysAllowPolicy](api/beta.md) { type }  
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAlwaysAllowPolicy { type }
 
@@ -1612,7 +1612,7 @@ BetaManagedAgentsSkillParams = [BetaManagedAgentsAnthropicSkillParams](api/beta.
 
 Skill to load in the session container.
 
-Accepts one of the following:
+One of the following:
 
 BetaManagedAgentsAnthropicSkillParams { skill\_id, type, version }
 

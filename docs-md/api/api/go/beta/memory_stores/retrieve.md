@@ -18,7 +18,7 @@ memoryStoreID string
 
 query BetaMemoryStoreGetParams
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Optional header to specify the beta version(s) you want to use.
 
@@ -26,7 +26,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -102,15 +102,15 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-ArchivedAt Timeoptional
+ArchivedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Description stringoptional
+Description stringOptional
 
 Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-Metadata map[string, string]optional
+Metadata map[string, string]Optional
 
 Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 

@@ -84,7 +84,7 @@ url: str
 
 checkout: Optional[Checkout]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout: …
 
@@ -116,7 +116,7 @@ access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -142,7 +142,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 A memory store attached to an agent session.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource: …
 
@@ -164,7 +164,7 @@ url: str
 
 checkout: Optional[Checkout]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout: …
 
@@ -214,7 +214,7 @@ access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -240,7 +240,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 The requested session resource.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource: …
 
@@ -262,7 +262,7 @@ url: str
 
 checkout: Optional[Checkout]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout: …
 
@@ -312,7 +312,7 @@ access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 
@@ -338,7 +338,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 The updated session resource.
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsGitHubRepositoryResource: …
 
@@ -360,7 +360,7 @@ url: str
 
 checkout: Optional[Checkout]
 
-Accepts one of the following:
+One of the following:
 
 class BetaManagedAgentsBranchCheckout: …
 
@@ -410,7 +410,7 @@ access: Optional[Literal["read\_write", "read\_only"]]
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 "read\_write"
 

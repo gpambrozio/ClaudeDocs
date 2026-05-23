@@ -26,7 +26,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -94,13 +94,13 @@ class BashCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -138,13 +138,13 @@ class BashCodeExecutionToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultErrorParam:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -195,7 +195,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -205,7 +205,7 @@ class BashCodeExecutionToolResultError:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -235,7 +235,7 @@ class BashCodeExecutionToolResultErrorParam:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -264,7 +264,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -446,7 +446,7 @@ class CitationsDelta:
 
 required Citation Citation
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -652,7 +652,7 @@ JsonElement Type "code\_execution\_20250522"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -677,7 +677,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -703,7 +703,7 @@ JsonElement Type "code\_execution\_20250825"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -728,7 +728,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -756,7 +756,7 @@ JsonElement Type "code\_execution\_20260120"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -781,7 +781,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -801,13 +801,13 @@ required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -865,7 +865,7 @@ class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -917,13 +917,13 @@ required [CodeExecutionToolResultBlockParamContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultErrorParam:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -990,7 +990,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1004,7 +1004,7 @@ class CodeExecutionToolResultErrorParam:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -1054,7 +1054,7 @@ class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -1080,7 +1080,7 @@ class CodeExecutionToolResultErrorParam:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -1138,7 +1138,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1156,7 +1156,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -1286,7 +1286,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -1322,7 +1322,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -1348,7 +1348,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -1372,7 +1372,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -1396,13 +1396,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -1440,7 +1440,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -1464,13 +1464,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -1502,7 +1502,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -1546,13 +1546,13 @@ required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -1606,13 +1606,13 @@ class BashCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -1650,13 +1650,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -1678,7 +1678,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -1722,13 +1722,13 @@ class ToolSearchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -1791,7 +1791,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1799,7 +1799,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -1901,7 +1901,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -1909,7 +1909,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -1946,7 +1946,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -1956,7 +1956,7 @@ class DocumentBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -1978,13 +1978,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -2009,7 +2009,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2017,7 +2017,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -2119,7 +2119,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -2127,7 +2127,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -2164,7 +2164,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2197,7 +2197,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2236,7 +2236,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2244,7 +2244,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -2365,7 +2365,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2416,7 +2416,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2426,7 +2426,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -2471,7 +2471,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2479,13 +2479,13 @@ Accepts one of the following:
 
 Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<Block>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -2510,7 +2510,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2518,7 +2518,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -2620,7 +2620,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -2628,7 +2628,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -2665,7 +2665,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2696,7 +2696,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2704,7 +2704,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -2825,7 +2825,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2839,7 +2839,7 @@ class DocumentBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -2861,13 +2861,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -2892,7 +2892,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -2900,7 +2900,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -3002,7 +3002,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -3010,7 +3010,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -3047,7 +3047,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3080,7 +3080,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3119,7 +3119,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3135,7 +3135,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -3170,7 +3170,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3180,7 +3180,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -3206,7 +3206,7 @@ class WebSearchToolResultBlockParam:
 
 required [WebSearchToolResultBlockParamContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 IReadOnlyList<[WebSearchResultBlockParam](api/messages.md)>
 
@@ -3224,7 +3224,7 @@ class WebSearchToolRequestError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -3261,7 +3261,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3271,7 +3271,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -3297,13 +3297,13 @@ class WebFetchToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlockParam:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -3329,7 +3329,7 @@ required [DocumentBlockParam](api/messages.md) Content
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -3351,13 +3351,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -3382,7 +3382,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3390,7 +3390,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -3492,7 +3492,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -3500,7 +3500,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -3537,7 +3537,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3570,7 +3570,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3615,7 +3615,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3625,7 +3625,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -3653,13 +3653,13 @@ required [CodeExecutionToolResultBlockParamContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultErrorParam:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -3726,7 +3726,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3736,13 +3736,13 @@ class BashCodeExecutionToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultErrorParam:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -3793,7 +3793,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3803,13 +3803,13 @@ class TextEditorCodeExecutionToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultErrorParam:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -3831,7 +3831,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -3888,7 +3888,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3898,13 +3898,13 @@ class ToolSearchToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultErrorParam:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -3941,7 +3941,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -3970,7 +3970,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -4002,7 +4002,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -4012,13 +4012,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -4043,7 +4043,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -4051,7 +4051,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -4153,7 +4153,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -4161,7 +4161,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -4198,7 +4198,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -4231,7 +4231,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -4239,7 +4239,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -4341,7 +4341,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -4349,7 +4349,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -4386,7 +4386,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -4408,7 +4408,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -4436,7 +4436,7 @@ class DocumentBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -4458,13 +4458,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -4489,7 +4489,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -4497,7 +4497,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -4599,7 +4599,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -4607,7 +4607,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -4644,7 +4644,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -4677,7 +4677,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -4731,7 +4731,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -4739,7 +4739,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -4776,7 +4776,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -4808,7 +4808,7 @@ JsonElement Type "memory\_20250818"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -4833,7 +4833,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -4898,7 +4898,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock:
 
@@ -4908,7 +4908,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -5038,7 +5038,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -5074,7 +5074,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -5100,7 +5100,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -5124,7 +5124,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -5148,13 +5148,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -5192,7 +5192,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -5216,13 +5216,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -5254,7 +5254,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -5298,13 +5298,13 @@ required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -5358,13 +5358,13 @@ class BashCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -5402,13 +5402,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -5430,7 +5430,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -5474,13 +5474,13 @@ class ToolSearchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -5522,7 +5522,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -5608,7 +5608,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"Cyber
 
@@ -5637,7 +5637,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"EndTurn
 
@@ -5723,7 +5723,7 @@ required ServiceTier? ServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -5761,7 +5761,7 @@ minLength1
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -5786,7 +5786,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -5826,7 +5826,7 @@ JsonElement Type "bash\_20250124"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -5851,7 +5851,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -5879,7 +5879,7 @@ JsonElement Type "code\_execution\_20250522"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -5904,7 +5904,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -5930,7 +5930,7 @@ JsonElement Type "code\_execution\_20250825"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -5955,7 +5955,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -5983,7 +5983,7 @@ JsonElement Type "code\_execution\_20260120"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6008,7 +6008,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6034,7 +6034,7 @@ JsonElement Type "memory\_20250818"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6059,7 +6059,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6087,7 +6087,7 @@ JsonElement Type "text\_editor\_20250124"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6112,7 +6112,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6140,7 +6140,7 @@ JsonElement Type "text\_editor\_20250429"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6165,7 +6165,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6193,7 +6193,7 @@ JsonElement Type "text\_editor\_20250728"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6218,7 +6218,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6250,7 +6250,7 @@ JsonElement Type "web\_search\_20250305"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6283,7 +6283,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6335,7 +6335,7 @@ JsonElement Type "web\_fetch\_20250910"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6368,7 +6368,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6408,7 +6408,7 @@ JsonElement Type "web\_search\_20260209"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6441,7 +6441,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6493,7 +6493,7 @@ JsonElement Type "web\_fetch\_20260209"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6526,7 +6526,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6568,7 +6568,7 @@ JsonElement Type "web\_fetch\_20260309"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6601,7 +6601,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6643,7 +6643,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 required Type Type
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"ToolSearchToolBm25\_20251119
 
@@ -6651,7 +6651,7 @@ Accepts one of the following:
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6676,7 +6676,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6700,7 +6700,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 required Type Type
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"ToolSearchToolRegex20251119
 
@@ -6708,7 +6708,7 @@ Accepts one of the following:
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -6733,7 +6733,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6781,13 +6781,13 @@ class MessageParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockParam](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -6812,7 +6812,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6820,7 +6820,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -6922,7 +6922,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -6930,7 +6930,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -6967,7 +6967,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -6977,7 +6977,7 @@ class DocumentBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -6999,13 +6999,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -7030,7 +7030,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7038,7 +7038,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -7140,7 +7140,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -7148,7 +7148,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -7185,7 +7185,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7218,7 +7218,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7257,7 +7257,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7265,7 +7265,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -7386,7 +7386,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7437,7 +7437,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7447,7 +7447,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -7492,7 +7492,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7500,13 +7500,13 @@ Accepts one of the following:
 
 Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<Block>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -7531,7 +7531,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7539,7 +7539,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -7641,7 +7641,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -7649,7 +7649,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -7686,7 +7686,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7717,7 +7717,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7725,7 +7725,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -7846,7 +7846,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7860,7 +7860,7 @@ class DocumentBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -7882,13 +7882,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -7913,7 +7913,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -7921,7 +7921,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -8023,7 +8023,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -8031,7 +8031,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -8068,7 +8068,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8101,7 +8101,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8140,7 +8140,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8156,7 +8156,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -8191,7 +8191,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8201,7 +8201,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -8227,7 +8227,7 @@ class WebSearchToolResultBlockParam:
 
 required [WebSearchToolResultBlockParamContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 IReadOnlyList<[WebSearchResultBlockParam](api/messages.md)>
 
@@ -8245,7 +8245,7 @@ class WebSearchToolRequestError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -8282,7 +8282,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8292,7 +8292,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -8318,13 +8318,13 @@ class WebFetchToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlockParam:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -8350,7 +8350,7 @@ required [DocumentBlockParam](api/messages.md) Content
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -8372,13 +8372,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -8403,7 +8403,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8411,7 +8411,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -8513,7 +8513,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -8521,7 +8521,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -8558,7 +8558,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8591,7 +8591,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8636,7 +8636,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8646,7 +8646,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -8674,13 +8674,13 @@ required [CodeExecutionToolResultBlockParamContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultErrorParam:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -8747,7 +8747,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8757,13 +8757,13 @@ class BashCodeExecutionToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultErrorParam:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -8814,7 +8814,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8824,13 +8824,13 @@ class TextEditorCodeExecutionToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultErrorParam:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -8852,7 +8852,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -8909,7 +8909,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8919,13 +8919,13 @@ class ToolSearchToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultErrorParam:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -8962,7 +8962,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -8991,7 +8991,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -9023,7 +9023,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -9031,7 +9031,7 @@ Accepts one of the following:
 
 required Role Role
 
-Accepts one of the following:
+One of the following:
 
 "user"User
 
@@ -9059,7 +9059,7 @@ Effort? Effort
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 "low"Low
 
@@ -9107,7 +9107,7 @@ class CitationsDelta:
 
 required Citation Citation
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -9229,7 +9229,7 @@ class RawContentBlockDeltaEvent:
 
 required [RawContentBlockDelta](api/messages.md) Delta
 
-Accepts one of the following:
+One of the following:
 
 class TextDelta:
 
@@ -9247,7 +9247,7 @@ class CitationsDelta:
 
 required Citation Citation
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -9375,7 +9375,7 @@ required ContentBlock ContentBlock
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock:
 
@@ -9385,7 +9385,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -9515,7 +9515,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -9551,7 +9551,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -9577,7 +9577,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -9601,7 +9601,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -9625,13 +9625,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -9669,7 +9669,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -9693,13 +9693,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -9731,7 +9731,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -9775,13 +9775,13 @@ required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -9835,13 +9835,13 @@ class BashCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -9879,13 +9879,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -9907,7 +9907,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -9951,13 +9951,13 @@ class ToolSearchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -10029,7 +10029,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"Cyber
 
@@ -10045,7 +10045,7 @@ JsonElement Type "refusal"constant
 
 required [StopReason](api/messages.md)? StopReason
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"EndTurn
 
@@ -10154,7 +10154,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock:
 
@@ -10164,7 +10164,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -10294,7 +10294,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -10330,7 +10330,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -10356,7 +10356,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -10380,7 +10380,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -10404,13 +10404,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -10448,7 +10448,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -10472,13 +10472,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -10510,7 +10510,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -10554,13 +10554,13 @@ required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -10614,13 +10614,13 @@ class BashCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -10658,13 +10658,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -10686,7 +10686,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -10730,13 +10730,13 @@ class ToolSearchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -10778,7 +10778,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -10864,7 +10864,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"Cyber
 
@@ -10893,7 +10893,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"EndTurn
 
@@ -10979,7 +10979,7 @@ required ServiceTier? ServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -11046,7 +11046,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock:
 
@@ -11056,7 +11056,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -11186,7 +11186,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -11222,7 +11222,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -11248,7 +11248,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -11272,7 +11272,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -11296,13 +11296,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -11340,7 +11340,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -11364,13 +11364,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -11402,7 +11402,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -11446,13 +11446,13 @@ required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -11506,13 +11506,13 @@ class BashCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -11550,13 +11550,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -11578,7 +11578,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -11622,13 +11622,13 @@ class ToolSearchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -11670,7 +11670,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -11756,7 +11756,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"Cyber
 
@@ -11785,7 +11785,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"EndTurn
 
@@ -11871,7 +11871,7 @@ required ServiceTier? ServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -11907,7 +11907,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"Cyber
 
@@ -11923,7 +11923,7 @@ JsonElement Type "refusal"constant
 
 required [StopReason](api/messages.md)? StopReason
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"EndTurn
 
@@ -11991,7 +11991,7 @@ required ContentBlock ContentBlock
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock:
 
@@ -12001,7 +12001,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -12131,7 +12131,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -12167,7 +12167,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -12193,7 +12193,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -12217,7 +12217,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -12241,13 +12241,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -12285,7 +12285,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -12309,13 +12309,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -12347,7 +12347,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -12391,13 +12391,13 @@ required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -12451,13 +12451,13 @@ class BashCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -12495,13 +12495,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -12523,7 +12523,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -12567,13 +12567,13 @@ class ToolSearchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -12617,7 +12617,7 @@ class RawContentBlockDeltaEvent:
 
 required [RawContentBlockDelta](api/messages.md) Delta
 
-Accepts one of the following:
+One of the following:
 
 class TextDelta:
 
@@ -12635,7 +12635,7 @@ class CitationsDelta:
 
 required Citation Citation
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -12785,7 +12785,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"Cyber
 
@@ -12824,7 +12824,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -12832,7 +12832,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -12953,7 +12953,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -12995,7 +12995,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -13021,7 +13021,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -13047,7 +13047,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -13082,7 +13082,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -13092,7 +13092,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -13142,7 +13142,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -13273,7 +13273,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -13281,7 +13281,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -13631,13 +13631,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -13659,7 +13659,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -13703,13 +13703,13 @@ class TextEditorCodeExecutionToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultErrorParam:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -13731,7 +13731,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -13788,7 +13788,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -13798,7 +13798,7 @@ class TextEditorCodeExecutionToolResultError:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -13830,7 +13830,7 @@ class TextEditorCodeExecutionToolResultErrorParam:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -13852,7 +13852,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -13874,7 +13874,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -13914,7 +13914,7 @@ Display? Display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"Summarized
 
@@ -13942,7 +13942,7 @@ Display? Display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"Summarized
 
@@ -13974,7 +13974,7 @@ Display? Display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"Summarized
 
@@ -13992,7 +13992,7 @@ Display? Display
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 "summarized"Summarized
 
@@ -14030,7 +14030,7 @@ minLength1
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -14055,7 +14055,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14095,7 +14095,7 @@ JsonElement Type "bash\_20250124"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -14120,7 +14120,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14263,7 +14263,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14292,7 +14292,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14300,13 +14300,13 @@ Accepts one of the following:
 
 Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<Block>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -14331,7 +14331,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14339,7 +14339,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -14441,7 +14441,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -14449,7 +14449,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -14486,7 +14486,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14517,7 +14517,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14525,7 +14525,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -14646,7 +14646,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14660,7 +14660,7 @@ class DocumentBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -14682,13 +14682,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -14713,7 +14713,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14721,7 +14721,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -14823,7 +14823,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -14831,7 +14831,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -14868,7 +14868,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14901,7 +14901,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14940,7 +14940,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -14958,7 +14958,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 required Type Type
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"ToolSearchToolBm25\_20251119
 
@@ -14966,7 +14966,7 @@ Accepts one of the following:
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -14991,7 +14991,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15015,7 +15015,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 required Type Type
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"ToolSearchToolRegex20251119
 
@@ -15023,7 +15023,7 @@ Accepts one of the following:
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15048,7 +15048,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15066,13 +15066,13 @@ class ToolSearchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -15104,13 +15104,13 @@ class ToolSearchToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultErrorParam:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -15147,7 +15147,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15176,7 +15176,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15186,7 +15186,7 @@ class ToolSearchToolResultError:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -15214,7 +15214,7 @@ class ToolSearchToolResultErrorParam:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -15261,7 +15261,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15281,7 +15281,7 @@ JsonElement Type "text\_editor\_20250124"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15306,7 +15306,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15334,7 +15334,7 @@ JsonElement Type "text\_editor\_20250429"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15359,7 +15359,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15387,7 +15387,7 @@ JsonElement Type "text\_editor\_20250728"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15412,7 +15412,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15462,7 +15462,7 @@ minLength1
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15487,7 +15487,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15527,7 +15527,7 @@ JsonElement Type "bash\_20250124"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15552,7 +15552,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15580,7 +15580,7 @@ JsonElement Type "code\_execution\_20250522"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15605,7 +15605,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15631,7 +15631,7 @@ JsonElement Type "code\_execution\_20250825"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15656,7 +15656,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15684,7 +15684,7 @@ JsonElement Type "code\_execution\_20260120"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15709,7 +15709,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15735,7 +15735,7 @@ JsonElement Type "memory\_20250818"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15760,7 +15760,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15788,7 +15788,7 @@ JsonElement Type "text\_editor\_20250124"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15813,7 +15813,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15841,7 +15841,7 @@ JsonElement Type "text\_editor\_20250429"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15866,7 +15866,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15894,7 +15894,7 @@ JsonElement Type "text\_editor\_20250728"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15919,7 +15919,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -15951,7 +15951,7 @@ JsonElement Type "web\_search\_20250305"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -15984,7 +15984,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -16036,7 +16036,7 @@ JsonElement Type "web\_fetch\_20250910"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -16069,7 +16069,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -16109,7 +16109,7 @@ JsonElement Type "web\_search\_20260209"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -16142,7 +16142,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -16194,7 +16194,7 @@ JsonElement Type "web\_fetch\_20260209"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -16227,7 +16227,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -16269,7 +16269,7 @@ JsonElement Type "web\_fetch\_20260309"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -16302,7 +16302,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -16344,7 +16344,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 required Type Type
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_bm25\_20251119"ToolSearchToolBm25\_20251119
 
@@ -16352,7 +16352,7 @@ Accepts one of the following:
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -16377,7 +16377,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -16401,7 +16401,7 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 required Type Type
 
-Accepts one of the following:
+One of the following:
 
 "tool\_search\_tool\_regex\_20251119"ToolSearchToolRegex20251119
 
@@ -16409,7 +16409,7 @@ Accepts one of the following:
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -16434,7 +16434,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -16456,7 +16456,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -16511,7 +16511,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -16521,7 +16521,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -16605,7 +16605,7 @@ required ServiceTier? ServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -16645,7 +16645,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -16685,7 +16685,7 @@ required [DocumentBlockParam](api/messages.md) Content
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -16707,13 +16707,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -16738,7 +16738,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -16746,7 +16746,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -16848,7 +16848,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -16856,7 +16856,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -16893,7 +16893,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -16926,7 +16926,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -16962,7 +16962,7 @@ JsonElement Type "web\_fetch\_20250910"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -16995,7 +16995,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -17035,7 +17035,7 @@ JsonElement Type "web\_fetch\_20260209"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -17068,7 +17068,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -17110,7 +17110,7 @@ JsonElement Type "web\_fetch\_20260309"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -17143,7 +17143,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -17181,7 +17181,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -17205,13 +17205,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -17243,7 +17243,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -17285,13 +17285,13 @@ class WebFetchToolResultBlockParam:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlockParam:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -17317,7 +17317,7 @@ required [DocumentBlockParam](api/messages.md) Content
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -17339,13 +17339,13 @@ class ContentBlockSource:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 string
 
 IReadOnlyList<[ContentBlockSourceContent](api/messages.md)>
 
-Accepts one of the following:
+One of the following:
 
 class TextBlockParam:
 
@@ -17370,7 +17370,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -17378,7 +17378,7 @@ Accepts one of the following:
 
 IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocationParam:
 
@@ -17480,7 +17480,7 @@ class ImageBlockParam:
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64ImageSource:
 
@@ -17488,7 +17488,7 @@ required string Data
 
 required MediaType MediaType
 
-Accepts one of the following:
+One of the following:
 
 "image/jpeg"ImageJpeg
 
@@ -17525,7 +17525,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -17558,7 +17558,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -17603,7 +17603,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -17613,7 +17613,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -17639,7 +17639,7 @@ class WebFetchToolResultErrorBlock:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -17663,7 +17663,7 @@ class WebFetchToolResultErrorBlockParam:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -17737,7 +17737,7 @@ JsonElement Type "web\_search\_20250305"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -17770,7 +17770,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -17822,7 +17822,7 @@ JsonElement Type "web\_search\_20260209"constant
 
 IReadOnlyList<AllowedCaller> AllowedCallers
 
-Accepts one of the following:
+One of the following:
 
 "direct"Direct
 
@@ -17855,7 +17855,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -17899,7 +17899,7 @@ class WebSearchToolRequestError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -17921,7 +17921,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -17945,13 +17945,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -17989,7 +17989,7 @@ class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -18021,7 +18021,7 @@ class WebSearchToolResultBlockParam:
 
 required [WebSearchToolResultBlockParamContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 IReadOnlyList<[WebSearchResultBlockParam](api/messages.md)>
 
@@ -18039,7 +18039,7 @@ class WebSearchToolRequestError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -18076,7 +18076,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 "5m"Ttl5m
 
@@ -18086,7 +18086,7 @@ Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -18126,7 +18126,7 @@ class WebSearchToolRequestError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -18146,7 +18146,7 @@ class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -18264,7 +18264,7 @@ required ProcessingStatus ProcessingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 "in\_progress"InProgress
 
@@ -18328,7 +18328,7 @@ required [ErrorResponse](api/$shared.md) Error
 
 required [ErrorObject](api/$shared.md) Error
 
-Accepts one of the following:
+One of the following:
 
 class InvalidRequestError:
 
@@ -18410,7 +18410,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 class MessageBatchSucceededResult:
 
@@ -18463,7 +18463,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock:
 
@@ -18473,7 +18473,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -18603,7 +18603,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -18639,7 +18639,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -18665,7 +18665,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -18689,7 +18689,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -18713,13 +18713,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -18757,7 +18757,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -18781,13 +18781,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -18819,7 +18819,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -18863,13 +18863,13 @@ required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -18923,13 +18923,13 @@ class BashCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -18967,13 +18967,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -18995,7 +18995,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -19039,13 +19039,13 @@ class ToolSearchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -19087,7 +19087,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -19173,7 +19173,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"Cyber
 
@@ -19202,7 +19202,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"EndTurn
 
@@ -19288,7 +19288,7 @@ required ServiceTier? ServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -19304,7 +19304,7 @@ required [ErrorResponse](api/$shared.md) Error
 
 required [ErrorObject](api/$shared.md) Error
 
-Accepts one of the following:
+One of the following:
 
 class InvalidRequestError:
 
@@ -19461,7 +19461,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock:
 
@@ -19471,7 +19471,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -19601,7 +19601,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -19637,7 +19637,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -19663,7 +19663,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -19687,7 +19687,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -19711,13 +19711,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -19755,7 +19755,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -19779,13 +19779,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -19817,7 +19817,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -19861,13 +19861,13 @@ required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -19921,13 +19921,13 @@ class BashCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -19965,13 +19965,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -19993,7 +19993,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -20037,13 +20037,13 @@ class ToolSearchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -20085,7 +20085,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -20171,7 +20171,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"Cyber
 
@@ -20200,7 +20200,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"EndTurn
 
@@ -20286,7 +20286,7 @@ required ServiceTier? ServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 
@@ -20302,7 +20302,7 @@ required [ErrorResponse](api/$shared.md) Error
 
 required [ErrorObject](api/$shared.md) Error
 
-Accepts one of the following:
+One of the following:
 
 class InvalidRequestError:
 
@@ -20423,7 +20423,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 class TextBlock:
 
@@ -20433,7 +20433,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 class CitationCharLocation:
 
@@ -20563,7 +20563,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -20599,7 +20599,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -20625,7 +20625,7 @@ required IReadOnlyDictionary<string, JsonElement> Input
 
 required Name Name
 
-Accepts one of the following:
+One of the following:
 
 "web\_search"WebSearch
 
@@ -20649,7 +20649,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -20673,13 +20673,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required [WebSearchToolResultBlockContent](api/messages.md) Content
 
-Accepts one of the following:
+One of the following:
 
 class WebSearchToolResultError:
 
 required [WebSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -20717,7 +20717,7 @@ required Caller Caller
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 class DirectCaller:
 
@@ -20741,13 +20741,13 @@ JsonElement Type "code\_execution\_20260120"constant
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class WebFetchToolResultErrorBlock:
 
 required [WebFetchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -20779,7 +20779,7 @@ required Boolean Enabled
 
 required Source Source
 
-Accepts one of the following:
+One of the following:
 
 class Base64PdfSource:
 
@@ -20823,13 +20823,13 @@ required [CodeExecutionToolResultBlockContent](api/messages.md) Content
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 class CodeExecutionToolResultError:
 
 required [CodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -20883,13 +20883,13 @@ class BashCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class BashCodeExecutionToolResultError:
 
 required [BashCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -20927,13 +20927,13 @@ class TextEditorCodeExecutionToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class TextEditorCodeExecutionToolResultError:
 
 required [TextEditorCodeExecutionToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -20955,7 +20955,7 @@ required string Content
 
 required FileType FileType
 
-Accepts one of the following:
+One of the following:
 
 "text"Text
 
@@ -20999,13 +20999,13 @@ class ToolSearchToolResultBlock:
 
 required Content Content
 
-Accepts one of the following:
+One of the following:
 
 class ToolSearchToolResultError:
 
 required [ToolSearchToolResultErrorCode](api/messages.md) ErrorCode
 
-Accepts one of the following:
+One of the following:
 
 "invalid\_tool\_input"InvalidToolInput
 
@@ -21047,7 +21047,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -21133,7 +21133,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 "cyber"Cyber
 
@@ -21162,7 +21162,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 "end\_turn"EndTurn
 
@@ -21248,7 +21248,7 @@ required ServiceTier? ServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"Standard
 

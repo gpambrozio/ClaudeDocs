@@ -28,13 +28,13 @@ DELETE/v1/memory\_stores/{memory\_store\_id}/memories/{memory\_id}
 
 ##### ModelsExpand Collapse
 
-BetaManagedAgentsConflictError = object { type, message }
+BetaManagedAgentsConflictError object { type, message }
 
 type: "conflict\_error"
 
 message: optional string
 
-BetaManagedAgentsContentSha256Precondition = object { type, content\_sha256 }
+BetaManagedAgentsContentSha256Precondition object { type, content\_sha256 }
 
 Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 
@@ -44,7 +44,7 @@ content\_sha256: optional string
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
-BetaManagedAgentsDeletedMemory = object { id, type }
+BetaManagedAgentsDeletedMemory object { id, type }
 
 Tombstone returned by [Delete a memory](api/beta/memory_stores/memories/delete.md). The memory's version history persists and remains listable via [List memory versions](api/beta/memory_stores/memory_versions/list.md) until the store itself is deleted.
 
@@ -56,69 +56,69 @@ type: "memory\_deleted"
 
 BetaManagedAgentsError = [BetaInvalidRequestError](api/beta.md) { message, type }  or [BetaAuthenticationError](api/beta.md) { message, type }  or [BetaBillingError](api/beta.md) { message, type }  or 9 more
 
-Accepts one of the following:
+One of the following:
 
-BetaInvalidRequestError = object { message, type }
+BetaInvalidRequestError object { message, type }
 
 message: string
 
 type: "invalid\_request\_error"
 
-BetaAuthenticationError = object { message, type }
+BetaAuthenticationError object { message, type }
 
 message: string
 
 type: "authentication\_error"
 
-BetaBillingError = object { message, type }
+BetaBillingError object { message, type }
 
 message: string
 
 type: "billing\_error"
 
-BetaPermissionError = object { message, type }
+BetaPermissionError object { message, type }
 
 message: string
 
 type: "permission\_error"
 
-BetaNotFoundError = object { message, type }
+BetaNotFoundError object { message, type }
 
 message: string
 
 type: "not\_found\_error"
 
-BetaRateLimitError = object { message, type }
+BetaRateLimitError object { message, type }
 
 message: string
 
 type: "rate\_limit\_error"
 
-BetaGatewayTimeoutError = object { message, type }
+BetaGatewayTimeoutError object { message, type }
 
 message: string
 
 type: "timeout\_error"
 
-BetaAPIError = object { message, type }
+BetaAPIError object { message, type }
 
 message: string
 
 type: "api\_error"
 
-BetaOverloadedError = object { message, type }
+BetaOverloadedError object { message, type }
 
 message: string
 
 type: "overloaded\_error"
 
-BetaManagedAgentsMemoryPreconditionFailedError = object { type, message }
+BetaManagedAgentsMemoryPreconditionFailedError object { type, message }
 
 type: "memory\_precondition\_failed\_error"
 
 message: optional string
 
-BetaManagedAgentsMemoryPathConflictError = object { type, conflicting\_memory\_id, conflicting\_path, message }
+BetaManagedAgentsMemoryPathConflictError object { type, conflicting\_memory\_id, conflicting\_path, message }
 
 type: "memory\_path\_conflict\_error"
 
@@ -128,13 +128,13 @@ conflicting\_path: optional string
 
 message: optional string
 
-BetaManagedAgentsConflictError = object { type, message }
+BetaManagedAgentsConflictError object { type, message }
 
 type: "conflict\_error"
 
 message: optional string
 
-BetaManagedAgentsMemory = object { id, content\_sha256, content\_size\_bytes, 7 more }
+BetaManagedAgentsMemory object { id, content\_sha256, content\_size\_bytes, 7 more }
 
 A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -180,9 +180,9 @@ BetaManagedAgentsMemoryListItem = [BetaManagedAgentsMemory](api/beta.md) { id, c
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
-BetaManagedAgentsMemory = object { id, content\_sha256, content\_size\_bytes, 7 more }
+BetaManagedAgentsMemory object { id, content\_sha256, content\_size\_bytes, 7 more }
 
 A `memory` object: a single text document at a hierarchical path inside a memory store. The `content` field is populated when `view=full` and `null` when `view=basic`; the `content_size_bytes` and `content_sha256` fields are always populated so sync clients can diff without fetching content. Memories are addressed by their `mem_...` ID; the path is the create key and can be changed via update.
 
@@ -224,7 +224,7 @@ content: optional string
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
-BetaManagedAgentsMemoryPrefix = object { path, type }
+BetaManagedAgentsMemoryPrefix object { path, type }
 
 A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
@@ -234,7 +234,7 @@ The rolled-up path prefix, including a trailing `/` (e.g. `/projects/foo/`). Pas
 
 type: "memory\_prefix"
 
-BetaManagedAgentsMemoryPathConflictError = object { type, conflicting\_memory\_id, conflicting\_path, message }
+BetaManagedAgentsMemoryPathConflictError object { type, conflicting\_memory\_id, conflicting\_path, message }
 
 type: "memory\_path\_conflict\_error"
 
@@ -244,13 +244,13 @@ conflicting\_path: optional string
 
 message: optional string
 
-BetaManagedAgentsMemoryPreconditionFailedError = object { type, message }
+BetaManagedAgentsMemoryPreconditionFailedError object { type, message }
 
 type: "memory\_precondition\_failed\_error"
 
 message: optional string
 
-BetaManagedAgentsMemoryPrefix = object { path, type }
+BetaManagedAgentsMemoryPrefix object { path, type }
 
 A rolled-up directory marker returned by [List memories](api/beta/memory_stores/memories/list.md) when `depth` is set. Indicates that one or more memories exist deeper than the requested depth under this prefix. This is a list-time rollup, not a stored resource; it has no ID and no lifecycle. Each prefix counts toward the page `limit` and interleaves with `memory` items in path order.
 
@@ -264,13 +264,13 @@ BetaManagedAgentsMemoryView = "basic" or "full"
 
 Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-Accepts one of the following:
+One of the following:
 
 "basic"
 
 "full"
 
-BetaManagedAgentsPrecondition = object { type, content\_sha256 }
+BetaManagedAgentsPrecondition object { type, content\_sha256 }
 
 Optimistic-concurrency precondition: the update applies only if the memory's stored `content_sha256` equals the supplied value. On mismatch, the request returns `memory_precondition_failed_error` (HTTP 409); re-read the memory and retry against the fresh state. If the precondition fails but the stored state already exactly matches the requested `content` and `path`, the server returns 200 instead of 409.
 

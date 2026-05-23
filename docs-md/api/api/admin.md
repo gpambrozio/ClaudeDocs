@@ -12,7 +12,7 @@ GET/v1/organizations/me
 
 ##### ModelsExpand Collapse
 
-Organization = object { id, name, type }
+Organization object { id, name, type }
 
 id: string
 
@@ -48,7 +48,7 @@ DELETE/v1/organizations/invites/{invite\_id}
 
 ##### ModelsExpand Collapse
 
-Invite = object { id, email, expires\_at, 4 more }
+Invite object { id, email, expires\_at, 4 more }
 
 id: string
 
@@ -70,7 +70,7 @@ role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -86,7 +86,7 @@ status: "accepted" or "expired" or "deleted" or "pending"
 
 Status of the Invite.
 
-Accepts one of the following:
+One of the following:
 
 "accepted"
 
@@ -102,7 +102,7 @@ Object type.
 
 For Invites, this is always `"invite"`.
 
-InviteDeleteResponse = object { id, type }
+InviteDeleteResponse object { id, type }
 
 id: string
 
@@ -134,7 +134,7 @@ DELETE/v1/organizations/users/{user\_id}
 
 ##### ModelsExpand Collapse
 
-User = object { id, added\_at, email, 3 more }
+User object { id, added\_at, email, 3 more }
 
 id: string
 
@@ -156,7 +156,7 @@ role: "user" or "developer" or "billing" or 2 more
 
 Organization role of the User.
 
-Accepts one of the following:
+One of the following:
 
 "user"
 
@@ -174,7 +174,7 @@ Object type.
 
 For Users, this is always `"user"`.
 
-UserDeleteResponse = object { id, type }
+UserDeleteResponse object { id, type }
 
 id: string
 
@@ -232,7 +232,7 @@ DELETE/v1/organizations/workspaces/{workspace\_id}/members/{user\_id}
 
 ##### ModelsExpand Collapse
 
-WorkspaceMember = object { type, user\_id, workspace\_id, workspace\_role }
+WorkspaceMember object { type, user\_id, workspace\_id, workspace\_role }
 
 type: "workspace\_member"
 
@@ -252,7 +252,7 @@ workspace\_role: "workspace\_user" or "workspace\_developer" or "workspace\_rest
 
 Role of the Workspace Member.
 
-Accepts one of the following:
+One of the following:
 
 "workspace\_user"
 
@@ -264,7 +264,7 @@ Accepts one of the following:
 
 "workspace\_billing"
 
-MemberDeleteResponse = object { type, user\_id, workspace\_id }
+MemberDeleteResponse object { type, user\_id, workspace\_id }
 
 type: "workspace\_member\_deleted"
 
@@ -288,7 +288,7 @@ GET/v1/organizations/workspaces/{workspace\_id}/rate\_limits
 
 ##### ModelsExpand Collapse
 
-RateLimitListResponse = object { data, next\_page }
+RateLimitListResponse object { data, next\_page }
 
 data: array of object { group\_type, limits, models, type }
 
@@ -298,7 +298,7 @@ group\_type: "model\_group" or "batch" or "token\_count" or 3 more
 
 The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
-Accepts one of the following:
+One of the following:
 
 "model\_group"
 
@@ -366,7 +366,7 @@ GET/v1/organizations/usage\_report/claude\_code
 
 ##### ModelsExpand Collapse
 
-ClaudeCodeUsageReport = object { data, has\_more, next\_page }
+ClaudeCodeUsageReport object { data, has\_more, next\_page }
 
 data: array of object { actor, core\_metrics, customer\_type, 6 more }
 
@@ -376,9 +376,9 @@ actor: object { email\_address, type }  or object { api\_key\_name, type }
 
 The user or API key that performed the Claude Code actions.
 
-Accepts one of the following:
+One of the following:
 
-UserActor = object { email\_address, type }
+UserActor object { email\_address, type }
 
 email\_address: string
 
@@ -386,7 +386,7 @@ Email address of the user who performed Claude Code actions.
 
 type: "user\_actor"
 
-APIActor = object { api\_key\_name, type }
+APIActor object { api\_key\_name, type }
 
 api\_key\_name: string
 
@@ -426,7 +426,7 @@ customer\_type: "api" or "subscription"
 
 Type of customer account (api for API customers, subscription for Pro/Team customers).
 
-Accepts one of the following:
+One of the following:
 
 "api"
 
@@ -500,7 +500,7 @@ subscription\_type: optional "enterprise" or "team"
 
 Subscription tier for subscription customers. `null` for API customers.
 
-Accepts one of the following:
+One of the following:
 
 "enterprise"
 
@@ -514,7 +514,7 @@ next\_page: string
 
 Opaque cursor token for fetching the next page of results, or null if no more pages are available.
 
-MessagesUsageReport = object { data, has\_more, next\_page }
+MessagesUsageReport object { data, has\_more, next\_page }
 
 data: array of object { ending\_at, results, starting\_at }
 
@@ -554,7 +554,7 @@ context\_window: "0-200k" or "200k-1M"
 
 Context window used. `null` if not grouping by context window.
 
-Accepts one of the following:
+One of the following:
 
 "0-200k"
 
@@ -589,7 +589,7 @@ service\_tier: "standard" or "batch" or "priority" or 3 more
 
 Service tier used. `null` if not grouping by service tier.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -631,7 +631,7 @@ GET/v1/organizations/cost\_report
 
 ##### ModelsExpand Collapse
 
-CostReport = object { data, has\_more, next\_page }
+CostReport object { data, has\_more, next\_page }
 
 data: array of object { ending\_at, results, starting\_at }
 
@@ -651,7 +651,7 @@ context\_window: "0-200k" or "200k-1M"
 
 Input context window used. `null` if not grouping by description or for non-token costs.
 
-Accepts one of the following:
+One of the following:
 
 "0-200k"
 
@@ -661,7 +661,7 @@ cost\_type: "tokens" or "web\_search" or "code\_execution" or "session\_usage"
 
 Type of cost. `null` if not grouping by description.
 
-Accepts one of the following:
+One of the following:
 
 "tokens"
 
@@ -692,7 +692,7 @@ service\_tier: "standard" or "batch"
 
 Service tier used. `null` if not grouping by description or for non-token costs.
 
-Accepts one of the following:
+One of the following:
 
 "standard"
 
@@ -702,7 +702,7 @@ token\_type: "uncached\_input\_tokens" or "output\_tokens" or "cache\_read\_inpu
 
 Type of token. `null` if not grouping by description or for non-token costs.
 
-Accepts one of the following:
+One of the following:
 
 "uncached\_input\_tokens"
 
@@ -738,7 +738,7 @@ GET/v1/organizations/rate\_limits
 
 ##### ModelsExpand Collapse
 
-RateLimitListResponse = object { data, next\_page }
+RateLimitListResponse object { data, next\_page }
 
 data: array of object { group\_type, limits, models, type }
 
@@ -748,7 +748,7 @@ group\_type: "model\_group" or "batch" or "token\_count" or 3 more
 
 The kind of rate-limit group this entry represents. `model_group` entries apply to a family of models (listed in `models`); other values apply to an API-surface category and have `models` set to `null`.
 
-Accepts one of the following:
+One of the following:
 
 "model\_group"
 
@@ -810,7 +810,7 @@ POST/v1/organizations/tunnels/{tunnel\_id}/archive
 
 ##### ModelsExpand Collapse
 
-MCPTunnelRetrieveResponse = object { id, archived\_at, created\_at, 4 more }
+MCPTunnelRetrieveResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 
@@ -844,7 +844,7 @@ workspace\_id: string
 ID of the Workspace this Tunnel belongs to, or `null` for the default
 Workspace. Immutable after creation.
 
-MCPTunnelListResponse = object { data, next\_page }
+MCPTunnelListResponse object { data, next\_page }
 
 data: array of object { id, archived\_at, created\_at, 4 more }
 
@@ -884,7 +884,7 @@ next\_page: string
 
 Opaque cursor for the next page, or `null` if there are no more results.
 
-MCPTunnelRevealTokenResponse = object { id, tunnel\_token, type }
+MCPTunnelRevealTokenResponse object { id, tunnel\_token, type }
 
 id: string
 
@@ -899,7 +899,7 @@ type: "tunnel\_token"
 
 Object type. Always `tunnel_token` for Tunnel Tokens.
 
-MCPTunnelRotateTokenResponse = object { id, tunnel\_token, type }
+MCPTunnelRotateTokenResponse object { id, tunnel\_token, type }
 
 id: string
 
@@ -914,7 +914,7 @@ type: "tunnel\_token"
 
 Object type. Always `tunnel_token` for Tunnel Tokens.
 
-MCPTunnelArchiveResponse = object { id, archived\_at, created\_at, 4 more }
+MCPTunnelArchiveResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 
@@ -968,7 +968,7 @@ POST/v1/organizations/tunnels/{tunnel\_id}/certificates/{certificate\_id}/archiv
 
 ##### ModelsExpand Collapse
 
-TunnelCertificateCreateResponse = object { id, archived\_at, created\_at, 4 more }
+TunnelCertificateCreateResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 
@@ -1000,7 +1000,7 @@ type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-TunnelCertificateRetrieveResponse = object { id, archived\_at, created\_at, 4 more }
+TunnelCertificateRetrieveResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 
@@ -1032,7 +1032,7 @@ type: "tunnel\_certificate"
 
 Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
-TunnelCertificateListResponse = object { data, next\_page }
+TunnelCertificateListResponse object { data, next\_page }
 
 data: array of object { id, archived\_at, created\_at, 4 more }
 
@@ -1070,7 +1070,7 @@ next\_page: string
 
 Opaque cursor for the next page, or `null` if there are no more results.
 
-TunnelCertificateArchiveResponse = object { id, archived\_at, created\_at, 4 more }
+TunnelCertificateArchiveResponse object { id, archived\_at, created\_at, 4 more }
 
 id: string
 

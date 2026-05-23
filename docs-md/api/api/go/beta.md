@@ -10,13 +10,13 @@ Go
 
 type AnthropicBeta interface{…}
 
-Accepts one of the following:
+One of the following:
 
 string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 
@@ -88,7 +88,7 @@ Type BillingError
 
 type BetaErrorUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaInvalidRequestError struct{…}
 
@@ -148,7 +148,7 @@ type BetaErrorResponse struct{…}
 
 Error [BetaErrorUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaInvalidRequestError struct{…}
 
@@ -794,7 +794,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -802,7 +802,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -918,7 +918,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -926,7 +926,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -1006,9 +1006,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Advisor20260301
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorTool20260301AllowedCallerDirect BetaAdvisorTool20260301AllowedCaller = "direct"
 
@@ -1016,13 +1016,13 @@ const BetaAdvisorTool20260301AllowedCallerCodeExecution20250825 BetaAdvisorTool2
 
 const BetaAdvisorTool20260301AllowedCallerCodeExecution20260120 BetaAdvisorTool20260301AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1033,19 +1033,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caching [BetaCacheControlEphemeral](api/beta.md)optional
+Caching [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1056,21 +1056,21 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -1078,13 +1078,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -1122,13 +1122,13 @@ type BetaAdvisorToolResultBlockParamResp struct{…}
 
 Content BetaAdvisorToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultErrorParamResp struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorParamErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorParamErrorCode = "max\_uses\_exceeded"
 
@@ -1162,13 +1162,13 @@ ToolUseID string
 
 Type AdvisorToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1179,7 +1179,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -1189,7 +1189,7 @@ type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -1209,7 +1209,7 @@ type BetaAdvisorToolResultErrorParamResp struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorParamErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorParamErrorCode = "max\_uses\_exceeded"
 
@@ -1235,7 +1235,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -1303,13 +1303,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -1347,13 +1347,13 @@ type BetaBashCodeExecutionToolResultBlockParamResp struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorParamErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -1387,13 +1387,13 @@ ToolUseID string
 
 Type BashCodeExecutionToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1404,7 +1404,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -1414,7 +1414,7 @@ type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -1432,7 +1432,7 @@ type BetaBashCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorParamErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -1450,7 +1450,7 @@ type BetaCacheControlEphemeral struct{…}
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -1461,7 +1461,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -1709,13 +1709,13 @@ URL string
 
 type BetaCitationsConfigParamResp struct{…}
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaCitationsDelta struct{…}
 
 Citation BetaCitationsDeltaCitationUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -1837,11 +1837,11 @@ type BetaClearThinking20251015Edit struct{…}
 
 Type ClearThinking20251015
 
-Keep BetaClearThinking20251015EditKeepUnionoptional
+Keep BetaClearThinking20251015EditKeepUnionOptional
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaThinkingTurns struct{…}
 
@@ -1873,7 +1873,7 @@ type BetaClearToolUses20250919Edit struct{…}
 
 Type ClearToolUses20250919
 
-ClearAtLeast [BetaInputTokensClearAtLeast](api/beta.md)optional
+ClearAtLeast [BetaInputTokensClearAtLeast](api/beta.md)Optional
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -1881,21 +1881,21 @@ Type InputTokens
 
 Value int64
 
-ClearToolInputs BetaClearToolUses20250919EditClearToolInputsUnionoptional
+ClearToolInputs BetaClearToolUses20250919EditClearToolInputsUnionOptional
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-Accepts one of the following:
+One of the following:
 
 bool
 
 []string
 
-ExcludeTools []stringoptional
+ExcludeTools []stringOptional
 
 Tool names whose uses are preserved from clearing
 
-Keep [BetaToolUsesKeep](api/beta.md)optional
+Keep [BetaToolUsesKeep](api/beta.md)Optional
 
 Number of tool uses to retain in the conversation
 
@@ -1903,11 +1903,11 @@ Type ToolUses
 
 Value int64
 
-Trigger BetaClearToolUses20250919EditTriggerUnionoptional
+Trigger BetaClearToolUses20250919EditTriggerUnionOptional
 
 Condition that triggers the context management strategy
 
-Accepts one of the following:
+One of the following:
 
 type BetaInputTokensTrigger struct{…}
 
@@ -1989,9 +1989,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type CodeExecution20250522
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionTool20250522AllowedCallerDirect BetaCodeExecutionTool20250522AllowedCaller = "direct"
 
@@ -1999,13 +1999,13 @@ const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20250825 BetaCodeEx
 
 const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250522AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2016,17 +2016,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -2040,9 +2040,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type CodeExecution20250825
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionTool20250825AllowedCallerDirect BetaCodeExecutionTool20250825AllowedCaller = "direct"
 
@@ -2050,13 +2050,13 @@ const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20250825 BetaCodeEx
 
 const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250825AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2067,17 +2067,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -2093,9 +2093,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type CodeExecution20260120
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionTool20260120AllowedCallerDirect BetaCodeExecutionTool20260120AllowedCaller = "direct"
 
@@ -2103,13 +2103,13 @@ const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20250825 BetaCodeEx
 
 const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20260120AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2120,17 +2120,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -2140,13 +2140,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -2200,13 +2200,13 @@ type BetaCodeExecutionToolResultBlockContentUnion interface{…}
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -2258,13 +2258,13 @@ Content [BetaCodeExecutionToolResultBlockParamContentUnionResp](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -2314,13 +2314,13 @@ ToolUseID string
 
 Type CodeExecutionToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2331,7 +2331,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -2341,13 +2341,13 @@ type BetaCodeExecutionToolResultBlockParamContentUnionResp interface{…}
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -2397,7 +2397,7 @@ type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -2411,7 +2411,7 @@ Type CodeExecutionToolResultError
 
 type BetaCodeExecutionToolResultErrorCode string
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -2425,7 +2425,7 @@ type BetaCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -2443,15 +2443,15 @@ Automatically compact older context when reaching the configured trigger thresho
 
 Type Compact20260112
 
-Instructions stringoptional
+Instructions stringOptional
 
 Additional instructions for summarization.
 
-PauseAfterCompaction booloptional
+PauseAfterCompaction boolOptional
 
 Whether to pause after compaction and return the compaction block to the user.
 
-Trigger [BetaInputTokensTrigger](api/beta.md)optional
+Trigger [BetaInputTokensTrigger](api/beta.md)Optional
 
 When to trigger compaction. Defaults to 150000 input tokens.
 
@@ -2493,13 +2493,13 @@ Summary of previously compacted content, or null if compaction failed
 
 Type Compaction
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2510,13 +2510,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-EncryptedContent stringoptional
+EncryptedContent stringOptional
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -2590,7 +2590,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -2604,11 +2604,11 @@ type BetaContainerParamsResp struct{…}
 
 Container parameters with skills to be loaded.
 
-ID stringoptional
+ID stringOptional
 
 Container id
 
-Skills [][BetaSkillParamsResp](api/beta.md)optional
+Skills [][BetaSkillParamsResp](api/beta.md)Optional
 
 List of skills to load in the container
 
@@ -2620,13 +2620,13 @@ Type BetaSkillParamsType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillParamsTypeAnthropic BetaSkillParamsType = "anthropic"
 
 const BetaSkillParamsTypeCustom BetaSkillParamsType = "custom"
 
-Version stringoptional
+Version stringOptional
 
 Skill version or 'latest' for most recent version
 
@@ -2647,13 +2647,13 @@ FileID string
 
 Type ContainerUpload
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -2664,7 +2664,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -2674,7 +2674,7 @@ type BetaContentBlockUnion interface{…}
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -2684,7 +2684,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -2816,11 +2816,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -2850,7 +2850,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -2870,11 +2870,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -2900,13 +2900,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -2938,11 +2938,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -2968,13 +2968,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -3006,7 +3006,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -3044,11 +3044,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -3074,13 +3074,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -3120,13 +3120,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -3180,13 +3180,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -3224,13 +3224,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -3252,7 +3252,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -3296,13 +3296,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -3350,7 +3350,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -3362,7 +3362,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -3506,7 +3506,7 @@ type BetaContentBlockParamUnionResp interface{…}
 
 Regular text content.
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -3514,13 +3514,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3531,15 +3531,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -3641,7 +3641,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -3649,7 +3649,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -3675,13 +3675,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3692,7 +3692,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -3702,7 +3702,7 @@ type BetaRequestDocumentBlock struct{…}
 
 Source BetaRequestDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -3724,13 +3724,13 @@ type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][BetaContentBlockSourceContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -3738,13 +3738,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3755,15 +3755,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -3865,7 +3865,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -3873,7 +3873,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -3899,13 +3899,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3916,7 +3916,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -3938,13 +3938,13 @@ Type File
 
 Type Document
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3955,19 +3955,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 type BetaSearchResultBlockParamResp struct{…}
 
@@ -3977,13 +3977,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -3994,15 +3994,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -4106,13 +4106,13 @@ Title string
 
 Type SearchResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4123,15 +4123,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaThinkingBlockParamResp struct{…}
 
@@ -4157,13 +4157,13 @@ Name string
 
 Type ToolUse
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4174,17 +4174,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaToolUseBlockParamCallerUnionRespoptional
+Caller BetaToolUseBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -4212,13 +4212,13 @@ ToolUseID string
 
 Type ToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4229,19 +4229,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Content []BetaToolResultBlockParamContentUnionRespoptional
+Content []BetaToolResultBlockParamContentUnionRespOptional
 
-Accepts one of the following:
+One of the following:
 
 []BetaToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -4249,13 +4249,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4266,15 +4266,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -4376,7 +4376,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -4384,7 +4384,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -4410,13 +4410,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4427,7 +4427,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -4441,13 +4441,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4458,15 +4458,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -4570,13 +4570,13 @@ Title string
 
 Type SearchResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4587,21 +4587,21 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaRequestDocumentBlock struct{…}
 
 Source BetaRequestDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -4623,13 +4623,13 @@ type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][BetaContentBlockSourceContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -4637,13 +4637,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4654,15 +4654,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -4764,7 +4764,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -4772,7 +4772,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -4798,13 +4798,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4815,7 +4815,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -4837,13 +4837,13 @@ Type File
 
 Type Document
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4854,19 +4854,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 type BetaToolReferenceBlockParamResp struct{…}
 
@@ -4876,13 +4876,13 @@ ToolName string
 
 Type ToolReference
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4893,13 +4893,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-IsError booloptional
+IsError boolOptional
 
 type BetaServerToolUseBlockParamResp struct{…}
 
@@ -4909,7 +4909,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockParamName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockParamNameAdvisor BetaServerToolUseBlockParamName = "advisor"
 
@@ -4929,13 +4929,13 @@ const BetaServerToolUseBlockParamNameToolSearchToolBm25 BetaServerToolUseBlockPa
 
 Type ServerToolUse
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -4946,17 +4946,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaServerToolUseBlockParamCallerUnionRespoptional
+Caller BetaServerToolUseBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -4982,7 +4982,7 @@ type BetaWebSearchToolResultBlockParamResp struct{…}
 
 Content [BetaWebSearchToolResultBlockParamContentUnionResp](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 [][BetaWebSearchResultBlockParamResp](api/beta.md)
 
@@ -4994,13 +4994,13 @@ Type WebSearchResult
 
 URL string
 
-PageAge stringoptional
+PageAge stringOptional
 
 type BetaWebSearchToolRequestError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -5020,13 +5020,13 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5037,17 +5037,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaWebSearchToolResultBlockParamCallerUnionRespoptional
+Caller BetaWebSearchToolResultBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -5073,13 +5073,13 @@ type BetaWebFetchToolResultBlockParamResp struct{…}
 
 Content BetaWebFetchToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlockParamResp struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -5105,7 +5105,7 @@ Content [BetaRequestDocumentBlock](api/beta.md)
 
 Source BetaRequestDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -5127,13 +5127,13 @@ type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][BetaContentBlockSourceContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -5141,13 +5141,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5158,15 +5158,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -5268,7 +5268,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -5276,7 +5276,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -5302,13 +5302,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5319,7 +5319,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -5341,13 +5341,13 @@ Type File
 
 Type Document
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5358,19 +5358,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 Type WebFetchResult
 
@@ -5378,7 +5378,7 @@ URL string
 
 Fetched content URL
 
-RetrievedAt stringoptional
+RetrievedAt stringOptional
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -5386,13 +5386,13 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5403,17 +5403,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaWebFetchToolResultBlockParamCallerUnionRespoptional
+Caller BetaWebFetchToolResultBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -5439,13 +5439,13 @@ type BetaAdvisorToolResultBlockParamResp struct{…}
 
 Content BetaAdvisorToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultErrorParamResp struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorParamErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorParamErrorCode = "max\_uses\_exceeded"
 
@@ -5479,13 +5479,13 @@ ToolUseID string
 
 Type AdvisorToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5496,7 +5496,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -5508,13 +5508,13 @@ Content [BetaCodeExecutionToolResultBlockParamContentUnionResp](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -5564,13 +5564,13 @@ ToolUseID string
 
 Type CodeExecutionToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5581,7 +5581,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -5591,13 +5591,13 @@ type BetaBashCodeExecutionToolResultBlockParamResp struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorParamErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -5631,13 +5631,13 @@ ToolUseID string
 
 Type BashCodeExecutionToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5648,7 +5648,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -5658,13 +5658,13 @@ type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorParamErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -5678,7 +5678,7 @@ const BetaTextEditorCodeExecutionToolResultErrorParamErrorCodeFileNotFound BetaT
 
 Type TextEditorCodeExecutionToolResultError
 
-ErrorMessage stringoptional
+ErrorMessage stringOptional
 
 type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}
 
@@ -5686,7 +5686,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockParamFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockParamFileTypeText BetaTextEditorCodeExecutionViewResultBlockParamFileType = "text"
 
@@ -5696,11 +5696,11 @@ const BetaTextEditorCodeExecutionViewResultBlockParamFileTypePDF BetaTextEditorC
 
 Type TextEditorCodeExecutionViewResult
 
-NumLines int64optional
+NumLines int64Optional
 
-StartLine int64optional
+StartLine int64Optional
 
-TotalLines int64optional
+TotalLines int64Optional
 
 type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}
 
@@ -5712,27 +5712,27 @@ type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}
 
 Type TextEditorCodeExecutionStrReplaceResult
 
-Lines []stringoptional
+Lines []stringOptional
 
-NewLines int64optional
+NewLines int64Optional
 
-NewStart int64optional
+NewStart int64Optional
 
-OldLines int64optional
+OldLines int64Optional
 
-OldStart int64optional
+OldStart int64Optional
 
 ToolUseID string
 
 Type TextEditorCodeExecutionToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5743,7 +5743,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -5753,13 +5753,13 @@ type BetaToolSearchToolResultBlockParamResp struct{…}
 
 Content BetaToolSearchToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultErrorParamResp struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorParamErrorCodeInvalidToolInput BetaToolSearchToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -5779,13 +5779,13 @@ ToolName string
 
 Type ToolReference
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5796,7 +5796,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -5808,13 +5808,13 @@ ToolUseID string
 
 Type ToolSearchToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5825,7 +5825,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -5845,13 +5845,13 @@ The name of the MCP server
 
 Type MCPToolUse
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5862,7 +5862,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -5874,13 +5874,13 @@ ToolUseID string
 
 Type MCPToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5891,15 +5891,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Content BetaRequestMCPToolResultBlockParamContentUnionRespoptional
+Content BetaRequestMCPToolResultBlockParamContentUnionRespOptional
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -5909,13 +5909,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -5926,15 +5926,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -6032,7 +6032,7 @@ Title string
 
 Type SearchResultLocation
 
-IsError booloptional
+IsError boolOptional
 
 type BetaContainerUploadBlockParamResp struct{…}
 
@@ -6043,13 +6043,13 @@ FileID string
 
 Type ContainerUpload
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -6060,7 +6060,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -6082,13 +6082,13 @@ Summary of previously compacted content, or null if compaction failed
 
 Type Compaction
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -6099,13 +6099,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-EncryptedContent stringoptional
+EncryptedContent stringOptional
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
@@ -6113,13 +6113,13 @@ type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][BetaContentBlockSourceContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -6127,13 +6127,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -6144,15 +6144,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -6254,7 +6254,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -6262,7 +6262,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -6288,13 +6288,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -6305,7 +6305,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -6315,7 +6315,7 @@ Type Content
 
 type BetaContentBlockSourceContentUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -6323,13 +6323,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -6340,15 +6340,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -6450,7 +6450,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -6458,7 +6458,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -6484,13 +6484,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -6501,7 +6501,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -6509,17 +6509,17 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 type BetaContextManagementConfig struct{…}
 
-Edits []BetaContextManagementConfigEditUnionoptional
+Edits []BetaContextManagementConfigEditUnionOptional
 
 List of context management edits to apply
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919Edit struct{…}
 
 Type ClearToolUses20250919
 
-ClearAtLeast [BetaInputTokensClearAtLeast](api/beta.md)optional
+ClearAtLeast [BetaInputTokensClearAtLeast](api/beta.md)Optional
 
 Minimum number of tokens that must be cleared when triggered. Context will only be modified if at least this many tokens can be removed.
 
@@ -6527,21 +6527,21 @@ Type InputTokens
 
 Value int64
 
-ClearToolInputs BetaClearToolUses20250919EditClearToolInputsUnionoptional
+ClearToolInputs BetaClearToolUses20250919EditClearToolInputsUnionOptional
 
 Whether to clear all tool inputs (bool) or specific tool inputs to clear (list)
 
-Accepts one of the following:
+One of the following:
 
 bool
 
 []string
 
-ExcludeTools []stringoptional
+ExcludeTools []stringOptional
 
 Tool names whose uses are preserved from clearing
 
-Keep [BetaToolUsesKeep](api/beta.md)optional
+Keep [BetaToolUsesKeep](api/beta.md)Optional
 
 Number of tool uses to retain in the conversation
 
@@ -6549,11 +6549,11 @@ Type ToolUses
 
 Value int64
 
-Trigger BetaClearToolUses20250919EditTriggerUnionoptional
+Trigger BetaClearToolUses20250919EditTriggerUnionOptional
 
 Condition that triggers the context management strategy
 
-Accepts one of the following:
+One of the following:
 
 type BetaInputTokensTrigger struct{…}
 
@@ -6571,11 +6571,11 @@ type BetaClearThinking20251015Edit struct{…}
 
 Type ClearThinking20251015
 
-Keep BetaClearThinking20251015EditKeepUnionoptional
+Keep BetaClearThinking20251015EditKeepUnionOptional
 
 Number of most recent assistant turns to keep thinking blocks for. Older turns will have their thinking blocks removed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaThinkingTurns struct{…}
 
@@ -6595,15 +6595,15 @@ Automatically compact older context when reaching the configured trigger thresho
 
 Type Compact20260112
 
-Instructions stringoptional
+Instructions stringOptional
 
 Additional instructions for summarization.
 
-PauseAfterCompaction booloptional
+PauseAfterCompaction boolOptional
 
 Whether to pause after compaction and return the compaction block to the user.
 
-Trigger [BetaInputTokensTrigger](api/beta.md)optional
+Trigger [BetaInputTokensTrigger](api/beta.md)Optional
 
 When to trigger compaction. Defaults to 150000 input tokens.
 
@@ -6617,7 +6617,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -6662,7 +6662,7 @@ CacheMissReason BetaDiagnosticsCacheMissReasonUnion
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCacheMissModelChanged struct{…}
 
@@ -6709,7 +6709,7 @@ type BetaDiagnosticsParamResp struct{…}
 Request-level diagnostics. Currently carries the previous response
 id for prompt-cache divergence reporting.
 
-PreviousMessageID stringoptional
+PreviousMessageID stringOptional
 
 The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
 
@@ -6729,7 +6729,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -6805,7 +6805,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -6813,7 +6813,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -6839,13 +6839,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -6856,7 +6856,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -6890,7 +6890,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -6998,7 +6998,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -7006,7 +7006,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -7098,23 +7098,23 @@ type BetaMCPToolConfig struct{…}
 
 Configuration for a specific tool in an MCP toolset.
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaMCPToolDefaultConfig struct{…}
 
 Default configuration for tools in an MCP toolset.
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -7126,7 +7126,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -7270,13 +7270,13 @@ The name of the MCP server
 
 Type MCPToolUse
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -7287,7 +7287,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -7306,13 +7306,13 @@ Name of the MCP server to configure tools for
 
 Type MCPToolset
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -7323,27 +7323,27 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Configs map[string, [BetaMCPToolConfig](api/beta.md)]optional
+Configs map[string, [BetaMCPToolConfig](api/beta.md)]Optional
 
 Configuration overrides for specific tools, keyed by tool name
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
-Enabled booloptional
+Enabled boolOptional
 
-DefaultConfig [BetaMCPToolDefaultConfig](api/beta.md)optional
+DefaultConfig [BetaMCPToolDefaultConfig](api/beta.md)Optional
 
 Default configuration applied to all tools from this server
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaMemoryTool20250818 struct{…}
 
@@ -7355,9 +7355,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Memory20250818
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaMemoryTool20250818AllowedCallerDirect BetaMemoryTool20250818AllowedCaller = "direct"
 
@@ -7365,13 +7365,13 @@ const BetaMemoryTool20250818AllowedCallerCodeExecution20250825 BetaMemoryTool202
 
 const BetaMemoryTool20250818AllowedCallerCodeExecution20260120 BetaMemoryTool20250818AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -7382,25 +7382,25 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
 type BetaMemoryTool20250818CommandUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaMemoryTool20250818ViewCommand struct{…}
 
@@ -7412,7 +7412,7 @@ Path string
 
 Path to directory or file to view
 
-ViewRange []int64optional
+ViewRange []int64Optional
 
 Optional line range for viewing specific lines
 
@@ -7574,7 +7574,7 @@ Path string
 
 Path to directory or file to view
 
-ViewRange []int64optional
+ViewRange []int64Optional
 
 Optional line range for viewing specific lines
 
@@ -7610,7 +7610,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -7649,7 +7649,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -7659,7 +7659,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -7791,11 +7791,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -7825,7 +7825,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -7845,11 +7845,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -7875,13 +7875,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -7913,11 +7913,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -7943,13 +7943,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -7981,7 +7981,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -8019,11 +8019,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -8049,13 +8049,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -8095,13 +8095,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -8155,13 +8155,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -8199,13 +8199,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -8227,7 +8227,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -8271,13 +8271,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -8325,7 +8325,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -8337,7 +8337,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -8487,7 +8487,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -8526,7 +8526,7 @@ CacheMissReason BetaDiagnosticsCacheMissReasonUnion
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCacheMissModelChanged struct{…}
 
@@ -8574,7 +8574,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -8582,7 +8582,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -8670,7 +8670,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -8699,7 +8699,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -8779,7 +8779,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -8887,7 +8887,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -8895,7 +8895,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -8995,7 +8995,7 @@ ServiceTier BetaUsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 
@@ -9007,7 +9007,7 @@ Speed BetaUsageSpeed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
 
@@ -9037,7 +9037,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -9145,7 +9145,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -9153,7 +9153,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -9289,11 +9289,11 @@ type BetaMessageParamResp struct{…}
 
 Content [][BetaContentBlockParamUnionResp](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 [][BetaContentBlockParamUnionResp](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -9301,13 +9301,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -9318,15 +9318,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -9428,7 +9428,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -9436,7 +9436,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -9462,13 +9462,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -9479,7 +9479,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -9489,7 +9489,7 @@ type BetaRequestDocumentBlock struct{…}
 
 Source BetaRequestDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -9511,13 +9511,13 @@ type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][BetaContentBlockSourceContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -9525,13 +9525,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -9542,15 +9542,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -9652,7 +9652,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -9660,7 +9660,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -9686,13 +9686,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -9703,7 +9703,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -9725,13 +9725,13 @@ Type File
 
 Type Document
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -9742,19 +9742,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 type BetaSearchResultBlockParamResp struct{…}
 
@@ -9764,13 +9764,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -9781,15 +9781,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -9893,13 +9893,13 @@ Title string
 
 Type SearchResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -9910,15 +9910,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaThinkingBlockParamResp struct{…}
 
@@ -9944,13 +9944,13 @@ Name string
 
 Type ToolUse
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -9961,17 +9961,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaToolUseBlockParamCallerUnionRespoptional
+Caller BetaToolUseBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -9999,13 +9999,13 @@ ToolUseID string
 
 Type ToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10016,19 +10016,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Content []BetaToolResultBlockParamContentUnionRespoptional
+Content []BetaToolResultBlockParamContentUnionRespOptional
 
-Accepts one of the following:
+One of the following:
 
 []BetaToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -10036,13 +10036,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10053,15 +10053,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -10163,7 +10163,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -10171,7 +10171,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -10197,13 +10197,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10214,7 +10214,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -10228,13 +10228,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10245,15 +10245,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -10357,13 +10357,13 @@ Title string
 
 Type SearchResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10374,21 +10374,21 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaRequestDocumentBlock struct{…}
 
 Source BetaRequestDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -10410,13 +10410,13 @@ type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][BetaContentBlockSourceContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -10424,13 +10424,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10441,15 +10441,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -10551,7 +10551,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -10559,7 +10559,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -10585,13 +10585,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10602,7 +10602,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -10624,13 +10624,13 @@ Type File
 
 Type Document
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10641,19 +10641,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 type BetaToolReferenceBlockParamResp struct{…}
 
@@ -10663,13 +10663,13 @@ ToolName string
 
 Type ToolReference
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10680,13 +10680,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-IsError booloptional
+IsError boolOptional
 
 type BetaServerToolUseBlockParamResp struct{…}
 
@@ -10696,7 +10696,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockParamName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockParamNameAdvisor BetaServerToolUseBlockParamName = "advisor"
 
@@ -10716,13 +10716,13 @@ const BetaServerToolUseBlockParamNameToolSearchToolBm25 BetaServerToolUseBlockPa
 
 Type ServerToolUse
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10733,17 +10733,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaServerToolUseBlockParamCallerUnionRespoptional
+Caller BetaServerToolUseBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -10769,7 +10769,7 @@ type BetaWebSearchToolResultBlockParamResp struct{…}
 
 Content [BetaWebSearchToolResultBlockParamContentUnionResp](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 [][BetaWebSearchResultBlockParamResp](api/beta.md)
 
@@ -10781,13 +10781,13 @@ Type WebSearchResult
 
 URL string
 
-PageAge stringoptional
+PageAge stringOptional
 
 type BetaWebSearchToolRequestError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -10807,13 +10807,13 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10824,17 +10824,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaWebSearchToolResultBlockParamCallerUnionRespoptional
+Caller BetaWebSearchToolResultBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -10860,13 +10860,13 @@ type BetaWebFetchToolResultBlockParamResp struct{…}
 
 Content BetaWebFetchToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlockParamResp struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -10892,7 +10892,7 @@ Content [BetaRequestDocumentBlock](api/beta.md)
 
 Source BetaRequestDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -10914,13 +10914,13 @@ type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][BetaContentBlockSourceContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -10928,13 +10928,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -10945,15 +10945,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -11055,7 +11055,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -11063,7 +11063,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -11089,13 +11089,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11106,7 +11106,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -11128,13 +11128,13 @@ Type File
 
 Type Document
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11145,19 +11145,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 Type WebFetchResult
 
@@ -11165,7 +11165,7 @@ URL string
 
 Fetched content URL
 
-RetrievedAt stringoptional
+RetrievedAt stringOptional
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -11173,13 +11173,13 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11190,17 +11190,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaWebFetchToolResultBlockParamCallerUnionRespoptional
+Caller BetaWebFetchToolResultBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -11226,13 +11226,13 @@ type BetaAdvisorToolResultBlockParamResp struct{…}
 
 Content BetaAdvisorToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultErrorParamResp struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorParamErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorParamErrorCode = "max\_uses\_exceeded"
 
@@ -11266,13 +11266,13 @@ ToolUseID string
 
 Type AdvisorToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11283,7 +11283,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -11295,13 +11295,13 @@ Content [BetaCodeExecutionToolResultBlockParamContentUnionResp](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -11351,13 +11351,13 @@ ToolUseID string
 
 Type CodeExecutionToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11368,7 +11368,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -11378,13 +11378,13 @@ type BetaBashCodeExecutionToolResultBlockParamResp struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorParamErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -11418,13 +11418,13 @@ ToolUseID string
 
 Type BashCodeExecutionToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11435,7 +11435,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -11445,13 +11445,13 @@ type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorParamErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -11465,7 +11465,7 @@ const BetaTextEditorCodeExecutionToolResultErrorParamErrorCodeFileNotFound BetaT
 
 Type TextEditorCodeExecutionToolResultError
 
-ErrorMessage stringoptional
+ErrorMessage stringOptional
 
 type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}
 
@@ -11473,7 +11473,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockParamFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockParamFileTypeText BetaTextEditorCodeExecutionViewResultBlockParamFileType = "text"
 
@@ -11483,11 +11483,11 @@ const BetaTextEditorCodeExecutionViewResultBlockParamFileTypePDF BetaTextEditorC
 
 Type TextEditorCodeExecutionViewResult
 
-NumLines int64optional
+NumLines int64Optional
 
-StartLine int64optional
+StartLine int64Optional
 
-TotalLines int64optional
+TotalLines int64Optional
 
 type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}
 
@@ -11499,27 +11499,27 @@ type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}
 
 Type TextEditorCodeExecutionStrReplaceResult
 
-Lines []stringoptional
+Lines []stringOptional
 
-NewLines int64optional
+NewLines int64Optional
 
-NewStart int64optional
+NewStart int64Optional
 
-OldLines int64optional
+OldLines int64Optional
 
-OldStart int64optional
+OldStart int64Optional
 
 ToolUseID string
 
 Type TextEditorCodeExecutionToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11530,7 +11530,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -11540,13 +11540,13 @@ type BetaToolSearchToolResultBlockParamResp struct{…}
 
 Content BetaToolSearchToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultErrorParamResp struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorParamErrorCodeInvalidToolInput BetaToolSearchToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -11566,13 +11566,13 @@ ToolName string
 
 Type ToolReference
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11583,7 +11583,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -11595,13 +11595,13 @@ ToolUseID string
 
 Type ToolSearchToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11612,7 +11612,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -11632,13 +11632,13 @@ The name of the MCP server
 
 Type MCPToolUse
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11649,7 +11649,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -11661,13 +11661,13 @@ ToolUseID string
 
 Type MCPToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11678,15 +11678,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Content BetaRequestMCPToolResultBlockParamContentUnionRespoptional
+Content BetaRequestMCPToolResultBlockParamContentUnionRespOptional
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -11696,13 +11696,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11713,15 +11713,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -11819,7 +11819,7 @@ Title string
 
 Type SearchResultLocation
 
-IsError booloptional
+IsError boolOptional
 
 type BetaContainerUploadBlockParamResp struct{…}
 
@@ -11830,13 +11830,13 @@ FileID string
 
 Type ContainerUpload
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11847,7 +11847,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -11869,13 +11869,13 @@ Summary of previously compacted content, or null if compaction failed
 
 Type Compaction
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -11886,19 +11886,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-EncryptedContent stringoptional
+EncryptedContent stringOptional
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
 Role BetaMessageParamRole
 
-Accepts one of the following:
+One of the following:
 
 const BetaMessageParamRoleUser BetaMessageParamRole = "user"
 
@@ -11920,7 +11920,7 @@ The total number of tokens across the provided list of messages, system prompt, 
 
 type BetaMetadata struct{…}
 
-UserID stringoptional
+UserID stringOptional
 
 An external identifier for the user who is associated with the request.
 
@@ -11930,11 +11930,11 @@ maxLength512
 
 type BetaOutputConfig struct{…}
 
-Effort BetaOutputConfigEffortoptional
+Effort BetaOutputConfigEffortOptional
 
 All possible effort levels.
 
-Accepts one of the following:
+One of the following:
 
 const BetaOutputConfigEffortLow BetaOutputConfigEffort = "low"
 
@@ -11946,7 +11946,7 @@ const BetaOutputConfigEffortXhigh BetaOutputConfigEffort = "xhigh"
 
 const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"
 
-Format [BetaJSONOutputFormat](api/beta.md)optional
+Format [BetaJSONOutputFormat](api/beta.md)Optional
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
 
@@ -11956,7 +11956,7 @@ The JSON schema of the format
 
 Type JSONSchema
 
-TaskBudget [BetaTokenTaskBudget](api/beta.md)optional
+TaskBudget [BetaTokenTaskBudget](api/beta.md)Optional
 
 User-configurable total token budget across contexts.
 
@@ -11968,7 +11968,7 @@ Type Tokens
 
 The budget type. Currently only 'tokens' is supported.
 
-Remaining int64optional
+Remaining int64Optional
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
@@ -11982,7 +11982,7 @@ Type Text
 
 type BetaRawContentBlockDeltaUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextDelta struct{…}
 
@@ -12000,7 +12000,7 @@ type BetaCitationsDelta struct{…}
 
 Citation BetaCitationsDeltaCitationUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -12132,7 +12132,7 @@ type BetaRawContentBlockDeltaEvent struct{…}
 
 Delta [BetaRawContentBlockDeltaUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextDelta struct{…}
 
@@ -12150,7 +12150,7 @@ type BetaCitationsDelta struct{…}
 
 Citation BetaCitationsDeltaCitationUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -12288,7 +12288,7 @@ ContentBlock BetaRawContentBlockStartEventContentBlockUnion
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -12298,7 +12298,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -12430,11 +12430,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -12464,7 +12464,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -12484,11 +12484,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -12514,13 +12514,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -12552,11 +12552,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -12582,13 +12582,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -12620,7 +12620,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -12658,11 +12658,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -12688,13 +12688,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -12734,13 +12734,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -12794,13 +12794,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -12838,13 +12838,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -12866,7 +12866,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -12910,13 +12910,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -12964,7 +12964,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -12976,7 +12976,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -13136,7 +13136,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -13192,7 +13192,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -13212,7 +13212,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -13228,7 +13228,7 @@ Type Refusal
 
 StopReason [BetaStopReason](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -13284,7 +13284,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -13392,7 +13392,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -13400,7 +13400,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -13530,7 +13530,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -13569,7 +13569,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -13579,7 +13579,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -13711,11 +13711,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -13745,7 +13745,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -13765,11 +13765,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -13795,13 +13795,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -13833,11 +13833,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -13863,13 +13863,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -13901,7 +13901,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -13939,11 +13939,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -13969,13 +13969,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -14015,13 +14015,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -14075,13 +14075,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -14119,13 +14119,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -14147,7 +14147,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -14191,13 +14191,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -14245,7 +14245,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -14257,7 +14257,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -14407,7 +14407,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -14446,7 +14446,7 @@ CacheMissReason BetaDiagnosticsCacheMissReasonUnion
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCacheMissModelChanged struct{…}
 
@@ -14494,7 +14494,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -14502,7 +14502,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -14590,7 +14590,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -14619,7 +14619,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -14699,7 +14699,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -14807,7 +14807,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -14815,7 +14815,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -14915,7 +14915,7 @@ ServiceTier BetaUsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 
@@ -14927,7 +14927,7 @@ Speed BetaUsageSpeed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
 
@@ -14941,7 +14941,7 @@ Type MessageStop
 
 type BetaRawMessageStreamEventUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaRawMessageStartEvent struct{…}
 
@@ -14977,7 +14977,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -15016,7 +15016,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -15026,7 +15026,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -15158,11 +15158,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -15192,7 +15192,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -15212,11 +15212,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -15242,13 +15242,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -15280,11 +15280,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -15310,13 +15310,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -15348,7 +15348,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -15386,11 +15386,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -15416,13 +15416,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -15462,13 +15462,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -15522,13 +15522,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -15566,13 +15566,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -15594,7 +15594,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -15638,13 +15638,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -15692,7 +15692,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -15704,7 +15704,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -15854,7 +15854,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -15893,7 +15893,7 @@ CacheMissReason BetaDiagnosticsCacheMissReasonUnion
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCacheMissModelChanged struct{…}
 
@@ -15941,7 +15941,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -15949,7 +15949,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -16037,7 +16037,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -16066,7 +16066,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -16146,7 +16146,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -16254,7 +16254,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -16262,7 +16262,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -16362,7 +16362,7 @@ ServiceTier BetaUsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 
@@ -16374,7 +16374,7 @@ Speed BetaUsageSpeed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
 
@@ -16392,7 +16392,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -16448,7 +16448,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -16468,7 +16468,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -16484,7 +16484,7 @@ Type Refusal
 
 StopReason [BetaStopReason](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -16540,7 +16540,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -16648,7 +16648,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -16656,7 +16656,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -16762,7 +16762,7 @@ ContentBlock BetaRawContentBlockStartEventContentBlockUnion
 
 Response model for a file uploaded to the container.
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -16772,7 +16772,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -16904,11 +16904,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -16938,7 +16938,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -16958,11 +16958,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -16988,13 +16988,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -17026,11 +17026,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -17056,13 +17056,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -17094,7 +17094,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -17132,11 +17132,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -17162,13 +17162,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -17208,13 +17208,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -17268,13 +17268,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -17312,13 +17312,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -17340,7 +17340,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -17384,13 +17384,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -17438,7 +17438,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -17450,7 +17450,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -17598,7 +17598,7 @@ type BetaRawContentBlockDeltaEvent struct{…}
 
 Delta [BetaRawContentBlockDeltaUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextDelta struct{…}
 
@@ -17616,7 +17616,7 @@ type BetaCitationsDelta struct{…}
 
 Citation BetaCitationsDeltaCitationUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -17776,7 +17776,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -17794,7 +17794,7 @@ type BetaRequestDocumentBlock struct{…}
 
 Source BetaRequestDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -17816,13 +17816,13 @@ type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][BetaContentBlockSourceContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -17830,13 +17830,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -17847,15 +17847,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -17957,7 +17957,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -17965,7 +17965,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -17991,13 +17991,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -18008,7 +18008,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -18030,13 +18030,13 @@ Type File
 
 Type Document
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -18047,25 +18047,25 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 type BetaRequestMCPServerToolConfiguration struct{…}
 
-AllowedTools []stringoptional
+AllowedTools []stringOptional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaRequestMCPServerURLDefinition struct{…}
 
@@ -18075,13 +18075,13 @@ Type URL
 
 URL string
 
-AuthorizationToken stringoptional
+AuthorizationToken stringOptional
 
-ToolConfiguration [BetaRequestMCPServerToolConfiguration](api/beta.md)optional
+ToolConfiguration [BetaRequestMCPServerToolConfiguration](api/beta.md)Optional
 
-AllowedTools []stringoptional
+AllowedTools []stringOptional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaRequestMCPToolResultBlockParamResp struct{…}
 
@@ -18089,13 +18089,13 @@ ToolUseID string
 
 Type MCPToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -18106,15 +18106,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Content BetaRequestMCPToolResultBlockParamContentUnionRespoptional
+Content BetaRequestMCPToolResultBlockParamContentUnionRespOptional
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -18124,13 +18124,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -18141,15 +18141,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -18247,7 +18247,7 @@ Title string
 
 Type SearchResultLocation
 
-IsError booloptional
+IsError boolOptional
 
 type BetaSearchResultBlockParamResp struct{…}
 
@@ -18257,13 +18257,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -18274,15 +18274,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -18386,13 +18386,13 @@ Title string
 
 Type SearchResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -18403,15 +18403,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaServerToolCaller struct{…}
 
@@ -18445,7 +18445,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -18465,11 +18465,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -18499,7 +18499,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockParamName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockParamNameAdvisor BetaServerToolUseBlockParamName = "advisor"
 
@@ -18519,13 +18519,13 @@ const BetaServerToolUseBlockParamNameToolSearchToolBm25 BetaServerToolUseBlockPa
 
 Type ServerToolUse
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -18536,17 +18536,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaServerToolUseBlockParamCallerUnionRespoptional
+Caller BetaServerToolUseBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -18586,7 +18586,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -18608,19 +18608,19 @@ Type BetaSkillParamsType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillParamsTypeAnthropic BetaSkillParamsType = "anthropic"
 
 const BetaSkillParamsTypeCustom BetaSkillParamsType = "custom"
 
-Version stringoptional
+Version stringOptional
 
 Skill version or 'latest' for most recent version
 
 type BetaStopReason string
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -18646,7 +18646,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -18760,13 +18760,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -18777,15 +18777,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -18885,7 +18885,7 @@ Type SearchResultLocation
 
 type BetaTextCitationUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -18991,7 +18991,7 @@ Type SearchResultLocation
 
 type BetaTextCitationParamUnionResp interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -19125,27 +19125,27 @@ type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}
 
 Type TextEditorCodeExecutionStrReplaceResult
 
-Lines []stringoptional
+Lines []stringOptional
 
-NewLines int64optional
+NewLines int64Optional
 
-NewStart int64optional
+NewStart int64Optional
 
-OldLines int64optional
+OldLines int64Optional
 
-OldStart int64optional
+OldStart int64Optional
 
 type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -19167,7 +19167,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -19211,13 +19211,13 @@ type BetaTextEditorCodeExecutionToolResultBlockParamResp struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorParamErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -19231,7 +19231,7 @@ const BetaTextEditorCodeExecutionToolResultErrorParamErrorCodeFileNotFound BetaT
 
 Type TextEditorCodeExecutionToolResultError
 
-ErrorMessage stringoptional
+ErrorMessage stringOptional
 
 type BetaTextEditorCodeExecutionViewResultBlockParamResp struct{…}
 
@@ -19239,7 +19239,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockParamFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockParamFileTypeText BetaTextEditorCodeExecutionViewResultBlockParamFileType = "text"
 
@@ -19249,11 +19249,11 @@ const BetaTextEditorCodeExecutionViewResultBlockParamFileTypePDF BetaTextEditorC
 
 Type TextEditorCodeExecutionViewResult
 
-NumLines int64optional
+NumLines int64Optional
 
-StartLine int64optional
+StartLine int64Optional
 
-TotalLines int64optional
+TotalLines int64Optional
 
 type BetaTextEditorCodeExecutionCreateResultBlockParamResp struct{…}
 
@@ -19265,27 +19265,27 @@ type BetaTextEditorCodeExecutionStrReplaceResultBlockParamResp struct{…}
 
 Type TextEditorCodeExecutionStrReplaceResult
 
-Lines []stringoptional
+Lines []stringOptional
 
-NewLines int64optional
+NewLines int64Optional
 
-NewStart int64optional
+NewStart int64Optional
 
-OldLines int64optional
+OldLines int64Optional
 
-OldStart int64optional
+OldStart int64Optional
 
 ToolUseID string
 
 Type TextEditorCodeExecutionToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -19296,7 +19296,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -19306,7 +19306,7 @@ type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -19326,7 +19326,7 @@ type BetaTextEditorCodeExecutionToolResultErrorParamResp struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorParamErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -19340,7 +19340,7 @@ const BetaTextEditorCodeExecutionToolResultErrorParamErrorCodeFileNotFound BetaT
 
 Type TextEditorCodeExecutionToolResultError
 
-ErrorMessage stringoptional
+ErrorMessage stringOptional
 
 type BetaTextEditorCodeExecutionViewResultBlock struct{…}
 
@@ -19348,7 +19348,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -19370,7 +19370,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockParamFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockParamFileTypeText BetaTextEditorCodeExecutionViewResultBlockParamFileType = "text"
 
@@ -19380,11 +19380,11 @@ const BetaTextEditorCodeExecutionViewResultBlockParamFileTypePDF BetaTextEditorC
 
 Type TextEditorCodeExecutionViewResult
 
-NumLines int64optional
+NumLines int64Optional
 
-StartLine int64optional
+StartLine int64Optional
 
-TotalLines int64optional
+TotalLines int64Optional
 
 type BetaThinkingBlock struct{…}
 
@@ -19406,11 +19406,11 @@ type BetaThinkingConfigAdaptive struct{…}
 
 Type Adaptive
 
-Display BetaThinkingConfigAdaptiveDisplayoptional
+Display BetaThinkingConfigAdaptiveDisplayOptional
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaThinkingConfigAdaptiveDisplaySummarized BetaThinkingConfigAdaptiveDisplay = "summarized"
 
@@ -19434,11 +19434,11 @@ minimum1024
 
 Type Enabled
 
-Display BetaThinkingConfigEnabledDisplayoptional
+Display BetaThinkingConfigEnabledDisplayOptional
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaThinkingConfigEnabledDisplaySummarized BetaThinkingConfigEnabledDisplay = "summarized"
 
@@ -19452,7 +19452,7 @@ When enabled, responses include `thinking` content blocks showing Claude's think
 
 See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
 
-Accepts one of the following:
+One of the following:
 
 type BetaThinkingConfigEnabled struct{…}
 
@@ -19468,11 +19468,11 @@ minimum1024
 
 Type Enabled
 
-Display BetaThinkingConfigEnabledDisplayoptional
+Display BetaThinkingConfigEnabledDisplayOptional
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaThinkingConfigEnabledDisplaySummarized BetaThinkingConfigEnabledDisplay = "summarized"
 
@@ -19486,11 +19486,11 @@ type BetaThinkingConfigAdaptive struct{…}
 
 Type Adaptive
 
-Display BetaThinkingConfigAdaptiveDisplayoptional
+Display BetaThinkingConfigAdaptiveDisplayOptional
 
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaThinkingConfigAdaptiveDisplaySummarized BetaThinkingConfigAdaptiveDisplay = "summarized"
 
@@ -19520,7 +19520,7 @@ Type Tokens
 
 The budget type. Currently only 'tokens' is supported.
 
-Remaining int64optional
+Remaining int64Optional
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
@@ -19534,9 +19534,9 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 Type Object
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
-Required []stringoptional
+Required []stringOptional
 
 Name string
 
@@ -19548,9 +19548,9 @@ maxLength128
 
 minLength1
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolAllowedCallerDirect BetaToolAllowedCaller = "direct"
 
@@ -19558,13 +19558,13 @@ const BetaToolAllowedCallerCodeExecution20250825 BetaToolAllowedCaller = "code\_
 
 const BetaToolAllowedCallerCodeExecution20260120 BetaToolAllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -19575,33 +19575,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Description stringoptional
+Description stringOptional
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-EagerInputStreaming booloptional
+EagerInputStreaming boolOptional
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-Type BetaToolTypeoptional
+Type BetaToolTypeOptional
 
 type BetaToolBash20241022 struct{…}
 
@@ -19613,9 +19613,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Bash20241022
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolBash20241022AllowedCallerDirect BetaToolBash20241022AllowedCaller = "direct"
 
@@ -19623,13 +19623,13 @@ const BetaToolBash20241022AllowedCallerCodeExecution20250825 BetaToolBash2024102
 
 const BetaToolBash20241022AllowedCallerCodeExecution20260120 BetaToolBash20241022AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -19640,19 +19640,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -19666,9 +19666,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Bash20250124
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolBash20250124AllowedCallerDirect BetaToolBash20250124AllowedCaller = "direct"
 
@@ -19676,13 +19676,13 @@ const BetaToolBash20250124AllowedCallerCodeExecution20250825 BetaToolBash2025012
 
 const BetaToolBash20250124AllowedCallerCodeExecution20260120 BetaToolBash20250124AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -19693,19 +19693,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -19713,7 +19713,7 @@ type BetaToolChoiceUnion interface{…}
 
 How the model should use the provided tools. The model can use a specific tool, any available tool, decide by itself, or not use tools at all.
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolChoiceAuto struct{…}
 
@@ -19721,7 +19721,7 @@ The model will automatically decide whether to use tools.
 
 Type Auto
 
-DisableParallelToolUse booloptional
+DisableParallelToolUse boolOptional
 
 Whether to disable parallel tool use.
 
@@ -19733,7 +19733,7 @@ The model will use any available tools.
 
 Type Any
 
-DisableParallelToolUse booloptional
+DisableParallelToolUse boolOptional
 
 Whether to disable parallel tool use.
 
@@ -19749,7 +19749,7 @@ The name of the tool to use.
 
 Type Tool
 
-DisableParallelToolUse booloptional
+DisableParallelToolUse boolOptional
 
 Whether to disable parallel tool use.
 
@@ -19767,7 +19767,7 @@ The model will use any available tools.
 
 Type Any
 
-DisableParallelToolUse booloptional
+DisableParallelToolUse boolOptional
 
 Whether to disable parallel tool use.
 
@@ -19779,7 +19779,7 @@ The model will automatically decide whether to use tools.
 
 Type Auto
 
-DisableParallelToolUse booloptional
+DisableParallelToolUse boolOptional
 
 Whether to disable parallel tool use.
 
@@ -19801,7 +19801,7 @@ The name of the tool to use.
 
 Type Tool
 
-DisableParallelToolUse booloptional
+DisableParallelToolUse boolOptional
 
 Whether to disable parallel tool use.
 
@@ -19825,9 +19825,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Computer20241022
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolComputerUse20241022AllowedCallerDirect BetaToolComputerUse20241022AllowedCaller = "direct"
 
@@ -19835,13 +19835,13 @@ const BetaToolComputerUse20241022AllowedCallerCodeExecution20250825 BetaToolComp
 
 const BetaToolComputerUse20241022AllowedCallerCodeExecution20260120 BetaToolComputerUse20241022AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -19852,23 +19852,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-DisplayNumber int64optional
+DisplayNumber int64Optional
 
 The X11 display number (e.g. 0, 1) for the display.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -19890,9 +19890,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Computer20250124
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolComputerUse20250124AllowedCallerDirect BetaToolComputerUse20250124AllowedCaller = "direct"
 
@@ -19900,13 +19900,13 @@ const BetaToolComputerUse20250124AllowedCallerCodeExecution20250825 BetaToolComp
 
 const BetaToolComputerUse20250124AllowedCallerCodeExecution20260120 BetaToolComputerUse20250124AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -19917,23 +19917,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-DisplayNumber int64optional
+DisplayNumber int64Optional
 
 The X11 display number (e.g. 0, 1) for the display.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -19955,9 +19955,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Computer20251124
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolComputerUse20251124AllowedCallerDirect BetaToolComputerUse20251124AllowedCaller = "direct"
 
@@ -19965,13 +19965,13 @@ const BetaToolComputerUse20251124AllowedCallerCodeExecution20250825 BetaToolComp
 
 const BetaToolComputerUse20251124AllowedCallerCodeExecution20260120 BetaToolComputerUse20251124AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -19982,27 +19982,27 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-DisplayNumber int64optional
+DisplayNumber int64Optional
 
 The X11 display number (e.g. 0, 1) for the display.
 
-EnableZoom booloptional
+EnableZoom boolOptional
 
 Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -20020,13 +20020,13 @@ ToolName string
 
 Type ToolReference
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20037,7 +20037,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -20049,13 +20049,13 @@ ToolUseID string
 
 Type ToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20066,19 +20066,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Content []BetaToolResultBlockParamContentUnionRespoptional
+Content []BetaToolResultBlockParamContentUnionRespOptional
 
-Accepts one of the following:
+One of the following:
 
 []BetaToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -20086,13 +20086,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20103,15 +20103,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -20213,7 +20213,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -20221,7 +20221,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -20247,13 +20247,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20264,7 +20264,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -20278,13 +20278,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20295,15 +20295,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -20407,13 +20407,13 @@ Title string
 
 Type SearchResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20424,21 +20424,21 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaRequestDocumentBlock struct{…}
 
 Source BetaRequestDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -20460,13 +20460,13 @@ type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][BetaContentBlockSourceContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -20474,13 +20474,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20491,15 +20491,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -20601,7 +20601,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -20609,7 +20609,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -20635,13 +20635,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20652,7 +20652,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -20674,13 +20674,13 @@ Type File
 
 Type Document
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20691,19 +20691,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 type BetaToolReferenceBlockParamResp struct{…}
 
@@ -20713,13 +20713,13 @@ ToolName string
 
 Type ToolReference
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20730,13 +20730,13 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-IsError booloptional
+IsError boolOptional
 
 type BetaToolSearchToolBm25\_20251119 struct{…}
 
@@ -20748,15 +20748,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type BetaToolSearchToolBm25\_20251119Type
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolBm25\_20251119TypeToolSearchToolBm25\_20251119 BetaToolSearchToolBm25\_20251119Type = "tool\_search\_tool\_bm25\_20251119"
 
 const BetaToolSearchToolBm25\_20251119TypeToolSearchToolBm25 BetaToolSearchToolBm25\_20251119Type = "tool\_search\_tool\_bm25"
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolBm25\_20251119AllowedCallerDirect BetaToolSearchToolBm25\_20251119AllowedCaller = "direct"
 
@@ -20764,13 +20764,13 @@ const BetaToolSearchToolBm25\_20251119AllowedCallerCodeExecution20250825 BetaToo
 
 const BetaToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20781,17 +20781,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -20805,15 +20805,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type BetaToolSearchToolRegex20251119Type
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolRegex20251119TypeToolSearchToolRegex20251119 BetaToolSearchToolRegex20251119Type = "tool\_search\_tool\_regex\_20251119"
 
 const BetaToolSearchToolRegex20251119TypeToolSearchToolRegex BetaToolSearchToolRegex20251119Type = "tool\_search\_tool\_regex"
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolRegex20251119AllowedCallerDirect BetaToolSearchToolRegex20251119AllowedCaller = "direct"
 
@@ -20821,13 +20821,13 @@ const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 BetaTool
 
 const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20838,17 +20838,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -20856,13 +20856,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -20894,13 +20894,13 @@ type BetaToolSearchToolResultBlockParamResp struct{…}
 
 Content BetaToolSearchToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultErrorParamResp struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorParamErrorCodeInvalidToolInput BetaToolSearchToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -20920,13 +20920,13 @@ ToolName string
 
 Type ToolReference
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20937,7 +20937,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -20949,13 +20949,13 @@ ToolUseID string
 
 Type ToolSearchToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -20966,7 +20966,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -20976,7 +20976,7 @@ type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -20994,7 +20994,7 @@ type BetaToolSearchToolResultErrorParamResp struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorParamErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorParamErrorCodeInvalidToolInput BetaToolSearchToolResultErrorParamErrorCode = "invalid\_tool\_input"
 
@@ -21024,13 +21024,13 @@ ToolName string
 
 Type ToolReference
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21041,7 +21041,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -21059,9 +21059,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type TextEditor20241022
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolTextEditor20241022AllowedCallerDirect BetaToolTextEditor20241022AllowedCaller = "direct"
 
@@ -21069,13 +21069,13 @@ const BetaToolTextEditor20241022AllowedCallerCodeExecution20250825 BetaToolTextE
 
 const BetaToolTextEditor20241022AllowedCallerCodeExecution20260120 BetaToolTextEditor20241022AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21086,19 +21086,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21112,9 +21112,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type TextEditor20250124
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolTextEditor20250124AllowedCallerDirect BetaToolTextEditor20250124AllowedCaller = "direct"
 
@@ -21122,13 +21122,13 @@ const BetaToolTextEditor20250124AllowedCallerCodeExecution20250825 BetaToolTextE
 
 const BetaToolTextEditor20250124AllowedCallerCodeExecution20260120 BetaToolTextEditor20250124AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21139,19 +21139,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21165,9 +21165,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type TextEditor20250429
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolTextEditor20250429AllowedCallerDirect BetaToolTextEditor20250429AllowedCaller = "direct"
 
@@ -21175,13 +21175,13 @@ const BetaToolTextEditor20250429AllowedCallerCodeExecution20250825 BetaToolTextE
 
 const BetaToolTextEditor20250429AllowedCallerCodeExecution20260120 BetaToolTextEditor20250429AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21192,19 +21192,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21218,9 +21218,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type TextEditor20250728
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolTextEditor20250728AllowedCallerDirect BetaToolTextEditor20250728AllowedCaller = "direct"
 
@@ -21228,13 +21228,13 @@ const BetaToolTextEditor20250728AllowedCallerCodeExecution20250825 BetaToolTextE
 
 const BetaToolTextEditor20250728AllowedCallerCodeExecution20260120 BetaToolTextEditor20250728AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21245,23 +21245,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-MaxCharacters int64optional
+MaxCharacters int64Optional
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21269,7 +21269,7 @@ type BetaToolUnion interface{…}
 
 Code execution tool with REPL state persistence (daemon mode + gVisor checkpoint).
 
-Accepts one of the following:
+One of the following:
 
 type BetaTool struct{…}
 
@@ -21281,9 +21281,9 @@ This defines the shape of the `input` that your tool accepts and that the model 
 
 Type Object
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
-Required []stringoptional
+Required []stringOptional
 
 Name string
 
@@ -21295,9 +21295,9 @@ maxLength128
 
 minLength1
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolAllowedCallerDirect BetaToolAllowedCaller = "direct"
 
@@ -21305,13 +21305,13 @@ const BetaToolAllowedCallerCodeExecution20250825 BetaToolAllowedCaller = "code\_
 
 const BetaToolAllowedCallerCodeExecution20260120 BetaToolAllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21322,33 +21322,33 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Description stringoptional
+Description stringOptional
 
 Description of what this tool does.
 
 Tool descriptions should be as detailed as possible. The more information that the model has about what the tool is and how to use it, the better it will perform. You can use natural language descriptions to reinforce important aspects of the tool input JSON schema.
 
-EagerInputStreaming booloptional
+EagerInputStreaming boolOptional
 
 Enable eager input streaming for this tool. When true, tool input parameters will be streamed incrementally as they are generated, and types will be inferred on-the-fly rather than buffering the full JSON output. When false, streaming is disabled for this tool even if the fine-grained-tool-streaming beta is active. When null (default), uses the default behavior based on beta headers.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-Type BetaToolTypeoptional
+Type BetaToolTypeOptional
 
 type BetaToolBash20241022 struct{…}
 
@@ -21360,9 +21360,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Bash20241022
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolBash20241022AllowedCallerDirect BetaToolBash20241022AllowedCaller = "direct"
 
@@ -21370,13 +21370,13 @@ const BetaToolBash20241022AllowedCallerCodeExecution20250825 BetaToolBash2024102
 
 const BetaToolBash20241022AllowedCallerCodeExecution20260120 BetaToolBash20241022AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21387,19 +21387,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21413,9 +21413,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Bash20250124
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolBash20250124AllowedCallerDirect BetaToolBash20250124AllowedCaller = "direct"
 
@@ -21423,13 +21423,13 @@ const BetaToolBash20250124AllowedCallerCodeExecution20250825 BetaToolBash2025012
 
 const BetaToolBash20250124AllowedCallerCodeExecution20260120 BetaToolBash20250124AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21440,19 +21440,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21466,9 +21466,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type CodeExecution20250522
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionTool20250522AllowedCallerDirect BetaCodeExecutionTool20250522AllowedCaller = "direct"
 
@@ -21476,13 +21476,13 @@ const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20250825 BetaCodeEx
 
 const BetaCodeExecutionTool20250522AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250522AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21493,17 +21493,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21517,9 +21517,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type CodeExecution20250825
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionTool20250825AllowedCallerDirect BetaCodeExecutionTool20250825AllowedCaller = "direct"
 
@@ -21527,13 +21527,13 @@ const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20250825 BetaCodeEx
 
 const BetaCodeExecutionTool20250825AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20250825AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21544,17 +21544,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21570,9 +21570,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type CodeExecution20260120
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionTool20260120AllowedCallerDirect BetaCodeExecutionTool20260120AllowedCaller = "direct"
 
@@ -21580,13 +21580,13 @@ const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20250825 BetaCodeEx
 
 const BetaCodeExecutionTool20260120AllowedCallerCodeExecution20260120 BetaCodeExecutionTool20260120AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21597,17 +21597,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21629,9 +21629,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Computer20241022
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolComputerUse20241022AllowedCallerDirect BetaToolComputerUse20241022AllowedCaller = "direct"
 
@@ -21639,13 +21639,13 @@ const BetaToolComputerUse20241022AllowedCallerCodeExecution20250825 BetaToolComp
 
 const BetaToolComputerUse20241022AllowedCallerCodeExecution20260120 BetaToolComputerUse20241022AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21656,23 +21656,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-DisplayNumber int64optional
+DisplayNumber int64Optional
 
 The X11 display number (e.g. 0, 1) for the display.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21686,9 +21686,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Memory20250818
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaMemoryTool20250818AllowedCallerDirect BetaMemoryTool20250818AllowedCaller = "direct"
 
@@ -21696,13 +21696,13 @@ const BetaMemoryTool20250818AllowedCallerCodeExecution20250825 BetaMemoryTool202
 
 const BetaMemoryTool20250818AllowedCallerCodeExecution20260120 BetaMemoryTool20250818AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21713,19 +21713,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21747,9 +21747,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Computer20250124
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolComputerUse20250124AllowedCallerDirect BetaToolComputerUse20250124AllowedCaller = "direct"
 
@@ -21757,13 +21757,13 @@ const BetaToolComputerUse20250124AllowedCallerCodeExecution20250825 BetaToolComp
 
 const BetaToolComputerUse20250124AllowedCallerCodeExecution20260120 BetaToolComputerUse20250124AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21774,23 +21774,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-DisplayNumber int64optional
+DisplayNumber int64Optional
 
 The X11 display number (e.g. 0, 1) for the display.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21804,9 +21804,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type TextEditor20241022
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolTextEditor20241022AllowedCallerDirect BetaToolTextEditor20241022AllowedCaller = "direct"
 
@@ -21814,13 +21814,13 @@ const BetaToolTextEditor20241022AllowedCallerCodeExecution20250825 BetaToolTextE
 
 const BetaToolTextEditor20241022AllowedCallerCodeExecution20260120 BetaToolTextEditor20241022AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21831,19 +21831,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21865,9 +21865,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Computer20251124
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolComputerUse20251124AllowedCallerDirect BetaToolComputerUse20251124AllowedCaller = "direct"
 
@@ -21875,13 +21875,13 @@ const BetaToolComputerUse20251124AllowedCallerCodeExecution20250825 BetaToolComp
 
 const BetaToolComputerUse20251124AllowedCallerCodeExecution20260120 BetaToolComputerUse20251124AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21892,27 +21892,27 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-DisplayNumber int64optional
+DisplayNumber int64Optional
 
 The X11 display number (e.g. 0, 1) for the display.
 
-EnableZoom booloptional
+EnableZoom boolOptional
 
 Whether to enable an action to take a zoomed-in screenshot of the screen.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21926,9 +21926,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type TextEditor20250124
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolTextEditor20250124AllowedCallerDirect BetaToolTextEditor20250124AllowedCaller = "direct"
 
@@ -21936,13 +21936,13 @@ const BetaToolTextEditor20250124AllowedCallerCodeExecution20250825 BetaToolTextE
 
 const BetaToolTextEditor20250124AllowedCallerCodeExecution20260120 BetaToolTextEditor20250124AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -21953,19 +21953,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -21979,9 +21979,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type TextEditor20250429
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolTextEditor20250429AllowedCallerDirect BetaToolTextEditor20250429AllowedCaller = "direct"
 
@@ -21989,13 +21989,13 @@ const BetaToolTextEditor20250429AllowedCallerCodeExecution20250825 BetaToolTextE
 
 const BetaToolTextEditor20250429AllowedCallerCodeExecution20260120 BetaToolTextEditor20250429AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22006,19 +22006,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -22032,9 +22032,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type TextEditor20250728
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolTextEditor20250728AllowedCallerDirect BetaToolTextEditor20250728AllowedCaller = "direct"
 
@@ -22042,13 +22042,13 @@ const BetaToolTextEditor20250728AllowedCallerCodeExecution20250825 BetaToolTextE
 
 const BetaToolTextEditor20250728AllowedCallerCodeExecution20260120 BetaToolTextEditor20250728AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22059,23 +22059,23 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-InputExamples []map[string, any]optional
+InputExamples []map[string, any]Optional
 
-MaxCharacters int64optional
+MaxCharacters int64Optional
 
 Maximum number of characters to display when viewing a file. If not specified, defaults to displaying the full file.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -22089,9 +22089,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebSearch20250305
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchTool20250305AllowedCallerDirect BetaWebSearchTool20250305AllowedCaller = "direct"
 
@@ -22099,21 +22099,21 @@ const BetaWebSearchTool20250305AllowedCallerCodeExecution20250825 BetaWebSearchT
 
 const BetaWebSearchTool20250305AllowedCallerCodeExecution20260120 BetaWebSearchTool20250305AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22124,43 +22124,43 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation [BetaUserLocation](api/beta.md)optional
+UserLocation [BetaUserLocation](api/beta.md)Optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 Type Approximate
 
-City stringoptional
+City stringOptional
 
 The city of the user.
 
-Country stringoptional
+Country stringOptional
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-Region stringoptional
+Region stringOptional
 
 The region of the user.
 
-Timezone stringoptional
+Timezone stringOptional
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -22174,9 +22174,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebFetch20250910
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchTool20250910AllowedCallerDirect BetaWebFetchTool20250910AllowedCaller = "direct"
 
@@ -22184,21 +22184,21 @@ const BetaWebFetchTool20250910AllowedCallerCodeExecution20250825 BetaWebFetchToo
 
 const BetaWebFetchTool20250910AllowedCallerCodeExecution20260120 BetaWebFetchTool20250910AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 List of domains to allow fetching from
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 List of domains to block fetching from
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22209,31 +22209,31 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Enabled booloptional
+Enabled boolOptional
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxContentTokens int64optional
+MaxContentTokens int64Optional
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -22247,9 +22247,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebSearch20260209
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchTool20260209AllowedCallerDirect BetaWebSearchTool20260209AllowedCaller = "direct"
 
@@ -22257,21 +22257,21 @@ const BetaWebSearchTool20260209AllowedCallerCodeExecution20250825 BetaWebSearchT
 
 const BetaWebSearchTool20260209AllowedCallerCodeExecution20260120 BetaWebSearchTool20260209AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22282,43 +22282,43 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation [BetaUserLocation](api/beta.md)optional
+UserLocation [BetaUserLocation](api/beta.md)Optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 Type Approximate
 
-City stringoptional
+City stringOptional
 
 The city of the user.
 
-Country stringoptional
+Country stringOptional
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-Region stringoptional
+Region stringOptional
 
 The region of the user.
 
-Timezone stringoptional
+Timezone stringOptional
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -22332,9 +22332,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebFetch20260209
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchTool20260209AllowedCallerDirect BetaWebFetchTool20260209AllowedCaller = "direct"
 
@@ -22342,21 +22342,21 @@ const BetaWebFetchTool20260209AllowedCallerCodeExecution20250825 BetaWebFetchToo
 
 const BetaWebFetchTool20260209AllowedCallerCodeExecution20260120 BetaWebFetchTool20260209AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 List of domains to allow fetching from
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 List of domains to block fetching from
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22367,31 +22367,31 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Enabled booloptional
+Enabled boolOptional
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxContentTokens int64optional
+MaxContentTokens int64Optional
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -22407,9 +22407,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebFetch20260309
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchTool20260309AllowedCallerDirect BetaWebFetchTool20260309AllowedCaller = "direct"
 
@@ -22417,21 +22417,21 @@ const BetaWebFetchTool20260309AllowedCallerCodeExecution20250825 BetaWebFetchToo
 
 const BetaWebFetchTool20260309AllowedCallerCodeExecution20260120 BetaWebFetchTool20260309AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 List of domains to allow fetching from
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 List of domains to block fetching from
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22442,35 +22442,35 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Enabled booloptional
+Enabled boolOptional
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxContentTokens int64optional
+MaxContentTokens int64Optional
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UseCache booloptional
+UseCache boolOptional
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
@@ -22482,7 +22482,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -22490,7 +22490,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -22570,9 +22570,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type Advisor20260301
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorTool20260301AllowedCallerDirect BetaAdvisorTool20260301AllowedCaller = "direct"
 
@@ -22580,13 +22580,13 @@ const BetaAdvisorTool20260301AllowedCallerCodeExecution20250825 BetaAdvisorTool2
 
 const BetaAdvisorTool20260301AllowedCallerCodeExecution20260120 BetaAdvisorTool20260301AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22597,19 +22597,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caching [BetaCacheControlEphemeral](api/beta.md)optional
+Caching [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Caching for the advisor's own prompt. When set, each advisor call writes a cache entry at the given TTL so subsequent calls in the same conversation read the stable prefix. When omitted, the advisor prompt is not cached.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22620,21 +22620,21 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -22648,15 +22648,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type BetaToolSearchToolBm25\_20251119Type
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolBm25\_20251119TypeToolSearchToolBm25\_20251119 BetaToolSearchToolBm25\_20251119Type = "tool\_search\_tool\_bm25\_20251119"
 
 const BetaToolSearchToolBm25\_20251119TypeToolSearchToolBm25 BetaToolSearchToolBm25\_20251119Type = "tool\_search\_tool\_bm25"
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolBm25\_20251119AllowedCallerDirect BetaToolSearchToolBm25\_20251119AllowedCaller = "direct"
 
@@ -22664,13 +22664,13 @@ const BetaToolSearchToolBm25\_20251119AllowedCallerCodeExecution20250825 BetaToo
 
 const BetaToolSearchToolBm25\_20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolBm25\_20251119AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22681,17 +22681,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -22705,15 +22705,15 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type BetaToolSearchToolRegex20251119Type
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolRegex20251119TypeToolSearchToolRegex20251119 BetaToolSearchToolRegex20251119Type = "tool\_search\_tool\_regex\_20251119"
 
 const BetaToolSearchToolRegex20251119TypeToolSearchToolRegex BetaToolSearchToolRegex20251119Type = "tool\_search\_tool\_regex"
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolRegex20251119AllowedCallerDirect BetaToolSearchToolRegex20251119AllowedCaller = "direct"
 
@@ -22721,13 +22721,13 @@ const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20250825 BetaTool
 
 const BetaToolSearchToolRegex20251119AllowedCallerCodeExecution20260120 BetaToolSearchToolRegex20251119AllowedCaller = "code\_execution\_20260120"
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22738,17 +22738,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -22765,13 +22765,13 @@ Name of the MCP server to configure tools for
 
 Type MCPToolset
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22782,27 +22782,27 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Configs map[string, [BetaMCPToolConfig](api/beta.md)]optional
+Configs map[string, [BetaMCPToolConfig](api/beta.md)]Optional
 
 Configuration overrides for specific tools, keyed by tool name
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
-Enabled booloptional
+Enabled boolOptional
 
-DefaultConfig [BetaMCPToolDefaultConfig](api/beta.md)optional
+DefaultConfig [BetaMCPToolDefaultConfig](api/beta.md)Optional
 
 Default configuration applied to all tools from this server
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
-Enabled booloptional
+Enabled boolOptional
 
 type BetaToolUseBlock struct{…}
 
@@ -22814,11 +22814,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -22850,13 +22850,13 @@ Name string
 
 Type ToolUse
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -22867,17 +22867,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaToolUseBlockParamCallerUnionRespoptional
+Caller BetaToolUseBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -22963,7 +22963,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -23071,7 +23071,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -23079,7 +23079,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -23179,7 +23179,7 @@ ServiceTier BetaUsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 
@@ -23191,7 +23191,7 @@ Speed BetaUsageSpeed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
 
@@ -23201,19 +23201,19 @@ type BetaUserLocation struct{…}
 
 Type Approximate
 
-City stringoptional
+City stringOptional
 
 The city of the user.
 
-Country stringoptional
+Country stringOptional
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-Region stringoptional
+Region stringOptional
 
 The region of the user.
 
-Timezone stringoptional
+Timezone stringOptional
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -23229,7 +23229,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -23269,7 +23269,7 @@ Content [BetaRequestDocumentBlock](api/beta.md)
 
 Source BetaRequestDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -23291,13 +23291,13 @@ type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][BetaContentBlockSourceContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -23305,13 +23305,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -23322,15 +23322,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -23432,7 +23432,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -23440,7 +23440,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -23466,13 +23466,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -23483,7 +23483,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -23505,13 +23505,13 @@ Type File
 
 Type Document
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -23522,19 +23522,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 Type WebFetchResult
 
@@ -23542,7 +23542,7 @@ URL string
 
 Fetched content URL
 
-RetrievedAt stringoptional
+RetrievedAt stringOptional
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -23556,9 +23556,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebFetch20250910
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchTool20250910AllowedCallerDirect BetaWebFetchTool20250910AllowedCaller = "direct"
 
@@ -23566,21 +23566,21 @@ const BetaWebFetchTool20250910AllowedCallerCodeExecution20250825 BetaWebFetchToo
 
 const BetaWebFetchTool20250910AllowedCallerCodeExecution20260120 BetaWebFetchTool20250910AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 List of domains to allow fetching from
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 List of domains to block fetching from
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -23591,31 +23591,31 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Enabled booloptional
+Enabled boolOptional
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxContentTokens int64optional
+MaxContentTokens int64Optional
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -23629,9 +23629,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebFetch20260209
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchTool20260209AllowedCallerDirect BetaWebFetchTool20260209AllowedCaller = "direct"
 
@@ -23639,21 +23639,21 @@ const BetaWebFetchTool20260209AllowedCallerCodeExecution20250825 BetaWebFetchToo
 
 const BetaWebFetchTool20260209AllowedCallerCodeExecution20260120 BetaWebFetchTool20260209AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 List of domains to allow fetching from
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 List of domains to block fetching from
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -23664,31 +23664,31 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Enabled booloptional
+Enabled boolOptional
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxContentTokens int64optional
+MaxContentTokens int64Optional
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
@@ -23704,9 +23704,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebFetch20260309
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchTool20260309AllowedCallerDirect BetaWebFetchTool20260309AllowedCaller = "direct"
 
@@ -23714,21 +23714,21 @@ const BetaWebFetchTool20260309AllowedCallerCodeExecution20250825 BetaWebFetchToo
 
 const BetaWebFetchTool20260309AllowedCallerCodeExecution20260120 BetaWebFetchTool20260309AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 List of domains to allow fetching from
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 List of domains to block fetching from
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -23739,35 +23739,35 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
 Citations configuration for fetched documents. Citations are disabled by default.
 
-Enabled booloptional
+Enabled boolOptional
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxContentTokens int64optional
+MaxContentTokens int64Optional
 
 Maximum number of tokens used by including web page text content in the context. The limit is approximate and does not apply to binary content such as PDFs.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UseCache booloptional
+UseCache boolOptional
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
@@ -23775,13 +23775,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -23813,7 +23813,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -23851,11 +23851,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -23881,13 +23881,13 @@ type BetaWebFetchToolResultBlockParamResp struct{…}
 
 Content BetaWebFetchToolResultBlockParamContentUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlockParamResp struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -23913,7 +23913,7 @@ Content [BetaRequestDocumentBlock](api/beta.md)
 
 Source BetaRequestDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -23935,13 +23935,13 @@ type BetaContentBlockSource struct{…}
 
 Content BetaContentBlockSourceContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
 [][BetaContentBlockSourceContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlockParamResp struct{…}
 
@@ -23949,13 +23949,13 @@ Text string
 
 Type Text
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -23966,15 +23966,15 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [][BetaTextCitationParamUnionResp](api/beta.md)optional
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocationParamResp struct{…}
 
@@ -24076,7 +24076,7 @@ type BetaImageBlockParamResp struct{…}
 
 Source BetaImageBlockParamSourceUnionResp
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64ImageSource struct{…}
 
@@ -24084,7 +24084,7 @@ Data string
 
 MediaType BetaBase64ImageSourceMediaType
 
-Accepts one of the following:
+One of the following:
 
 const BetaBase64ImageSourceMediaTypeImageJPEG BetaBase64ImageSourceMediaType = "image/jpeg"
 
@@ -24110,13 +24110,13 @@ Type File
 
 Type Image
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -24127,7 +24127,7 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
@@ -24149,13 +24149,13 @@ Type File
 
 Type Document
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -24166,19 +24166,19 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Citations [BetaCitationsConfigParamResp](api/beta.md)optional
+Citations [BetaCitationsConfigParamResp](api/beta.md)Optional
 
-Enabled booloptional
+Enabled boolOptional
 
-Context stringoptional
+Context stringOptional
 
-Title stringoptional
+Title stringOptional
 
 Type WebFetchResult
 
@@ -24186,7 +24186,7 @@ URL string
 
 Fetched content URL
 
-RetrievedAt stringoptional
+RetrievedAt stringOptional
 
 ISO 8601 timestamp when the content was retrieved
 
@@ -24194,13 +24194,13 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -24211,17 +24211,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaWebFetchToolResultBlockParamCallerUnionRespoptional
+Caller BetaWebFetchToolResultBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -24247,7 +24247,7 @@ type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -24271,7 +24271,7 @@ type BetaWebFetchToolResultErrorBlockParamResp struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -24293,7 +24293,7 @@ Type WebFetchToolResultError
 
 type BetaWebFetchToolResultErrorCode string
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -24333,7 +24333,7 @@ Type WebSearchResult
 
 URL string
 
-PageAge stringoptional
+PageAge stringOptional
 
 type BetaWebSearchTool20250305 struct{…}
 
@@ -24345,9 +24345,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebSearch20250305
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchTool20250305AllowedCallerDirect BetaWebSearchTool20250305AllowedCaller = "direct"
 
@@ -24355,21 +24355,21 @@ const BetaWebSearchTool20250305AllowedCallerCodeExecution20250825 BetaWebSearchT
 
 const BetaWebSearchTool20250305AllowedCallerCodeExecution20260120 BetaWebSearchTool20250305AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -24380,43 +24380,43 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation [BetaUserLocation](api/beta.md)optional
+UserLocation [BetaUserLocation](api/beta.md)Optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 Type Approximate
 
-City stringoptional
+City stringOptional
 
 The city of the user.
 
-Country stringoptional
+Country stringOptional
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-Region stringoptional
+Region stringOptional
 
 The region of the user.
 
-Timezone stringoptional
+Timezone stringOptional
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -24430,9 +24430,9 @@ This is how the tool will be called by the model and in `tool_use` blocks.
 
 Type WebSearch20260209
 
-AllowedCallers []stringoptional
+AllowedCallers []stringOptional
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchTool20260209AllowedCallerDirect BetaWebSearchTool20260209AllowedCaller = "direct"
 
@@ -24440,21 +24440,21 @@ const BetaWebSearchTool20260209AllowedCallerCodeExecution20250825 BetaWebSearchT
 
 const BetaWebSearchTool20260209AllowedCallerCodeExecution20260120 BetaWebSearchTool20260209AllowedCaller = "code\_execution\_20260120"
 
-AllowedDomains []stringoptional
+AllowedDomains []stringOptional
 
 If provided, only these domains will be included in results. Cannot be used alongside `blocked_domains`.
 
-BlockedDomains []stringoptional
+BlockedDomains []stringOptional
 
 If provided, these domains will never appear in results. Cannot be used alongside `allowed_domains`.
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -24465,43 +24465,43 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-DeferLoading booloptional
+DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
-MaxUses int64optional
+MaxUses int64Optional
 
 Maximum number of times the tool can be used in the API request.
 
-Strict booloptional
+Strict boolOptional
 
 When true, guarantees schema validation on tool names and inputs
 
-UserLocation [BetaUserLocation](api/beta.md)optional
+UserLocation [BetaUserLocation](api/beta.md)Optional
 
 Parameters for the user's location. Used to provide more relevant search results.
 
 Type Approximate
 
-City stringoptional
+City stringOptional
 
 The city of the user.
 
-Country stringoptional
+Country stringOptional
 
 The two letter [ISO country code](https://en.wikipedia.org/wiki/ISO_3166-1_alpha-2) of the user.
 
-Region stringoptional
+Region stringOptional
 
 The region of the user.
 
-Timezone stringoptional
+Timezone stringOptional
 
 The [IANA timezone](https://nodatime.org/TimeZones) of the user.
 
@@ -24509,7 +24509,7 @@ type BetaWebSearchToolRequestError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -24529,13 +24529,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -24567,11 +24567,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -24595,13 +24595,13 @@ Type CodeExecution20260120
 
 type BetaWebSearchToolResultBlockContentUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -24633,7 +24633,7 @@ type BetaWebSearchToolResultBlockParamResp struct{…}
 
 Content [BetaWebSearchToolResultBlockParamContentUnionResp](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 [][BetaWebSearchResultBlockParamResp](api/beta.md)
 
@@ -24645,13 +24645,13 @@ Type WebSearchResult
 
 URL string
 
-PageAge stringoptional
+PageAge stringOptional
 
 type BetaWebSearchToolRequestError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -24671,13 +24671,13 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-CacheControl [BetaCacheControlEphemeral](api/beta.md)optional
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
 
 Create a cache control breakpoint at this content block.
 
 Type Ephemeral
 
-TTL BetaCacheControlEphemeralTTLoptional
+TTL BetaCacheControlEphemeralTTLOptional
 
 The time-to-live for the cache control breakpoint.
 
@@ -24688,17 +24688,17 @@ This may be one the following values:
 
 Defaults to `5m`.
 
-Accepts one of the following:
+One of the following:
 
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
-Caller BetaWebSearchToolResultBlockParamCallerUnionRespoptional
+Caller BetaWebSearchToolResultBlockParamCallerUnionRespOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -24722,7 +24722,7 @@ Type CodeExecution20260120
 
 type BetaWebSearchToolResultBlockParamContentUnionResp interface{…}
 
-Accepts one of the following:
+One of the following:
 
 [][BetaWebSearchResultBlockParamResp](api/beta.md)
 
@@ -24734,13 +24734,13 @@ Type WebSearchResult
 
 URL string
 
-PageAge stringoptional
+PageAge stringOptional
 
 type BetaWebSearchToolRequestError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -24760,7 +24760,7 @@ type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -24778,7 +24778,7 @@ Type WebSearchToolResultError
 
 type BetaWebSearchToolResultErrorCode string
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -24880,7 +24880,7 @@ ProcessingStatus BetaMessageBatchProcessingStatus
 
 Processing status of the Message Batch.
 
-Accepts one of the following:
+One of the following:
 
 const BetaMessageBatchProcessingStatusInProgress BetaMessageBatchProcessingStatus = "in\_progress"
 
@@ -24944,7 +24944,7 @@ Error [BetaErrorResponse](api/beta.md)
 
 Error [BetaErrorUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaInvalidRequestError struct{…}
 
@@ -25026,7 +25026,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageBatchSucceededResult struct{…}
 
@@ -25062,7 +25062,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -25101,7 +25101,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -25111,7 +25111,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -25243,11 +25243,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -25277,7 +25277,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -25297,11 +25297,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -25327,13 +25327,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -25365,11 +25365,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -25395,13 +25395,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -25433,7 +25433,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -25471,11 +25471,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -25501,13 +25501,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -25547,13 +25547,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -25607,13 +25607,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -25651,13 +25651,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -25679,7 +25679,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -25723,13 +25723,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -25777,7 +25777,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -25789,7 +25789,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -25939,7 +25939,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -25978,7 +25978,7 @@ CacheMissReason BetaDiagnosticsCacheMissReasonUnion
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCacheMissModelChanged struct{…}
 
@@ -26026,7 +26026,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -26034,7 +26034,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -26122,7 +26122,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -26151,7 +26151,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -26231,7 +26231,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -26339,7 +26339,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -26347,7 +26347,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -26447,7 +26447,7 @@ ServiceTier BetaUsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 
@@ -26459,7 +26459,7 @@ Speed BetaUsageSpeed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
 
@@ -26473,7 +26473,7 @@ Error [BetaErrorResponse](api/beta.md)
 
 Error [BetaErrorUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaInvalidRequestError struct{…}
 
@@ -26579,7 +26579,7 @@ Processing result for this request.
 
 Contains a Message output if processing was successful, an error response if processing failed, or the reason why processing was not attempted, such as cancellation or expiration.
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageBatchSucceededResult struct{…}
 
@@ -26615,7 +26615,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -26654,7 +26654,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -26664,7 +26664,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -26796,11 +26796,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -26830,7 +26830,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -26850,11 +26850,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -26880,13 +26880,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -26918,11 +26918,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -26948,13 +26948,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -26986,7 +26986,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -27024,11 +27024,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -27054,13 +27054,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -27100,13 +27100,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -27160,13 +27160,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -27204,13 +27204,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -27232,7 +27232,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -27276,13 +27276,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -27330,7 +27330,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -27342,7 +27342,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -27492,7 +27492,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -27531,7 +27531,7 @@ CacheMissReason BetaDiagnosticsCacheMissReasonUnion
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCacheMissModelChanged struct{…}
 
@@ -27579,7 +27579,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -27587,7 +27587,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -27675,7 +27675,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -27704,7 +27704,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -27784,7 +27784,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -27892,7 +27892,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -27900,7 +27900,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -28000,7 +28000,7 @@ ServiceTier BetaUsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 
@@ -28012,7 +28012,7 @@ Speed BetaUsageSpeed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
 
@@ -28026,7 +28026,7 @@ Error [BetaErrorResponse](api/beta.md)
 
 Error [BetaErrorUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaInvalidRequestError struct{…}
 
@@ -28130,7 +28130,7 @@ Type BetaSkillType
 
 Type of skill - either 'anthropic' (built-in) or 'custom' (user-defined)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSkillTypeAnthropic BetaSkillType = "anthropic"
 
@@ -28169,7 +28169,7 @@ Then the response `content` might be:
 [{"type": "text", "text": "B)"}]
 ```
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextBlock struct{…}
 
@@ -28179,7 +28179,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -28311,11 +28311,11 @@ Name string
 
 Type ToolUse
 
-Caller BetaToolUseBlockCallerUnionoptional
+Caller BetaToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -28345,7 +28345,7 @@ Input map[string, any]
 
 Name BetaServerToolUseBlockName
 
-Accepts one of the following:
+One of the following:
 
 const BetaServerToolUseBlockNameAdvisor BetaServerToolUseBlockName = "advisor"
 
@@ -28365,11 +28365,11 @@ const BetaServerToolUseBlockNameToolSearchToolBm25 BetaServerToolUseBlockName = 
 
 Type ServerToolUse
 
-Caller BetaServerToolUseBlockCallerUnionoptional
+Caller BetaServerToolUseBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -28395,13 +28395,13 @@ type BetaWebSearchToolResultBlock struct{…}
 
 Content [BetaWebSearchToolResultBlockContentUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebSearchToolResultError struct{…}
 
 ErrorCode [BetaWebSearchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebSearchToolResultErrorCodeInvalidToolInput [BetaWebSearchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -28433,11 +28433,11 @@ ToolUseID string
 
 Type WebSearchToolResult
 
-Caller BetaWebSearchToolResultBlockCallerUnionoptional
+Caller BetaWebSearchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -28463,13 +28463,13 @@ type BetaWebFetchToolResultBlock struct{…}
 
 Content BetaWebFetchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebFetchToolResultErrorBlock struct{…}
 
 ErrorCode [BetaWebFetchToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -28501,7 +28501,7 @@ Enabled bool
 
 Source BetaDocumentBlockSourceUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBase64PDFSource struct{…}
 
@@ -28539,11 +28539,11 @@ ToolUseID string
 
 Type WebFetchToolResult
 
-Caller BetaWebFetchToolResultBlockCallerUnionoptional
+Caller BetaWebFetchToolResultBlockCallerUnionOptional
 
 Tool invocation directly from the model.
 
-Accepts one of the following:
+One of the following:
 
 type BetaDirectCaller struct{…}
 
@@ -28569,13 +28569,13 @@ type BetaAdvisorToolResultBlock struct{…}
 
 Content BetaAdvisorToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaAdvisorToolResultError struct{…}
 
 ErrorCode BetaAdvisorToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaAdvisorToolResultErrorErrorCodeMaxUsesExceeded BetaAdvisorToolResultErrorErrorCode = "max\_uses\_exceeded"
 
@@ -28615,13 +28615,13 @@ Content [BetaCodeExecutionToolResultBlockContentUnion](api/beta.md)
 
 Code execution result with encrypted stdout for PFC + web\_search results.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCodeExecutionToolResultError struct{…}
 
 ErrorCode [BetaCodeExecutionToolResultErrorCode](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 const BetaCodeExecutionToolResultErrorCodeInvalidToolInput [BetaCodeExecutionToolResultErrorCode](api/beta.md) = "invalid\_tool\_input"
 
@@ -28675,13 +28675,13 @@ type BetaBashCodeExecutionToolResultBlock struct{…}
 
 Content BetaBashCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaBashCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaBashCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaBashCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaBashCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -28719,13 +28719,13 @@ type BetaTextEditorCodeExecutionToolResultBlock struct{…}
 
 Content BetaTextEditorCodeExecutionToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaTextEditorCodeExecutionToolResultError struct{…}
 
 ErrorCode BetaTextEditorCodeExecutionToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionToolResultErrorErrorCodeInvalidToolInput BetaTextEditorCodeExecutionToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -28747,7 +28747,7 @@ Content string
 
 FileType BetaTextEditorCodeExecutionViewResultBlockFileType
 
-Accepts one of the following:
+One of the following:
 
 const BetaTextEditorCodeExecutionViewResultBlockFileTypeText BetaTextEditorCodeExecutionViewResultBlockFileType = "text"
 
@@ -28791,13 +28791,13 @@ type BetaToolSearchToolResultBlock struct{…}
 
 Content BetaToolSearchToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaToolSearchToolResultError struct{…}
 
 ErrorCode BetaToolSearchToolResultErrorErrorCode
 
-Accepts one of the following:
+One of the following:
 
 const BetaToolSearchToolResultErrorErrorCodeInvalidToolInput BetaToolSearchToolResultErrorErrorCode = "invalid\_tool\_input"
 
@@ -28845,7 +28845,7 @@ type BetaMCPToolResultBlock struct{…}
 
 Content BetaMCPToolResultBlockContentUnion
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -28857,7 +28857,7 @@ Citations supporting the text block.
 
 The type of citation returned will depend on the type of document being cited. Citing a PDF results in `page_location`, plain text results in `char_location`, and content document results in `content_block_location`.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCitationCharLocation struct{…}
 
@@ -29007,7 +29007,7 @@ AppliedEdits []BetaContextManagementResponseAppliedEditUnion
 
 List of context management edits that were applied.
 
-Accepts one of the following:
+One of the following:
 
 type BetaClearToolUses20250919EditResponse struct{…}
 
@@ -29046,7 +29046,7 @@ CacheMissReason BetaDiagnosticsCacheMissReasonUnion
 
 Explains why the prompt cache could not fully reuse the prefix from the request identified by `diagnostics.previous_message_id`. `null` means diagnosis is still pending — the response was serialized before the background comparison completed.
 
-Accepts one of the following:
+One of the following:
 
 type BetaCacheMissModelChanged struct{…}
 
@@ -29094,7 +29094,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -29102,7 +29102,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -29190,7 +29190,7 @@ The policy category that triggered the refusal.
 
 `null` when the refusal doesn't map to a named category.
 
-Accepts one of the following:
+One of the following:
 
 const BetaRefusalStopDetailsCategoryCyber BetaRefusalStopDetailsCategory = "cyber"
 
@@ -29219,7 +29219,7 @@ This may be one the following values:
 
 In non-streaming mode this value is always non-null. In streaming mode, it is null in the `message_start` event and non-null otherwise.
 
-Accepts one of the following:
+One of the following:
 
 const BetaStopReasonEndTurn [BetaStopReason](api/beta.md) = "end\_turn"
 
@@ -29299,7 +29299,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 - Calculate the true context window size from the last iteration
 - Understand token accumulation across server-side tool use loops
 
-Accepts one of the following:
+One of the following:
 
 type BetaMessageIterationUsage struct{…}
 
@@ -29407,7 +29407,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type Model string
 
@@ -29415,7 +29415,7 @@ The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -29515,7 +29515,7 @@ ServiceTier BetaUsageServiceTier
 
 If the request used the priority, standard, or batch tier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageServiceTierStandard BetaUsageServiceTier = "standard"
 
@@ -29527,7 +29527,7 @@ Speed BetaUsageSpeed
 
 The inference speed mode used for this request.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUsageSpeedStandard BetaUsageSpeed = "standard"
 
@@ -29605,7 +29605,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -29613,7 +29613,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -29653,11 +29653,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -29683,7 +29683,7 @@ Name string
 
 Skills []BetaManagedAgentsAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -29709,7 +29709,7 @@ System string
 
 Tools []BetaManagedAgentsAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -29721,7 +29721,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -29743,7 +29743,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -29767,7 +29767,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -29795,7 +29795,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -29819,7 +29819,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -29847,15 +29847,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -29893,7 +29893,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -29915,7 +29915,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -29937,7 +29937,7 @@ Name BetaManagedAgentsAgentToolConfigParamsName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigParamsNameBash BetaManagedAgentsAgentToolConfigParamsName = "bash"
 
@@ -29955,15 +29955,15 @@ const BetaManagedAgentsAgentToolConfigParamsNameWebFetch BetaManagedAgentsAgentT
 
 const BetaManagedAgentsAgentToolConfigParamsNameWebSearch BetaManagedAgentsAgentToolConfigParamsName = "web\_search"
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
 
-PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -29987,7 +29987,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30005,15 +30005,15 @@ type BetaManagedAgentsAgentToolsetDefaultConfigParamsResp struct{…}
 
 Default configuration for all tools in a toolset.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30037,7 +30037,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -30059,7 +30059,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30083,7 +30083,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30106,17 +30106,17 @@ Input payload for the `bash` tool of the
 a normal invocation supplies `command`, while `restart=true`
 (with no `command`) reboots the runner-side bash session.
 
-Command stringoptional
+Command stringOptional
 
 Shell command to execute. Omit only when `restart` is true.
 
-Restart booloptional
+Restart boolOptional
 
 When true, restart the persistent bash session instead of
 running a command. Subsequent calls without `restart` will
 run against the fresh session.
 
-TimeoutMs int64optional
+TimeoutMs int64Optional
 
 Per-call timeout in milliseconds. Defaults to the
 runner-wide tool timeout when omitted or zero.
@@ -30139,7 +30139,7 @@ OldString string
 
 Substring to find and replace.
 
-ReplaceAll booloptional
+ReplaceAll boolOptional
 
 When true, replace every occurrence of `old_string`
 instead of requiring a unique match.
@@ -30155,7 +30155,7 @@ Doublestar glob pattern (e.g. `**/*.go`). Absolute patterns
 are only permitted when the runner is configured to allow
 them.
 
-Path stringoptional
+Path stringOptional
 
 Optional directory root to search under. Defaults to the
 runner's working directory.
@@ -30169,7 +30169,7 @@ Pattern string
 
 Regular expression to search for.
 
-Path stringoptional
+Path stringOptional
 
 Optional directory root to search under. Defaults to the
 runner's working directory.
@@ -30180,7 +30180,7 @@ Configuration for built-in agent tools. Use this to enable or disable groups of 
 
 Type BetaManagedAgentsAgentToolset20260401ParamsType
 
-Configs [][BetaManagedAgentsAgentToolConfigParamsResp](api/beta.md)optional
+Configs [][BetaManagedAgentsAgentToolConfigParamsResp](api/beta.md)Optional
 
 Per-tool configuration overrides.
 
@@ -30188,7 +30188,7 @@ Name BetaManagedAgentsAgentToolConfigParamsName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigParamsNameBash BetaManagedAgentsAgentToolConfigParamsName = "bash"
 
@@ -30206,15 +30206,15 @@ const BetaManagedAgentsAgentToolConfigParamsNameWebFetch BetaManagedAgentsAgentT
 
 const BetaManagedAgentsAgentToolConfigParamsNameWebSearch BetaManagedAgentsAgentToolConfigParamsName = "web\_search"
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
 
-PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30228,19 +30228,19 @@ Tool calls require user confirmation before execution.
 
 Type BetaManagedAgentsAlwaysAskPolicyType
 
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfigParamsResp](api/beta.md)optional
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfigParamsResp](api/beta.md)Optional
 
 Default configuration for all tools in a toolset.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30264,7 +30264,7 @@ FilePath string
 
 Path of the file to read.
 
-ViewRange []int64optional
+ViewRange []int64Optional
 
 Optional `[start_line, end_line]` 1-indexed inclusive
 range. When omitted the entire file is returned.
@@ -30315,7 +30315,7 @@ Identifier of the Anthropic skill (e.g., "xlsx").
 
 Type BetaManagedAgentsAnthropicSkillParamsType
 
-Version stringoptional
+Version stringOptional
 
 Version to pin. Defaults to latest if omitted.
 
@@ -30339,7 +30339,7 @@ Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
 
 Type BetaManagedAgentsCustomSkillParamsType
 
-Version stringoptional
+Version stringOptional
 
 Version to pin. Defaults to latest if omitted.
 
@@ -30353,15 +30353,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -30373,15 +30373,15 @@ type BetaManagedAgentsCustomToolInputSchema struct{…}
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -30397,15 +30397,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -30437,7 +30437,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30459,15 +30459,15 @@ Name string
 
 Name of the MCP tool to configure. 1-128 characters.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled. Overrides the `default_config` setting.
 
-PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30493,7 +30493,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30517,7 +30517,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30545,7 +30545,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30563,15 +30563,15 @@ type BetaManagedAgentsMCPToolsetDefaultConfigParamsResp struct{…}
 
 Default configuration for all tools from an MCP server.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30595,7 +30595,7 @@ Name of the MCP server. Must match a server name from the mcp\_servers array. 1-
 
 Type BetaManagedAgentsMCPToolsetParamsType
 
-Configs [][BetaManagedAgentsMCPToolConfigParamsResp](api/beta.md)optional
+Configs [][BetaManagedAgentsMCPToolConfigParamsResp](api/beta.md)Optional
 
 Per-tool configuration overrides.
 
@@ -30603,15 +30603,15 @@ Name string
 
 Name of the MCP tool to configure. 1-128 characters.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled. Overrides the `default_config` setting.
 
-PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30625,19 +30625,19 @@ Tool calls require user confirmation before execution.
 
 Type BetaManagedAgentsAlwaysAskPolicyType
 
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfigParamsResp](api/beta.md)optional
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfigParamsResp](api/beta.md)Optional
 
 Default configuration for all tools from an MCP server.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -30657,7 +30657,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -30665,7 +30665,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -30715,7 +30715,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -30723,7 +30723,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -30763,11 +30763,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -30783,7 +30783,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -30791,7 +30791,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -30831,11 +30831,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigParamsSpeedoptional
+Speed BetaManagedAgentsModelConfigParamsSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigParamsSpeedStandard BetaManagedAgentsModelConfigParamsSpeed = "standard"
 
@@ -30865,7 +30865,7 @@ Agents [][BetaManagedAgentsMultiagentRosterEntryParamsUnionResp](api/beta.md)
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -30879,7 +30879,7 @@ The `agent` ID.
 
 Type BetaManagedAgentsAgentParamsType
 
-Version int64optional
+Version int64Optional
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
@@ -30923,7 +30923,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -30931,7 +30931,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -30971,11 +30971,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -30985,7 +30985,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -31011,7 +31011,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -31023,7 +31023,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -31045,7 +31045,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -31069,7 +31069,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -31097,7 +31097,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -31121,7 +31121,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -31149,15 +31149,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -31173,7 +31173,7 @@ type BetaManagedAgentsSkillParamsUnionResp interface{…}
 
 Skill to load in the session container.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkillParamsResp struct{…}
 
@@ -31185,7 +31185,7 @@ Identifier of the Anthropic skill (e.g., "xlsx").
 
 Type BetaManagedAgentsAnthropicSkillParamsType
 
-Version stringoptional
+Version stringOptional
 
 Version to pin. Defaults to latest if omitted.
 
@@ -31199,7 +31199,7 @@ Tagged ID of the custom skill (e.g., "skill\_01XJ5...").
 
 Type BetaManagedAgentsCustomSkillParamsType
 
-Version stringoptional
+Version stringOptional
 
 Version to pin. Defaults to latest if omitted.
 
@@ -31273,7 +31273,7 @@ Networking BetaCloudConfigNetworkingUnion
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 type BetaUnrestrictedNetwork struct{…}
 
@@ -31331,7 +31331,7 @@ Pip []string
 
 Python packages to install
 
-Type BetaPackagesTypeoptional
+Type BetaPackagesTypeOptional
 
 Package configuration type
 
@@ -31350,11 +31350,11 @@ Type Cloud
 
 Environment type
 
-Networking BetaCloudConfigParamsNetworkingUnionRespoptional
+Networking BetaCloudConfigParamsNetworkingUnionRespOptional
 
 Network configuration policy. Omit on update to preserve the existing value.
 
-Accepts one of the following:
+One of the following:
 
 type BetaUnrestrictedNetwork struct{…}
 
@@ -31375,49 +31375,49 @@ Type Limited
 
 Network policy type
 
-AllowMCPServers booloptional
+AllowMCPServers boolOptional
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowPackageManagers booloptional
+AllowPackageManagers boolOptional
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowedHosts []stringoptional
+AllowedHosts []stringOptional
 
 Specifies domains the container can reach.
 
-Packages [BetaPackagesParamsResp](api/beta.md)optional
+Packages [BetaPackagesParamsResp](api/beta.md)Optional
 
 Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-Apt []stringoptional
+Apt []stringOptional
 
 Ubuntu/Debian packages to install
 
-Cargo []stringoptional
+Cargo []stringOptional
 
 Rust packages to install
 
-Gem []stringoptional
+Gem []stringOptional
 
 Ruby packages to install
 
-Go []stringoptional
+Go []stringOptional
 
 Go packages to install
 
-Npm []stringoptional
+Npm []stringOptional
 
 Node.js packages to install
 
-Pip []stringoptional
+Pip []stringOptional
 
 Python packages to install
 
-Type BetaPackagesParamsTypeoptional
+Type BetaPackagesParamsTypeOptional
 
 Package configuration type
 
@@ -31437,7 +31437,7 @@ Config BetaEnvironmentConfigUnion
 
 Environment configuration (either Anthropic Cloud or self-hosted)
 
-Accepts one of the following:
+One of the following:
 
 type BetaCloudConfig struct{…}
 
@@ -31447,7 +31447,7 @@ Networking BetaCloudConfigNetworkingUnion
 
 Network configuration policy.
 
-Accepts one of the following:
+One of the following:
 
 type BetaUnrestrictedNetwork struct{…}
 
@@ -31505,7 +31505,7 @@ Pip []string
 
 Python packages to install
 
-Type BetaPackagesTypeoptional
+Type BetaPackagesTypeOptional
 
 Package configuration type
 
@@ -31545,11 +31545,11 @@ UpdatedAt string
 
 RFC 3339 timestamp when environment was last updated
 
-Scope BetaEnvironmentScopeoptional
+Scope BetaEnvironmentScopeOptional
 
 The visibility scope for this environment. 'organization' means visible to all accounts. 'account' means visible only to the owning account.
 
-Accepts one of the following:
+One of the following:
 
 const BetaEnvironmentScopeOrganization BetaEnvironmentScope = "organization"
 
@@ -31598,15 +31598,15 @@ Type Limited
 
 Network policy type
 
-AllowMCPServers booloptional
+AllowMCPServers boolOptional
 
 Permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowPackageManagers booloptional
+AllowPackageManagers boolOptional
 
 Permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
-AllowedHosts []stringoptional
+AllowedHosts []stringOptional
 
 Specifies domains the container can reach.
 
@@ -31638,7 +31638,7 @@ Pip []string
 
 Python packages to install
 
-Type BetaPackagesTypeoptional
+Type BetaPackagesTypeOptional
 
 Package configuration type
 
@@ -31648,31 +31648,31 @@ Specify packages (and optionally their versions) available in this environment.
 
 When versioning, use the version semantics relevant for the package manager, e.g. for `pip` use `package==1.0.0`. You are responsible for validating the package and version exist. Unversioned installs the latest.
 
-Apt []stringoptional
+Apt []stringOptional
 
 Ubuntu/Debian packages to install
 
-Cargo []stringoptional
+Cargo []stringOptional
 
 Rust packages to install
 
-Gem []stringoptional
+Gem []stringOptional
 
 Ruby packages to install
 
-Go []stringoptional
+Go []stringOptional
 
 Go packages to install
 
-Npm []stringoptional
+Npm []stringOptional
 
 Node.js packages to install
 
-Pip []stringoptional
+Pip []stringOptional
 
 Python packages to install
 
-Type BetaPackagesParamsTypeoptional
+Type BetaPackagesParamsTypeOptional
 
 Package configuration type
 
@@ -31804,7 +31804,7 @@ State BetaSelfHostedWorkState
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
 
@@ -31844,7 +31844,7 @@ State BetaSelfHostedWorkHeartbeatResponseState
 
 Current state of the work item (active/stopping/stopped)
 
-Accepts one of the following:
+One of the following:
 
 const BetaSelfHostedWorkHeartbeatResponseStateQueued BetaSelfHostedWorkHeartbeatResponseState = "queued"
 
@@ -31916,7 +31916,7 @@ State BetaSelfHostedWorkState
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 const BetaSelfHostedWorkStateQueued BetaSelfHostedWorkState = "queued"
 
@@ -31974,7 +31974,7 @@ type BetaSelfHostedWorkStopRequest struct{…}
 
 Request to stop a work item.
 
-Force booloptional
+Force boolOptional
 
 If true, immediately stop work without graceful shutdown
 
@@ -32051,7 +32051,7 @@ The `agent` ID.
 
 Type BetaManagedAgentsAgentParamsType
 
-Version int64optional
+Version int64Optional
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
@@ -32067,11 +32067,11 @@ type BetaManagedAgentsCacheCreationUsage struct{…}
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
-Ephemeral1hInputTokens int64optional
+Ephemeral1hInputTokens int64Optional
 
 Tokens used to create 1-hour ephemeral cache entries.
 
-Ephemeral5mInputTokens int64optional
+Ephemeral5mInputTokens int64Optional
 
 Tokens used to create 5-minute ephemeral cache entries.
 
@@ -32101,7 +32101,7 @@ ID of a previously uploaded file.
 
 Type BetaManagedAgentsFileResourceParamsType
 
-MountPath stringoptional
+MountPath stringOptional
 
 Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
 
@@ -32119,11 +32119,11 @@ URL string
 
 Github URL of the repository
 
-Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnionRespoptional
+Checkout BetaManagedAgentsGitHubRepositoryResourceParamsCheckoutUnionRespOptional
 
 Branch or commit to check out. Defaults to the repository's default branch.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBranchCheckout struct{…}
 
@@ -32141,7 +32141,7 @@ Full commit SHA to check out.
 
 Type BetaManagedAgentsCommitCheckoutType
 
-MountPath stringoptional
+MountPath stringOptional
 
 Mount path in the container. Defaults to `/workspace/<repo-name>`.
 
@@ -32155,17 +32155,17 @@ The memory store ID (memstore\_...). Must belong to the caller's organization an
 
 Type BetaManagedAgentsMemoryStoreResourceParamType
 
-Access BetaManagedAgentsMemoryStoreResourceParamAccessoptional
+Access BetaManagedAgentsMemoryStoreResourceParamAccessOptional
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryStoreResourceParamAccessReadWrite BetaManagedAgentsMemoryStoreResourceParamAccess = "read\_write"
 
 const BetaManagedAgentsMemoryStoreResourceParamAccessReadOnly BetaManagedAgentsMemoryStoreResourceParamAccess = "read\_only"
 
-Instructions stringoptional
+Instructions stringOptional
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
@@ -32193,7 +32193,7 @@ Agents [][BetaManagedAgentsMultiagentRosterEntryParamsUnionResp](api/beta.md)
 
 Agents the coordinator may spawn as session threads. 1–20 entries. Each entry is an agent ID string, a versioned `{"type":"agent","id","version"}` reference, or `{"type":"self"}` to allow recursive self-invocation. Entries must reference distinct agents (after resolving `self` and string forms); at most one `self`. Referenced agents must exist, must not be archived, and must not themselves have `multiagent` set (depth limit 1).
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -32207,7 +32207,7 @@ The `agent` ID.
 
 Type BetaManagedAgentsAgentParamsType
 
-Version int64optional
+Version int64Optional
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
@@ -32223,7 +32223,7 @@ type BetaManagedAgentsMultiagentRosterEntryParamsUnionResp interface{…}
 
 An entry in a multiagent roster: an agent ID string, a versioned agent reference, or `self`.
 
-Accepts one of the following:
+One of the following:
 
 string
 
@@ -32237,7 +32237,7 @@ The `agent` ID.
 
 Type BetaManagedAgentsAgentParamsType
 
-Version int64optional
+Version int64Optional
 
 The specific `agent` version to use. Omit to use the latest version. Must be at least 1 if specified.
 
@@ -32309,7 +32309,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -32317,7 +32317,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -32357,11 +32357,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -32397,7 +32397,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -32405,7 +32405,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -32445,11 +32445,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -32459,7 +32459,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -32485,7 +32485,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -32497,7 +32497,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -32519,7 +32519,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -32543,7 +32543,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -32571,7 +32571,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -32595,7 +32595,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -32623,15 +32623,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -32649,7 +32649,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -32675,7 +32675,7 @@ System string
 
 Tools []BetaManagedAgentsSessionAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -32687,7 +32687,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -32709,7 +32709,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -32733,7 +32733,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -32761,7 +32761,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -32785,7 +32785,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -32813,15 +32813,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -32877,7 +32877,7 @@ Type BetaManagedAgentsOutcomeEvaluationResourceType
 
 Resources [][BetaManagedAgentsSessionResourceUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsGitHubRepositoryResource struct{…}
 
@@ -32897,9 +32897,9 @@ A timestamp in RFC 3339 format
 
 URL string
 
-Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionoptional
+Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionOptional
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBranchCheckout struct{…}
 
@@ -32945,29 +32945,29 @@ The memory store ID (memstore\_...). Must belong to the caller's organization an
 
 Type BetaManagedAgentsMemoryStoreResourceType
 
-Access BetaManagedAgentsMemoryStoreResourceAccessoptional
+Access BetaManagedAgentsMemoryStoreResourceAccessOptional
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryStoreResourceAccessReadWrite BetaManagedAgentsMemoryStoreResourceAccess = "read\_write"
 
 const BetaManagedAgentsMemoryStoreResourceAccessReadOnly BetaManagedAgentsMemoryStoreResourceAccess = "read\_only"
 
-Description stringoptional
+Description stringOptional
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-Instructions stringoptional
+Instructions stringOptional
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-MountPath stringoptional
+MountPath stringOptional
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-Name stringoptional
+Name stringOptional
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -32975,11 +32975,11 @@ Stats [BetaManagedAgentsSessionStats](api/beta.md)
 
 Timing statistics for a session.
 
-ActiveSeconds float64optional
+ActiveSeconds float64Optional
 
 Cumulative time in seconds the session spent in running status. Excludes idle time.
 
-DurationSeconds float64optional
+DurationSeconds float64Optional
 
 Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
 
@@ -32987,7 +32987,7 @@ Status BetaManagedAgentsSessionStatus
 
 SessionStatus enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSessionStatusRescheduling BetaManagedAgentsSessionStatus = "rescheduling"
 
@@ -33009,27 +33009,27 @@ Usage [BetaManagedAgentsSessionUsage](api/beta.md)
 
 Cumulative token usage for a session across all turns.
 
-CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)optional
+CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)Optional
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
-Ephemeral1hInputTokens int64optional
+Ephemeral1hInputTokens int64Optional
 
 Tokens used to create 1-hour ephemeral cache entries.
 
-Ephemeral5mInputTokens int64optional
+Ephemeral5mInputTokens int64Optional
 
 Tokens used to create 5-minute ephemeral cache entries.
 
-CacheReadInputTokens int64optional
+CacheReadInputTokens int64Optional
 
 Total tokens read from prompt cache.
 
-InputTokens int64optional
+InputTokens int64Optional
 
 Total input tokens consumed across all turns.
 
-OutputTokens int64optional
+OutputTokens int64Optional
 
 Total output tokens generated across all turns.
 
@@ -33063,7 +33063,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -33071,7 +33071,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -33111,11 +33111,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -33151,7 +33151,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -33159,7 +33159,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -33199,11 +33199,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -33213,7 +33213,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -33239,7 +33239,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -33251,7 +33251,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -33273,7 +33273,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33297,7 +33297,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33325,7 +33325,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33349,7 +33349,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33377,15 +33377,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -33403,7 +33403,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -33429,7 +33429,7 @@ System string
 
 Tools []BetaManagedAgentsSessionAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -33441,7 +33441,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -33463,7 +33463,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33487,7 +33487,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33515,7 +33515,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33539,7 +33539,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33567,15 +33567,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -33591,7 +33591,7 @@ type BetaManagedAgentsSessionAgentUpdate struct{…}
 
 Mid-session agent configuration update. Only `tools` and `mcp_servers` are updatable. Full replacement: the provided array becomes the new value. To preserve existing entries, GET the session, modify the array, and POST it back.
 
-MCPServers [][BetaManagedAgentsURLMCPServerParamsResp](api/beta.md)optional
+MCPServers [][BetaManagedAgentsURLMCPServerParamsResp](api/beta.md)Optional
 
 Replacement MCP server list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
@@ -33605,11 +33605,11 @@ URL string
 
 Endpoint URL for the MCP server.
 
-Tools []BetaManagedAgentsSessionAgentUpdateToolUnionoptional
+Tools []BetaManagedAgentsSessionAgentUpdateToolUnionOptional
 
 Replacement tool list. Full replacement: the provided array becomes the new value. Send an empty array to clear; omit to preserve.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401ParamsResp struct{…}
 
@@ -33617,7 +33617,7 @@ Configuration for built-in agent tools. Use this to enable or disable groups of 
 
 Type BetaManagedAgentsAgentToolset20260401ParamsType
 
-Configs [][BetaManagedAgentsAgentToolConfigParamsResp](api/beta.md)optional
+Configs [][BetaManagedAgentsAgentToolConfigParamsResp](api/beta.md)Optional
 
 Per-tool configuration overrides.
 
@@ -33625,7 +33625,7 @@ Name BetaManagedAgentsAgentToolConfigParamsName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigParamsNameBash BetaManagedAgentsAgentToolConfigParamsName = "bash"
 
@@ -33643,15 +33643,15 @@ const BetaManagedAgentsAgentToolConfigParamsNameWebFetch BetaManagedAgentsAgentT
 
 const BetaManagedAgentsAgentToolConfigParamsNameWebSearch BetaManagedAgentsAgentToolConfigParamsName = "web\_search"
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled and available to Claude. Overrides the default\_config setting.
 
-PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33665,19 +33665,19 @@ Tool calls require user confirmation before execution.
 
 Type BetaManagedAgentsAlwaysAskPolicyType
 
-DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfigParamsResp](api/beta.md)optional
+DefaultConfig [BetaManagedAgentsAgentToolsetDefaultConfigParamsResp](api/beta.md)Optional
 
 Default configuration for all tools in a toolset.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled and available to Claude by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33701,7 +33701,7 @@ Name of the MCP server. Must match a server name from the mcp\_servers array. 1-
 
 Type BetaManagedAgentsMCPToolsetParamsType
 
-Configs [][BetaManagedAgentsMCPToolConfigParamsResp](api/beta.md)optional
+Configs [][BetaManagedAgentsMCPToolConfigParamsResp](api/beta.md)Optional
 
 Per-tool configuration overrides.
 
@@ -33709,15 +33709,15 @@ Name string
 
 Name of the MCP tool to configure. 1-128 characters.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether this tool is enabled. Overrides the `default_config` setting.
 
-PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33731,19 +33731,19 @@ Tool calls require user confirmation before execution.
 
 Type BetaManagedAgentsAlwaysAskPolicyType
 
-DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfigParamsResp](api/beta.md)optional
+DefaultConfig [BetaManagedAgentsMCPToolsetDefaultConfigParamsResp](api/beta.md)Optional
 
 Default configuration for all tools from an MCP server.
 
-Enabled booloptional
+Enabled boolOptional
 
 Whether tools are enabled by default. Defaults to true if not specified.
 
-PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespoptional
+PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigParamsPermissionPolicyUnionRespOptional
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33769,15 +33769,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -33817,7 +33817,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -33825,7 +33825,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -33865,11 +33865,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -33879,7 +33879,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -33905,7 +33905,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -33917,7 +33917,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -33939,7 +33939,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33963,7 +33963,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -33991,7 +33991,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -34015,7 +34015,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -34043,15 +34043,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -34069,11 +34069,11 @@ type BetaManagedAgentsSessionStats struct{…}
 
 Timing statistics for a session.
 
-ActiveSeconds float64optional
+ActiveSeconds float64Optional
 
 Cumulative time in seconds the session spent in running status. Excludes idle time.
 
-DurationSeconds float64optional
+DurationSeconds float64Optional
 
 Elapsed time since session creation in seconds. For terminated sessions, frozen at the final update.
 
@@ -34091,7 +34091,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsSessionUpdatedEventType
 
-Agent [BetaManagedAgentsSessionAgent](api/beta.md)optional
+Agent [BetaManagedAgentsSessionAgent](api/beta.md)Optional
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -34117,7 +34117,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -34125,7 +34125,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -34165,11 +34165,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -34205,7 +34205,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -34213,7 +34213,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -34253,11 +34253,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -34267,7 +34267,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -34293,7 +34293,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -34305,7 +34305,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -34327,7 +34327,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -34351,7 +34351,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -34379,7 +34379,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -34403,7 +34403,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -34431,15 +34431,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -34457,7 +34457,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -34483,7 +34483,7 @@ System string
 
 Tools []BetaManagedAgentsSessionAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -34495,7 +34495,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -34517,7 +34517,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -34541,7 +34541,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -34569,7 +34569,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -34593,7 +34593,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -34621,15 +34621,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -34641,11 +34641,11 @@ Type BetaManagedAgentsSessionAgentType
 
 Version int64
 
-Metadata map[string, string]optional
+Metadata map[string, string]Optional
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-Title stringoptional
+Title stringOptional
 
 The session's new title. Present only when the update changed it.
 
@@ -34653,27 +34653,27 @@ type BetaManagedAgentsSessionUsage struct{…}
 
 Cumulative token usage for a session across all turns.
 
-CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)optional
+CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)Optional
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
-Ephemeral1hInputTokens int64optional
+Ephemeral1hInputTokens int64Optional
 
 Tokens used to create 1-hour ephemeral cache entries.
 
-Ephemeral5mInputTokens int64optional
+Ephemeral5mInputTokens int64Optional
 
 Tokens used to create 5-minute ephemeral cache entries.
 
-CacheReadInputTokens int64optional
+CacheReadInputTokens int64Optional
 
 Total tokens read from prompt cache.
 
-InputTokens int64optional
+InputTokens int64Optional
 
 Total input tokens consumed across all turns.
 
-OutputTokens int64optional
+OutputTokens int64Optional
 
 Total output tokens generated across all turns.
 
@@ -34691,11 +34691,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventType
 
-Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -34715,7 +34715,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -34761,7 +34761,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -34813,11 +34813,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -34853,15 +34853,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -34909,7 +34909,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentCustomToolUseEventType
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -34931,11 +34931,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolResultEventType
 
-Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -34955,7 +34955,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -35001,7 +35001,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -35053,11 +35053,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -35093,7 +35093,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -35123,11 +35123,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "allow"
 
@@ -35135,7 +35135,7 @@ const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAsk BetaManagedAge
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -35203,7 +35203,7 @@ Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -35223,7 +35223,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -35269,7 +35269,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -35321,11 +35321,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -35339,7 +35339,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentThreadMessageReceivedEventType
 
-FromAgentName stringoptional
+FromAgentName stringOptional
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -35355,7 +35355,7 @@ Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -35375,7 +35375,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -35421,7 +35421,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -35473,11 +35473,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -35491,7 +35491,7 @@ Public `sthr_` ID of the thread the message was sent to.
 
 Type BetaManagedAgentsAgentThreadMessageSentEventType
 
-ToAgentName stringoptional
+ToAgentName stringOptional
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -35513,11 +35513,11 @@ The id of the `agent.tool_use` event this result corresponds to.
 
 Type BetaManagedAgentsAgentToolResultEventType
 
-Content []BetaManagedAgentsAgentToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -35537,7 +35537,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -35583,7 +35583,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -35635,11 +35635,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -35675,7 +35675,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -35701,11 +35701,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "allow"
 
@@ -35713,7 +35713,7 @@ const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAsk BetaManagedAgents
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -35757,7 +35757,7 @@ RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -35787,7 +35787,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -35839,11 +35839,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -35851,7 +35851,7 @@ type BetaManagedAgentsEventParamsUnionResp interface{…}
 
 Union type for event parameters that can be sent to a session.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUserMessageEventParamsResp struct{…}
 
@@ -35861,7 +35861,7 @@ Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -35881,7 +35881,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -35927,7 +35927,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -35979,11 +35979,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -35995,7 +35995,7 @@ Parameters for sending an interrupt to pause the agent.
 
 Type BetaManagedAgentsUserInterruptEventParamsType
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -36007,7 +36007,7 @@ Result BetaManagedAgentsUserToolConfirmationEventParamsResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventParamsResultAllow BetaManagedAgentsUserToolConfirmationEventParamsResult = "allow"
 
@@ -36019,7 +36019,7 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventParamsType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
@@ -36033,11 +36033,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventParamsType
 
-Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionRespoptional
+Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionRespOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -36057,7 +36057,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -36103,7 +36103,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -36155,11 +36155,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -36195,7 +36195,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -36211,7 +36211,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubricParamsResp struct{…}
 
@@ -36235,7 +36235,7 @@ Type BetaManagedAgentsTextRubricParamsType
 
 Type BetaManagedAgentsUserDefineOutcomeEventParamsType
 
-MaxIterations int64optional
+MaxIterations int64Optional
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -36249,11 +36249,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventParamsType
 
-Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespoptional
+Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -36273,7 +36273,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -36319,7 +36319,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -36371,11 +36371,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -36411,7 +36411,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -36463,7 +36463,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -36517,7 +36517,7 @@ RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -36555,7 +36555,7 @@ RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -36589,7 +36589,7 @@ RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -36623,7 +36623,7 @@ RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -36657,7 +36657,7 @@ RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -36765,11 +36765,11 @@ type BetaManagedAgentsSendSessionEvents struct{…}
 
 Events that were successfully sent to the session.
 
-Data []BetaManagedAgentsSendSessionEventsDataUnionoptional
+Data []BetaManagedAgentsSendSessionEventsDataUnionOptional
 
 Sent events
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUserMessageEvent struct{…}
 
@@ -36783,7 +36783,7 @@ Content []BetaManagedAgentsUserMessageEventContentUnion
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -36803,7 +36803,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -36849,7 +36849,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -36901,17 +36901,17 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
 Type BetaManagedAgentsUserMessageEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
@@ -36925,11 +36925,11 @@ Unique identifier for this event.
 
 Type BetaManagedAgentsUserInterruptEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -36945,7 +36945,7 @@ Result BetaManagedAgentsUserToolConfirmationEventResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventResultAllow BetaManagedAgentsUserToolConfirmationEventResult = "allow"
 
@@ -36957,15 +36957,15 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -36983,11 +36983,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventType
 
-Content []BetaManagedAgentsUserCustomToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserCustomToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -37007,7 +37007,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -37053,7 +37053,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -37105,11 +37105,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -37145,15 +37145,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -37185,7 +37185,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubric struct{…}
 
@@ -37223,11 +37223,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventType
 
-Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -37247,7 +37247,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -37293,7 +37293,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -37345,11 +37345,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -37385,15 +37385,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -37429,7 +37429,7 @@ Error BetaManagedAgentsSessionErrorEventErrorUnion
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUnknownError struct{…}
 
@@ -37443,7 +37443,7 @@ RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -37477,7 +37477,7 @@ RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -37511,7 +37511,7 @@ RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -37545,7 +37545,7 @@ RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -37583,7 +37583,7 @@ RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -37621,7 +37621,7 @@ RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -37655,7 +37655,7 @@ RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -37687,7 +37687,7 @@ type BetaManagedAgentsSessionEventUnion interface{…}
 
 Union type for all event types in a session.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUserMessageEvent struct{…}
 
@@ -37701,7 +37701,7 @@ Content []BetaManagedAgentsUserMessageEventContentUnion
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -37721,7 +37721,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -37767,7 +37767,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -37819,17 +37819,17 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
 Type BetaManagedAgentsUserMessageEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
@@ -37843,11 +37843,11 @@ Unique identifier for this event.
 
 Type BetaManagedAgentsUserInterruptEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -37863,7 +37863,7 @@ Result BetaManagedAgentsUserToolConfirmationEventResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventResultAllow BetaManagedAgentsUserToolConfirmationEventResult = "allow"
 
@@ -37875,15 +37875,15 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -37901,11 +37901,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventType
 
-Content []BetaManagedAgentsUserCustomToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserCustomToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -37925,7 +37925,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -37971,7 +37971,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -38023,11 +38023,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -38063,15 +38063,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -38097,7 +38097,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentCustomToolUseEventType
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -38165,11 +38165,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "allow"
 
@@ -38177,7 +38177,7 @@ const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAsk BetaManagedAge
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -38199,11 +38199,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolResultEventType
 
-Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -38223,7 +38223,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -38269,7 +38269,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -38321,11 +38321,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -38361,7 +38361,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -38387,11 +38387,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "allow"
 
@@ -38399,7 +38399,7 @@ const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAsk BetaManagedAgents
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -38421,11 +38421,11 @@ The id of the `agent.tool_use` event this result corresponds to.
 
 Type BetaManagedAgentsAgentToolResultEventType
 
-Content []BetaManagedAgentsAgentToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -38445,7 +38445,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -38491,7 +38491,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -38543,11 +38543,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -38583,7 +38583,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -38599,7 +38599,7 @@ Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -38619,7 +38619,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -38665,7 +38665,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -38717,11 +38717,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -38735,7 +38735,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentThreadMessageReceivedEventType
 
-FromAgentName stringoptional
+FromAgentName stringOptional
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -38751,7 +38751,7 @@ Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -38771,7 +38771,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -38817,7 +38817,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -38869,11 +38869,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -38887,7 +38887,7 @@ Public `sthr_` ID of the thread the message was sent to.
 
 Type BetaManagedAgentsAgentThreadMessageSentEventType
 
-ToAgentName stringoptional
+ToAgentName stringOptional
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -38917,7 +38917,7 @@ Error BetaManagedAgentsSessionErrorEventErrorUnion
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUnknownError struct{…}
 
@@ -38931,7 +38931,7 @@ RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -38965,7 +38965,7 @@ RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -38999,7 +38999,7 @@ RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -39033,7 +39033,7 @@ RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -39071,7 +39071,7 @@ RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -39109,7 +39109,7 @@ RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -39143,7 +39143,7 @@ RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -39215,7 +39215,7 @@ StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -39353,11 +39353,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -39413,11 +39413,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -39479,7 +39479,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubric struct{…}
 
@@ -39563,7 +39563,7 @@ StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -39625,11 +39625,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventType
 
-Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -39649,7 +39649,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -39695,7 +39695,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -39747,11 +39747,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -39787,15 +39787,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -39835,7 +39835,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsSessionUpdatedEventType
 
-Agent [BetaManagedAgentsSessionAgent](api/beta.md)optional
+Agent [BetaManagedAgentsSessionAgent](api/beta.md)Optional
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -39861,7 +39861,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -39869,7 +39869,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -39909,11 +39909,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -39949,7 +39949,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -39957,7 +39957,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -39997,11 +39997,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -40011,7 +40011,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -40037,7 +40037,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -40049,7 +40049,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -40071,7 +40071,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -40095,7 +40095,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -40123,7 +40123,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -40147,7 +40147,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -40175,15 +40175,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -40201,7 +40201,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -40227,7 +40227,7 @@ System string
 
 Tools []BetaManagedAgentsSessionAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -40239,7 +40239,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -40261,7 +40261,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -40285,7 +40285,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -40313,7 +40313,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -40337,7 +40337,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -40365,15 +40365,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -40385,11 +40385,11 @@ Type BetaManagedAgentsSessionAgentType
 
 Version int64
 
-Metadata map[string, string]optional
+Metadata map[string, string]Optional
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-Title stringoptional
+Title stringOptional
 
 The session's new title. Present only when the update changed it.
 
@@ -40425,7 +40425,7 @@ StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -40539,7 +40539,7 @@ StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -40667,11 +40667,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -40717,11 +40717,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -40781,11 +40781,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -40839,7 +40839,7 @@ type BetaManagedAgentsStreamSessionEventsUnion interface{…}
 
 Server-sent event in the session stream.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUserMessageEvent struct{…}
 
@@ -40853,7 +40853,7 @@ Content []BetaManagedAgentsUserMessageEventContentUnion
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -40873,7 +40873,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -40919,7 +40919,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -40971,17 +40971,17 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
 Type BetaManagedAgentsUserMessageEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
@@ -40995,11 +40995,11 @@ Unique identifier for this event.
 
 Type BetaManagedAgentsUserInterruptEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -41015,7 +41015,7 @@ Result BetaManagedAgentsUserToolConfirmationEventResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventResultAllow BetaManagedAgentsUserToolConfirmationEventResult = "allow"
 
@@ -41027,15 +41027,15 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -41053,11 +41053,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventType
 
-Content []BetaManagedAgentsUserCustomToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserCustomToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -41077,7 +41077,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -41123,7 +41123,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -41175,11 +41175,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -41215,15 +41215,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -41249,7 +41249,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentCustomToolUseEventType
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -41317,11 +41317,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "allow"
 
@@ -41329,7 +41329,7 @@ const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAsk BetaManagedAge
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -41351,11 +41351,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolResultEventType
 
-Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -41375,7 +41375,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -41421,7 +41421,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -41473,11 +41473,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -41513,7 +41513,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -41539,11 +41539,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "allow"
 
@@ -41551,7 +41551,7 @@ const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAsk BetaManagedAgents
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -41573,11 +41573,11 @@ The id of the `agent.tool_use` event this result corresponds to.
 
 Type BetaManagedAgentsAgentToolResultEventType
 
-Content []BetaManagedAgentsAgentToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -41597,7 +41597,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -41643,7 +41643,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -41695,11 +41695,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -41735,7 +41735,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -41751,7 +41751,7 @@ Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -41771,7 +41771,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -41817,7 +41817,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -41869,11 +41869,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -41887,7 +41887,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentThreadMessageReceivedEventType
 
-FromAgentName stringoptional
+FromAgentName stringOptional
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -41903,7 +41903,7 @@ Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -41923,7 +41923,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -41969,7 +41969,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -42021,11 +42021,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -42039,7 +42039,7 @@ Public `sthr_` ID of the thread the message was sent to.
 
 Type BetaManagedAgentsAgentThreadMessageSentEventType
 
-ToAgentName stringoptional
+ToAgentName stringOptional
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -42069,7 +42069,7 @@ Error BetaManagedAgentsSessionErrorEventErrorUnion
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUnknownError struct{…}
 
@@ -42083,7 +42083,7 @@ RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -42117,7 +42117,7 @@ RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -42151,7 +42151,7 @@ RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -42185,7 +42185,7 @@ RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -42223,7 +42223,7 @@ RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -42261,7 +42261,7 @@ RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -42295,7 +42295,7 @@ RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -42367,7 +42367,7 @@ StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -42505,11 +42505,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -42565,11 +42565,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -42631,7 +42631,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubric struct{…}
 
@@ -42715,7 +42715,7 @@ StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -42777,11 +42777,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventType
 
-Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -42801,7 +42801,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -42847,7 +42847,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -42899,11 +42899,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -42939,15 +42939,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -42987,7 +42987,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsSessionUpdatedEventType
 
-Agent [BetaManagedAgentsSessionAgent](api/beta.md)optional
+Agent [BetaManagedAgentsSessionAgent](api/beta.md)Optional
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -43013,7 +43013,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -43021,7 +43021,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -43061,11 +43061,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -43101,7 +43101,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -43109,7 +43109,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -43149,11 +43149,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -43163,7 +43163,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -43189,7 +43189,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -43201,7 +43201,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -43223,7 +43223,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -43247,7 +43247,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -43275,7 +43275,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -43299,7 +43299,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -43327,15 +43327,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -43353,7 +43353,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -43379,7 +43379,7 @@ System string
 
 Tools []BetaManagedAgentsSessionAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -43391,7 +43391,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -43413,7 +43413,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -43437,7 +43437,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -43465,7 +43465,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -43489,7 +43489,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -43517,15 +43517,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -43537,11 +43537,11 @@ Type BetaManagedAgentsSessionAgentType
 
 Version int64
 
-Metadata map[string, string]optional
+Metadata map[string, string]Optional
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-Title stringoptional
+Title stringOptional
 
 The session's new title. Present only when the update changed it.
 
@@ -43587,7 +43587,7 @@ RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -43643,11 +43643,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventType
 
-Content []BetaManagedAgentsUserCustomToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserCustomToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -43667,7 +43667,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -43713,7 +43713,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -43765,11 +43765,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -43805,15 +43805,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -43827,11 +43827,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventParamsType
 
-Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionRespoptional
+Content []BetaManagedAgentsUserCustomToolResultEventParamsContentUnionRespOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -43851,7 +43851,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -43897,7 +43897,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -43949,11 +43949,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -43989,7 +43989,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -44021,7 +44021,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubric struct{…}
 
@@ -44057,7 +44057,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventParamsRubricUnionResp
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubricParamsResp struct{…}
 
@@ -44081,7 +44081,7 @@ Type BetaManagedAgentsTextRubricParamsType
 
 Type BetaManagedAgentsUserDefineOutcomeEventParamsType
 
-MaxIterations int64optional
+MaxIterations int64Optional
 
 Eval→revision cycles before giving up. Default 3, max 20.
 
@@ -44095,11 +44095,11 @@ Unique identifier for this event.
 
 Type BetaManagedAgentsUserInterruptEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -44109,7 +44109,7 @@ Parameters for sending an interrupt to pause the agent.
 
 Type BetaManagedAgentsUserInterruptEventParamsType
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -44125,7 +44125,7 @@ Content []BetaManagedAgentsUserMessageEventContentUnion
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -44145,7 +44145,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -44191,7 +44191,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -44243,17 +44243,17 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
 Type BetaManagedAgentsUserMessageEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
@@ -44265,7 +44265,7 @@ Content []BetaManagedAgentsUserMessageEventParamsContentUnionResp
 
 Array of content blocks for the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -44285,7 +44285,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -44331,7 +44331,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -44383,11 +44383,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -44405,7 +44405,7 @@ Result BetaManagedAgentsUserToolConfirmationEventResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventResultAllow BetaManagedAgentsUserToolConfirmationEventResult = "allow"
 
@@ -44417,15 +44417,15 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -44437,7 +44437,7 @@ Result BetaManagedAgentsUserToolConfirmationEventParamsResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventParamsResultAllow BetaManagedAgentsUserToolConfirmationEventParamsResult = "allow"
 
@@ -44449,7 +44449,7 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventParamsType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
@@ -44463,11 +44463,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventParamsType
 
-Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespoptional
+Content []BetaManagedAgentsUserToolResultEventParamsContentUnionRespOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -44487,7 +44487,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -44533,7 +44533,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -44585,11 +44585,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -44625,7 +44625,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -44707,9 +44707,9 @@ A timestamp in RFC 3339 format
 
 URL string
 
-Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionoptional
+Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionOptional
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBranchCheckout struct{…}
 
@@ -44737,29 +44737,29 @@ The memory store ID (memstore\_...). Must belong to the caller's organization an
 
 Type BetaManagedAgentsMemoryStoreResourceType
 
-Access BetaManagedAgentsMemoryStoreResourceAccessoptional
+Access BetaManagedAgentsMemoryStoreResourceAccessOptional
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryStoreResourceAccessReadWrite BetaManagedAgentsMemoryStoreResourceAccess = "read\_write"
 
 const BetaManagedAgentsMemoryStoreResourceAccessReadOnly BetaManagedAgentsMemoryStoreResourceAccess = "read\_only"
 
-Description stringoptional
+Description stringOptional
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-Instructions stringoptional
+Instructions stringOptional
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-MountPath stringoptional
+MountPath stringOptional
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-Name stringoptional
+Name stringOptional
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -44767,7 +44767,7 @@ type BetaManagedAgentsSessionResourceUnion interface{…}
 
 A memory store attached to an agent session.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsGitHubRepositoryResource struct{…}
 
@@ -44787,9 +44787,9 @@ A timestamp in RFC 3339 format
 
 URL string
 
-Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionoptional
+Checkout BetaManagedAgentsGitHubRepositoryResourceCheckoutUnionOptional
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBranchCheckout struct{…}
 
@@ -44835,29 +44835,29 @@ The memory store ID (memstore\_...). Must belong to the caller's organization an
 
 Type BetaManagedAgentsMemoryStoreResourceType
 
-Access BetaManagedAgentsMemoryStoreResourceAccessoptional
+Access BetaManagedAgentsMemoryStoreResourceAccessOptional
 
 Access mode for an attached memory store.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryStoreResourceAccessReadWrite BetaManagedAgentsMemoryStoreResourceAccess = "read\_write"
 
 const BetaManagedAgentsMemoryStoreResourceAccessReadOnly BetaManagedAgentsMemoryStoreResourceAccess = "read\_only"
 
-Description stringoptional
+Description stringOptional
 
 Description of the memory store, snapshotted at attach time. Rendered into the agent's system prompt. Empty string when the store has no description.
 
-Instructions stringoptional
+Instructions stringOptional
 
 Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
 
-MountPath stringoptional
+MountPath stringOptional
 
 Filesystem path where the store is mounted in the session container, e.g. /mnt/memory/user-preferences. Derived from the store's name. Output-only.
 
-Name stringoptional
+Name stringOptional
 
 Display name of the memory store, snapshotted at attach time. Later edits to the store's name do not propagate to this resource.
 
@@ -44917,7 +44917,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -44925,7 +44925,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -44965,11 +44965,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -44979,7 +44979,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -45005,7 +45005,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -45017,7 +45017,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -45039,7 +45039,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -45063,7 +45063,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -45091,7 +45091,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -45115,7 +45115,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -45143,15 +45143,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -45183,15 +45183,15 @@ Stats [BetaManagedAgentsSessionThreadStats](api/beta.md)
 
 Timing statistics for a session thread.
 
-ActiveSeconds float64optional
+ActiveSeconds float64Optional
 
 Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
-DurationSeconds float64optional
+DurationSeconds float64Optional
 
 Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
-StartupSeconds float64optional
+StartupSeconds float64Optional
 
 Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
 
@@ -45199,7 +45199,7 @@ Status [BetaManagedAgentsSessionThreadStatus](api/beta.md)
 
 SessionThreadStatus enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSessionThreadStatusRunning [BetaManagedAgentsSessionThreadStatus](api/beta.md) = "running"
 
@@ -45219,27 +45219,27 @@ Usage [BetaManagedAgentsSessionThreadUsage](api/beta.md)
 
 Cumulative token usage for a session thread across all turns.
 
-CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)optional
+CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)Optional
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
-Ephemeral1hInputTokens int64optional
+Ephemeral1hInputTokens int64Optional
 
 Tokens used to create 1-hour ephemeral cache entries.
 
-Ephemeral5mInputTokens int64optional
+Ephemeral5mInputTokens int64Optional
 
 Tokens used to create 5-minute ephemeral cache entries.
 
-CacheReadInputTokens int64optional
+CacheReadInputTokens int64Optional
 
 Total tokens read from prompt cache.
 
-InputTokens int64optional
+InputTokens int64Optional
 
 Total input tokens consumed across all turns.
 
-OutputTokens int64optional
+OutputTokens int64Optional
 
 Total output tokens generated across all turns.
 
@@ -45247,15 +45247,15 @@ type BetaManagedAgentsSessionThreadStats struct{…}
 
 Timing statistics for a session thread.
 
-ActiveSeconds float64optional
+ActiveSeconds float64Optional
 
 Cumulative time in seconds the thread spent actively running. Excludes idle time.
 
-DurationSeconds float64optional
+DurationSeconds float64Optional
 
 Elapsed time since thread creation in seconds. For archived threads, frozen at the final update.
 
-StartupSeconds float64optional
+StartupSeconds float64Optional
 
 Time in seconds for the thread to begin running. Zero for child threads, which start immediately.
 
@@ -45263,7 +45263,7 @@ type BetaManagedAgentsSessionThreadStatus string
 
 SessionThreadStatus enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSessionThreadStatusRunning [BetaManagedAgentsSessionThreadStatus](api/beta.md) = "running"
 
@@ -45277,27 +45277,27 @@ type BetaManagedAgentsSessionThreadUsage struct{…}
 
 Cumulative token usage for a session thread across all turns.
 
-CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)optional
+CacheCreation [BetaManagedAgentsCacheCreationUsage](api/beta.md)Optional
 
 Prompt-cache creation token usage broken down by cache lifetime.
 
-Ephemeral1hInputTokens int64optional
+Ephemeral1hInputTokens int64Optional
 
 Tokens used to create 1-hour ephemeral cache entries.
 
-Ephemeral5mInputTokens int64optional
+Ephemeral5mInputTokens int64Optional
 
 Tokens used to create 5-minute ephemeral cache entries.
 
-CacheReadInputTokens int64optional
+CacheReadInputTokens int64Optional
 
 Total tokens read from prompt cache.
 
-InputTokens int64optional
+InputTokens int64Optional
 
 Total input tokens consumed across all turns.
 
-OutputTokens int64optional
+OutputTokens int64Optional
 
 Total output tokens generated across all turns.
 
@@ -45305,7 +45305,7 @@ type BetaManagedAgentsStreamSessionThreadEventsUnion interface{…}
 
 Server-sent event in a single thread's stream.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUserMessageEvent struct{…}
 
@@ -45319,7 +45319,7 @@ Content []BetaManagedAgentsUserMessageEventContentUnion
 
 Array of content blocks comprising the user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -45339,7 +45339,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -45385,7 +45385,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -45437,17 +45437,17 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
 Type BetaManagedAgentsUserMessageEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
@@ -45461,11 +45461,11 @@ Unique identifier for this event.
 
 Type BetaManagedAgentsUserInterruptEventType
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 If absent, interrupts every non-archived thread in a multiagent session (or the primary alone in a single-agent session). If present, interrupts only the named thread.
 
@@ -45481,7 +45481,7 @@ Result BetaManagedAgentsUserToolConfirmationEventResult
 
 UserToolConfirmationResult enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsUserToolConfirmationEventResultAllow BetaManagedAgentsUserToolConfirmationEventResult = "allow"
 
@@ -45493,15 +45493,15 @@ The id of the `agent.tool_use` or `agent.mcp_tool_use` event this result corresp
 
 Type BetaManagedAgentsUserToolConfirmationEventType
 
-DenyMessage stringoptional
+DenyMessage stringOptional
 
 Optional message providing context for a 'deny' decision. Only allowed when result is 'deny'.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, the confirmation routes to this subagent's thread rather than the primary. Echo this from the `session_thread_id` on the `agent.tool_use` or `agent.mcp_tool_use` event that prompted the approval.
 
@@ -45519,11 +45519,11 @@ The id of the `agent.custom_tool_use` event this result corresponds to, which ca
 
 Type BetaManagedAgentsUserCustomToolResultEventType
 
-Content []BetaManagedAgentsUserCustomToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserCustomToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -45543,7 +45543,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -45589,7 +45589,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -45641,11 +45641,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -45681,15 +45681,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.custom_tool_use` event's `session_thread_id`.
 
@@ -45715,7 +45715,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentCustomToolUseEventType
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its custom tool use on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.custom_tool_result` event to route the result back.
 
@@ -45783,11 +45783,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "allow"
 
@@ -45795,7 +45795,7 @@ const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionAsk BetaManagedAge
 
 const BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentMCPToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -45817,11 +45817,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentMCPToolResultEventType
 
-Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentMCPToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -45841,7 +45841,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -45887,7 +45887,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -45939,11 +45939,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -45979,7 +45979,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -46005,11 +46005,11 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentToolUseEventType
 
-EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionoptional
+EvaluatedPermission BetaManagedAgentsAgentToolUseEventEvaluatedPermissionOptional
 
 AgentEvaluatedPermission enum
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAllow BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "allow"
 
@@ -46017,7 +46017,7 @@ const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionAsk BetaManagedAgents
 
 const BetaManagedAgentsAgentToolUseEventEvaluatedPermissionDeny BetaManagedAgentsAgentToolUseEventEvaluatedPermission = "deny"
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 When set, this event was cross-posted from a subagent's thread to surface its permission request on the primary thread's stream. Empty on the thread's own events. Echo this on a `user.tool_confirmation` event to route the approval back.
 
@@ -46039,11 +46039,11 @@ The id of the `agent.tool_use` event this result corresponds to.
 
 Type BetaManagedAgentsAgentToolResultEventType
 
-Content []BetaManagedAgentsAgentToolResultEventContentUnionoptional
+Content []BetaManagedAgentsAgentToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -46063,7 +46063,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -46109,7 +46109,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -46161,11 +46161,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -46201,7 +46201,7 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
@@ -46217,7 +46217,7 @@ Content []BetaManagedAgentsAgentThreadMessageReceivedEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -46237,7 +46237,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -46283,7 +46283,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -46335,11 +46335,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -46353,7 +46353,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsAgentThreadMessageReceivedEventType
 
-FromAgentName stringoptional
+FromAgentName stringOptional
 
 Name of the callable agent this message came from. Absent when received from the primary agent.
 
@@ -46369,7 +46369,7 @@ Content []BetaManagedAgentsAgentThreadMessageSentEventContentUnion
 
 Message content blocks.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -46389,7 +46389,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -46435,7 +46435,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -46487,11 +46487,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -46505,7 +46505,7 @@ Public `sthr_` ID of the thread the message was sent to.
 
 Type BetaManagedAgentsAgentThreadMessageSentEventType
 
-ToAgentName stringoptional
+ToAgentName stringOptional
 
 Name of the callable agent this message was sent to. Absent when sent to the primary agent.
 
@@ -46535,7 +46535,7 @@ Error BetaManagedAgentsSessionErrorEventErrorUnion
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsUnknownError struct{…}
 
@@ -46549,7 +46549,7 @@ RetryStatus BetaManagedAgentsUnknownErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -46583,7 +46583,7 @@ RetryStatus BetaManagedAgentsModelOverloadedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -46617,7 +46617,7 @@ RetryStatus BetaManagedAgentsModelRateLimitedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -46651,7 +46651,7 @@ RetryStatus BetaManagedAgentsModelRequestFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -46689,7 +46689,7 @@ RetryStatus BetaManagedAgentsMCPConnectionFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -46727,7 +46727,7 @@ RetryStatus BetaManagedAgentsMCPAuthenticationFailedErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -46761,7 +46761,7 @@ RetryStatus BetaManagedAgentsBillingErrorRetryStatusUnion
 
 What the client should do next in response to this error.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsRetryStatusRetrying struct{…}
 
@@ -46833,7 +46833,7 @@ StopReason BetaManagedAgentsSessionStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -46971,11 +46971,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -47031,11 +47031,11 @@ OutputTokens int64
 
 Output tokens generated by this request.
 
-Speed BetaManagedAgentsSpanModelUsageSpeedoptional
+Speed BetaManagedAgentsSpanModelUsageSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsSpanModelUsageSpeedStandard BetaManagedAgentsSpanModelUsageSpeed = "standard"
 
@@ -47097,7 +47097,7 @@ Rubric BetaManagedAgentsUserDefineOutcomeEventRubricUnion
 
 Rubric for grading the quality of an outcome.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsFileRubric struct{…}
 
@@ -47181,7 +47181,7 @@ StopReason BetaManagedAgentsSessionThreadStatusIdleEventStopReasonUnion
 
 The agent completed its turn naturally and is ready for the next user message.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionEndTurn struct{…}
 
@@ -47243,11 +47243,11 @@ The id of the `agent.tool_use` event this result corresponds to, which can be fo
 
 Type BetaManagedAgentsUserToolResultEventType
 
-Content []BetaManagedAgentsUserToolResultEventContentUnionoptional
+Content []BetaManagedAgentsUserToolResultEventContentUnionOptional
 
 The result content returned by the tool.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -47267,7 +47267,7 @@ Source BetaManagedAgentsImageBlockSourceUnion
 
 Union type for image source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64ImageSource struct{…}
 
@@ -47313,7 +47313,7 @@ Source BetaManagedAgentsDocumentBlockSourceUnion
 
 Union type for document source variants.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsBase64DocumentSource struct{…}
 
@@ -47365,11 +47365,11 @@ Type BetaManagedAgentsFileDocumentSourceType
 
 Type BetaManagedAgentsDocumentBlockType
 
-Context stringoptional
+Context stringOptional
 
 Additional context about the document for the model.
 
-Title stringoptional
+Title stringOptional
 
 The title of the document.
 
@@ -47405,15 +47405,15 @@ The title of the search result.
 
 Type BetaManagedAgentsSearchResultBlockType
 
-IsError booloptional
+IsError boolOptional
 
 Whether the tool execution resulted in an error.
 
-ProcessedAt Timeoptional
+ProcessedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-SessionThreadID stringoptional
+SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
@@ -47453,7 +47453,7 @@ A timestamp in RFC 3339 format
 
 Type BetaManagedAgentsSessionUpdatedEventType
 
-Agent [BetaManagedAgentsSessionAgent](api/beta.md)optional
+Agent [BetaManagedAgentsSessionAgent](api/beta.md)Optional
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
 
@@ -47479,7 +47479,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -47487,7 +47487,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -47527,11 +47527,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -47567,7 +47567,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsModel string
 
@@ -47575,7 +47575,7 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -47615,11 +47615,11 @@ High-performance model for agents and coding
 
 string
 
-Speed BetaManagedAgentsModelConfigSpeedoptional
+Speed BetaManagedAgentsModelConfigSpeedOptional
 
 Inference speed mode. `fast` provides significantly faster output token generation at premium pricing. Not all models support `fast`; invalid combinations are rejected at create time.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsModelConfigSpeedStandard BetaManagedAgentsModelConfigSpeed = "standard"
 
@@ -47629,7 +47629,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionThreadAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -47655,7 +47655,7 @@ System string
 
 Tools []BetaManagedAgentsSessionThreadAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -47667,7 +47667,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -47689,7 +47689,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -47713,7 +47713,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -47741,7 +47741,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -47765,7 +47765,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -47793,15 +47793,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -47819,7 +47819,7 @@ Name string
 
 Skills []BetaManagedAgentsSessionAgentSkillUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAnthropicSkill struct{…}
 
@@ -47845,7 +47845,7 @@ System string
 
 Tools []BetaManagedAgentsSessionAgentToolUnion
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAgentToolset20260401 struct{…}
 
@@ -47857,7 +47857,7 @@ Name BetaManagedAgentsAgentToolConfigName
 
 Built-in agent tool identifier.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsAgentToolConfigNameBash BetaManagedAgentsAgentToolConfigName = "bash"
 
@@ -47879,7 +47879,7 @@ PermissionPolicy BetaManagedAgentsAgentToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -47903,7 +47903,7 @@ PermissionPolicy BetaManagedAgentsAgentToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -47931,7 +47931,7 @@ PermissionPolicy BetaManagedAgentsMCPToolConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -47955,7 +47955,7 @@ PermissionPolicy BetaManagedAgentsMCPToolsetDefaultConfigPermissionPolicyUnion
 
 Permission policy for tool execution.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsAlwaysAllowPolicy struct{…}
 
@@ -47983,15 +47983,15 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
-Properties map[string, any]optional
+Properties map[string, any]Optional
 
 JSON Schema properties defining the tool's input parameters.
 
-Required []stringoptional
+Required []stringOptional
 
 List of required property names.
 
-Type BetaManagedAgentsCustomToolInputSchemaTypeoptional
+Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
 
 Must be 'object' for tool input schemas.
 
@@ -48003,11 +48003,11 @@ Type BetaManagedAgentsSessionAgentType
 
 Version int64
 
-Metadata map[string, string]optional
+Metadata map[string, string]Optional
 
 The session's full metadata bag after the update. Present when the update set non-empty metadata; absent when metadata was unchanged or cleared to empty.
 
-Title stringoptional
+Title stringOptional
 
 The session's new title. Present only when the update changed it.
 
@@ -48167,7 +48167,7 @@ Auth BetaManagedAgentsCredentialAuthUnion
 
 Authentication details for a credential.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsMCPOAuthAuthResponse struct{…}
 
@@ -48179,11 +48179,11 @@ URL of the MCP server this credential authenticates against.
 
 Type BetaManagedAgentsMCPOAuthAuthResponseType
 
-ExpiresAt Timeoptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -48199,7 +48199,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
@@ -48219,11 +48219,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -48255,7 +48255,7 @@ VaultID string
 
 Identifier of the vault this credential belongs to.
 
-DisplayName stringoptional
+DisplayName stringOptional
 
 Human-readable name for the credential.
 
@@ -48327,7 +48327,7 @@ Status BetaManagedAgentsRefreshObjectStatus
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsRefreshObjectStatusSucceeded BetaManagedAgentsRefreshObjectStatus = "succeeded"
 
@@ -48341,7 +48341,7 @@ Status [BetaManagedAgentsCredentialValidationStatus](api/beta.md)
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
 
@@ -48363,7 +48363,7 @@ type BetaManagedAgentsCredentialValidationStatus string
 
 Overall verdict of a credential validation probe.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsCredentialValidationStatusValid [BetaManagedAgentsCredentialValidationStatus](api/beta.md) = "valid"
 
@@ -48391,11 +48391,11 @@ URL of the MCP server this credential authenticates against.
 
 Type BetaManagedAgentsMCPOAuthAuthResponseType
 
-ExpiresAt Timeoptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshResponse](api/beta.md)Optional
 
 OAuth refresh token configuration returned in credential responses.
 
@@ -48411,7 +48411,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
@@ -48431,11 +48431,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -48453,11 +48453,11 @@ URL of the MCP server this credential authenticates against.
 
 Type BetaManagedAgentsMCPOAuthCreateParamsType
 
-ExpiresAt Timeoptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshParamsResp](api/beta.md)optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshParamsResp](api/beta.md)Optional
 
 OAuth refresh token parameters for creating a credential with refresh support.
 
@@ -48477,7 +48477,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionRe
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}
 
@@ -48505,11 +48505,11 @@ OAuth client secret.
 
 Type BetaManagedAgentsTokenEndpointAuthPostParamType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -48533,7 +48533,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshParamsTokenEndpointAuthUnionRe
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneParamResp struct{…}
 
@@ -48561,11 +48561,11 @@ OAuth client secret.
 
 Type BetaManagedAgentsTokenEndpointAuthPostParamType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -48585,7 +48585,7 @@ TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshResponseTokenEndpointAuthUnion
 
 Token endpoint requires no client authentication.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthNoneResponse struct{…}
 
@@ -48605,11 +48605,11 @@ Token endpoint uses POST body authentication with client credentials.
 
 Type BetaManagedAgentsTokenEndpointAuthPostResponseType
 
-Resource stringoptional
+Resource stringOptional
 
 OAuth resource indicator.
 
-Scope stringoptional
+Scope stringOptional
 
 OAuth scope for the refresh request.
 
@@ -48617,19 +48617,19 @@ type BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp struct{…}
 
 Parameters for updating OAuth refresh token configuration.
 
-RefreshToken stringoptional
+RefreshToken stringOptional
 
 Updated OAuth refresh token.
 
-Scope stringoptional
+Scope stringOptional
 
 Updated OAuth scope for the refresh request.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespoptional
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespOptional
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
 
@@ -48637,7 +48637,7 @@ Updated HTTP Basic authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -48647,7 +48647,7 @@ Updated POST body authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -48657,31 +48657,31 @@ Parameters for updating an MCP OAuth credential. The `mcp_server_url` is immutab
 
 Type BetaManagedAgentsMCPOAuthUpdateParamsType
 
-AccessToken stringoptional
+AccessToken stringOptional
 
 Updated OAuth access token.
 
-ExpiresAt Timeoptional
+ExpiresAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta.md)optional
+Refresh [BetaManagedAgentsMCPOAuthRefreshUpdateParamsResp](api/beta.md)Optional
 
 Parameters for updating OAuth refresh token configuration.
 
-RefreshToken stringoptional
+RefreshToken stringOptional
 
 Updated OAuth refresh token.
 
-Scope stringoptional
+Scope stringOptional
 
 Updated OAuth scope for the refresh request.
 
-TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespoptional
+TokenEndpointAuth BetaManagedAgentsMCPOAuthRefreshUpdateParamsTokenEndpointAuthUnionRespOptional
 
 Updated HTTP Basic authentication parameters for the token endpoint.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamResp struct{…}
 
@@ -48689,7 +48689,7 @@ Updated HTTP Basic authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -48699,7 +48699,7 @@ Updated POST body authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -48779,7 +48779,7 @@ Status BetaManagedAgentsRefreshObjectStatus
 
 Outcome of a refresh-token exchange attempted during credential validation.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsRefreshObjectStatusSucceeded BetaManagedAgentsRefreshObjectStatus = "succeeded"
 
@@ -48819,7 +48819,7 @@ Parameters for updating a static bearer token credential. The `mcp_server_url` i
 
 Type BetaManagedAgentsStaticBearerUpdateParamsType
 
-Token stringoptional
+Token stringOptional
 
 Updated static bearer token value.
 
@@ -48845,7 +48845,7 @@ Updated HTTP Basic authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthBasicUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -48883,7 +48883,7 @@ Updated POST body authentication parameters for the token endpoint.
 
 Type BetaManagedAgentsTokenEndpointAuthPostUpdateParamType
 
-ClientSecret stringoptional
+ClientSecret stringOptional
 
 Updated OAuth client secret.
 
@@ -48959,15 +48959,15 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-ArchivedAt Timeoptional
+ArchivedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-Description stringoptional
+Description stringOptional
 
 Free-text description of what the store contains, up to 1024 characters. Included in the agent's system prompt when the store is attached, so word it to be useful to the agent. Empty string when unset.
 
-Metadata map[string, string]optional
+Metadata map[string, string]Optional
 
 Arbitrary key-value tags for your own bookkeeping (such as the end user a store belongs to). Up to 16 pairs; keys 1–64 characters; values up to 512 characters. Returned on retrieve/list but not filterable.
 
@@ -49009,7 +49009,7 @@ type BetaManagedAgentsConflictError struct{…}
 
 Type BetaManagedAgentsConflictErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsContentSha256Precondition struct{…}
 
@@ -49017,7 +49017,7 @@ Optimistic-concurrency precondition: the update applies only if the memory's sto
 
 Type BetaManagedAgentsContentSha256PreconditionType
 
-ContentSha256 stringoptional
+ContentSha256 stringOptional
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
@@ -49033,7 +49033,7 @@ Type BetaManagedAgentsDeletedMemoryType
 
 type BetaManagedAgentsErrorUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaInvalidRequestError struct{…}
 
@@ -49093,23 +49093,23 @@ type BetaManagedAgentsMemoryPreconditionFailedError struct{…}
 
 Type BetaManagedAgentsMemoryPreconditionFailedErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemoryPathConflictError struct{…}
 
 Type BetaManagedAgentsMemoryPathConflictErrorType
 
-ConflictingMemoryID stringoptional
+ConflictingMemoryID stringOptional
 
-ConflictingPath stringoptional
+ConflictingPath stringOptional
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsConflictError struct{…}
 
 Type BetaManagedAgentsConflictErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemory struct{…}
 
@@ -49149,7 +49149,7 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
@@ -49157,7 +49157,7 @@ type BetaManagedAgentsMemoryListItemUnion interface{…}
 
 One item in a [List memories](api/beta/memory_stores/memories/list.md) response: either a `memory` object or, when `depth` is set, a `memory_prefix` rollup marker.
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsMemory struct{…}
 
@@ -49197,7 +49197,7 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=basic`. Maximum 100 kB (102,400 bytes).
 
@@ -49215,17 +49215,17 @@ type BetaManagedAgentsMemoryPathConflictError struct{…}
 
 Type BetaManagedAgentsMemoryPathConflictErrorType
 
-ConflictingMemoryID stringoptional
+ConflictingMemoryID stringOptional
 
-ConflictingPath stringoptional
+ConflictingPath stringOptional
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemoryPreconditionFailedError struct{…}
 
 Type BetaManagedAgentsMemoryPreconditionFailedErrorType
 
-Message stringoptional
+Message stringOptional
 
 type BetaManagedAgentsMemoryPrefix struct{…}
 
@@ -49241,7 +49241,7 @@ type BetaManagedAgentsMemoryView string
 
 Selects which projection of a `memory` or `memory_version` the server returns. `basic` returns the object with `content` set to `null`; `full` populates `content`. When omitted, the default is endpoint-specific: retrieve operations default to `full`; list, create, and update operations default to `basic`. Listing with `view=full` caps `limit` at 20.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryViewBasic [BetaManagedAgentsMemoryView](api/beta.md) = "basic"
 
@@ -49253,7 +49253,7 @@ Optimistic-concurrency precondition: the update applies only if the memory's sto
 
 Type BetaManagedAgentsPreconditionType
 
-ContentSha256 stringoptional
+ContentSha256 stringOptional
 
 Expected `content_sha256` of the stored memory (64 lowercase hexadecimal characters). Typically the `content_sha256` returned by a prior read or list call. Because the server applies no content normalization, clients can also compute this locally as the SHA-256 of the UTF-8 content bytes.
 
@@ -49283,7 +49283,7 @@ type BetaManagedAgentsActorUnion interface{…}
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionActor struct{…}
 
@@ -49349,7 +49349,7 @@ Operation [BetaManagedAgentsMemoryVersionOperation](api/beta.md)
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryVersionOperationCreated [BetaManagedAgentsMemoryVersionOperation](api/beta.md) = "created"
 
@@ -49359,23 +49359,23 @@ const BetaManagedAgentsMemoryVersionOperationDeleted [BetaManagedAgentsMemoryVer
 
 Type BetaManagedAgentsMemoryVersionType
 
-Content stringoptional
+Content stringOptional
 
 The memory's UTF-8 text content as of this version. `null` when `view=basic`, when `operation` is `deleted`, or when `redacted_at` is set.
 
-ContentSha256 stringoptional
+ContentSha256 stringOptional
 
 Lowercase hex SHA-256 digest of `content` as of this version (64 characters). `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-ContentSizeBytes int64optional
+ContentSizeBytes int64Optional
 
 Size of `content` in bytes as of this version. `null` when `redacted_at` is set or `operation` is `deleted`. Populated regardless of `view` otherwise.
 
-CreatedBy [BetaManagedAgentsActorUnion](api/beta.md)optional
+CreatedBy [BetaManagedAgentsActorUnion](api/beta.md)Optional
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionActor struct{…}
 
@@ -49407,19 +49407,19 @@ UserID string
 
 ID of the user who performed the write (a `user_...` value).
 
-Path stringoptional
+Path stringOptional
 
 The memory's path at the time of this write. `null` if and only if `redacted_at` is set.
 
-RedactedAt Timeoptional
+RedactedAt TimeOptional
 
 A timestamp in RFC 3339 format
 
-RedactedBy [BetaManagedAgentsActorUnion](api/beta.md)optional
+RedactedBy [BetaManagedAgentsActorUnion](api/beta.md)Optional
 
 Identifies who performed a write or redact operation. Captured at write time on the `memory_version` row. The API key that created a session is not recorded on agent writes; attribution answers who made the write, not who is ultimately responsible. Look up session provenance separately via the [Sessions API](api/sessions-retrieve.md).
 
-Accepts one of the following:
+One of the following:
 
 type BetaManagedAgentsSessionActor struct{…}
 
@@ -49455,7 +49455,7 @@ type BetaManagedAgentsMemoryVersionOperation string
 
 The kind of mutation a `memory_version` records. Every non-no-op mutation to a memory appends exactly one version row with one of these values.
 
-Accepts one of the following:
+One of the following:
 
 const BetaManagedAgentsMemoryVersionOperationCreated [BetaManagedAgentsMemoryVersionOperation](api/beta.md) = "created"
 
@@ -49533,7 +49533,7 @@ ID string
 
 ID of the deleted file.
 
-Type DeletedFileTypeoptional
+Type DeletedFileTypeOptional
 
 Deleted object type.
 
@@ -49569,11 +49569,11 @@ Object type.
 
 For files, this is always `"file"`.
 
-Downloadable booloptional
+Downloadable boolOptional
 
 Whether the file can be downloaded.
 
-Scope [BetaFileScope](api/beta.md)optional
+Scope [BetaFileScope](api/beta.md)Optional
 
 The scope of this file, indicating the context in which it was created (e.g., a session).
 
@@ -49695,7 +49695,7 @@ Relationship BetaUserProfileRelationship
 
 How the entity behind a user profile relates to the platform that owns the API key. `external`: an individual end-user of the platform. `resold`: a company the platform resells Claude access to. `internal`: the platform's own usage.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUserProfileRelationshipExternal BetaUserProfileRelationship = "external"
 
@@ -49711,7 +49711,7 @@ Status BetaUserProfileTrustGrantStatus
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
 
@@ -49727,11 +49727,11 @@ UpdatedAt Time
 
 A timestamp in RFC 3339 format
 
-ExternalID stringoptional
+ExternalID stringOptional
 
 Platform's own identifier for this user. Not enforced unique.
 
-Name stringoptional
+Name stringOptional
 
 Display name of the entity this profile represents. For `resold` this is the resold-to company's name.
 
@@ -49755,7 +49755,7 @@ Status BetaUserProfileTrustGrantStatus
 
 Status of the trust grant.
 
-Accepts one of the following:
+One of the following:
 
 const BetaUserProfileTrustGrantStatusActive BetaUserProfileTrustGrantStatus = "active"
 
@@ -49806,7 +49806,7 @@ RFC 3339 timestamp when the event occurred.
 
 Data [BetaWebhookEventDataUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebhookSessionCreatedEventData struct{…}
 
@@ -50094,7 +50094,7 @@ Object type. Always `event` for webhook payloads.
 
 type BetaWebhookEventDataUnion interface{…}
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebhookSessionCreatedEventData struct{…}
 
@@ -50668,7 +50668,7 @@ RFC 3339 timestamp when the event occurred.
 
 Data [BetaWebhookEventDataUnion](api/beta.md)
 
-Accepts one of the following:
+One of the following:
 
 type BetaWebhookSessionCreatedEventData struct{…}
 

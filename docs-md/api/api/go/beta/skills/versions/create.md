@@ -22,13 +22,13 @@ The format and length of IDs may change over time.
 
 params BetaSkillVersionNewParams
 
-Files param.Field[[]Reader]optional
+Files param.Field[[]Reader]Optional
 
 Body param: Files to upload for the skill.
 
 All files must be in the same top-level directory and must include a SKILL.md file at the root of that directory.
 
-Betas param.Field[[]AnthropicBeta]optional
+Betas param.Field[[]AnthropicBeta]Optional
 
 Header param: Optional header to specify the beta version(s) you want to use.
 
@@ -36,7 +36,7 @@ string
 
 type AnthropicBeta string
 
-Accepts one of the following:
+One of the following:
 
 const AnthropicBetaMessageBatches2024\_09\_24 AnthropicBeta = "message-batches-2024-09-24"
 

@@ -142,7 +142,7 @@ required State State
 
 Current state of the work item
 
-Accepts one of the following:
+One of the following:
 
 "queued"Queued
 
