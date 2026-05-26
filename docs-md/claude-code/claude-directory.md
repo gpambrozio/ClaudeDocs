@@ -198,6 +198,7 @@ Files in the paths below are deleted on startup once they’re older than [`clea
 | `shell-snapshots/` | Captured shell environment used by the Bash tool. Removed on clean exit. The sweep clears any left after a crash. |
 | `backups/` | Timestamped copies of `~/.claude.json` taken before config migrations |
 | `feedback-bundles/` | Redacted transcript archives written by `/feedback` on third-party providers, for sending to your Anthropic account team |
+| `todos/`, `statsig/`, `logs/` | Legacy directories from older versions. No longer written. The sweep removes their contents and then the empty directory. |
 
 ### [​](#kept-until-you-delete-them) Kept until you delete them
 
@@ -208,7 +209,6 @@ The following paths are not covered by automatic cleanup and persist indefinitel
 | `history.jsonl` | Every prompt you’ve typed, with timestamp and project path. Used for up-arrow recall. |
 | `stats-cache.json` | Aggregated token and cost counts shown by `/usage` |
 | `remote-settings.json` | Cached copy of [server-managed settings](server-managed-settings.md) for your organization. Only present when your organization has configured them. Refreshed on each launch. |
-| `todos/` | Legacy per-session task lists. No longer written by current versions; safe to delete. |
 
 Other small cache and lock files appear depending on which features you use and are safe to delete.
 
@@ -261,7 +261,7 @@ You can also delete any of the application-data paths above by hand. New session
 | `~/.claude/stats-cache.json` | Historical totals shown by `/usage` |
 | `~/.claude/remote-settings.json` | Nothing. Re-fetched on next launch. |
 | `~/.claude/debug/`, `~/.claude/plans/`, `~/.claude/paste-cache/`, `~/.claude/image-cache/`, `~/.claude/session-env/`, `~/.claude/tasks/`, `~/.claude/shell-snapshots/`, `~/.claude/backups/` | Nothing user-facing |
-| `~/.claude/todos/` | Nothing. Legacy directory not written by current versions. |
+| `~/.claude/todos/`, `~/.claude/statsig/`, `~/.claude/logs/` | Nothing. Legacy directories not written by current versions. |
 
 Don’t delete `~/.claude.json`, `~/.claude/settings.json`, or `~/.claude/plugins/`: those hold your auth, preferences, and installed plugins.
 

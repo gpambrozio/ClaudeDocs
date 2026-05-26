@@ -165,7 +165,7 @@ Choose an installation scope:
 For example, select **commit-commands** (a plugin that adds git workflow skills) and install it to your user scope.You can also install directly from the command line:
 
 ```shiki
-/plugin install commit-commands@anthropics-claude-code
+/plugin install commit-commands@claude-code-plugins
 ```
 
 See [Configuration scopes](settings.md) to learn more about scopes.

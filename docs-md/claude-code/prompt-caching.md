@@ -25,12 +25,12 @@ To get the most out of prefix matching, Claude Code orders each request so conte
 
 A change to the conversation layer leaves the system prompt and project context cached. A change to the system prompt invalidates everything, because all later content now sits behind a different prefix. The third column gives common triggers rather than an exhaustive list, and the sections below cover the full set, including content such as output style that is fixed at session start.
 The prefix-match rule explains most of the behaviors on this page. [Plan mode](permission-modes.md) and [skill loading](skills.md), for example, append their instructions as conversation messages, so the cached prefix stays intact.
-Two settings aren’t part of the prompt text at all, so they don’t appear in the layer table. They behave differently for caching:
+Two settings aren’t part of the prompt text at all, so they don’t appear in the layer table, but both are part of the cache key:
 
-- **Model**: the cache is keyed by model, so each model has its own cache. Switching models recomputes the entire request even when the content is identical. See [Switching models](#switching-models) below.
-- **Effort level**: not part of the cache key or the prompt, so [changing it](model-config.md) mid-session has no effect on the cache.
+- **Model**: each model has its own cache. Switching models recomputes the entire request even when the content is identical. See [Switching models](#switching-models) below.
+- **Effort level**: each effort level has its own cache for the same model. Changing it mid-session recomputes the entire request, and Claude Code asks you to confirm before applying the change. See [Changing effort level](#changing-effort-level) below.
 
-Pick your model and connect MCP servers at the top of a session, then save `/compact` for natural breaks between tasks. The fewer changes you make mid-task, the higher your cache hit rate.
+Pick your model, effort level, and MCP servers at the top of a session, then save `/compact` for natural breaks between tasks. The fewer changes you make mid-task, the higher your cache hit rate.
 
 ### [​](#where-the-cache-lives) Where the cache lives
 
@@ -48,6 +48,7 @@ For what each provider stores and processes, see [data usage](data-usage.md). Wh
 These actions cause the next request to miss part or all of the cache. You see a one-time slower, more expensive turn, after which the new prefix is cached. Most of them are avoidable mid-task once you know they have a cost. A model switch or an MCP reconnect can feel free until you notice the slower turn that follows.
 
 - [Switching models](#switching-models)
+- [Changing effort level](#changing-effort-level)
 - [Connecting or disconnecting an MCP server](#connecting-or-disconnecting-an-mcp-server)
 - [Denying an entire tool](#denying-an-entire-tool)
 - [Compacting the conversation](#compacting-the-conversation)
@@ -57,6 +58,10 @@ These actions cause the next request to miss part or all of the cache. You see a
 
 Each model has its own cache. Switching with [`/model`](model-config.md) means the next request reads the entire conversation history with no cache hits, even though the content is identical.
 The [`opusplan` model setting](model-config.md) resolves to Opus during plan mode and Sonnet during execution, so each plan-mode toggle is a model switch and starts a fresh cache.
+
+### [​](#changing-effort-level) Changing effort level
+
+The cache is keyed by [effort level](model-config.md) as well as model, so switching with `/effort` means the next request reads the entire conversation history with no cache hits. Once a conversation has started, Claude Code shows a confirmation dialog before applying an effort change that would invalidate the cache. A change that resolves to the same level already in effect, such as setting the model’s default explicitly, skips the dialog and keeps the cache.
 
 ### [​](#connecting-or-disconnecting-an-mcp-server) Connecting or disconnecting an MCP server
 
