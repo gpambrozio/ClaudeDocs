@@ -85,6 +85,10 @@ These plugins bundle pre-configured [MCP servers](mcp.md) so you can connect Cla
 - **Communication**: `slack`
 - **Monitoring**: `sentry`
 
+### [​](#automatic-security-review) Automatic security review
+
+The `security-guidance` plugin reviews each change Claude makes for common vulnerabilities and instructs Claude to fix what it finds in the same session. See [Catch security issues as Claude writes code](security-guidance.md) for what it checks and how to add project-specific rules.
+
 ### [​](#development-workflows) Development workflows
 
 Plugins that add skills and agents for common development tasks:

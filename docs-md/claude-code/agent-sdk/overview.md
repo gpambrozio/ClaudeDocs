@@ -317,10 +317,10 @@ The SDK also supports Claude Code’s filesystem-based configuration. With defau
 
 | Feature | Description | Location |
 | --- | --- | --- |
-| [Skills](agent-sdk/skills.md) | Specialized capabilities defined in Markdown | `.claude/skills/*/SKILL.md` |
-| [Slash commands](agent-sdk/slash-commands.md) | Custom commands for common tasks | `.claude/commands/*.md` |
+| [Skills](agent-sdk/skills.md) | Specialized capabilities Claude uses automatically or you invoke with `/name` | `.claude/skills/*/SKILL.md` |
+| [Commands](agent-sdk/slash-commands.md) | Custom commands in the legacy format. Use skills for new custom commands | `.claude/commands/*.md` |
 | [Memory](agent-sdk/modifying-system-prompts.md) | Project context and instructions | `CLAUDE.md` or `.claude/CLAUDE.md` |
-| [Plugins](agent-sdk/plugins.md) | Extend with custom commands, agents, and MCP servers | Programmatic via `plugins` option |
+| [Plugins](agent-sdk/plugins.md) | Extend with skills, agents, hooks, and MCP servers | Programmatic via `plugins` option |
 
 ## [​](#compare-the-agent-sdk-to-other-claude-tools) Compare the Agent SDK to other Claude tools
 

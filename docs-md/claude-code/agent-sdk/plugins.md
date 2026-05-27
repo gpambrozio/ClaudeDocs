@@ -6,7 +6,7 @@
 >
 > Use this file to discover all available pages before exploring further.
 
-Plugins allow you to extend Claude Code with custom functionality that can be shared across projects. Through the Agent SDK, you can programmatically load plugins from local directories to add custom slash commands, agents, skills, hooks, and MCP servers to your agent sessions.
+Plugins allow you to extend Claude Code with custom functionality that can be shared across projects. Through the Agent SDK, you can programmatically load plugins from local directories to add skills, agents, hooks, and MCP servers to your agent sessions.
 
 ## [​](#what-are-plugins) What are plugins?
 
@@ -76,16 +76,20 @@ for await (const message of query({
     console.log("Plugins:", message.plugins);
     // Example: [{ name: "my-plugin", path: "./my-plugin" }]
 
-    // Check available commands from plugins
+    // Plugin skills appear with the plugin name as a prefix
+    console.log("Skills:", message.skills);
+    // Example: ["my-plugin:greet"]
+
+    // Plugin commands use the same prefix, and skills appear here too
     console.log("Commands:", message.slash_commands);
-    // Example: ["compact", "context", "my-plugin:custom-command"]
+    // Example: ["compact", "context", "my-plugin:custom-command", "my-plugin:greet"]
   }
 }
 ```
 
 ## [​](#using-plugin-skills) Using plugin skills
 
-Skills from plugins are automatically namespaced with the plugin name to avoid conflicts. When invoked as slash commands, the format is `plugin-name:skill-name`.
+Skills from plugins are automatically namespaced with the plugin name to avoid conflicts. To invoke one directly, send `/plugin-name:skill-name` as the prompt.
 
 TypeScript
 
@@ -136,6 +140,7 @@ async function runWithPlugin() {
   })) {
     if (message.type === "system" && message.subtype === "init") {
       console.log("Loaded plugins:", message.plugins);
+      console.log("Available skills:", message.skills);
       console.log("Available commands:", message.slash_commands);
     }
 
@@ -216,9 +221,9 @@ If your plugin doesn’t appear in the init message:
 
 If plugin skills don’t work:
 
-1. **Use the namespace**: Plugin skills require the `plugin-name:skill-name` format when invoked as slash commands
-2. **Check init message**: Verify the skill appears in `slash_commands` with the correct namespace
-3. **Validate skill files**: Ensure each skill has a `SKILL.md` file in its own subdirectory under `skills/` (for example, `skills/my-skill/SKILL.md`)
+1. **Use the namespace**: invoke plugin skills as `/plugin-name:skill-name`
+2. **Check init message**: verify the skill appears in the `skills` list with the correct namespace
+3. **Validate skill files**: ensure each skill has a `SKILL.md` file in its own subdirectory under `skills/`, for example `skills/my-skill/SKILL.md`
 
 ### [​](#path-resolution-issues) Path resolution issues
 
@@ -232,7 +237,7 @@ If relative paths don’t work:
 
 - [Plugins](plugins.md) - Complete plugin development guide
 - [Plugins reference](plugins-reference.md) - Technical specifications
-- [Slash Commands](agent-sdk/slash-commands.md) - Using slash commands in the SDK
+- [Commands](agent-sdk/slash-commands.md) - Using commands in the SDK
 - [Subagents](agent-sdk/subagents.md) - Working with specialized agents
 - [Skills](agent-sdk/skills.md) - Using Agent Skills
 
