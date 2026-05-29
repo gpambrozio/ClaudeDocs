@@ -32,7 +32,7 @@ One of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 22 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 24 more
 
 "message-batches-2024-09-24"
 
@@ -83,6 +83,10 @@ One of the following:
 "managed-agents-2026-04-01"
 
 "cache-diagnosis-2026-04-07"
+
+"thinking-token-count-2026-05-13"
+
+"mid-conversation-system-2026-04-07"
 
 ##### ReturnsExpand Collapse
 
@@ -485,6 +489,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -575,7 +581,7 @@ type: "code\_execution\_20260120"
 
 BetaAdvisorToolResultBlock { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  | [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  | [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 One of the following:
 
@@ -599,17 +605,25 @@ One of the following:
 
 type: "advisor\_tool\_result\_error"
 
-BetaAdvisorResultBlock { text, type }
+BetaAdvisorResultBlock { stop\_reason, text, type }
+
+stop\_reason: string | null
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-BetaAdvisorRedactedResultBlock { encrypted\_content, type }
+BetaAdvisorRedactedResultBlock { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string | null
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -1104,7 +1118,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
+"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -1251,7 +1269,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
+usage: [BetaUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
 
 Billing and rate-limit usage.
 
@@ -1411,7 +1429,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-7" | "claude-mythos-preview" | "claude-opus-4-6" | 14 more
+"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -1494,6 +1516,28 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The number of output tokens which were used.
+
+output\_tokens\_details: OutputTokensDetails | null
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: [BetaServerToolUsage](api/beta.md) { web\_fetch\_requests, web\_search\_requests }  | null
 

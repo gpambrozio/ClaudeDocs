@@ -19,7 +19,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     cache_control={"type": "ephemeral"},
     system="You are an AI assistant tasked with analyzing literary works. Your goal is to provide insightful commentary on themes, characters, and writing style.",
@@ -70,6 +70,7 @@ Prompt caching introduces a new pricing structure. The table below shows the pri
 
 | Model | Base Input Tokens | 5m Cache Writes | 1h Cache Writes | Cache Hits & Refreshes | Output Tokens |
 | --- | --- | --- | --- | --- | --- |
+| Claude Opus 4.8 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.7 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.6 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
 | Claude Opus 4.5 | $5 / MTok | $6.25 / MTok | $10 / MTok | $0.50 / MTok | $25 / MTok |
@@ -107,7 +108,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     cache_control={"type": "ephemeral"},
     system="You are a helpful assistant that remembers our conversation.",
@@ -151,7 +152,7 @@ This lets you combine both approaches. For example, use an explicit breakpoint t
 
 ```shiki
 {
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "max_tokens": 1024,
   "cache_control": { "type": "ephemeral" },
   "system": [
@@ -248,7 +249,7 @@ Adding more `cache_control` breakpoints doesn't increase your costs - you still 
 On the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), [Vertex AI](build-with-claude/claude-on-vertex-ai.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) (beta), the minimum cacheable prompt length is:
 
 - 4,096 tokens for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Opus 4.5
-- 1,024 tokens for Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4 ([deprecated](about-claude/model-deprecations.md)), and Claude Sonnet 4 ([deprecated](about-claude/model-deprecations.md))
+- 1,024 tokens for Claude Opus 4.8, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.1, Claude Opus 4 ([deprecated](about-claude/model-deprecations.md)), and Claude Sonnet 4 ([deprecated](about-claude/model-deprecations.md))
 - 4,096 tokens for Claude Haiku 4.5
 - 2,048 tokens for Claude Haiku 3.5 ([retired, except on Vertex AI](about-claude/model-deprecations.md))
 
@@ -304,6 +305,8 @@ The following table shows which parts of the cache are invalidated by different 
 | **Images** | ✓ | ✓ | ✘ | Adding/removing images anywhere in the prompt affects message blocks |
 | **Thinking parameters** | ✓ | ✓ | ✘ | Changes to extended thinking settings (enable/disable, budget) affect message blocks |
 | **Non-tool results passed to extended thinking requests** | ✓ | ✓ | Model-specific | On Opus 4.5+ and Sonnet 4.6+, thinking blocks are preserved by default, so the cache remains valid (✓). On earlier Opus/Sonnet models and all Haiku models, all previously-cached thinking blocks are stripped from context, and any messages that follow those thinking blocks are removed from the cache (✘). For more details, see [Caching with thinking blocks](#caching-with-thinking-blocks). |
+
+On Claude Opus 4.8, you can add a new system instruction partway through a conversation without invalidating the system or message caches. Append a `{"role": "system"}` message to `messages` instead of editing the top-level `system` field, so the cached prefix stays unchanged. See [Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md).
 
 ### Tracking cache performance
 
@@ -522,7 +525,7 @@ client = anthropic.Anthropic()
 
 # Fire this before users arrive to warm the shared system-prompt cache.
 prewarm = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=0,
     system=[
         {
@@ -548,7 +551,7 @@ Output
   "type": "message",
   "role": "assistant",
   "content": [],
-  "model": "claude-opus-4-7-20251101",
+  "model": "claude-opus-4-8",
   "stop_reason": "max_tokens",
   "stop_sequence": null,
   "usage": {
@@ -599,7 +602,7 @@ SYSTEM_PROMPT = [
 def prewarm_cache() -> None:
     """Call this at application startup or on a scheduled interval."""
     client.messages.create(
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         max_tokens=0,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": "warmup"}],
@@ -608,7 +611,7 @@ def prewarm_cache() -> None:
 def respond(user_message: str) -> anthropic.types.Message:
     """The real user request; benefits from a warm cache."""
     return client.messages.create(
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         max_tokens=1024,
         system=SYSTEM_PROMPT,
         messages=[{"role": "user", "content": user_message}],

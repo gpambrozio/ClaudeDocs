@@ -52,15 +52,27 @@ All [active models](about-claude/models/overview.md) support the Message Batches
 
 ### What can be batched
 
-Any request that you can make to the Messages API can be included in a batch. This includes:
+Almost any request you can make to the Messages API can be included in a batch. This includes:
 
 - Vision
-- Tool use
+- Tool use, including all [server tools](agents-and-tools/tool-use/server-tools.md) (web search, web fetch, code execution, MCP connectors, advisor, and tool search)
 - System messages
 - Multi-turn conversations
-- Any beta features
+- Extended thinking
+- Most beta features
 
 Since each request in the batch is processed independently, you can mix different types of requests within a single batch.
+
+A small number of Messages API parameters are **not** supported in batch requests. Including any of these returns a validation error:
+
+| Parameter | Why |
+| --- | --- |
+| `stream: true` | Batch results come back as a single file, not a stream. |
+| `speed` ([Fast mode](build-with-claude/fast-mode.md)) | Fast mode tunes synchronous latency, which doesn't apply to asynchronous batch processing. |
+| `store` / `previous_thread_event_id` (Threads) | Threads are stateful; batch requests are not. |
+| `cache_hint` / `context_hint` | These routing hints apply to synchronous request scheduling only. |
+| `max_tokens: 0` | See [Batch limitations](#batch-limitations). |
+| `research_preview_2026_02: "active"` | Research preview mode is not available on the batch path. |
 
 Since batches can take longer than 5 minutes to process, consider using the [1-hour cache duration](build-with-claude/prompt-caching.md) with prompt caching for better cache hit rates when processing batches with shared context.
 
@@ -72,6 +84,7 @@ The Batches API offers significant cost savings. All usage is charged at 50% of 
 
 | Model | Batch input | Batch output |
 | --- | --- | --- |
+| Claude Opus 4.8 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.7 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.6 | $2.50 / MTok | $12.50 / MTok |
 | Claude Opus 4.5 | $2.50 / MTok | $12.50 / MTok |
@@ -109,7 +122,7 @@ message_batch = client.messages.batches.create(
         Request(
             custom_id="my-first-request",
             params=MessageCreateParamsNonStreaming(
-                model="claude-opus-4-7",
+                model="claude-opus-4-8",
                 max_tokens=1024,
                 messages=[
                     {
@@ -122,7 +135,7 @@ message_batch = client.messages.batches.create(
         Request(
             custom_id="my-second-request",
             params=MessageCreateParamsNonStreaming(
-                model="claude-opus-4-7",
+                model="claude-opus-4-8",
                 max_tokens=1024,
                 messages=[
                     {
@@ -253,8 +266,8 @@ The results are in `.jsonl` format, where each line is a valid JSON object repre
 .jsonl file
 
 ```shiki
-{"custom_id":"my-second-request","result":{"type":"succeeded","message":{"id":"msg_014VwiXbi91y3JMjcpyGBHX5","type":"message","role":"assistant","model":"claude-opus-4-7","content":[{"type":"text","text":"Hello again! It's nice to see you. How can I assist you today? Is there anything specific you'd like to chat about or any questions you have?"}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":11,"output_tokens":36}}}}
-{"custom_id":"my-first-request","result":{"type":"succeeded","message":{"id":"msg_01FqfsLoHwgeFbguDgpz48m7","type":"message","role":"assistant","model":"claude-opus-4-7","content":[{"type":"text","text":"Hello! How can I assist you today? Feel free to ask me any questions or let me know if there's anything you'd like to chat about."}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":34}}}}
+{"custom_id":"my-second-request","result":{"type":"succeeded","message":{"id":"msg_014VwiXbi91y3JMjcpyGBHX5","type":"message","role":"assistant","model":"claude-opus-4-8","content":[{"type":"text","text":"Hello again! It's nice to see you. How can I assist you today? Is there anything specific you'd like to chat about or any questions you have?"}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":11,"output_tokens":36}}}}
+{"custom_id":"my-first-request","result":{"type":"succeeded","message":{"id":"msg_01FqfsLoHwgeFbguDgpz48m7","type":"message","role":"assistant","model":"claude-opus-4-8","content":[{"type":"text","text":"Hello! How can I assist you today? Feel free to ask me any questions or let me know if there's anything you'd like to chat about."}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":34}}}}
 ```
 
 If your result has an error, its `result.error` will be set to the standard [error shape](api/errors.md).
@@ -329,7 +342,7 @@ message_batch = client.messages.batches.create(
         Request(
             custom_id="my-first-request",
             params=MessageCreateParamsNonStreaming(
-                model="claude-opus-4-7",
+                model="claude-opus-4-8",
                 max_tokens=1024,
                 system=[
                     {
@@ -353,7 +366,7 @@ message_batch = client.messages.batches.create(
         Request(
             custom_id="my-second-request",
             params=MessageCreateParamsNonStreaming(
-                model="claude-opus-4-7",
+                model="claude-opus-4-8",
                 max_tokens=1024,
                 system=[
                     {
@@ -380,9 +393,17 @@ message_batch = client.messages.batches.create(
 
 In this example, both requests in the batch include identical system messages and the full text of Pride and Prejudice marked with `cache_control` to increase the likelihood of cache hits.
 
+### Server tools and the agentic loop
+
+All [server tools](agents-and-tools/tool-use/server-tools.md) (web search, web fetch, code execution, MCP connectors, advisor, and tool search) work in batch requests. The batch worker runs the same server-side agentic loop as the synchronous Messages API.
+
+Because there is no open connection to maintain, the batch loop runs **more iterations per turn** than a synchronous request before it returns `stop_reason: "pause_turn"`. If a batch result comes back with `pause_turn`, the turn did not finish; you can continue it by submitting the paused assistant content in a follow-up request (batch or synchronous) exactly as shown in the [pause\_turn continuation pattern](agents-and-tools/tool-use/server-tools.md).
+
+The batch worker additionally throttles `web_search` per organization so that highly concurrent batch processing does not exhaust your organization's web-search rate limit. The batch retries throttled requests automatically; you don't need to handle this yourself, but very large web-search batches might take longer to complete.
+
 ### Extended output (beta)
 
-The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 4.7, Claude Opus 4.6, or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard limit (64k to 128k depending on model) in a single turn.
+The `output-300k-2026-03-24` beta header raises the `max_tokens` cap to 300,000 for batch requests using Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, or Claude Sonnet 4.6. Include the header to generate outputs far longer than the standard limit (64k to 128k depending on model) in a single turn.
 
 Extended output is available on the Message Batches API only, not the synchronous Messages API. It is supported on the Claude API and Claude Platform on AWS, and is not currently available on Amazon Bedrock, Vertex AI, or Microsoft Foundry.
 
@@ -404,7 +425,7 @@ message_batch = client.beta.messages.batches.create(
         Request(
             custom_id="long-form-request",
             params=MessageCreateParamsNonStreaming(
-                model="claude-opus-4-7",
+                model="claude-opus-4-8",
                 max_tokens=300_000,
                 messages=[
                     {

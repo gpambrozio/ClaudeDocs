@@ -16,11 +16,13 @@ This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-a
 
 ## Basic request and response
 
+The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on Claude Opus 4.7 and later models, including Claude Opus 4.8. Setting them to a non-default value returns a 400 error. Omit them from request payloads and use prompting to guide the model's behavior instead. See the [migration guide](about-claude/models/migration-guide.md).
+
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 message = anthropic.Anthropic().messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello, Claude"}],
 )
@@ -40,7 +42,7 @@ Output
       "text": "Hello!"
     }
   ],
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -50,6 +52,8 @@ Output
 }
 ```
 
+On Claude Opus 4.7 and later models, refusal responses (`stop_reason: "refusal"`) also include a `stop_details` object identifying the policy category that triggered the refusal. See [Handling stop reasons](build-with-claude/handling-stop-reasons.md) for the field reference and example handling code.
+
 ## Multiple conversational turns
 
 The Messages API is stateless, which means that you always send the full conversational history to the API. You can use this pattern to build up a conversation over time. Earlier conversational turns don't necessarily need to actually originate from Claude. You can use synthetic `assistant` messages.
@@ -58,7 +62,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 message = anthropic.Anthropic().messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {"role": "user", "content": "Hello, Claude"},
@@ -82,7 +86,7 @@ Output
       "text": "Sure, I'd be happy to provide..."
     }
   ],
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -92,11 +96,19 @@ Output
 }
 ```
 
+### System role in messages
+
+The first message in `messages` must always have `"role": "user"`. After that, on Claude Opus 4.8, you can also include messages with `"role": "system"` to add a new system instruction partway through a conversation.
+
+A mid-conversation system message has the same authority as the top-level `system` field, but because it is appended to the end of the message history, it does not invalidate any cached prefix that came before it. Use the top-level `system` field for instructions that should apply from the very first turn, and a mid-conversation system message for instructions that only become relevant later.
+
+See [Mid-conversation system messages](build-with-claude/mid-conversation-system-messages.md) for the complete guide, including how to combine it with [prompt caching](build-with-claude/prompt-caching.md).
+
 ## Putting words in Claude's mouth
 
 You can pre-fill part of Claude's response in the last position of the input messages list. This can be used to shape Claude's response. The example below uses `"max_tokens": 1` to get a single multiple choice answer from Claude.
 
-Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
+Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Requests using prefill with these models return a 400 error. Use [structured outputs](build-with-claude/structured-outputs.md) or system prompt instructions instead. See the [migration guide](about-claude/models/migration-guide.md) for migration patterns.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -154,7 +166,7 @@ image_media_type = "image/jpeg"
 image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf-8")
 
 message = anthropic.Anthropic().messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -177,7 +189,7 @@ print(message)
 
 # Option 2: URL-referenced image
 message_from_url = anthropic.Anthropic().messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -211,7 +223,7 @@ Output
       "text": "This image shows an ant, specifically a close-up view of an ant. The ant is shown in detail, with its distinct head, antennae, and legs clearly visible. The image is focused on capturing the intricate details and features of the ant, likely taken with a macro lens to get an extreme close-up perspective."
     }
   ],
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "stop_reason": "end_turn",
   "stop_sequence": null,
   "usage": {
@@ -226,6 +238,7 @@ Output
 See the [tool use guide](agents-and-tools/tool-use/overview.md) for examples of how to use tools with the Messages API.
 See the [computer use guide](agents-and-tools/tool-use/computer-use-tool.md) for examples of how to control desktop computer environments with the Messages API.
 For guaranteed JSON output, see [Structured Outputs](build-with-claude/structured-outputs.md).
+For an advisory token budget across a full agentic loop, set `output_config.task_budget`; see [Task budgets](build-with-claude/task-budgets.md).
 
 Was this page helpful?
 

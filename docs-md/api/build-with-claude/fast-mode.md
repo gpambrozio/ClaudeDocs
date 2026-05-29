@@ -1,10 +1,10 @@
-# Fast mode (beta: research preview)
+# Fast mode (research preview)
 
 Copy page
 
-Fast mode provides significantly faster output token generation for Claude Opus 4.6 and Claude Opus 4.7. By setting `speed: "fast"` in your API request, you get up to 2.5x higher output tokens per second from the same model at premium pricing.
+Fast mode provides significantly faster output token generation for Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6 at premium pricing. Set `speed: "fast"` in your API request to opt in. Fast mode delivers up to 2.5x higher output tokens per second from the same model.
 
-Fast mode is in beta (research preview). [Join the waitlist](https://claude.com/fast-mode) to request access. Availability is limited while Anthropic gathers feedback.
+Fast mode is in research preview. Contact your account manager to request access. If you do not have an account manager, [join the waitlist](https://claude.com/fast-mode) for fast mode.
 
 This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md). When your organization has a ZDR arrangement, data sent through this feature is not stored after the API response is returned.
 
@@ -12,14 +12,19 @@ This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-a
 
 Fast mode is supported on the following models:
 
-- Claude Opus 4.7 (`claude-opus-4-7`)
-- Claude Opus 4.6 (`claude-opus-4-6`)
+- Claude Opus 4.8 (claude-opus-4-8)
+- Claude Opus 4.7 (claude-opus-4-7)
+- Claude Opus 4.6 (claude-opus-4-6)
+
+Fast mode for Claude Opus 4.8 launches as a research preview on the Claude API, including Claude Managed Agents, only. It is not available on third-party platforms, including Vertex AI, Amazon Bedrock, and Microsoft Foundry.
+
+Fast mode for Claude Opus 4.6 is deprecated as of the Claude Opus 4.8 launch and will be removed approximately 30 days later. After removal, requests to `claude-opus-4-6` with `speed: "fast"` will fall back to standard speed at standard pricing rather than return an error. Migrate to fast mode for Claude Opus 4.8 or Claude Opus 4.7 to keep the speedup.
 
 ## How fast mode works
 
 Fast mode runs the same model with a faster inference configuration. There is no change to intelligence or capabilities.
 
-- Up to 2.5x higher output tokens per second compared to standard speed
+- On Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6, up to 2.5x higher output tokens per second compared to standard speed
 - Speed benefits are focused on output tokens per second (OTPS), not time to first token (TTFT)
 - Same model weights and behavior (not a different model)
 
@@ -31,7 +36,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     speed="fast",
     betas=["fast-mode-2026-02-01"],
@@ -45,11 +50,12 @@ print(response.content[0].text)
 
 ## Pricing
 
-Fast mode is priced at 6x standard Opus rates across the full context window, including requests over 200k input tokens. The following table shows pricing for Claude Opus 4.6 and Claude Opus 4.7 with fast mode:
+Fast mode is priced at a per-model multiplier on standard rates across the full context window, including requests over 200k input tokens. The following table shows fast mode pricing for each supported model:
 
-| Input | Output |
-| --- | --- |
-| $30 / MTok | $150 / MTok |
+| Model | Input | Output |
+| --- | --- | --- |
+| Claude Opus 4.6 / Claude Opus 4.7 | $30 / MTok | $150 / MTok |
+| Claude Opus 4.8 | $10 / MTok | $50 / MTok |
 
 Fast mode pricing stacks with other pricing modifiers:
 
@@ -83,7 +89,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     speed="fast",
     betas=["fast-mode-2026-02-01"],
@@ -130,13 +136,15 @@ CLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 client = anthropic.Anthropic()
 
-def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params):
+def create_message_with_fast_fallback(max_retries=0, max_attempts=3, **params):
     try:
-        return client.beta.messages.create(**params, max_retries=max_retries)
+        return client.with_options(max_retries=max_retries).beta.messages.create(
+            **params
+        )
     except anthropic.RateLimitError:
         if params.get("speed") == "fast":
             del params["speed"]
-            return create_message_with_fast_fallback(**params)
+            return create_message_with_fast_fallback(max_retries=max_retries, **params)
         raise
     except (
         anthropic.APIStatusError,
@@ -146,12 +154,12 @@ def create_message_with_fast_fallback(max_retries=None, max_attempts=3, **params
             raise
         if max_attempts > 1:
             return create_message_with_fast_fallback(
-                max_attempts=max_attempts - 1, **params
+                max_retries=max_retries, max_attempts=max_attempts - 1, **params
             )
         raise
 
 message = create_message_with_fast_fallback(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello"}],
     betas=["fast-mode-2026-02-01"],
@@ -163,7 +171,7 @@ message = create_message_with_fast_fallback(
 ## Considerations
 
 - **Prompt caching:** Switching between fast and standard speed invalidates the prompt cache. Requests at different speeds do not share cached prefixes.
-- **Supported models:** Fast mode is supported on Claude Opus 4.6 and Claude Opus 4.7. Sending `speed: "fast"` with an unsupported model returns an error.
+- **Supported models:** Fast mode is supported on Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6. Sending `speed: "fast"` with an unsupported model returns an error.
 - **TTFT:** Fast mode's benefits are focused on output tokens per second (OTPS), not time to first token (TTFT).
 - **Batch API:** Fast mode is not available with the [Batch API](build-with-claude/batch-processing.md).
 - **Priority Tier:** Fast mode is not available with [Priority Tier](api/service-tiers.md).

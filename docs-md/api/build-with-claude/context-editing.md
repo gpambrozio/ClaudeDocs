@@ -70,7 +70,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=[{"role": "user", "content": "Search for recent developments in AI"}],
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
@@ -87,7 +87,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=[
         {
@@ -285,7 +285,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.count_tokens(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     messages=[{"role": "user", "content": "Continue our conversation..."}],
     tools=[...],  # Your tool definitions
     betas=["context-management-2025-06-27"],
@@ -338,7 +338,7 @@ CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=[...],
     tools=[
@@ -411,7 +411,7 @@ Python
 client = anthropic.Anthropic()
 
 runner = client.beta.messages.tool_runner(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[read_file],
     messages=[{"role": "user", "content": "What's in config.json?"}],

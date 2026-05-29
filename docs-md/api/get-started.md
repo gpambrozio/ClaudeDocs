@@ -5,6 +5,7 @@ Copy page
 ## Prerequisites
 
 - An Anthropic [Console account](/)
+- An [API key](/settings/keys)
 
 ## Call the API
 
@@ -24,35 +25,51 @@ TypeScript
 
 TypeScript
 
+C#
+
+C#
+
+Go
+
+Go
+
 Java
 
 Java
+
+PHP
+
+PHP
+
+Ruby
+
+Ruby
 
 1. 1
 
    Set your API key
 
-   Get your API key from the [Claude Console](/settings/keys) and set it as an environment variable:
+   Export your API key as an environment variable. The SDK reads `ANTHROPIC_API_KEY` automatically.
 
    ```shiki
-   export ANTHROPIC_API_KEY='your-api-key-here'
+   export ANTHROPIC_API_KEY="your-api-key-here"
    ```
-
-   To persist the key across shell sessions, add the line to your shell profile (such as `~/.zshrc` or `~/.bashrc`).
 2. 2
 
-   Install the SDK
-
-   Install the Anthropic Python SDK:
+   Create a project and install the SDK
 
    ```shiki
+   mkdir claude-quickstart && cd claude-quickstart
+   python3 -m venv .venv && source .venv/bin/activate
    pip install anthropic
    ```
 3. 3
 
    Create your code
 
-   Save this as `quickstart.py`:
+   Create a file called `quickstart.py`:
+
+   Python
 
    ```shiki
    import anthropic
@@ -60,7 +77,7 @@ Java
    client = anthropic.Anthropic()
 
    message = client.messages.create(
-       model="claude-opus-4-7",
+       model="claude-opus-4-8",
        max_tokens=1000,
        messages=[
            {
@@ -79,17 +96,10 @@ Java
    python quickstart.py
    ```
 
-   **Example output:**
-
    Output
 
    ```inline-block
-   [
-       TextBlock(
-           text='Here are some effective search strategies for finding the latest renewable energy developments:\n\n**Search Terms to Use:**\n- "renewable energy news 2024"\n- "clean energy breakthroughs"\n- "solar/wind/battery technology advances"\n- "energy storage innovations"\n- "green hydrogen developments"\n- "renewable energy policy updates"\n\n**Reliable Sources to Check:**\n- **News & Analysis:** Reuters Energy, Bloomberg New Energy Finance, Greentech Media, Energy Storage News\n- **Industry Publications:** Renewable Energy World, PV Magazine, Wind Power Engineering\n- **Research Organizations:** International Energy Agency (IEA), National Renewable Energy Laboratory (NREL)\n- **Government Sources:** Department of Energy websites, EPA clean energy updates\n\n**Specific Topics to Explore:**\n- Perovskite and next-gen solar cells\n- Offshore wind expansion\n- Grid-scale battery storage\n- Green hydrogen production\n- Carbon capture technologies\n- Smart grid innovations\n- Energy policy changes and incentives...',
-           type="text",
-       )
-   ]
+   [TextBlock(citations=None, text='Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- "Renewable energy news 2025"\n- ...', type='text')]
    ```
 
 ## Next steps

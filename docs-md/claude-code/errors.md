@@ -71,7 +71,7 @@ These errors come from the inference provider rather than your account or reques
 Claude Code shows the status code and the API’s error message for any 5xx response. The example below shows a 500 response on the Anthropic API:
 
 ```shiki
-API Error: 500 Internal server error. This is a server-side issue, usually temporary — try again in a moment. If it persists, check status.claude.com.
+API Error: 500 Internal server error. This is a server-side issue, usually temporary — try again in a moment. If it persists, check https://status.claude.com.
 ```
 
 The trailing sentence names where to check service health and varies by provider. Bedrock, Vertex AI, and Foundry configurations name that provider’s service status. A custom `ANTHROPIC_BASE_URL` names the gateway host.
@@ -87,7 +87,7 @@ This indicates an unexpected failure inside the API. It is not caused by your pr
 The API is temporarily at capacity across all users. Claude Code has already retried several times before showing this message:
 
 ```shiki
-API Error: Repeated 529 Overloaded errors. The API is at capacity — this is usually temporary. Try again in a moment. If it persists, check status.claude.com.
+API Error: Repeated 529 Overloaded errors. The API is at capacity — this is usually temporary. Try again in a moment. If it persists, check https://status.claude.com.
 ```
 
 The trailing sentence varies by provider in the same way as the 500 error above. A 529 is not your usage limit and does not count against your quota.
@@ -195,7 +195,7 @@ This is [retried automatically](#automatic-retries) before being shown.
 You have hit the rate limit configured for your API key, Amazon Bedrock project, or Google Vertex AI project.
 
 ```shiki
-API Error: Request rejected (429) · this may be a temporary capacity issue. If it persists, check status.claude.com.
+API Error: Request rejected (429) · this may be a temporary capacity issue. If it persists, check https://status.claude.com.
 ```
 
 The trailing sentence names where to check service health and varies by provider. Bedrock, Vertex AI, and Foundry configurations name that provider’s service status instead of the Anthropic status page. A custom `ANTHROPIC_BASE_URL` names the gateway host.
@@ -544,7 +544,7 @@ Claude Opus is not available with the Claude Pro plan · Select a different mode
 
 ### [​](#thinking-type-enabled-is-not-supported-for-this-model) thinking.type.enabled is not supported for this model
 
-Your Claude Code version is older than the minimum for Opus 4.7. The CLI sent a thinking configuration the model no longer accepts.
+Your Claude Code version is older than the minimum for Opus 4.7 or Opus 4.8. The CLI sent a thinking configuration the model no longer accepts.
 
 ```shiki
 API Error: 400 ... "thinking.type.enabled" is not supported for this model. Use "thinking.type.adaptive" and "output_config.effort" to control thinking behavior.
@@ -552,7 +552,7 @@ API Error: 400 ... "thinking.type.enabled" is not supported for this model. Use 
 
 **What to do:**
 
-- Run `claude update` to upgrade to v2.1.111 or later, then restart Claude Code
+- Run `claude update` and restart Claude Code. Opus 4.7 needs v2.1.111 or later. Opus 4.8 needs v2.1.154 or later
 - If you cannot upgrade, run `/model` and select Opus 4.6 or Sonnet instead
 - If you hit this in the Agent SDK, see [SDK troubleshooting](agent-sdk/quickstart.md)
 

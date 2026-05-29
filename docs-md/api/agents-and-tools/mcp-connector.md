@@ -42,7 +42,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1000,
     messages=[{"role": "user", "content": "What tools do you have available?"}],
     mcp_servers=[
@@ -287,7 +287,7 @@ You can connect to multiple MCP servers by including multiple server definitions
 
 ```shiki
 {
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "max_tokens": 1000,
   "messages": [
     {
@@ -421,7 +421,7 @@ await mcpClient.connect(transport);
 // List tools and convert them for the Claude API
 const { tools } = await mcpClient.listTools();
 const finalMessage = await anthropic.beta.messages.toolRunner({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [{ role: "user", content: "What tools do you have available?" }],
   tools: mcpTools(tools, mcpClient)
@@ -439,7 +439,7 @@ import { mcpMessages } from "@anthropic-ai/sdk/helpers/beta/mcp";
 
 const { messages } = await mcpClient.getPrompt({ name: "my-prompt" });
 const response = await anthropic.beta.messages.create({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: mcpMessages(messages)
 });
@@ -457,7 +457,7 @@ import { mcpResourceToContent, mcpResourceToFile } from "@anthropic-ai/sdk/helpe
 // As a content block in a message
 const resource = await mcpClient.readResource({ uri: "file:///path/to/doc.txt" });
 await anthropic.beta.messages.create({
-  model: "claude-opus-4-7",
+  model: "claude-opus-4-8",
   max_tokens: 1024,
   messages: [
     {
@@ -478,6 +478,10 @@ await anthropic.beta.files.upload({ file: mcpResourceToFile(fileResource) });
 ### Error handling
 
 The conversion functions throw `UnsupportedMCPValueError` if an MCP value isn't supported by the Claude API. This can happen with unsupported content types, MIME types, or non-HTTP resource links.
+
+## Batch requests
+
+You can include `mcp_servers` in [Message Batches API](build-with-claude/batch-processing.md) requests. MCP tool calls through the Batches API are priced the same as those in regular Messages API requests.
 
 ## Data retention
 
@@ -501,7 +505,7 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 
 ```shiki
 {
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "max_tokens": 1000,
   "messages": [
     // ...
@@ -525,7 +529,7 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 
 ```shiki
 {
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "max_tokens": 1000,
   "messages": [
     // ...

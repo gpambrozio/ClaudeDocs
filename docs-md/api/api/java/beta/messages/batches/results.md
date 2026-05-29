@@ -78,6 +78,10 @@ MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
 
 CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
+THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+
+MID\_CONVERSATION\_SYSTEM\_2026\_04\_07("mid-conversation-system-2026-04-07")
+
 ##### ReturnsExpand Collapse
 
 class BetaMessageBatchIndividualResponse:
@@ -479,6 +483,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -595,6 +601,10 @@ JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_er
 
 class BetaAdvisorResultBlock:
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
@@ -604,6 +614,10 @@ class BetaAdvisorRedactedResultBlock:
 String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
@@ -1098,6 +1112,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -1401,6 +1419,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -1480,6 +1502,28 @@ Usage for an advisor sub-inference iteration
 long outputTokens
 
 The number of output tokens which were used.
+
+Optional<OutputTokensDetails> outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 

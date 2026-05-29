@@ -623,6 +623,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -917,12 +919,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -942,6 +945,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -1127,6 +1134,28 @@ The number of input tokens which were used.
 output\_tokens: int
 
 The number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[ServerToolUsage]
 
@@ -1651,6 +1680,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -1945,12 +1976,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -1970,6 +2002,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -2155,6 +2191,28 @@ The number of input tokens which were used.
 output\_tokens: int
 
 The number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[ServerToolUsage]
 
@@ -2641,6 +2699,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -2935,12 +2995,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -2960,6 +3021,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -3145,6 +3210,28 @@ The number of input tokens which were used.
 output\_tokens: int
 
 The number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[ServerToolUsage]
 

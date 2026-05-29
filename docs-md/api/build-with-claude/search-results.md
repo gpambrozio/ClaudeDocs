@@ -8,6 +8,7 @@ Search result content blocks enable natural citations with proper source attribu
 
 The search results feature is available on the following models:
 
+- Claude Opus 4.8 (claude-opus-4-8)
 - Claude Opus 4.7 (`claude-opus-4-7`)
 - Claude Opus 4.6 (`claude-opus-4-6`)
 - Claude Sonnet 4.6 (`claude-sonnet-4-6`)
@@ -142,7 +143,7 @@ def search_knowledge_base(query):
 
 # Create a message with the tool
 response = client.messages.create(
-    model="claude-opus-4-7",  # Works with all supported models
+    model="claude-opus-4-8",  # Works with all supported models
     max_tokens=1024,
     tools=[knowledge_base_tool],
     messages=[
@@ -156,7 +157,7 @@ if response.content[0].type == "tool_use":
 
     # Send the tool result back
     final_response = client.messages.create(
-        model="claude-opus-4-7",  # Works with all supported models
+        model="claude-opus-4-8",  # Works with all supported models
         max_tokens=1024,
         messages=[
             MessageParam(
@@ -197,7 +198,7 @@ client = Anthropic()
 
 # Provide search results directly in the user message
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         MessageParam(

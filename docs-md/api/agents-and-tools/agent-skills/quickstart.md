@@ -45,7 +45,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 # Create a message with the PowerPoint Skill
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -115,7 +115,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -137,7 +137,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={
@@ -159,7 +159,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=16000,
     betas=["code-execution-2025-08-25", "skills-2025-10-02"],
     container={

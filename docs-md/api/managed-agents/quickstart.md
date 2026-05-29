@@ -11,7 +11,7 @@ This guide walks you through creating an agent, setting up an environment, start
 | Concept | Description |
 | --- | --- |
 | **Agent** | The model, system prompt, tools, MCP servers, and skills |
-| **Environment** | Configuration for where sessions run: an Anthropic-managed cloud container, or a self-hosted sandbox on your own infrastructure |
+| **Environment** | Configuration for where sessions run: an Anthropic-managed cloud sandbox, or a self-hosted sandbox on your own infrastructure |
 | **Session** | A running agent instance within an environment, performing a specific task and generating outputs |
 | **Events** | Messages exchanged between your application and the agent (user turns, tool results, status updates) |
 
@@ -99,7 +99,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
    ```shiki
    ant beta:agents create \
      --name "Coding Assistant" \
-     --model '{id: claude-opus-4-7}' \
+     --model '{id: claude-opus-4-8}' \
      --system "You are a helpful coding assistant. Write clean, well-documented code." \
      --tool '{type: agent_toolset_20260401}'
    ```
@@ -111,7 +111,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
    Create an environment
 
-   An environment defines the container where your agent runs.
+   An environment defines the sandbox where your agent runs.
 
    curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -123,7 +123,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
    Save the returned `environment.id`. You'll reference it in every session you create.
 
-   To run the sandbox on your own infrastructure instead of a cloud container, see [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
+   To run the sandbox on your own infrastructure instead of a cloud sandbox, see [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
 3. 3
 
    Start a session
@@ -180,7 +180,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
                    break
    ```
 
-   The agent will write a Python script, execute it in the container, and verify the output file was created. Your output will look similar to this:
+   The agent will write a Python script, execute it in the sandbox, and verify the output file was created. Your output will look similar to this:
 
    ```inline-block
    I'll create a Python script that generates the first 20 Fibonacci numbers and saves them to a file.
@@ -197,9 +197,9 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 When you send a user event, Claude Managed Agents:
 
-1. **Provisions a container:** Your environment configuration determines how it's built.
+1. **Provisions a sandbox:** Your environment configuration determines how it's built.
 2. **Runs the agent loop:** Claude decides which tools to use based on your message
-3. **Executes tools:** File writes, bash commands, and other tool calls run inside the container
+3. **Executes tools:** File writes, bash commands, and other tool calls run inside the sandbox
 4. **Streams events:** You receive real-time updates as the agent works
 5. **Goes idle:** The agent emits a `session.status_idle` event when it has nothing more to do
 
@@ -209,7 +209,7 @@ When you send a user event, Claude Managed Agents:
 
 Create reusable, versioned agent configurations](managed-agents/agent-setup.md)[Configure environments
 
-Customize networking and container settings](managed-agents/environments.md)[Agent tools
+Customize networking and sandbox settings](managed-agents/environments.md)[Agent tools
 
 Enable specific tools for your agent](managed-agents/tools.md)[Events and streaming
 

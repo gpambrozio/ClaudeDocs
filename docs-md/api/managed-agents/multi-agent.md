@@ -8,7 +8,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## How it works
 
-All agents share the same container, filesystem, and [vault credentials](managed-agents/vaults.md), but each agent runs in its own **session thread**, a context-isolated event stream with its own conversation history. The coordinator reports activity in the **primary thread** (which is the same as the session-level [event stream](managed-agents/events-and-streaming.md)); additional threads are spawned at runtime when the coordinator delegates work.
+All agents share the same sandbox, filesystem, and [vault credentials](managed-agents/vaults.md), but each agent runs in its own **session thread**, a context-isolated event stream with its own conversation history. The coordinator reports activity in the **primary thread** (which is the same as the session-level [event stream](managed-agents/events-and-streaming.md)); additional threads are spawned at runtime when the coordinator delegates work.
 
 Threads are persistent: the coordinator can send a follow-up to an agent it called earlier, and that agent retains everything from its previous turns.
 
@@ -33,7 +33,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 ant beta:agents create <<YAML
 name: Engineering Lead
-model: claude-opus-4-7
+model: claude-opus-4-8
 system: You coordinate engineering work. Delegate code review to the reviewer agent and test writing to the test agent.
 tools:
   - type: agent_toolset_20260401
@@ -89,7 +89,7 @@ research_agent = client.beta.agents.create(
 
 coordinator = client.beta.agents.create(
     name="coordinator",
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     tools=[{"type": "agent_toolset_20260401"}],
     multiagent={
         "type": "coordinator",

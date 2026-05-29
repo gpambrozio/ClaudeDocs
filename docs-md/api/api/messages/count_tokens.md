@@ -1620,6 +1620,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -2317,13 +2319,178 @@ One of the following:
 
 "1h"
 
-role: "user" or "assistant"
+MidConversationSystemBlockParam object { content, type, cache\_control }
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+content: array of [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }
+
+System instruction text blocks.
+
+text: string
+
+type: "text"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+citations: optional array of [TextCitationParam](api/messages.md)
+
+One of the following:
+
+CitationCharLocationParam object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_char\_index: number
+
+start\_char\_index: number
+
+type: "char\_location"
+
+CitationPageLocationParam object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+start\_page\_number: number
+
+type: "page\_location"
+
+CitationContentBlockLocationParam object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+document\_index: number
+
+document\_title: string
+
+end\_block\_index: number
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
+
+type: "content\_block\_location"
+
+CitationWebSearchResultLocationParam object { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: string
+
+encrypted\_index: string
+
+title: string
+
+type: "web\_search\_result\_location"
+
+url: string
+
+CitationSearchResultLocationParam object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+end\_block\_index: number
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+source: string
+
+start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
+
+title: string
+
+type: "search\_result\_location"
+
+type: "mid\_conv\_system"
+
+cache\_control: optional [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+role: "user" or "assistant" or "system"
 
 One of the following:
 
 "user"
 
 "assistant"
+
+"system"
 
 model: [Model](api/messages.md)
 
@@ -2333,13 +2500,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more
+"claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 

@@ -18,7 +18,6 @@ cURLCLIPythonTypeScript
 
 ```shiki
 # Ring 1: Single tool, single turn.
-# Source for <CodeSource> in build-a-tool-using-agent.mdx.
 
 import json
 
@@ -61,7 +60,7 @@ tools = [
 # Send the user's request along with the tool definition. Claude decides
 # whether to call the tool based on the request and the tool description.
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -91,7 +90,7 @@ result = {"event_id": "evt_123", "status": "created"}
 # its tool_use_id must match the id from the tool_use block above. The
 # assistant's previous response is included so Claude has the full history.
 followup = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -145,7 +144,6 @@ cURLCLIPythonTypeScript
 
 ```shiki
 # Ring 2: The agentic loop.
-# Source for <CodeSource> in build-a-tool-using-agent.mdx.
 
 import json
 
@@ -194,7 +192,7 @@ messages = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -222,7 +220,7 @@ while response.stop_reason == "tool_use":
     )
 
     response = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-8",
         max_tokens=1024,
         tools=tools,
         tool_choice={"type": "auto", "disable_parallel_tool_use": True},
@@ -253,7 +251,6 @@ cURLCLIPythonTypeScript
 
 ```shiki
 # Ring 3: Multiple tools, parallel calls.
-# Source for <CodeSource> in build-a-tool-using-agent.mdx.
 
 import json
 
@@ -314,7 +311,7 @@ messages = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=tools,
     messages=messages,
@@ -339,7 +336,7 @@ while response.stop_reason == "tool_use":
     messages.append({"role": "user", "content": tool_results})
 
     response = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-8",
         max_tokens=1024,
         tools=tools,
         messages=messages,
@@ -367,7 +364,6 @@ cURLCLIPythonTypeScript
 
 ```shiki
 # Ring 4: Error handling.
-# Source for <CodeSource> in build-a-tool-using-agent.mdx.
 
 import json
 
@@ -430,7 +426,7 @@ messages = [
 ]
 
 response = client.messages.create(
-    model="claude-opus-4-6",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=tools,
     messages=messages,
@@ -460,7 +456,7 @@ while response.stop_reason == "tool_use":
     messages.append({"role": "user", "content": tool_results})
 
     response = client.messages.create(
-        model="claude-opus-4-6",
+        model="claude-opus-4-8",
         max_tokens=1024,
         tools=tools,
         messages=messages,
@@ -492,7 +488,6 @@ cURLCLIPythonTypeScript
 
 ```shiki
 # Ring 5: The Tool Runner SDK abstraction.
-# Source for <CodeSource> in build-a-tool-using-agent.mdx.
 
 import json
 
@@ -532,7 +527,7 @@ def list_calendar_events(date: str) -> str:
     return json.dumps({"events": [{"title": "Existing meeting", "start": "14:00", "end": "15:00"}]})
 
 final_message = client.beta.messages.tool_runner(
-    model="claude-opus-4-6",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[create_calendar_event, list_calendar_events],
     messages=[

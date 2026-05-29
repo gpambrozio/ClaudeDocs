@@ -4,7 +4,7 @@ Copy page
 
 The latest generation of Claude models:
 
-**Claude Opus 4.7** - Anthropic's most capable model for complex reasoning and agentic coding, with a step-change jump over Claude Opus 4.6. Read the [Claude Opus 4.7 announcement](https://www.anthropic.com/news/claude-opus-4-7).
+**Claude Opus 4.8** - Anthropic's most capable model for complex reasoning and agentic coding. Read the [Claude Opus 4.8 announcement](https://www.anthropic.com/news/claude-opus-4-8).
 
 **Claude Sonnet 4.6** - Frontier intelligence at scale, built for coding, agents, and enterprise workflows. Read the [Claude Sonnet 4.6 announcement](https://www.anthropic.com/news/claude-sonnet-4-6).
 

@@ -1488,6 +1488,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -1774,7 +1776,7 @@ file\_id: String
 
 type: :container\_upload
 
-ContentBlockParam = [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }  | 13 more
+ContentBlockParam = [TextBlockParam](api/messages.md) { text, type, cache\_control, citations }  | [ImageBlockParam](api/messages.md) { source, type, cache\_control }  | [DocumentBlockParam](api/messages.md) { source, type, cache\_control, 3 more }  | 14 more
 
 Regular text content.
 
@@ -3323,6 +3325,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -3996,6 +4000,169 @@ Files uploaded via this block will be available in the container's input directo
 file\_id: String
 
 type: :container\_upload
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+:"5m"
+
+:"1h"
+
+class MidConversationSystemBlockParam { content, type, cache\_control }
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+content: Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations } ]
+
+System instruction text blocks.
+
+text: String
+
+type: :text
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+:"5m"
+
+:"1h"
+
+citations: Array[[TextCitationParam](api/messages.md)]
+
+One of the following:
+
+class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_char\_index: Integer
+
+start\_char\_index: Integer
+
+type: :char\_location
+
+class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_page\_number: Integer
+
+start\_page\_number: Integer
+
+type: :page\_location
+
+class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+document\_index: Integer
+
+document\_title: String
+
+end\_block\_index: Integer
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+start\_block\_index: Integer
+
+0-based index of the first cited block in the source's `content` array.
+
+type: :content\_block\_location
+
+class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: String
+
+encrypted\_index: String
+
+title: String
+
+type: :web\_search\_result\_location
+
+url: String
+
+class CitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: String
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+end\_block\_index: Integer
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+search\_result\_index: Integer
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+source: String
+
+start\_block\_index: Integer
+
+0-based index of the first cited block in the source's `content` array.
+
+title: String
+
+type: :search\_result\_location
+
+type: :mid\_conv\_system
 
 cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
 
@@ -5244,6 +5411,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -5538,13 +5707,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 :"claude-opus-4-7"
 
@@ -5687,7 +5860,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -5730,6 +5903,28 @@ The number of input tokens which were used.
 output\_tokens: Integer
 
 The number of output tokens which were used.
+
+output\_tokens\_details: OutputTokensDetails{ thinking\_tokens}
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: Integer
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
@@ -6773,7 +6968,7 @@ strict: bool
 
 When true, guarantees schema validation on tool names and inputs
 
-class MessageDeltaUsage { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+class MessageDeltaUsage { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
 
 cache\_creation\_input\_tokens: Integer
 
@@ -6790,6 +6985,28 @@ The cumulative number of input tokens which were used.
 output\_tokens: Integer
 
 The cumulative number of output tokens which were used.
+
+output\_tokens\_details: OutputTokensDetails{ thinking\_tokens}
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: Integer
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
@@ -8358,6 +8575,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -9055,13 +9274,178 @@ One of the following:
 
 :"1h"
 
-role: :user | :assistant
+class MidConversationSystemBlockParam { content, type, cache\_control }
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+content: Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations } ]
+
+System instruction text blocks.
+
+text: String
+
+type: :text
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+:"5m"
+
+:"1h"
+
+citations: Array[[TextCitationParam](api/messages.md)]
+
+One of the following:
+
+class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_char\_index: Integer
+
+start\_char\_index: Integer
+
+type: :char\_location
+
+class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_page\_number: Integer
+
+start\_page\_number: Integer
+
+type: :page\_location
+
+class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+document\_index: Integer
+
+document\_title: String
+
+end\_block\_index: Integer
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+start\_block\_index: Integer
+
+0-based index of the first cited block in the source's `content` array.
+
+type: :content\_block\_location
+
+class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: String
+
+encrypted\_index: String
+
+title: String
+
+type: :web\_search\_result\_location
+
+url: String
+
+class CitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: String
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+end\_block\_index: Integer
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+search\_result\_index: Integer
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+source: String
+
+start\_block\_index: Integer
+
+0-based index of the first cited block in the source's `content` array.
+
+title: String
+
+type: :search\_result\_location
+
+type: :mid\_conv\_system
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+:"5m"
+
+:"1h"
+
+role: :user | :assistant | :system
 
 One of the following:
 
 :user
 
 :assistant
+
+:system
 
 class MessageTokensCount { input\_tokens }
 
@@ -9079,7 +9463,170 @@ This should be a uuid, hash value, or other opaque identifier. Anthropic may use
 
 maxLength512
 
-Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more | String
+class MidConversationSystemBlockParam { content, type, cache\_control }
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+content: Array[[TextBlockParam](api/messages.md) { text, type, cache\_control, citations } ]
+
+System instruction text blocks.
+
+text: String
+
+type: :text
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+:"5m"
+
+:"1h"
+
+citations: Array[[TextCitationParam](api/messages.md)]
+
+One of the following:
+
+class CitationCharLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_char\_index: Integer
+
+start\_char\_index: Integer
+
+type: :char\_location
+
+class CitationPageLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+document\_index: Integer
+
+document\_title: String
+
+end\_page\_number: Integer
+
+start\_page\_number: Integer
+
+type: :page\_location
+
+class CitationContentBlockLocationParam { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: String
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+document\_index: Integer
+
+document\_title: String
+
+end\_block\_index: Integer
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+start\_block\_index: Integer
+
+0-based index of the first cited block in the source's `content` array.
+
+type: :content\_block\_location
+
+class CitationWebSearchResultLocationParam { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: String
+
+encrypted\_index: String
+
+title: String
+
+type: :web\_search\_result\_location
+
+url: String
+
+class CitationSearchResultLocationParam { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: String
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+end\_block\_index: Integer
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+search\_result\_index: Integer
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+source: String
+
+start\_block\_index: Integer
+
+0-based index of the first cited block in the source's `content` array.
+
+title: String
+
+type: :search\_result\_location
+
+type: :mid\_conv\_system
+
+cache\_control: [CacheControlEphemeral](api/messages.md) { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: :ephemeral
+
+ttl: :"5m" | :"1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+:"5m"
+
+:"1h"
+
+Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more | String
 
 The model that will complete your prompt.
 
@@ -9087,13 +9634,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 :"claude-opus-4-7"
 
@@ -9821,6 +10372,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -10177,7 +10730,7 @@ stop\_sequence: String
 
 type: :message\_delta
 
-usage: [MessageDeltaUsage](api/messages.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+usage: [MessageDeltaUsage](api/messages.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
 
 Billing and rate-limit usage.
 
@@ -10204,6 +10757,28 @@ The cumulative number of input tokens which were used.
 output\_tokens: Integer
 
 The cumulative number of output tokens which were used.
+
+output\_tokens\_details: OutputTokensDetails{ thinking\_tokens}
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: Integer
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
@@ -10600,6 +11175,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -10894,13 +11471,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 :"claude-opus-4-7"
 
@@ -11043,7 +11624,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -11086,6 +11667,28 @@ The number of input tokens which were used.
 output\_tokens: Integer
 
 The number of output tokens which were used.
+
+output\_tokens\_details: OutputTokensDetails{ thinking\_tokens}
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: Integer
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
@@ -11504,6 +12107,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -11798,13 +12403,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 :"claude-opus-4-7"
 
@@ -11947,7 +12556,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -11990,6 +12599,28 @@ The number of input tokens which were used.
 output\_tokens: Integer
 
 The number of output tokens which were used.
+
+output\_tokens\_details: OutputTokensDetails{ thinking\_tokens}
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: Integer
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
@@ -12077,7 +12708,7 @@ stop\_sequence: String
 
 type: :message\_delta
 
-usage: [MessageDeltaUsage](api/messages.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 2 more }
+usage: [MessageDeltaUsage](api/messages.md) { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
 
 Billing and rate-limit usage.
 
@@ -12104,6 +12735,28 @@ The cumulative number of input tokens which were used.
 output\_tokens: Integer
 
 The cumulative number of output tokens which were used.
+
+output\_tokens\_details: OutputTokensDetails{ thinking\_tokens}
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: Integer
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
@@ -12458,6 +13111,8 @@ One of the following:
 :url\_too\_long
 
 :url\_not\_allowed
+
+:url\_not\_in\_prior\_context
 
 :url\_not\_accessible
 
@@ -16707,7 +17362,7 @@ type: :url
 
 url: String
 
-class Usage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+class Usage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 cache\_creation: [CacheCreation](api/messages.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -16740,6 +17395,28 @@ The number of input tokens which were used.
 output\_tokens: Integer
 
 The number of output tokens which were used.
+
+output\_tokens\_details: OutputTokensDetails{ thinking\_tokens}
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: Integer
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
@@ -17371,6 +18048,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -17450,6 +18129,8 @@ One of the following:
 :url\_too\_long
 
 :url\_not\_allowed
+
+:url\_not\_in\_prior\_context
 
 :url\_not\_accessible
 
@@ -17799,6 +18480,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -17823,6 +18506,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -17835,7 +18520,7 @@ One of the following:
 
 type: :web\_fetch\_tool\_result\_error
 
-WebFetchToolResultErrorCode = :invalid\_tool\_input | :url\_too\_long | :url\_not\_allowed | 5 more
+WebFetchToolResultErrorCode = :invalid\_tool\_input | :url\_too\_long | :url\_not\_allowed | 6 more
 
 One of the following:
 
@@ -17844,6 +18529,8 @@ One of the following:
 :url\_too\_long
 
 :url\_not\_allowed
+
+:url\_not\_in\_prior\_context
 
 :url\_not\_accessible
 
@@ -18955,6 +19642,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -19249,13 +19938,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 :"claude-opus-4-7"
 
@@ -19398,7 +20091,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -19441,6 +20134,28 @@ The number of input tokens which were used.
 output\_tokens: Integer
 
 The number of output tokens which were used.
+
+output\_tokens\_details: OutputTokensDetails{ thinking\_tokens}
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: Integer
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
@@ -19965,6 +20680,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -20259,13 +20976,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 :"claude-opus-4-7"
 
@@ -20408,7 +21129,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -20451,6 +21172,28 @@ The number of input tokens which were used.
 output\_tokens: Integer
 
 The number of output tokens which were used.
+
+output\_tokens\_details: OutputTokensDetails{ thinking\_tokens}
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: Integer
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 
@@ -20937,6 +21680,8 @@ One of the following:
 
 :url\_not\_allowed
 
+:url\_not\_in\_prior\_context
+
 :url\_not\_accessible
 
 :unsupported\_content\_type
@@ -21231,13 +21976,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-7" | :"claude-mythos-preview" | :"claude-opus-4-6" | 14 more
+Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 :"claude-opus-4-7"
 
@@ -21380,7 +22129,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 5 more }
+usage: [Usage](api/messages.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 6 more }
 
 Billing and rate-limit usage.
 
@@ -21423,6 +22172,28 @@ The number of input tokens which were used.
 output\_tokens: Integer
 
 The number of output tokens which were used.
+
+output\_tokens\_details: OutputTokensDetails{ thinking\_tokens}
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: Integer
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: [ServerToolUsage](api/messages.md) { web\_fetch\_requests, web\_search\_requests }
 

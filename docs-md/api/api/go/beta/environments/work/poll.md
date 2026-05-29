@@ -88,6 +88,10 @@ const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-202
 
 const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
 
+const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+
+const AnthropicBetaMidConversationSystem2026\_04\_07 AnthropicBeta = "mid-conversation-system-2026-04-07"
+
 AnthropicWorkerID param.Field[string]Optional
 
 Header param: Unique identifier for the specific worker polling, used to track aggregated environment-level work metrics in Console

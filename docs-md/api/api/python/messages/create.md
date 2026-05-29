@@ -81,13 +81,13 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
-content: Union[str, List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 14 more]]]
+content: Union[str, List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 15 more]]]
 
 One of the following:
 
 str
 
-List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 14 more]]
+List[Union[[TextBlockParam](api/messages.md), [ImageBlockParam](api/messages.md), [DocumentBlockParam](api/messages.md), 15 more]]
 
 One of the following:
 
@@ -1634,6 +1634,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -2331,13 +2333,178 @@ One of the following:
 
 "1h"
 
-role: Literal["user", "assistant"]
+class MidConversationSystemBlockParam: …
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+content: List[[TextBlockParam](api/messages.md)]
+
+System instruction text blocks.
+
+text: str
+
+type: Literal["text"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[List[[TextCitationParam](api/messages.md)]]
+
+One of the following:
+
+class CitationCharLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_char\_index: int
+
+start\_char\_index: int
+
+type: Literal["char\_location"]
+
+class CitationPageLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_page\_number: int
+
+start\_page\_number: int
+
+type: Literal["page\_location"]
+
+class CitationContentBlockLocationParam: …
+
+cited\_text: str
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_block\_index: int
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+start\_block\_index: int
+
+0-based index of the first cited block in the source's `content` array.
+
+type: Literal["content\_block\_location"]
+
+class CitationWebSearchResultLocationParam: …
+
+cited\_text: str
+
+encrypted\_index: str
+
+title: Optional[str]
+
+type: Literal["web\_search\_result\_location"]
+
+url: str
+
+class CitationSearchResultLocationParam: …
+
+cited\_text: str
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+end\_block\_index: int
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+search\_result\_index: int
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+source: str
+
+start\_block\_index: int
+
+0-based index of the first cited block in the source's `content` array.
+
+title: Optional[str]
+
+type: Literal["search\_result\_location"]
+
+type: Literal["mid\_conv\_system"]
+
+cache\_control: Optional[CacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+role: Literal["user", "assistant", "system"]
 
 One of the following:
 
 "user"
 
 "assistant"
+
+"system"
 
 model: [ModelParam](api/messages.md)
 
@@ -2347,12 +2514,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -2372,6 +2540,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -4286,6 +4458,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -4580,12 +4754,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -4605,6 +4780,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -4790,6 +4969,28 @@ The number of input tokens which were used.
 output\_tokens: int
 
 The number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[ServerToolUsage]
 
@@ -5202,6 +5403,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -5496,12 +5699,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -5521,6 +5725,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -5707,6 +5915,28 @@ output\_tokens: int
 
 The number of output tokens which were used.
 
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
+
 server\_tool\_use: Optional[ServerToolUsage]
 
 The number of server tool requests.
@@ -5820,6 +6050,28 @@ The cumulative number of input tokens which were used.
 output\_tokens: int
 
 The cumulative number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[ServerToolUsage]
 
@@ -6174,6 +6426,8 @@ One of the following:
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -6683,6 +6937,9 @@ Response 200
     "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0
@@ -6740,6 +6997,9 @@ Response 200
     "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0

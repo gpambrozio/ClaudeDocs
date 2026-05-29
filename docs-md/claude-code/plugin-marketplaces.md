@@ -217,6 +217,7 @@ Each plugin entry in the `plugins` array describes a plugin and where to find it
 | `category` | string | Plugin category for organization |
 | `tags` | array | Tags for searchability |
 | `strict` | boolean | Controls whether `plugin.json` is the authority for component definitions (default: true). See [Strict mode](#strict-mode) below. |
+| `defaultEnabled` | boolean | Whether the plugin is enabled after install (default: true). Set to `false` to install the plugin disabled until the user opts in. Takes precedence over the same field in the plugin’s `plugin.json`. See [Default enablement](plugins-reference.md). Requires Claude Code v2.1.154 or later. |
 
 **Component configuration fields:**
 
@@ -882,19 +883,27 @@ claude plugin marketplace list [options]
 | --- | --- |
 | `--json` | Output as JSON |
 
+With `--json`, each entry includes `name`, `source`, and source-specific fields: `repo` for GitHub sources, `url` for git and URL sources, and `path` for local sources. GitHub and git sources also include a `ref` field when the marketplace was added with a pinned branch or tag.
+
 ### [​](#plugin-marketplace-remove) Plugin marketplace remove
 
 Remove a configured marketplace. The alias `rm` is also accepted.
 
 ```shiki
-claude plugin marketplace remove <name>
+claude plugin marketplace remove <name> [options]
 ```
 
 **Arguments:**
 
 - `<name>`: marketplace name to remove, as shown by `claude plugin marketplace list`. This is the `name` from `marketplace.json`, not the source you passed to `add`
 
-Removing a marketplace also uninstalls any plugins you installed from it. To refresh a marketplace without losing installed plugins, use `claude plugin marketplace update` instead.
+**Options:**
+
+| Option | Description | Default |
+| --- | --- | --- |
+| `--scope <scope>` | Restrict removal to a single settings scope: `user`, `project`, or `local`. See [Plugin installation scopes](plugins-reference.md). When omitted, the declaration is removed from every editable scope. When given, only that scope’s declaration is removed; the shared state, cache, and installed plugin data are preserved when the marketplace is still declared in another scope | (all scopes) |
+
+Removing a marketplace from its last remaining scope also uninstalls any plugins you installed from it. To refresh a marketplace without losing installed plugins, use `claude plugin marketplace update` instead.
 
 ### [​](#plugin-marketplace-update) Plugin marketplace update
 

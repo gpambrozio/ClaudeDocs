@@ -1620,6 +1620,8 @@ const WebFetchToolResultErrorCodeURLTooLong [WebFetchToolResultErrorCode](api/me
 
 const WebFetchToolResultErrorCodeURLNotAllowed [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_allowed"
 
+const WebFetchToolResultErrorCodeURLNotInPriorContext [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_in\_prior\_context"
+
 const WebFetchToolResultErrorCodeURLNotAccessible [WebFetchToolResultErrorCode](api/messages.md) = "url\_not\_accessible"
 
 const WebFetchToolResultErrorCodeUnsupportedContentType [WebFetchToolResultErrorCode](api/messages.md) = "unsupported\_content\_type"
@@ -2317,6 +2319,169 @@ const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
 
 const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
 
+type MidConversationSystemBlockParamResp struct{…}
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+Content [][TextBlockParamResp](api/messages.md)
+
+System instruction text blocks.
+
+Text string
+
+Type Text
+
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL CacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+
+const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+
+Citations [][TextCitationParamUnionResp](api/messages.md)Optional
+
+One of the following:
+
+type CitationCharLocationParamResp struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndCharIndex int64
+
+StartCharIndex int64
+
+Type CharLocation
+
+type CitationPageLocationParamResp struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndPageNumber int64
+
+StartPageNumber int64
+
+Type PageLocation
+
+type CitationContentBlockLocationParamResp struct{…}
+
+CitedText string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndBlockIndex int64
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+StartBlockIndex int64
+
+0-based index of the first cited block in the source's `content` array.
+
+Type ContentBlockLocation
+
+type CitationWebSearchResultLocationParamResp struct{…}
+
+CitedText string
+
+EncryptedIndex string
+
+Title string
+
+Type WebSearchResultLocation
+
+URL string
+
+type CitationSearchResultLocationParamResp struct{…}
+
+CitedText string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+EndBlockIndex int64
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+SearchResultIndex int64
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+Source string
+
+StartBlockIndex int64
+
+0-based index of the first cited block in the source's `content` array.
+
+Title string
+
+Type SearchResultLocation
+
+Type MidConvSystem
+
+CacheControl [CacheControlEphemeral](api/messages.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL CacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const CacheControlEphemeralTTLTTL5m CacheControlEphemeralTTL = "5m"
+
+const CacheControlEphemeralTTLTTL1h CacheControlEphemeralTTL = "1h"
+
 Role MessageParamRole
 
 One of the following:
@@ -2324,6 +2489,8 @@ One of the following:
 const MessageParamRoleUser MessageParamRole = "user"
 
 const MessageParamRoleAssistant MessageParamRole = "assistant"
+
+const MessageParamRoleSystem MessageParamRole = "system"
 
 Model param.Field[Model]
 

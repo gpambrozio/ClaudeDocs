@@ -621,6 +621,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -737,6 +739,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -746,6 +752,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -1248,6 +1258,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -1561,6 +1575,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -1642,6 +1660,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The number of output tokens which were used.
+
+OutputTokensDetails BetaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 
@@ -2174,6 +2214,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -2290,6 +2332,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -2299,6 +2345,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -2801,6 +2851,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -3114,6 +3168,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -3195,6 +3253,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The number of output tokens which were used.
+
+OutputTokensDetails BetaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 
@@ -3689,6 +3769,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -3805,6 +3887,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -3814,6 +3900,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -4316,6 +4406,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -4629,6 +4723,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -4710,6 +4808,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The number of output tokens which were used.
+
+OutputTokensDetails BetaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 

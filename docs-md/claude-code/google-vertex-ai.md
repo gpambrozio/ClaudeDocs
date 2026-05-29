@@ -135,10 +135,10 @@ Claude Code disables [MCP tool search](mcp.md) by default on Vertex AI, so MCP t
 Pin specific model versions when deploying to multiple users. Without pinning, model aliases such as `sonnet` and `opus` resolve to the latest version, which may not yet be enabled in your Vertex AI project when Anthropic releases an update. Claude Code [falls back](#startup-model-checks) to the previous version at startup when the latest is unavailable, but pinning lets you control when your users move to a new model.
 
 Set these environment variables to specific Vertex AI model IDs.
-Without `ANTHROPIC_DEFAULT_OPUS_MODEL`, the `opus` alias on Vertex resolves to Opus 4.6. Set it to the Opus 4.7 ID to use the latest model:
+Without `ANTHROPIC_DEFAULT_OPUS_MODEL`, the `opus` alias on Vertex resolves to Opus 4.6. Set it to the Opus 4.8 ID to use the latest model:
 
 ```shiki
-export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-7'
+export ANTHROPIC_DEFAULT_OPUS_MODEL='claude-opus-4-8'
 export ANTHROPIC_DEFAULT_SONNET_MODEL='claude-sonnet-4-6'
 export ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'
 ```
@@ -155,7 +155,7 @@ Background tasks such as session title generation use the small/fast model, norm
 To customize models further:
 
 ```shiki
-export ANTHROPIC_MODEL='claude-opus-4-7'
+export ANTHROPIC_MODEL='claude-opus-4-8'
 export ANTHROPIC_DEFAULT_HAIKU_MODEL='claude-haiku-4-5@20251001'
 ```
 
@@ -179,7 +179,7 @@ Create a dedicated GCP project for Claude Code to simplify cost tracking and acc
 
 ## [​](#1m-token-context-window) 1M token context window
 
-Claude Opus 4.7, Opus 4.6, and Sonnet 4.6 support the [1M token context window](build-with-claude/context-windows.md) on Vertex AI. Claude Code automatically enables the extended context window when you select a 1M model variant.
+Claude Opus 4.6 and later, and Sonnet 4.6, support the [1M token context window](build-with-claude/context-windows.md) on Vertex AI. Claude Code automatically enables the extended context window when you select a 1M model variant.
 The [setup wizard](#sign-in-with-vertex-ai) offers a 1M context option when it pins models. To enable it for a manually pinned model instead, append `[1m]` to the model ID. See [Pin models for third-party deployments](model-config.md) for details.
 
 ## [​](#troubleshooting) Troubleshooting

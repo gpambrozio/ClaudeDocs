@@ -135,6 +135,9 @@ These triggers can go quiet when the main session is idle, for example while a c
 - **Colors**: use [ANSI escape codes](https://en.wikipedia.org/wiki/ANSI_escape_code#Colors) like `\033[32m` for green (terminal must support them). See the [git status example](#git-status-with-colors).
 - **Links**: use [OSC 8 escape sequences](https://en.wikipedia.org/wiki/ANSI_escape_code#OSC) to make text clickable (Cmd+click on macOS, Ctrl+click on Windows/Linux). Requires a terminal that supports hyperlinks like iTerm2, Kitty, or WezTerm. See the [clickable links example](#clickable-links).
 
+**Sizing output to the terminal**
+Claude Code captures your script’s output instead of connecting it directly to the terminal, so `tput cols` and language-level width detection cannot read the terminal size from inside the script. Read the `COLUMNS` and `LINES` environment variables instead. Claude Code sets these to the current terminal dimensions before running your script. Requires Claude Code v2.1.153 or later.
+
 The status line runs locally and does not consume API tokens. It temporarily hides during certain UI interactions, including autocomplete suggestions, the help menu, and permission prompts.
 
 ## [​](#available-data) Available data
@@ -159,7 +162,7 @@ Claude Code sends the following JSON fields to your script via stdin:
 | `context_window.remaining_percentage` | Pre-calculated percentage of context window remaining |
 | `context_window.current_usage` | Token counts from the last API call, described in [context window fields](#context-window-fields) |
 | `exceeds_200k_tokens` | Whether the total token count (input, cache, and output tokens combined) from the most recent API response exceeds 200k. This is a fixed threshold regardless of actual context window size. |
-| `effort.level` | Current reasoning effort (`low`, `medium`, `high`, `xhigh`, or `max`). Reflects the live session value, including mid-session `/effort` changes. Absent when the current model does not support the effort parameter |
+| `effort.level` | Current reasoning effort (`low`, `medium`, `high`, `xhigh`, `max`, or `ultra`). The `ultra` value corresponds to ultracode in `/effort`; the field reports the stored value, not the display label. Reflects the live session value, including mid-session `/effort` changes. Absent when the current model does not support the effort parameter |
 | `thinking.enabled` | Whether extended thinking is enabled for the session |
 | `rate_limits.five_hour.used_percentage`, `rate_limits.seven_day.used_percentage` | Percentage of the 5-hour or 7-day rate limit consumed, from 0 to 100 |
 | `rate_limits.five_hour.resets_at`, `rate_limits.seven_day.resets_at` | Unix epoch seconds when the 5-hour or 7-day rate limit window resets |
@@ -189,7 +192,7 @@ Your status line command receives this JSON structure via stdin:
   "session_name": "my-session",
   "transcript_path": "/path/to/transcript.jsonl",
   "model": {
-    "id": "claude-opus-4-7",
+    "id": "claude-opus-4-8",
     "display_name": "Opus"
   },
   "workspace": {

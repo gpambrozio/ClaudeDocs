@@ -34,7 +34,7 @@ import anthropic
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[{"type": "bash_20250124", "name": "bash"}],
     messages=[

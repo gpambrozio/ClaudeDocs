@@ -42,6 +42,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding

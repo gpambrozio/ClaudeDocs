@@ -69,7 +69,7 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
---model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+--model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 

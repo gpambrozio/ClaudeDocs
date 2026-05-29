@@ -937,6 +937,18 @@ string fileID
 
 Create a cache control breakpoint at this content block.
 
+[MidConversationSystemBlockParam](api/messages.md)
+
+list<[TextBlockParam](api/messages.md)> content
+
+System instruction text blocks.
+
+"mid\_conv\_system" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
 [ContentBlockSource](api/messages.md)
 
 Content content
@@ -1707,6 +1719,15 @@ int outputTokens
 
 The cumulative number of output tokens which were used.
 
+?OutputTokensDetails outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
 ?[ServerToolUsage](api/messages.md) serverToolUse
 
 The number of server tool requests.
@@ -1731,9 +1752,25 @@ An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
+[MidConversationSystemBlockParam](api/messages.md)
+
+list<[TextBlockParam](api/messages.md)> content
+
+System instruction text blocks.
+
+"mid\_conv\_system" type
+
+?[CacheControlEphemeral](api/messages.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
 Model
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -3467,6 +3504,15 @@ int outputTokens
 
 The number of output tokens which were used.
 
+?OutputTokensDetails outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
 ?[ServerToolUsage](api/messages.md) serverToolUse
 
 The number of server tool requests.
@@ -3708,6 +3754,8 @@ One of the following:
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 

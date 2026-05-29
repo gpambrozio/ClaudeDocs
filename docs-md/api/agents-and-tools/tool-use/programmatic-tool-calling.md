@@ -18,11 +18,12 @@ Programmatic tool calling requires `code_execution_20260120`, which is supported
 
 | Model |
 | --- |
-| Claude Opus 4.7 (`claude-opus-4-7`) |
-| Claude Opus 4.6 (`claude-opus-4-6`) |
-| Claude Sonnet 4.6 (`claude-sonnet-4-6`) |
-| Claude Opus 4.5 (`claude-opus-4-5-20251101`) |
-| Claude Sonnet 4.5 (`claude-sonnet-4-5-20250929`) |
+| Claude Opus 4.8 (claude-opus-4-8) |
+| Claude Opus 4.7 (claude-opus-4-7) |
+| Claude Opus 4.6 (claude-opus-4-6) |
+| Claude Sonnet 4.6 (claude-sonnet-4-6) |
+| Claude Opus 4.5 (claude-opus-4-5-20251101) |
+| Claude Sonnet 4.5 (claude-sonnet-4-5-20250929) |
 
 For the full code execution tool version matrix, see the [code execution tool model compatibility table](agents-and-tools/tool-use/code-execution-tool.md). Programmatic tool calling is available on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). It is not currently available on Amazon Bedrock or Vertex AI.
 
@@ -36,7 +37,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=[
         {
@@ -214,7 +215,7 @@ CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     container="container_xyz789",  # Reuse the container
     messages=[

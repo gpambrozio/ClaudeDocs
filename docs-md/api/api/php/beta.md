@@ -62,6 +62,10 @@ One of the following:
 
 "cache-diagnosis-2026-04-07"
 
+"thinking-token-count-2026-05-13"
+
+"mid-conversation-system-2026-04-07"
+
 [BetaAPIError](api/beta.md)
 
 string message
@@ -392,6 +396,10 @@ string encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
+?string stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
 "advisor\_redacted\_result" type
 
 [BetaAdvisorRedactedResultBlockParam](api/beta.md)
@@ -402,7 +410,13 @@ Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 "advisor\_redacted\_result" type
 
+?string stopReason
+
 [BetaAdvisorResultBlock](api/beta.md)
+
+?string stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 string text
 
@@ -413,6 +427,8 @@ string text
 string text
 
 "advisor\_result" type
+
+?string stopReason
 
 [BetaAdvisorTool20260301](api/beta.md)
 
@@ -1159,15 +1175,15 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 [BetaCompactionBlockParam](api/beta.md)
 
-?string content
-
-Summary of previously compacted content, or null if compaction failed
-
 "compaction" type
 
 ?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
+
+?string content
+
+Summary of previously compacted content, or null if compaction failed
 
 ?string encryptedContent
 
@@ -1677,19 +1693,31 @@ Create a cache control breakpoint at this content block.
 
 [BetaCompactionBlockParam](api/beta.md)
 
-?string content
-
-Summary of previously compacted content, or null if compaction failed
-
 "compaction" type
 
 ?[BetaCacheControlEphemeral](api/beta.md) cacheControl
 
 Create a cache control breakpoint at this content block.
 
+?string content
+
+Summary of previously compacted content, or null if compaction failed
+
 ?string encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
+
+[BetaMidConversationSystemBlockParam](api/beta.md)
+
+list<[BetaTextBlockParam](api/beta.md)> content
+
+System instruction text blocks.
+
+"mid\_conv\_system" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
 
 [BetaContentBlockSource](api/beta.md)
 
@@ -2348,6 +2376,15 @@ int outputTokens
 
 The cumulative number of output tokens which were used.
 
+?OutputTokensDetails outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
 ?[BetaServerToolUsage](api/beta.md) serverToolUse
 
 The number of server tool requests.
@@ -2402,6 +2439,18 @@ An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
+[BetaMidConversationSystemBlockParam](api/beta.md)
+
+list<[BetaTextBlockParam](api/beta.md)> content
+
+System instruction text blocks.
+
+"mid\_conv\_system" type
+
+?[BetaCacheControlEphemeral](api/beta.md) cacheControl
+
+Create a cache control breakpoint at this content block.
+
 [BetaOutputConfig](api/beta.md)
 
 ?Effort effort
@@ -2447,6 +2496,10 @@ Citation citation
 "citations\_delta" type
 
 [BetaThinkingDelta](api/beta.md)
+
+?int estimatedTokens
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 string thinking
 
@@ -3197,6 +3250,10 @@ Controls how thinking content appears in the response. When set to `summarized`,
 Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
 
 [BetaThinkingDelta](api/beta.md)
+
+?int estimatedTokens
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 string thinking
 
@@ -4582,6 +4639,15 @@ int outputTokens
 
 The number of output tokens which were used.
 
+?OutputTokensDetails outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
 ?[BetaServerToolUsage](api/beta.md) serverToolUse
 
 The number of server tool requests.
@@ -4827,6 +4893,8 @@ One of the following:
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 

@@ -31,13 +31,13 @@ dream = client.beta.dreams.create(
         {"type": "memory_store", "memory_store_id": store_id},
         {"type": "sessions", "session_ids": [session_a, session_b]},
     ],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     instructions="Focus on coding-style preferences; ignore one-off debugging notes.",
 )
 print(dream.id)  # drm_01...
 ```
 
-Dreaming inputs include the pre-existing memory store and an array of sessions. The model selected will run the dreaming pipeline; during the research preview `claude-opus-4-7` and `claude-sonnet-4-6` are supported. You can also provide additional guidance on dreaming run execution in `instructions`.
+Dreaming inputs include the pre-existing memory store and an array of sessions. The model selected will run the dreaming pipeline; during the research preview `claude-opus-4-8`, `claude-opus-4-7`, and `claude-sonnet-4-6` are supported. You can also provide additional guidance on dreaming run execution in `instructions`.
 
 The response is the full `dream` resource with `status: "pending"`:
 
@@ -51,7 +51,7 @@ The response is the full `dream` resource with `status: "pending"`:
     { "type": "sessions", "session_ids": ["sesn_01...", "sesn_02..."] }
   ],
   "outputs": [],
-  "model": { "id": "claude-opus-4-7" },
+  "model": { "id": "claude-opus-4-8" },
   "instructions": "Focus on coding-style preferences; ignore one-off debugging notes.",
   "session_id": null,
   "created_at": "2026-04-29T17:04:10Z",
@@ -180,7 +180,7 @@ Dreams are billed at standard API token rates for the model you select; `usage` 
 | --- | --- |
 | Sessions per dream | 100 |
 | `instructions` length | 4,096 characters |
-| Supported models | `claude-opus-4-7`, `claude-sonnet-4-6` |
+| Supported models | `claude-opus-4-8`, `claude-opus-4-7`, `claude-sonnet-4-6` |
 
 Default rate limits apply to dream creation while this feature is in beta. [Contact support](https://support.claude.com) if you need higher limits.
 

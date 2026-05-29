@@ -55,7 +55,7 @@ try:
     with client.messages.stream(
         max_tokens=1024,
         messages=messages + [{"role": "user", "content": "Hello"}],
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
     ) as stream:
         for event in stream:
             # Check for refusal in message delta

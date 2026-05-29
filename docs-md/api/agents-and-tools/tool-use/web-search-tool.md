@@ -4,7 +4,7 @@ Copy page
 
 The web search tool gives Claude direct access to real-time web content, allowing it to answer questions with up-to-date information beyond its knowledge cutoff. The response includes citations for sources drawn from search results.
 
-The latest web search tool version (`web_search_20260209`) supports **dynamic filtering** with [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. The previous tool version (`web_search_20250305`) remains available without dynamic filtering.
+The latest web search tool version (`web_search_20260209`) supports **dynamic filtering** with Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. Claude can write and execute code to filter search results before they reach the context window, keeping only relevant information and discarding the rest. This leads to more accurate responses while reducing token consumption. The previous tool version (`web_search_20250305`) remains available without dynamic filtering.
 
 For [Claude Mythos Preview](https://anthropic.com/glasswing), web search is supported on the Claude API, Microsoft Foundry, and Vertex AI. Web search is not available for Mythos Preview on Amazon Bedrock or [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
 
@@ -43,7 +43,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=[
         {
@@ -68,7 +68,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "What's the weather in NYC?"}],
     tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
@@ -283,6 +283,8 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "web
 ## Batch requests
 
 You can include the web search tool in the [Messages Batches API](build-with-claude/batch-processing.md). Web search tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
+
+To protect shared capacity, the Batches API throttles web search requests per organization, so large batches with many searches might take longer to complete. You can see your organization's web search rate limit on the [Limits](/settings/limits) page in the Claude Console; contact sales from that page to request a higher limit. Typical batch web-search workloads include enriching records with current web data, researching a large list of entities, and grounding or checking a corpus of content against live sources.
 
 ## Usage and pricing
 

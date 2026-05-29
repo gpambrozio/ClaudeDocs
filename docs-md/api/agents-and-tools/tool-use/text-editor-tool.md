@@ -31,7 +31,7 @@ cURLCLIPythonTypeScriptJava
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[
         {
@@ -158,7 +158,7 @@ cURLCLIPythonTypeScriptJava
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
@@ -179,7 +179,7 @@ Output
 ```shiki
 {
   "id": "msg_01XAbCDeFgHiJkLmNoPQrStU",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -206,7 +206,7 @@ cURLCLIPythonTypeScriptJava
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
@@ -256,7 +256,7 @@ Output
 ```shiki
 {
   "id": "msg_01VwXyZAbCdEfGhIjKlMnO",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "stop_reason": "tool_use",
   "role": "assistant",
   "content": [
@@ -285,7 +285,7 @@ CLIPythonTypeScriptJava
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[{"type": "text_editor_20250728", "name": "str_replace_based_edit_tool"}],
     messages=[
@@ -333,7 +333,7 @@ Output
 ```shiki
 {
   "id": "msg_01IjKlMnOpQrStUvWxYzAb",
-  "model": "claude-opus-4-7",
+  "model": "claude-opus-4-8",
   "stop_reason": "end_turn",
   "role": "assistant",
   "content": [

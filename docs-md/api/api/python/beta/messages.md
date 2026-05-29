@@ -56,12 +56,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -81,6 +82,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -166,6 +171,10 @@ encrypted\_content: str
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
 type: Literal["advisor\_redacted\_result"]
 
 class BetaAdvisorRedactedResultBlockParam: …
@@ -176,7 +185,13 @@ Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: Literal["advisor\_redacted\_result"]
 
+stop\_reason: Optional[str]
+
 class BetaAdvisorResultBlock: …
+
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: str
 
@@ -188,6 +203,8 @@ text: str
 
 type: Literal["advisor\_result"]
 
+stop\_reason: Optional[str]
+
 class BetaAdvisorTool20260301: …
 
 model: [Model](api/messages.md)
@@ -198,12 +215,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -223,6 +241,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -398,6 +420,10 @@ type: Literal["advisor\_tool\_result\_error"]
 
 class BetaAdvisorResultBlock: …
 
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 text: str
 
 type: Literal["advisor\_result"]
@@ -407,6 +433,10 @@ class BetaAdvisorRedactedResultBlock: …
 encrypted\_content: str
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: Literal["advisor\_redacted\_result"]
 
@@ -446,6 +476,8 @@ text: str
 
 type: Literal["advisor\_result"]
 
+stop\_reason: Optional[str]
+
 class BetaAdvisorRedactedResultBlockParam: …
 
 encrypted\_content: str
@@ -453,6 +485,8 @@ encrypted\_content: str
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: Literal["advisor\_redacted\_result"]
+
+stop\_reason: Optional[str]
 
 tool\_use\_id: str
 
@@ -1783,10 +1817,6 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-content: Optional[str]
-
-Summary of previously compacted content, or null if compaction failed
-
 type: Literal["compaction"]
 
 cache\_control: Optional[BetaCacheControlEphemeral]
@@ -1811,6 +1841,10 @@ One of the following:
 "5m"
 
 "1h"
+
+content: Optional[str]
+
+Summary of previously compacted content, or null if compaction failed
 
 encrypted\_content: Optional[str]
 
@@ -2278,6 +2312,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -2394,6 +2430,10 @@ type: Literal["advisor\_tool\_result\_error"]
 
 class BetaAdvisorResultBlock: …
 
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 text: str
 
 type: Literal["advisor\_result"]
@@ -2403,6 +2443,10 @@ class BetaAdvisorRedactedResultBlock: …
 encrypted\_content: str
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: Literal["advisor\_redacted\_result"]
 
@@ -4385,6 +4429,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -4765,6 +4811,8 @@ text: str
 
 type: Literal["advisor\_result"]
 
+stop\_reason: Optional[str]
+
 class BetaAdvisorRedactedResultBlockParam: …
 
 encrypted\_content: str
@@ -4772,6 +4820,8 @@ encrypted\_content: str
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: Literal["advisor\_redacted\_result"]
+
+stop\_reason: Optional[str]
 
 tool\_use\_id: str
 
@@ -5374,10 +5424,6 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-content: Optional[str]
-
-Summary of previously compacted content, or null if compaction failed
-
 type: Literal["compaction"]
 
 cache\_control: Optional[BetaCacheControlEphemeral]
@@ -5403,9 +5449,176 @@ One of the following:
 
 "1h"
 
+content: Optional[str]
+
+Summary of previously compacted content, or null if compaction failed
+
 encrypted\_content: Optional[str]
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
+
+class BetaMidConversationSystemBlockParam: …
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+content: List[[BetaTextBlockParam](api/beta.md)]
+
+System instruction text blocks.
+
+text: str
+
+type: Literal["text"]
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+
+One of the following:
+
+class BetaCitationCharLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_char\_index: int
+
+start\_char\_index: int
+
+type: Literal["char\_location"]
+
+class BetaCitationPageLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_page\_number: int
+
+start\_page\_number: int
+
+type: Literal["page\_location"]
+
+class BetaCitationContentBlockLocationParam: …
+
+cited\_text: str
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_block\_index: int
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+start\_block\_index: int
+
+0-based index of the first cited block in the source's `content` array.
+
+type: Literal["content\_block\_location"]
+
+class BetaCitationWebSearchResultLocationParam: …
+
+cited\_text: str
+
+encrypted\_index: str
+
+title: Optional[str]
+
+type: Literal["web\_search\_result\_location"]
+
+url: str
+
+class BetaCitationSearchResultLocationParam: …
+
+cited\_text: str
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+end\_block\_index: int
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+search\_result\_index: int
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+source: str
+
+start\_block\_index: int
+
+0-based index of the first cited block in the source's `content` array.
+
+title: Optional[str]
+
+type: Literal["search\_result\_location"]
+
+type: Literal["mid\_conv\_system"]
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"
+
+"1h"
 
 class BetaContentBlockSource: …
 
@@ -6298,12 +6511,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -6323,6 +6537,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -7273,6 +7491,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -7389,6 +7609,10 @@ type: Literal["advisor\_tool\_result\_error"]
 
 class BetaAdvisorResultBlock: …
 
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 text: str
 
 type: Literal["advisor\_result"]
@@ -7398,6 +7622,10 @@ class BetaAdvisorRedactedResultBlock: …
 encrypted\_content: str
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: Literal["advisor\_redacted\_result"]
 
@@ -7892,12 +8120,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -7917,6 +8146,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -8223,12 +8456,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -8248,6 +8482,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -8330,6 +8568,28 @@ Usage for an advisor sub-inference iteration
 output\_tokens: int
 
 The number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -8499,12 +8759,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -8524,6 +8785,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -8606,6 +8871,28 @@ Usage for an advisor sub-inference iteration
 output\_tokens: int
 
 The cumulative number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -10248,6 +10535,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -10628,6 +10917,8 @@ text: str
 
 type: Literal["advisor\_result"]
 
+stop\_reason: Optional[str]
+
 class BetaAdvisorRedactedResultBlockParam: …
 
 encrypted\_content: str
@@ -10635,6 +10926,8 @@ encrypted\_content: str
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: Literal["advisor\_redacted\_result"]
+
+stop\_reason: Optional[str]
 
 tool\_use\_id: str
 
@@ -11237,10 +11530,6 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-content: Optional[str]
-
-Summary of previously compacted content, or null if compaction failed
-
 type: Literal["compaction"]
 
 cache\_control: Optional[BetaCacheControlEphemeral]
@@ -11266,17 +11555,186 @@ One of the following:
 
 "1h"
 
+content: Optional[str]
+
+Summary of previously compacted content, or null if compaction failed
+
 encrypted\_content: Optional[str]
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-role: Literal["user", "assistant"]
+class BetaMidConversationSystemBlockParam: …
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+content: List[[BetaTextBlockParam](api/beta.md)]
+
+System instruction text blocks.
+
+text: str
+
+type: Literal["text"]
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+
+One of the following:
+
+class BetaCitationCharLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_char\_index: int
+
+start\_char\_index: int
+
+type: Literal["char\_location"]
+
+class BetaCitationPageLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_page\_number: int
+
+start\_page\_number: int
+
+type: Literal["page\_location"]
+
+class BetaCitationContentBlockLocationParam: …
+
+cited\_text: str
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_block\_index: int
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+start\_block\_index: int
+
+0-based index of the first cited block in the source's `content` array.
+
+type: Literal["content\_block\_location"]
+
+class BetaCitationWebSearchResultLocationParam: …
+
+cited\_text: str
+
+encrypted\_index: str
+
+title: Optional[str]
+
+type: Literal["web\_search\_result\_location"]
+
+url: str
+
+class BetaCitationSearchResultLocationParam: …
+
+cited\_text: str
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+end\_block\_index: int
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+search\_result\_index: int
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+source: str
+
+start\_block\_index: int
+
+0-based index of the first cited block in the source's `content` array.
+
+title: Optional[str]
+
+type: Literal["search\_result\_location"]
+
+type: Literal["mid\_conv\_system"]
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+role: Literal["user", "assistant", "system"]
 
 One of the following:
 
 "user"
 
 "assistant"
+
+"system"
 
 class BetaMessageTokensCount: …
 
@@ -11301,6 +11759,169 @@ An external identifier for the user who is associated with the request.
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
 maxLength512
+
+class BetaMidConversationSystemBlockParam: …
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+content: List[[BetaTextBlockParam](api/beta.md)]
+
+System instruction text blocks.
+
+text: str
+
+type: Literal["text"]
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"
+
+"1h"
+
+citations: Optional[List[[BetaTextCitationParam](api/beta.md)]]
+
+One of the following:
+
+class BetaCitationCharLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_char\_index: int
+
+start\_char\_index: int
+
+type: Literal["char\_location"]
+
+class BetaCitationPageLocationParam: …
+
+cited\_text: str
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_page\_number: int
+
+start\_page\_number: int
+
+type: Literal["page\_location"]
+
+class BetaCitationContentBlockLocationParam: …
+
+cited\_text: str
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+document\_index: int
+
+document\_title: Optional[str]
+
+end\_block\_index: int
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+start\_block\_index: int
+
+0-based index of the first cited block in the source's `content` array.
+
+type: Literal["content\_block\_location"]
+
+class BetaCitationWebSearchResultLocationParam: …
+
+cited\_text: str
+
+encrypted\_index: str
+
+title: Optional[str]
+
+type: Literal["web\_search\_result\_location"]
+
+url: str
+
+class BetaCitationSearchResultLocationParam: …
+
+cited\_text: str
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+end\_block\_index: int
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+search\_result\_index: int
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+source: str
+
+start\_block\_index: int
+
+0-based index of the first cited block in the source's `content` array.
+
+title: Optional[str]
+
+type: Literal["search\_result\_location"]
+
+type: Literal["mid\_conv\_system"]
+
+cache\_control: Optional[BetaCacheControlEphemeral]
+
+Create a cache control breakpoint at this content block.
+
+type: Literal["ephemeral"]
+
+ttl: Optional[Literal["5m", "1h"]]
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"
+
+"1h"
 
 class BetaOutputConfig: …
 
@@ -11482,6 +12103,10 @@ type: Literal["citations\_delta"]
 
 class BetaThinkingDelta: …
 
+estimated\_tokens: Optional[int]
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
+
 thinking: str
 
 type: Literal["thinking\_delta"]
@@ -11631,6 +12256,10 @@ type: Literal["search\_result\_location"]
 type: Literal["citations\_delta"]
 
 class BetaThinkingDelta: …
+
+estimated\_tokens: Optional[int]
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 thinking: str
 
@@ -11970,6 +12599,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -12086,6 +12717,10 @@ type: Literal["advisor\_tool\_result\_error"]
 
 class BetaAdvisorResultBlock: …
 
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 text: str
 
 type: Literal["advisor\_result"]
@@ -12095,6 +12730,10 @@ class BetaAdvisorRedactedResultBlock: …
 encrypted\_content: str
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: Literal["advisor\_redacted\_result"]
 
@@ -12768,12 +13407,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -12793,6 +13433,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -12875,6 +13519,28 @@ Usage for an advisor sub-inference iteration
 output\_tokens: int
 
 The cumulative number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -13269,6 +13935,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -13385,6 +14053,10 @@ type: Literal["advisor\_tool\_result\_error"]
 
 class BetaAdvisorResultBlock: …
 
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 text: str
 
 type: Literal["advisor\_result"]
@@ -13394,6 +14066,10 @@ class BetaAdvisorRedactedResultBlock: …
 encrypted\_content: str
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: Literal["advisor\_redacted\_result"]
 
@@ -13888,12 +14564,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -13913,6 +14590,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -14219,12 +14900,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -14244,6 +14926,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -14326,6 +15012,28 @@ Usage for an advisor sub-inference iteration
 output\_tokens: int
 
 The number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -14752,6 +15460,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -14868,6 +15578,10 @@ type: Literal["advisor\_tool\_result\_error"]
 
 class BetaAdvisorResultBlock: …
 
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 text: str
 
 type: Literal["advisor\_result"]
@@ -14877,6 +15591,10 @@ class BetaAdvisorRedactedResultBlock: …
 encrypted\_content: str
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: Literal["advisor\_redacted\_result"]
 
@@ -15371,12 +16089,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -15396,6 +16115,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -15702,12 +16425,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -15727,6 +16451,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -15809,6 +16537,28 @@ Usage for an advisor sub-inference iteration
 output\_tokens: int
 
 The number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -16114,12 +16864,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -16139,6 +16890,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -16221,6 +16976,28 @@ Usage for an advisor sub-inference iteration
 output\_tokens: int
 
 The cumulative number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -16552,6 +17329,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -16668,6 +17447,10 @@ type: Literal["advisor\_tool\_result\_error"]
 
 class BetaAdvisorResultBlock: …
 
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 text: str
 
 type: Literal["advisor\_result"]
@@ -16677,6 +17460,10 @@ class BetaAdvisorRedactedResultBlock: …
 encrypted\_content: str
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: Literal["advisor\_redacted\_result"]
 
@@ -17205,6 +17992,10 @@ type: Literal["search\_result\_location"]
 type: Literal["citations\_delta"]
 
 class BetaThinkingDelta: …
+
+estimated\_tokens: Optional[int]
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 thinking: str
 
@@ -18979,6 +19770,10 @@ One of the following:
 "omitted"
 
 class BetaThinkingDelta: …
+
+estimated\_tokens: Optional[int]
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 thinking: str
 
@@ -21968,12 +22763,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -21993,6 +22789,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -22575,12 +23375,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -22600,6 +23401,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -22682,6 +23487,28 @@ Usage for an advisor sub-inference iteration
 output\_tokens: int
 
 The number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -23309,6 +24136,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -23414,6 +24243,8 @@ One of the following:
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -23775,6 +24606,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -23799,6 +24632,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -23811,7 +24646,7 @@ One of the following:
 
 type: Literal["web\_fetch\_tool\_result\_error"]
 
-Literal["invalid\_tool\_input", "url\_too\_long", "url\_not\_allowed", 5 more]
+Literal["invalid\_tool\_input", "url\_too\_long", "url\_not\_allowed", 6 more]
 
 One of the following:
 
@@ -23820,6 +24655,8 @@ One of the following:
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -24929,6 +25766,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -25045,6 +25884,10 @@ type: Literal["advisor\_tool\_result\_error"]
 
 class BetaAdvisorResultBlock: …
 
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 text: str
 
 type: Literal["advisor\_result"]
@@ -25054,6 +25897,10 @@ class BetaAdvisorRedactedResultBlock: …
 encrypted\_content: str
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: Literal["advisor\_redacted\_result"]
 
@@ -25548,12 +26395,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -25573,6 +26421,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -25879,12 +26731,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -25904,6 +26757,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -25986,6 +26843,28 @@ Usage for an advisor sub-inference iteration
 output\_tokens: int
 
 The number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -26518,6 +27397,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -26634,6 +27515,10 @@ type: Literal["advisor\_tool\_result\_error"]
 
 class BetaAdvisorResultBlock: …
 
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 text: str
 
 type: Literal["advisor\_result"]
@@ -26643,6 +27528,10 @@ class BetaAdvisorRedactedResultBlock: …
 encrypted\_content: str
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: Literal["advisor\_redacted\_result"]
 
@@ -27137,12 +28026,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -27162,6 +28052,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -27468,12 +28362,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -27493,6 +28388,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -27575,6 +28474,28 @@ Usage for an advisor sub-inference iteration
 output\_tokens: int
 
 The number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 
@@ -28069,6 +28990,8 @@ One of the following:
 
 "url\_not\_allowed"
 
+"url\_not\_in\_prior\_context"
+
 "url\_not\_accessible"
 
 "unsupported\_content\_type"
@@ -28185,6 +29108,10 @@ type: Literal["advisor\_tool\_result\_error"]
 
 class BetaAdvisorResultBlock: …
 
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 text: str
 
 type: Literal["advisor\_result"]
@@ -28194,6 +29121,10 @@ class BetaAdvisorRedactedResultBlock: …
 encrypted\_content: str
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: Optional[str]
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: Literal["advisor\_redacted\_result"]
 
@@ -28688,12 +29619,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -28713,6 +29645,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -29019,12 +29955,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-7", "claude-mythos-preview", "claude-opus-4-6", 14 more]
+Literal["claude-opus-4-8", "claude-opus-4-7", "claude-mythos-preview", 15 more]
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-mythos-preview` - New class of intelligence, strongest in coding and cybersecurity
 - `claude-opus-4-6` - Frontier intelligence for long-running agents and coding
@@ -29044,6 +29981,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-3-haiku-20240307` - Deprecated: Will reach end-of-life on April 20th, 2026. Please migrate to claude-haiku-4-5. Visit <https://docs.anthropic.com/en/docs/resources/model-deprecations> for more information.
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -29126,6 +30067,28 @@ Usage for an advisor sub-inference iteration
 output\_tokens: int
 
 The number of output tokens which were used.
+
+output\_tokens\_details: Optional[OutputTokensDetails]
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: int
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 server\_tool\_use: Optional[BetaServerToolUsage]
 

@@ -64,6 +64,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -148,6 +152,10 @@ EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
 Type AdvisorRedactedResult
 
 type BetaAdvisorRedactedResultBlockParamResp struct{…}
@@ -158,7 +166,13 @@ Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 Type AdvisorRedactedResult
 
+StopReason stringOptional
+
 type BetaAdvisorResultBlock struct{…}
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 Text string
 
@@ -169,6 +183,8 @@ type BetaAdvisorResultBlockParamResp struct{…}
 Text string
 
 Type AdvisorResult
+
+StopReason stringOptional
 
 type BetaAdvisorTool20260301 struct{…}
 
@@ -187,6 +203,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -362,6 +382,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -371,6 +395,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -410,6 +438,8 @@ Text string
 
 Type AdvisorResult
 
+StopReason stringOptional
+
 type BetaAdvisorRedactedResultBlockParamResp struct{…}
 
 EncryptedContent string
@@ -417,6 +447,8 @@ EncryptedContent string
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 Type AdvisorRedactedResult
+
+StopReason stringOptional
 
 ToolUseID string
 
@@ -1747,10 +1779,6 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-Content string
-
-Summary of previously compacted content, or null if compaction failed
-
 Type Compaction
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -1775,6 +1803,10 @@ One of the following:
 const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Content stringOptional
+
+Summary of previously compacted content, or null if compaction failed
 
 EncryptedContent stringOptional
 
@@ -2242,6 +2274,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -2358,6 +2392,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -2367,6 +2405,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -4347,6 +4389,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -4727,6 +4771,8 @@ Text string
 
 Type AdvisorResult
 
+StopReason stringOptional
+
 type BetaAdvisorRedactedResultBlockParamResp struct{…}
 
 EncryptedContent string
@@ -4734,6 +4780,8 @@ EncryptedContent string
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 Type AdvisorRedactedResult
+
+StopReason stringOptional
 
 ToolUseID string
 
@@ -5336,10 +5384,6 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-Content string
-
-Summary of previously compacted content, or null if compaction failed
-
 Type Compaction
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -5365,9 +5409,176 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+Content stringOptional
+
+Summary of previously compacted content, or null if compaction failed
+
 EncryptedContent stringOptional
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
+
+type BetaMidConversationSystemBlockParamResp struct{…}
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+Content [][BetaTextBlockParamResp](api/beta.md)
+
+System instruction text blocks.
+
+Text string
+
+Type Text
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+
+One of the following:
+
+type BetaCitationCharLocationParamResp struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndCharIndex int64
+
+StartCharIndex int64
+
+Type CharLocation
+
+type BetaCitationPageLocationParamResp struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndPageNumber int64
+
+StartPageNumber int64
+
+Type PageLocation
+
+type BetaCitationContentBlockLocationParamResp struct{…}
+
+CitedText string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndBlockIndex int64
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+StartBlockIndex int64
+
+0-based index of the first cited block in the source's `content` array.
+
+Type ContentBlockLocation
+
+type BetaCitationWebSearchResultLocationParamResp struct{…}
+
+CitedText string
+
+EncryptedIndex string
+
+Title string
+
+Type WebSearchResultLocation
+
+URL string
+
+type BetaCitationSearchResultLocationParamResp struct{…}
+
+CitedText string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+EndBlockIndex int64
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+SearchResultIndex int64
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+Source string
+
+StartBlockIndex int64
+
+0-based index of the first cited block in the source's `content` array.
+
+Title string
+
+Type SearchResultLocation
+
+Type MidConvSystem
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 type BetaContentBlockSource struct{…}
 
@@ -6267,6 +6478,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
@@ -7217,6 +7432,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -7333,6 +7550,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -7342,6 +7563,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -7844,6 +8069,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -8157,6 +8386,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -8238,6 +8471,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The number of output tokens which were used.
+
+OutputTokensDetails BetaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 
@@ -8415,6 +8670,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -8496,6 +8755,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The cumulative number of output tokens which were used.
+
+OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 
@@ -10134,6 +10415,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -10514,6 +10797,8 @@ Text string
 
 Type AdvisorResult
 
+StopReason stringOptional
+
 type BetaAdvisorRedactedResultBlockParamResp struct{…}
 
 EncryptedContent string
@@ -10521,6 +10806,8 @@ EncryptedContent string
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 Type AdvisorRedactedResult
+
+StopReason stringOptional
 
 ToolUseID string
 
@@ -11123,10 +11410,6 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-Content string
-
-Summary of previously compacted content, or null if compaction failed
-
 Type Compaction
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -11152,9 +11435,176 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+Content stringOptional
+
+Summary of previously compacted content, or null if compaction failed
+
 EncryptedContent stringOptional
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
+
+type BetaMidConversationSystemBlockParamResp struct{…}
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+Content [][BetaTextBlockParamResp](api/beta.md)
+
+System instruction text blocks.
+
+Text string
+
+Type Text
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+
+One of the following:
+
+type BetaCitationCharLocationParamResp struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndCharIndex int64
+
+StartCharIndex int64
+
+Type CharLocation
+
+type BetaCitationPageLocationParamResp struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndPageNumber int64
+
+StartPageNumber int64
+
+Type PageLocation
+
+type BetaCitationContentBlockLocationParamResp struct{…}
+
+CitedText string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndBlockIndex int64
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+StartBlockIndex int64
+
+0-based index of the first cited block in the source's `content` array.
+
+Type ContentBlockLocation
+
+type BetaCitationWebSearchResultLocationParamResp struct{…}
+
+CitedText string
+
+EncryptedIndex string
+
+Title string
+
+Type WebSearchResultLocation
+
+URL string
+
+type BetaCitationSearchResultLocationParamResp struct{…}
+
+CitedText string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+EndBlockIndex int64
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+SearchResultIndex int64
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+Source string
+
+StartBlockIndex int64
+
+0-based index of the first cited block in the source's `content` array.
+
+Title string
+
+Type SearchResultLocation
+
+Type MidConvSystem
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 Role BetaMessageParamRole
 
@@ -11163,6 +11613,8 @@ One of the following:
 const BetaMessageParamRoleUser BetaMessageParamRole = "user"
 
 const BetaMessageParamRoleAssistant BetaMessageParamRole = "assistant"
+
+const BetaMessageParamRoleSystem BetaMessageParamRole = "system"
 
 type BetaMessageTokensCount struct{…}
 
@@ -11187,6 +11639,169 @@ An external identifier for the user who is associated with the request.
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
 maxLength512
+
+type BetaMidConversationSystemBlockParamResp struct{…}
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+Content [][BetaTextBlockParamResp](api/beta.md)
+
+System instruction text blocks.
+
+Text string
+
+Type Text
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+
+One of the following:
+
+type BetaCitationCharLocationParamResp struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndCharIndex int64
+
+StartCharIndex int64
+
+Type CharLocation
+
+type BetaCitationPageLocationParamResp struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndPageNumber int64
+
+StartPageNumber int64
+
+Type PageLocation
+
+type BetaCitationContentBlockLocationParamResp struct{…}
+
+CitedText string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndBlockIndex int64
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+StartBlockIndex int64
+
+0-based index of the first cited block in the source's `content` array.
+
+Type ContentBlockLocation
+
+type BetaCitationWebSearchResultLocationParamResp struct{…}
+
+CitedText string
+
+EncryptedIndex string
+
+Title string
+
+Type WebSearchResultLocation
+
+URL string
+
+type BetaCitationSearchResultLocationParamResp struct{…}
+
+CitedText string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+EndBlockIndex int64
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+SearchResultIndex int64
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+Source string
+
+StartBlockIndex int64
+
+0-based index of the first cited block in the source's `content` array.
+
+Title string
+
+Type SearchResultLocation
+
+Type MidConvSystem
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 type BetaOutputConfig struct{…}
 
@@ -11368,6 +11983,10 @@ Type CitationsDelta
 
 type BetaThinkingDelta struct{…}
 
+EstimatedTokens int64
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
+
 Thinking string
 
 Type ThinkingDelta
@@ -11517,6 +12136,10 @@ Type SearchResultLocation
 Type CitationsDelta
 
 type BetaThinkingDelta struct{…}
+
+EstimatedTokens int64
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 Thinking string
 
@@ -11856,6 +12479,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -11972,6 +12597,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -11981,6 +12610,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -12662,6 +13295,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -12743,6 +13380,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The cumulative number of output tokens which were used.
+
+OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 
@@ -13137,6 +13796,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -13253,6 +13914,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -13262,6 +13927,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -13764,6 +14433,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -14077,6 +14750,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -14158,6 +14835,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The number of output tokens which were used.
+
+OutputTokensDetails BetaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 
@@ -14584,6 +15283,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -14700,6 +15401,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -14709,6 +15414,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -15211,6 +15920,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -15524,6 +16237,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -15605,6 +16322,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The number of output tokens which were used.
+
+OutputTokensDetails BetaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 
@@ -15918,6 +16657,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -15999,6 +16742,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The cumulative number of output tokens which were used.
+
+OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 
@@ -16330,6 +17095,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -16446,6 +17213,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -16455,6 +17226,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -16983,6 +17758,10 @@ Type SearchResultLocation
 Type CitationsDelta
 
 type BetaThinkingDelta struct{…}
+
+EstimatedTokens int64
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 Thinking string
 
@@ -18757,6 +19536,10 @@ const BetaThinkingConfigAdaptiveDisplaySummarized BetaThinkingConfigAdaptiveDisp
 const BetaThinkingConfigAdaptiveDisplayOmitted BetaThinkingConfigAdaptiveDisplay = "omitted"
 
 type BetaThinkingDelta struct{…}
+
+EstimatedTokens int64
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 Thinking string
 
@@ -21752,6 +22535,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -22341,6 +23128,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -22422,6 +23213,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The number of output tokens which were used.
+
+OutputTokensDetails BetaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 
@@ -23049,6 +23862,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -23154,6 +23969,8 @@ const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErr
 const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_too\_long"
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
+
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
 
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
@@ -23515,6 +24332,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -23539,6 +24358,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -23560,6 +24381,8 @@ const BetaWebFetchToolResultErrorCodeInvalidToolInput [BetaWebFetchToolResultErr
 const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_too\_long"
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
+
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
 
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
@@ -24669,6 +25492,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -24785,6 +25610,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -24794,6 +25623,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -25296,6 +26129,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -25609,6 +26446,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -25690,6 +26531,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The number of output tokens which were used.
+
+OutputTokensDetails BetaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 
@@ -26222,6 +27085,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -26338,6 +27203,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -26347,6 +27216,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -26849,6 +27722,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -27162,6 +28039,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -27243,6 +28124,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The number of output tokens which were used.
+
+OutputTokensDetails BetaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 
@@ -27737,6 +28640,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -27853,6 +28758,10 @@ Type AdvisorToolResultError
 
 type BetaAdvisorResultBlock struct{…}
 
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 Text string
 
 Type AdvisorResult
@@ -27862,6 +28771,10 @@ type BetaAdvisorRedactedResultBlock struct{…}
 EncryptedContent string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+StopReason string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 Type AdvisorRedactedResult
 
@@ -28364,6 +29277,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -28677,6 +29594,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -28758,6 +29679,28 @@ Usage for an advisor sub-inference iteration
 OutputTokens int64
 
 The number of output tokens which were used.
+
+OutputTokensDetails BetaUsageOutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 ServerToolUse [BetaServerToolUsage](api/beta.md)
 

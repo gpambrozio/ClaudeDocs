@@ -2,15 +2,15 @@
 
 Copy page
 
-By default, Managed Agents executes tools and code inside [Anthropic-managed cloud containers](managed-agents/cloud-containers.md). Self-hosted sandboxes keep the orchestration on Anthropic's side but move tool execution into infrastructure you control, so the agent's code, filesystem, and network egress never leave your environment.
+By default, Managed Agents executes tools and code inside [Anthropic-managed cloud sandboxes](managed-agents/cloud-sandboxes-reference.md). Self-hosted sandboxes keep the orchestration on Anthropic's side but move tool execution into infrastructure you control, so the agent's code, filesystem, and network egress never leave your environment.
 
-Self-hosted sandboxes are not yet available on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md).
+Self-hosted sandboxes support all Claude models available in Managed Agents, including Claude Opus 4.8. The model is configured on the [agent](managed-agents/agent-setup.md), not the environment.
 
 ## How it differs from cloud environments
 
 |  | Cloud environment | Self-hosted sandbox |
 | --- | --- | --- |
-| Where tools run | Anthropic-managed containers | Your infrastructure |
+| Where tools run | Anthropic-managed sandboxes | Your infrastructure |
 | Network reach | Anthropic's egress controls | Your network policy |
 | File and GitHub repo mounting | Managed by Anthropic | Managed by you |
 | Lifecycle | Managed by Anthropic | Managed by you |
@@ -21,7 +21,7 @@ For Zero Data Retention and HIPAA BAA eligibility, see [API and data retention](
 
 ## When to combine with MCP tunnels
 
-Self-hosting controls *where the agent's code executes*. [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) control *how Anthropic reaches MCP servers in your network*. They are independent: a session running in Anthropic's cloud containers can still reach private MCP servers through a tunnel, and a self-hosted session can use either tunneled or public MCP servers. Use both when you want execution and tool access to stay inside your boundary.
+Self-hosting controls *where the agent's code executes*. [MCP tunnels](agents-and-tools/mcp-tunnels/overview.md) control *how Anthropic reaches MCP servers in your network*. They are independent: a session running in Anthropic's cloud sandboxes can still reach private MCP servers through a tunnel, and a self-hosted session can use either tunneled or public MCP servers. Use both when you want execution and tool access to stay inside your boundary.
 
 ## Environment worker
 
@@ -33,14 +33,16 @@ Work is claimed by polling the environment's queue: either by an **always-on wor
 
 Both CLI and SDK include pre-built workers to orchestrate your sessions. The `ant` CLI supports the always-on pattern only; the SDK supports both always-on and webhook-triggered architectures.
 
-The CLI and SDK both are configurable (see [reference](#reference)), but if you require more control, you can leverage the [Environments Work endpoints](api/beta/environments/work.md) directly and implement your own worker.
+The CLI and SDK both are configurable (see [reference](#reference)), but if you require more control, you can leverage the [Environments Work endpoints](api/beta/environments/work.md) directly and implement your own worker. On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the `GET /v1/environments/{id}/work` list endpoint and its SDK equivalent are not currently available; the other work endpoints (poll, ack, heartbeat, stop, post results, per-item get, and stats) work normally.
 
 The SDK helpers require `/bin/bash` at that exact path. The TypeScript SDK additionally requires `unzip`, `tar`, and Node.js 22 or later. These dependencies are resolved at fixed paths and do not respect `PATH` overrides.
 
 ### Sandbox filesystem
 
 - **`/workspace`**: the default working directory for tool execution and skill download. Skills are downloaded to `/workspace/skills/<name>/`. If you change `--workdir` from the default, update your agent's system prompt so Claude knows where to find them.
-- **`/mnt/session/outputs`**: the agent writes final output files to this path. When running in a container, mount a host directory here to retrieve them.
+- **`/mnt/session/outputs`**: the agent writes final output files to this path. When running in a sandbox, mount a host directory here to retrieve them.
+
+On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the worker authenticates with AWS IAM (SigV4), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](api/claude-platform-on-aws-iam-actions.md) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
 
 Always-on (ant CLI)
 
@@ -89,7 +91,7 @@ Webhook-triggered (SDK)
    Run this on the machine where the worker will run.
 
    ```shiki
-   VERSION=1.9.1
+   VERSION=1.10.0
    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
    ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
    curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
@@ -112,13 +114,13 @@ Webhook-triggered (SDK)
 
    The worker exits cleanly on SIGTERM or SIGINT, draining in-flight tool calls before stopping.
 
-   **Container per session**
+   **Sandbox per session**
 
-   For stronger isolation: a fresh filesystem, resource limits, or network controls per session. Run each session in its own container. Start by building an image with `ant` installed and `ant beta:worker run` as the entrypoint. When a container starts, it reads session details from environment variables, handles that session, and exits:
+   For stronger isolation: a fresh filesystem, resource limits, or network controls per session. Run each session in its own sandbox. Start by building an image with `ant` installed and `ant beta:worker run` as the entrypoint. When a sandbox starts, it reads session details from environment variables, handles that session, and exits:
 
    ```inline-block
    FROM your-base-image
-   ARG ANT_VERSION=1.9.1
+   ARG ANT_VERSION=1.10.0
    ARG TARGETARCH
    RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
        curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \
@@ -128,7 +130,7 @@ Webhook-triggered (SDK)
    ENTRYPOINT ["ant", "beta:worker", "run"]
    ```
 
-   Then write a spawn script that forwards session details into a fresh container, and start the poller pointing at it:
+   Then write a spawn script that forwards session details into a fresh sandbox, and start the poller pointing at it:
 
    ```shiki
    #!/bin/bash
@@ -150,7 +152,7 @@ Webhook-triggered (SDK)
 
 Once your worker is running, create a session that targets the environment. Anthropic enqueues it and your worker claims and executes it.
 
-File and GitHub resource mounting are handled in your container image rather than by Anthropic. To load your sandbox with session-specific files, you can pass session metadata when creating the session. Your orchestration layer can read that metadata and mount the relevant files before the worker starts executing.
+File and GitHub resource mounting are handled in your sandbox image rather than by Anthropic. To load your sandbox with session-specific files, you can pass session metadata when creating the session. Your orchestration layer can read that metadata and mount the relevant files before the worker starts executing.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 

@@ -70,6 +70,10 @@ MANAGED\_AGENTS\_2026\_04\_01("managed-agents-2026-04-01")
 
 CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
+THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
+
+MID\_CONVERSATION\_SYSTEM\_2026\_04\_07("mid-conversation-system-2026-04-07")
+
 Model model
 
 Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control

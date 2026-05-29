@@ -16,7 +16,7 @@ client = anthropic.Anthropic()
 with client.messages.stream(
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello"}],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
 ) as stream:
     for text in stream.text_stream:
         print(text, end="", flush=True)
@@ -34,7 +34,7 @@ client = anthropic.Anthropic()
 with client.messages.stream(
     max_tokens=128000,
     messages=[{"role": "user", "content": "Write a detailed analysis..."}],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
 ) as stream:
     message = stream.get_final_message()
 
@@ -157,7 +157,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 with client.messages.stream(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     messages=[{"role": "user", "content": "Hello"}],
     max_tokens=256,
 ) as stream:
@@ -169,7 +169,7 @@ Response
 
 ```shiki
 event: message_start
-data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-7", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
+data: {"type": "message_start", "message": {"id": "msg_1nZdL29xx5MUA1yADyHTEsnR8uuvGzszyY", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-8", "stop_reason": null, "stop_sequence": null, "usage": {"input_tokens": 25, "output_tokens": 1}}}
 
 event: content_block_start
 data: {"type": "content_block_start", "index": 0, "content_block": {"type": "text", "text": ""}}
@@ -222,7 +222,7 @@ tools = [
 ]
 
 with client.messages.stream(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=tools,
     tool_choice={"type": "any"},
@@ -238,7 +238,7 @@ Response
 
 ```shiki
 event: message_start
-data: {"type":"message_start","message":{"id":"msg_014p7gG3wDgGV9EUtLvnow3U","type":"message","role":"assistant","model":"claude-opus-4-7","stop_sequence":null,"usage":{"input_tokens":472,"output_tokens":2},"content":[],"stop_reason":null}}
+data: {"type":"message_start","message":{"id":"msg_014p7gG3wDgGV9EUtLvnow3U","type":"message","role":"assistant","model":"claude-opus-4-8","stop_sequence":null,"usage":{"input_tokens":472,"output_tokens":2},"content":[],"stop_reason":null}}
 
 event: content_block_start
 data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}
@@ -329,7 +329,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 with client.messages.stream(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=20000,
     thinking={"type": "adaptive", "display": "summarized"},
     messages=[
@@ -351,7 +351,7 @@ Response
 
 ```shiki
 event: message_start
-data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-7", "stop_reason": null, "stop_sequence": null}}
+data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-opus-4-8", "stop_reason": null, "stop_sequence": null}}
 
 event: content_block_start
 data: {"type": "content_block_start", "index": 0, "content_block": {"type": "thinking", "thinking": "", "signature": ""}}
@@ -400,7 +400,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 with client.messages.stream(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[{"type": "web_search_20250305", "name": "web_search", "max_uses": 5}],
     messages=[
@@ -415,7 +415,7 @@ Response
 
 ```shiki
 event: message_start
-data: {"type":"message_start","message":{"id":"msg_01G...","type":"message","role":"assistant","model":"claude-opus-4-7","content":[],"stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":2679,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":3}}}
+data: {"type":"message_start","message":{"id":"msg_01G...","type":"message","role":"assistant","model":"claude-opus-4-8","content":[],"stop_reason":null,"stop_sequence":null,"usage":{"input_tokens":2679,"cache_creation_input_tokens":0,"cache_read_input_tokens":0,"output_tokens":3}}}
 
 event: content_block_start
 data: {"type":"content_block_start","index":0,"content_block":{"type":"text","text":""}}

@@ -1658,6 +1658,8 @@ const BetaWebFetchToolResultErrorCodeURLTooLong [BetaWebFetchToolResultErrorCode
 
 const BetaWebFetchToolResultErrorCodeURLNotAllowed [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_allowed"
 
+const BetaWebFetchToolResultErrorCodeURLNotInPriorContext [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_in\_prior\_context"
+
 const BetaWebFetchToolResultErrorCodeURLNotAccessible [BetaWebFetchToolResultErrorCode](api/beta.md) = "url\_not\_accessible"
 
 const BetaWebFetchToolResultErrorCodeUnsupportedContentType [BetaWebFetchToolResultErrorCode](api/beta.md) = "unsupported\_content\_type"
@@ -2038,6 +2040,8 @@ Text string
 
 Type AdvisorResult
 
+StopReason stringOptional
+
 type BetaAdvisorRedactedResultBlockParamResp struct{…}
 
 EncryptedContent string
@@ -2045,6 +2049,8 @@ EncryptedContent string
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 Type AdvisorRedactedResult
+
+StopReason stringOptional
 
 ToolUseID string
 
@@ -2647,10 +2653,6 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-Content string
-
-Summary of previously compacted content, or null if compaction failed
-
 Type Compaction
 
 CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
@@ -2676,9 +2678,176 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+Content stringOptional
+
+Summary of previously compacted content, or null if compaction failed
+
 EncryptedContent stringOptional
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
+
+type BetaMidConversationSystemBlockParamResp struct{…}
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+Content [][BetaTextBlockParamResp](api/beta.md)
+
+System instruction text blocks.
+
+Text string
+
+Type Text
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
+
+Citations [][BetaTextCitationParamUnionResp](api/beta.md)Optional
+
+One of the following:
+
+type BetaCitationCharLocationParamResp struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndCharIndex int64
+
+StartCharIndex int64
+
+Type CharLocation
+
+type BetaCitationPageLocationParamResp struct{…}
+
+CitedText string
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndPageNumber int64
+
+StartPageNumber int64
+
+Type PageLocation
+
+type BetaCitationContentBlockLocationParamResp struct{…}
+
+CitedText string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+DocumentIndex int64
+
+DocumentTitle string
+
+EndBlockIndex int64
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+StartBlockIndex int64
+
+0-based index of the first cited block in the source's `content` array.
+
+Type ContentBlockLocation
+
+type BetaCitationWebSearchResultLocationParamResp struct{…}
+
+CitedText string
+
+EncryptedIndex string
+
+Title string
+
+Type WebSearchResultLocation
+
+URL string
+
+type BetaCitationSearchResultLocationParamResp struct{…}
+
+CitedText string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+EndBlockIndex int64
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+SearchResultIndex int64
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+Source string
+
+StartBlockIndex int64
+
+0-based index of the first cited block in the source's `content` array.
+
+Title string
+
+Type SearchResultLocation
+
+Type MidConvSystem
+
+CacheControl [BetaCacheControlEphemeral](api/beta.md)Optional
+
+Create a cache control breakpoint at this content block.
+
+Type Ephemeral
+
+TTL BetaCacheControlEphemeralTTLOptional
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
+
+const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
 Role BetaMessageParamRole
 
@@ -2687,6 +2856,8 @@ One of the following:
 const BetaMessageParamRoleUser BetaMessageParamRole = "user"
 
 const BetaMessageParamRoleAssistant BetaMessageParamRole = "assistant"
+
+const BetaMessageParamRoleSystem BetaMessageParamRole = "system"
 
 Model param.Field[Model]
 
@@ -4174,6 +4345,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -4545,6 +4720,10 @@ const AnthropicBetaAdvisorTool2026\_03\_01 AnthropicBeta = "advisor-tool-2026-03
 const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-2026-04-01"
 
 const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
+
+const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+
+const AnthropicBetaMidConversationSystem2026\_04\_07 AnthropicBeta = "mid-conversation-system-2026-04-07"
 
 ##### ReturnsExpand Collapse
 

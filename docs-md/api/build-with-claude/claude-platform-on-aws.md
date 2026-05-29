@@ -257,12 +257,13 @@ The following models are available on Claude Platform on AWS:
 
 | Model | Model ID |
 | --- | --- |
-| Claude Opus 4.7 | `claude-opus-4-7` |
-| Claude Opus 4.6 | `claude-opus-4-6` |
-| Claude Sonnet 4.6 | `claude-sonnet-4-6` |
-| Claude Opus 4.5 | `claude-opus-4-5` |
-| Claude Sonnet 4.5 | `claude-sonnet-4-5` |
-| Claude Haiku 4.5 | `claude-haiku-4-5` |
+| Claude Opus 4.8 | claude-opus-4-8 |
+| Claude Opus 4.7 | claude-opus-4-7 |
+| Claude Opus 4.6 | claude-opus-4-6 |
+| Claude Sonnet 4.6 | claude-sonnet-4-6 |
+| Claude Opus 4.5 | claude-opus-4-5 |
+| Claude Sonnet 4.5 | claude-sonnet-4-5 |
+| Claude Haiku 4.5 | claude-haiku-4-5 |
 
 Model IDs are identical to the first-party Claude API. There are no Bedrock-style ARNs or `anthropic.` prefixes.
 
@@ -318,7 +319,7 @@ See the [comparison table](#claude-platform-on-aws-vs-amazon-bedrock) for featur
 
 ### Claude Managed Agents
 
-[Claude Managed Agents](managed-agents/overview.md) is available on Claude Platform on AWS, including agents, environments, sessions, credential vaults, and memory stores.
+[Claude Managed Agents](managed-agents/overview.md) is available on Claude Platform on AWS, including [agents](managed-agents/agent-setup.md), [environments](managed-agents/environments.md), [sessions](managed-agents/sessions.md), [credential vaults](managed-agents/vaults.md), [memory stores](managed-agents/memory.md), [webhooks](managed-agents/webhooks.md), [multiagent orchestration](managed-agents/multi-agent.md), and [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
 
 Session behavior on Claude Platform on AWS differs from first-party Claude Managed Agents in one way:
 
@@ -337,9 +338,7 @@ The following capabilities are not currently available on Claude Platform on AWS
 - **OAuth authentication:** Not supported. Use SigV4 or API key authentication.
 - **Fast mode:** Not available on Claude Platform on AWS.
 - **OpenAI-compatible API endpoints:** Not available on Claude Platform on AWS.
-- **Webhooks:** Not available on Claude Platform on AWS.
-- **Claude Managed Agents multiagent orchestration:** Only one agent per session is currently supported on Claude Platform on AWS.
-- **Claude Managed Agents self-hosted sandboxes:** Only the `cloud` environment type is supported.
+- **Self-hosted sandbox work-list endpoint:** The `GET /v1/environments/{id}/work` endpoint, which lists pending work for a [self-hosted sandbox](managed-agents/self-hosted-sandboxes.md), is not currently available. The other work endpoints (poll, ack, heartbeat, stop, post results, per-item get, and stats) work normally.
 - **MCP tunnels:** Only MCP servers exposed over the public internet are supported.
 
 ## Data residency
@@ -402,7 +401,7 @@ Create additional workspaces, rename a workspace, or archive a workspace from th
 
 ## Using the Claude Console
 
-Claude Platform on AWS uses the standard Claude Console at [platform.claude.com](https://platform.claude.com). When you sign in from the AWS Console, an **Account managed by AWS** indicator appears in the bottom-left of the Claude Console sidebar and the Console scopes to your Claude Platform on AWS organization. It provides usage analytics, cost breakdowns, rate limit visibility, workspace visibility, and pages for managing files, Agent Skills, batch jobs, and Claude Managed Agents resources (agents, sessions, environments, credential vaults, and memory stores).
+Claude Platform on AWS uses the standard Claude Console at [platform.claude.com](https://platform.claude.com). When you sign in from the AWS Console, an **Account managed by AWS** indicator appears in the bottom-left of the Claude Console sidebar and the Console scopes to your Claude Platform on AWS organization. It provides usage analytics, cost breakdowns, rate limit visibility, workspace visibility, and pages for managing files, Agent Skills, batch jobs, and Claude Managed Agents resources (agents, sessions, environments, credential vaults, memory stores, and webhooks).
 
 ### Signing in
 
@@ -430,9 +429,10 @@ The **Through AWS gateway** column indicates whether the page reads and writes d
 | **Batches** | Yes | Yes | View and manage batch processing jobs. |
 | **Agents** | Yes | Yes | View and manage agent definitions. |
 | **Sessions** | Yes | Yes | View agent sessions and event history. |
-| **Environments** | Yes | Yes | View and manage cloud container configurations for sessions. |
+| **Environments** | Yes | Yes | View and manage cloud sandbox configurations for sessions. |
 | **Credential vaults** | Yes | Yes | View and manage credential vaults for session authentication. |
 | **Memory stores** | Yes | Yes | View and manage persistent agent memory. |
+| **Webhooks** | Yes | Yes | View and manage webhook endpoints under **Settings → Webhooks**. |
 | **API keys** | No | N/A | Manage API keys in the AWS Console (**Claude Platform on AWS → API keys**). See [API key authentication](#api-key-authentication). |
 | **Members** | No | N/A | Not applicable. AWS IAM manages access. |
 | **Billing** | No | N/A | Not applicable. AWS Marketplace manages billing and invoicing. View cost breakdowns on the Cost page. |
@@ -456,7 +456,7 @@ For the CCU price, conversion mechanics, discount application, and per-model tok
 
 ## Monitoring and logging
 
-AWS CloudTrail can capture all requests to Claude Platform on AWS. Workspace and vault operations are logged as Management events by default. Inference, batch, file, skill, model, user profile, and Claude Managed Agents operations (other than vaults) are classified as Data events and require explicit data event logging configuration, which incurs additional CloudTrail charges. See the [IAM actions reference](api/claude-platform-on-aws-iam-actions.md) for the full event type classification and the [AWS CloudTrail documentation](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) for configuration details.
+AWS CloudTrail can capture all requests to Claude Platform on AWS. Workspace, vault, and webhook operations are logged as Management events by default. Inference, batch, file, skill, model, user profile, and Claude Managed Agents operations (other than vaults and webhooks) are classified as Data events and require explicit data event logging configuration, which incurs additional CloudTrail charges. See the [IAM actions reference](api/claude-platform-on-aws-iam-actions.md) for the full event type classification and the [AWS CloudTrail documentation](https://docs.aws.amazon.com/awscloudtrail/latest/userguide/) for configuration details.
 
 ### Request IDs
 
@@ -589,7 +589,7 @@ This policy assumes AWS SigV4 authentication. If the principal authenticates wit
 
 ### Managed policies
 
-AWS provides four managed policies (`AnthropicFullAccess`, `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, and `AnthropicLimitedAccess`) for common access patterns. For the actions each policy grants, the complete list of IAM actions, the route-to-action mapping, and additional policy examples, see [IAM actions for Claude Platform on AWS](api/claude-platform-on-aws-iam-actions.md).
+AWS provides five managed policies (`AnthropicFullAccess`, `AnthropicReadOnlyAccess`, `AnthropicInferenceAccess`, `AnthropicLimitedAccess`, and `AnthropicSelfHostedEnvironmentAccess`) for common access patterns. For the actions each policy grants, the complete list of IAM actions, the route-to-action mapping, and additional policy examples, see [IAM actions for Claude Platform on AWS](api/claude-platform-on-aws-iam-actions.md).
 
 ## Additional resources
 

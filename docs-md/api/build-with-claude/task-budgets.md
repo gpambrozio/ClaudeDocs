@@ -6,7 +6,7 @@ This feature is eligible for [Zero Data Retention (ZDR)](build-with-claude/api-a
 
 Task budgets let you tell Claude how many tokens it has for a full agentic loop, including thinking, tool calls, tool results, and output. The model sees a running countdown and uses it to prioritize work and finish gracefully as the budget is consumed.
 
-Task budgets are in public beta on [Claude Opus 4.7](about-claude/models/overview.md). Set the `task-budgets-2026-03-13` beta header to opt in.
+Task budgets are in beta on Claude Opus 4.8 and Claude Opus 4.7. Set the `task-budgets-2026-03-13` beta header to opt in.
 
 ## When to use task budgets
 
@@ -22,13 +22,13 @@ Task budgets complement the [effort parameter](build-with-claude/effort.md): eff
 
 Add `task_budget` to `output_config` and include the beta header:
 
-cURLCLIPythonTypeScriptGoJavaC#PHPRuby
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 client = anthropic.Anthropic()
 
-response = client.beta.messages.create(
-    model="claude-opus-4-7",
+with client.beta.messages.stream(
+    model="claude-opus-4-8",
     max_tokens=128000,
     output_config={
         "effort": "high",
@@ -38,7 +38,10 @@ response = client.beta.messages.create(
         {"role": "user", "content": "Review the codebase and propose a refactor plan."}
     ],
     betas=["task-budgets-2026-03-13"],
-)
+) as stream:
+    response = stream.get_final_message()
+
+print(response.usage)
 ```
 
 The `task_budget` object has three fields:
@@ -134,7 +137,7 @@ Putting the three turns side by side makes the distinction between payload size 
 | 1 | ~20 | 5,000 (thinking + `tool_use`) | ~95,000 |
 | 2 | ~7,800 (turn 1 history + tool result) | 6,800 (2,800 tool result + 4,000 thinking and `tool_use`) | ~88,200 |
 | 3 | ~13,000 (full history + second tool result) | 7,200 (1,200 tool result + 6,000 `text`) | ~81,000 |
-| **Total** | **~20,820 sent across requests** | **19,000 counted against budget** | — |
+| **Total** | **~20,820 sent across requests** | **19,000 counted against budget** | N/A |
 
 Your client sent the turn-1 user message three times and the turn-1 assistant message twice, but each was counted once. The budget spent 19,000 of 100,000 tokens, even though the cumulative payload your client transmitted was larger and the prompt-cached input on turns 2 and 3 was larger still.
 
@@ -185,13 +188,14 @@ def run_task_and_count_tokens(messages: list) -> int:
     """Runs an agentic loop to completion and returns total tokens spent."""
     total_spend = 0
     while True:
-        response = client.beta.messages.create(
-            model="claude-opus-4-7",
+        with client.beta.messages.stream(
+            model="claude-opus-4-8",
             max_tokens=128000,
             messages=messages,
             tools=tools,
             betas=["task-budgets-2026-03-13"],
-        )
+        ) as stream:
+            response = stream.get_final_message()
         # Count what Claude generated this turn (output covers text + thinking + tool calls).
         # Tool-result tokens also count against the budget; add the token count of the
         # tool_result blocks you append below if you want client-side tracking to match
@@ -221,12 +225,13 @@ The minimum accepted `task_budget.total` is **20,000 tokens**; values below the 
 
 | Model | Support |
 | --- | --- |
-| Claude Opus 4.7 | Public beta (set `task-budgets-2026-03-13` header) |
+| Claude Opus 4.8 | Beta (set `task-budgets-2026-03-13` header) |
+| Claude Opus 4.7 | Beta (set `task-budgets-2026-03-13` header) |
 | Claude Opus 4.6 | Not supported |
 | Claude Sonnet 4.6 | Not supported |
 | Claude Haiku 4.5 | Not supported |
 
-Task budgets are not supported on [Claude Code](https://docs.claude.com/en/docs/claude-code) or Cowork surfaces at launch. Use task budgets directly via the Messages API on Claude Opus 4.7.
+Task budgets are not supported on [Claude Code](https://docs.claude.com/en/docs/claude-code) or Cowork surfaces. Use task budgets directly via the Messages API on a [supported model](#feature-support).
 
 Was this page helpful?
 

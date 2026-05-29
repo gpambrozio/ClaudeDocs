@@ -144,7 +144,7 @@ client = AnthropicFoundry(
 )
 
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 )
@@ -209,7 +209,7 @@ client = AnthropicFoundry(
 
 # Make request
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "Hello!"}],
 )
@@ -228,7 +228,7 @@ Claude in Foundry supports most of Claude's powerful features. You can find all 
 
 ### Context window
 
-Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Microsoft Foundry. Other Claude models, including Sonnet 4.5, have a 200k-token context window.
+Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Microsoft Foundry. Other Claude models, including Claude Opus 4.8 and Sonnet 4.5, have a 200k-token context window.
 
 ### Features not supported
 
@@ -245,17 +245,18 @@ For details on response headers specific to Foundry, see [Correlation request ID
 
 ## API model IDs and deployments
 
-The following Claude models are available through Foundry. The latest generation models (Opus 4.7, Opus 4.6, Sonnet 4.6, and Haiku 4.5) offer the most advanced capabilities:
+The following Claude models are available through Foundry. The latest generation models (Claude Opus 4.8, Opus 4.7, Opus 4.6, Sonnet 4.6, and Haiku 4.5) offer the most advanced capabilities:
 
 | Model | Default deployment name |
 | --- | --- |
-| Claude Opus 4.7 | `claude-opus-4-7` |
-| Claude Opus 4.6 | `claude-opus-4-6` |
-| Claude Opus 4.5 | `claude-opus-4-5` |
-| Claude Opus 4.1 | `claude-opus-4-1` |
-| Claude Sonnet 4.6 | `claude-sonnet-4-6` |
-| Claude Sonnet 4.5 | `claude-sonnet-4-5` |
-| Claude Haiku 4.5 | `claude-haiku-4-5` |
+| Claude Opus 4.8 | claude-opus-4-8 |
+| Claude Opus 4.7 | claude-opus-4-7 |
+| Claude Opus 4.6 | claude-opus-4-6 |
+| Claude Opus 4.5 | claude-opus-4-5 |
+| Claude Opus 4.1 | claude-opus-4-1 |
+| Claude Sonnet 4.6 | claude-sonnet-4-6 |
+| Claude Sonnet 4.5 | claude-sonnet-4-5 |
+| Claude Haiku 4.5 | claude-haiku-4-5 |
 
 By default, deployment names match the model IDs shown in the preceding table. However, you can create custom deployments with different names in the Foundry portal to manage different configurations, versions, or rate limits. Use the deployment name (not necessarily the model ID) in your API requests.
 

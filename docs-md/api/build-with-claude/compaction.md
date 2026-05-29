@@ -22,10 +22,11 @@ Compaction is in beta. Include the [beta header](api/beta-headers.md) `compact-2
 
 Compaction is supported on the following models:
 
-- [Claude Mythos Preview](https://anthropic.com/glasswing) (`claude-mythos-preview`)
-- Claude Opus 4.7 (`claude-opus-4-7`)
-- Claude Opus 4.6 (`claude-opus-4-6`)
-- Claude Sonnet 4.6 (`claude-sonnet-4-6`)
+- [Claude Mythos Preview](https://anthropic.com/glasswing) (claude-mythos-preview)
+- Claude Opus 4.8 (claude-opus-4-8)
+- Claude Opus 4.7 (claude-opus-4-7)
+- Claude Opus 4.6 (claude-opus-4-6)
+- Claude Sonnet 4.6 (claude-sonnet-4-6)
 
 ## How compaction works
 
@@ -53,7 +54,7 @@ messages = [{"role": "user", "content": "Help me build a website"}]
 
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=messages,
     context_management={"edits": [{"type": "compact_20260112"}]},
@@ -83,7 +84,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=messages,
     context_management={
@@ -114,7 +115,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=messages,
     context_management={
@@ -141,7 +142,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=messages,
     context_management={
@@ -157,7 +158,7 @@ if response.stop_reason == "compaction":
     # Continue the request
     response = client.beta.messages.create(
         betas=["compact-2026-01-12"],
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         max_tokens=4096,
         messages=messages,
         context_management={"edits": [{"type": "compact_20260112"}]},
@@ -179,7 +180,7 @@ n_compactions = 0
 
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=messages,
     context_management={
@@ -241,7 +242,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=messages,
     context_management={"edits": [{"type": "compact_20260112"}]},
@@ -254,7 +255,7 @@ messages.append({"role": "user", "content": "Now add error handling"})
 
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=messages,
     context_management={"edits": [{"type": "compact_20260112"}]},
@@ -278,7 +279,7 @@ messages = [{"role": "user", "content": "Hello, Claude"}]
 
 with client.beta.messages.stream(
     betas=["compact-2026-01-12"],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     messages=messages,
     context_management={"edits": [{"type": "compact_20260112"}]},
@@ -338,7 +339,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 response = client.beta.messages.create(
     betas=["compact-2026-01-12"],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=4096,
     system=[
         {
@@ -406,7 +407,7 @@ client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
 count_response = client.beta.messages.count_tokens(
     betas=["compact-2026-01-12"],
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     messages=messages,
     context_management={"edits": [{"type": "compact_20260112"}]},
 )
@@ -431,7 +432,7 @@ def chat(user_message: str) -> str:
 
     response = client.beta.messages.create(
         betas=["compact-2026-01-12"],
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         max_tokens=4096,
         messages=messages,
         context_management={
@@ -473,7 +474,7 @@ def chat(user_message: str) -> str:
 
     response = client.beta.messages.create(
         betas=["compact-2026-01-12"],
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         max_tokens=4096,
         messages=messages,
         context_management={
@@ -505,7 +506,7 @@ def chat(user_message: str) -> str:
         # Continue the request with the compacted context + preserved messages
         response = client.beta.messages.create(
             betas=["compact-2026-01-12"],
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=4096,
             messages=messages_after_compaction,
             context_management={"edits": [{"type": "compact_20260112"}]},

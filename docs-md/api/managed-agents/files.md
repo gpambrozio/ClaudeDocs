@@ -2,7 +2,7 @@
 
 Copy page
 
-You can provide files to your agent by uploading them via the Files API and mounting them in the session's container.
+You can provide files to your agent by uploading them via the Files API and mounting them in the session's sandbox.
 
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
@@ -19,7 +19,7 @@ print(f"File ID: {file.id}")
 
 ## Mounting files in a session
 
-Mount uploaded files into the container by adding them to the `resources` array when creating a session:
+Mount uploaded files into the sandbox by adding them to the `resources` array when creating a session:
 
 The `mount_path` is optional, but make sure the uploaded file has a descriptive name so the agent knows what it is looking for.
 
@@ -116,7 +116,7 @@ The agent can work with any file type, including:
 
 ## File paths
 
-Files mounted in the container are read-only copies. The agent can read them but cannot modify the original uploaded file. To work with modified versions, the agent writes to new paths within the container.
+Files mounted in the sandbox are read-only copies. The agent can read them but cannot modify the original uploaded file. To work with modified versions, the agent writes to new paths within the sandbox.
 
 - Files are mounted at the exact path you specify
 - Parent directories are created automatically

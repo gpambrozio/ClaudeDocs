@@ -32,7 +32,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     system="You are a scientist",
     messages=[{"role": "user", "content": "Hello, Claude"}],
 )
@@ -56,7 +56,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     tools=[
         {
             "name": "get_weather",
@@ -100,7 +100,7 @@ image_data = base64.standard_b64encode(httpx.get(image_url).content).decode("utf
 client = anthropic.Anthropic()
 
 response = client.messages.count_tokens(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     messages=[
         {
             "role": "user",
@@ -190,7 +190,7 @@ with open("document.pdf", "rb") as pdf_file:
     pdf_base64 = base64.standard_b64encode(pdf_file.read()).decode("utf-8")
 
 response = client.messages.count_tokens(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     messages=[
         {
             "role": "user",

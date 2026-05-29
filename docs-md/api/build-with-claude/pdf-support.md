@@ -91,7 +91,7 @@ cURLCLIPythonTypeScriptJava
 ```shiki
 client = anthropic.Anthropic()
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -134,7 +134,7 @@ pdf_data = base64.standard_b64encode(httpx.get(pdf_url).content).decode("utf-8")
 # Send to Claude using base64 encoding
 client = anthropic.Anthropic()
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -172,7 +172,7 @@ with open("document.pdf", "rb") as f:
 
 # Use the uploaded file in a message
 message = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     betas=["files-api-2025-04-14"],
     messages=[
@@ -257,7 +257,7 @@ cURLCLIPythonTypeScriptJava
 client = anthropic.Anthropic()
 # ...
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -293,7 +293,7 @@ message_batch = client.messages.batches.create(
         {
             "custom_id": "doc1",
             "params": {
-                "model": "claude-opus-4-7",
+                "model": "claude-opus-4-8",
                 "max_tokens": 1024,
                 "messages": [
                     {

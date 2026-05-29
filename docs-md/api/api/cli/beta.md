@@ -724,11 +724,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -806,15 +810,19 @@ type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
 type: "advisor\_redacted\_result"
 
-beta\_advisor\_redacted\_result\_block\_param: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block\_param: object { encrypted\_content, type, stop\_reason }
 
 encrypted\_content: string
 
@@ -822,25 +830,37 @@ Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: "advisor\_redacted\_result"
 
-beta\_advisor\_result\_block: object { text, type }
+stop\_reason: optional string
+
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_result\_block\_param: object { text, type }
+beta\_advisor\_result\_block\_param: object { text, type, stop\_reason }
 
 text: string
 
 type: "advisor\_result"
+
+stop\_reason: optional string
 
 beta\_advisor\_tool\_20260301: object { model, name, type, 6 more }
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -982,7 +1002,7 @@ When true, guarantees schema validation on tool names and inputs
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -1002,17 +1022,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -1022,7 +1050,7 @@ type: "advisor\_tool\_result"
 
 beta\_advisor\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
 
-content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlockParam](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlockParam](api/beta.md) { text, type, stop\_reason }  or [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type, stop\_reason }
 
 beta\_advisor\_tool\_result\_error\_param: object { error\_code, type }
 
@@ -1042,19 +1070,23 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block\_param: object { text, type }
+beta\_advisor\_result\_block\_param: object { text, type, stop\_reason }
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block\_param: object { encrypted\_content, type }
+stop\_reason: optional string
+
+beta\_advisor\_redacted\_result\_block\_param: object { encrypted\_content, type, stop\_reason }
 
 encrypted\_content: string
 
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: "advisor\_redacted\_result"
+
+stop\_reason: optional string
 
 tool\_use\_id: string
 
@@ -2301,7 +2333,7 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
-beta\_compaction\_block\_param: object { content, type, cache\_control, encrypted\_content }
+beta\_compaction\_block\_param: object { type, cache\_control, content, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -2310,10 +2342,6 @@ to maintain context across compaction boundaries.
 
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
-
-content: string
-
-Summary of previously compacted content, or null if compaction failed
 
 type: "compaction"
 
@@ -2337,6 +2365,10 @@ Defaults to `5m`.
 "5m"
 
 "1h"
+
+content: optional string
+
+Summary of previously compacted content, or null if compaction failed
 
 encrypted\_content: optional string
 
@@ -2768,13 +2800,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -2862,7 +2896,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -2882,17 +2916,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -3264,7 +3306,7 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
-beta\_content\_block\_param: [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }  or 17 more
+beta\_content\_block\_param: [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  or [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  or [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }  or 18 more
 
 Regular text content.
 
@@ -4727,13 +4769,15 @@ content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, typ
 
 beta\_web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -5061,7 +5105,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
 
-content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlockParam](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlockParam](api/beta.md) { text, type, stop\_reason }  or [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type, stop\_reason }
 
 beta\_advisor\_tool\_result\_error\_param: object { error\_code, type }
 
@@ -5081,19 +5125,23 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block\_param: object { text, type }
+beta\_advisor\_result\_block\_param: object { text, type, stop\_reason }
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block\_param: object { encrypted\_content, type }
+stop\_reason: optional string
+
+beta\_advisor\_redacted\_result\_block\_param: object { encrypted\_content, type, stop\_reason }
 
 encrypted\_content: string
 
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: "advisor\_redacted\_result"
+
+stop\_reason: optional string
 
 tool\_use\_id: string
 
@@ -5642,7 +5690,7 @@ Defaults to `5m`.
 
 "1h"
 
-beta\_compaction\_block\_param: object { content, type, cache\_control, encrypted\_content }
+beta\_compaction\_block\_param: object { type, cache\_control, content, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -5651,10 +5699,6 @@ to maintain context across compaction boundaries.
 
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
-
-content: string
-
-Summary of previously compacted content, or null if compaction failed
 
 type: "compaction"
 
@@ -5679,9 +5723,168 @@ Defaults to `5m`.
 
 "1h"
 
+content: optional string
+
+Summary of previously compacted content, or null if compaction failed
+
 encrypted\_content: optional string
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
+
+beta\_mid\_conversation\_system\_block\_param: object { content, type, cache\_control }
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+content: array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
+
+System instruction text blocks.
+
+text: string
+
+type: "text"
+
+cache\_control: optional object { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+"5m"
+
+"1h"
+
+citations: optional array of [BetaTextCitationParam](api/beta.md)
+
+beta\_citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_char\_index: number
+
+start\_char\_index: number
+
+type: "char\_location"
+
+beta\_citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+start\_page\_number: number
+
+type: "page\_location"
+
+beta\_citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+document\_index: number
+
+document\_title: string
+
+end\_block\_index: number
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
+
+type: "content\_block\_location"
+
+beta\_citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: string
+
+encrypted\_index: string
+
+title: string
+
+type: "web\_search\_result\_location"
+
+url: string
+
+beta\_citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+end\_block\_index: number
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+source: string
+
+start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
+
+title: string
+
+type: "search\_result\_location"
+
+type: "mid\_conv\_system"
+
+cache\_control: optional object { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+"5m"
+
+"1h"
 
 beta\_content\_block\_source: object { content, type }
 
@@ -6514,11 +6717,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -7419,13 +7626,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -7513,7 +7722,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -7533,17 +7742,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -8002,11 +8219,15 @@ beta\_cache\_miss\_unavailable: object { type }
 
 type: "unavailable"
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -8147,7 +8368,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
 
 Billing and rate-limit usage.
 
@@ -8297,11 +8518,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -8383,6 +8608,26 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
 The number of server tool requests.
@@ -8413,7 +8658,7 @@ The inference speed mode used for this request.
 
 "fast"
 
-beta\_message\_delta\_usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
+beta\_message\_delta\_usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 4 more }
 
 cache\_creation\_input\_tokens: number
 
@@ -8537,11 +8782,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -8622,6 +8871,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The cumulative number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
@@ -10134,13 +10403,15 @@ content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, typ
 
 beta\_web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -10468,7 +10739,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
 
-content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlockParam](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultErrorParam](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlockParam](api/beta.md) { text, type, stop\_reason }  or [BetaAdvisorRedactedResultBlockParam](api/beta.md) { encrypted\_content, type, stop\_reason }
 
 beta\_advisor\_tool\_result\_error\_param: object { error\_code, type }
 
@@ -10488,19 +10759,23 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block\_param: object { text, type }
+beta\_advisor\_result\_block\_param: object { text, type, stop\_reason }
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block\_param: object { encrypted\_content, type }
+stop\_reason: optional string
+
+beta\_advisor\_redacted\_result\_block\_param: object { encrypted\_content, type, stop\_reason }
 
 encrypted\_content: string
 
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 type: "advisor\_redacted\_result"
+
+stop\_reason: optional string
 
 tool\_use\_id: string
 
@@ -11049,7 +11324,7 @@ Defaults to `5m`.
 
 "1h"
 
-beta\_compaction\_block\_param: object { content, type, cache\_control, encrypted\_content }
+beta\_compaction\_block\_param: object { type, cache\_control, content, encrypted\_content }
 
 A compaction block containing summary of previous context.
 
@@ -11058,10 +11333,6 @@ to maintain context across compaction boundaries.
 
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
-
-content: string
-
-Summary of previously compacted content, or null if compaction failed
 
 type: "compaction"
 
@@ -11086,15 +11357,176 @@ Defaults to `5m`.
 
 "1h"
 
+content: optional string
+
+Summary of previously compacted content, or null if compaction failed
+
 encrypted\_content: optional string
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
 
-role: "user" or "assistant"
+beta\_mid\_conversation\_system\_block\_param: object { content, type, cache\_control }
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+content: array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
+
+System instruction text blocks.
+
+text: string
+
+type: "text"
+
+cache\_control: optional object { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+"5m"
+
+"1h"
+
+citations: optional array of [BetaTextCitationParam](api/beta.md)
+
+beta\_citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_char\_index: number
+
+start\_char\_index: number
+
+type: "char\_location"
+
+beta\_citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+start\_page\_number: number
+
+type: "page\_location"
+
+beta\_citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+document\_index: number
+
+document\_title: string
+
+end\_block\_index: number
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
+
+type: "content\_block\_location"
+
+beta\_citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: string
+
+encrypted\_index: string
+
+title: string
+
+type: "web\_search\_result\_location"
+
+url: string
+
+beta\_citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+end\_block\_index: number
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+source: string
+
+start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
+
+title: string
+
+type: "search\_result\_location"
+
+type: "mid\_conv\_system"
+
+cache\_control: optional object { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+"5m"
+
+"1h"
+
+role: "user" or "assistant" or "system"
 
 "user"
 
 "assistant"
+
+"system"
 
 beta\_message\_tokens\_count: object { context\_management, input\_tokens }
 
@@ -11117,6 +11549,161 @@ user\_id: optional string
 An external identifier for the user who is associated with the request.
 
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
+
+beta\_mid\_conversation\_system\_block\_param: object { content, type, cache\_control }
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+content: array of [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }
+
+System instruction text blocks.
+
+text: string
+
+type: "text"
+
+cache\_control: optional object { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+"5m"
+
+"1h"
+
+citations: optional array of [BetaTextCitationParam](api/beta.md)
+
+beta\_citation\_char\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_char\_index: number
+
+start\_char\_index: number
+
+type: "char\_location"
+
+beta\_citation\_page\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+document\_index: number
+
+document\_title: string
+
+end\_page\_number: number
+
+start\_page\_number: number
+
+type: "page\_location"
+
+beta\_citation\_content\_block\_location\_param: object { cited\_text, document\_index, document\_title, 3 more }
+
+cited\_text: string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+document\_index: number
+
+document\_title: string
+
+end\_block\_index: number
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
+
+type: "content\_block\_location"
+
+beta\_citation\_web\_search\_result\_location\_param: object { cited\_text, encrypted\_index, title, 2 more }
+
+cited\_text: string
+
+encrypted\_index: string
+
+title: string
+
+type: "web\_search\_result\_location"
+
+url: string
+
+beta\_citation\_search\_result\_location\_param: object { cited\_text, end\_block\_index, search\_result\_index, 4 more }
+
+cited\_text: string
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+end\_block\_index: number
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+search\_result\_index: number
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+source: string
+
+start\_block\_index: number
+
+0-based index of the first cited block in the source's `content` array.
+
+title: string
+
+type: "search\_result\_location"
+
+type: "mid\_conv\_system"
+
+cache\_control: optional object { type, ttl }
+
+Create a cache control breakpoint at this content block.
+
+type: "ephemeral"
+
+ttl: optional "5m" or "1h"
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+"5m"
+
+"1h"
 
 beta\_output\_config: object { effort, format, task\_budget }
 
@@ -11288,7 +11875,11 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-beta\_thinking\_delta: object { thinking, type }
+beta\_thinking\_delta: object { estimated\_tokens, thinking, type }
+
+estimated\_tokens: number
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 thinking: string
 
@@ -11432,7 +12023,11 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-beta\_thinking\_delta: object { thinking, type }
+beta\_thinking\_delta: object { estimated\_tokens, thinking, type }
+
+estimated\_tokens: number
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 thinking: string
 
@@ -11742,13 +12337,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -11836,7 +12433,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -11856,17 +12453,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -12364,7 +12969,7 @@ stop\_sequence: string
 
 type: "message\_delta"
 
-usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
+usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 4 more }
 
 Billing and rate-limit usage.
 
@@ -12498,11 +13103,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -12583,6 +13192,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The cumulative number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
@@ -12945,13 +13574,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -13039,7 +13670,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -13059,17 +13690,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -13528,11 +14167,15 @@ beta\_cache\_miss\_unavailable: object { type }
 
 type: "unavailable"
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -13673,7 +14316,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
 
 Billing and rate-limit usage.
 
@@ -13823,11 +14466,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -13908,6 +14555,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
@@ -14296,13 +14963,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -14390,7 +15059,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -14410,17 +15079,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -14879,11 +15556,15 @@ beta\_cache\_miss\_unavailable: object { type }
 
 type: "unavailable"
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -15024,7 +15705,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
 
 Billing and rate-limit usage.
 
@@ -15174,11 +15855,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -15259,6 +15944,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
@@ -15408,7 +16113,7 @@ stop\_sequence: string
 
 type: "message\_delta"
 
-usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
+usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 4 more }
 
 Billing and rate-limit usage.
 
@@ -15542,11 +16247,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -15627,6 +16336,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The cumulative number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
@@ -15928,13 +16657,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -16022,7 +16753,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -16042,17 +16773,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -16550,7 +17289,11 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-beta\_thinking\_delta: object { thinking, type }
+beta\_thinking\_delta: object { estimated\_tokens, thinking, type }
+
+estimated\_tokens: number
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 thinking: string
 
@@ -18214,7 +18957,11 @@ Controls how thinking content appears in the response. When set to `summarized`,
 
 "omitted"
 
-beta\_thinking\_delta: object { thinking, type }
+beta\_thinking\_delta: object { estimated\_tokens, thinking, type }
+
+estimated\_tokens: number
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 thinking: string
 
@@ -20988,11 +21735,15 @@ Whether to use cached content. Set to false to bypass the cache and fetch fresh 
 
 beta\_advisor\_tool\_20260301: object { model, name, type, 6 more }
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -21397,7 +22148,7 @@ type: "url"
 
 url: string
 
-beta\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
+beta\_usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
 
 cache\_creation: object { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }
 
@@ -21537,11 +22288,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -21622,6 +22377,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
@@ -22199,13 +22974,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -22297,13 +23074,15 @@ content: [BetaWebFetchToolResultErrorBlockParam](api/beta.md) { error\_code, typ
 
 beta\_web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -22631,13 +23410,15 @@ type: "code\_execution\_20260120"
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -22653,13 +23434,15 @@ type: "web\_fetch\_tool\_result\_error"
 
 beta\_web\_fetch\_tool\_result\_error\_block\_param: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -22673,13 +23456,15 @@ error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" o
 
 type: "web\_fetch\_tool\_result\_error"
 
-beta\_web\_fetch\_tool\_result\_error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+beta\_web\_fetch\_tool\_result\_error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -23713,13 +24498,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -23807,7 +24594,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -23827,17 +24614,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -24296,11 +25091,15 @@ beta\_cache\_miss\_unavailable: object { type }
 
 type: "unavailable"
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -24441,7 +25240,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
 
 Billing and rate-limit usage.
 
@@ -24591,11 +25390,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -24676,6 +25479,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
@@ -25168,13 +25991,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -25262,7 +26087,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -25282,17 +26107,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -25751,11 +26584,15 @@ beta\_cache\_miss\_unavailable: object { type }
 
 type: "unavailable"
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -25896,7 +26733,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
 
 Billing and rate-limit usage.
 
@@ -26046,11 +26883,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -26131,6 +26972,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
@@ -26587,13 +27448,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -26681,7 +27544,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -26701,17 +27564,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -27170,11 +28041,15 @@ beta\_cache\_miss\_unavailable: object { type }
 
 type: "unavailable"
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -27315,7 +28190,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
 
 Billing and rate-limit usage.
 
@@ -27465,11 +28340,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -27550,6 +28429,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 

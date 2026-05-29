@@ -2,7 +2,7 @@
 
 Copy page
 
-Environments define the container configuration where your agent runs. You create an environment once, then reference its ID each time you start a session. Multiple sessions can share the same environment, but each session gets its own isolated container instance.
+Environments define the sandbox configuration where your agent runs. You create an environment once, then reference its ID each time you start a session. Multiple sessions can share the same environment, but each session gets its own isolated sandbox (a fresh Linux container).
 
 This page covers `type: cloud` environments. To run sandboxes on your own infrastructure, see [Self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
 
@@ -37,7 +37,7 @@ session = client.beta.sessions.create(
 
 ### Packages
 
-The `packages` field pre-installs packages into the container before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions; the default is latest.
+The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions; the default is latest.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -71,12 +71,12 @@ Supported package managers:
 
 ### Networking
 
-The `networking` field controls the container's outbound network access. It does not impact the `web_search` or `web_fetch` tools' allowed domains.
+The `networking` field controls the sandbox's outbound network access. It does not impact the `web_search` or `web_fetch` tools' allowed domains.
 
 | Mode | Description |
 | --- | --- |
 | `unrestricted` | Full outbound network access, except for a general safety blocklist. This is the default. |
-| `limited` | Restricts container network access to the `allowed_hosts` list. Further access is enabled via the `allow_package_managers` and `allow_mcp_servers` bool. |
+| `limited` | Restricts sandbox network access to the `allowed_hosts` list. Further access is enabled via the `allow_package_managers` and `allow_mcp_servers` bool. |
 
 curlPythonTypeScriptC#GoJavaPHPRuby
 
@@ -96,7 +96,7 @@ For production deployments, use `limited` networking with an explicit `allowed_h
 
 When using `limited` networking:
 
-- `allowed_hosts` specifies domains the container can reach. These must be HTTPS-prefixed.
+- `allowed_hosts` specifies domains the sandbox can reach. These must be HTTPS-prefixed.
 - `allow_mcp_servers` permits outbound access to MCP server endpoints configured on the agent, beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 - `allow_package_managers` permits outbound access to public package registries (PyPI, npm, etc.) beyond those listed in the `allowed_hosts` array. Defaults to `false`.
 
@@ -104,7 +104,7 @@ When using `limited` networking:
 
 - Environments persist until explicitly archived or deleted.
 - Multiple sessions can reference the same environment.
-- Each session gets its own container instance. Sessions do not share file system state.
+- Each session gets its own sandbox instance. Sessions do not share file system state.
 - Environments are not versioned. If you frequently update your environments, you may want to log these updates on your side, to map environment state with sessions.
 
 ## Manage environments
@@ -127,7 +127,7 @@ ant beta:environments delete --environment-id "$ENVIRONMENT_ID"
 
 ## Pre-installed runtimes
 
-Cloud containers include common runtimes out of the box. See [Container reference](managed-agents/cloud-containers.md) for the full list of pre-installed languages, databases, and utilities.
+Cloud sandboxes include common runtimes out of the box. See [Sandbox reference](managed-agents/cloud-sandboxes-reference.md) for the full list of pre-installed languages, databases, and utilities.
 
 Was this page helpful?
 

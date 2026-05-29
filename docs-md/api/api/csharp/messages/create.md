@@ -1636,6 +1636,8 @@ One of the following:
 
 "url\_not\_allowed"UrlNotAllowed
 
+"url\_not\_in\_prior\_context"UrlNotInPriorContext
+
 "url\_not\_accessible"UrlNotAccessible
 
 "unsupported\_content\_type"UnsupportedContentType
@@ -2333,6 +2335,169 @@ One of the following:
 
 "1h"Ttl1h
 
+class MidConversationSystemBlockParam:
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+required IReadOnlyList<[TextBlockParam](api/messages.md)> Content
+
+System instruction text blocks.
+
+required string Text
+
+JsonElement Type "text"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
+IReadOnlyList<[TextCitationParam](api/messages.md)>? Citations
+
+One of the following:
+
+class CitationCharLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndCharIndex
+
+required Long StartCharIndex
+
+JsonElement Type "char\_location"constant
+
+class CitationPageLocationParam:
+
+required string CitedText
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndPageNumber
+
+required Long StartPageNumber
+
+JsonElement Type "page\_location"constant
+
+class CitationContentBlockLocationParam:
+
+required string CitedText
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+required Long DocumentIndex
+
+required string? DocumentTitle
+
+required Long EndBlockIndex
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+required Long StartBlockIndex
+
+0-based index of the first cited block in the source's `content` array.
+
+JsonElement Type "content\_block\_location"constant
+
+class CitationWebSearchResultLocationParam:
+
+required string CitedText
+
+required string EncryptedIndex
+
+required string? Title
+
+JsonElement Type "web\_search\_result\_location"constant
+
+required string Url
+
+class CitationSearchResultLocationParam:
+
+required string CitedText
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+required Long EndBlockIndex
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+required Long SearchResultIndex
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+required string Source
+
+required Long StartBlockIndex
+
+0-based index of the first cited block in the source's `content` array.
+
+required string? Title
+
+JsonElement Type "search\_result\_location"constant
+
+JsonElement Type "mid\_conv\_system"constant
+
+[CacheControlEphemeral](api/messages.md)? CacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonElement Type "ephemeral"constant
+
+Ttl Ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+"5m"Ttl5m
+
+"1h"Ttl1h
+
 required Role Role
 
 One of the following:
@@ -2340,6 +2505,8 @@ One of the following:
 "user"User
 
 "assistant"Assistant
+
+"system"System
 
 required [Model](api/messages.md) model
 
@@ -4033,6 +4200,8 @@ One of the following:
 
 "url\_not\_allowed"UrlNotAllowed
 
+"url\_not\_in\_prior\_context"UrlNotInPriorContext
+
 "url\_not\_accessible"UrlNotAccessible
 
 "unsupported\_content\_type"UnsupportedContentType
@@ -4327,6 +4496,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
+
 "claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
@@ -4509,6 +4682,28 @@ The number of input tokens which were used.
 required Long OutputTokens
 
 The number of output tokens which were used.
+
+required OutputTokensDetails? OutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+required Long ThinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 required [ServerToolUsage](api/messages.md)? ServerToolUse
 
@@ -4919,6 +5114,8 @@ One of the following:
 
 "url\_not\_allowed"UrlNotAllowed
 
+"url\_not\_in\_prior\_context"UrlNotInPriorContext
+
 "url\_not\_accessible"UrlNotAccessible
 
 "unsupported\_content\_type"UnsupportedContentType
@@ -5213,6 +5410,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
+
 "claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
@@ -5396,6 +5597,28 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
+required OutputTokensDetails? OutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+required Long ThinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
+
 required [ServerToolUsage](api/messages.md)? ServerToolUse
 
 The number of server tool requests.
@@ -5509,6 +5732,28 @@ The cumulative number of input tokens which were used.
 required Long OutputTokens
 
 The cumulative number of output tokens which were used.
+
+required OutputTokensDetails? OutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+required Long ThinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 required [ServerToolUsage](api/messages.md)? ServerToolUse
 
@@ -5863,6 +6108,8 @@ One of the following:
 "url\_too\_long"UrlTooLong
 
 "url\_not\_allowed"UrlNotAllowed
+
+"url\_not\_in\_prior\_context"UrlNotInPriorContext
 
 "url\_not\_accessible"UrlNotAccessible
 
@@ -6374,6 +6621,9 @@ Response 200
     "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0
@@ -6431,6 +6681,9 @@ Response 200
     "inference_geo": "inference_geo",
     "input_tokens": 2095,
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0

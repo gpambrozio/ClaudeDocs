@@ -79,7 +79,7 @@ Note that if you want to include a [system prompt](https://docs.claude.com/en/do
 
 There is a limit of 100,000 messages in a single request.
 
---model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+--model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 Body param: The model that will complete your prompt.
 
@@ -613,13 +613,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -707,7 +709,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -727,17 +729,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -1196,11 +1206,15 @@ beta\_cache\_miss\_unavailable: object { type }
 
 type: "unavailable"
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -1341,7 +1355,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
 
 Billing and rate-limit usage.
 
@@ -1491,11 +1505,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -1576,6 +1594,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
@@ -1958,13 +1996,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -2052,7 +2092,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -2072,17 +2112,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -2541,11 +2589,15 @@ beta\_cache\_miss\_unavailable: object { type }
 
 type: "unavailable"
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -2686,7 +2738,7 @@ Object type.
 
 For Messages, this is always `"message"`.
 
-usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 7 more }
+usage: object { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 8 more }
 
 Billing and rate-limit usage.
 
@@ -2836,11 +2888,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -2921,6 +2977,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
@@ -3070,7 +3146,7 @@ stop\_sequence: string
 
 type: "message\_delta"
 
-usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 3 more }
+usage: object { cache\_creation\_input\_tokens, cache\_read\_input\_tokens, input\_tokens, 4 more }
 
 Billing and rate-limit usage.
 
@@ -3204,11 +3280,15 @@ input\_tokens: number
 
 The number of input tokens which were used.
 
-model: "claude-opus-4-7" or "claude-mythos-preview" or "claude-opus-4-6" or 14 more or string
+model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -3289,6 +3369,26 @@ Usage for an advisor sub-inference iteration
 output\_tokens: number
 
 The cumulative number of output tokens which were used.
+
+output\_tokens\_details: object { thinking\_tokens }
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 server\_tool\_use: object { web\_fetch\_requests, web\_search\_requests }
 
@@ -3590,13 +3690,15 @@ content: [BetaWebFetchToolResultErrorBlock](api/beta.md) { error\_code, type }  
 
 beta\_web\_fetch\_tool\_result\_error\_block: object { error\_code, type }
 
-error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 5 more
+error\_code: "invalid\_tool\_input" or "url\_too\_long" or "url\_not\_allowed" or 6 more
 
 "invalid\_tool\_input"
 
 "url\_too\_long"
 
 "url\_not\_allowed"
+
+"url\_not\_in\_prior\_context"
 
 "url\_not\_accessible"
 
@@ -3684,7 +3786,7 @@ type: "code\_execution\_20260120"
 
 beta\_advisor\_tool\_result\_block: object { content, tool\_use\_id, type }
 
-content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, type }
+content: [BetaAdvisorToolResultError](api/beta.md) { error\_code, type }  or [BetaAdvisorResultBlock](api/beta.md) { stop\_reason, text, type }  or [BetaAdvisorRedactedResultBlock](api/beta.md) { encrypted\_content, stop\_reason, type }
 
 beta\_advisor\_tool\_result\_error: object { error\_code, type }
 
@@ -3704,17 +3806,25 @@ error\_code: "max\_uses\_exceeded" or "prompt\_too\_long" or "too\_many\_request
 
 type: "advisor\_tool\_result\_error"
 
-beta\_advisor\_result\_block: object { text, type }
+beta\_advisor\_result\_block: object { stop\_reason, text, type }
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 text: string
 
 type: "advisor\_result"
 
-beta\_advisor\_redacted\_result\_block: object { encrypted\_content, type }
+beta\_advisor\_redacted\_result\_block: object { encrypted\_content, stop\_reason, type }
 
 encrypted\_content: string
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+stop\_reason: string
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 type: "advisor\_redacted\_result"
 
@@ -4212,7 +4322,11 @@ type: "search\_result\_location"
 
 type: "citations\_delta"
 
-beta\_thinking\_delta: object { thinking, type }
+beta\_thinking\_delta: object { estimated\_tokens, thinking, type }
+
+estimated\_tokens: number
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 thinking: string
 
@@ -4337,6 +4451,9 @@ Response 200
       }
     ],
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0
@@ -4430,6 +4547,9 @@ Response 200
       }
     ],
     "output_tokens": 503,
+    "output_tokens_details": {
+      "thinking_tokens": 0
+    },
     "server_tool_use": {
       "web_fetch_requests": 2,
       "web_search_requests": 0

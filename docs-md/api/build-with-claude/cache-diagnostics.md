@@ -33,7 +33,7 @@ SYSTEM = "You are an AI assistant analyzing a large document. <document>...</doc
 
 # Turn 1: opt in with previous_message_id=None
 r1 = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     cache_control={"type": "ephemeral"},
     system=SYSTEM,
@@ -44,7 +44,7 @@ r1 = client.beta.messages.create(
 
 # Turn 2: reference the previous response id
 r2 = client.beta.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     cache_control={"type": "ephemeral"},
     system=SYSTEM,
@@ -75,7 +75,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 # Turn 2: stream, referencing the previous response id
 with client.beta.messages.stream(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     cache_control={"type": "ephemeral"},
     system=SYSTEM,
@@ -157,7 +157,7 @@ for i, user_message in enumerate(
     messages.append({"role": "user", "content": user_message})
 
     r = client.beta.messages.create(
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         max_tokens=1024,
         cache_control={"type": "ephemeral"},
         system=SYSTEM,

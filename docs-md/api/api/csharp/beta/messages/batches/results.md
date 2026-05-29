@@ -78,6 +78,10 @@ Optional header to specify the beta version(s) you want to use.
 
 "cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
 
+"thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+
+"mid-conversation-system-2026-04-07"MidConversationSystem2026\_04\_07
+
 ##### ReturnsExpand Collapse
 
 class BetaMessageBatchIndividualResponse:
@@ -479,6 +483,8 @@ One of the following:
 
 "url\_not\_allowed"UrlNotAllowed
 
+"url\_not\_in\_prior\_context"UrlNotInPriorContext
+
 "url\_not\_accessible"UrlNotAccessible
 
 "unsupported\_content\_type"UnsupportedContentType
@@ -595,6 +601,10 @@ JsonElement Type "advisor\_tool\_result\_error"constant
 
 class BetaAdvisorResultBlock:
 
+required string? StopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 required string Text
 
 JsonElement Type "advisor\_result"constant
@@ -604,6 +614,10 @@ class BetaAdvisorRedactedResultBlock:
 required string EncryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+required string? StopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonElement Type "advisor\_redacted\_result"constant
 
@@ -1098,6 +1112,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
+
 "claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
@@ -1401,6 +1419,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
+
 "claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
@@ -1480,6 +1502,28 @@ Usage for an advisor sub-inference iteration
 required Long OutputTokens
 
 The number of output tokens which were used.
+
+required OutputTokensDetails? OutputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+required Long ThinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 required [BetaServerToolUsage](api/beta.md)? ServerToolUse
 

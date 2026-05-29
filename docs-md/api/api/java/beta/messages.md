@@ -56,6 +56,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -138,6 +142,10 @@ String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
+
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
 class BetaAdvisorRedactedResultBlockParam:
@@ -148,7 +156,13 @@ Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
+Optional<String> stopReason
+
 class BetaAdvisorResultBlock:
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
 
 String text
 
@@ -160,6 +174,8 @@ String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
 
+Optional<String> stopReason
+
 class BetaAdvisorTool20260301:
 
 Model model
@@ -169,6 +185,10 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -342,6 +362,10 @@ JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_er
 
 class BetaAdvisorResultBlock:
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
@@ -351,6 +375,10 @@ class BetaAdvisorRedactedResultBlock:
 String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
@@ -390,6 +418,8 @@ String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
 
+Optional<String> stopReason
+
 class BetaAdvisorRedactedResultBlockParam:
 
 String encryptedContent
@@ -397,6 +427,8 @@ String encryptedContent
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+Optional<String> stopReason
 
 String toolUseId
 
@@ -1721,10 +1753,6 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-Optional<String> content
-
-Summary of previously compacted content, or null if compaction failed
-
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
@@ -1749,6 +1777,10 @@ One of the following:
 TTL\_5M("5m")
 
 TTL\_1H("1h")
+
+Optional<String> content
+
+Summary of previously compacted content, or null if compaction failed
 
 Optional<String> encryptedContent
 
@@ -2214,6 +2246,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -2330,6 +2364,10 @@ JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_er
 
 class BetaAdvisorResultBlock:
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
@@ -2339,6 +2377,10 @@ class BetaAdvisorRedactedResultBlock:
 String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
@@ -4319,6 +4361,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -4699,6 +4743,8 @@ String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
 
+Optional<String> stopReason
+
 class BetaAdvisorRedactedResultBlockParam:
 
 String encryptedContent
@@ -4706,6 +4752,8 @@ String encryptedContent
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+Optional<String> stopReason
 
 String toolUseId
 
@@ -5308,10 +5356,6 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-Optional<String> content
-
-Summary of previously compacted content, or null if compaction failed
-
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
@@ -5337,9 +5381,176 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<String> content
+
+Summary of previously compacted content, or null if compaction failed
+
 Optional<String> encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
+
+class BetaMidConversationSystemBlockParam:
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+List<[BetaTextBlockParam](api/beta.md)> content
+
+System instruction text blocks.
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+One of the following:
+
+class BetaCitationCharLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endCharIndex
+
+long startCharIndex
+
+JsonValue; type "char\_location"constant"char\_location"constant
+
+class BetaCitationPageLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endPageNumber
+
+long startPageNumber
+
+JsonValue; type "page\_location"constant"page\_location"constant
+
+class BetaCitationContentBlockLocationParam:
+
+String citedText
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endBlockIndex
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+long startBlockIndex
+
+0-based index of the first cited block in the source's `content` array.
+
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+
+class BetaCitationWebSearchResultLocationParam:
+
+String citedText
+
+String encryptedIndex
+
+Optional<String> title
+
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+
+String url
+
+class BetaCitationSearchResultLocationParam:
+
+String citedText
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+long endBlockIndex
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+long searchResultIndex
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+String source
+
+long startBlockIndex
+
+0-based index of the first cited block in the source's `content` array.
+
+Optional<String> title
+
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+
+JsonValue; type "mid\_conv\_system"constant"mid\_conv\_system"constant
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
 
 class BetaContentBlockSource:
 
@@ -6979,6 +7190,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -7095,6 +7308,10 @@ JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_er
 
 class BetaAdvisorResultBlock:
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
@@ -7104,6 +7321,10 @@ class BetaAdvisorRedactedResultBlock:
 String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
@@ -7598,6 +7819,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -7901,6 +8126,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -7980,6 +8209,28 @@ Usage for an advisor sub-inference iteration
 long outputTokens
 
 The number of output tokens which were used.
+
+Optional<OutputTokensDetails> outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
@@ -8149,6 +8400,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -8228,6 +8483,28 @@ Usage for an advisor sub-inference iteration
 long outputTokens
 
 The cumulative number of output tokens which were used.
+
+Optional<OutputTokensDetails> outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
@@ -9870,6 +10147,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -10250,6 +10529,8 @@ String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
 
+Optional<String> stopReason
+
 class BetaAdvisorRedactedResultBlockParam:
 
 String encryptedContent
@@ -10257,6 +10538,8 @@ String encryptedContent
 Opaque blob produced by a prior response; must be round-tripped verbatim.
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
+
+Optional<String> stopReason
 
 String toolUseId
 
@@ -10859,10 +11142,6 @@ to maintain context across compaction boundaries.
 When content is None, the block represents a failed compaction. The server
 treats these as no-ops. Empty string content is not allowed.
 
-Optional<String> content
-
-Summary of previously compacted content, or null if compaction failed
-
 JsonValue; type "compaction"constant"compaction"constant
 
 Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
@@ -10888,9 +11167,176 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+Optional<String> content
+
+Summary of previously compacted content, or null if compaction failed
+
 Optional<String> encryptedContent
 
 Opaque metadata from prior compaction, to be round-tripped verbatim
+
+class BetaMidConversationSystemBlockParam:
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+List<[BetaTextBlockParam](api/beta.md)> content
+
+System instruction text blocks.
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+One of the following:
+
+class BetaCitationCharLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endCharIndex
+
+long startCharIndex
+
+JsonValue; type "char\_location"constant"char\_location"constant
+
+class BetaCitationPageLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endPageNumber
+
+long startPageNumber
+
+JsonValue; type "page\_location"constant"page\_location"constant
+
+class BetaCitationContentBlockLocationParam:
+
+String citedText
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endBlockIndex
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+long startBlockIndex
+
+0-based index of the first cited block in the source's `content` array.
+
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+
+class BetaCitationWebSearchResultLocationParam:
+
+String citedText
+
+String encryptedIndex
+
+Optional<String> title
+
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+
+String url
+
+class BetaCitationSearchResultLocationParam:
+
+String citedText
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+long endBlockIndex
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+long searchResultIndex
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+String source
+
+long startBlockIndex
+
+0-based index of the first cited block in the source's `content` array.
+
+Optional<String> title
+
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+
+JsonValue; type "mid\_conv\_system"constant"mid\_conv\_system"constant
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
 
 Role role
 
@@ -10899,6 +11345,8 @@ One of the following:
 USER("user")
 
 ASSISTANT("assistant")
+
+SYSTEM("system")
 
 class BetaMessageTokensCount:
 
@@ -10923,6 +11371,169 @@ An external identifier for the user who is associated with the request.
 This should be a uuid, hash value, or other opaque identifier. Anthropic may use this id to help detect abuse. Do not include any identifying information such as name, email address, or phone number.
 
 maxLength512
+
+class BetaMidConversationSystemBlockParam:
+
+System instructions that appear mid-conversation.
+
+Use this block to provide or update system-level instructions at a specific
+point in the conversation, rather than only via the top-level `system` parameter.
+
+List<[BetaTextBlockParam](api/beta.md)> content
+
+System instruction text blocks.
+
+String text
+
+JsonValue; type "text"constant"text"constant
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
+
+Optional<List<[BetaTextCitationParam](api/beta.md)>> citations
+
+One of the following:
+
+class BetaCitationCharLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endCharIndex
+
+long startCharIndex
+
+JsonValue; type "char\_location"constant"char\_location"constant
+
+class BetaCitationPageLocationParam:
+
+String citedText
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endPageNumber
+
+long startPageNumber
+
+JsonValue; type "page\_location"constant"page\_location"constant
+
+class BetaCitationContentBlockLocationParam:
+
+String citedText
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+long documentIndex
+
+Optional<String> documentTitle
+
+long endBlockIndex
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+long startBlockIndex
+
+0-based index of the first cited block in the source's `content` array.
+
+JsonValue; type "content\_block\_location"constant"content\_block\_location"constant
+
+class BetaCitationWebSearchResultLocationParam:
+
+String citedText
+
+String encryptedIndex
+
+Optional<String> title
+
+JsonValue; type "web\_search\_result\_location"constant"web\_search\_result\_location"constant
+
+String url
+
+class BetaCitationSearchResultLocationParam:
+
+String citedText
+
+The full text of the cited block range, concatenated.
+
+Always equals the contents of `content[start_block_index:end_block_index]` joined together. The text block is the minimal citable unit; this field is never a substring of a single block. Not counted toward output tokens, and not counted toward input tokens when sent back in subsequent turns.
+
+long endBlockIndex
+
+Exclusive 0-based end index of the cited block range in the source's `content` array.
+
+Always greater than `start_block_index`; a single-block citation has `end_block_index = start_block_index + 1`.
+
+long searchResultIndex
+
+0-based index of the cited search result among all `search_result` content blocks in the request, in the order they appear across messages and tool results.
+
+Counted separately from `document_index`; server-side web search results are not included in this count.
+
+minimum0
+
+String source
+
+long startBlockIndex
+
+0-based index of the first cited block in the source's `content` array.
+
+Optional<String> title
+
+JsonValue; type "search\_result\_location"constant"search\_result\_location"constant
+
+JsonValue; type "mid\_conv\_system"constant"mid\_conv\_system"constant
+
+Optional<[BetaCacheControlEphemeral](api/beta.md)> cacheControl
+
+Create a cache control breakpoint at this content block.
+
+JsonValue; type "ephemeral"constant"ephemeral"constant
+
+Optional<Ttl> ttl
+
+The time-to-live for the cache control breakpoint.
+
+This may be one the following values:
+
+- `5m`: 5 minutes
+- `1h`: 1 hour
+
+Defaults to `5m`.
+
+One of the following:
+
+TTL\_5M("5m")
+
+TTL\_1H("1h")
 
 class BetaOutputConfig:
 
@@ -11102,6 +11713,10 @@ JsonValue; type "citations\_delta"constant"citations\_delta"constant
 
 class BetaThinkingDelta:
 
+Optional<Long> estimatedTokens
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
+
 String thinking
 
 JsonValue; type "thinking\_delta"constant"thinking\_delta"constant
@@ -11251,6 +11866,10 @@ JsonValue; type "search\_result\_location"constant"search\_result\_location"cons
 JsonValue; type "citations\_delta"constant"citations\_delta"constant
 
 class BetaThinkingDelta:
+
+Optional<Long> estimatedTokens
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 String thinking
 
@@ -11590,6 +12209,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -11706,6 +12327,10 @@ JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_er
 
 class BetaAdvisorResultBlock:
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
@@ -11715,6 +12340,10 @@ class BetaAdvisorRedactedResultBlock:
 String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
@@ -12388,6 +13017,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -12467,6 +13100,28 @@ Usage for an advisor sub-inference iteration
 long outputTokens
 
 The cumulative number of output tokens which were used.
+
+Optional<OutputTokensDetails> outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
@@ -12861,6 +13516,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -12977,6 +13634,10 @@ JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_er
 
 class BetaAdvisorResultBlock:
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
@@ -12986,6 +13647,10 @@ class BetaAdvisorRedactedResultBlock:
 String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
@@ -13480,6 +14145,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -13783,6 +14452,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -13862,6 +14535,28 @@ Usage for an advisor sub-inference iteration
 long outputTokens
 
 The number of output tokens which were used.
+
+Optional<OutputTokensDetails> outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
@@ -14286,6 +14981,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -14402,6 +15099,10 @@ JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_er
 
 class BetaAdvisorResultBlock:
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
@@ -14411,6 +15112,10 @@ class BetaAdvisorRedactedResultBlock:
 String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
@@ -14905,6 +15610,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -15208,6 +15917,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -15287,6 +16000,28 @@ Usage for an advisor sub-inference iteration
 long outputTokens
 
 The number of output tokens which were used.
+
+Optional<OutputTokensDetails> outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
@@ -15592,6 +16327,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -15671,6 +16410,28 @@ Usage for an advisor sub-inference iteration
 long outputTokens
 
 The cumulative number of output tokens which were used.
+
+Optional<OutputTokensDetails> outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
@@ -16002,6 +16763,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -16118,6 +16881,10 @@ JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_er
 
 class BetaAdvisorResultBlock:
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
@@ -16127,6 +16894,10 @@ class BetaAdvisorRedactedResultBlock:
 String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
@@ -16655,6 +17426,10 @@ JsonValue; type "search\_result\_location"constant"search\_result\_location"cons
 JsonValue; type "citations\_delta"constant"citations\_delta"constant
 
 class BetaThinkingDelta:
+
+Optional<Long> estimatedTokens
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 String thinking
 
@@ -18421,6 +19196,10 @@ SUMMARIZED("summarized")
 OMITTED("omitted")
 
 class BetaThinkingDelta:
+
+Optional<Long> estimatedTokens
+
+Per-frame increment of a coarse, running estimate of the tokens this thinking block has produced so far. Present whenever the `thinking-token-count-2026-05-13` beta is set; `null` unless `thinking.display` resolves to `"omitted"` and a count is due this frame. Sum the increments across `thinking_delta` frames on this block for a progress indicator. Each increment is a non-negative multiple of a fixed quantum and the cadence is rate-limited, so this is a deliberately lossy display hint, not a billable count; `usage.output_tokens` remains authoritative.
 
 String thinking
 
@@ -21406,6 +22185,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -21985,6 +22768,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -22064,6 +22851,28 @@ Usage for an advisor sub-inference iteration
 long outputTokens
 
 The number of output tokens which were used.
+
+Optional<OutputTokensDetails> outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
@@ -22691,6 +23500,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -22796,6 +23607,8 @@ INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
 
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
@@ -23157,6 +23970,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -23181,6 +23996,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -23200,6 +24017,8 @@ INVALID\_TOOL\_INPUT("invalid\_tool\_input")
 URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
+
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
 
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
@@ -24303,6 +25122,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -24419,6 +25240,10 @@ JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_er
 
 class BetaAdvisorResultBlock:
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
@@ -24428,6 +25253,10 @@ class BetaAdvisorRedactedResultBlock:
 String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
@@ -24922,6 +25751,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -25225,6 +26058,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -25304,6 +26141,28 @@ Usage for an advisor sub-inference iteration
 long outputTokens
 
 The number of output tokens which were used.
+
+Optional<OutputTokensDetails> outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
@@ -25834,6 +26693,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -25950,6 +26811,10 @@ JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_er
 
 class BetaAdvisorResultBlock:
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
@@ -25959,6 +26824,10 @@ class BetaAdvisorRedactedResultBlock:
 String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
@@ -26453,6 +27322,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -26756,6 +27629,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -26835,6 +27712,28 @@ Usage for an advisor sub-inference iteration
 long outputTokens
 
 The number of output tokens which were used.
+
+Optional<OutputTokensDetails> outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 
@@ -27329,6 +28228,8 @@ URL\_TOO\_LONG("url\_too\_long")
 
 URL\_NOT\_ALLOWED("url\_not\_allowed")
 
+URL\_NOT\_IN\_PRIOR\_CONTEXT("url\_not\_in\_prior\_context")
+
 URL\_NOT\_ACCESSIBLE("url\_not\_accessible")
 
 UNSUPPORTED\_CONTENT\_TYPE("unsupported\_content\_type")
@@ -27445,6 +28346,10 @@ JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_er
 
 class BetaAdvisorResultBlock:
 
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`). `max_tokens` indicates the advisor's output was truncated at the tool's `max_tokens` value or the advisor model's policy cap.
+
 String text
 
 JsonValue; type "advisor\_result"constant"advisor\_result"constant
@@ -27454,6 +28359,10 @@ class BetaAdvisorRedactedResultBlock:
 String encryptedContent
 
 Opaque blob containing the advisor's output. Round-trip verbatim; do not inspect or modify.
+
+Optional<String> stopReason
+
+The advisor sub-inference's stop reason (same values as the top-level message `stop_reason`).
 
 JsonValue; type "advisor\_redacted\_result"constant"advisor\_redacted\_result"constant
 
@@ -27948,6 +28857,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -28251,6 +29164,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -28330,6 +29247,28 @@ Usage for an advisor sub-inference iteration
 long outputTokens
 
 The number of output tokens which were used.
+
+Optional<OutputTokensDetails> outputTokensDetails
+
+Breakdown of output tokens by category.
+
+`output_tokens` remains the inclusive, authoritative total used for billing.
+This object provides a read-only decomposition for observability — for example,
+how many of the billed output tokens were spent on internal reasoning that may
+have been summarized before being returned to you.
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
 
 Optional<[BetaServerToolUsage](api/beta.md)> serverToolUse
 

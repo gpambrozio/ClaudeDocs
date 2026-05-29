@@ -2,7 +2,7 @@
 
 Copy page
 
-You can mount a GitHub repository to your session container and connect to the GitHub MCP for making pull requests.
+You can mount a GitHub repository to your session sandbox and connect to the GitHub MCP for making pull requests.
 
 GitHub repositories are cached, so future sessions that use the same repository start faster.
 
@@ -17,7 +17,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 AGENT_ID=$(ant beta:agents create \
   --name "Code Reviewer" \
-  --model '{id: claude-opus-4-7}' \
+  --model '{id: claude-opus-4-8}' \
   --system "You are a code review assistant with access to GitHub." \
   --mcp-server '{type: url, name: github, url: https://api.githubcopilot.com/mcp/}' \
   --tool '{type: agent_toolset_20260401}' \

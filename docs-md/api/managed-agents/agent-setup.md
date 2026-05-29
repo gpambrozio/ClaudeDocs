@@ -24,19 +24,19 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 ## Create an agent
 
-The following example defines a coding agent that uses Claude Opus 4.7 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](managed-agents/tools.md) for the full list of supported tools.
+The following example defines a coding agent that uses Claude Opus 4.8 with access to the pre-built agent toolset. The toolset lets the agent write code, read files, search the web, and more. See the [agent tools reference](managed-agents/tools.md) for the full list of supported tools.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 ant beta:agents create \
   --name "Coding Assistant" \
-  --model '{id: claude-opus-4-7}' \
+  --model '{id: claude-opus-4-8}' \
   --system "You are a helpful coding agent." \
   --tool '{type: agent_toolset_20260401}'
 ```
 
-To use Claude Opus 4.6 or Claude Opus 4.7 with [fast mode](build-with-claude/fast-mode.md), pass `model` as an object: `{"id": "claude-opus-4-7", "speed": "fast"}`.
+To use Claude Opus 4.8, Claude Opus 4.7, or Claude Opus 4.6 with [fast mode](build-with-claude/fast-mode.md), pass `model` as an object, for example: `{"id": "claude-opus-4-8", "speed": "fast"}`. Fast mode for Claude Opus 4.6 is deprecated as of the Claude Opus 4.8 launch and will be removed approximately 30 days later.
 
 The response echoes your configuration and adds `id`, `type`, `version`, `created_at`, `updated_at`, and `archived_at` fields. The `version` starts at 1 and increments each time an update changes the agent.
 
@@ -46,7 +46,7 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
   "type": "agent",
   "name": "Coding Assistant",
   "model": {
-    "id": "claude-opus-4-7",
+    "id": "claude-opus-4-8",
     "speed": "standard"
   },
   "system": "You are a helpful coding agent.",

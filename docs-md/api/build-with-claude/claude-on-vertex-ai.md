@@ -59,6 +59,7 @@ Lifecycle terms (Deprecated, Retired) are defined in [Model deprecations](about-
 
 | Model | Vertex AI API model ID |
 | --- | --- |
+| Claude Opus 4.8 | claude-opus-4-8 |
 | Claude Opus 4.7 | claude-opus-4-7 |
 | Claude Opus 4.6 | claude-opus-4-6 |
 | Claude Sonnet 4.6 | claude-sonnet-4-6 |
@@ -90,7 +91,7 @@ region = "global"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=100,
     messages=[
         {
@@ -142,7 +143,7 @@ For the full feature list with Vertex AI availability, see [Features overview](b
 
 ### Context window
 
-Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
+Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6 have a [1M-token context window](build-with-claude/context-windows.md) on Vertex AI. Other Claude models, including Sonnet 4.5 and Sonnet 4 (deprecated), have a 200k-token context window.
 
 Vertex AI limits request payloads to 30 MB. When sending large documents or many images, you may reach this limit before the token limit.
 
@@ -199,7 +200,7 @@ region = "global"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=100,
     messages=[
         {
@@ -226,7 +227,7 @@ region = "us"  # Multi-region identifier: "us" or "eu"
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=100,
     messages=[
         {
@@ -253,7 +254,7 @@ region = "us-east1"  # Specify a specific region
 client = AnthropicVertex(project_id=project_id, region=region)
 
 message = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=100,
     messages=[
         {

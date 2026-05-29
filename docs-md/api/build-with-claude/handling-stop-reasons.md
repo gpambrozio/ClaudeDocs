@@ -117,7 +117,7 @@ messages = [
 # If you still get empty responses after fixing the above:
 def handle_empty_response(client, messages):
     response = client.messages.create(
-        model="claude-opus-4-7", max_tokens=1024, messages=messages
+        model="claude-opus-4-8", max_tokens=1024, messages=messages
     )
 
     # Check if response is empty
@@ -129,7 +129,7 @@ def handle_empty_response(client, messages):
         messages.append({"role": "user", "content": "Please continue"})
 
         response = client.messages.create(
-            model="claude-opus-4-7", max_tokens=1024, messages=messages
+            model="claude-opus-4-8", max_tokens=1024, messages=messages
         )
 
     return response
@@ -150,7 +150,7 @@ Python
 ```shiki
 # Request with limited tokens
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=10,
     messages=[{"role": "user", "content": "Explain quantum physics"}],
 )
@@ -175,7 +175,7 @@ if response.stop_reason == "max_tokens":
     if last_block.type == "tool_use":
         # Send the request with higher max_tokens
         response = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=4096,  # Increased limit
             messages=messages,
             tools=tools,
@@ -190,7 +190,7 @@ Python
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     stop_sequences=["END", "STOP"],
     messages=[{"role": "user", "content": "Generate text until you say END"}],
@@ -204,7 +204,7 @@ if response.stop_reason == "stop_sequence":
 
 Claude is calling a tool and expects you to execute it.
 
-For most tool use implementations, we recommend using the [tool runner](agents-and-tools/tool-use/tool-runner.md) which automatically handles tool execution, result formatting, and conversation management.
+For most tool use implementations, use the [tool runner](agents-and-tools/tool-use/tool-runner.md), which automatically handles tool execution, result formatting, and conversation management.
 
 Python
 
@@ -253,7 +253,7 @@ Python
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     tools=[{"type": "web_search_20250305", "name": "web_search"}],
     messages=[{"role": "user", "content": "Search for latest AI news"}],
@@ -266,7 +266,7 @@ if response.stop_reason == "pause_turn":
         {"role": "assistant", "content": response.content},
     ]
     continuation = client.messages.create(
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         max_tokens=1024,
         messages=messages,
         tools=[{"type": "web_search_20250305", "name": "web_search"}],
@@ -283,7 +283,7 @@ Python
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "[Unsafe request]"}],
 )
@@ -296,6 +296,34 @@ if response.stop_reason == "refusal":
 
 If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5 or Opus 4.1, you can try updating your API calls to use Haiku 4.5 (`claude-haiku-4-5-20251001`), which has different usage restrictions. Learn more about [understanding Sonnet 4.5's API safety filters](https://support.claude.com/en/articles/12449294-understanding-sonnet-4-5-s-api-safety-filters).
 
+#### Refusal categories
+
+On Claude Opus 4.7 and later models, a `refusal` response also includes a `stop_details` object alongside `stop_reason`, with no beta header required:
+
+- `stop_details.type` is always `"refusal"`.
+- `stop_details.category` identifies the policy category that triggered the refusal: `"cyber"` or `"bio"`. It is `null` when the refusal doesn't map to a named category.
+- `stop_details.explanation` is a human-readable description of the refusal, or `null` when no explanation is available for the category. The text is not guaranteed to be stable, so don't parse it programmatically.
+
+Use `stop_details.category` to handle specific refusal categories differently in your application, for example by logging them separately or surfacing a category-specific message to the user.
+
+Python
+
+```shiki
+response = client.messages.create(
+    model="claude-opus-4-8",
+    max_tokens=1024,
+    messages=[{"role": "user", "content": "[Unsafe request]"}],
+)
+
+if response.stop_reason == "refusal" and response.stop_details:
+    print(f"Refusal category: {response.stop_details.category}")
+    if response.stop_details.category == "cyber":
+        # Route this category differently from generic safety refusals
+        print(response.stop_details.explanation)
+```
+
+`stop_details` is `null` for all stop reasons other than `refusal`.
+
 ### model\_context\_window\_exceeded
 
 Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
@@ -305,8 +333,8 @@ Python
 ```shiki
 # Request with maximum tokens to get as much as possible
 response = client.messages.create(
-    model="claude-opus-4-7",
-    max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k (Opus 4.7 supports 128k with streaming)
+    model="claude-opus-4-8",
+    max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k (Opus 4.8 supports 128k with streaming)
     messages=[
         {"role": "user", "content": "Large input that uses most of context window..."}
     ],
@@ -363,7 +391,7 @@ def handle_truncated_response(response):
             {"role": "assistant", "content": response.content[0].text},
         ]
         continuation = client.messages.create(
-            model="claude-opus-4-7",
+            model="claude-opus-4-8",
             max_tokens=1024,
             messages=messages + [{"role": "user", "content": "Please continue"}],
         )
@@ -387,7 +415,7 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
 
     for _ in range(max_continuations):
         response = client.messages.create(
-            model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
+            model="claude-opus-4-8", max_tokens=1024, messages=messages, tools=tools
         )
 
         if response.stop_reason != "pause_turn":
@@ -486,7 +514,7 @@ def complete_tool_workflow(client, user_query, tools):
 
     while True:
         response = client.messages.create(
-            model="claude-opus-4-7", max_tokens=1024, messages=messages, tools=tools
+            model="claude-opus-4-8", max_tokens=1024, messages=messages, tools=tools
         )
 
         if response.stop_reason == "tool_use":
@@ -508,7 +536,7 @@ def get_complete_response(client, prompt, max_attempts=3):
 
     for _ in range(max_attempts):
         response = client.messages.create(
-            model="claude-opus-4-7", messages=messages, max_tokens=4096
+            model="claude-opus-4-8", messages=messages, max_tokens=4096
         )
 
         full_response += response.content[0].text
@@ -537,7 +565,7 @@ def get_max_possible_tokens(client, prompt):
     without needing to calculate input token count
     """
     response = client.messages.create(
-        model="claude-opus-4-7",
+        model="claude-opus-4-8",
         messages=[{"role": "user", "content": prompt}],
         max_tokens=20000,  # Python SDK requires streaming for max_tokens above ~21k
     )

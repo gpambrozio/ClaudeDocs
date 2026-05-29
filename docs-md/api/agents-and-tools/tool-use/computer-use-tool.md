@@ -6,7 +6,7 @@ Claude can interact with computer environments through the computer use tool, wh
 
 Computer use is in beta and requires a [beta header](api/beta-headers.md):
 
-- `"computer-use-2025-11-24"` for Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5
+- `"computer-use-2025-11-24"` for Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5
 - `"computer-use-2025-01-24"` for Claude Sonnet 4.5, Claude Haiku 4.5, Claude Opus 4.1, Claude Sonnet 4 ([deprecated](about-claude/model-deprecations.md)), and Claude Opus 4 ([deprecated](about-claude/model-deprecations.md))
 
 Reach out through the [feedback form](https://forms.gle/H6UFuXaaLywri9hz6) to share your feedback on this feature.
@@ -59,7 +59,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.beta.messages.create(
-    model="claude-opus-4-7",  # or another compatible model
+    model="claude-opus-4-8",  # or another compatible model
     max_tokens=1024,
     tools=[
         {
@@ -274,7 +274,7 @@ Available on all models that support computer use:
 - **wait:** Pause between actions
 
 **Enhanced actions (`computer_20251124`)**
-Available in Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5:
+Available in Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, and Claude Opus 4.5:
 
 - All actions from `computer_20250124`
 - **zoom:** View a specific region of the screen at full resolution. Requires `enable_zoom: true` in tool definition. Takes a `region` parameter with coordinates `[x1, y1, x2, y2]` defining top-left and bottom-right corners of the area to inspect.
@@ -531,7 +531,7 @@ When implementing the computer use tool, various errors might occur. Here's how 
 
 #### Handle coordinate scaling for higher resolutions
 
-Claude Opus 4.7 supports up to 2576 pixels on the long edge, and its coordinates are 1:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance that follows applies to earlier models.
+Claude Opus 4.8 and Claude Opus 4.7 support up to 2576 pixels on the long edge, and their coordinates are 1:1 with image pixels (no scale-factor conversion required). The 1568-pixel guidance that follows applies to earlier models.
 
 The API constrains images to a maximum of 1568 pixels on the longest edge and approximately 1.15 megapixels total (see [image resizing](build-with-claude/vision.md) for details). For example, a 1512x982 screen gets downsampled to approximately 1330x864. Claude analyzes this smaller image and returns coordinates in that space, but your tool performs clicks in the original screen space.
 

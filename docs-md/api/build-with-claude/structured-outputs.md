@@ -9,7 +9,7 @@ Structured outputs constrain Claude's responses to follow a specific schema, ens
 
 You can use these features independently or together in the same request.
 
-Structured outputs are generally available on the Claude API for [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. On Amazon Bedrock, structured outputs are generally available for Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Opus 4.7 and Claude Mythos Preview are available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint). Structured outputs are available on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) and in beta on [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On [Vertex AI](build-with-claude/claude-on-vertex-ai.md), structured outputs are generally available for Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6.
+Structured outputs are generally available on the Claude API for Claude Opus 4.8, [Claude Mythos Preview](https://anthropic.com/glasswing), Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5. On Amazon Bedrock, structured outputs are generally available for Claude Opus 4.8, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5; Claude Opus 4.7 and Claude Mythos Preview are available through [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) (the Messages-API Bedrock endpoint). Structured outputs are available on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) and in beta on [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md). On [Vertex AI](build-with-claude/claude-on-vertex-ai.md), structured outputs are generally available for Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Sonnet 4.5, Claude Opus 4.5, and Claude Haiku 4.5.
 
 This feature qualifies for [Zero Data Retention (ZDR)](build-with-claude/api-and-data-retention.md) with limited technical retention. See the [Data retention](#data-retention) section for details on what is retained and why.
 
@@ -47,7 +47,7 @@ cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 client = anthropic.Anthropic()
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -138,7 +138,7 @@ class ContactInfo(BaseModel):
 client = Anthropic()
 
 response = client.messages.parse(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -201,7 +201,7 @@ class ContactInfo(BaseModel):
     plan_interest: str
 # ...
 response = client.messages.parse(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
@@ -232,7 +232,7 @@ schema = transform_schema(schema)
 schema["properties"]["custom_field"] = {"type": "string"}
 
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[{"role": "user", "content": "..."}],
     output_config={
@@ -280,7 +280,7 @@ CLIPythonTypeScriptC#GoJavaPHPRuby
 
 ```shiki
 response = client.messages.create(
-    model="claude-opus-4-7",
+    model="claude-opus-4-8",
     max_tokens=1024,
     messages=[
         {
