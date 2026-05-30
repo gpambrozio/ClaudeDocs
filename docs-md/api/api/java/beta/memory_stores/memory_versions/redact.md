@@ -2,7 +2,9 @@
 
 Copy page
 
-Java
+SDK language
+
+Java
 
 # Redact a memory version
 

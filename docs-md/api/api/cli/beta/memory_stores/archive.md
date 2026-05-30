@@ -2,7 +2,9 @@
 
 Copy page
 
-CLI
+SDK language
+
+CLI
 
 # Archive a memory store
 

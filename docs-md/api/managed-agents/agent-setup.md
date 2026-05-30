@@ -90,6 +90,7 @@ ant beta:agents update \
 - **`multiagent`** is replaced as a whole, including its `agents` roster. Pass `null` to clear it.
 - **Metadata** is merged at the key level. Keys you provide are added or updated. Keys you omit are preserved. To delete a specific key, set its value to an empty string.
 - **No-op detection.** If the update produces no change relative to the current version, no new version is created and the existing version is returned.
+- **Coordinator rosters are not updated.** Coordinators that reference this agent in their `multiagent.agents` roster keep the version that was pinned when the coordinator was created or last updated, even if the reference omits `version`. To delegate to the new version, [update the coordinator](managed-agents/multi-agent.md) so its roster references it.
 
 ## Agent lifecycle
 

@@ -2,7 +2,9 @@
 
 Copy page
 
-cURL
+SDK language
+
+cURL
 
 # List Session Thread Events
 

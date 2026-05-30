@@ -341,16 +341,23 @@ Each background session can run on a different model. To override it for one ses
 A background session reads its [settings](settings.md) from the directory it runs in, the same as if you had started `claude` there.
 The [permission mode](permissions.md) depends on how you started the session. Backgrounding an existing session with `/bg` or `←` keeps the current permission mode, so a session you switched to `acceptEdits` or `auto` stays in that mode after detaching. Dispatching from the agent view input or running `claude --bg` from your shell uses the `defaultMode` from that directory’s settings, or the `permissionMode` from the dispatched [subagent’s frontmatter](sub-agents.md).
 The permission mode you start a background session with persists when the supervisor later [stops and restarts](#the-supervisor-process) the session’s process. A session you launched with `claude --bg --dangerously-skip-permissions` or `claude --bg --permission-mode bypassPermissions` stays in `bypassPermissions` after that restart instead of falling back to the directory’s `defaultMode`.
-To set defaults for every session you dispatch from agent view, pass any of `--permission-mode`, `--model`, or `--effort` when opening it:
+To set defaults for every session you dispatch from agent view, pass any of `--permission-mode`, `--model`, `--effort`, or `--agent` when opening it:
 
 ```shiki
 claude agents --permission-mode plan --model opus --effort high
 ```
 
+`--agent` sets the [subagent](sub-agents.md) used when a dispatch prompt does not name one, either with `@name` or as the first word. It defaults to the [`agent` setting](settings.md) if one is set, otherwise the built-in catch-all `claude` agent. Naming a subagent in the dispatch input overrides both.
 `claude agents` also accepts `--dangerously-skip-permissions` as shorthand for `--permission-mode bypassPermissions`, and `--allow-dangerously-skip-permissions` to make `bypassPermissions` available in each dispatched session’s `Shift+Tab` cycle without starting in that mode. Both match the [top-level CLI flags](cli-reference.md).
+These flags were added across releases. Earlier versions reject them with an unknown-option error.
 
-Passing `--permission-mode`, `--model`, `--effort`, or `--dangerously-skip-permissions` to `claude agents` requires Claude Code v2.1.142 or later. `--allow-dangerously-skip-permissions` on `claude agents` requires v2.1.143 or later. Earlier versions reject these flags with an unknown-option error.
+| Flag or setting | Minimum version |
+| --- | --- |
+| `--permission-mode`, `--model`, `--effort`, `--dangerously-skip-permissions` | v2.1.142 |
+| `--allow-dangerously-skip-permissions` | v2.1.143 |
+| `--agent`, and honoring the `agent` setting for dispatched sessions | v2.1.157 |
 
+Before v2.1.157, agent view ignores the `agent` setting and dispatches the built-in `claude` agent.
 The active defaults appear in the footer below the dispatch input.
 Without these flags, the session uses the `defaultMode` from that directory’s settings or the `permissionMode` from the dispatched [subagent’s frontmatter](sub-agents.md), and the model shown in the agent view header.
 Using `bypassPermissions` or `auto` is refused until you have accepted that mode by running `claude` with it once interactively, since those modes let a session you aren’t watching act without approval. The same applies whether you pass the mode to `claude agents` or to `claude --bg --permission-mode`.

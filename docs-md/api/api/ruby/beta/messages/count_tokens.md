@@ -2,7 +2,9 @@
 
 Copy page
 
-Ruby
+SDK language
+
+Ruby
 
 # Count tokens in a Message
 

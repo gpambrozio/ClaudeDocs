@@ -2,7 +2,9 @@
 
 Copy page
 
-Ruby
+SDK language
+
+Ruby
 
 # Cancel a Message Batch
 

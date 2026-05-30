@@ -2,7 +2,9 @@
 
 Copy page
 
-C#
+SDK language
+
+C#
 
 # Cancel a Message Batch
 

@@ -2,7 +2,9 @@
 
 Copy page
 
-TypeScript
+SDK language
+
+TypeScript
 
 # Count tokens in a Message
 

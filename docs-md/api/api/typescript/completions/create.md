@@ -2,7 +2,9 @@
 
 Copy page
 
-TypeScript
+SDK language
+
+TypeScript
 
 # Create a Text Completion
 

@@ -2,7 +2,9 @@
 
 Copy page
 
-Java
+SDK language
+
+Java
 
 # Send Events
 

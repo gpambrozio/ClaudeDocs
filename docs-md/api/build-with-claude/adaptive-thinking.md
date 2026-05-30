@@ -66,7 +66,7 @@ You can combine adaptive thinking with the [effort parameter](build-with-claude/
 | --- | --- |
 | `max` | Claude always thinks with no constraints on thinking depth. Available on Claude Opus 4.8, Claude Mythos Preview, Claude Opus 4.7, Claude Opus 4.6, and Claude Sonnet 4.6. |
 | `xhigh` | Claude always thinks deeply with extended exploration. Available on Claude Opus 4.8 and Claude Opus 4.7. |
-| `high` (default) | Claude always thinks. Provides deep reasoning on complex tasks. |
+| `high` (default) | Claude almost always thinks. Provides deep reasoning on complex tasks. |
 | `medium` | Claude uses moderate thinking. May skip thinking for very simple queries. |
 | `low` | Claude minimizes thinking. Skips thinking for simple tasks where speed matters most. |
 
@@ -152,6 +152,16 @@ will meaningfully improve answer quality — typically for problems
 that require multi-step reasoning. When in doubt, respond directly.
 ```
 
+To encourage thinking instead, use a phrase like:
+
+```inline-block
+This task involves multi-step reasoning. Think carefully before responding.
+```
+
+Steering effectiveness can be sensitive to exact wording — if one phrasing doesn't produce the behavior you want, try a more direct variant.
+
+You can also steer thinking on a per-message basis from the user turn. Appending `"Please think hard before responding."` to a user message encourages Claude to think on that turn; `"Answer directly without deliberating."` suppresses it. This works independently of the system prompt and is useful when only some requests in a conversation warrant extended reasoning.
+
 Steering Claude to think less often may reduce quality on tasks that benefit from reasoning. Measure the impact on your specific workloads before deploying prompt-based tuning to production. Consider testing with lower [effort levels](build-with-claude/effort.md) first.
 
 ### Cost control
@@ -177,7 +187,7 @@ Here are some important considerations for summarized thinking:
 - Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience.
 - Summarization is processed by a different model than the one you target in your requests. The thinking model does not see the summarized output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#384b59545d4b7859564c504a5748515b165b5755).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#c7b4a6aba2b487a6a9b3afb5a8b7aea4e9a4a8aa).
 
 ### Controlling thinking display
 

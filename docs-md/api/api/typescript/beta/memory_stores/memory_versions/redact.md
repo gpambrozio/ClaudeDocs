@@ -2,7 +2,9 @@
 
 Copy page
 
-TypeScript
+SDK language
+
+TypeScript
 
 # Redact a memory version
 

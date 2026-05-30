@@ -2,7 +2,9 @@
 
 Copy page
 
-Go
+SDK language
+
+Go
 
 # Stream Session Thread Events
 

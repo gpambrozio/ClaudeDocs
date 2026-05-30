@@ -366,6 +366,11 @@ asyncio.run(main())
 | Code modification | `Read`, `Edit`, `Write`, `Grep`, `Glob` | Full read/write access without command execution |
 | Full access | All tools | Inherits all tools from parent (omit `tools` field) |
 
+## [​](#scale-up-with-dynamic-workflows) Scale up with dynamic workflows
+
+Subagents work well for a few delegated tasks per turn. For runs that coordinate dozens to hundreds of agents, use the `Workflow` tool, which moves the orchestration into a script the runtime executes outside the conversation context. See [dynamic workflows](workflows.md) for how workflows differ from turn-by-turn subagent delegation.
+The `Workflow` tool is available in the TypeScript Agent SDK v0.3.149 and later. Include `Workflow` in `allowedTools` to auto-approve workflow runs. The tool input and output schemas are listed in the [TypeScript reference](agent-sdk/typescript.md).
+
 ## [​](#troubleshooting) Troubleshooting
 
 ### [​](#claude-not-delegating-to-subagents) Claude not delegating to subagents
@@ -387,6 +392,7 @@ On Windows, subagents with very long prompts may fail due to command line length
 ## [​](#related-documentation) Related documentation
 
 - [Claude Code subagents](sub-agents.md): comprehensive subagent documentation including filesystem-based definitions
+- [Dynamic workflows](workflows.md): orchestrate many subagents from a script for jobs too large for one conversation
 - [SDK overview](agent-sdk/overview.md): getting started with the Claude Agent SDK
 
 ---

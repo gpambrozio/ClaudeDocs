@@ -2,7 +2,9 @@
 
 Copy page
 
-C#
+SDK language
+
+C#
 
 # Count tokens in a Message
 

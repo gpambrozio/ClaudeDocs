@@ -2,7 +2,9 @@
 
 Copy page
 
-C#
+SDK language
+
+C#
 
 # Archive a memory store
 

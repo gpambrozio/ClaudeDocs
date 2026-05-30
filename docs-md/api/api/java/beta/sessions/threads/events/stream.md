@@ -2,7 +2,9 @@
 
 Copy page
 
-Java
+SDK language
+
+Java
 
 # Stream Session Thread Events
 

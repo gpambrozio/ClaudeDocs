@@ -2,7 +2,9 @@
 
 Copy page
 
-Python
+SDK language
+
+Python
 
 # Retrieve a memory version
 

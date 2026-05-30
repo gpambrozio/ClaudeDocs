@@ -2,7 +2,9 @@
 
 Copy page
 
-PHP
+SDK language
+
+PHP
 
 # Retrieve a Message Batch
 

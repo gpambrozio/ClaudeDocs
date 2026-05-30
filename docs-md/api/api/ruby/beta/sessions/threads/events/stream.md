@@ -2,7 +2,9 @@
 
 Copy page
 
-Ruby
+SDK language
+
+Ruby
 
 # Stream Session Thread Events
 

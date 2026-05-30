@@ -18,6 +18,8 @@ To connect to a remote MCP server:
 
 For more information about using remote MCP servers with the Claude API, see the [MCP connector docs](agents-and-tools/mcp-connector.md).
 
+Once connected, remote MCP tools follow the same triggering behavior as any other tool. See [When Claude uses MCP tools](agents-and-tools/mcp-connector.md).
+
 ## Remote MCP server examples
 
 [Ticket Tailor](https://help.tickettailor.com/en/articles/11892797-how-to-connect-ticket-tailor-to-your-favourite-ai-agent)

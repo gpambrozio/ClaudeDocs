@@ -2,7 +2,9 @@
 
 Copy page
 
-cURL
+SDK language
+
+cURL
 
 # Delete Credential
 

@@ -27,7 +27,8 @@ Create a project folder
 Create a new directory for this quickstart:
 
 ```shiki
-mkdir my-agent && cd my-agent
+mkdir my-agent
+cd my-agent
 ```
 
 For your own projects, you can run the SDK from any folder; it will have access to files in that directory and its subdirectories by default.
@@ -46,18 +47,30 @@ Install the Agent SDK package for your language:
 npm install @anthropic-ai/claude-agent-sdk
 ```
 
-[uv Python package manager](https://docs.astral.sh/uv/) is a fast Python package manager that handles virtual environments automatically:
+[uv](https://docs.astral.sh/uv/) is a fast Python package manager that handles virtual environments automatically:
 
 ```shiki
-uv init && uv add claude-agent-sdk
+uv init
+uv add claude-agent-sdk
 ```
 
-Create a virtual environment first, then install:
+Create and activate a virtual environment, then install the package.On macOS or Linux:
 
 ```shiki
-python3 -m venv .venv && source .venv/bin/activate
-pip3 install claude-agent-sdk
+python3 -m venv .venv
+source .venv/bin/activate
+pip install claude-agent-sdk
 ```
+
+On Windows:
+
+```shiki
+py -m venv .venv
+.venv\Scripts\Activate.ps1
+pip install claude-agent-sdk
+```
+
+If PowerShell blocks `Activate.ps1` with an execution policy error, run `Set-ExecutionPolicy -Scope Process RemoteSigned` first.
 
 The TypeScript SDK bundles a native Claude Code binary for your platform as an optional dependency, so you don’t need to install Claude Code separately.
 

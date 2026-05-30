@@ -2,7 +2,9 @@
 
 Copy page
 
-CLI
+SDK language
+
+CLI
 
 # Cancel a Message Batch
 
