@@ -2,9 +2,9 @@
 
 Copy page
 
-MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
-This guide deploys the MCP tunnel stack as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
+This guide deploys the [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) as hardened containers on a single host. The same configuration can be replicated across multiple hosts for availability.
 
 ## Before you begin
 
@@ -12,10 +12,10 @@ You need:
 
 - **A tunnel created in the Console.** Follow [Create a tunnel](agents-and-tools/mcp-tunnels/console.md) and record the tunnel ID (`tnl_...`).
 - **A way for the host to authenticate to the Tunnels API.**
-  - **Programmatic access (recommended).** Turn on **Set up programmatic access** when creating the tunnel so the `setup` service can authenticate through Workload Identity Federation. Record the federation rule ID (`fdrl_...`) and your organization ID.
+  - **Programmatic access (recommended).** Turn on **Set up programmatic access** when creating the tunnel so the [setup component](agents-and-tools/mcp-tunnels/concepts.md) can authenticate through Workload Identity Federation. Record the federation rule ID (`fdrl_...`) and your organization ID.
   - **Manual.** Skip programmatic access. You'll [get the tunnel token from the Console](agents-and-tools/mcp-tunnels/console.md), generate a CA and server certificate yourself, and [register the CA in the Console](agents-and-tools/mcp-tunnels/console.md).
 - **A host with Docker and Docker Compose** installed. The manual flow also requires `openssl` (1.1.1 or newer).
-- **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the tunnel edge (7844 TCP and UDP). See the full [network requirements](agents-and-tools/mcp-tunnels/overview.md).
+- **Outbound network connectivity** from the host to `api.anthropic.com` (443 TCP) and the [tunnel edge](agents-and-tools/mcp-tunnels/concepts.md) (7844 TCP and UDP). See the full [network requirements](agents-and-tools/mcp-tunnels/overview.md).
 - **One or more MCP servers** running and reachable from the host on the addresses you'll configure under `routes`. If you don't have one yet, [use the sample server](#optional-use-a-sample-mcp-server).
 
 ## Optional: Use a sample MCP server
@@ -23,7 +23,7 @@ You need:
 If you don't have an MCP server available for testing, use this minimal one:
 
 ```shiki
-mkdir -p mcp-tunnel/{config,data}
+mkdir -p mcp-tunnel
 cat > mcp-tunnel/hello_server.py <<'EOF'
 from mcp.server.fastmcp import FastMCP
 
@@ -53,7 +53,9 @@ Without programmatic access
 
 Without programmatic access
 
-The `setup` service uses Workload Identity Federation to fetch the tunnel token, generate a CA and server certificate, and register the CA with Anthropic.
+This path requires the host to have an OIDC identity provider (such as a cloud VM metadata server or SPIFFE). If it doesn't, use the **Without programmatic access** tab instead.
+
+The setup component uses Workload Identity Federation to fetch the tunnel token, generate a CA and server certificate, and register the CA with Anthropic.
 
 1. 1
 
@@ -69,6 +71,8 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
 2. 2
 
    Write docker-compose.yaml
+
+   The compose file pins images by SHA-256 digest, runs every container as non-root with a read-only filesystem, drops all Linux capabilities, and disables privilege escalation.
 
    ```shiki
    cat > docker-compose.yaml <<'EOF'
@@ -137,8 +141,6 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
    EOF
    ```
 
-   The compose file pins images by SHA-256 digest, runs every container as non-root with a read-only filesystem, drops all Linux capabilities, and disables privilege escalation.
-
    If you're using the [sample MCP server](#optional-use-a-sample-mcp-server), append it as a service:
 
    ```shiki
@@ -165,19 +167,19 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
    export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
    ```
 
-   If your federation rule is scoped to a workspace other than your organization's default, also set `ANTHROPIC_WORKSPACE_ID=wrkspc_...`; setup uses the default workspace otherwise.
+   If your federation rule is scoped to a workspace other than your organization's default, also set `ANTHROPIC_WORKSPACE_ID=wrkspc_...`; the setup component uses the default workspace otherwise.
 
-   Set `ANTHROPIC_IDENTITY_TOKEN` to an OIDC JWT from this host's identity provider. Follow the [WIF guide for your provider](manage-claude/workload-identity-federation.md) to register the issuer, set the rule's subject, and mint the token; the rule's audience must match the audience you request when minting. If this host has no identity provider, switch to the **Without programmatic access** tab.
+   Set `ANTHROPIC_IDENTITY_TOKEN` to an OIDC JWT from this host's identity provider. Follow the [WIF guide for your provider](manage-claude/workload-identity-federation.md) to register the issuer, set the rule's subject, and mint the token; the rule's audience must match the audience you request when minting.
 
-   Run setup:
+   Run the setup component:
 
    ```shiki
    docker compose run --rm setup
    ```
 
-   `setup init` is idempotent over `data/`: re-running it reuses the existing CA and skips registration. A new CA is only generated and registered when `data/` is empty or `TUNNEL_ID` has changed; in that case the cap of two active certificates applies, so revoke one in the Console first if both slots are filled.
+   `setup init` is idempotent over `data/`: re-running it reuses the existing CA and skips registration. A new CA is generated and registered only when `data/` is empty or `TUNNEL_ID` has changed; in that case the cap of two active certificates applies, so revoke one in the Console first if both slots are filled.
 
-   See [Setup Job authentication failures](agents-and-tools/mcp-tunnels/troubleshooting.md) if it errors.
+   See [Setup component authentication failures](agents-and-tools/mcp-tunnels/troubleshooting.md) if it errors.
 
    Retrieve your tunnel domain and export it for later steps:
 
@@ -191,7 +193,7 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
 
    Write the proxy config
 
-   `tunnel_domain` is **required**: the proxy uses it to strip the domain suffix from incoming hostnames before looking up the subdomain in `routes`. `routes` is a flat map from subdomain to upstream URL.
+   `tunnel_domain` is **required**: the [proxy](agents-and-tools/mcp-tunnels/concepts.md) uses it to strip the domain suffix from incoming hostnames before looking up the subdomain in `routes`. `routes` is a flat map from subdomain to upstream URL, not a list.
 
    ```shiki
    cat > config/mcp-proxy.yaml <<EOF
@@ -217,11 +219,13 @@ The `setup` service uses Workload Identity Federation to fetch the tunnel token,
    docker compose up -d
    ```
 
-For a multi-VM deployment, copy your deployment directory to each host, set `TUNNEL_TOKEN` (`$(sudo cat data/tunnel-token)` in the programmatic flow, or the revealed value in the manual flow), and run `docker compose up -d`. The compose file reads `TUNNEL_TOKEN` from the environment with no default, so the export must run in every fresh shell, including after a reboot. The same tunnel token and certificates work across all replicas.
+The compose file reads `TUNNEL_TOKEN` from the host environment with no default, so the export must be repeated in every fresh shell and after a reboot.
+
+For a multi-VM deployment, copy the `mcp-tunnel/` directory to each host, set `TUNNEL_TOKEN`, and run `docker compose up -d`. In the programmatic flow `TUNNEL_TOKEN` is `$(sudo cat data/tunnel-token)`; in the manual flow it's the value you copied from the Console. The same tunnel token and certificates work across all replicas.
 
 ## Verify the deployment
 
-Verify end to end by calling a routed server from Anthropic's side: see [Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md). With the [sample MCP server](#optional-use-a-sample-mcp-server), the routed URL is `https://echo.<your-tunnel-domain>/mcp`. If verification fails, see [Troubleshooting](agents-and-tools/mcp-tunnels/troubleshooting.md).
+Verify end to end by calling an [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md) from Anthropic's side: see [Use the tunneled MCP servers](agents-and-tools/mcp-tunnels/overview.md). With the [sample MCP server](#optional-use-a-sample-mcp-server), the routed URL is `https://echo.<your-tunnel-domain>/mcp`. If verification fails, see [Troubleshooting](agents-and-tools/mcp-tunnels/troubleshooting.md).
 
 ## Upgrades
 
@@ -229,7 +233,7 @@ Run the commands in this section from inside the `mcp-tunnel/` deployment direct
 
 ### Rotate the tunnel token
 
-With programmatic access, increment `--token-version` in the `setup` service command, set the Workload Identity Federation identifiers, mint a fresh OIDC JWT (it will have expired since install), and re-run setup:
+With programmatic access, increment `--token-version` in the `setup` service command, set the Workload Identity Federation identifiers, mint a fresh OIDC JWT, and re-run the setup component:
 
 ```shiki
 # Edit docker-compose.yaml: increment the integer in the setup service's
@@ -251,7 +255,7 @@ export TUNNEL_TOKEN=$(sudo cat data/tunnel-token)
 docker compose up -d cloudflared
 ```
 
-The setup binary authenticates with Workload Identity Federation; there is no API token to revoke.
+The `--token-version` argument is edited in `docker-compose.yaml` rather than passed on the command line so the new value persists for future runs of the setup component. The setup component authenticates with Workload Identity Federation; there is no API token to revoke.
 
 Without programmatic access, click **Rotate token** on the tunnel detail page in the Console, then update the `TUNNEL_TOKEN` environment variable on each host and restart cloudflared (`docker compose up -d cloudflared`).
 
@@ -266,6 +270,8 @@ With programmatic access:
 ```shiki
 docker compose run --rm setup renew-cert --output=dir:/data
 ```
+
+The CLI arguments replace the `setup` service's `command` (the `init` arguments) but keep its `entrypoint`, so this runs `/setup renew-cert --output=dir:/data`.
 
 Pass `--renew-before=720h` to make the command a no-op when more than 30 days of validity remain. This makes it safe to run on a fixed schedule.
 
@@ -287,7 +293,7 @@ In either flow the proxy polls `tls.cert_file` and reloads it automatically, so 
 
 [Use the tunneled MCP servers
 
-Attach a routed MCP server to a Managed Agent or the Messages API.](agents-and-tools/mcp-tunnels/overview.md)[Security
+Attach an upstream MCP server to a Managed Agent or the Messages API.](agents-and-tools/mcp-tunnels/overview.md)[Security
 
 Hardening guidance, credential rotation, and breach response.](agents-and-tools/mcp-tunnels/security.md)[Troubleshooting
 

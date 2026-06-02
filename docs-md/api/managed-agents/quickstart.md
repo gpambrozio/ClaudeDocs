@@ -17,7 +17,7 @@ This guide walks you through creating an agent, setting up an environment, start
 
 ## Prerequisites
 
-- An Anthropic [Console account](/)
+- An Anthropic [Console account](https://platform.claude.com)
 - An [API key](/settings/keys)
 
 ## Install the CLI
@@ -180,7 +180,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
                    break
    ```
 
-   The agent will write a Python script, execute it in the sandbox, and verify the output file was created. Your output will look similar to this:
+   The agent writes a Python script, executes it in the sandbox, and verifies the output file was created. Your output looks similar to this:
 
    ```inline-block
    I'll create a Python script that generates the first 20 Fibonacci numbers and saves them to a file.
@@ -198,10 +198,10 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 When you send a user event, Claude Managed Agents:
 
 1. **Provisions a sandbox:** Your environment configuration determines how it's built.
-2. **Runs the agent loop:** Claude decides which tools to use based on your message
-3. **Executes tools:** File writes, bash commands, and other tool calls run inside the sandbox
-4. **Streams events:** You receive real-time updates as the agent works
-5. **Goes idle:** The agent emits a `session.status_idle` event when it has nothing more to do
+2. **Runs the agent loop:** Claude determines which tools to use based on your message.
+3. **Executes tools:** File writes, bash commands, and other tool calls run inside the sandbox.
+4. **Streams events:** You receive real-time updates as the agent works.
+5. **Goes idle:** The agent emits a `session.status_idle` event when it has nothing more to do.
 
 ## Next steps
 
@@ -211,7 +211,7 @@ Create reusable, versioned agent configurations](managed-agents/agent-setup.md)[
 
 Customize networking and sandbox settings](managed-agents/environments.md)[Agent tools
 
-Enable specific tools for your agent](managed-agents/tools.md)[Events and streaming
+Enable specific tools for your agent](managed-agents/tools.md)[Session event stream
 
 Handle events and steer the agent mid-execution](managed-agents/events-and-streaming.md)
 

@@ -19,7 +19,7 @@ To get the most out of prefix matching, Claude Code orders each request so conte
 
 | Layer | Content | Changes when |
 | --- | --- | --- |
-| System prompt | Core instructions, tool definitions, output style | An MCP server connects or disconnects, or Claude Code is upgraded |
+| System prompt | Core instructions, tool definitions, output style | The set of loaded tool definitions changes, or Claude Code is upgraded |
 | Project context | CLAUDE.md, auto memory, unscoped rules | Session starts, or after `/clear` or `/compact` |
 | Conversation | Your messages, Claude’s responses, tool results | Every turn |
 
@@ -30,7 +30,7 @@ Two settings aren’t part of the prompt text at all, so they don’t appear in 
 - **Model**: each model has its own cache. Switching models recomputes the entire request even when the content is identical. See [Switching models](#switching-models) below.
 - **Effort level**: each effort level has its own cache for the same model. Changing it mid-session recomputes the entire request, and Claude Code asks you to confirm before applying the change. See [Changing effort level](#changing-effort-level) below.
 
-Pick your model, effort level, and MCP servers at the top of a session, then save `/compact` for natural breaks between tasks. The fewer changes you make mid-task, the higher your cache hit rate.
+Pick your model and effort level at the top of a session, then save `/compact` for natural breaks between tasks. The fewer changes you make mid-task, the higher your cache hit rate.
 
 ### [​](#where-the-cache-lives) Where the cache lives
 
@@ -45,11 +45,12 @@ For what each provider stores and processes, see [data usage](data-usage.md). Wh
 
 ## [​](#actions-that-invalidate-the-cache) Actions that invalidate the cache
 
-These actions cause the next request to miss part or all of the cache. You see a one-time slower, more expensive turn, after which the new prefix is cached. Most of them are avoidable mid-task once you know they have a cost. A model switch or an MCP reconnect can feel free until you notice the slower turn that follows.
+These actions cause the next request to miss part or all of the cache. You see a one-time slower, more expensive turn, after which the new prefix is cached. Most of them are avoidable mid-task once you know they have a cost. A model switch can feel free until you notice the slower turn that follows.
 
 - [Switching models](#switching-models)
 - [Changing effort level](#changing-effort-level)
 - [Connecting or disconnecting an MCP server](#connecting-or-disconnecting-an-mcp-server)
+- [Enabling or disabling a plugin](#enabling-or-disabling-a-plugin)
 - [Denying an entire tool](#denying-an-entire-tool)
 - [Compacting the conversation](#compacting-the-conversation)
 - [Upgrading Claude Code](#upgrading-claude-code)
@@ -65,13 +66,24 @@ The cache is keyed by [effort level](model-config.md) as well as model, so switc
 
 ### [​](#connecting-or-disconnecting-an-mcp-server) Connecting or disconnecting an MCP server
 
-Tool definitions sit in the system prompt layer, so the cache invalidates when the set of MCP tools available to Claude changes between turns. The most common cause is an [MCP server](mcp.md) connecting or disconnecting mid-session, which can happen without any action on your part: a stdio server’s process exits, an HTTP session expires, or a server [reconnects automatically after a transient failure](mcp.md). A connected server can also push a [dynamic tool update](mcp.md) that changes its tool list.
+Tool definitions sit in the system prompt layer, so the cache invalidates when the set of tool definitions in the request changes between turns. Whether an [MCP server](mcp.md) change does this depends on whether its tools are deferred by [tool search](mcp.md) or loaded into the prefix:
+
+- **Deferred tools**, the default on supported models: a server connecting, disconnecting, or changing its tool list only appends new content and doesn’t disturb anything already cached.
+- **Tools loaded into the prefix**: any change to them invalidates the cache. This happens when [tool search is unavailable or disabled](mcp.md), such as on Haiku models, on Vertex AI, or with a custom `ANTHROPIC_BASE_URL` gateway. It also happens for a server or tool marked [`alwaysLoad`](mcp.md), and for definitions kept upfront by [threshold-based loading](mcp.md).
+
+When tools load into the prefix, the most common cause of an invalidation is a server connecting or disconnecting mid-session, which can happen without any action on your part: a stdio server’s process exits, an HTTP session expires, or a server [reconnects automatically after a transient failure](mcp.md). A connected server can also push a [dynamic tool update](mcp.md) that changes its tool list.
 Editing your MCP config does not by itself change the cache. The new config takes effect only after a restart, which is when the server connects or disconnects.
-[MCP tool search](mcp.md) reduces how much each tool contributes to the prefix by deferring full tool definitions, but the set of tool names still has to stay stable for the cache to remain valid.
+
+### [​](#enabling-or-disabling-a-plugin) Enabling or disabling a plugin
+
+[Plugins](plugins.md) bundle several component types, and the cost of a change depends on which components the plugin provides. Skills, commands, agents, hooks, LSP servers, monitors, and themes never invalidate the cache: anything they add to the request is appended after the existing conversation, so the next request pays for the new content but still reads everything before it from the cache.
+The exception is a plugin that provides [MCP servers](plugins-reference.md). Enabling or disabling one follows the same rules as [connecting or disconnecting an MCP server](#connecting-or-disconnecting-an-mcp-server): the cache survives when the server’s tools are deferred, and the next request re-reads the entire conversation when they load into the prefix.
+Plugin changes apply when you run [`/reload-plugins`](discover-plugins.md) or start a new session. The cost, whether appended announcements or a full re-read, shows up on the first turn after the reload, not when you run `/plugin install`, `/plugin enable`, or `/plugin disable`.
+Disabling a plugin you enabled earlier in the session restores the previous request shape. If that prefix is still within its [cache lifetime](#cache-lifetime), the next request reads the older cache entry instead of rebuilding.
 
 ### [​](#denying-an-entire-tool) Denying an entire tool
 
-Adding a bare tool name like `Bash` or `WebFetch` as a [deny rule](permissions.md) removes that tool from Claude’s context entirely. Tool definitions sit in the system prompt layer, so adding or removing one of these rules mid-session invalidates the cache the same way an MCP server connecting or disconnecting does. The change takes effect on the next turn whether you add it through `/permissions` or by [editing a settings file directly](settings.md).
+Adding a bare tool name like `Bash` or `WebFetch` as a [deny rule](permissions.md) removes that tool from Claude’s context entirely. Built-in tool definitions load into the system prompt layer, so adding or removing one of these rules mid-session invalidates the cache. The change takes effect on the next turn whether you add it through `/permissions` or by [editing a settings file directly](settings.md).
 Only a bare tool name, or the equivalent `Bash(*)` form, has this effect. Scoped deny rules like `Bash(rm *)`, and all allow and ask rules, don’t change which tools Claude sees. Claude Code checks them when Claude attempts a call, leaving the prefix intact.
 
 ### [​](#compacting-the-conversation) Compacting the conversation

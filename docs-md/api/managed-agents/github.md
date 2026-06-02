@@ -8,7 +8,7 @@ GitHub repositories are cached, so future sessions that use the same repository 
 
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
-## GitHub MCP and Session Resources
+## GitHub MCP and session resources
 
 First, create an agent that declares the GitHub MCP server. The agent definition holds the server URL but no auth token:
 
@@ -84,7 +84,7 @@ resources = [
 
 ## Managing repositories on a running session
 
-After a session is created, you can list its repository resources and rotate their authorization tokens. Each resource has an `id` returned at session creation time (or via `resources.list`) that you use for updates. Repositories are attached for the lifetime of the session; to change which repositories are mounted, create a new session.
+After a session is created, you can list its repository resources and rotate their authorization tokens. Each resource has an `id` returned at session creation time (or through `resources.list`) that you use for updates. Repositories are attached for the lifetime of the session; to change which repositories are mounted, create a new session.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -124,6 +124,16 @@ client.beta.sessions.events.send(
     ],
 )
 ```
+
+## Next steps
+
+[Session event stream
+
+Stream events and steer the agent while it opens the pull request](managed-agents/events-and-streaming.md)[MCP connector
+
+Connect more MCP servers to give the agent additional tools](managed-agents/mcp-connector.md)[Adding files
+
+Mount files in the sandbox alongside your repositories](managed-agents/files.md)
 
 Was this page helpful?
 

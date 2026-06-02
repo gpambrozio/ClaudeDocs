@@ -2,19 +2,19 @@
 
 Copy page
 
-MCP tunnels is a research preview feature. [Request access](https://claude.com/form/claude-managed-agents) to try it.
+MCP tunnels are in research preview. [Request access](https://claude.com/form/claude-managed-agents) to try them.
 
-The tunnel architecture provides strong defaults (outbound-only connectivity, end-to-end encryption, and IP validation), but the overall security of your deployment also depends on how you configure and operate it. This page covers recommended hardening, breach response, and how to decommission a tunnel.
+The tunnel architecture provides strong defaults (outbound-only connectivity, end-to-end encryption, and IP validation), but the overall security of your [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) also depends on how you configure and operate it. This page covers recommended hardening, breach response, and how to decommission a tunnel.
 
 ## Best practices
 
-- **Require OAuth on every MCP server.** Configure each upstream server to require OAuth as described in the [MCP authorization spec](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization). OAuth provides defense in depth on top of the tunnel's transport authentication and enables user-level authorization at the data layer.
+- **Require OAuth on every MCP server.** Configure each [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md) to require OAuth as described in the [MCP authorization spec](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization). OAuth provides defense in depth on top of the tunnel's transport authentication and enables user-level authorization at the data layer.
 - **Enable SSO for your organization.** Tunnels, federation rules, and service accounts are managed in the Claude Console. SSO enforces your identity provider's session controls on the admins who can change them.
-- **Restrict `upstream.allowed_ips`.** Use the smallest CIDR ranges that cover your MCP servers. This is the proxy's primary SSRF defense.
+- **Restrict `upstream.allowed_ips`.** Use the smallest CIDR ranges that cover your MCP servers. This is the [proxy](agents-and-tools/mcp-tunnels/concepts.md)'s primary SSRF defense.
 - **Monitor logs.** Alert on warnings, errors, and unusual traffic patterns from the tunnel stack.
 - **Rotate credentials.** Rotate the server certificate and tunnel token on a regular schedule, and immediately if you suspect compromise.
 - **Keep images updated.** Track new proxy releases and pin images by SHA-256 digest.
-- **Limit network reach.** The proxy and cloudflared should only be able to reach the destinations listed in the [network requirements](agents-and-tools/mcp-tunnels/overview.md). Use NetworkPolicy (Kubernetes) or host firewall rules (Compose).
+- **Limit network reach.** The proxy and [cloudflared](agents-and-tools/mcp-tunnels/concepts.md) should only be able to reach the destinations listed in the [network requirements](agents-and-tools/mcp-tunnels/overview.md). Use NetworkPolicy (Kubernetes) or host firewall rules (Compose).
 - **Limit MCP server scope.** Each server should expose only the tools and data required for its purpose.
 - **Protect credentials at rest.** Apply your organization's secrets-management practices to private keys and tunnel tokens.
 
@@ -24,7 +24,7 @@ If you believe your tunnel token, TLS keys, or proxy host has been compromised:
 
 1. 1
 
-   Stop the deployment
+   Stop the tunnel stack
 
    Helm
 
@@ -39,9 +39,9 @@ If you believe your tunnel token, TLS keys, or proxy host has been compromised:
    ```
 2. 2
 
-   Detach the tunneled servers
+   Detach the upstream MCP servers
 
-   Remove the tunneled MCP servers from any Managed Agent sessions that use them, and stop passing their URLs in the `mcp_servers` block of Messages API requests.
+   Remove the upstream MCP servers from any Managed Agent sessions that use them, and stop passing their URLs in the `mcp_servers` block of Messages API requests.
 3. 3
 
    Archive the tunnel
@@ -69,7 +69,7 @@ Follow these steps to decommission a tunnel and remove all stored credentials.
 
 1. 1
 
-   Stop the deployment
+   Stop the tunnel stack
 
    Helm
 
@@ -99,7 +99,7 @@ Follow these steps to decommission a tunnel and remove all stored credentials.
 
    Docker Compose
 
-   With programmatic access, the setup Job created a single Secret named after the release. Without programmatic access, you created `mcp-tunnel-token` and `mcp-tunnel-cert` yourself. Delete whichever apply:
+   With programmatic access, the setup component created a single Secret named after the release. Without programmatic access, you created `mcp-tunnel-token` and `mcp-tunnel-cert` yourself. Delete whichever apply:
 
    ```shiki
    kubectl -n mcp-tunnel delete secret \

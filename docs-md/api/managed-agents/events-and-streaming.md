@@ -13,34 +13,9 @@ Events flow in two directions.
 - **User events** are what you send to the agent to kick off a session and steer it as it progresses.
 - **Session events**, **span events**, and **agent events** are sent to you for observability into your session state and agent progress.
 
-Event type strings follow a `{domain}.{action}` naming convention.
+Event type strings follow a `{domain}.{action}` naming convention. See [Event types](managed-agents/reference.md) in the reference for the full catalog.
 
-User events
-
-User events
-
-Agent events
-
-Agent events
-
-Session events
-
-Session events
-
-Span events
-
-Span events
-
-| Type | Description |
-| --- | --- |
-| `user.message` | A user message with text content. |
-| `user.interrupt` | Stop the agent mid-execution. |
-| `user.custom_tool_result` | Response to a custom tool call from the agent. |
-| `user.tool_confirmation` | Approve or deny an agent or MCP tool call when a permission policy requires confirmation. |
-| `user.define_outcome` | Define an [outcome](managed-agents/define-outcomes.md) for the agent to work toward. |
-| `user.tool_result` | For sessions with `self_hosted` [environments](managed-agents/self-hosted-sandboxes.md) only, your integration is responsible for providing `agent_toolset` results. The SDK helpers and CLI do this automatically. |
-
-Every event includes a `processed_at` timestamp indicating when the event was recorded server-side. If `processed_at` is null, it means the event has been queued by the harness and will be handled after preceding events finish processing.
+Every event includes a `processed_at` timestamp indicating when the event was recorded server-side. If `processed_at` is null, it means the event has been queued by the harness and is handled after preceding events finish processing.
 
 ## Integrating events
 
@@ -101,7 +76,7 @@ client.beta.sessions.events.send(
 )
 ```
 
-The agent will acknowledge the interruption and switch to the new task.
+The agent acknowledges the interruption and switches to the new task.
 
 ## Additional scenarios
 
@@ -224,16 +199,16 @@ The session object includes a `usage` field with cumulative token statistics. Fe
 
 The Console provides a visual timeline view of your agent sessions. Navigate to the Claude Managed Agents section in the Console to see:
 
-- **Session list** - All sessions with their status, creation time, and model
-- **Tracing view** - A chronological view of events (content, timestamps, token usage) within a session. These are only accessible to Developers and Admins.
-- **Tool execution** - Details of each tool call and its result
+- **Session list:** All sessions with their status, creation time, and model
+- **Tracing view:** A chronological view of events (content, timestamps, token usage) within a session. Tracing views are only accessible to Developers and Admins.
+- **Tool execution:** Details of each tool call and its result
 
 ## Debugging tips
 
-- **Check session events** - Session errors are conveyed through the `session.error` event
-- **Review tool results** - Tool execution failures often explain unexpected agent behavior
-- **Track token usage** - Monitor token consumption to optimize prompts and reduce costs
-- **Use system prompts** - Add logging instructions to the system prompt to make the agent explain its reasoning
+- **Check session events:** Session errors are conveyed through the `session.error` event
+- **Review tool results:** Tool execution failures often explain unexpected agent behavior
+- **Track token usage:** Monitor token consumption to optimize prompts and reduce costs
+- **Use system prompts:** Add logging instructions to the system prompt to make the agent explain its reasoning
 
 Was this page helpful?
 

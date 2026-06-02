@@ -29,7 +29,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 | PostgreSQL client | `psql` client for connecting to external databases |
 | Redis client | `redis-cli` for connecting to external instances |
 
-Database servers (PostgreSQL, Redis, etc.) are not running in the sandbox by default. The sandbox includes client tools for connecting to external database instances. SQLite is fully available for local use.
+Database servers (such as PostgreSQL and Redis) are not running in the sandbox by default. The sandbox includes client tools for connecting to external database instances. SQLite is fully available for local use.
 
 ## Utilities
 

@@ -13,8 +13,8 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 | Field | Description |
 | --- | --- |
 | `name` | Required. A human-readable name for the agent. |
-| `model` | Required. The Claude [model](about-claude/models/overview.md) that powers the agent. All Claude 4.5 and later models are supported. |
-| `system` | A [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](managed-agents/events-and-streaming.md), which should describe the work to be done. |
+| `model` | Required. The Claude [model](about-claude/models/overview.md) that powers the agent. All Claude 4.5-family and later models are supported. |
+| `system` | A [system prompt](build-with-claude/prompt-engineering/claude-prompting-best-practices.md) that defines the agent's behavior and persona. The system prompt is distinct from [user messages](managed-agents/reference.md), which should describe the work to be done. |
 | `tools` | The tools available to the agent. Combines [pre-built agent tools](managed-agents/tools.md), [MCP tools](managed-agents/mcp-connector.md), and [custom tools](managed-agents/tools.md). |
 | `mcp_servers` | MCP servers that provide standardized third-party capabilities. |
 | `skills` | [Skills](managed-agents/skills.md) that supply domain-specific context with progressive disclosure. |

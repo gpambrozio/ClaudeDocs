@@ -254,7 +254,7 @@ Connect Claude to external services](mcp.md)
 
 [## Hooks
 
-Automate workflows with hooks](hooks-guide.md)
+Automate actions with hooks](hooks-guide.md)
 
 [## Plugins
 

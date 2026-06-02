@@ -2,7 +2,7 @@
 
 Copy page
 
-You can provide files to your agent by uploading them via the Files API and mounting them in the session's sandbox.
+You can provide files to your agent by uploading them through the Files API and mounting them in the session's sandbox.
 
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
@@ -21,7 +21,7 @@ print(f"File ID: {file.id}")
 
 Mount uploaded files into the sandbox by adding them to the `resources` array when creating a session:
 
-The `mount_path` is optional, but make sure the uploaded file has a descriptive name so the agent knows what it is looking for.
+The `mount_path` is optional, but make sure the uploaded file has a descriptive name so the agent can identify it.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -39,7 +39,7 @@ session = client.beta.sessions.create(
 )
 ```
 
-A new `file_id` will be created that references the instance of the file in the session. These copies do not count against your [storage limits](build-with-claude/files.md).
+A new `file_id` is created that references the instance of the file in the session. These copies do not count against your [storage limits](build-with-claude/files.md).
 
 ## Multiple files
 
@@ -108,7 +108,7 @@ content.write_to_file("output.txt")
 
 The agent can work with any file type, including:
 
-- Source code (`.py`, `.js`, `.ts`, `.go`, `.rs`, etc.)
+- Source code (`.py`, `.js`, `.ts`, `.go`, `.rs`, and others)
 - Data files (`.csv`, `.json`, `.xml`, `.yaml`)
 - Documents (`.txt`, `.md`)
 - Archives (`.zip`, `.tar.gz`) - the agent can extract these using bash

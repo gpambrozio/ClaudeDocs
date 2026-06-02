@@ -4,6 +4,8 @@ Copy page
 
 By default, Managed Agents executes tools and code inside [Anthropic-managed cloud sandboxes](managed-agents/cloud-sandboxes-reference.md). Self-hosted sandboxes keep the orchestration on Anthropic's side but move tool execution into infrastructure you control, so the agent's code, filesystem, and network egress never leave your environment.
 
+Tool execution stays on your host: the filesystem the agent reads and writes, the processes it spawns, and the network it can reach are all under your control. Tool inputs and outputs still flow to Anthropic's control plane (where Claude runs) so the model can see results and determine what to do next. See the [security model](managed-agents/self-hosted-sandboxes-security.md) for the full data-flow boundary.
+
 Self-hosted sandboxes support all Claude models available in Managed Agents, including Claude Opus 4.8. The model is configured on the [agent](managed-agents/agent-setup.md), not the environment.
 
 ## How it differs from cloud environments
@@ -25,36 +27,29 @@ Self-hosting controls *where the agent's code executes*. [MCP tunnels](agents-an
 
 ## Environment worker
 
-The following guide describes how to build a worker with any generic sandboxing platform. Additional, platform-specific guides are available for [Cloudflare](https://developers.cloudflare.com/sandbox/claude-managed-agents/), [Daytona](guides/claude/claude-managed-agents.md), [Modal](https://github.com/modal-labs/claude-managed-agents-modal-sandbox), and [Vercel](https://vercel.com/kb/guide/run-claude-managed-agent-tools-with-vercel-sandbox).
+This guide describes how to build a worker with any generic sandboxing platform. Additional, platform-specific guides are available for [Cloudflare](https://developers.cloudflare.com/sandbox/claude-managed-agents/), [Daytona](guides/claude/claude-managed-agents.md), [Modal](https://github.com/modal-labs/claude-managed-agents-modal-sandbox), and [Vercel](https://vercel.com/kb/guide/run-claude-managed-agent-tools-with-vercel-sandbox).
 
-An environment worker is a process you run on your own infrastructure that receives tool execution requests from Anthropic and runs them locally. The `self_hosted` environment is a work queue connecting Anthropic's orchestration to your worker: when a [session](managed-agents/sessions.md) is assigned to an environment, Anthropic enqueues it as a work item. Your worker claims items from that queue, spawns an execution context for each session, downloads the [agent's skills](managed-agents/skills.md), runs tool calls locally, and posts results back.
+An environment worker is a process you run on your own infrastructure. It receives tool execution requests from Anthropic and runs them locally. The `self_hosted` environment acts as a work queue: when a [session](managed-agents/sessions.md) is assigned to it, Anthropic enqueues the session as a work item. Your worker claims work items from that queue, spawns an execution context for each one, downloads the agent's [skills](managed-agents/skills.md) (reusable, filesystem-based resources that give the agent domain-specific expertise), runs the tool calls, and posts the results back.
 
-Work is claimed by polling the environment's queue: either by an **always-on worker** that polls continuously, or a **webhook-triggered handler** that wakes on `session.status_run_started` and starts polling.
+Work items are claimed by polling the environment's queue: either by an **always-on worker** that polls continuously, or a **webhook-triggered handler** that wakes on `session.status_run_started` and starts polling.
 
-Both CLI and SDK include pre-built workers to orchestrate your sessions. The `ant` CLI supports the always-on pattern only; the SDK supports both always-on and webhook-triggered architectures.
-
-The CLI and SDK both are configurable (see [reference](#reference)), but if you require more control, you can leverage the [Environments Work endpoints](api/beta/environments/work.md) directly and implement your own worker. On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the `GET /v1/environments/{id}/work` list endpoint and its SDK equivalent are not currently available; the other work endpoints (poll, ack, heartbeat, stop, post results, per-item get, and stats) work normally.
-
-The SDK helpers require `/bin/bash` at that exact path. The TypeScript SDK additionally requires `unzip`, `tar`, and Node.js 22 or later. These dependencies are resolved at fixed paths and do not respect `PATH` overrides.
+The CLI and SDK both ship pre-built workers. The `ant` CLI supports the always-on pattern only; the SDK supports both always-on and webhook-triggered. Both are configurable: see [Self-hosted worker](managed-agents/reference.md) in the reference for CLI flags, and [SDK helpers](#sdk-helpers) on this page for the SDK options. For more control, call the [Environments Work endpoints](api/beta/environments/work.md) directly and implement your own worker. On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the `GET /v1/environments/{id}/work` list endpoint and its SDK equivalent are not currently available; the other work endpoints (poll, ack, heartbeat, stop, post results, per-item get, and stats) work normally.
 
 ### Sandbox filesystem
 
-- **`/workspace`**: the default working directory for tool execution and skill download. Skills are downloaded to `/workspace/skills/<name>/`. If you change `--workdir` from the default, update your agent's system prompt so Claude knows where to find them.
-- **`/mnt/session/outputs`**: the agent writes final output files to this path. When running in a sandbox, mount a host directory here to retrieve them.
+- **`/workspace`:** the system default working directory for tool execution and skill download. The CLI's `--workdir` flag defaults to the current directory; pass `--workdir /workspace` to match the system default. Skills are downloaded to `<workdir>/skills/<name>/`. If you use a different working directory, update your agent's system prompt so Claude can locate the skill files.
+- **`/mnt/session/outputs`:** the worker harness instructs Claude to write final deliverables here. In sandbox mode, mount a host directory at this path to retrieve outputs after the session ends. In in-process mode, the worker's file tools write under the working directory instead, so this path does not apply.
+
+## Before you begin
+
+You need:
+
+- **An existing agent.** If you don't have one, complete the [Quickstart](managed-agents/quickstart.md) first and note its agent ID.
+- **A Linux host** with `/bin/bash` at that exact path. The TypeScript SDK additionally requires `unzip`, `tar`, and Node.js 22 or later; the Python SDK uses the standard library for archive extraction and has no additional binary requirements. These dependencies are resolved at fixed paths and do not respect `PATH` overrides.
+- **The `ant` CLI or an Anthropic SDK** (Python, TypeScript, or Go) on the worker host.
+- **Two credentials:** an environment key (generated in the steps that follow) authenticates the worker to its queue; your Claude API key creates sessions and reads queue stats from outside the worker host.
 
 On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the worker authenticates with AWS IAM (SigV4), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](api/claude-platform-on-aws-iam-actions.md) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
-
-Always-on (ant CLI)
-
-Always-on (ant CLI)
-
-Always-on (SDK)
-
-Always-on (SDK)
-
-Webhook-triggered (SDK)
-
-Webhook-triggered (SDK)
 
 1. 1
 
@@ -76,19 +71,38 @@ Webhook-triggered (SDK)
    ```
 2. 2
 
-   Set your environment key
+   Generate an environment key
 
-   In the Console, open the environment and click **Generate environment key**. Then export the environment ID and key on the worker host:
+   In the Console, open the environment and click **Generate environment key**. Key generation is Console-only, regardless of whether you created the environment through the Console or the API. Then export the environment ID and key on the worker host:
 
    ```shiki
    export ANTHROPIC_ENVIRONMENT_KEY="sk-ant-oat01-..."
    export ANTHROPIC_ENVIRONMENT_ID="env_..."
    ```
-3. 3
+
+Skills can include executables that the agent may run directly. The CLI and SDK workers automatically mark downloaded skill files as executable in the sandbox. If you implement skills download manually, you are responsible for setting executable permissions.
+
+## Run a worker
+
+Choose **always-on** for the simplest setup: a long-running process polls the queue continuously and needs only outbound HTTPS. Choose **webhook-triggered** to avoid running an idle poller; it requires a webhook endpoint that Anthropic can reach (see [Webhooks](managed-agents/webhooks.md) for endpoint setup and signature verification).
+
+Always-on (ant CLI)
+
+Always-on (ant CLI)
+
+Always-on (SDK)
+
+Always-on (SDK)
+
+Webhook-triggered (SDK)
+
+Webhook-triggered (SDK)
+
+1. 1
 
    Install the ant CLI
 
-   Run this on the machine where the worker will run.
+   Run this on the worker host.
 
    ```shiki
    VERSION=1.10.0
@@ -97,15 +111,13 @@ Webhook-triggered (SDK)
    curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
      | sudo tar -xz -C /usr/local/bin ant
    ```
-4. 4
+2. 2
 
    Run the worker
 
    **In-process**
 
-   `ant beta:worker poll` claims sessions assigned to the environment, downloads skills, executes tool calls in the working directory, and posts results back.
-
-   Skills can include executables that the agent may run directly. The CLI automatically marks downloaded skill files as executable in the sandbox. If you implement skills download manually, you are responsible for setting executable permissions.
+   `ant beta:worker poll` claims work items assigned to the environment, downloads skills, executes tool calls in the working directory, and posts results back.
 
    ```shiki
    ant beta:worker poll \
@@ -116,7 +128,7 @@ Webhook-triggered (SDK)
 
    **Sandbox per session**
 
-   For stronger isolation: a fresh filesystem, resource limits, or network controls per session. Run each session in its own sandbox. Start by building an image with `ant` installed and `ant beta:worker run` as the entrypoint. When a sandbox starts, it reads session details from environment variables, handles that session, and exits:
+   If you need stronger isolation (a fresh filesystem, resource limits, or per-session network controls), run each session in its own sandbox. Build an image with `ant` installed and `ant beta:worker run` as the entrypoint. The base image must provide `/bin/bash`; `curl` is only used at build time. When a sandbox starts, it reads session details from environment variables, handles that session, and exits:
 
    ```inline-block
    FROM your-base-image
@@ -130,7 +142,7 @@ Webhook-triggered (SDK)
    ENTRYPOINT ["ant", "beta:worker", "run"]
    ```
 
-   Then write a spawn script that forwards session details into a fresh sandbox, and start the poller pointing at it:
+   Then write a spawn script that forwards session details into a fresh sandbox. The poller injects `ANTHROPIC_SESSION_ID`, `ANTHROPIC_WORK_ID`, `ANTHROPIC_ENVIRONMENT_ID`, and `ANTHROPIC_ENVIRONMENT_KEY` into the script's environment. `ANTHROPIC_BASE_URL` is optional and is passed through only if it was set on the poller host; it overrides the default API endpoint. In the example, `/host/outputs` is a host directory you choose; it is bind-mounted to the sandbox's `/mnt/session/outputs` so you can retrieve session deliverables after the sandbox exits.
 
    ```shiki
    #!/bin/bash
@@ -143,16 +155,100 @@ Webhook-triggered (SDK)
      your-image
    ```
 
+   Start the poller pointing at the script:
+
    ```shiki
    ant beta:worker poll \
      --on-work ./spawn.sh
    ```
 
+### SDK helpers
+
+The SDK provides three helpers at different levels of control. `EnvironmentWorker` covers most use cases; drop to the lower-level helpers when you need to launch your own per-session process or run tools against an already-claimed session.
+
+- **`EnvironmentWorker`:** the out-of-the-box worker. Handles polling, setup, and execution end to end.
+  - `.run()`: runs indefinitely, picking up sessions as they arrive. Exits cleanly on SIGTERM.
+  - `.handle_item()`: picks up one pending session, handles it, and exits.
+- **`work.poller()`:** polls the work queue on your behalf and gives you each claimed session. Use this when you want to decide what happens for each session, for example launching a sandbox rather than running tools in-process.
+  - `drain`: whether to stop polling once the queue is empty rather than waiting for new work.
+  - `block_ms`: how long to wait for work to arrive before returning, in milliseconds. Must be between 1 and 999 (per-poll wait; the helper re-polls automatically). Pass `null` (`None` in Python, `param.Null[int64]()` in Go) for a non-blocking check; omitting the parameter uses the default 999 ms long-poll.
+  - `reclaim_older_than_ms`: re-claim work items leased to a worker that has stopped responding.
+  - `auto_stop`: whether to post a stop signal on the work item after the iterator exits. The Go poller has no opt-out and always posts the stop signal, so block in the loop body until the session completes rather than detaching.
+- **`client.beta.sessions.events.tool_runner()`:** runs tool calls for a single session, given the session ID and a tool list. Use when you've already claimed the work and only need the execution layer.
+
+Use the work poller directly when you want to launch your own per-session process, for example spinning up a sandbox for each claimed session:
+
+cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+```shiki
+import asyncio
+import os
+
+from anthropic import AsyncAnthropic
+from anthropic.types.beta.environments import BetaSelfHostedWork
+
+async def launch_container(work: BetaSelfHostedWork) -> None:
+    # Replace with your own per-session sandbox launcher. Pass
+    # ANTHROPIC_ENVIRONMENT_KEY into the launched sandbox, never
+    # your API key.
+    print(f"claimed session {work.data.id}")
+
+async def main() -> None:
+    environment_key = os.environ["ANTHROPIC_ENVIRONMENT_KEY"]
+    environment_id = os.environ["ANTHROPIC_ENVIRONMENT_ID"]
+    async with AsyncAnthropic(auth_token=environment_key) as client:
+        async for work in client.beta.environments.work.poller(
+            environment_id=environment_id,
+            environment_key=environment_key,
+            auto_stop=False,  # the launched sandbox owns the stop call
+        ):
+            await launch_container(work)
+
+asyncio.run(main())
+```
+
+**`AgentToolContext`** is the execution context for tool calls. It defines the working directory and path policy, and optionally downloads the session's skills when used as a context manager. **`beta_agent_toolset_20260401(env)`** takes an `AgentToolContext` and returns the standard tool implementations (`bash`, `read`, `write`, `edit`, `glob`, `grep`).
+
+**With `EnvironmentWorker`:** both are managed automatically. Pass a `tools` factory to customize the tool list:
+
+Python
+
+```shiki
+EnvironmentWorker(client, ..., tools=lambda env: [beta_bash_tool(env), my_custom_tool])
+```
+
+**With `work.poller()` and `tool_runner()`:** pass a tool list as `tools` to `client.beta.sessions.events.tool_runner()`. To build that list, set up `AgentToolContext` yourself and call `beta_agent_toolset_20260401(env)`:
+
+PythonTypeScriptC#GoJavaPHPRuby
+
+```shiki
+from anthropic.lib.tools.agent_toolset import (
+    AgentToolContext,
+    beta_agent_toolset_20260401,
+)
+
+async with AgentToolContext(
+    workdir="/workspace", client=client, session_id=work.data.id
+) as env:
+    # skills downloaded to /workspace/skills/<name>/
+    tools = beta_agent_toolset_20260401(env)
+```
+
+### Verify the worker is connected
+
+From a separate shell, using your Claude API key (not the environment key), confirm `workers_polling` is at least 1:
+
+```shiki
+ant beta:environments:work stats --environment-id "$ANTHROPIC_ENVIRONMENT_ID"
+```
+
+If `workers_polling` stays at 0, the worker isn't reaching the queue: confirm `ANTHROPIC_ENVIRONMENT_KEY` and `ANTHROPIC_ENVIRONMENT_ID` are set on the worker host. See [Read queue depth](#read-queue-depth) for the full stats response and other language examples.
+
 ## Start a session
 
-Once your worker is running, create a session that targets the environment. Anthropic enqueues it and your worker claims and executes it.
+Once your worker is running, create a session that targets the environment. The session enters the environment's work queue and waits there until a worker claims it; if no worker is connected, the session stays queued rather than failing.
 
-File and GitHub resource mounting are handled in your sandbox image rather than by Anthropic. To load your sandbox with session-specific files, you can pass session metadata when creating the session. Your orchestration layer can read that metadata and mount the relevant files before the worker starts executing.
+Anthropic doesn't mount files or GitHub repositories into self-hosted sandboxes. To make session-specific files available, pass file references (such as an S3 path or commit SHA) in the session `metadata` field. Your spawn script or `--on-work` handler reads that metadata from the claimed work item (through the [Environments Work endpoints](api/beta/environments/work.md)) and stages the files into the working directory before tool execution begins.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -164,27 +260,9 @@ session = client.beta.sessions.create(
 )
 ```
 
-[Memory](managed-agents/memory.md) is not yet supported with self-hosted sandboxes.
+[Memory](managed-agents/memory.md) is not currently supported with self-hosted sandboxes.
 
-## Reference
-
-ant CLI
-
-ant CLI
-
-SDK
-
-SDK
-
-| Flag | Description |
-| --- | --- |
-| `--environment-id` | The environment to poll for work. Also reads from `ANTHROPIC_ENVIRONMENT_ID`. |
-| `--environment-key` | Authenticates the worker with this environment. Also reads from `ANTHROPIC_ENVIRONMENT_KEY`. |
-| `--workdir` | Directory where skills are downloaded and tools read and write files. Defaults to `/workspace`. |
-| `--on-work` | Script to call for each claimed work item instead of running tools in-process. Receives session details as environment variables. |
-| `--unrestricted-paths` | Allow tool calls to access paths outside `--workdir`. |
-| `--max-idle` | How long to wait after an `end_turn` idle before shutting down. Defaults to `60s`. |
-| `--log-format` | Log output format. Use `json` for structured log ingestion. Defaults to `text`. |
+See [Self-hosted worker](managed-agents/reference.md) in the reference for the full list of CLI flags, and [SDK helpers](#sdk-helpers) for the SDK helper options.
 
 ## Monitoring and operations
 

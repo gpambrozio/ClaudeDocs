@@ -106,8 +106,8 @@ Organization admins and billing members cannot be removed from workspaces while 
 
 In the **Limits** tab, you can configure:
 
-- **Rate limits**: Set limits per model tier for requests per minute, input tokens, or output tokens
-- **Spend notifications**: Configure alerts when spending reaches certain thresholds
+- **Rate limits:** Set limits per model tier for requests per minute, input tokens, or output tokens
+- **Spend notifications:** Configure alerts when spending reaches certain thresholds
 
 #### Archive a workspace
 
@@ -189,10 +189,10 @@ Resources scoped to workspaces include:
 
 Some resources are managed at the organization level and cannot be managed with a workspace API key:
 
-- **[MCP tunnels](agents-and-tools/mcp-tunnels/overview.md)** are created in a workspace; the Console **MCP tunnels** list and the Managed Agent server picker show tunnels in the current workspace only, while the cap of 10 active tunnels applies organization-wide. Tunnel management requires a role with tunnel management permissions; organization developers can view but not change them. The Tunnels API authenticates with a short-lived OAuth token carrying the `org:manage_tunnels` scope, obtained through [Workload Identity Federation](manage-claude/workload-identity-federation.md), not a workspace API key.
+- **[MCP tunnels](agents-and-tools/mcp-tunnels/overview.md)** are managed with an org-scoped OAuth token (`org:manage_tunnels`) obtained through [Workload Identity Federation](manage-claude/workload-identity-federation.md), not a workspace API key, and the cap of 10 active tunnels applies organization-wide. Tunnel management requires a role with tunnel management permissions; organization developers can view but not change them. Tunnels are created in a workspace, and the Console **MCP tunnels** list and the Managed Agent server picker show tunnels in the current workspace only.
 - **Workspaces** themselves and **organization members** are managed through the [Admin API](manage-claude/admin-api.md), which requires an Admin API key.
 
-[Prompt caches](build-with-claude/prompt-caching.md) are also isolated per workspace on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) (in beta). On Amazon Bedrock and Vertex AI, prompt caches are isolated per organization.
+[Prompt caches](build-with-claude/prompt-caching.md) are also isolated per workspace on the Claude API, [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md) (where Claude is currently in beta). On Amazon Bedrock and Vertex AI, prompt caches are isolated per organization.
 
 To retrieve your organization's workspace IDs, use the [List Workspaces](api/admin-api/workspaces/list-workspaces.md) endpoint, or find them in the [Claude Console](/settings/workspaces).
 
@@ -204,8 +204,8 @@ You can set custom spend and rate limits for each workspace to protect against o
 
 Workspace limits can be set lower than (but not higher than) your organization's limits:
 
-- **Spend limits**: Cap monthly spending for a workspace
-- **Rate limits**: Limit requests per minute, input tokens per minute, or output tokens per minute
+- **Spend limits:** Cap monthly spending for a workspace
+- **Rate limits:** Limit requests per minute, input tokens per minute, or output tokens per minute
 
 - You cannot set limits on the Default Workspace
 - If not set, workspace limits match the organization's limits

@@ -28,6 +28,7 @@ You can start sessions, pipe content, resume conversations, and manage updates w
 | `claude attach <id>` | Attach to a [background session](agent-view.md) in this terminal | `claude attach 7c5dcf5d` |
 | `claude auto-mode defaults` | Print the built-in [auto mode](permission-modes.md) classifier rules as JSON. Use `claude auto-mode config` to see your effective config with settings applied | `claude auto-mode defaults > rules.json` |
 | `claude daemon status` | Print the background-session [supervisor’s](agent-view.md) state, version, socket directory, and worker count for diagnostics. Exits 1 if the supervisor isn’t running | `claude daemon status` |
+| `claude daemon stop --any` | Stop the background-session [supervisor](agent-view.md) and the sessions it hosts. Pass `--keep-workers` to leave background sessions running so the next supervisor reconnects to them. `--any` confirms stopping an on-demand supervisor, which is the default. Use this to recover from an [unresponsive supervisor](agent-view.md) | `claude daemon stop --any --keep-workers` |
 | `claude logs <id>` | Print recent output from a [background session](agent-view.md) | `claude logs 7c5dcf5d` |
 | `claude mcp` | Configure Model Context Protocol (MCP) servers | See the [Claude Code MCP documentation](mcp.md). |
 | `claude plugin` | Manage Claude Code [plugins](plugins.md). Alias: `claude plugins`. See [plugin reference](plugins-reference.md) for subcommands | `claude plugin install code-review@claude-plugins-official` |

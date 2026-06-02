@@ -118,7 +118,7 @@ In CI, you can automate code review and issue triage with [GitHub Actions](githu
 
 Connect your tools with MCP
 
-The [Model Context Protocol (MCP)](mcp.md) is an open standard for connecting AI tools to external data sources. With MCP, Claude Code can read your design docs in Google Drive, update tickets in Jira, pull data from Slack, or use your own custom tooling.
+The [Model Context Protocol (MCP)](mcp.md) is an open standard for connecting AI tools to external data sources. With MCP, Claude Code can read your design docs in Google Drive, update tickets in Jira, pull data from Slack, or use your own custom tooling. The [MCP quickstart](mcp-quickstart.md) connects your first server end to end.
 
 Customize with instructions, skills, and hooks
 
