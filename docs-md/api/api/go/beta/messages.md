@@ -8474,7 +8474,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -8758,7 +8758,7 @@ OutputTokens int64
 
 The cumulative number of output tokens which were used.
 
-OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -11849,6 +11849,21 @@ Remaining int64Optional
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
+type BetaOutputTokensDetails struct{…}
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
+
 type BetaPlainTextSource struct{…}
 
 Data string
@@ -13383,7 +13398,7 @@ OutputTokens int64
 
 The cumulative number of output tokens which were used.
 
-OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -14838,7 +14853,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -16325,7 +16340,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -16745,7 +16760,7 @@ OutputTokens int64
 
 The cumulative number of output tokens which were used.
 
-OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -23216,7 +23231,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -26534,7 +26549,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -28127,7 +28142,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -29682,7 +29697,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 

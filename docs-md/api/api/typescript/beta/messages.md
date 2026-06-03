@@ -8440,7 +8440,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: OutputTokensDetails | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -8718,7 +8718,7 @@ output\_tokens: number
 
 The cumulative number of output tokens which were used.
 
-output\_tokens\_details: OutputTokensDetails | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -11803,6 +11803,21 @@ remaining?: number | null
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
+BetaOutputTokensDetails { thinking\_tokens }
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
+
 BetaPlainTextSource { data, media\_type, type }
 
 data: string
@@ -13331,7 +13346,7 @@ output\_tokens: number
 
 The cumulative number of output tokens which were used.
 
-output\_tokens\_details: OutputTokensDetails | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -14774,7 +14789,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: OutputTokensDetails | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -16249,7 +16264,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: OutputTokensDetails | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -16663,7 +16678,7 @@ output\_tokens: number
 
 The cumulative number of output tokens which were used.
 
-output\_tokens\_details: OutputTokensDetails | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -23118,7 +23133,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: OutputTokensDetails | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -26420,7 +26435,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: OutputTokensDetails | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -28001,7 +28016,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: OutputTokensDetails | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 
@@ -29544,7 +29559,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: OutputTokensDetails | null
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }  | null
 
 Breakdown of output tokens by category.
 

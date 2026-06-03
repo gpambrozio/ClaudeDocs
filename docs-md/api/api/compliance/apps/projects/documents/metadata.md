@@ -57,7 +57,11 @@ Size in bytes of the document content (UTF-8 encoded)
 
 user: object { id, email\_address }
 
-User information for project creator.
+The user who created a project or project document.
+
+Fields that reference this type are null when the creator's account has
+been deleted or the creator is no longer a member of any organization
+under the parent organization.
 
 id: string
 

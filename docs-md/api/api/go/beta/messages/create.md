@@ -4846,8 +4846,6 @@ const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2
 
 const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
 
-const AnthropicBetaMidConversationSystem2026\_04\_07 AnthropicBeta = "mid-conversation-system-2026-04-07"
-
 ##### ReturnsExpand Collapse
 
 type BetaMessage struct{…}
@@ -6269,7 +6267,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -7750,7 +7748,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -8170,7 +8168,7 @@ OutputTokens int64
 
 The cumulative number of output tokens which were used.
 
-OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 

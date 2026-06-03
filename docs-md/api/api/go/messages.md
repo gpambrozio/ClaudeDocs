@@ -5904,7 +5904,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails UsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 
@@ -6986,7 +6986,7 @@ OutputTokens int64
 
 The cumulative number of output tokens which were used.
 
-OutputTokensDetails MessageDeltaUsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 
@@ -9740,6 +9740,21 @@ The JSON schema of the format
 
 Type JSONSchema
 
+type OutputTokensDetails struct{…}
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
+
 type PlainTextSource struct{…}
 
 Data string
@@ -10754,7 +10769,7 @@ OutputTokens int64
 
 The cumulative number of output tokens which were used.
 
-OutputTokensDetails MessageDeltaUsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 
@@ -11664,7 +11679,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails UsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 
@@ -12596,7 +12611,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails UsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 
@@ -12732,7 +12747,7 @@ OutputTokens int64
 
 The cumulative number of output tokens which were used.
 
-OutputTokensDetails MessageDeltaUsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 
@@ -17390,7 +17405,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails UsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 
@@ -20129,7 +20144,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails UsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 
@@ -21167,7 +21182,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails UsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 
@@ -22167,7 +22182,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails UsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 

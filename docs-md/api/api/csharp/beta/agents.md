@@ -78,6 +78,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
+
 "claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
@@ -1124,6 +1128,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
+
 "claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
@@ -1181,6 +1189,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"ClaudeOpus4\_7
 
@@ -1311,6 +1323,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"ClaudeOpus4\_7
 

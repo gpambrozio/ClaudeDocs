@@ -32,7 +32,7 @@ One of the following:
 
 String = String
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 24 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more
 
 One of the following:
 
@@ -87,8 +87,6 @@ One of the following:
 :"cache-diagnosis-2026-04-07"
 
 :"thinking-token-count-2026-05-13"
-
-:"mid-conversation-system-2026-04-07"
 
 ##### ReturnsExpand Collapse
 
@@ -1531,7 +1529,7 @@ output\_tokens: Integer
 
 The number of output tokens which were used.
 
-output\_tokens\_details: OutputTokensDetails{ thinking\_tokens}
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }
 
 Breakdown of output tokens by category.
 

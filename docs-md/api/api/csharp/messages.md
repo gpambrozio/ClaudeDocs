@@ -5882,7 +5882,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -6962,7 +6962,7 @@ required Long OutputTokens
 
 The cumulative number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -9630,6 +9630,21 @@ The JSON schema of the format
 
 JsonElement Type "json\_schema"constant
 
+class OutputTokensDetails:
+
+required Long ThinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
+
 class PlainTextSource:
 
 required string Data
@@ -10642,7 +10657,7 @@ required Long OutputTokens
 
 The cumulative number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -11542,7 +11557,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -12462,7 +12477,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -12598,7 +12613,7 @@ required Long OutputTokens
 
 The cumulative number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -17242,7 +17257,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -19963,7 +19978,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -20989,7 +21004,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -21979,7 +21994,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 

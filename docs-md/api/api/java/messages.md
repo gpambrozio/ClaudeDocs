@@ -5882,7 +5882,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[OutputTokensDetails](api/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -6962,7 +6962,7 @@ long outputTokens
 
 The cumulative number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[OutputTokensDetails](api/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -9708,6 +9708,21 @@ The JSON schema of the format
 
 JsonValue; type "json\_schema"constant"json\_schema"constant
 
+class OutputTokensDetails:
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
+
 class PlainTextSource:
 
 String data
@@ -10720,7 +10735,7 @@ long outputTokens
 
 The cumulative number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[OutputTokensDetails](api/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -11620,7 +11635,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[OutputTokensDetails](api/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -12540,7 +12555,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[OutputTokensDetails](api/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -12676,7 +12691,7 @@ long outputTokens
 
 The cumulative number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[OutputTokensDetails](api/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -17320,7 +17335,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[OutputTokensDetails](api/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -20041,7 +20056,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[OutputTokensDetails](api/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -21067,7 +21082,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[OutputTokensDetails](api/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -22057,7 +22072,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[OutputTokensDetails](api/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 

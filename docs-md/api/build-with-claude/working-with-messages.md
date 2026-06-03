@@ -98,7 +98,7 @@ Output
 
 ### System role in messages
 
-The first message in `messages` must always have `"role": "user"`. After that, on Claude Opus 4.8, you can also include messages with `"role": "system"` to add a new system instruction partway through a conversation.
+On Claude Opus 4.8, you can include messages with `"role": "system"` after a user turn (subject to [placement rules](build-with-claude/mid-conversation-system-messages.md)) to add a new system instruction partway through a conversation. A `system` message cannot be the first entry in `messages`; use the top-level `system` field for instructions that apply from the start.
 
 A mid-conversation system message has the same authority as the top-level `system` field, but because it is appended to the end of the message history, it does not invalidate any cached prefix that came before it. Use the top-level `system` field for instructions that should apply from the very first turn, and a mid-conversation system message for instructions that only become relevant later.
 

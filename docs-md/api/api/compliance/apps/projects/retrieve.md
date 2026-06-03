@@ -10,9 +10,6 @@ GET/v1/compliance/apps/projects/{project\_id}
 
 Get detailed information for a specific project.
 
-Returns:
-Detailed project information including description, instructions, and counts
-
 ##### Path ParametersExpand Collapse
 
 project\_id: string
@@ -75,7 +72,11 @@ Project last update timestamp
 
 user: object { id, email\_address }
 
-User information for project creator.
+The user who created a project or project document.
+
+Fields that reference this type are null when the creator's account has
+been deleted or the creator is no longer a member of any organization
+under the parent organization.
 
 id: string
 

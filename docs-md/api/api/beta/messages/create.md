@@ -26,7 +26,7 @@ One of the following:
 
 string
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 24 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more
 
 One of the following:
 
@@ -81,8 +81,6 @@ One of the following:
 "cache-diagnosis-2026-04-07"
 
 "thinking-token-count-2026-05-13"
-
-"mid-conversation-system-2026-04-07"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -6648,7 +6646,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }
 
 Breakdown of output tokens by category.
 
@@ -8129,7 +8127,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }
 
 Breakdown of output tokens by category.
 
@@ -8549,7 +8547,7 @@ output\_tokens: number
 
 The cumulative number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+output\_tokens\_details: [BetaOutputTokensDetails](api/beta.md) { thinking\_tokens }
 
 Breakdown of output tokens by category.
 

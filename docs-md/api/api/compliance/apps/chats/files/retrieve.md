@@ -28,6 +28,10 @@ id: string
 
 File ID
 
+claude\_chat\_ids: array of string
+
+Chats this file is attached to. A file can be referenced by messages across multiple chats.
+
 created\_at: string
 
 File creation timestamp
@@ -71,6 +75,9 @@ Response 200
   "created_at": "2024-01-15T10:30:00Z",
   "message_ids": [
     "claude_chat_msg_abc123"
+  ],
+  "claude_chat_ids": [
+    "claude_chat_def456"
   ]
 }
 ```
@@ -89,6 +96,9 @@ Response 200
   "created_at": "2024-01-15T10:30:00Z",
   "message_ids": [
     "claude_chat_msg_abc123"
+  ],
+  "claude_chat_ids": [
+    "claude_chat_def456"
   ]
 }
 ```

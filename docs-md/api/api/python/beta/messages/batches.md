@@ -1701,7 +1701,7 @@ output\_tokens: int
 
 The number of output tokens which were used.
 
-output\_tokens\_details: Optional[OutputTokensDetails]
+output\_tokens\_details: Optional[BetaOutputTokensDetails]
 
 Breakdown of output tokens by category.
 
@@ -3332,7 +3332,7 @@ output\_tokens: int
 
 The number of output tokens which were used.
 
-output\_tokens\_details: Optional[OutputTokensDetails]
+output\_tokens\_details: Optional[BetaOutputTokensDetails]
 
 Breakdown of output tokens by category.
 
@@ -4925,7 +4925,7 @@ output\_tokens: int
 
 The number of output tokens which were used.
 
-output\_tokens\_details: Optional[OutputTokensDetails]
+output\_tokens\_details: Optional[BetaOutputTokensDetails]
 
 Breakdown of output tokens by category.
 

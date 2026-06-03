@@ -1106,7 +1106,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens }
 
 Breakdown of output tokens by category.
 
@@ -2144,7 +2144,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens }
 
 Breakdown of output tokens by category.
 
@@ -3144,7 +3144,7 @@ output\_tokens: number
 
 The number of output tokens which were used.
 
-output\_tokens\_details: object { thinking\_tokens }
+output\_tokens\_details: [OutputTokensDetails](api/messages.md) { thinking\_tokens }
 
 Breakdown of output tokens by category.
 

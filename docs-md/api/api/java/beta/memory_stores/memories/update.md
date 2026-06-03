@@ -82,8 +82,6 @@ CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
 THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
-MID\_CONVERSATION\_SYSTEM\_2026\_04\_07("mid-conversation-system-2026-04-07")
-
 Optional<String> content
 
 New UTF-8 text content for the memory. Maximum 100 kB (102,400 bytes). Omit to leave the content unchanged (e.g., for a rename-only update).

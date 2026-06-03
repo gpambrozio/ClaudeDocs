@@ -90,8 +90,6 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
 
-"mid-conversation-system-2026-04-07"MidConversationSystem2026\_04\_07
-
 ##### ReturnsExpand Collapse
 
 class EventListPageResponse:
@@ -2278,6 +2276,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
+
 "claude-opus-4-7"ClaudeOpus4\_7
 
 Frontier intelligence for long-running agents and coding
@@ -2355,6 +2357,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-opus-4-8"ClaudeOpus4\_8
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"ClaudeOpus4\_7
 

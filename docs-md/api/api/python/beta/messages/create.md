@@ -5207,7 +5207,7 @@ One of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 24 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 23 more]
 
 One of the following:
 
@@ -5262,8 +5262,6 @@ One of the following:
 "cache-diagnosis-2026-04-07"
 
 "thinking-token-count-2026-05-13"
-
-"mid-conversation-system-2026-04-07"
 
 ##### ReturnsExpand Collapse
 
@@ -6724,7 +6722,7 @@ output\_tokens: int
 
 The number of output tokens which were used.
 
-output\_tokens\_details: Optional[OutputTokensDetails]
+output\_tokens\_details: Optional[BetaOutputTokensDetails]
 
 Breakdown of output tokens by category.
 
@@ -8243,7 +8241,7 @@ output\_tokens: int
 
 The number of output tokens which were used.
 
-output\_tokens\_details: Optional[OutputTokensDetails]
+output\_tokens\_details: Optional[BetaOutputTokensDetails]
 
 Breakdown of output tokens by category.
 
@@ -8682,7 +8680,7 @@ output\_tokens: int
 
 The cumulative number of output tokens which were used.
 
-output\_tokens\_details: Optional[OutputTokensDetails]
+output\_tokens\_details: Optional[BetaOutputTokensDetails]
 
 Breakdown of output tokens by category.
 

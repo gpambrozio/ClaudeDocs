@@ -11749,6 +11749,19 @@ remaining: optional number
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
+beta\_output\_tokens\_details: object { thinking\_tokens }
+
+thinking\_tokens: number
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
 beta\_plain\_text\_source: object { data, media\_type, type }
 
 data: string
@@ -28550,11 +28563,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -29670,11 +29687,15 @@ beta\_managed\_agents\_model\_config: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -29724,11 +29745,15 @@ beta\_managed\_agents\_model\_config\_params: object { id, speed }
 
 An object that defines additional configuration control over model use
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -29862,11 +29887,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -31276,11 +31305,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -31352,11 +31385,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -32046,11 +32083,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -32122,11 +32163,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -32824,11 +32869,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -33132,11 +33181,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -33208,11 +33261,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -39490,11 +39547,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -39566,11 +39627,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -42920,11 +42985,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -42996,11 +43065,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -44976,11 +45049,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -47774,11 +47851,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 
@@ -47850,11 +47931,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-7" or "claude-opus-4-6" or "claude-sonnet-4-6" or 6 more or string
+id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 

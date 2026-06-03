@@ -10,9 +10,6 @@ GET/v1/compliance/organizations/{org\_uuid}/users
 
 List current user members of an organization.
 
-Returns:
-List of user members with pagination info
-
 ##### Path ParametersExpand Collapse
 
 org\_uuid: string

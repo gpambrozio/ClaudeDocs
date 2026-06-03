@@ -1643,7 +1643,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [BetaOutputTokensDetails](api/beta.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -3214,7 +3214,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [BetaOutputTokensDetails](api/beta.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -4749,7 +4749,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [BetaOutputTokensDetails](api/beta.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 

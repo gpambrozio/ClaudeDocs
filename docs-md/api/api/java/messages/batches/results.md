@@ -912,7 +912,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[OutputTokensDetails](api/messages.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 

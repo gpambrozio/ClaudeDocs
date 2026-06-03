@@ -28,7 +28,6 @@ import anthropic
 
 client = anthropic.Anthropic()
 
-# model-id-sweep: next-opus
 MODEL = "claude-opus-4-8"
 EFFORT = "xhigh"
 

@@ -120,15 +120,91 @@ version\_id: string
 
 Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
 
-content: array of object { text, type }
+content: array of object { text, type }  or object { id, input, integration\_name, 4 more }  or object { content, integration\_name, is\_error, 5 more }
 
 Content blocks within the message
+
+One of the following:
+
+Text object { text, type }
+
+Text content block.
 
 text: string
 
 Text content from human or assistant
 
 type: "text"
+
+ToolUse object { id, input, integration\_name, 4 more }
+
+Tool invocation requested by the assistant.
+
+id: string
+
+Tool-use ID, e.g. 'toolu\_01AbC...'
+
+input: string
+
+Arguments passed to the tool, as a JSON-encoded string. May be shortened — see the `truncated` field
+
+integration\_name: string
+
+Name of the integration that provides this tool, when applicable
+
+mcp\_server\_url: string
+
+Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
+
+name: string
+
+Name of the tool invoked
+
+truncated: boolean
+
+True when `input` was shortened. Pass tool\_use\_input\_max\_chars=-1 to disable the limit
+
+type: "tool\_use"
+
+ToolResult object { content, integration\_name, is\_error, 5 more }
+
+Result returned by a tool invocation.
+
+content: array of object { text, type }
+
+Text content returned by the tool. Generated files are surfaced via the message's `generated_files` list; other non-text item types (including images and links) are omitted.
+
+text: string
+
+Text returned by the tool
+
+type: "text"
+
+integration\_name: string
+
+Name of the integration that provides this tool, when applicable
+
+is\_error: boolean
+
+True when the tool reported an error
+
+mcp\_server\_url: string
+
+Base URL (scheme, host, and path only) of the MCP server that provides this tool, when applicable
+
+name: string
+
+Name of the tool that produced this result
+
+tool\_use\_id: string
+
+ID of the tool\_use block this result responds to
+
+truncated: boolean
+
+True when one or more text items in `content` were shortened. Pass tool\_result\_max\_chars=-1 to retrieve full content.
+
+type: "tool\_result"
 
 created\_at: string
 
@@ -192,7 +268,7 @@ GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
 ##### ModelsExpand Collapse
 
-FileRetrieveResponse object { id, created\_at, filename, 4 more }
+FileRetrieveResponse object { id, claude\_chat\_ids, created\_at, 5 more }
 
 File metadata for GET /v1/compliance/apps/chats/files/{claude\_file\_id}.
 
@@ -202,6 +278,10 @@ the file bytes.
 id: string
 
 File ID
+
+claude\_chat\_ids: array of string
+
+Chats this file is attached to. A file can be referenced by messages across multiple chats.
 
 created\_at: string
 

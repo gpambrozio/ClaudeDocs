@@ -12,9 +12,6 @@ Delete a project document for compliance purposes.
 
 Hard-deletes the project document permanently.
 
-Returns:
-ComplianceProjectDocumentDeleteResponse confirming the deletion
-
 ##### Path ParametersExpand Collapse
 
 document\_id: string

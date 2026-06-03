@@ -74,8 +74,6 @@ CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
 THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
-MID\_CONVERSATION\_SYSTEM\_2026\_04\_07("mid-conversation-system-2026-04-07")
-
 Model model
 
 Model identifier. Accepts the [model string](about-claude/models/overview.md), e.g. `claude-opus-4-6`, or a `model_config` object for additional configuration control
@@ -85,6 +83,10 @@ enum BetaManagedAgentsModel:
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -133,6 +135,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -465,6 +471,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 

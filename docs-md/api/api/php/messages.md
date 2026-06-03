@@ -1721,7 +1721,7 @@ int outputTokens
 
 The cumulative number of output tokens which were used.
 
-?OutputTokensDetails outputTokensDetails
+?[OutputTokensDetails](api/messages.md) outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -1851,6 +1851,19 @@ All possible effort levels.
 ?[JSONOutputFormat](api/messages.md) format
 
 A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+[OutputTokensDetails](api/messages.md)
+
+int thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 [PlainTextSource](api/messages.md)
 
@@ -3506,7 +3519,7 @@ int outputTokens
 
 The number of output tokens which were used.
 
-?OutputTokensDetails outputTokensDetails
+?[OutputTokensDetails](api/messages.md) outputTokensDetails
 
 Breakdown of output tokens by category.
 

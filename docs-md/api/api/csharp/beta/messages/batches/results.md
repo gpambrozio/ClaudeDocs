@@ -82,8 +82,6 @@ Optional header to specify the beta version(s) you want to use.
 
 "thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
 
-"mid-conversation-system-2026-04-07"MidConversationSystem2026\_04\_07
-
 ##### ReturnsExpand Collapse
 
 class BetaMessageBatchIndividualResponse:
@@ -1505,7 +1503,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [BetaOutputTokensDetails](api/beta.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 

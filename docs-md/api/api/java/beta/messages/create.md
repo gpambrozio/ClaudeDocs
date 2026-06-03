@@ -78,8 +78,6 @@ CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
 THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
-MID\_CONVERSATION\_SYSTEM\_2026\_04\_07("mid-conversation-system-2026-04-07")
-
 long maxTokens
 
 The maximum number of tokens to generate before stopping.
@@ -6239,7 +6237,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -7698,7 +7696,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -8108,7 +8106,7 @@ long outputTokens
 
 The cumulative number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 

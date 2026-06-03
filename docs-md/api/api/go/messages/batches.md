@@ -1118,7 +1118,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails UsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 
@@ -2156,7 +2156,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails UsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 
@@ -3156,7 +3156,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails UsageOutputTokensDetails
+OutputTokensDetails [OutputTokensDetails](api/messages.md)
 
 Breakdown of output tokens by category.
 

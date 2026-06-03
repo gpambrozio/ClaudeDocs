@@ -24,7 +24,7 @@ Fast mode for Claude Opus 4.6 is deprecated as of the Claude Opus 4.8 launch and
 
 Fast mode runs the same model with a faster inference configuration. There is no change to intelligence or capabilities.
 
-- On Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6, up to 2.5x higher output tokens per second compared to standard speed
+- Up to 2.5x higher output tokens per second compared to standard speed
 - Speed benefits are focused on output tokens per second (OTPS), not time to first token (TTFT)
 - Same model weights and behavior (not a different model)
 

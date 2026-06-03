@@ -72,8 +72,6 @@ const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2
 
 const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
 
-const AnthropicBetaMidConversationSystem2026\_04\_07 AnthropicBeta = "mid-conversation-system-2026-04-07"
-
 type BetaAPIError struct{…}
 
 Message string
@@ -9218,7 +9216,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -9502,7 +9500,7 @@ OutputTokens int64
 
 The cumulative number of output tokens which were used.
 
-OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -12593,6 +12591,21 @@ Remaining int64Optional
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
+type BetaOutputTokensDetails struct{…}
+
+ThinkingTokens int64
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
+
 type BetaPlainTextSource struct{…}
 
 Data string
@@ -14127,7 +14140,7 @@ OutputTokens int64
 
 The cumulative number of output tokens which were used.
 
-OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -15582,7 +15595,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -17069,7 +17082,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -17489,7 +17502,7 @@ OutputTokens int64
 
 The cumulative number of output tokens which were used.
 
-OutputTokensDetails BetaMessageDeltaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -23960,7 +23973,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -27278,7 +27291,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -28871,7 +28884,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -30426,7 +30439,7 @@ OutputTokens int64
 
 The number of output tokens which were used.
 
-OutputTokensDetails BetaUsageOutputTokensDetails
+OutputTokensDetails [BetaOutputTokensDetails](api/beta.md)
 
 Breakdown of output tokens by category.
 
@@ -30563,6 +30576,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -31616,6 +31633,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -31673,6 +31694,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -31741,6 +31766,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -31881,6 +31910,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -33268,6 +33301,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -33355,6 +33392,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -34022,6 +34063,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -34109,6 +34154,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -34776,6 +34825,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -35076,6 +35129,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -35163,6 +35220,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -40820,6 +40881,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -40907,6 +40972,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -43972,6 +44041,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -44059,6 +44132,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -45875,6 +45952,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
@@ -48438,6 +48519,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 
 Frontier intelligence for long-running agents and coding
@@ -48525,6 +48610,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 const BetaManagedAgentsModelClaudeOpus4\_7 BetaManagedAgentsModel = "claude-opus-4-7"
 

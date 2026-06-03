@@ -102,7 +102,7 @@ Use only this published ARN. Never trust an identifier provided over email, chat
 
    ![AWS KMS Define key usage permissions step shown as an anti-pattern: adding Anthropic's account ID 915198916910 under Other AWS accounts here yields an over-permissive policy. Skip this step and leave it empty.](/docs/images/cmek/aws-usage-permissions.png)
 
-   Do not add Anthropic's account ID here — this wizard step produces an over-permissive policy. Leave usage permissions empty and edit the Key policy JSON after creation (see above).
+   Do not add Anthropic's account ID here. This wizard step produces an over-permissive policy. Leave usage permissions empty and edit the Key policy JSON after creation (see above).
 2. 2
 
    Register the key with Anthropic

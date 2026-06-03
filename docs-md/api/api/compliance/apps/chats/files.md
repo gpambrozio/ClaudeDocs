@@ -20,7 +20,7 @@ GET/v1/compliance/apps/chats/files/{claude\_file\_id}/content
 
 ##### ModelsExpand Collapse
 
-FileRetrieveResponse object { id, created\_at, filename, 4 more }
+FileRetrieveResponse object { id, claude\_chat\_ids, created\_at, 5 more }
 
 File metadata for GET /v1/compliance/apps/chats/files/{claude\_file\_id}.
 
@@ -30,6 +30,10 @@ the file bytes.
 id: string
 
 File ID
+
+claude\_chat\_ids: array of string
+
+Chats this file is attached to. A file can be referenced by messages across multiple chats.
 
 created\_at: string
 

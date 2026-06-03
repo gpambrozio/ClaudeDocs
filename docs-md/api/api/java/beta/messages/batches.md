@@ -1643,7 +1643,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -3214,7 +3214,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -4749,7 +4749,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 

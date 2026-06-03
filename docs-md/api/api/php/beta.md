@@ -66,8 +66,6 @@ One of the following:
 
 "thinking-token-count-2026-05-13"
 
-"mid-conversation-system-2026-04-07"
-
 [BetaAPIError](api/beta.md)
 
 string message
@@ -2378,7 +2376,7 @@ int outputTokens
 
 The cumulative number of output tokens which were used.
 
-?OutputTokensDetails outputTokensDetails
+?[BetaOutputTokensDetails](api/beta.md) outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -2466,6 +2464,19 @@ A schema to specify Claude's output format in responses. See [structured outputs
 ?[BetaTokenTaskBudget](api/beta.md) taskBudget
 
 User-configurable total token budget across contexts.
+
+[BetaOutputTokensDetails](api/beta.md)
+
+int thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
 
 [BetaPlainTextSource](api/beta.md)
 
@@ -4641,7 +4652,7 @@ int outputTokens
 
 The number of output tokens which were used.
 
-?OutputTokensDetails outputTokensDetails
+?[BetaOutputTokensDetails](api/beta.md) outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -5709,6 +5720,10 @@ Default configuration for all tools from an MCP server.
 BetaManagedAgentsModel
 
 One of the following:
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
 
 "claude-opus-4-7"
 

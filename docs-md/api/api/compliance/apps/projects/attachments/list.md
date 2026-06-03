@@ -19,12 +19,6 @@ GET /v1/compliance/apps/chats/files/{claude\_file\_id}/content endpoint.
 The text content of attached project documents can be fetched using the
 GET /v1/compliance/apps/projects/documents/{claude\_proj\_doc\_id} endpoint.
 
-Returns:
-List of project attachments with pagination info
-
-Raises:
-NotFoundException: If project doesn't exist or project\_id format is invalid
-
 ##### Path ParametersExpand Collapse
 
 project\_id: string

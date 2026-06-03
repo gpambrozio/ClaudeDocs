@@ -64,8 +64,6 @@ CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
 THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
-MID\_CONVERSATION\_SYSTEM\_2026\_04\_07("mid-conversation-system-2026-04-07")
-
 class BetaApiError:
 
 String message
@@ -8946,7 +8944,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -9220,7 +9218,7 @@ long outputTokens
 
 The cumulative number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -12315,6 +12313,21 @@ Optional<Long> remaining
 
 Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
 
+class BetaOutputTokensDetails:
+
+long thinkingTokens
+
+Number of output tokens the model generated as internal reasoning, including
+the thinking-block delimiter tokens.
+
+Reflects the raw reasoning the model produced, not the (possibly shorter)
+summarized thinking text returned in the response body. Computed by
+re-tokenizing the raw reasoning text, so it may differ from the model's exact
+generation count by a small number of tokens. Always ≤ `output_tokens`;
+`output_tokens - thinking_tokens` approximates the non-reasoning output.
+
+minimum0
+
 class BetaPlainTextSource:
 
 String data
@@ -13837,7 +13850,7 @@ long outputTokens
 
 The cumulative number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -15272,7 +15285,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -16737,7 +16750,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -17147,7 +17160,7 @@ long outputTokens
 
 The cumulative number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -23588,7 +23601,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -26878,7 +26891,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -28449,7 +28462,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -29984,7 +29997,7 @@ long outputTokens
 
 The number of output tokens which were used.
 
-Optional<OutputTokensDetails> outputTokensDetails
+Optional<[BetaOutputTokensDetails](api/beta.md)> outputTokensDetails
 
 Breakdown of output tokens by category.
 
@@ -30113,6 +30126,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -31154,6 +31171,10 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -31201,6 +31222,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -31259,6 +31284,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -31389,6 +31418,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -32762,6 +32795,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -32839,6 +32876,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -33496,6 +33537,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -33573,6 +33618,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -34230,6 +34279,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -34520,6 +34573,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -34597,6 +34654,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -40240,6 +40301,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -40317,6 +40382,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -43370,6 +43439,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -43447,6 +43520,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -45251,6 +45328,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
@@ -47800,6 +47881,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 
 Frontier intelligence for long-running agents and coding
@@ -47877,6 +47962,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
 
 CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
 

@@ -912,7 +912,7 @@ required Long OutputTokens
 
 The number of output tokens which were used.
 
-required OutputTokensDetails? OutputTokensDetails
+required [OutputTokensDetails](api/messages.md)? OutputTokensDetails
 
 Breakdown of output tokens by category.
 
