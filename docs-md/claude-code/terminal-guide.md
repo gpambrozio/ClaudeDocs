@@ -1,11 +1,5 @@
 # Terminal guide for new users
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 You can use Claude Code even if you’ve never used a terminal before. This guide walks you through opening a terminal, installing Claude Code, and your first interactions.
 
 - [macOS and Linux](#macos-and-linux)

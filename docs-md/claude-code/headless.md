@@ -1,11 +1,5 @@
 # Run Claude Code programmatically
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 Starting June 15, 2026, Agent SDK and `claude -p` usage on subscription plans will draw from a new monthly Agent SDK credit, separate from your interactive usage limits. See [Use the Claude Agent SDK with your Claude plan](https://support.claude.com/en/articles/15036540-use-the-claude-agent-sdk-with-your-claude-plan) for details.
 
 The [Agent SDK](agent-sdk/overview.md) gives you the same tools, agent loop, and context management that power Claude Code. It’s available as a CLI for scripts and CI/CD, or as [Python](agent-sdk/python.md) and [TypeScript](agent-sdk/typescript.md) packages for full programmatic control.
@@ -146,7 +140,7 @@ When an API request fails with a retryable error, Claude Code emits a `system/ap
 | `max_retries` | integer | total retries permitted |
 | `retry_delay_ms` | integer | milliseconds until the next attempt |
 | `error_status` | integer or null | HTTP status code, or `null` for connection errors with no HTTP response |
-| `error` | string | error category: `authentication_failed`, `oauth_org_not_allowed`, `billing_error`, `rate_limit`, `invalid_request`, `model_not_found`, `server_error`, `max_output_tokens`, or `unknown` |
+| `error` | string | error category: `authentication_failed`, `oauth_org_not_allowed`, `billing_error`, `rate_limit`, `overloaded`, `invalid_request`, `model_not_found`, `server_error`, `max_output_tokens`, or `unknown` |
 | `uuid` | string | unique event identifier |
 | `session_id` | string | session the event belongs to |
 

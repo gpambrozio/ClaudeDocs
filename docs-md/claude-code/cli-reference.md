@@ -1,11 +1,3 @@
-# CLI reference
-
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 ## [​](#cli-commands) CLI commands
 
 You can start sessions, pipe content, resume conversations, and manage updates with these commands:

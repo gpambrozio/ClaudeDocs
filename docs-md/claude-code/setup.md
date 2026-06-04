@@ -1,11 +1,5 @@
 # Advanced setup
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 This page covers system requirements, platform-specific installation details, updates, and uninstallation. For a guided walkthrough of your first session, see the [quickstart](quickstart.md). If you’ve never used a terminal before, see the [terminal guide](terminal-guide.md).
 
 ## [​](#system-requirements) System requirements

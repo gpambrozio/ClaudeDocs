@@ -1,11 +1,5 @@
 # Intercept and control agent behavior with hooks
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 Hooks are callback functions that run your code in response to agent events, like a tool being called, a session starting, or execution stopping. With hooks, you can:
 
 - **Block dangerous operations** before they execute, like destructive shell commands or unauthorized file access

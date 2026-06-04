@@ -1,11 +1,5 @@
 # How Claude Code uses prompt caching
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 Prompt caching makes Claude Code faster and more cost-efficient. Without caching, the API would reprocess your full history on every turn. With caching, it reuses what it already processed and only does new work for what changed.
 Claude Code handles prompt caching for you, unless you [disable it](#disable-prompt-caching). It is still useful to know how prompt caching works, because some actions invalidate the cache and make the next response slower and more expensive while it rebuilds. This page covers which actions those are, why some settings wait for a restart to apply, and how to check cache performance when usage looks high.
 
@@ -49,6 +43,7 @@ These actions cause the next request to miss part or all of the cache. You see a
 
 - [Switching models](#switching-models)
 - [Changing effort level](#changing-effort-level)
+- [Turning on fast mode](#turning-on-fast-mode)
 - [Connecting or disconnecting an MCP server](#connecting-or-disconnecting-an-mcp-server)
 - [Enabling or disabling a plugin](#enabling-or-disabling-a-plugin)
 - [Denying an entire tool](#denying-an-entire-tool)
@@ -63,6 +58,13 @@ The [`opusplan` model setting](model-config.md) resolves to Opus during plan mod
 ### [​](#changing-effort-level) Changing effort level
 
 The cache is keyed by [effort level](model-config.md) as well as model, so switching with `/effort` means the next request reads the entire conversation history with no cache hits. Once a conversation has started, Claude Code shows a confirmation dialog before applying an effort change that would invalidate the cache. A change that resolves to the same level already in effect, such as setting the model’s default explicitly, skips the dialog and keeps the cache.
+
+### [​](#turning-on-fast-mode) Turning on fast mode
+
+Enabling [fast mode](fast-mode.md) adds a request header that is part of the cache key, so the next request reads the entire conversation history with no cache hits. Those uncached input tokens are billed at [fast mode rates](fast-mode.md), which is why turning it on at the start of a session costs less than turning it on deep into a long one. Enabling fast mode from a non-Opus model also [switches your model](#switching-models), which starts a fresh cache on its own.
+The cost applies once per conversation. After the first fast mode turn, Claude Code keeps sending the header and varies only the request’s speed setting, which is not part of the cache key. Turning fast mode off, the [automatic fallback to standard speed](fast-mode.md) after a rate limit, and turning it back on later all keep the cache. `/clear` and `/compact` reset this, since they rebuild the cache at those points anyway.
+
+Keeping the header across toggles requires Claude Code v2.1.86 or later. On earlier versions, every fast mode toggle and rate-limit fallback invalidates the cache.
 
 ### [​](#connecting-or-disconnecting-an-mcp-server) Connecting or disconnecting an MCP server
 

@@ -1,11 +1,5 @@
 # Troubleshooting
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 This page covers performance, stability, and search problems once Claude Code is running. For other issues, start with the page that matches where you’re stuck:
 
 | Symptom | Go to |
@@ -54,6 +48,10 @@ If Claude Code seems unresponsive:
 2. If unresponsive, you may need to close the terminal and restart
 
 Restarting doesn’t lose your conversation. Run `claude --resume` in the same directory to pick the session back up.
+
+### [​](#garbled-or-corrupted-text-in-an-editor’s-integrated-terminal) Garbled or corrupted text in an editor’s integrated terminal
+
+If characters render as boxes, smears, or the wrong glyphs when running Claude Code in the VS Code, Cursor, or Devin Desktop integrated terminal, the terminal’s GPU renderer is likely the cause. Run `/terminal-setup` inside Claude Code to set `terminal.integrated.gpuAcceleration` to `"off"`, or set it manually in your editor settings and reload the window. See [Terminal configuration](terminal-config.md) for the other settings `/terminal-setup` writes.
 
 ### [​](#search-and-discovery-issues) Search and discovery issues
 

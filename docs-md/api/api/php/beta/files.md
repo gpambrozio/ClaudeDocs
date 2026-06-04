@@ -1,104 +1,473 @@
 # Files
 
-Copy page
-
-SDK language
-
-PHP
-
+```
 # Files
 
-##### [Upload File](api/beta/files/upload.md)
+## Upload File
 
-$client->beta->files->upload(string file, ?list<AnthropicBeta> betas): [FileMetadata](api/beta.md)
+`$client->beta->files->upload(string file, ?list<AnthropicBeta> betas): FileMetadata`
 
-POST/v1/files
+**post** `/v1/files`
 
-##### [List Files](api/beta/files/list.md)
+Upload File
 
-$client->beta->files->list(?string afterID, ?string beforeID, ?int limit, ?string scopeID, ?list<AnthropicBeta> betas): Page<[FileMetadata](api/beta.md)>
+### Parameters
 
-GET/v1/files
+- `file: string`
 
-##### [Download File](api/beta/files/download.md)
+  The file to upload
 
-$client->beta->files->download(string fileID, ?list<AnthropicBeta> betas): download
+- `betas?:optional list<AnthropicBeta>`
 
-GET/v1/files/{file\_id}/content
+  Optional header to specify the beta version(s) you want to use.
 
-##### [Get File Metadata](api/beta/files/retrieve_metadata.md)
+### Returns
 
-$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): [FileMetadata](api/beta.md)
+- `FileMetadata`
 
-GET/v1/files/{file\_id}
+  - `string id`
 
-##### [Delete File](api/beta/files/delete.md)
+    Unique object identifier.
 
-$client->beta->files->delete(string fileID, ?list<AnthropicBeta> betas): [DeletedFile](api/beta.md)
+    The format and length of IDs may change over time.
 
-DELETE/v1/files/{file\_id}
+  - `\Datetime createdAt`
 
-##### ModelsExpand Collapse
+    RFC 3339 datetime string representing when the file was created.
 
-[BetaFileScope](api/beta.md)
+  - `string filename`
 
-string id
+    Original filename of the uploaded file.
 
-The ID of the scoping resource (e.g., the session ID).
+  - `string mimeType`
 
-"session" type
+    MIME type of the file.
 
-The type of scope (e.g., `"session"`).
+  - `int sizeBytes`
 
-[DeletedFile](api/beta.md)
+    Size of the file in bytes.
 
-string id
+  - `"file" type`
 
-ID of the deleted file.
+    Object type.
 
-?Type type
+    For files, this is always `"file"`.
 
-Deleted object type.
+  - `?bool downloadable`
 
-For file deletion, this is always `"file_deleted"`.
+    Whether the file can be downloaded.
 
-[FileMetadata](api/beta.md)
+  - `?BetaFileScope scope`
 
-string id
+    The scope of this file, indicating the context in which it was created (e.g., a session).
 
-Unique object identifier.
+### Example
 
-The format and length of IDs may change over time.
+```php
+<?php
 
-\Datetime createdAt
+require_once dirname(__DIR__) . '/vendor/autoload.php';
 
-RFC 3339 datetime string representing when the file was created.
+$client = new Client(apiKey: 'my-anthropic-api-key');
 
-string filename
+$fileMetadata = $client->beta->files->upload(
+  file: FileParam::fromString('Example data', filename: uniqid('file-upload-', true)),
+  betas: ['message-batches-2024-09-24'],
+);
 
-Original filename of the uploaded file.
+var_dump($fileMetadata);
+```
 
-string mimeType
+#### Response
 
-MIME type of the file.
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
 
-int sizeBytes
+## List Files
 
-Size of the file in bytes.
+`$client->beta->files->list(?string afterID, ?string beforeID, ?int limit, ?string scopeID, ?list<AnthropicBeta> betas): Page<FileMetadata>`
 
-"file" type
+**get** `/v1/files`
 
-Object type.
+List Files
 
-For files, this is always `"file"`.
+### Parameters
 
-?bool downloadable
+- `afterID?:optional string`
 
-Whether the file can be downloaded.
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately after this object.
 
-?[BetaFileScope](api/beta.md) scope
+- `beforeID?:optional string`
 
-The scope of this file, indicating the context in which it was created (e.g., a session).
+  ID of the object to use as a cursor for pagination. When provided, returns the page of results immediately before this object.
+
+- `limit?:optional int`
+
+  Number of items to return per page.
+
+  Defaults to `20`. Ranges from `1` to `1000`.
+
+- `scopeID?:optional string`
+
+  Filter by scope ID. Only returns files associated with the specified scope (e.g., a session ID).
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `FileMetadata`
+
+  - `string id`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `\Datetime createdAt`
+
+    RFC 3339 datetime string representing when the file was created.
+
+  - `string filename`
+
+    Original filename of the uploaded file.
+
+  - `string mimeType`
+
+    MIME type of the file.
+
+  - `int sizeBytes`
+
+    Size of the file in bytes.
+
+  - `"file" type`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `?bool downloadable`
+
+    Whether the file can be downloaded.
+
+  - `?BetaFileScope scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$page = $client->beta->files->list(
+  afterID: 'after_id',
+  beforeID: 'before_id',
+  limit: 1,
+  scopeID: 'scope_id',
+  betas: ['message-batches-2024-09-24'],
+);
+
+var_dump($page);
+```
+
+#### Response
+
+```json
+{
+  "data": [
+    {
+      "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+      "created_at": "2025-04-15T18:37:24.100435Z",
+      "filename": "document.pdf",
+      "mime_type": "application/pdf",
+      "size_bytes": 102400,
+      "type": "file",
+      "downloadable": false,
+      "scope": {
+        "id": "id",
+        "type": "session"
+      }
+    }
+  ],
+  "first_id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "has_more": true,
+  "last_id": "file_013Zva2CMHLNnXjNJJKqJ2EF"
+}
+```
+
+## Download File
+
+`$client->beta->files->download(string fileID, ?list<AnthropicBeta> betas): download`
+
+**get** `/v1/files/{file_id}/content`
+
+Download File
+
+### Parameters
+
+- `fileID: string`
+
+  ID of the File.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `mixed`
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$response = $client->beta->files->download(
+  'file_id', betas: ['message-batches-2024-09-24']
+);
+
+var_dump($response);
+```
+
+## Get File Metadata
+
+`$client->beta->files->retrieveMetadata(string fileID, ?list<AnthropicBeta> betas): FileMetadata`
+
+**get** `/v1/files/{file_id}`
+
+Get File Metadata
+
+### Parameters
+
+- `fileID: string`
+
+  ID of the File.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `FileMetadata`
+
+  - `string id`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `\Datetime createdAt`
+
+    RFC 3339 datetime string representing when the file was created.
+
+  - `string filename`
+
+    Original filename of the uploaded file.
+
+  - `string mimeType`
+
+    MIME type of the file.
+
+  - `int sizeBytes`
+
+    Size of the file in bytes.
+
+  - `"file" type`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `?bool downloadable`
+
+    Whether the file can be downloaded.
+
+  - `?BetaFileScope scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$fileMetadata = $client->beta->files->retrieveMetadata(
+  'file_id', betas: ['message-batches-2024-09-24']
+);
+
+var_dump($fileMetadata);
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "created_at": "2025-04-15T18:37:24.100435Z",
+  "filename": "document.pdf",
+  "mime_type": "application/pdf",
+  "size_bytes": 102400,
+  "type": "file",
+  "downloadable": false,
+  "scope": {
+    "id": "id",
+    "type": "session"
+  }
+}
+```
+
+## Delete File
+
+`$client->beta->files->delete(string fileID, ?list<AnthropicBeta> betas): DeletedFile`
+
+**delete** `/v1/files/{file_id}`
+
+Delete File
+
+### Parameters
+
+- `fileID: string`
+
+  ID of the File.
+
+- `betas?:optional list<AnthropicBeta>`
+
+  Optional header to specify the beta version(s) you want to use.
+
+### Returns
+
+- `DeletedFile`
+
+  - `string id`
+
+    ID of the deleted file.
+
+  - `?Type type`
+
+    Deleted object type.
+
+    For file deletion, this is always `"file_deleted"`.
+
+### Example
+
+```php
+<?php
+
+require_once dirname(__DIR__) . '/vendor/autoload.php';
+
+$client = new Client(apiKey: 'my-anthropic-api-key');
+
+$deletedFile = $client->beta->files->delete(
+  'file_id', betas: ['message-batches-2024-09-24']
+);
+
+var_dump($deletedFile);
+```
+
+#### Response
+
+```json
+{
+  "id": "file_011CNha8iCJcU1wXNR6q4V8w",
+  "type": "file_deleted"
+}
+```
+
+## Domain Types
+
+### Beta File Scope
+
+- `BetaFileScope`
+
+  - `string id`
+
+    The ID of the scoping resource (e.g., the session ID).
+
+  - `"session" type`
+
+    The type of scope (e.g., `"session"`).
+
+### Deleted File
+
+- `DeletedFile`
+
+  - `string id`
+
+    ID of the deleted file.
+
+  - `?Type type`
+
+    Deleted object type.
+
+    For file deletion, this is always `"file_deleted"`.
+
+### File Metadata
+
+- `FileMetadata`
+
+  - `string id`
+
+    Unique object identifier.
+
+    The format and length of IDs may change over time.
+
+  - `\Datetime createdAt`
+
+    RFC 3339 datetime string representing when the file was created.
+
+  - `string filename`
+
+    Original filename of the uploaded file.
+
+  - `string mimeType`
+
+    MIME type of the file.
+
+  - `int sizeBytes`
+
+    Size of the file in bytes.
+
+  - `"file" type`
+
+    Object type.
+
+    For files, this is always `"file"`.
+
+  - `?bool downloadable`
+
+    Whether the file can be downloaded.
+
+  - `?BetaFileScope scope`
+
+    The scope of this file, indicating the context in which it was created (e.g., a session).
+```
 
 ---
 

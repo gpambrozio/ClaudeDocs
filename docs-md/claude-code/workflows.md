@@ -1,11 +1,5 @@
 # Orchestrate subagents at scale with dynamic workflows
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 Dynamic workflows are in research preview. They require Claude Code v2.1.154 or later and are available on all paid plans, with Anthropic API access, and on Amazon Bedrock, Google Cloud Vertex AI, and Microsoft Foundry. On Pro, turn them on from the Dynamic workflows row in `/config`.
 
 A dynamic workflow is a JavaScript script that orchestrates [subagents](sub-agents.md) at scale. Claude writes the script for the task you describe, and a runtime executes it in the background while your session stays responsive.

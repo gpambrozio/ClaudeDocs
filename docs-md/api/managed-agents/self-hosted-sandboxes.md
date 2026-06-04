@@ -49,7 +49,7 @@ You need:
 - **The `ant` CLI or an Anthropic SDK** (Python, TypeScript, or Go) on the worker host.
 - **Two credentials:** an environment key (generated in the steps that follow) authenticates the worker to its queue; your Claude API key creates sessions and reads queue stats from outside the worker host.
 
-On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the worker authenticates with AWS IAM (SigV4), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](api/claude-platform-on-aws-iam-actions.md) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
+On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the worker authenticates with AWS IAM (SigV4) or an [API key generated in the AWS Console](build-with-claude/claude-platform-on-aws.md), not an environment key. Attach the [`AnthropicSelfHostedEnvironmentAccess`](api/claude-platform-on-aws-iam-actions.md) managed policy to the IAM principal your worker runs as. Environment keys generated in the Claude Console don't work with the Claude Platform on AWS endpoint.
 
 1. 1
 

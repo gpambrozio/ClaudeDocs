@@ -1,11 +1,5 @@
 # Quickstart
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 Use the Agent SDK to build an AI agent that reads your code, finds bugs, and fixes them, all without manual intervention.
 **What you’ll do:**
 
@@ -164,15 +158,22 @@ This example uses streaming to show progress in real-time. If you don’t need l
 
 Your agent is ready. Run it with the following command:
 
-- Python
 - TypeScript
-
-```shiki
-python3 agent.py
-```
+- Python (uv)
+- Python (pip)
 
 ```shiki
 npx tsx agent.ts
+```
+
+```shiki
+uv run agent.py
+```
+
+With your virtual environment still activated:
+
+```shiki
+python agent.py
 ```
 
 After running, check `utils.py`. You’ll see defensive code handling empty lists and null users. Your agent autonomously:

@@ -1,11 +1,5 @@
 # Claude Code on Claude Platform on AWS
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 **Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
 
 [View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=claude_platform_on_aws_view_plans#plans-business)[Contact sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=claude_platform_on_aws_contact_sales)

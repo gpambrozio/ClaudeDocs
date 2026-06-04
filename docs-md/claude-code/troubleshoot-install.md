@@ -1,11 +1,5 @@
 # Troubleshoot installation and login
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 If installation fails or you can’t sign in, find your error below. For runtime issues after Claude Code is working, see [Troubleshooting](troubleshooting.md). For configuration problems such as settings not applying or hooks not firing, see [Debug your configuration](debug-your-config.md).
 
 ## [​](#find-your-error) Find your error

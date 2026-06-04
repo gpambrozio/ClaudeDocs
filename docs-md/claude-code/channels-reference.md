@@ -1,11 +1,5 @@
 # Channels reference
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 Channels are in [research preview](channels.md) and require Claude Code v2.1.80 or later. Team and Enterprise organizations must [explicitly enable them](channels.md).
 
 A channel is an MCP server that pushes events into a Claude Code session so Claude can react to things happening outside the terminal.

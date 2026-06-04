@@ -1,11 +1,5 @@
 # Manage sessions
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 A session is a saved conversation tied to a project directory. Claude Code stores it locally as you work, so you can resume where you left off, branch to try a different approach, or switch between tasks.
 The [desktop app](desktop.md), [Claude Code on the web](claude-code-on-the-web.md), and the [VS Code extension](vs-code.md) each maintain their own session history. This page covers the CLI:
 

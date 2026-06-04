@@ -1,11 +1,5 @@
 # Run parallel sessions with worktrees
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 A [git worktree](https://git-scm.com/docs/git-worktree) is a separate working directory with its own files and branch, sharing the same repository history and remote as your main checkout. Running each Claude Code session in its own worktree means edits in one session never touch files in another, so you can have Claude building a feature in one terminal while fixing a bug in a second.
 This page covers worktree isolation in the CLI. Everything below assumes a git repository. For other version control systems, see [Non-git version control](#non-git-version-control). The [desktop app](desktop.md) creates a worktree for every new session automatically.
 Worktrees are one of several ways to run Claude in parallel. They isolate file edits, while [subagents](sub-agents.md) and [agent teams](agent-teams.md) coordinate the work itself. See [Run agents in parallel](agents.md) to compare the approaches, or skip ahead to [Isolate subagents with worktrees](#isolate-subagents-with-worktrees) to use worktrees and subagents together.

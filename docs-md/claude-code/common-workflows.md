@@ -1,11 +1,5 @@
 # Common workflows
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 This page collects short recipes for everyday development. For higher-level guidance on prompting and context management, see [Best practices](best-practices.md).
 This page covers:
 

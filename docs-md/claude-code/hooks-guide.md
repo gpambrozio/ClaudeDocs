@@ -1,11 +1,5 @@
 # Automate actions with hooks
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 Hooks are user-defined shell commands that execute at specific points in Claude Code’s lifecycle. They provide deterministic control over Claude Code’s behavior, ensuring certain actions always happen rather than relying on the LLM to choose to run them. Use hooks to enforce project rules, automate repetitive tasks, and integrate Claude Code with your existing tools.
 For decisions that require judgment rather than deterministic rules, you can also use [prompt-based hooks](#prompt-based-hooks) or [agent-based hooks](#agent-based-hooks) that use a Claude model to evaluate conditions.
 For other ways to extend Claude Code, see [skills](skills.md) for giving Claude additional instructions and executable commands, [subagents](sub-agents.md) for running tasks in isolated contexts, and [plugins](plugins.md) for packaging extensions to share across projects.
@@ -603,7 +597,7 @@ Each event type matches on a specific field:
 | `PreCompact`, `PostCompact` | what triggered compaction | `manual`, `auto` |
 | `SubagentStop` | agent type | same values as `SubagentStart` |
 | `ConfigChange` | configuration source | `user_settings`, `project_settings`, `local_settings`, `policy_settings`, `skills` |
-| `StopFailure` | error type | `rate_limit`, `authentication_failed`, `oauth_org_not_allowed`, `billing_error`, `invalid_request`, `model_not_found`, `server_error`, `max_output_tokens`, `unknown` |
+| `StopFailure` | error type | `rate_limit`, `overloaded`, `authentication_failed`, `oauth_org_not_allowed`, `billing_error`, `invalid_request`, `model_not_found`, `server_error`, `max_output_tokens`, `unknown` |
 | `InstructionsLoaded` | load reason | `session_start`, `nested_traversal`, `path_glob_match`, `include`, `compact` |
 | `Elicitation` | MCP server name | your configured MCP server names |
 | `ElicitationResult` | MCP server name | same values as `Elicitation` |

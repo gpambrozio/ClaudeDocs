@@ -30,6 +30,12 @@ The maximal number of images per message or request is:
 
 The maximal dimensions per image are 8000x8000 px. If you submit more than 20 images in one API request, this limit is reduced to 2000x2000 px.
 
+The maximal size per image is:
+
+- 10 MB (base64-encoded) when using the Claude API directly.
+- 5 MB (base64-encoded) on Amazon Bedrock and Vertex AI.
+- 10 MB on [claude.ai](https://claude.ai/).
+
 While the API supports up to 600 images per request, [request size limits](api/overview.md) (32 MB for standard endpoints; lower on some partner-operated platforms, for example, Amazon Bedrock and Vertex AI) can be reached first. For many images, consider uploading with the [Files API](#files-api-image-example) and referencing by `file_id` to keep request payloads small.
 
 Even when using the Files API, requests with many large images can fail before reaching the 600-image count. Reduce image dimensions or file sizes (for example, by downsampling) before uploading (see [Evaluate image size](#evaluate-image-size)).

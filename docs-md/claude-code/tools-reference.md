@@ -1,11 +1,5 @@
 # Tools reference
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 Claude Code has access to a set of built-in tools that help it understand and modify your codebase. The tool names are the exact strings you use in [permission rules](permissions.md), [subagent tool lists](sub-agents.md), and [hook matchers](hooks.md). To disable a tool entirely, add its name to the `deny` array in your [permission settings](permissions.md).
 To add custom tools, connect an [MCP server](mcp.md). To extend Claude with reusable prompt-based workflows, write a [skill](skills.md), which runs through the existing `Skill` tool rather than adding a new tool entry.
 

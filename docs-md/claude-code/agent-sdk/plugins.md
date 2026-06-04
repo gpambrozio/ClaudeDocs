@@ -1,11 +1,5 @@
 # Plugins in the SDK
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 Plugins allow you to extend Claude Code with custom functionality that can be shared across projects. Through the Agent SDK, you can programmatically load plugins from local directories to add skills, agents, hooks, and MCP servers to your agent sessions.
 
 ## [​](#what-are-plugins) What are plugins?

@@ -1,11 +1,5 @@
 # Plugins reference
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 Looking to install plugins? See [Discover and install plugins](discover-plugins.md). For creating plugins, see [Plugins](plugins.md). For distributing plugins, see [Plugin marketplaces](plugin-marketplaces.md).
 
 This reference provides complete technical specifications for the Claude Code plugin system, including component schemas, CLI commands, and development tools.

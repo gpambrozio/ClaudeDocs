@@ -1,11 +1,3 @@
-# Interactive mode
-
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 ## [​](#keyboard-shortcuts) Keyboard shortcuts
 
 Keyboard shortcuts may vary by platform and terminal. In [fullscreen rendering](fullscreen.md), press `?` in the transcript viewer to see available shortcuts there.**macOS users**: Option/Alt key shortcuts (`Alt+B`, `Alt+F`, `Alt+Y`, `Alt+M`, `Alt+P`) require configuring Option as Meta in your terminal:

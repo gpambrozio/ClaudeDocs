@@ -1,11 +1,5 @@
 # Claude Code on Amazon Bedrock
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 **Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
 
 [View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=bedrock_view_plans#plans-business)[Contact sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=bedrock_contact_sales)
@@ -156,6 +150,7 @@ When enabling Bedrock for Claude Code, keep the following in mind:
 
 - `AWS_REGION` is a required environment variable. Claude Code does not read from the `.aws` config file for this setting.
 - When using Bedrock, the `/logout` command is unavailable since authentication is handled through AWS credentials.
+- The WebSearch tool is not available on Bedrock. See [WebSearch tool behavior](tools-reference.md).
 - You can use settings files for environment variables like `AWS_PROFILE` that you don’t want to leak to other processes. See [Settings](settings.md) for more information.
 
 ### [​](#4-pin-model-versions) 4. Pin model versions

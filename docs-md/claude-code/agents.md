@@ -1,11 +1,5 @@
 # Run agents in parallel
 
-> ## Documentation Index
->
-> Fetch the complete documentation index at: <https://code.claude.com/docs/llms.txt>
->
-> Use this file to discover all available pages before exploring further.
-
 [Subagents](sub-agents.md), [agent view](agent-view.md), [agent teams](agent-teams.md), and [dynamic workflows](workflows.md) each parallelize work in a different way. The right one depends on whether you want to stay in each conversation yourself, hand tasks off and check back later, or have Claude coordinate a group of workers for you.
 
 | Approach | What it gives you | Use it when |
