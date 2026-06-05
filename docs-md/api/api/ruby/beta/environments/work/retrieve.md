@@ -1,165 +1,174 @@
-# Retrieve
+# Get Work Item
 
-```
-## Get Work Item
+Copy page
 
-`beta.environments.work.retrieve(work_id, **kwargs) -> BetaSelfHostedWork`
+SDK language
 
-**get** `/v1/environments/{environment_id}/work/{work_id}`
+Ruby
+
+# Get Work Item
+
+beta.environments.work.retrieve(work\_id, \*\*kwargs) -> [BetaSelfHostedWork](api/beta.md) { id, acknowledged\_at, created\_at, 9 more }
+
+GET/v1/environments/{environment\_id}/work/{work\_id}
 
 Note: these endpoints are called automatically by the pre-built environment worker provided in the SDKs and CLI, for orchestrating sessions with self-hosted sandbox environments. They are included here as a reference; you do not need to invoke them directly.
 
 Retrieve detailed information about a specific work item.
 
-### Parameters
+##### ParametersExpand Collapse
 
-- `environment_id: String`
+environment\_id: String
 
-- `work_id: String`
+work\_id: String
 
-- `betas: Array[AnthropicBeta]`
+betas: Array[[AnthropicBeta](api/beta.md)]
 
-  Optional header to specify the beta version(s) you want to use.
+Optional header to specify the beta version(s) you want to use.
 
-  - `String = String`
+One of the following:
 
-  - `AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more`
+String = String
 
-    - `:"message-batches-2024-09-24"`
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more
 
-    - `:"prompt-caching-2024-07-31"`
+One of the following:
 
-    - `:"computer-use-2024-10-22"`
+:"message-batches-2024-09-24"
 
-    - `:"computer-use-2025-01-24"`
+:"prompt-caching-2024-07-31"
 
-    - `:"pdfs-2024-09-25"`
+:"computer-use-2024-10-22"
 
-    - `:"token-counting-2024-11-01"`
+:"computer-use-2025-01-24"
 
-    - `:"token-efficient-tools-2025-02-19"`
+:"pdfs-2024-09-25"
 
-    - `:"output-128k-2025-02-19"`
+:"token-counting-2024-11-01"
 
-    - `:"files-api-2025-04-14"`
+:"token-efficient-tools-2025-02-19"
 
-    - `:"mcp-client-2025-04-04"`
+:"output-128k-2025-02-19"
 
-    - `:"mcp-client-2025-11-20"`
+:"files-api-2025-04-14"
 
-    - `:"dev-full-thinking-2025-05-14"`
+:"mcp-client-2025-04-04"
 
-    - `:"interleaved-thinking-2025-05-14"`
+:"mcp-client-2025-11-20"
 
-    - `:"code-execution-2025-05-22"`
+:"dev-full-thinking-2025-05-14"
 
-    - `:"extended-cache-ttl-2025-04-11"`
+:"interleaved-thinking-2025-05-14"
 
-    - `:"context-1m-2025-08-07"`
+:"code-execution-2025-05-22"
 
-    - `:"context-management-2025-06-27"`
+:"extended-cache-ttl-2025-04-11"
 
-    - `:"model-context-window-exceeded-2025-08-26"`
+:"context-1m-2025-08-07"
 
-    - `:"skills-2025-10-02"`
+:"context-management-2025-06-27"
 
-    - `:"fast-mode-2026-02-01"`
+:"model-context-window-exceeded-2025-08-26"
 
-    - `:"output-300k-2026-03-24"`
+:"skills-2025-10-02"
 
-    - `:"user-profiles-2026-03-24"`
+:"fast-mode-2026-02-01"
 
-    - `:"advisor-tool-2026-03-01"`
+:"output-300k-2026-03-24"
 
-    - `:"managed-agents-2026-04-01"`
+:"user-profiles-2026-03-24"
 
-    - `:"cache-diagnosis-2026-04-07"`
+:"advisor-tool-2026-03-01"
 
-    - `:"thinking-token-count-2026-05-13"`
+:"managed-agents-2026-04-01"
 
-### Returns
+:"cache-diagnosis-2026-04-07"
 
-- `class BetaSelfHostedWork`
+:"thinking-token-count-2026-05-13"
 
-  Work resource representing a unit of work in a self-hosted environment.
+##### ReturnsExpand Collapse
 
-  Work items are queued when sessions are created or when long-dormant sessions
-  receive new messages. The environment worker polls for work to execute in a
-  self-hosted sandbox.
+class BetaSelfHostedWork { id, acknowledged\_at, created\_at, 9 more }
 
-  - `id: String`
+Work resource representing a unit of work in a self-hosted environment.
 
-    Work identifier (e.g., 'work_...')
+Work items are queued when sessions are created or when long-dormant sessions
+receive new messages. The environment worker polls for work to execute in a
+self-hosted sandbox.
 
-  - `acknowledged_at: String`
+id: String
 
-    RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
+Work identifier (e.g., 'work\_...')
 
-  - `created_at: String`
+acknowledged\_at: String
 
-    RFC 3339 timestamp when work was created
+RFC 3339 timestamp when the work item was acknowledged and assigned to a self-hosted sandbox
 
-  - `data: BetaSessionWorkData`
+created\_at: String
 
-    The actual work to be performed
+RFC 3339 timestamp when work was created
 
-    - `id: String`
+data: [BetaSessionWorkData](api/beta.md) { id, type }
 
-      Session identifier (e.g., 'session_...')
+The actual work to be performed
 
-    - `type: :session`
+id: String
 
-      Type of work data
+Session identifier (e.g., 'session\_...')
 
-      - `:session`
+type: :session
 
-  - `environment_id: String`
+Type of work data
 
-    Environment identifier this work belongs to (e.g., `env_...`)
+environment\_id: String
 
-  - `latest_heartbeat_at: String`
+Environment identifier this work belongs to (e.g., `env_...`)
 
-    RFC 3339 timestamp of the most recent heartbeat
+latest\_heartbeat\_at: String
 
-  - `metadata: Hash[Symbol, String]`
+RFC 3339 timestamp of the most recent heartbeat
 
-    User-provided metadata key-value pairs associated with this work item
+metadata: Hash[Symbol, String]
 
-  - `started_at: String`
+User-provided metadata key-value pairs associated with this work item
 
-    RFC 3339 timestamp when work execution started
+started\_at: String
 
-  - `state: :queued | :starting | :active | 2 more`
+RFC 3339 timestamp when work execution started
 
-    Current state of the work item
+state: :queued | :starting | :active | 2 more
 
-    - `:queued`
+Current state of the work item
 
-    - `:starting`
+One of the following:
 
-    - `:active`
+:queued
 
-    - `:stopping`
+:starting
 
-    - `:stopped`
+:active
 
-  - `stop_requested_at: String`
+:stopping
 
-    RFC 3339 timestamp when stop was requested
+:stopped
 
-  - `stopped_at: String`
+stop\_requested\_at: String
 
-    RFC 3339 timestamp when work execution stopped
+RFC 3339 timestamp when stop was requested
 
-  - `type: :work`
+stopped\_at: String
 
-    The type of object (always 'work')
+RFC 3339 timestamp when work execution stopped
 
-    - `:work`
+type: :work
 
-### Example
+The type of object (always 'work')
 
-```ruby
+Get Work Item
+
+Ruby
+
+```shiki
 require "anthropic"
 
 anthropic = Anthropic::Client.new(api_key: "my-anthropic-api-key")
@@ -169,9 +178,9 @@ beta_self_hosted_work = anthropic.beta.environments.work.retrieve("work_id", env
 puts(beta_self_hosted_work)
 ```
 
-#### Response
+Response 200
 
-```json
+```shiki
 {
   "id": "id",
   "acknowledged_at": "acknowledged_at",
@@ -192,6 +201,31 @@ puts(beta_self_hosted_work)
   "type": "work"
 }
 ```
+
+##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "id",
+  "acknowledged_at": "acknowledged_at",
+  "created_at": "created_at",
+  "data": {
+    "id": "id",
+    "type": "session"
+  },
+  "environment_id": "environment_id",
+  "latest_heartbeat_at": "latest_heartbeat_at",
+  "metadata": {
+    "foo": "string"
+  },
+  "started_at": "started_at",
+  "state": "queued",
+  "stop_requested_at": "stop_requested_at",
+  "stopped_at": "stopped_at",
+  "type": "work"
+}
 ```
 
 ---

@@ -10,7 +10,7 @@ The latest generation of Claude models:
 
 **Claude Haiku 4.5** - Fastest model with near-frontier intelligence. Read the [Claude Haiku 4.5 announcement](https://www.anthropic.com/news/claude-haiku-4-5).
 
-Looking to chat with Claude? Visit [claude.ai](https://www.claude.ai).
+Looking to chat with Claude? Visit [claude.ai](https://claude.ai).
 
 Anthropic offers two ways to build with Claude, each suited to different use cases:
 

@@ -184,14 +184,16 @@ If you run into problems installing on macOS or Linux, check these common issues
 
 'command not found: claude'
 
-If you see `command not found: claude` after installing, your terminal needs to reload its settings. Close the Terminal window and open a new one, then try `claude` again.If it still doesn’t work, add the install directory to your PATH. Run the command for your shell:
+If you see `command not found: claude` after installing, your terminal needs to reload its settings. Close the Terminal window and open a new one, then try `claude` again.If it still doesn’t work, add the install directory to your PATH.For Zsh, the macOS default shell:
 
 ```shiki
-# Zsh (macOS default)
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.zshrc
 source ~/.zshrc
+```
 
-# Bash (Linux default)
+For Bash, the Linux default shell:
+
+```shiki
 echo 'export PATH="$HOME/.local/bin:$PATH"' >> ~/.bashrc
 source ~/.bashrc
 ```

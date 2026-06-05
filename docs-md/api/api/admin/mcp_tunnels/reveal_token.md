@@ -1,9 +1,10 @@
-# Reveal Token
+# Reveal Tunnel Token
 
-```
-## Reveal Tunnel Token
+Copy page
 
-**post** `/v1/organizations/tunnels/{tunnel_id}/reveal_token`
+# Reveal Tunnel Token
+
+POST/v1/organizations/tunnels/{tunnel\_id}/reveal\_token
 
 Return the tunnel's current connection token.
 
@@ -12,55 +13,62 @@ Repeated calls return the same value until the token is rotated.
 Exposed as `POST` so the token does not appear in intermediary
 access logs.
 
-### Path Parameters
+##### Path ParametersExpand Collapse
 
-- `tunnel_id: string`
+tunnel\_id: string
 
-  ID of the Tunnel.
+ID of the Tunnel.
 
-### Header Parameters
+##### Header ParametersExpand Collapse
 
-- `"anthropic-beta": array of "mcp-tunnels-2026-05-19"`
+"anthropic-beta": array of "mcp-tunnels-2026-05-19"
 
-  Required for all Tunnel endpoints.
+Required for all Tunnel endpoints.
 
-  - `"mcp-tunnels-2026-05-19"`
+##### ReturnsExpand Collapse
 
-### Returns
+id: string
 
-- `id: string`
+Stable identifier for the current token value. Changes when the token is
+rotated.
 
-  Stable identifier for the current token value. Changes when the token is
-  rotated.
+tunnel\_token: string
 
-- `tunnel_token: string`
+The tunnel's connection token.
 
-  The tunnel's connection token.
+type: "tunnel\_token"
 
-- `type: "tunnel_token"`
+Object type. Always `tunnel_token` for Tunnel Tokens.
 
-  Object type. Always `tunnel_token` for Tunnel Tokens.
+Reveal Tunnel Token
 
-  - `"tunnel_token"`
-
-### Example
-
-```http
+```shiki
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/reveal_token \
     -X POST \
     -H 'anthropic-version: 2023-06-01' \
     -H "Authorization: Bearer $ANTHROPIC_WIF_BEARER_TOKEN"
 ```
 
-#### Response
+Response 200
 
-```json
+```shiki
 {
   "id": "ttkn_bb97000eaec162831399ca9b6684a4fdf5be49ace5683057b017aab5c87e19e0",
   "tunnel_token": "eyJhIjoiRVhBTVBMRSIsInQiOiJFWEFNUExFIiwicyI6IkVYQU1QTEUifQ==",
   "type": "tunnel_token"
 }
 ```
+
+##### Returns Examples
+
+Response 200
+
+```shiki
+{
+  "id": "ttkn_bb97000eaec162831399ca9b6684a4fdf5be49ace5683057b017aab5c87e19e0",
+  "tunnel_token": "eyJhIjoiRVhBTVBMRSIsInQiOiJFWEFNUExFIiwicyI6IkVYQU1QTEUifQ==",
+  "type": "tunnel_token"
+}
 ```
 
 ---

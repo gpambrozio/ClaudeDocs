@@ -215,11 +215,15 @@ Files API
 
 ### PDF documents
 
-PDF documents can be provided as base64-encoded data or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text will not be citable.
+PDF documents can be provided as base64-encoded data, a URL, or by `file_id`. PDF text is extracted and chunked into sentences. As image citations are not yet supported, PDFs that are scans of documents and do not contain extractable text will not be citable.
 
 Base64
 
 Base64
+
+URL
+
+URL
 
 Files API
 
