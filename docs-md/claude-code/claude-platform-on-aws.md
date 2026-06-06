@@ -1,5 +1,9 @@
 # Claude Code on Claude Platform on AWS
 
+**Deploying Claude Code across your organization?** Talk to sales about enterprise plans, SSO, and centralized billing.
+
+[View plans](https://claude.com/pricing?utm_source=claude_code&utm_medium=docs&utm_content=claude_platform_on_aws_view_plans#plans-business)[Contact sales](https://claude.com/contact-sales?utm_source=claude_code&utm_medium=docs&utm_content=claude_platform_on_aws_contact_sales)
+
 Claude Platform on AWS is the Anthropic-operated Claude API with AWS authentication, IAM access control, and AWS Marketplace billing. Requests reach Anthropic’s API directly, so you get the same models and features as the [Claude API](https://platform.claude.com/docs) on the same release schedule. You authenticate with AWS credentials or a workspace API key, and you pay through AWS Marketplace.
 Use this guide to point Claude Code at a workspace you’ve already provisioned through Claude Platform on AWS. For the AWS subscription and workspace setup that comes before this, see the [Claude Platform on AWS documentation](build-with-claude/claude-platform-on-aws.md).
 
@@ -64,7 +68,7 @@ Claude Platform on AWS is opt-in even when AWS credentials are present in your e
 
 ### [​](#3-pin-model-versions) 3. Pin model versions
 
-Claude Platform on AWS uses the same model IDs as the direct Claude API. The default aliases `opus`, `sonnet`, and `haiku` resolve to the latest versions available in your workspace.
+Claude Platform on AWS uses the same model IDs as the direct Claude API. The default aliases `opus`, `sonnet`, and `haiku` resolve to Claude Code’s built-in defaults for Claude Platform on AWS, which can lag the newest release. Without `ANTHROPIC_DEFAULT_OPUS_MODEL`, the `opus` alias resolves to Opus 4.7.
 If you deploy Claude Code to a team, pin the model IDs explicitly so a new release doesn’t move everyone at once:
 
 ```shiki

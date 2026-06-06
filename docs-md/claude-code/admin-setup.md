@@ -63,6 +63,7 @@ Managed settings can lock down tools, sandbox execution, restrict MCP servers an
 | [Hook restrictions](settings.md) | Only managed hooks load; restrict HTTP hook URLs | `allowManagedHooksOnly`, `allowedHttpHookUrls` |
 | [Disable agent view](agent-view.md) | Turn off `claude agents`, `--bg`, `/background`, and the on-demand supervisor | `disableAgentView` |
 | [Version floor](settings.md) | Prevent auto-update from installing below an org-wide minimum | `minimumVersion` |
+| [Required version range](settings.md) | Refuse to start at all when the running version is outside an org-approved range. Stronger than `minimumVersion`, which only blocks downgrades | `requiredMinimumVersion`, `requiredMaximumVersion` |
 
 Permission rules and sandboxing cover different layers. Denying WebFetch blocks Claude’s fetch tool, but if Bash is allowed, `curl` and `wget` can still reach any URL. Sandboxing closes that gap with a network domain allowlist enforced at the OS level.
 For the threat model these controls defend against, see [Security](security.md).

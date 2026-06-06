@@ -276,6 +276,13 @@ From the list you can:
 
 When you install a plugin that declares dependencies, the install output lists which dependencies were auto-installed alongside it.
 You can also manage plugins with direct commands.
+List installed plugins without opening the menu:
+
+```shiki
+/plugin list
+```
+
+Pass `--enabled` or `--disabled` to show only plugins in that state.
 Disable a plugin without uninstalling:
 
 ```shiki

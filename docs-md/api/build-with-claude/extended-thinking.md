@@ -98,7 +98,7 @@ Here are some important considerations for summarized thinking:
 - Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience.
 - Summarization is processed by a different model than the one you target in your requests. The thinking model does not see the summarized output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#d8abb9b4bdab98b9b6acb0aab7a8b1bbf6bbb7b5).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](mailto:sales@anthropic.com).
 
 ### Controlling thinking display
 
@@ -388,14 +388,14 @@ With interleaved thinking, Claude can:
 - **Claude Opus 4.7**: Interleaved thinking is automatically enabled when using [adaptive thinking](build-with-claude/adaptive-thinking.md) (the only supported thinking mode on Opus 4.7). No beta header is needed.
 - **Claude Opus 4.6**: Interleaved thinking is automatically enabled when using [adaptive thinking](build-with-claude/adaptive-thinking.md). No beta header is needed. The `interleaved-thinking-2025-05-14` beta header is **deprecated** on Opus 4.6 and is safely ignored if included.
 - **Claude Sonnet 4.6**: Interleaved thinking is automatically enabled when using [adaptive thinking](build-with-claude/adaptive-thinking.md) (recommended). The `interleaved-thinking-2025-05-14` beta header with manual extended thinking (`thinking: {type: "enabled"}`) is still functional but deprecated.
-- **Other Claude 4 models** (Opus 4.5, Opus 4.1, Opus 4 (deprecated), Sonnet 4.5, Sonnet 4 (deprecated)): Add [the beta header](api/beta-headers.md) `interleaved-thinking-2025-05-14` to your API request to enable interleaved thinking.
+- **Other Claude 4 models** (Opus 4.5, Opus 4.1 (deprecated), Opus 4 (deprecated), Sonnet 4.5, Sonnet 4 (deprecated)): Add [the beta header](api/beta-headers.md) `interleaved-thinking-2025-05-14` to your API request to enable interleaved thinking.
 
 Here are some important considerations for interleaved thinking:
 
 - With interleaved thinking, the `budget_tokens` can exceed the `max_tokens` parameter, as it represents the total budget across all thinking blocks within one assistant turn.
 - Interleaved thinking is only supported for [tools used via the Messages API](agents-and-tools/tool-use/overview.md).
 - The Claude API and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md) accept `interleaved-thinking-2025-05-14` in requests to any model without returning an error. On models that don't support interleaved thinking, the header is ignored. On Claude Opus 4.8, Claude Opus 4.7, and Claude Opus 4.6, it's deprecated and safely ignored. On Claude Mythos Preview, it's not needed and safely ignored.
-- On partner-operated platforms (for example, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1, Opus 4 (deprecated), Sonnet 4.5, or Sonnet 4 (deprecated), your request will fail.
+- On partner-operated platforms (for example, [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md) and [Vertex AI](build-with-claude/claude-on-vertex-ai.md)), if you pass `interleaved-thinking-2025-05-14` to any model aside from Claude Opus 4.8, Claude Opus 4.7, Claude Opus 4.6, Claude Sonnet 4.6, Claude Opus 4.5, Claude Opus 4.1 (deprecated), Opus 4 (deprecated), Sonnet 4.5, or Sonnet 4 (deprecated), your request will fail.
 
 ### Tool use without interleaved thinking
 
@@ -588,7 +588,7 @@ The Messages API handles thinking differently across Claude model versions. The 
 
 ### Thinking block preservation by model
 
-Whether thinking blocks from previous assistant turns are preserved in context by default depends on the model class. **Opus**: Claude Opus 4.5 and later Opus models keep all prior thinking blocks; Claude Opus 4.1 and earlier Opus models keep only the last assistant turn's thinking. **Sonnet**: Claude Sonnet 4.6 and later Sonnet models keep all; Claude Sonnet 4.5 and earlier Sonnet models keep only the last turn. **Haiku**: all Haiku models through Claude Haiku 4.5 keep only the last turn. [Claude Mythos Preview](https://anthropic.com/glasswing) also keeps all prior thinking blocks.
+Whether thinking blocks from previous assistant turns are preserved in context by default depends on the model class. **Opus**: Claude Opus 4.5 and later Opus models keep all prior thinking blocks; Claude Opus 4.1 (deprecated) and earlier Opus models keep only the last assistant turn's thinking. **Sonnet**: Claude Sonnet 4.6 and later Sonnet models keep all; Claude Sonnet 4.5 and earlier Sonnet models keep only the last turn. **Haiku**: all Haiku models through Claude Haiku 4.5 keep only the last turn. [Claude Mythos Preview](https://anthropic.com/glasswing) also keeps all prior thinking blocks.
 
 **Benefits of thinking block preservation:**
 
@@ -601,7 +601,7 @@ Whether thinking blocks from previous assistant turns are preserved in context b
 - **Automatic behavior**: This is the default for each model as listed above. No code changes or beta headers are required
 - **Backward compatibility**: To leverage this feature, continue passing complete, unmodified thinking blocks back to the API as you would for tool use
 
-For earlier models (Claude Sonnet 4.5, Opus 4.1, etc.), thinking blocks from previous turns continue to be removed from context. The existing behavior described in the [Extended thinking with prompt caching](#extended-thinking-with-prompt-caching) section applies to those models.
+For earlier models (Claude Sonnet 4.5, Opus 4.1 (deprecated), etc.), thinking blocks from previous turns continue to be removed from context. The existing behavior described in the [Extended thinking with prompt caching](#extended-thinking-with-prompt-caching) section applies to those models.
 
 ## Pricing
 
