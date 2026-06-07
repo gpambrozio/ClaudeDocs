@@ -187,7 +187,7 @@ Here are some important considerations for summarized thinking:
 - Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience.
 - Summarization is processed by a different model than the one you target in your requests. The thinking model does not see the summarized output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#acdfcdc0c9dfeccdc2d8c4dec3dcc5cf82cfc3c1).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#98ebf9f4fdebd8f9f6ecf0eaf7e8f1fbb6fbf7f5).
 
 ### Controlling thinking display
 
