@@ -146,7 +146,7 @@ Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
 List Skill Versions
 
-Go
+Go
 
 ```shiki
 package main
@@ -179,6 +179,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "data": [
@@ -201,6 +203,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

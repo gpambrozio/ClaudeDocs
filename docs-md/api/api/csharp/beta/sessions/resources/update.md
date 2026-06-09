@@ -186,7 +186,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 Update Session Resource
 
-C#
+C#
 
 ```shiki
 ResourceUpdateParams parameters = new()
@@ -202,6 +202,8 @@ Console.WriteLine(resource);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -221,6 +223,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

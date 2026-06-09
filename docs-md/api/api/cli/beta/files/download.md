@@ -30,7 +30,7 @@ unnamed\_schema\_0: file path
 
 Download File
 
-CLI
+CLI
 
 ```shiki
 ant beta:files download \

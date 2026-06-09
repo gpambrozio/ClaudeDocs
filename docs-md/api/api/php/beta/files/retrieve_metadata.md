@@ -66,7 +66,7 @@ The scope of this file, indicating the context in which it was created (e.g., a 
 
 Get File Metadata
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -83,6 +83,8 @@ var_dump($fileMetadata);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -103,6 +105,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

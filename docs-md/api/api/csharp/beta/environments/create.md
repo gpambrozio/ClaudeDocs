@@ -326,7 +326,7 @@ One of the following:
 
 Create Environment
 
-C#
+C#
 
 ```shiki
 EnvironmentCreateParams parameters = new() { Name = "python-data-analysis" };
@@ -337,6 +337,8 @@ Console.WriteLine(betaEnvironment);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -388,6 +390,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

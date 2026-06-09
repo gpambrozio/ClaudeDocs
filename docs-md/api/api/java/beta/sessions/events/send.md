@@ -1282,7 +1282,7 @@ Routes this result to a subagent thread. Copy from the `agent.tool_use` event's 
 
 Send Events
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -1315,6 +1315,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "data": [
@@ -1336,6 +1338,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -100,7 +100,7 @@ For file deletion, this is always `"file_deleted"`.
 
 Delete File
 
-Python
+Python
 
 ```shiki
 import os
@@ -117,6 +117,8 @@ print(deleted_file.id)
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
@@ -127,6 +129,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

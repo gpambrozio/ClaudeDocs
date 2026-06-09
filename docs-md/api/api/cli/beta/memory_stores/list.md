@@ -88,7 +88,7 @@ Opaque cursor for the next page (a `page_...` value). Pass as `page` on the next
 
 List memory stores
 
-CLI
+CLI
 
 ```shiki
 ant beta:memory-stores list \
@@ -96,6 +96,8 @@ ant beta:memory-stores list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -120,6 +122,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

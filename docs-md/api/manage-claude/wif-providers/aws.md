@@ -29,6 +29,8 @@ The AWS STS `GetWebIdentityToken` API returns an OIDC token signed by AWS that a
    python3 -c "import boto3; boto3.client('iam').enable_outbound_web_identity_federation()"
    ```
 
+   
+
    If this is not enabled, calls to `GetWebIdentityToken` fail with `OutboundWebIdentityFederationDisabledException`.
 2. 2
 
@@ -48,6 +50,8 @@ The AWS STS `GetWebIdentityToken` API returns an OIDC token signed by AWS that a
      ]
    }
    ```
+
+   
 3. 3
 
    Find your account's STS issuer URL
@@ -57,6 +61,8 @@ The AWS STS `GetWebIdentityToken` API returns an OIDC token signed by AWS that a
    ```shiki
    python3 -c "import boto3; print(boto3.client('iam').get_outbound_web_identity_federation_info())"
    ```
+
+   
 
 ### Configure Anthropic
 
@@ -71,6 +77,8 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
   "jwks_source": "discovery"
 }
 ```
+
+
 
 **Federation rule:** Match the audience you pass to `GetWebIdentityToken` and the calling role's IAM role ARN in the `sub` claim. The `sub` value is the IAM role ARN of the workload that called the API, in the form `arn:aws:iam::<account>:role/<role-name>`. The token also carries an `https://sts.amazonaws.com/` claim with `aws_account`, `org_id`, `principal_id`, and any `request_tags` you passed; you can match on those with the rule's `claims` map or a CEL `condition` for finer control.
 
@@ -89,6 +97,8 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 }
 ```
 
+
+
 Be as specific as the workload allows. Match the exact role ARN, and only broaden `subject_prefix` (for example, to `arn:aws:iam::123456789012:role/*`) if multiple IAM roles should map to the same Anthropic service account.
 
 ### Acquire and use the token
@@ -98,6 +108,8 @@ Call `GetWebIdentityToken` with `https://api.anthropic.com` as the audience, the
 `GetWebIdentityToken` is available only on regional STS endpoints. If you receive `'STS' object has no attribute 'get_web_identity_token'` or a similar error, pin your STS client to a region (for example, `boto3.client("sts", region_name="us-east-1")`) and ensure your AWS SDK is recent enough to include the API.
 
 cURLPythonTypeScriptGoJavaC#CLIPHPRuby
+
+
 
 ```shiki
 import os
@@ -139,6 +151,8 @@ From inside the workload, exchange an STS-issued token directly and inspect the 
 
 cURL
 
+
+
 ```shiki
 JWT=$(aws sts get-web-identity-token \
   --region us-east-1 \
@@ -177,6 +191,8 @@ This path additionally requires an EKS cluster with an [IAM OIDC provider enable
 
    CLI
 
+   
+
    ```shiki
    aws eks describe-cluster \
      --name <cluster-name> \
@@ -200,6 +216,8 @@ This path additionally requires an EKS cluster with an [IAM OIDC provider enable
      annotations:
        eks.amazonaws.com/role-arn: arn:aws:iam::123456789012:role/inference-worker
    ```
+
+   
 
    ```shiki
    apiVersion: v1
@@ -236,6 +254,8 @@ This path additionally requires an EKS cluster with an [IAM OIDC provider enable
              mountPath: /var/run/secrets/anthropic.com
              readOnly: true
    ```
+
+   
 3. 3
 
    Note the token's claim shape
@@ -256,6 +276,8 @@ This path additionally requires an EKS cluster with an [IAM OIDC provider enable
    }
    ```
 
+   
+
    The `serviceAccountToken` projection sets `aud` to `https://api.anthropic.com`. The separate IRSA-injected token at `AWS_WEB_IDENTITY_TOKEN_FILE` carries `aud: sts.amazonaws.com` and is for AWS API calls, not this exchange.
 
 ### Configure Anthropic
@@ -271,6 +293,8 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
   "jwks_source": "discovery"
 }
 ```
+
+
 
 **Federation rule:** Match the Kubernetes `sub` claim and the Anthropic audience `https://api.anthropic.com`. (Project a dedicated service-account token with that audience; don't reuse the IRSA default `sts.amazonaws.com` token.)
 
@@ -289,6 +313,8 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 }
 ```
 
+
+
 Be as specific as the workload allows. Loosen `subject_prefix` to `system:serviceaccount:inference:*` (the trailing `*` makes it a prefix match) only if every service account in the namespace should map to the same Anthropic service account.
 
 ### Acquire and use the token
@@ -296,6 +322,8 @@ Be as specific as the workload allows. Loosen `subject_prefix` to `system:servic
 Inside the pod, the projected token is at `/var/run/secrets/anthropic.com/token` (exposed as `ANTHROPIC_IDENTITY_TOKEN_FILE` in the Pod spec). Pass that file to the SDK's federation credentials and the SDK handles the exchange and refresh.
 
 cURLPythonTypeScriptGoJavaC#CLIPHPRuby
+
+
 
 ```shiki
 import os
@@ -330,6 +358,8 @@ The Pod spec already sets `ANTHROPIC_IDENTITY_TOKEN_FILE`, `ANTHROPIC_FEDERATION
 From inside the pod, exchange the projected token directly and inspect the response:
 
 cURL
+
+
 
 ```shiki
 JWT=$(cat "$ANTHROPIC_IDENTITY_TOKEN_FILE")

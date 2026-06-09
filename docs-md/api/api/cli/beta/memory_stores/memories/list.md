@@ -124,7 +124,7 @@ Opaque cursor for the next page (a `page_...` value), or `null` if there are no 
 
 List memories
 
-CLI
+CLI
 
 ```shiki
 ant beta:memory-stores:memories list \
@@ -133,6 +133,8 @@ ant beta:memory-stores:memories list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -157,6 +159,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

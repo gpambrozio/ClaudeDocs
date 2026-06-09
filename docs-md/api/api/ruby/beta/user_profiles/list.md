@@ -160,7 +160,7 @@ Display name of the entity this profile represents. For `resold` this is the res
 
 List User Profiles
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -173,6 +173,8 @@ puts(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -200,6 +202,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

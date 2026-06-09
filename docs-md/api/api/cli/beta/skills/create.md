@@ -79,7 +79,7 @@ ISO 8601 timestamp of when the skill was last updated.
 
 Create Skill
 
-CLI
+CLI
 
 ```shiki
 ant beta:skills create \
@@ -87,6 +87,8 @@ ant beta:skills create \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -103,6 +105,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

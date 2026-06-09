@@ -90,6 +90,8 @@ for message in runner:
     print(message)
 ```
 
+
+
 The `@beta_tool` decorator inspects the function arguments and docstring to derive the JSON schema for you.
 
 The tool function must return a content block or content block array, including text, images, or document blocks. This allows tools to return rich, multimodal responses. Returned strings are converted to a text content block. If you want to return a structured JSON object to Claude, encode it to a JSON string before returning it. Numbers, Booleans, or other non-string primitives must also be converted to strings.
@@ -149,6 +151,8 @@ for block in final_message.content:
     if block.type == "text":
         print(block.text)
 ```
+
+
 
 ## Advanced usage
 
@@ -224,12 +228,16 @@ for message in runner:
     # When there's no tool call, leave state untouched so the loop exits.
 ```
 
+
+
 To change request parameters such as `max_tokens` without taking over message history, use `set_messages_params()`. The runner still appends the assistant message and tool result automatically.
 
 ```shiki
 for message in runner:
     runner.set_messages_params(lambda params: {**params, "max_tokens": 2048})
 ```
+
+
 
 ### Automatic context management
 
@@ -248,6 +256,8 @@ export ANTHROPIC_LOG=info
 # View debug-level logs for more verbose output
 export ANTHROPIC_LOG=debug
 ```
+
+
 
 When enabled, the SDK logs full exception details to your language's standard logging facility, including the complete stack trace when a tool fails.
 
@@ -310,6 +320,8 @@ for message in runner:
     # Process the message normally
     print(message.content)
 ```
+
+
 
 ### Modifying tool results
 
@@ -375,6 +387,8 @@ for message in runner:
     print(message.content)
 ```
 
+
+
 Adding `cache_control` to tool results is particularly useful when tools return large amounts of data (such as document search results) that you want to cache for subsequent API calls. See [Prompt caching](build-with-claude/prompt-caching.md) for more details on caching strategies.
 
 ## Streaming
@@ -428,6 +442,8 @@ for message_stream in runner:
 
 print(runner.until_done())
 ```
+
+
 
 ## Next steps
 

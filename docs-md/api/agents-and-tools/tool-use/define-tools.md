@@ -39,6 +39,8 @@ Here are the functions available in JSONSchema format:
 {{ TOOL CONFIGURATION }}
 ```
 
+
+
 ### Best practices for tool definitions
 
 To get the best performance out of Claude when using tools, follow these guidelines:
@@ -70,6 +72,8 @@ You can provide concrete examples of valid tool inputs to help Claude understand
 Add an optional `input_examples` field to your tool definition with an array of example input objects. Each example must be valid according to the tool's `input_schema`:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 import anthropic
@@ -131,6 +135,8 @@ In some cases, you may want Claude to use a specific tool to answer the user's q
 tool_choice = {"type": "tool", "name": "get_weather"}
 ```
 
+
+
 When working with the tool\_choice parameter, there are four possible options:
 
 - `auto` allows Claude to decide whether to call any provided tools or not. This is the default value when `tools` are provided.
@@ -163,6 +169,8 @@ When using tools, Claude will often comment on what it's doing or respond natura
 For example, given the prompt "What's the weather like in San Francisco right now, and what time is it there?", Claude might respond with:
 
 JSON
+
+
 
 ```shiki
 {

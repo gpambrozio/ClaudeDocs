@@ -128,7 +128,7 @@ Pagination token for the next page, or null if no more results.
 
 List Vaults
 
-C#
+C#
 
 ```shiki
 VaultListParams parameters = new();
@@ -141,6 +141,8 @@ await foreach (var item in page.Paginate())
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -164,6 +166,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

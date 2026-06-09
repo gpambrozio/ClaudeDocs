@@ -12,6 +12,8 @@ The `stop_reason` field is part of every successful Messages API response. Unlik
 
 Example response
 
+
+
 ```shiki
 {
   "id": "msg_01234",
@@ -39,6 +41,8 @@ Example response
 The most common stop reason. Indicates Claude finished its response naturally.
 
 Python
+
+
 
 ```shiki
 from anthropic import Anthropic
@@ -135,6 +139,8 @@ def handle_empty_response(client, messages):
     return response
 ```
 
+
+
 **Best practices:**
 
 1. **Never add text blocks immediately after tool results** - This teaches Claude to expect user input after every tool use
@@ -146,6 +152,8 @@ def handle_empty_response(client, messages):
 Claude stopped because it reached the `max_tokens` limit specified in your request.
 
 Python
+
+
 
 ```shiki
 # Request with limited tokens
@@ -166,6 +174,8 @@ if response.stop_reason == "max_tokens":
 If Claude's response is cut off due to hitting the `max_tokens` limit, and the truncated response contains an incomplete tool use block, you'll need to retry the request with a higher `max_tokens` value to get the full tool use.
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Check if response was truncated during tool use
@@ -188,6 +198,8 @@ Claude encountered one of your custom stop sequences.
 
 Python
 
+
+
 ```shiki
 response = client.messages.create(
     model="claude-opus-4-8",
@@ -207,6 +219,8 @@ Claude is calling a tool and expects you to execute it.
 For most tool use implementations, use the [tool runner](agents-and-tools/tool-use/tool-runner.md), which automatically handles tool execution, result formatting, and conversation management.
 
 Python
+
+
 
 ```shiki
 from anthropic import Anthropic
@@ -251,6 +265,8 @@ When this happens, the response may contain a `server_tool_use` block without a 
 
 Python
 
+
+
 ```shiki
 response = client.messages.create(
     model="claude-opus-4-8",
@@ -281,6 +297,8 @@ Claude refused to generate a response due to safety concerns.
 
 Python
 
+
+
 ```shiki
 response = client.messages.create(
     model="claude-opus-4-8",
@@ -308,6 +326,8 @@ Use `stop_details.category` to handle specific refusal categories differently in
 
 Python
 
+
+
 ```shiki
 response = client.messages.create(
     model="claude-opus-4-8",
@@ -329,6 +349,8 @@ if response.stop_reason == "refusal" and response.stop_details:
 Claude stopped because it reached the model's context window limit. This allows you to request the maximum possible tokens without knowing the exact input size.
 
 Python
+
+
 
 ```shiki
 # Request with maximum tokens to get as much as possible
@@ -371,6 +393,8 @@ def handle_response(response):
         return response.content[0].text
 ```
 
+
+
 ### 2. Handle truncated responses gracefully
 
 When a response is truncated due to token limits or context window:
@@ -397,6 +421,8 @@ def handle_truncated_response(response):
         )
         return response.content[0].text + continuation.content[0].text
 ```
+
+
 
 ### 3. Implement retry logic for pause\_turn
 
@@ -432,6 +458,8 @@ def handle_server_tool_conversation(client, user_query, tools, max_continuations
     return response
 ```
 
+
+
 ## Stop reasons vs. errors
 
 It's important to distinguish between `stop_reason` values and actual errors:
@@ -449,6 +477,8 @@ It's important to distinguish between `stop_reason` values and actual errors:
 - Response contains error details
 
 Python
+
+
 
 ```shiki
 import anthropic
@@ -484,6 +514,8 @@ When using streaming, `stop_reason` is:
 - Not provided in any other events
 
 Python
+
+
 
 ```shiki
 from anthropic import Anthropic
@@ -527,6 +559,8 @@ def complete_tool_workflow(client, user_query, tools):
             return response
 ```
 
+
+
 ### Ensuring complete responses
 
 ```shiki
@@ -553,6 +587,8 @@ def get_complete_response(client, prompt, max_attempts=3):
 
     return full_response
 ```
+
+
 
 ### Getting maximum tokens without knowing input size
 
@@ -584,6 +620,8 @@ def get_max_possible_tokens(client, prompt):
 
     return response.content[0].text
 ```
+
+
 
 By properly handling `stop_reason` values, you can build more robust applications that gracefully handle different response scenarios and provide better user experiences.
 

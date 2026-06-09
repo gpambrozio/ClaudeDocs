@@ -36,7 +36,7 @@ Type type
 
 Delete Credential
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -60,6 +60,8 @@ var_dump($betaManagedAgentsDeletedCredential);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
@@ -70,6 +72,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

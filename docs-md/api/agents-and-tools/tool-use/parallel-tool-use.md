@@ -24,6 +24,8 @@ Claude might occasionally batch calls that turn out to depend on each other (for
 }
 ```
 
+
+
 ## Worked example
 
 **Simpler with Tool Runner**: The example below shows manual parallel tool handling. For most use cases, [Tool Runner](agents-and-tools/tool-use/tool-runner.md) automatically handles parallel tool execution with much less code.
@@ -31,6 +33,8 @@ Claude might occasionally batch calls that turn out to depend on each other (for
 Here's a complete, runnable script to test and verify parallel tool calls are working correctly:
 
 PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Define tools
@@ -176,6 +180,8 @@ Specifically for parallel tool use:
 ]
 ```
 
+
+
 See [Handle tool calls](agents-and-tools/tool-use/handle-tool-calls.md) for other formatting rules.
 
 **2. Weak prompting**
@@ -200,6 +206,8 @@ avg_tools_per_message = (
 print(f"Average tools per message: {avg_tools_per_message}")
 # Should be > 1.0 if parallel calls are working
 ```
+
+
 
 **4. Calls in a batch appear to depend on each other**
 

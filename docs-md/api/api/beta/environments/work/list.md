@@ -178,7 +178,7 @@ Opaque cursor for fetching the next page of results
 
 List Work Items
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work \
@@ -188,6 +188,8 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -219,6 +221,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

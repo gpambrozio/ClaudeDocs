@@ -4,6 +4,8 @@ Copy page
 
 Configure with the /claude-api skill in Claude Code
 
+
+
 ```shiki
 claude "/claude-api help me configure a customer-managed encryption key with Google Cloud KMS"
 ```
@@ -29,6 +31,8 @@ In order to have Anthropic use your encryption key, you must give Anthropic's se
 anthropic-cmek-client-us@gcp-anthropic-cmek-clients.iam.gserviceaccount.com
 ```
 
+
+
 Use only this published service account email. Never trust an identifier provided over email, chat, or any onboarding channel.
 
 **Domain restricted sharing:** If your project is under a Google Cloud organization that enforces `constraints/iam.allowedPolicyMemberDomains`, the IAM bindings below are rejected because the Anthropic service account is outside your organization. You need either a project-level carve-out on that constraint, or to add Anthropic's Cloud Identity customer ID (format `C0xxxxxxxx`) to the allowed list. Contact Anthropic for the customer ID if needed.
@@ -46,6 +50,8 @@ Use only this published service account email. Never trust an identifier provide
      --project=<your-project-id> \
      --location=<region>
    ```
+
+   
 2. 2
 
    Create the crypto key
@@ -60,6 +66,8 @@ Use only this published service account email. Never trust an identifier provide
      --purpose=encryption \
      --protection-level=hsm
    ```
+
+   
 
    For software protection instead, omit `--protection-level=hsm`. Nothing else in this guide changes.
 
@@ -85,6 +93,8 @@ Use only this published service account email. Never trust an identifier provide
      --role=roles/cloudkms.cryptoKeyEncrypterDecrypter
    ```
 
+   
+
    Viewer, for the metadata read (`cryptoKeys.get`) Anthropic performs at startup to validate the key's purpose and algorithm:
 
    ```shiki
@@ -95,6 +105,8 @@ Use only this published service account email. Never trust an identifier provide
      --member="serviceAccount:anthropic-cmek-client-us@gcp-anthropic-cmek-clients.iam.gserviceaccount.com" \
      --role=roles/cloudkms.viewer
    ```
+
+   
 
    From the Console, select the key, open the **Permissions** panel, click **Grant access**, and add the service account with both the Cloud KMS CryptoKey Encrypter/Decrypter and Cloud KMS Viewer roles. Make sure you are on the key's permissions page, not the key ring or project, so the grant is scoped to this key only.
 
@@ -111,6 +123,8 @@ Use only this published service account email. Never trust an identifier provide
    projects/<your-project-id>/locations/<region>/keyRings/<your-keyring-name>/cryptoKeys/<your-key-name>
    ```
 
+   
+
    Retrieve it with:
 
    ```shiki
@@ -120,6 +134,8 @@ Use only this published service account email. Never trust an identifier provide
      --keyring=<your-keyring-name> \
      --format="value(name)"
    ```
+
+   
 
    From the Console, open the key's details page and click **Copy resource name**.
 
@@ -147,6 +163,8 @@ Use only this published service account email. Never trust an identifier provide
      }'
    ```
 
+   
+
    The response contains the external key ID:
 
    ```shiki
@@ -156,6 +174,8 @@ Use only this published service account email. Never trust an identifier provide
      "display_name": "<friendly-name>"
    }
    ```
+
+   
 6. 6
 
    Validate the key
@@ -169,11 +189,15 @@ Use only this published service account email. Never trust an identifier provide
      -H "content-type: application/json" -d '{}'
    ```
 
+   
+
    A successful response looks like this:
 
    ```shiki
    { "type": "external_key_validation", "status": "success", "error": null }
    ```
+
+   
 
    If validation fails, common causes are:
 
@@ -193,6 +217,8 @@ Use only this published service account email. Never trust an identifier provide
        "external_key_id": "ekey_<id>"
      }'
    ```
+
+   
 
 ## Terraform
 

@@ -172,7 +172,7 @@ The type of object (always 'work')
 
 List Work Items
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -190,6 +190,8 @@ for await (const betaSelfHostedWork of client.beta.environments.work.list(
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -221,6 +223,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

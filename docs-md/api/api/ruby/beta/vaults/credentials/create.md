@@ -296,7 +296,7 @@ Human-readable name for the credential.
 
 Create Credential
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -316,6 +316,8 @@ puts(beta_managed_agents_credential)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -339,6 +341,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -10,6 +10,8 @@ The [Python](https://github.com/anthropics/anthropic-sdk-python) and [TypeScript
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -28,6 +30,8 @@ If you don't need to process text as it arrives, the SDKs provide a way to use s
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -45,7 +49,7 @@ The `.stream()` call keeps the HTTP connection alive with server-sent events, th
 
 ## Event types
 
-Each server-sent event includes a named event type and associated JSON data. Each event uses an SSE event name (e.g. `event: message_stop`), and includes the matching event `type` in its data.
+Each server-sent event includes a named event type and associated JSON data. Each event uses an SSE event name (for example, `event: message_stop`), and includes the matching event `type` in its data.
 
 Each stream uses the following event flow:
 
@@ -66,6 +70,8 @@ The API may occasionally send [errors](api/errors.md) in the event stream. For e
 
 Example error
 
+
+
 ```shiki
 event: error
 data: {"type": "error", "error": {"type": "overloaded_error", "message": "Overloaded"}}
@@ -85,6 +91,8 @@ A `text` content block delta looks like:
 
 Text delta
 
+
+
 ```shiki
 event: content_block_delta
 data: {"type": "content_block_delta","index": 0,"delta": {"type": "text_delta", "text": "ello frien"}}
@@ -94,11 +102,13 @@ data: {"type": "content_block_delta","index": 0,"delta": {"type": "text_delta", 
 
 The deltas for `tool_use` content blocks correspond to updates for the `input` field of the block. To support maximum granularity, the deltas are *partial JSON strings*, whereas the final `tool_use.input` is always an *object*.
 
-You can accumulate the string deltas and parse the JSON once you receive a `content_block_stop` event, by using a library like [Pydantic](https://docs.pydantic.dev/latest/concepts/json/#partial-json-parsing) to do partial JSON parsing, or by using the [SDKs](api/client-sdks.md), which provide helpers to access parsed incremental values.
+You can accumulate the string deltas and parse the JSON once you receive a `content_block_stop` event, by using a library like [Pydantic](https://docs.pydantic.dev/latest/concepts/json/#partial-json-parsing) to do partial JSON parsing, or by using the [SDKs](cli-sdks-libraries/overview.md), which provide helpers to access parsed incremental values.
 
 A `tool_use` content block delta looks like:
 
 Input JSON delta
+
+
 
 ```shiki
 event: content_block_delta
@@ -119,6 +129,8 @@ A typical thinking delta looks like:
 
 Thinking delta
 
+
+
 ```shiki
 event: content_block_delta
 data: {"type": "content_block_delta", "index": 0, "delta": {"type": "thinking_delta", "thinking": "I need to find the GCD of 1071 and 462 using the Euclidean algorithm.\n\n1071 = 2 × 462 + 147"}}
@@ -128,6 +140,8 @@ The signature delta looks like:
 
 Signature delta
 
+
+
 ```shiki
 event: content_block_delta
 data: {"type": "content_block_delta", "index": 0, "delta": {"type": "signature_delta", "signature": "EqQBCgIYAhIM1gbcDa9GJwZA2b3hGgxBdjrkzLoky3dl1pkiMOYds..."}}
@@ -135,7 +149,7 @@ data: {"type": "content_block_delta", "index": 0, "delta": {"type": "signature_d
 
 ## Full HTTP stream response
 
-Use the [client SDKs](api/client-sdks.md) when using streaming mode. However, if you are building a direct API integration, you need to handle these events yourself.
+Use the [client SDKs](cli-sdks-libraries/overview.md) when using streaming mode. However, if you are building a direct API integration, you need to handle these events yourself.
 
 A stream response consists of:
 
@@ -153,6 +167,8 @@ There may be `ping` events dispersed throughout the response as well. See [Event
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -166,6 +182,8 @@ with client.messages.stream(
 ```
 
 Response
+
+
 
 ```shiki
 event: message_start
@@ -201,6 +219,8 @@ This request asks Claude to use a tool to report the weather.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -235,6 +255,8 @@ with client.messages.stream(
 ```
 
 Response
+
+
 
 ```shiki
 event: message_start
@@ -325,6 +347,8 @@ This request enables extended thinking with streaming. The `display: "summarized
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -348,6 +372,8 @@ with client.messages.stream(
 ```
 
 Response
+
+
 
 ```shiki
 event: message_start
@@ -396,6 +422,8 @@ This request asks Claude to search the web for current weather information.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -412,6 +440,8 @@ with client.messages.stream(
 ```
 
 Response
+
+
 
 ```shiki
 event: message_start
@@ -515,6 +545,8 @@ For Claude 4.6 and later models, the same capture-and-resume strategy applies, b
 2. **Construct a continuation request:** Create a new API request with a user message containing the partial response and an instruction to continue, for example:
 
    Sample prompt
+
+   
 
    ```inline-block
    Your previous response was interrupted and ended with [previous_response]. Continue from where you left off.

@@ -18,6 +18,8 @@ The example is a single file. The constants control the effort level, the fan-ou
 
 PythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 import atexit
 import concurrent.futures
@@ -57,6 +59,8 @@ The reminders are short on purpose. They flip the mode and point at the tool des
 
 PythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 MODE_ENTER = (
     "Orchestration mode is on: optimize for the most exhaustive, correct answer rather than "
@@ -78,6 +82,8 @@ MODE_EXIT = (
 The Workflow tool carries the real behavioral contract: the opt-in rule, the standing consent that applies while the mode is on, granularity guidance for sizing the fan-out, and the quality patterns the model can reach for (a verification wave, a completeness critic, multi-phase sequencing). Subagents also get a `report_findings` tool so their results come back as structured JSON instead of prose, and the bash tool is the Anthropic-defined `bash_20250124` tool run locally.
 
 PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 WORKFLOW_TOOL = {
@@ -154,6 +160,8 @@ The bash handler runs the requested command with a timeout, captures combined st
 
 PythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 # Run bash where the example was launched. In DOC_TEST_MODE the docs harness
 # points it at a throwaway fixture directory instead, removed on exit.
@@ -204,6 +212,8 @@ def handle_bash_block(block) -> tuple[str, bool]:
 Each workflow subtask becomes its own small agent loop with the bash tool, running at the same effort as the main loop. A per-request timeout bounds each API call so a dropped connection degrades one subagent instead of stalling the whole run.
 
 PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 def run_subagent(model: str, prompt: str) -> str:
@@ -267,6 +277,8 @@ A fan-out that spawns dozens of subagents is expensive to restart from scratch. 
 
 PythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 _journal_lock = threading.Lock()
 
@@ -305,6 +317,8 @@ def journaled(prompt: str, compute) -> str:
 The fan-out accepts up to `MAX_TOTAL_SUBTASKS` prompts, runs them through the journal with at most `MAX_CONCURRENT` in flight (sequential in the PHP port), and isolates failures so one broken subagent degrades to an error string instead of ending the run. Once the first wave finishes, a second wave reuses the same subagent path to try to refute each result: every verifier re-derives the claims from the source, defaulting to refuted when uncertain. Both the original result and its verdict are returned to the orchestrator so it can weigh them together.
 
 PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 def normalize_subtasks(raw) -> list[str]:
@@ -369,6 +383,8 @@ def run_workflow(model: str, raw_subtasks) -> tuple[str, bool]:
 The agent appends the user's message first, then any system messages that are due: the exit notice, the full mode text on entry, or the periodic refresher. Placing the system message after the user turn keeps every cached byte ahead of it untouched, and satisfies the placement rule that a system message follows a user turn.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 class ModeAgent:
@@ -470,6 +486,8 @@ The bash tool in this example runs model-written commands directly on your machi
 
 PythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 if __name__ == "__main__":
     task = (
@@ -489,6 +507,8 @@ Start the example from the directory you want the agents to work in, for example
 ```shiki
 python orchestration_mode.py "Review this repository for flaky tests and propose fixes."
 ```
+
+
 
 With the mode on, expect the model to scout with a few bash commands, dispatch the Workflow tool unprompted, and synthesize the subagent reports into a final answer. Trivial or conversational requests stay solo, as the reminder instructs.
 

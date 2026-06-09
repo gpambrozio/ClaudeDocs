@@ -68,7 +68,7 @@ A timestamp in RFC 3339 format
 
 Update Vault
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults update \
@@ -77,6 +77,8 @@ ant beta:vaults update \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -95,6 +97,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

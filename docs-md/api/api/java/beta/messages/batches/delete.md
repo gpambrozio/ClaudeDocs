@@ -98,7 +98,7 @@ For Message Batches, this is always `"message_batch_deleted"`.
 
 Delete a Message Batch
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -121,6 +121,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
@@ -131,6 +133,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

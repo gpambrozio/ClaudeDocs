@@ -98,7 +98,7 @@ unnamed\_schema\_3 = Response
 
 Download Skill Version Content
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';

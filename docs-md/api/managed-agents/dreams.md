@@ -25,6 +25,8 @@ The dream produces another **output memory store**, separate from the input. The
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 dream = client.beta.dreams.create(
     inputs=[
@@ -67,6 +69,8 @@ The response is the full `dream` resource with `status: "pending"`:
 }
 ```
 
+
+
 If you only have session transcripts and no existing store, [create an empty memory store](managed-agents/memory.md) first and pass it as the `memory_store` input.
 
 ### Steer with instructions
@@ -80,6 +84,8 @@ Use `instructions` for high-level synthesis guidance such as focus areas ("focus
 Dreams run asynchronously and typically take minutes to tens of minutes depending on input size. Poll the dream by ID to check status:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 while dream.status in ("pending", "running"):
@@ -111,6 +117,8 @@ When `status` reaches `completed`, the `memory_store` entry in `outputs[]` refer
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 # After the dream ends, the output holds the rebuilt memory store
 output_store_id = next(
@@ -134,7 +142,11 @@ While a dream is `pending` or `running`, archiving or deleting its output store 
 
 Cancel moves a `pending` or `running` dream to `canceled` immediately. Canceling an already-`canceled` dream is an idempotent no-op; canceling a `completed` or `failed` dream returns 400.
 
+After cancellation, the dream's `usage` fields might continue to update for a few seconds while in-flight work winds down. Poll the dream until `usage` stabilizes if you need the final count.
+
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client.beta.dreams.cancel(dream.id)
@@ -145,6 +157,8 @@ client.beta.dreams.cancel(dream.id)
 Archive sets `archived_at` on a dream that has reached a terminal state (`completed`, `failed`, or `canceled`); `status` is left unchanged. Archived dreams are excluded from default list responses but remain readable by ID. Archiving an already-archived dream is an idempotent no-op. Archiving a `pending` or `running` dream returns 400; cancel it first. There is no unarchive.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client.beta.dreams.archive(dream.id)
@@ -157,6 +171,8 @@ Archiving a dream does not touch its output memory store; manage that separately
 Returns all non-archived dreams in the workspace, newest first. Use `limit` (default 20, max 100) and the `page` cursor to paginate. Pass `include_archived=true` to include archived dreams.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 for listed_dream in client.beta.dreams.list(limit=20):

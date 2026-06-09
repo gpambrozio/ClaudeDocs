@@ -172,7 +172,7 @@ The type of object (always 'work')
 
 Stop Work
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/stop \
@@ -184,6 +184,8 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/sto
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -210,6 +212,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

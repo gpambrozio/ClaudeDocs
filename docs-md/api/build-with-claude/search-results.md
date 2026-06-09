@@ -60,6 +60,8 @@ Search results use the following structure:
 }
 ```
 
+
+
 ### Required fields
 
 | Field | Type | Description |
@@ -88,6 +90,8 @@ The most powerful use case is returning search results from your custom tools. T
 ### Example: Knowledge base tool
 
 PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 from anthropic.types import (
@@ -191,6 +195,8 @@ You can also provide search results directly in user messages. This is useful fo
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 from anthropic.types import MessageParam, TextBlockParam, SearchResultBlockParam
 
@@ -286,6 +292,8 @@ Regardless of how search results are provided, Claude automatically includes cit
 }
 ```
 
+
+
 ### Citation fields
 
 Each citation includes:
@@ -328,6 +336,8 @@ Search results can contain multiple text blocks in the `content` array:
 }
 ```
 
+
+
 A citation referencing the rate limits block looks like:
 
 ```shiki
@@ -341,6 +351,8 @@ A citation referencing the rate limits block looks like:
   "end_block_index": 2
 }
 ```
+
+
 
 When this search result is cited, `start_block_index` and `end_block_index` identify which of these blocks the citation covers, and `cited_text` contains exactly those blocks' text. Splitting content into smaller, focused blocks gives Claude finer citation boundaries; combining content into one block means every citation returns the full text. This is the same model used by [custom content documents](build-with-claude/citations.md) in the Citations feature.
 
@@ -380,6 +392,8 @@ messages = [
 # Claude might respond and call a tool to search for pricing
 # Then you provide tool results with more search results
 ```
+
+
 
 ### Combining with other content types
 
@@ -421,6 +435,8 @@ user_content = [
 ]
 ```
 
+
+
 ### Cache control
 
 Add cache control for better performance:
@@ -437,6 +453,8 @@ Add cache control for better performance:
 }
 ```
 
+
+
 ### Citation control
 
 By default, citations are disabled for search results. You can enable citations by explicitly setting the `citations` configuration:
@@ -452,6 +470,8 @@ By default, citations are disabled for search results. You can enable citations 
   }
 }
 ```
+
+
 
 When `citations.enabled` is set to `true`, Claude includes citation references when using information from the search result. This enables:
 
@@ -499,6 +519,8 @@ Citations are all-or-nothing: either all search results in a request must have c
        except Exception as e:
            return {"type": "text", "text": f"Search error: {str(e)}"}
    ```
+
+   
 
 ## Limitations
 

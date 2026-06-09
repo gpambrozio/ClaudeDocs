@@ -104,7 +104,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 List Session Resources
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -124,6 +124,8 @@ var_dump($page);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -156,6 +158,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

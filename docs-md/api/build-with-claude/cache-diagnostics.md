@@ -26,6 +26,8 @@ Send the beta header on every turn. On the first turn, pass `"previous_message_i
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -71,6 +73,8 @@ else:
 In streaming responses, `diagnostics` appears on the `message_start` event.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Turn 2: stream, referencing the previous response id
@@ -173,6 +177,8 @@ for i, user_message in enumerate(
     prev_id = r.id
 ```
 
+
+
 ## Response format
 
 The `diagnostics` field on the response `Message` has four possible states:
@@ -206,6 +212,8 @@ When `cache_miss_reason` is non-null, it looks like this:
   }
 }
 ```
+
+
 
 ## Cache miss reason types
 

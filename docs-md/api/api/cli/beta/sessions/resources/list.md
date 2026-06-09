@@ -146,7 +146,7 @@ Opaque cursor for the next page. Null when no more results.
 
 List Session Resources
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions:resources list \
@@ -155,6 +155,8 @@ ant beta:sessions:resources list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -187,6 +189,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

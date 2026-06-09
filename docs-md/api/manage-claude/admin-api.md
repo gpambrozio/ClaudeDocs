@@ -49,6 +49,8 @@ You can list [organization members](api/admin-api/users/get-user.md), update mem
 
 cURL
 
+
+
 ```shiki
 # List organization members
 curl "https://api.anthropic.com/v1/organizations/users?limit=10" \
@@ -73,6 +75,8 @@ curl --request DELETE "https://api.anthropic.com/v1/organizations/users/{user_id
 You can invite users to organizations and manage those [invites](api/admin-api/invites/get-invite.md).
 
 cURL
+
+
 
 ```shiki
 # Create invite
@@ -105,6 +109,8 @@ For a comprehensive guide to workspaces, including Console and API examples, see
 Manage [user access to specific workspaces](api/admin-api/workspace_members/get-workspace-member.md):
 
 cURL
+
+
 
 ```shiki
 # Add member to workspace
@@ -143,6 +149,8 @@ Monitor and manage [API keys](api/admin-api/apikeys/get-api-key.md):
 
 cURL
 
+
+
 ```shiki
 # List API keys
 curl "https://api.anthropic.com/v1/organizations/api_keys?limit=10&status=active&workspace_id=wrkspc_xxx" \
@@ -168,6 +176,8 @@ For example:
 
 cURL
 
+
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/me" \
   --header "anthropic-version: 2023-06-01" \
@@ -181,6 +191,8 @@ curl "https://api.anthropic.com/v1/organizations/me" \
   "name": "Organization Name"
 }
 ```
+
+
 
 This endpoint is useful for programmatically determining which organization an Admin API key belongs to.
 

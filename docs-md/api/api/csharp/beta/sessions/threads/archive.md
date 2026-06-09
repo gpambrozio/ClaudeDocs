@@ -440,7 +440,7 @@ Total output tokens generated across all turns.
 
 Archive Session Thread
 
-C#
+C#
 
 ```shiki
 ThreadArchiveParams parameters = new()
@@ -455,6 +455,8 @@ Console.WriteLine(betaManagedAgentsSessionThread);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -532,6 +534,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -34,7 +34,7 @@ Type type
 
 Delete Vault
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -52,6 +52,8 @@ var_dump($betaManagedAgentsDeletedVault);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -62,6 +64,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

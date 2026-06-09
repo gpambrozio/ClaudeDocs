@@ -150,7 +150,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 Create a memory
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories \
@@ -165,6 +165,8 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -184,6 +186,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

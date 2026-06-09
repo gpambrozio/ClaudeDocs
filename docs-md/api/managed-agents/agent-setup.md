@@ -28,6 +28,8 @@ The following example defines a coding agent that uses Claude Opus 4.8 with acce
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:agents create \
   --name "Coding Assistant" \
@@ -69,11 +71,15 @@ The response echoes your configuration and adds `id`, `type`, `version`, `create
 }
 ```
 
+
+
 ## Update an agent
 
 Updating an agent generates a new version when the configuration changes. Pass the current `version` to ensure you're updating from a known state.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:agents update \
@@ -106,6 +112,8 @@ Fetch the full version history to track how an agent has changed over time.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:agents:versions list --agent-id "$AGENT_ID"
 ```
@@ -115,6 +123,8 @@ ant beta:agents:versions list --agent-id "$AGENT_ID"
 Archiving makes the agent read-only. Existing sessions continue to run, but new sessions cannot reference the agent. The response sets `archived_at` to the archive timestamp.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:agents archive --agent-id "$AGENT_ID"

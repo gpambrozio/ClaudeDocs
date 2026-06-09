@@ -1288,7 +1288,7 @@ Routes this result to a subagent thread. Copy from the `agent.tool_use` event's 
 
 Send Events
 
-Go
+Go
 
 ```shiki
 package main
@@ -1331,6 +1331,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "data": [
@@ -1352,6 +1354,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

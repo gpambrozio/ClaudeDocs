@@ -192,7 +192,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 List Session Resources
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -210,6 +210,8 @@ for await (const betaManagedAgentsSessionResource of client.beta.sessions.resour
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -242,6 +244,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

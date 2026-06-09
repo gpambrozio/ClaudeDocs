@@ -214,7 +214,7 @@ One of the following:
 
 Archive Environment
 
-C#
+C#
 
 ```shiki
 EnvironmentArchiveParams parameters = new()
@@ -228,6 +228,8 @@ Console.WriteLine(betaEnvironment);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -279,6 +281,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

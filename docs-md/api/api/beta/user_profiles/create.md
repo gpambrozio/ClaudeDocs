@@ -166,7 +166,7 @@ Display name of the entity this profile represents. For `resold` this is the res
 
 Create User Profile
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/user_profiles \
@@ -181,6 +181,8 @@ curl https://api.anthropic.com/v1/user_profiles \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -203,6 +205,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

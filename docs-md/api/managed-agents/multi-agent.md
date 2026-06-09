@@ -30,6 +30,8 @@ When [defining your agent](managed-agents/agent-setup.md), set `multiagent` to d
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:agents create <<YAML
 name: Engineering Lead
@@ -63,6 +65,8 @@ Create a session referencing the coordinator. The coordinator delegates to the a
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 session = client.beta.sessions.create(
     agent=coordinator.id,
@@ -78,6 +82,8 @@ MCP servers are agent-scoped (each agent definition declares its own servers and
 - To limit an agent's access, declare only the servers it needs in its agent definition.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 research_agent = client.beta.agents.create(
@@ -137,6 +143,8 @@ List all threads associated with a session as follows:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 for thread in client.beta.sessions.threads.list(session.id):
     print(f"[{thread.agent.name}] {thread.status}")
@@ -171,6 +179,8 @@ List session thread events
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 with client.beta.sessions.threads.events.stream(
     thread.id,
@@ -203,11 +213,15 @@ If a subagent needs something from your client, such as [permission](managed-age
 }
 ```
 
+
+
 Post `user.tool_confirmation` (with `tool_use_id`) or `user.custom_tool_result` (with `custom_tool_use_id`); the server routes the response to the correct thread automatically.
 
 The following example extends the [tool confirmation handler](managed-agents/events-and-streaming.md) to route replies. The same pattern applies to `user.custom_tool_result`.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 for event_id in stop.event_ids:

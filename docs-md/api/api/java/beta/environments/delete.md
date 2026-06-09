@@ -92,7 +92,7 @@ The type of response
 
 Delete Environment
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -115,6 +115,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -125,6 +127,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

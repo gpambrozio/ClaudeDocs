@@ -298,7 +298,7 @@ Human-readable name for the credential.
 
 Create Credential
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials \
@@ -320,6 +320,8 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -343,6 +345,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

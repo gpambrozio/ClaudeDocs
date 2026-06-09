@@ -790,7 +790,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 Create Agent
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -808,6 +808,8 @@ console.log(betaManagedAgentsAgent.id);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -882,6 +884,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

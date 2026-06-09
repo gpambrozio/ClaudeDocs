@@ -28,6 +28,8 @@ For Users, this is always `"user_deleted"`.
 
 Remove User
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -X DELETE \
@@ -36,6 +38,8 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -47,6 +51,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

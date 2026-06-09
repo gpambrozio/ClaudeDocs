@@ -180,7 +180,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 Get Session Resource
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
@@ -190,6 +190,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources/$RESOURCE_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -209,6 +211,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

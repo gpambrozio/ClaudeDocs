@@ -136,7 +136,7 @@ Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
 List Message Batches
 
-CLI
+CLI
 
 ```shiki
 ant messages:batches list \
@@ -144,6 +144,8 @@ ant messages:batches list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -176,6 +178,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

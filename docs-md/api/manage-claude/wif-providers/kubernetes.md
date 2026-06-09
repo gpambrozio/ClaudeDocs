@@ -6,6 +6,8 @@ Self-managed Kubernetes clusters (kubeadm, k3s, OpenShift, and on-premises distr
 
 cURL
 
+
+
 ```shiki
 kubectl get --raw /.well-known/openid-configuration | jq -r .issuer
 ```
@@ -26,6 +28,8 @@ The mechanism on this page (projected service-account token, cluster API server 
 Project a service account token into your pod with the audience and lifetime that your federation rule expects. The `serviceAccountToken` projection writes a fresh JWT to the mount path and rotates it before `expirationSeconds` elapses.
 
 Pod
+
+
 
 ```shiki
 apiVersion: v1
@@ -73,6 +77,8 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 
 cURL
 
+
+
 ```shiki
 kubectl get --raw /openid/v1/jwks
 ```
@@ -87,6 +93,8 @@ Then configure the issuer with the contents of the returned `keys` array (not th
   "jwks_keys": [{ "kty": "RSA", "kid": "...", "n": "...", "e": "AQAB" }]
 }
 ```
+
+
 
 In `inline` mode the `issuer_url` is only compared against the JWT's `iss` claim; Anthropic never attempts to reach it. If your issuer is publicly reachable, use `"jwks_source": "discovery"` instead and omit `jwks_keys`.
 
@@ -112,6 +120,8 @@ With `inline` keys you are responsible for updating the issuer when the cluster 
 }
 ```
 
+
+
 Be as specific as the workload allows. Loosen `subject_prefix` to `system:serviceaccount:inference:*` (the trailing `*` makes it a prefix match) only if every service account in the namespace should map to the same Anthropic service account. Add the rule's `fdrl_...` ID to your pod's `ANTHROPIC_FEDERATION_RULE_ID` environment variable.
 
 ## Acquire and use the token
@@ -119,6 +129,8 @@ Be as specific as the workload allows. Loosen `subject_prefix` to `system:servic
 The pod spec in [Configure Kubernetes](#configure-kubernetes) sets `ANTHROPIC_IDENTITY_TOKEN_FILE` to the projected mount path, along with `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and `ANTHROPIC_WORKSPACE_ID`. With those in place, the SDK reads the token from disk on every exchange and refreshes the Anthropic access token automatically.
 
 cURLPythonTypeScriptGoJavaC#CLIPHPRuby
+
+
 
 ```shiki
 import anthropic

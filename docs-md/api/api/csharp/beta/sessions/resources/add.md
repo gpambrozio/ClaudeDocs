@@ -114,7 +114,7 @@ A timestamp in RFC 3339 format
 
 Add Session Resource
 
-C#
+C#
 
 ```shiki
 ResourceAddParams parameters = new()
@@ -131,6 +131,8 @@ Console.WriteLine(betaManagedAgentsFileResource);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
@@ -145,6 +147,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

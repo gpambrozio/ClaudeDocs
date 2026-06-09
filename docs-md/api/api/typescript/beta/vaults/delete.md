@@ -96,7 +96,7 @@ type: "vault\_deleted"
 
 Delete Vault
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -114,6 +114,8 @@ console.log(betaManagedAgentsDeletedVault.id);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -124,6 +126,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

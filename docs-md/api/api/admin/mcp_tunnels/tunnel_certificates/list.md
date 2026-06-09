@@ -78,6 +78,8 @@ Opaque cursor for the next page, or `null` if there are no more results.
 
 List Tunnel Certificates
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates \
     -H 'anthropic-version: 2023-06-01' \
@@ -85,6 +87,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates 
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -106,6 +110,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

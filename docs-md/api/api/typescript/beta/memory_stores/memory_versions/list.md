@@ -262,7 +262,7 @@ ID of the user who performed the write (a `user_...` value).
 
 List memory versions
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -280,6 +280,8 @@ for await (const betaManagedAgentsMemoryVersion of client.beta.memoryStores.memo
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -313,6 +315,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

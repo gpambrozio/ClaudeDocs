@@ -168,7 +168,7 @@ Display name of the entity this profile represents. For `resold` this is the res
 
 Update User Profile
 
-Python
+Python
 
 ```shiki
 import os
@@ -184,6 +184,8 @@ print(beta_user_profile.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -206,6 +208,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

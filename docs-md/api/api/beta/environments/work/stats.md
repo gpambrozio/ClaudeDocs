@@ -112,7 +112,7 @@ Number of workers that have polled for work in the last 30 seconds. Requires wor
 
 Get Queue Statistics
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
@@ -122,6 +122,8 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/stats \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -136,6 +138,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

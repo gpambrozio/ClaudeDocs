@@ -104,7 +104,7 @@ type: "memory\_deleted"
 
 Delete a memory
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -122,6 +122,8 @@ console.log(betaManagedAgentsDeletedMemory.id);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -132,6 +134,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

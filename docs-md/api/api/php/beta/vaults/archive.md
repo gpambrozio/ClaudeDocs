@@ -54,7 +54,7 @@ A timestamp in RFC 3339 format
 
 Archive Vault
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -71,6 +71,8 @@ var_dump($betaManagedAgentsVault);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -89,6 +91,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

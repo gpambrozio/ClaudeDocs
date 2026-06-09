@@ -17,6 +17,8 @@ The Compliance API returns errors in an error format consistent with the rest of
 }
 ```
 
+
+
 Match on `error.type`, not on the message string. Messages are stable enough to copy into runbooks but might be reworded over time; the type values are part of the API contract.
 
 The following table tells you at a glance whether to retry. Each section that follows shows the verbatim error body and the fix.
@@ -44,6 +46,8 @@ The request was syntactically valid but contained a parameter the server rejecte
 The `created_at.gte` parameter contains an invalid timestamp format. Timestamps must be provided in RFC 3339 format e.g., "2024-03-01T00:00:00Z". Got "2024-01-01".
 ```
 
+
+
 **Cause:** A `created_at.*` or `updated_at.*` value (`.gte`, `.gt`, `.lte`, `.lt`) could not be parsed as a datetime. The message names the parameter that failed and echoes the value that was sent.
 
 **Fix:** Send a full RFC 3339 timestamp including time and time zone, for example, `2024-03-01T00:00:00Z` or `2024-03-01T00:00:00+00:00`.
@@ -56,6 +60,8 @@ The `created_at.gte` parameter contains an invalid timestamp format. Timestamps 
 The limit parameter must be between 1 and 1000, inclusive. Got 1500.
 ```
 
+
+
 **Cause:** The `limit` query parameter was outside the accepted range. The bound named in the message reflects the maximum for the specific endpoint that was called.
 
 **Fix:** Send a `limit` within the range the endpoint accepts. Each list endpoint has its own `limit` range; see the parameter constraints on the corresponding [Compliance API reference](api/compliance.md) page.
@@ -67,6 +73,8 @@ The limit parameter must be between 1 and 1000, inclusive. Got 1500.
 ```inline-block
 Invalid `after_id`. No activity found for `after_id` "activity_invalid123"
 ```
+
+
 
 **Cause:** The `after_id` or `before_id` cursor could not be decoded as an opaque cursor or parsed as an activity ID.
 
@@ -86,6 +94,8 @@ The `x-api-key` header was missing or did not match a known key. A valid key wit
 The API key provided is invalid or has been revoked.
 ```
 
+
+
 **Cause:** The key in `x-api-key` does not exist, has been deleted, or has been disabled. A missing or empty `x-api-key` header returns the same body, so check both your secret store and the key's revocation status.
 
 **Fix:** Confirm the key value, check that it has not been deleted in claude.ai (Compliance Access Keys) or Claude Console (Admin API keys), and confirm it is enabled. See [Get access to the Compliance API](manage-claude/compliance-api-access.md).
@@ -102,6 +112,8 @@ The key in `x-api-key` is valid but does not carry the scope the endpoint requir
 Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compliance_activities']
 ```
 
+
+
 **Cause:** A key without `read:compliance_activities` was used to call `GET /v1/compliance/activities`. There are two common paths to this error:
 
 - A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_activities` scope.
@@ -116,6 +128,8 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 ```inline-block
 Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compliance_org_data']
 ```
+
+
 
 **Cause:** A key without `read:compliance_org_data` was used to call an organizations, roles, or groups endpoint. There are two common paths to this error:
 
@@ -132,6 +146,8 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 Missing required scopes. Got: ['read:compliance_activities'] Needed: ['read:compliance_user_data']
 ```
 
+
+
 **Cause:** A key without `read:compliance_user_data` was used to call a chats, messages, files, projects, organization users, or group-members endpoint. There are two common paths to this error:
 
 - A Compliance Access Key (`sk-ant-api01-...`) was created without the `read:compliance_user_data` scope.
@@ -146,6 +162,8 @@ Missing required scopes. Got: ['read:compliance_activities'] Needed: ['read:comp
 ```inline-block
 Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['delete:compliance_user_data']
 ```
+
+
 
 **Cause:** A Compliance Access Key without `delete:compliance_user_data` was used to call a `DELETE` endpoint on chats, files, or projects.
 
@@ -163,6 +181,8 @@ The endpoint resolved but the resource ID does not exist or has already been del
 Chat claude_chat_01H5CWunD7RpVJ5bHa8RCkja not found.
 ```
 
+
+
 **Cause:** The chat ID in the path does not match a chat readable through the Compliance API. The chat might have been hard-deleted through a previous Compliance API call or removed by your organization's retention policy, or it might belong to an organization the calling key cannot read. Chats that a user soft-deleted in claude.ai do not return 404; they remain readable with `deleted_at` populated.
 
 **Fix:** Confirm the chat ID against a recent `claude_chat_created` or `claude_chat_viewed` activity. If the activity is recent and the read still fails, the chat has been hard-deleted (through this API or by retention-policy expiry) or belongs to an organization outside your key's scope.
@@ -174,6 +194,8 @@ Chat claude_chat_01H5CWunD7RpVJ5bHa8RCkja not found.
 ```inline-block
 No file found with provided id, or it has already been deleted.
 ```
+
+
 
 **Cause:** The file ID does not exist or has been deleted. This error applies to both chat-attached files (`claude_file_...`) and project files.
 
@@ -187,6 +209,8 @@ No file found with provided id, or it has already been deleted.
 No project is found with the provided id.
 ```
 
+
+
 **Cause:** The project ID does not exist or has been deleted.
 
 **Fix:** Reconcile against recent `claude_project_created` or `claude_project_deleted` activities. The Activity Feed continues to expose the project's lifecycle events even after the project itself is gone.
@@ -199,6 +223,8 @@ No project is found with the provided id.
 No project document found with provided id, or it has already been deleted.
 ```
 
+
+
 **Cause:** The project document ID does not exist or has been deleted. This error applies to text project documents (`claude_proj_doc_...`), not to project files.
 
 **Fix:** Use `GET /v1/compliance/apps/projects/{project_id}/attachments` to list current attachments. If the document is missing, it was deleted; retrieve it through a `claude_project_document_uploaded` activity record if you only need the metadata.
@@ -210,6 +236,8 @@ No project document found with provided id, or it has already been deleted.
 ```inline-block
 The "ce86b5f3-7c16-48b3-a9f3-e1d2c4b8a0f1" organization does not exist or the requester is not authorized to access it.
 ```
+
+
 
 The organization, role, and group endpoints return a 404 `not_found_error` in the standard error format. The organization message names the `org_uuid`; the role and group messages are generic (`Role not found.`, `Group not found.`). This occurs when a path ID (`org_uuid`, `role_id`, or `group_id`) does not exist or no longer belongs to a tree the calling key can read.
 
@@ -228,6 +256,8 @@ The request is well-formed and authorized but conflicts with the resource's curr
 ```inline-block
 The "claude_proj_01KGp4eZNug9ri4kE35RSppq" project cannot be deleted as it has chats attached to it. Delete or detach all chats, and try deleting the project again.
 ```
+
+
 
 **Cause:** `DELETE /v1/compliance/apps/projects/{project_id}` was called on a project that still has chats attached.
 
@@ -254,6 +284,8 @@ anthropic-ratelimit-requests-remaining: 0
 anthropic-ratelimit-requests-reset: 2026-04-21T14:38:25Z
 ```
 
+
+
 ```shiki
 {
   "error": {
@@ -262,6 +294,8 @@ anthropic-ratelimit-requests-reset: 2026-04-21T14:38:25Z
   }
 }
 ```
+
+
 
 **Cause:** Your parent organization sent more than 600 requests to `/v1/compliance/*` in a 1-minute window, across all of its keys and linked organizations.
 
@@ -286,6 +320,8 @@ For service-wide incidents, check [status.anthropic.com](https://status.anthropi
 ```inline-block
 Response exceeds maximum of 1,000 organizations. Contact support for assistance with larger organization lists.
 ```
+
+
 
 **Cause:** A list endpoint without pagination (notably `GET /v1/compliance/organizations`) would have returned more than its hard cap of 1,000 records.
 

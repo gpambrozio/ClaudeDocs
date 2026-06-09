@@ -160,7 +160,7 @@ Cursor for the next page, or `null` when there are no more results.
 
 List User Profiles
 
-C#
+C#
 
 ```shiki
 UserProfileListParams parameters = new();
@@ -173,6 +173,8 @@ await foreach (var item in page.Paginate())
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -200,6 +202,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

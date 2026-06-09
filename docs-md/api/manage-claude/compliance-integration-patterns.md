@@ -32,6 +32,8 @@ Set `created_at.lt` at least 1 minute in the past so that every activity in the 
 
 cURL
 
+
+
 ```shiki
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/activities" \
@@ -50,6 +52,8 @@ A `created_at.lt` bound too close to the present silently and permanently drops 
 ### Cursor-driven incremental reads
 
 cURL
+
+
 
 ```shiki
 first_id="activity_01XyDMpzjS89pFZXqSFUBDr6"  # first_id from a previous response
@@ -75,6 +79,8 @@ loop:
   if not page.has_more: break
 persist(cursor)
 ```
+
+
 
 Cursors survive key rotation; see [Manage and rotate keys](manage-claude/compliance-api-access.md).
 

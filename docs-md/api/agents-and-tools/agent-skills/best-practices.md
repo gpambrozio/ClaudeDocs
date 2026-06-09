@@ -42,6 +42,8 @@ with pdfplumber.open("file.pdf") as pdf:
 ```
 ```
 
+
+
 **Bad example: Too verbose** (approximately 150 tokens):
 
 ```shiki
@@ -53,6 +55,8 @@ use a library. There are many libraries available for PDF processing, but
 pdfplumber is recommended because it's easy to use and handles most cases well.
 First, you'll need to install it using pip. Then you can use the code below...
 ```
+
+
 
 The concise version assumes Claude knows what PDFs are and how libraries work.
 
@@ -79,6 +83,8 @@ Example:
 4. Verify adherence to project conventions
 ```
 
+
+
 **Medium freedom** (pseudocode or scripts with parameters):
 
 Use when:
@@ -102,6 +108,8 @@ def generate_report(data, format="markdown", include_charts=True):
 ```
 ```
 
+
+
 **Low freedom** (specific scripts, few or no parameters):
 
 Use when:
@@ -123,6 +131,8 @@ python scripts/migrate.py --verify --backup
 
 Do not modify the command or add additional flags.
 ```
+
+
 
 **Analogy:** Think of Claude as a robot exploring a path:
 
@@ -216,11 +226,15 @@ Effective examples:
 description: Extract text and tables from PDF files, fill forms, merge documents. Use when working with PDF files or when the user mentions PDFs, forms, or document extraction.
 ```
 
+
+
 **Excel Analysis skill:**
 
 ```shiki
 description: Analyze Excel spreadsheets, create pivot tables, generate charts. Use when analyzing Excel files, spreadsheets, tabular data, or .xlsx files.
 ```
+
+
 
 **Git Commit Helper skill:**
 
@@ -228,19 +242,27 @@ description: Analyze Excel spreadsheets, create pivot tables, generate charts. U
 description: Generate descriptive commit messages by analyzing git diffs. Use when the user asks for help writing commit messages or reviewing staged changes.
 ```
 
+
+
 Avoid vague descriptions like these:
 
 ```shiki
 description: Helps with documents
 ```
 
+
+
 ```shiki
 description: Processes data
 ```
 
+
+
 ```shiki
 description: Does stuff with files
 ```
+
+
 
 ### Progressive disclosure patterns
 
@@ -276,6 +298,8 @@ pdf/
     └── validate.py       # Validation script
 ```
 
+
+
 #### Pattern 1: High-level guide with references
 
 ```shiki
@@ -302,6 +326,8 @@ with pdfplumber.open("file.pdf") as pdf:
 **Examples**: See [EXAMPLES.md](EXAMPLES.md) for common patterns
 ```
 
+
+
 Claude loads FORMS.md, REFERENCE.md, or EXAMPLES.md only when needed.
 
 #### Pattern 2: Domain-specific organization
@@ -318,7 +344,11 @@ bigquery-skill/
     └── marketing.md (campaigns, attribution)
 ```
 
+
+
 SKILL.md
+
+
 
 ```shiki
 # BigQuery Data Analysis
@@ -360,6 +390,8 @@ For simple edits, modify the XML directly.
 **For OOXML details**: See [OOXML.md](OOXML.md)
 ```
 
+
+
 Claude reads REDLINING.md or OOXML.md only when the user needs those features.
 
 ### Avoid deeply nested references
@@ -381,6 +413,8 @@ See [details.md](details.md)...
 Here's the actual information...
 ```
 
+
+
 **Good example: One level deep**:
 
 ```shiki
@@ -391,6 +425,8 @@ Here's the actual information...
 **API reference**: See [reference.md](reference.md)
 **Examples**: See [examples.md](examples.md)
 ```
+
+
 
 ### Structure longer reference files with table of contents
 
@@ -414,6 +450,8 @@ For reference files longer than 100 lines, include a table of contents at the to
 ## Core methods
 ...
 ```
+
+
 
 Claude can then read the complete file or jump to specific sections as needed.
 
@@ -465,6 +503,8 @@ Organize findings by theme. Include:
 Check that every claim references the correct source document. If citations are incomplete, return to Step 3.
 ```
 
+
+
 This example shows how workflows apply to analysis tasks that don't require code. The checklist pattern works for any complex, multi-step process.
 
 **Example 2: PDF form filling workflow** (for Skills with code):
@@ -510,6 +550,8 @@ Run: `python scripts/verify_output.py output.pdf`
 If verification fails, return to Step 2.
 ```
 
+
+
 Clear steps prevent Claude from skipping critical validation. The checklist helps both Claude and you track progress through multi-step workflows.
 
 ### Implement feedback loops
@@ -536,6 +578,8 @@ This pattern greatly improves output quality.
 5. Finalize and save the document
 ```
 
+
+
 This shows the validation loop pattern using reference documents instead of scripts. The "validator" is STYLE\_GUIDE.md, and Claude performs the check by reading and comparing.
 
 **Example 2: Document editing process** (for Skills with code):
@@ -554,6 +598,8 @@ This shows the validation loop pattern using reference documents instead of scri
 6. Test the output document
 ```
 
+
+
 The validation loop catches errors early.
 
 ## Content guidelines
@@ -568,6 +614,8 @@ Don't include information that will become outdated:
 If you're doing this before August 2025, use the old API.
 After August 2025, use the new API.
 ```
+
+
 
 **Good example** (use "old patterns" section):
 
@@ -586,6 +634,8 @@ The v1 API used: `api.example.com/v1/messages`
 This endpoint is no longer supported.
 </details>
 ```
+
+
 
 The old patterns section provides historical context without cluttering the main content.
 
@@ -637,6 +687,8 @@ ALWAYS use this exact template structure:
 ```
 ```
 
+
+
 **For flexible guidance** (when adaptation is useful):
 
 ```shiki
@@ -659,6 +711,8 @@ Here is a sensible default format, but use your best judgment based on the analy
 
 Adjust sections as needed for the specific analysis type.
 ```
+
+
 
 ### Examples pattern
 
@@ -700,6 +754,8 @@ chore: update dependencies and refactor error handling
 Follow this style: type(scope): brief description, then detailed explanation.
 ```
 
+
+
 Examples help Claude understand the desired style and level of detail more clearly than descriptions alone.
 
 ### Conditional workflow pattern
@@ -725,6 +781,8 @@ Guide Claude through decision points:
    - Validate after each change
    - Repack when complete
 ```
+
+
 
 If workflows become large or complicated with many steps, consider pushing them into separate files and tell Claude to read the appropriate file based on the task at hand.
 
@@ -758,6 +816,8 @@ This approach ensures you're solving actual problems rather than anticipating re
   ]
 }
 ```
+
+
 
 This example demonstrates a data-driven evaluation with a simple testing rubric. There is not currently a built-in way to run these evaluations. Users can create their own evaluation system. Evaluations are your source of truth for measuring Skill effectiveness.
 
@@ -843,6 +903,8 @@ import pdfplumber
 For scanned PDFs requiring OCR, use pdf2image with pytesseract instead."
 ```
 
+
+
 ## Advanced: Skills with executable code
 
 The sections below focus on Skills that include executable scripts. If your Skill uses only markdown instructions, skip to [Checklist for effective Skills](#checklist-for-effective-skills).
@@ -871,6 +933,8 @@ def process_file(path):
         return ""
 ```
 
+
+
 **Bad example: Punt to Claude:**
 
 ```shiki
@@ -878,6 +942,8 @@ def process_file(path):
     # Just fail and let Claude figure it out
     return open(path).read()
 ```
+
+
 
 Configuration parameters should also be justified and documented to avoid "voodoo constants" (Ousterhout's law). If you don't know the right value, how will Claude determine it?
 
@@ -893,12 +959,16 @@ REQUEST_TIMEOUT = 30
 MAX_RETRIES = 3
 ```
 
+
+
 **Bad example: Magic numbers:**
 
 ```shiki
 TIMEOUT = 47  # Why 47?
 RETRIES = 5  # Why 5?
 ```
+
+
 
 ### Provide utility scripts
 
@@ -955,6 +1025,8 @@ python scripts/fill_form.py input.pdf fields.json output.pdf
 ```
 ```
 
+
+
 ### Use visual analysis
 
 When inputs can be rendered as images, have Claude analyze them:
@@ -970,6 +1042,8 @@ When inputs can be rendered as images, have Claude analyze them:
 2. Analyze each page image to identify form fields
 3. Claude can see field locations and types visually
 ```
+
+
 
 In this example, you'd need to write the `pdf_to_images.py` script.
 
@@ -1039,6 +1113,8 @@ bigquery-skill/
     └── product.md (usage analytics)
 ```
 
+
+
 When the user asks about revenue, Claude reads SKILL.md, sees the reference to `reference/finance.md`, and invokes bash to read just that file. The sales.md and product.md files remain on the filesystem, consuming zero context tokens until needed. This filesystem-based model is what enables progressive disclosure. Claude can navigate and selectively load exactly what each task requires.
 
 For complete details on the technical architecture, see [How Skills work](agents-and-tools/agent-skills/overview.md) in the Skills overview.
@@ -1055,6 +1131,8 @@ If your Skill uses MCP (Model Context Protocol) tools, always use fully qualifie
 Use the BigQuery:bigquery_schema tool to retrieve table schemas.
 Use the GitHub:create_issue tool to create issues.
 ```
+
+
 
 Where:
 
@@ -1080,6 +1158,8 @@ from pypdf import PdfReader
 reader = PdfReader("file.pdf")
 ```"
 ```
+
+
 
 ## Technical notes
 

@@ -5524,7 +5524,7 @@ The session's new title. Present only when the update changed it.
 
 Stream Session Thread Events
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream \
@@ -5534,6 +5534,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/stream
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -5552,6 +5554,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

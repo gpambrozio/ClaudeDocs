@@ -80,6 +80,8 @@ Example:
 [{"type": "text", "text": "Hi, I'm Claude."}]
 ```
 
+
+
 If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
 For example, if the input `messages` were:
@@ -91,11 +93,15 @@ For example, if the input `messages` were:
 ]
 ```
 
+
+
 Then the response `content` might be:
 
 ```shiki
 [{"type": "text", "text": "B)"}]
 ```
+
+
 
 One of the following:
 
@@ -1038,7 +1044,7 @@ JsonElement Type "expired"constant
 
 Retrieve Message Batch results
 
-C#
+C#
 
 ```shiki
 BatchResultsParams parameters = new() { MessageBatchID = "message_batch_id" };

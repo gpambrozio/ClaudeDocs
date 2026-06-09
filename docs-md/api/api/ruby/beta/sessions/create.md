@@ -974,7 +974,7 @@ Vault IDs attached to the session at creation. Empty when no vaults were supplie
 
 Create Session
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -990,6 +990,8 @@ puts(beta_managed_agents_session)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -1159,6 +1161,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

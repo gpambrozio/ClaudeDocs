@@ -172,7 +172,7 @@ The type of object (always 'work')
 
 List Work Items
 
-Python
+Python
 
 ```shiki
 import os
@@ -189,6 +189,8 @@ print(page.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -220,6 +222,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

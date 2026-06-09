@@ -98,7 +98,7 @@ The type of response
 
 Delete Environment
 
-Python
+Python
 
 ```shiki
 import os
@@ -115,6 +115,8 @@ print(beta_environment_delete_response.id)
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -125,6 +127,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

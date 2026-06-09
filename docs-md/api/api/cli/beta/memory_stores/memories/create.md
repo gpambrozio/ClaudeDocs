@@ -84,7 +84,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 Create a memory
 
-CLI
+CLI
 
 ```shiki
 ant beta:memory-stores:memories create \
@@ -95,6 +95,8 @@ ant beta:memory-stores:memories create \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -114,6 +116,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -2836,7 +2836,7 @@ The session's new title. Present only when the update changed it.
 
 List Session Thread Events
 
-Python
+Python
 
 ```shiki
 import os
@@ -2854,6 +2854,8 @@ print(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -2877,6 +2879,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

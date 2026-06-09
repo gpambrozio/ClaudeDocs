@@ -5502,7 +5502,7 @@ The session's new title. Present only when the update changed it.
 
 Stream Session Thread Events
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -5521,6 +5521,8 @@ console.log(betaManagedAgentsStreamSessionThreadEvents);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
@@ -5538,6 +5540,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

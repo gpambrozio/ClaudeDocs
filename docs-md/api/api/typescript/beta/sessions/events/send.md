@@ -1290,7 +1290,7 @@ Routes this result to a subagent thread. Copy from the `agent.tool_use` event's 
 
 Send Events
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -1313,6 +1313,8 @@ console.log(betaManagedAgentsSendSessionEvents.data);
 
 Response 200
 
+
+
 ```shiki
 {
   "data": [
@@ -1334,6 +1336,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

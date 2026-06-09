@@ -402,7 +402,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 List Agent Versions
 
-Go
+Go
 
 ```shiki
 package main
@@ -434,6 +434,8 @@ func main() {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -513,6 +515,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

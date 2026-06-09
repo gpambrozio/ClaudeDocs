@@ -394,7 +394,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 Archive Agent
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -407,6 +407,8 @@ puts(beta_managed_agents_agent)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -481,6 +483,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

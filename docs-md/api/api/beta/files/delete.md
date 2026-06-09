@@ -100,7 +100,7 @@ For file deletion, this is always `"file_deleted"`.
 
 Delete File
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/files/$FILE_ID \
@@ -112,6 +112,8 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
@@ -122,6 +124,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

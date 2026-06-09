@@ -186,7 +186,7 @@ Identifier of the vault containing the credential.
 
 Validate Credential
 
-C#
+C#
 
 ```shiki
 CredentialMcpOAuthValidateParams parameters = new()
@@ -201,6 +201,8 @@ Console.WriteLine(betaManagedAgentsCredentialValidation);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -234,6 +236,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

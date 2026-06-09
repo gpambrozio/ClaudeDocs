@@ -104,7 +104,7 @@ ID of the last file in this page of results.
 
 List Files
 
-CLI
+CLI
 
 ```shiki
 ant beta:files list \
@@ -112,6 +112,8 @@ ant beta:files list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -139,6 +141,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

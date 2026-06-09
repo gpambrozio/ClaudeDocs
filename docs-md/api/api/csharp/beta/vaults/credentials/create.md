@@ -290,7 +290,7 @@ Human-readable name for the credential.
 
 Create Credential
 
-C#
+C#
 
 ```shiki
 CredentialCreateParams parameters = new()
@@ -310,6 +310,8 @@ Console.WriteLine(betaManagedAgentsCredential);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -333,6 +335,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -4,6 +4,8 @@ Copy page
 
 Configure with the /claude-api skill in Claude Code
 
+
+
 ```shiki
 claude "/claude-api help me configure a customer-managed encryption key with AWS KMS"
 ```
@@ -25,6 +27,8 @@ In order to have Anthropic use your encryption key, you must give Anthropic's IA
 ```inline-block
 arn:aws:iam::915198916910:role/anthropic-cmek-client-us
 ```
+
+
 
 Use only this published ARN. Never trust an identifier provided over email, chat, or any onboarding channel.
 
@@ -80,6 +84,8 @@ Use only this published ARN. Never trust an identifier provided over email, chat
      }"
    ```
 
+   
+
    Capture `KeyMetadata.Arn` from the output. You need it when you register the key in the next step.
 
    The `EncryptionContext` condition is recommended but optional. Anthropic always includes your workspace's compartment ID in the encryption context, so ciphertext is cryptographically bound to that compartment regardless. Adding the condition provides defense-in-depth at the IAM layer. To start without it, omit the `Condition` block from the `AllowAnthropicCMEKCrypto` statement and add it later with `kms:PutKeyPolicy`.
@@ -125,6 +131,8 @@ Use only this published ARN. Never trust an identifier provided over email, chat
      }'
    ```
 
+   
+
    The response contains the external key ID:
 
    ```shiki
@@ -134,6 +142,8 @@ Use only this published ARN. Never trust an identifier provided over email, chat
      "display_name": "<friendly-name>"
    }
    ```
+
+   
 3. 3
 
    Validate the key
@@ -147,11 +157,15 @@ Use only this published ARN. Never trust an identifier provided over email, chat
      -H "content-type: application/json" -d '{}'
    ```
 
+   
+
    A successful response looks like this:
 
    ```shiki
    { "type": "external_key_validation", "status": "success", "error": null }
    ```
+
+   
 
    If validation fails, common causes are:
 
@@ -172,6 +186,8 @@ Use only this published ARN. Never trust an identifier provided over email, chat
        "external_key_id": "ekey_<id>"
      }'
    ```
+
+   
 
 ## Terraform
 

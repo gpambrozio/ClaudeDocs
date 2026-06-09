@@ -5522,7 +5522,7 @@ The session's new title. Present only when the update changed it.
 
 Stream Events
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -5535,6 +5535,8 @@ puts(beta_managed_agents_stream_session_events)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -5553,6 +5555,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

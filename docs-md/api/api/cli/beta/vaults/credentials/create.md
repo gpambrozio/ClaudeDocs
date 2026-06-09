@@ -156,7 +156,7 @@ Human-readable name for the credential.
 
 Create Credential
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults:credentials create \
@@ -166,6 +166,8 @@ ant beta:vaults:credentials create \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -189,6 +191,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

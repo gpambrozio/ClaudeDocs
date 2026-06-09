@@ -22,6 +22,8 @@ The file ID (tagged ID, e.g., claude\_file\_abc123)
 
 Download file content
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID/content \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"

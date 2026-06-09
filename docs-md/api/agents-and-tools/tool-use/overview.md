@@ -8,6 +8,8 @@ Here's the simplest example using a server tool, where Anthropic handles executi
 
 cURLCLIPythonTypeScript
 
+
+
 ```shiki
 import anthropic
 

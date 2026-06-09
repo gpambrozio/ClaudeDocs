@@ -152,7 +152,7 @@ The type of scope (e.g., `"session"`).
 
 List Files
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -168,6 +168,8 @@ for await (const fileMetadata of client.beta.files.list()) {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -195,6 +197,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

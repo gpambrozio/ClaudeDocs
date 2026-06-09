@@ -51,6 +51,8 @@ Here's a simple example that asks Claude to perform a calculation:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -112,6 +114,8 @@ When multiple code execution environments are available, be aware that:
 - If you need to pass results between environments, explicitly include outputs in subsequent tool calls rather than assuming shared state
 ```
 
+
+
 This is especially important when combining code execution with [web search](agents-and-tools/tool-use/web-search-tool.md) or [web fetch](agents-and-tools/tool-use/web-fetch-tool.md), which enable code execution automatically. If your application already provides a client-side shell tool, the automatic code execution creates a second execution environment that Claude needs to distinguish between.
 
 ## How to use the tool
@@ -138,6 +142,8 @@ The Python environment can process various file types uploaded through the Files
 3. **Include the code execution tool** in your API request
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -172,6 +178,8 @@ print(response)
 When Claude creates files during code execution, you can retrieve these files using the Files API:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Initialize the client
@@ -217,6 +225,8 @@ The code execution tool requires no additional parameters:
 
 JSON
 
+
+
 ```shiki
 {
   "type": "code_execution_20250825",
@@ -236,6 +246,8 @@ The code execution tool can return two types of results depending on the operati
 ### Bash command response
 
 Output
+
+
 
 ```shiki
 {
@@ -263,6 +275,8 @@ Output
 **View file:**
 
 Output
+
+
 
 ```shiki
 {
@@ -292,6 +306,8 @@ Output
 
 Output
 
+
+
 ```shiki
 {
   "type": "server_tool_use",
@@ -316,6 +332,8 @@ Output
 **Edit file (str\_replace):**
 
 Output
+
+
 
 ```shiki
 {
@@ -364,6 +382,8 @@ Each tool type can return specific errors:
 **Common errors (all tools):**
 
 Output
+
+
 
 ```shiki
 {
@@ -439,6 +459,8 @@ This allows you to maintain created files between requests.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 # First request: Create a file with a random number
 response1 = client.messages.create(
@@ -492,6 +514,8 @@ event: content_block_start
 data: {"type": "content_block_start", "index": 2, "content_block": {"type": "code_execution_tool_result", "tool_use_id": "srvtoolu_xyz789", "content": {"stdout": "   A  B  C\n0  1  2  3\n1  4  5  6", "stderr": ""}}}
 ```
 
+
+
 ## Batch requests
 
 You can include the code execution tool in the [Messages Batches API](build-with-claude/batch-processing.md). Code execution tool calls through the Messages Batches API are priced the same as those in regular Messages API requests.
@@ -521,6 +545,8 @@ Code execution usage is tracked in the response:
 }
 ```
 
+
+
 ## Upgrade to latest tool version
 
 By upgrading to `code-execution-2025-08-25`, you get access to file manipulation and Bash capabilities, including code in multiple languages. There is no price difference.
@@ -547,6 +573,8 @@ To upgrade, update the tool type in your API requests:
 - "type": "code_execution_20250522"
 + "type": "code_execution_20250825"
 ```
+
+
 
 **Review response handling** (if parsing responses programmatically):
 

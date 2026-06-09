@@ -50,6 +50,8 @@ description: Extract text and tables from PDF files, fill forms, merge documents
 ---
 ```
 
+
+
 Claude loads this metadata at startup and includes it in the system prompt. This lightweight approach means you can install many Skills without context penalty; Claude only knows each Skill exists and when to use it.
 
 ### Level 2: Instructions (loaded when triggered)
@@ -73,6 +75,8 @@ with pdfplumber.open("document.pdf") as pdf:
 For advanced form filling, see [FORMS.md](FORMS.md).
 ```
 
+
+
 When you request something that matches a Skill's description, Claude reads SKILL.md from the filesystem via bash. Only then does this content enter the context window.
 
 ### Level 3: Resources and code (loaded as needed)
@@ -87,6 +91,8 @@ pdf-skill/
 └── scripts/
     └── fill_form.py (utility script)
 ```
+
+
 
 **Instructions**: Additional markdown files (FORMS.md, REFERENCE.md) containing specialized guidance and workflows
 
@@ -208,6 +214,8 @@ description: Brief description of what this Skill does and when to use it
 ## Examples
 [Concrete examples of using this Skill]
 ```
+
+
 
 **Required fields**: `name` and `description`
 

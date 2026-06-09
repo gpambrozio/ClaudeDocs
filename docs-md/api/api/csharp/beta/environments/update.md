@@ -330,7 +330,7 @@ One of the following:
 
 Update Environment
 
-C#
+C#
 
 ```shiki
 EnvironmentUpdateParams parameters = new()
@@ -344,6 +344,8 @@ Console.WriteLine(betaEnvironment);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -395,6 +397,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

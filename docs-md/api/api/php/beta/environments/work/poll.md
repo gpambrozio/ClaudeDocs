@@ -90,7 +90,7 @@ The type of object (always 'work')
 
 Poll for Work
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -111,6 +111,8 @@ var_dump($betaSelfHostedWork);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -137,6 +139,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

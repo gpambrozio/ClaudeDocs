@@ -44,11 +44,15 @@ Example rubric:
 - Sensitivity analysis on WACC and terminal growth rate is included
 ```
 
+
+
 Pass the rubric as inline text on `user.define_outcome` (see the next section), or upload it through the Files API for reuse across sessions.
 
 Uploading through the Files API requires both the `managed-agents-2026-04-01` and `files-api-2025-04-14` beta headers.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 rubric = client.beta.files.upload(file=Path("/tmp/rubric.md"))
@@ -60,6 +64,8 @@ print(f"Uploaded rubric: {rubric.id}")
 After creating a session, send a `user.define_outcome` event. The agent begins work immediately; no additional user message event is required.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Create a session
@@ -109,6 +115,8 @@ This is the event you send to initiate an outcome. It is echoed back on receipt,
 }
 ```
 
+
+
 ### Outcome evaluation start
 
 Emitted once the grader starts an evaluation over one iteration loop. The `iteration` field is a 0-indexed revision counter: `0` is the first evaluation, `1` is the re-evaluation after the first revision, and so on.
@@ -123,6 +131,8 @@ Emitted once the grader starts an evaluation over one iteration loop. The `itera
 }
 ```
 
+
+
 ### Outcome evaluation ongoing
 
 Heartbeat emitted while the grader runs. The grader's internal reasoning is opaque: you see that it's working, not what it's thinking.
@@ -135,6 +145,8 @@ Heartbeat emitted while the grader runs. The grader's internal reasoning is opaq
   "processed_at": "2026-03-25T14:02:10Z"
 }
 ```
+
+
 
 ### Outcome evaluation end
 
@@ -167,11 +179,15 @@ Emitted after the grader finishes evaluating one iteration. The `result` field i
 }
 ```
 
+
+
 ## Checking on outcome status
 
 You can either listen on the [event stream](managed-agents/events-and-streaming.md) for `span.outcome_evaluation_end`, or poll `GET /v1/sessions/:id` and read `outcome_evaluations[].result`:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 session = client.beta.sessions.retrieve(session.id)
@@ -186,6 +202,8 @@ for outcome in session.outcome_evaluations:
 The agent writes output files to `/mnt/session/outputs/` inside the sandbox. Once the session is idle, fetch them through the [Files API](build-with-claude/files.md) scoped to the session:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # List files produced by this session

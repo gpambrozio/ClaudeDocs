@@ -384,7 +384,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 Update Agent
 
-CLI
+CLI
 
 ```shiki
 ant beta:agents update \
@@ -394,6 +394,8 @@ ant beta:agents update \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -468,6 +470,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

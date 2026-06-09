@@ -134,7 +134,7 @@ The type of scope (e.g., `"session"`).
 
 Upload File
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -147,6 +147,8 @@ puts(file_metadata)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -167,6 +169,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

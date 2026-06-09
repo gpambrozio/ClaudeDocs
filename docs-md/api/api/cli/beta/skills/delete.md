@@ -44,7 +44,7 @@ For Skills, this is always `"skill_deleted"`.
 
 Delete Skill
 
-CLI
+CLI
 
 ```shiki
 ant beta:skills delete \
@@ -53,6 +53,8 @@ ant beta:skills delete \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -64,6 +66,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

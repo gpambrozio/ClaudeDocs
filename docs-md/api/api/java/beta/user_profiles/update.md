@@ -160,7 +160,7 @@ Display name of the entity this profile represents. For `resold` this is the res
 
 Update User Profile
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -183,6 +183,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "uprof_011CZkZCu8hGbp5mYRQgUmz9",
@@ -204,6 +206,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

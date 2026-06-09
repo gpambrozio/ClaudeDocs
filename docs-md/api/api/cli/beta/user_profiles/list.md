@@ -100,7 +100,7 @@ Cursor for the next page, or `null` when there are no more results.
 
 List User Profiles
 
-CLI
+CLI
 
 ```shiki
 ant beta:user-profiles list \
@@ -108,6 +108,8 @@ ant beta:user-profiles list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -135,6 +137,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

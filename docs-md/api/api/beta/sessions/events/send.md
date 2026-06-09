@@ -1292,7 +1292,7 @@ Routes this result to a subagent thread. Copy from the `agent.tool_use` event's 
 
 Send Events
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events \
@@ -1317,6 +1317,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/events \
 
 Response 200
 
+
+
 ```shiki
 {
   "data": [
@@ -1338,6 +1340,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

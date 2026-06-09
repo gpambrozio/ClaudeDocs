@@ -112,7 +112,7 @@ A timestamp in RFC 3339 format
 
 Get Vault
 
-C#
+C#
 
 ```shiki
 VaultRetrieveParams parameters = new()
@@ -126,6 +126,8 @@ Console.WriteLine(betaManagedAgentsVault);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -144,6 +146,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

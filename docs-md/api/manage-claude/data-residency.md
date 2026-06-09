@@ -24,6 +24,8 @@ The `inference_geo` parameter controls where model inference runs for a specific
 
 cURLCLIPythonTypeScript
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -47,6 +49,8 @@ The response `usage` object includes an `inference_geo` field indicating where i
 
 Output
 
+
+
 ```shiki
 {
   "usage": {
@@ -61,7 +65,7 @@ Output
 
 The `inference_geo` parameter is supported on Claude Opus 4.6, Claude Sonnet 4.6, and later models. Requests with `inference_geo` on Claude Opus 4.5, Claude Sonnet 4.5, Claude Haiku 4.5, or earlier models return a 400 error.
 
-The `inference_geo` parameter is available on the Claude API (first-party) and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On Amazon Bedrock, Vertex AI, and Microsoft Foundry, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](api/openai-sdk.md).
+The `inference_geo` parameter is available on the Claude API (first-party) and [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). On Amazon Bedrock, Vertex AI, and Microsoft Foundry, the inference region is determined by the endpoint URL or inference profile, so `inference_geo` is not applicable. The `inference_geo` parameter is also not available through the [OpenAI SDK compatibility endpoint](cli-sdks-libraries/libraries/openai-sdk.md).
 
 ### Workspace-level restrictions
 

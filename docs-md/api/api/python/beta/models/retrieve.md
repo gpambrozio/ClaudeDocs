@@ -278,7 +278,7 @@ For Models, this is always `"model"`.
 
 Get a Model
 
-Python
+Python
 
 ```shiki
 import os
@@ -294,6 +294,8 @@ print(beta_model_info.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -370,6 +372,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

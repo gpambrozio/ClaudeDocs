@@ -49,6 +49,8 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 }
 ```
 
+
+
 **Federation rule:** Match on the Okta `sub` claim, which is the service app's Client ID. If you defined custom claims in Okta, you can match on those instead with the `claims` map or a CEL `condition`.
 
 ```shiki
@@ -66,11 +68,15 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 }
 ```
 
+
+
 ## Acquire a token and call the Claude API
 
 Unlike platform-native providers (AWS, Google Cloud, Kubernetes), which make a token available inside the workload's runtime (through a projected file or local metadata endpoint), Okta does not. Your workload must call Okta's token endpoint to obtain a JWT, then pass that JWT to the Anthropic SDK as the identity token.
 
 cURLPythonTypeScriptGoJavaC#CLIPHPRuby
+
+
 
 ```shiki
 import os

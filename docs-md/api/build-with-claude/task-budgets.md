@@ -24,6 +24,8 @@ Add `task_budget` to `output_config` and include the beta header:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -54,6 +56,8 @@ The `task_budget` object has three fields:
 
 Claude sees a budget-countdown marker injected server-side throughout the conversation. The marker shows how many tokens remain in the current agentic loop and updates as the model generates thinking, tool calls, and output, and as it processes tool results. Claude uses this signal to pace itself and finish gracefully as the budget is consumed.
 
+**The countdown is visible only to the model.** API responses do not include a remaining-budget field: there is no `task_budget` information in the response `usage` object, and SDKs have no accessor for it. To track spend client-side, sum token usage across the requests in your loop as shown in [Measure your current usage](#measure-your-current-usage), or pass your own figure forward with `remaining` when [carrying a budget across compaction](#carrying-a-budget-across-compaction-with-remaining).
+
 **The countdown reflects tokens Claude has processed in the current agentic loop, not tokens you resend between turns.** If your client sends the full conversation history on every follow-up request, your client-side token count may differ from the budget Claude is tracking. If you also decrement `remaining` while resending full history, the model sees an under-reported budget and the countdown drops faster than it should, causing Claude to wrap up earlier than the budget actually allows. Set a generous budget and let the model self-regulate against the countdown rather than trying to mirror it client-side.
 
 ### Worked example: budget counting across turns
@@ -71,6 +75,8 @@ Consider a loop with `task_budget: {type: "tokens", total: 100000}` and a single
   ]
 }
 ```
+
+
 
 Claude thinks, then emits a tool call and stops with `stop_reason: "tool_use"`:
 
@@ -91,6 +97,8 @@ Claude thinks, then emits a tool call and stops with `stop_reason: "tool_use"`:
   ]
 }
 ```
+
+
 
 Suppose this assistant turn (thinking plus the tool call) totals 5,000 generated tokens. The countdown Claude saw during generation ended near `remaining` ≈ 95,000.
 
@@ -126,6 +134,8 @@ Suppose this assistant turn (thinking plus the tool call) totals 5,000 generated
 }
 ```
 
+
+
 The resent turn-1 user and assistant messages are not counted again, but the 2,800-token tool result is new content Claude sees this turn and counts against the budget. Claude spends another 4,000 tokens on thinking and a second tool call (`grep -rn "eval(" src/`). The countdown ends near `remaining` ≈ 88,200.
 
 **Turn 3.** Full history resent again with the second tool result (1,200 tokens of grep output) appended. Claude writes a 6,000-token final findings report and stops with `stop_reason: "end_turn"`. `remaining` ≈ 81,000.
@@ -146,6 +156,8 @@ Your client sent the turn-1 user message three times and the turn-1 assistant me
 If your agentic loop compacts or rewrites context between requests (for example, by summarizing earlier turns), the server has no memory of how much budget was spent before compaction. Pass `remaining` on the next request so the countdown continues from where you left off rather than resetting to `total`:
 
 PythonTypeScriptGoJavaC#PHPRuby
+
+
 
 ```shiki
 output_config = {
@@ -182,6 +194,8 @@ The right budget depends on how much work your agentic loop currently does. Rath
 Run a representative sample of tasks **without** `task_budget` set and record the total tokens Claude spends per task. For an agentic loop, sum `usage.output_tokens` plus thinking and tool-result tokens across every request in the loop:
 
 PythonTypeScript
+
+
 
 ```shiki
 def run_task_and_count_tokens(messages: list) -> int:

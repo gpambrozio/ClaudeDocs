@@ -111,6 +111,8 @@ You can [create a batch](api/creating-message-batches.md) by passing this list i
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
 from anthropic.types.messages.batch_create_params import Request
@@ -161,6 +163,8 @@ When a batch is first created, the response will have a processing status of `in
 
 Output
 
+
+
 ```shiki
 {
   "id": "msgbatch_01HkcTjaV5uDC8jWR4ZsDV8d",
@@ -191,6 +195,8 @@ To poll a Message Batch, you'll need its `id`, which is provided in the response
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 import time
 
@@ -214,6 +220,8 @@ print(message_batch)
 You can list all Message Batches in your Workspace using the [list endpoint](api/listing-message-batches.md). The API supports pagination, automatically fetching additional pages as needed:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -240,6 +248,8 @@ Results of the batch are available for download at the `results_url` property on
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -265,6 +275,8 @@ The results are in `.jsonl` format, where each line is a valid JSON object repre
 
 .jsonl file
 
+
+
 ```shiki
 {"custom_id":"my-second-request","result":{"type":"succeeded","message":{"id":"msg_014VwiXbi91y3JMjcpyGBHX5","type":"message","role":"assistant","model":"claude-opus-4-8","content":[{"type":"text","text":"Hello again! It's nice to see you. How can I assist you today? Is there anything specific you'd like to chat about or any questions you have?"}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":11,"output_tokens":36}}}}
 {"custom_id":"my-first-request","result":{"type":"succeeded","message":{"id":"msg_01FqfsLoHwgeFbguDgpz48m7","type":"message","role":"assistant","model":"claude-opus-4-8","content":[{"type":"text","text":"Hello! How can I assist you today? Feel free to ask me any questions or let me know if there's anything you'd like to chat about."}],"stop_reason":"end_turn","stop_sequence":null,"usage":{"input_tokens":10,"output_tokens":34}}}}
@@ -282,6 +294,8 @@ You can cancel a Message Batch that is currently processing using the [cancel en
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -296,6 +310,8 @@ print(message_batch)
 The response will show the batch in a `canceling` state:
 
 Output
+
+
 
 ```shiki
 {
@@ -330,6 +346,8 @@ To maximize the likelihood of cache hits in your batch requests:
 Example of implementing prompt caching in a batch:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 from anthropic.types.message_create_params import MessageCreateParamsNonStreaming
@@ -412,6 +430,8 @@ Use extended output for long-form generation such as book-length drafts and tech
 A single 300k-token generation can take over an hour to complete, so plan your batch submissions with the 24-hour processing window in mind. Standard batch pricing (50% of standard API prices) applies.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 from anthropic.types.beta.message_create_params import MessageCreateParamsNonStreaming

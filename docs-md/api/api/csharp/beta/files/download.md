@@ -80,7 +80,7 @@ Optional header to specify the beta version(s) you want to use.
 
 Download File
 
-C#
+C#
 
 ```shiki
 FileDownloadParams parameters = new() { FileID = "file_id" };

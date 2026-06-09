@@ -17,7 +17,7 @@ Context editing allows you to selectively clear specific content from conversati
 | Approach | Where it runs | Strategies | How it works |
 | --- | --- | --- | --- |
 | **Server-side** | API | Tool result clearing (`clear_tool_uses_20250919`) Thinking block clearing (`clear_thinking_20251015`) | Applied before the prompt reaches Claude. Clears specific content from conversation history. Each strategy can be configured independently. |
-| **Client-side** | SDK | Compaction | Available in [Python, TypeScript, and Ruby SDKs](api/client-sdks.md) when using [`tool_runner`](agents-and-tools/tool-use/tool-runner.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk) below. |
+| **Client-side** | SDK | Compaction | Available in [Python, TypeScript, and Ruby SDKs](cli-sdks-libraries/overview.md) when using [`tool_runner`](agents-and-tools/tool-use/tool-runner.md). Generates a summary and replaces full conversation history. See [Client-side compaction](#client-side-compaction-sdk). |
 
 ## Server-side strategies
 
@@ -45,7 +45,7 @@ The `clear_thinking_20251015` strategy manages `thinking` blocks in conversation
 
 Use this strategy to override the default. If your code runs across multiple model tiers, set `keep` explicitly rather than relying on the per-model default.
 
-An assistant conversation turn may include multiple content blocks (e.g. when using tools) and multiple thinking blocks (e.g. with [interleaved thinking](build-with-claude/extended-thinking.md)).
+An assistant conversation turn may include multiple content blocks (for example, when using tools) and multiple thinking blocks (for example, with [interleaved thinking](build-with-claude/extended-thinking.md)).
 
 ### Context editing happens server-side
 
@@ -68,6 +68,8 @@ The simplest way to enable tool result clearing is to specify only the strategy 
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-8",
@@ -84,6 +86,8 @@ response = client.beta.messages.create(
 You can customize the tool result clearing behavior with additional parameters:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 response = client.beta.messages.create(
@@ -128,6 +132,8 @@ Enable thinking block clearing to manage context and prompt caching effectively 
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-6",
@@ -168,6 +174,8 @@ Keep thinking blocks from the last 3 assistant turns:
 }
 ```
 
+
+
 Keep all thinking blocks (maximizes cache hits):
 
 ```shiki
@@ -177,6 +185,8 @@ Keep all thinking blocks (maximizes cache hits):
 }
 ```
 
+
+
 ### Combining strategies
 
 You can use both thinking block clearing and tool result clearing together:
@@ -184,6 +194,8 @@ You can use both thinking block clearing and tool result clearing together:
 When using multiple strategies, the `clear_thinking_20251015` strategy must be listed first in the `edits` array.
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 response = client.beta.messages.create(
@@ -225,6 +237,8 @@ You can see which context edits were applied to your request using the `context_
 
 Output
 
+
+
 ```shiki
 {
   "id": "msg_013Zva2CMHLNnXjNJJKqJ2EF",
@@ -259,6 +273,8 @@ For streaming responses, the context edits will be included in the final `messag
 
 Streaming Response
 
+
+
 ```shiki
 {
   "type": "message_delta",
@@ -282,6 +298,8 @@ Streaming Response
 The [token counting](build-with-claude/token-counting.md) endpoint supports context management, allowing you to preview how many tokens your prompt will use after context editing is applied.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 response = client.beta.messages.count_tokens(
@@ -308,6 +326,8 @@ print(
 ```
 
 Output
+
+
 
 ```shiki
 {
@@ -336,6 +356,8 @@ To use both features together, enable them in your API request:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-8",
@@ -356,7 +378,7 @@ For the full memory tool reference including commands and examples, see [Memory 
 
 **Anthropic recommends server-side compaction over SDK compaction.** [Server-side compaction](build-with-claude/compaction.md) handles context management automatically with less integration complexity, better token usage calculation, and no client-side limitations. Use SDK compaction only if you specifically need client-side control over the summarization process.
 
-Compaction is available in the [Python, TypeScript, and Ruby SDKs](api/client-sdks.md) when using the [`tool_runner` method](agents-and-tools/tool-use/tool-runner.md).
+Compaction is available in the [Python, TypeScript, and Ruby SDKs](cli-sdks-libraries/overview.md) when using the [`tool_runner` method](agents-and-tools/tool-use/tool-runner.md).
 
 Compaction is an SDK feature that automatically manages conversation context by generating summaries when token usage grows too large. Unlike server-side context editing strategies that clear content, compaction instructs Claude to summarize the conversation history, then replaces the full history with that summary. This allows Claude to continue working on long-running tasks that would otherwise exceed the [context window](build-with-claude/context-windows.md).
 
@@ -407,6 +429,8 @@ Ruby
 
 Python
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -446,6 +470,8 @@ As the conversation grows, the message history accumulates:
 ]
 ```
 
+
+
 When tokens exceed the threshold, the SDK injects a summary request and Claude generates a summary. The entire history is then replaced:
 
 **After compaction (back to ~2-3k tokens):**
@@ -458,6 +484,8 @@ When tokens exceed the threshold, the SDK injects a summary request and Claude g
   }
 ]
 ```
+
+
 
 Claude continues working from this summary as if it were the original conversation history.
 
@@ -476,6 +504,8 @@ The threshold determines when compaction occurs. A lower threshold means more fr
 
 PythonTypeScript
 
+
+
 ```shiki
 # More frequent compaction for memory-constrained scenarios
 compaction_control = {"enabled": True, "context_token_threshold": 50000}
@@ -490,6 +520,8 @@ You can use a faster or cheaper model for generating summaries:
 
 PythonTypeScript
 
+
+
 ```shiki
 compaction_control = {
     "enabled": True,
@@ -503,6 +535,8 @@ compaction_control = {
 You can provide a custom prompt for domain-specific needs. Your prompt should instruct Claude to wrap its summary in `<summary></summary>` tags.
 
 PythonTypeScript
+
+
 
 ```shiki
 compaction_control = {
@@ -542,6 +576,8 @@ When using server-side tools, the SDK may incorrectly calculate token usage, cau
 For example, after a web search operation, the API response might show:
 
 Output
+
+
 
 ```shiki
 {
@@ -600,6 +636,8 @@ Ruby
 The Python SDK logs compaction events at the INFO level. Enable the `anthropic.lib.tools` logger:
 
 Python
+
+
 
 ```shiki
 import logging

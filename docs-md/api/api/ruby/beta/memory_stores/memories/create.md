@@ -146,7 +146,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 Create a memory
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -159,6 +159,8 @@ puts(beta_managed_agents_memory)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -178,6 +180,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

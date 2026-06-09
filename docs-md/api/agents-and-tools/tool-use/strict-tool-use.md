@@ -27,6 +27,8 @@ For example, suppose a booking system needs `passengers: int`. Without strict mo
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -64,6 +66,8 @@ print(response.content)
 **Response format:** Tool use blocks with validated inputs in `response.content[x].input`
 
 Output
+
+
 
 ```shiki
 {

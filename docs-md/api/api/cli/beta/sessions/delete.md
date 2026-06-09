@@ -38,7 +38,7 @@ type: "session\_deleted"
 
 Delete Session
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions delete \
@@ -47,6 +47,8 @@ ant beta:sessions delete \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -58,6 +60,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

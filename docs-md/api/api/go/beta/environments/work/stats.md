@@ -112,7 +112,7 @@ Number of workers that have polled for work in the last 30 seconds. Requires wor
 
 Get Queue Statistics
 
-Go
+Go
 
 ```shiki
 package main
@@ -145,6 +145,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "depth": 0,
@@ -158,6 +160,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

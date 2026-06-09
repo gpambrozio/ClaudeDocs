@@ -188,7 +188,7 @@ Identifier of the vault containing the credential.
 
 Validate Credential
 
-Python
+Python
 
 ```shiki
 import os
@@ -205,6 +205,8 @@ print(beta_managed_agents_credential_validation.credential_id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -238,6 +240,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -81,6 +81,8 @@ Opaque cursor for the next page, or `null` if there are no more results.
 
 List Tunnels
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/tunnels \
     -H 'anthropic-version: 2023-06-01' \
@@ -88,6 +90,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -109,6 +113,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

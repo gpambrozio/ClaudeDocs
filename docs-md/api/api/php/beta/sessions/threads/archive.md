@@ -72,7 +72,7 @@ Cumulative token usage for a session thread across all turns.
 
 Archive Session Thread
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -91,6 +91,8 @@ var_dump($betaManagedAgentsSessionThread);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -168,6 +170,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -134,7 +134,7 @@ The type of scope (e.g., `"session"`).
 
 Get File Metadata
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/files/$FILE_ID \
@@ -144,6 +144,8 @@ curl https://api.anthropic.com/v1/files/$FILE_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -164,6 +166,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

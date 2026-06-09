@@ -46,7 +46,7 @@ Contains a Message output if processing was successful, an error response if pro
 
 Retrieve Message Batch results
 
-PHP
+PHP
 
 ```shiki
 <?php

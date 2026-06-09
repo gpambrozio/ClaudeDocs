@@ -44,7 +44,7 @@ For Skills, this is always `"skill_deleted"`.
 
 Delete Skill
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -62,6 +62,8 @@ var_dump($skill);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
@@ -72,6 +74,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -128,7 +128,7 @@ The type of scope (e.g., `"session"`).
 
 Get File Metadata
 
-C#
+C#
 
 ```shiki
 FileRetrieveMetadataParams parameters = new() { FileID = "file_id" };
@@ -139,6 +139,8 @@ Console.WriteLine(fileMetadata);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -159,6 +161,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

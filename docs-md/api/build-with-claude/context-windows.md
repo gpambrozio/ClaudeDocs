@@ -107,6 +107,8 @@ At the start of a conversation, Claude receives information about its total cont
 <budget:token_budget>1000000</budget:token_budget>
 ```
 
+
+
 The budget is set to 1M tokens (200k for models with a smaller context window).
 
 After each tool call, Claude receives an update on remaining capacity:
@@ -114,6 +116,8 @@ After each tool call, Claude receives an update on remaining capacity:
 ```shiki
 <system_warning>Token usage: 35000/1000000; 965000 remaining</system_warning>
 ```
+
+
 
 This awareness helps Claude determine how much capacity remains for work and enables more effective execution on long-running tasks. Image tokens are included in these budgets.
 

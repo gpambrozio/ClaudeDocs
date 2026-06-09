@@ -409,7 +409,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 Get Agent
 
-Python
+Python
 
 ```shiki
 import os
@@ -425,6 +425,8 @@ print(beta_managed_agents_agent.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -499,6 +501,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

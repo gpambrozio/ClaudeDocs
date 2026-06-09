@@ -31,6 +31,8 @@ Enable the full toolset with `agent_toolset_20260401` when creating an agent. Us
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:agents create <<'YAML'
 name: Coding Assistant
@@ -57,6 +59,8 @@ To disable a tool, set `enabled: false` in its config entry:
 }
 ```
 
+
+
 ### Enabling only specific tools
 
 To start with everything off and enable only what you need, set `default_config.enabled` to `false`:
@@ -73,6 +77,8 @@ To start with everything off and enable only what you need, set `default_config.
 }
 ```
 
+
+
 ## Custom tools
 
 In addition to built-in tools, you can define custom tools. Custom tools are analogous to [user-defined client tools](agents-and-tools/tool-use/how-tool-use-works.md) in the Messages API.
@@ -80,6 +86,8 @@ In addition to built-in tools, you can define custom tools. Custom tools are ana
 Custom tools allow you to extend Claude's capabilities to perform a wider variety of tasks. Each tool defines a contract: you specify what operations are available and what they return; Claude determines when and how to call them. The model never executes anything on its own. It emits a structured request, your code runs the operation, and the result flows back into the conversation.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:agents create <<'YAML'

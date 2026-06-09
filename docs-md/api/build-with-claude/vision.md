@@ -125,6 +125,8 @@ The base64 example prompts use these variables:
 
 cURLPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 import base64
 import httpx
@@ -146,6 +148,8 @@ Below are examples of how to include images in a Messages API request using base
 ### Base64-encoded image example
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 image1_data = "iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAIAAACQd1PeAAAADElEQVR4nGP4z8AAAAMBAQDJ/pLvAAAAAElFTkSuQmCC"
@@ -178,6 +182,8 @@ print(message)
 ### URL-based image example
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -215,6 +221,8 @@ Files API and referencing them by `file_id` keeps request payloads small
 regardless of how many images accumulate in the conversation history.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()

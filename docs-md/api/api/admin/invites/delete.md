@@ -28,6 +28,8 @@ For Invites, this is always `"invite_deleted"`.
 
 Delete Invite
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -X DELETE \
@@ -36,6 +38,8 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -47,6 +51,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

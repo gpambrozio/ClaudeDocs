@@ -12,6 +12,8 @@ First, upload a file using the [Files API](build-with-claude/files.md):
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 file = client.beta.files.upload(file=Path("data.csv"))
 print(f"File ID: {file.id}")
@@ -24,6 +26,8 @@ Mount uploaded files into the sandbox by adding them to the `resources` array wh
 The `mount_path` is optional, but make sure the uploaded file has a descriptive name so the agent can identify it.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 session = client.beta.sessions.create(
@@ -47,6 +51,8 @@ Mount multiple files by adding entries to the `resources` array:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 resources = [
     {"type": "file", "file_id": "file_abc123", "mount_path": "/workspace/data.csv"},
@@ -63,6 +69,8 @@ You can add or remove files from a session after creation using the session reso
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 resource = client.beta.sessions.resources.add(
     session.id,
@@ -75,6 +83,8 @@ print(resource.id)  # "sesrsc_01ABC..."
 List all resources on a session with `resources.list`. To remove a file, call `resources.delete` with the resource ID:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 listed = client.beta.sessions.resources.list(session.id)
@@ -89,6 +99,8 @@ client.beta.sessions.resources.delete(resource.id, session_id=session.id)
 Use the [Files API](build-with-claude/files.md) to list files scoped to a session and download them.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # List files associated with a session

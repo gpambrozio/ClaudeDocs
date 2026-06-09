@@ -96,6 +96,8 @@ Token to provide in as `page` in the subsequent request to retrieve the next pag
 
 List Workspace Rate Limits
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_limits \
     -H 'anthropic-version: 2023-06-01' \
@@ -103,6 +105,8 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/rate_li
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -129,6 +133,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

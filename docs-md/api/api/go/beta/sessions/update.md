@@ -870,7 +870,7 @@ Vault IDs attached to the session at creation. Empty when no vaults were supplie
 
 Update Session
 
-Go
+Go
 
 ```shiki
 package main
@@ -902,6 +902,8 @@ func main() {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -1071,6 +1073,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

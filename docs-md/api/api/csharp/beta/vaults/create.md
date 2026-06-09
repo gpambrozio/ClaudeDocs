@@ -116,7 +116,7 @@ A timestamp in RFC 3339 format
 
 Create Vault
 
-C#
+C#
 
 ```shiki
 VaultCreateParams parameters = new() { DisplayName = "Example vault" };
@@ -127,6 +127,8 @@ Console.WriteLine(betaManagedAgentsVault);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -145,6 +147,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

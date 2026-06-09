@@ -44,6 +44,8 @@ Here's an example of the default response format:
 }
 ```
 
+
+
 For more information about the response format of extended thinking, see the [Messages API Reference](api/messages/create.md).
 
 ## How to use extended thinking
@@ -51,6 +53,8 @@ For more information about the response format of extended thinking, see the [Me
 Here is an example of using extended thinking in the Messages API:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -98,7 +102,7 @@ Here are some important considerations for summarized thinking:
 - Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience.
 - Summarization is processed by a different model than the one you target in your requests. The thinking model does not see the summarized output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#e49785888197a4858a908c968b948d87ca878b89).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](mailto:sales@anthropic.com).
 
 ### Controlling thinking display
 
@@ -123,6 +127,8 @@ On [Claude Mythos Preview](https://anthropic.com/glasswing), `display` defaults 
 Automated pipelines that never surface thinking content to end users can skip the overhead of receiving thinking tokens over the wire. Latency-sensitive applications get the same reasoning quality without waiting for thinking text to stream before the final response begins.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -153,6 +159,8 @@ for block in response.content:
 When `display: "omitted"` is set, the response contains `thinking` blocks with an empty `thinking` field:
 
 Output
+
+
 
 ```shiki
 {
@@ -186,7 +194,7 @@ Here's how to handle streaming with thinking:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
-[Try in Console](/workbench/new?user=What+is+the+greatest+common+divisor+of+1071+and+462%3F&thinking.budget_tokens=10000)
+[Try in Console](/workbench/new?user=What+is+the+greatest+common+divisor+of+1071+and+462%3F&thinking.budget_tokens=10000)
 
 ```shiki
 client = anthropic.Anthropic()
@@ -230,6 +238,8 @@ Example streaming output:
 
 Output
 
+
+
 ```shiki
 event: message_start
 data: {"type": "message_start", "message": {"id": "msg_01...", "type": "message", "role": "assistant", "content": [], "model": "claude-sonnet-4-6", "stop_reason": null, "stop_sequence": null}}
@@ -272,6 +282,8 @@ data: {"type": "message_stop"}
 When `display: "omitted"` is set, the thinking block opens, a single `signature_delta` arrives, and the block closes without any `thinking_delta` events. Text streaming begins immediately after:
 
 Output
+
+
 
 ```shiki
 event: content_block_start
@@ -318,6 +330,8 @@ User: [tool_result: "20°C, sunny"]
 Assistant: [text: "The weather in Paris is 20°C and sunny"]
 ```
 
+
+
 Even though there are multiple API messages, the tool use loop is conceptually part of one continuous assistant response.
 
 #### Graceful thinking degradation
@@ -343,6 +357,8 @@ Assistant: [text: "It's sunny"]
 User: "What about tomorrow?"
 Assistant: [thinking] + [text: "..."] (thinking enabled - new turn)
 ```
+
+
 
 By completing the assistant turn before toggling thinking, you ensure that thinking is actually enabled for the new request.
 
@@ -441,11 +457,15 @@ When using extended thinking with tool use, thinking blocks exhibit specific cac
 User: "What's the weather in Paris?"
 ```
 
+
+
 **Response 1:**
 
 ```inline-block
 [thinking_block_1] + [tool_use block 1]
 ```
+
+
 
 **Request 2:**
 
@@ -455,11 +475,15 @@ Assistant: [thinking_block_1] + [tool_use block 1],
 User: [tool_result_1, cache=True]
 ```
 
+
+
 **Response 2:**
 
 ```inline-block
 [thinking_block_2] + [text block 2]
 ```
+
+
 
 Request 2 writes a cache of the request content (not the response). The cache includes the original user message, the first thinking block, tool use block, and the tool result.
 
@@ -473,6 +497,8 @@ Assistant: [thinking_block_2] + [text block 2],
 User: [Text response, cache=True]
 ```
 
+
+
 For Opus 4.5+ and Sonnet 4.6+, all previous thinking blocks are kept by default. For earlier Opus/Sonnet models and all Haiku models, because a non-tool-result user block was included, all previous thinking blocks are ignored and stripped from context. This request will be processed the same as:
 
 ```inline-block
@@ -482,6 +508,8 @@ User: [tool_result_1, cache=True],
 Assistant: [text block 2],
 User: [Text response, cache=True]
 ```
+
+
 
 **Key points:**
 
@@ -517,6 +545,8 @@ context window =
   (thinking tokens + encrypted thinking tokens + text output tokens)
 ```
 
+
+
 Use the [token counting API](build-with-claude/token-counting.md) to get accurate token counts for your specific use case, especially when working with multi-turn conversations that include thinking.
 
 ### The context window with extended thinking and tool use
@@ -530,6 +560,8 @@ context window =
   (current input tokens + previous thinking tokens + tool use tokens) +
   (thinking tokens + encrypted thinking tokens + text output tokens)
 ```
+
+
 
 The diagram below illustrates token management for extended thinking with tool use:
 
@@ -569,6 +601,8 @@ In addition to regular `thinking` blocks, the API may return `redacted_thinking`
   "data": "..."
 }
 ```
+
+
 
 The `data` field is opaque and encrypted. Like the `signature` field on regular thinking blocks, you should pass `redacted_thinking` blocks back to the API unchanged when continuing a multi-turn conversation with [tools](build-with-claude/extended-thinking.md).
 
@@ -643,6 +677,8 @@ To see how many billed output tokens were spent on internal reasoning, read `usa
   }
 }
 ```
+
+
 
 `output_tokens` remains the inclusive, authoritative total used for billing. `output_tokens_details` is a read-only breakdown for observability.
 

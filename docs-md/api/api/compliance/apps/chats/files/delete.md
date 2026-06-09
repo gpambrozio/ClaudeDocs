@@ -33,6 +33,8 @@ Constant string confirming deletion
 
 Delete file
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
     -X DELETE \
@@ -40,6 +42,8 @@ curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -51,6 +55,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

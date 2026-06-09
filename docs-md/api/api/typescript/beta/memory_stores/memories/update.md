@@ -160,7 +160,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 Update a memory
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -177,6 +177,8 @@ console.log(betaManagedAgentsMemory.id);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -196,6 +198,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

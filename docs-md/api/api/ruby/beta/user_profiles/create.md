@@ -166,7 +166,7 @@ Display name of the entity this profile represents. For `resold` this is the res
 
 Create User Profile
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -179,6 +179,8 @@ puts(beta_user_profile)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -201,6 +203,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

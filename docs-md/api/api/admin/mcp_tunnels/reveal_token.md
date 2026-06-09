@@ -42,6 +42,8 @@ Object type. Always `tunnel_token` for Tunnel Tokens.
 
 Reveal Tunnel Token
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/reveal_token \
     -X POST \
@@ -50,6 +52,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/reveal_token 
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -62,6 +66,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

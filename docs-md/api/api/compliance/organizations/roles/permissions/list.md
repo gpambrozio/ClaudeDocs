@@ -62,12 +62,16 @@ Token to retrieve the next page. Use this as the 'page' parameter in your next r
 
 List Compliance Role Permissions
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/compliance/organizations/$ORG_UUID/roles/$ROLE_ID/permissions \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -86,6 +90,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

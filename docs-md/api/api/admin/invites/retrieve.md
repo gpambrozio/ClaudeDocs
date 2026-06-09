@@ -72,6 +72,8 @@ For Invites, this is always `"invite"`.
 
 Get Invite
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
     -H 'anthropic-version: 2023-06-01' \
@@ -79,6 +81,8 @@ curl https://api.anthropic.com/v1/organizations/invites/$INVITE_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -95,6 +99,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

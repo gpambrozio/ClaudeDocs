@@ -94,7 +94,7 @@ One of the following:
 
 Download Skill Version Content
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION/content \

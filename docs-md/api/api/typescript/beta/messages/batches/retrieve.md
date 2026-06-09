@@ -180,7 +180,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Retrieve a Message Batch
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -195,6 +195,8 @@ console.log(betaMessageBatch.id);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -220,6 +222,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

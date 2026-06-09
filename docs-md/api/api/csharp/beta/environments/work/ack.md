@@ -164,7 +164,7 @@ The type of object (always 'work')
 
 Acknowledge Work
 
-C#
+C#
 
 ```shiki
 WorkAckParams parameters = new()
@@ -179,6 +179,8 @@ Console.WriteLine(betaSelfHostedWork);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -205,6 +207,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

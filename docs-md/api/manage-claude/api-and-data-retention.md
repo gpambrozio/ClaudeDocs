@@ -121,6 +121,8 @@ Your signed BAA is the official source of truth for which features are covered. 
 }
 ```
 
+
+
 The error message lists the non-eligible features detected in the request. Remove these features from your request and retry.
 
 ## Feature eligibility

@@ -96,7 +96,7 @@ type: Literal["vault\_deleted"]
 
 Delete Vault
 
-Python
+Python
 
 ```shiki
 import os
@@ -113,6 +113,8 @@ print(beta_managed_agents_deleted_vault.id)
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -123,6 +125,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -166,7 +166,7 @@ ID of the last file in this page of results.
 
 List Files
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/files \
@@ -176,6 +176,8 @@ curl https://api.anthropic.com/v1/files \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -203,6 +205,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -52,6 +52,8 @@ An Entra-issued token for a managed identity carries these claims:
 }
 ```
 
+
+
 `sub` and `oid` are identical (the managed identity's object ID). `azp` is the application or client ID. Match on `oid` to authorize one specific identity, or on `azp` to authorize any identity associated with an application registration. The `tid` claim repeats your tenant ID; matching on it is defense in depth, because the issuer URL already pins the tenant.
 
 ## Configure Anthropic
@@ -67,6 +69,8 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
   "jwks_source": "discovery"
 }
 ```
+
+
 
 Depending on the token version, the `iss` claim may be `https://sts.windows.net/<TENANT_ID>/` instead. Decode your managed-identity token (the Verify section below shows how) and register whichever `iss` value it contains. The two URLs share the same JWKS, so discovery mode works for either.
 
@@ -93,11 +97,15 @@ Depending on the token version, the `iss` claim may be `https://sts.windows.net/
 }
 ```
 
+
+
 ## Acquire and use the token
 
 At runtime your workload fetches its Entra token, exchanges it at `POST /v1/oauth/token`, and uses the returned bearer token to call Claude. Each Anthropic SDK handles the exchange and refresh loop when you supply a token-provider callable, as shown in the following examples. The cURL tab shows the raw flow.
 
 cURLPythonTypeScriptGoJavaC#PHPRubyCLI
+
+
 
 ```shiki
 import os
@@ -142,6 +150,8 @@ print(message.content[0].text)
 On AKS, the file at `AZURE_FEDERATED_TOKEN_FILE` is a Kubernetes-projected service account token signed by your cluster's OIDC issuer, not an Entra-issued token. To stay on the Entra-mediated path described on this page, exchange that token at `https://login.microsoftonline.com/<TENANT_ID>/oauth2/v2.0/token` (federated `client_credentials` grant) first, then pass the resulting Entra access token to the Anthropic SDK as the identity token.
 
 cURLPythonTypeScriptGoJavaC#PHPRubyCLI
+
+
 
 ```shiki
 import os

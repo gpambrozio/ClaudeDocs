@@ -127,6 +127,8 @@ Admin API endpoints require an Admin API key (starting with `sk-ant-admin...`) t
 
 cURL
 
+
+
 ```shiki
 # Create a workspace
 curl --request POST "https://api.anthropic.com/v1/organizations/workspaces" \
@@ -152,6 +154,8 @@ For complete parameter details and response schemas, see the [Workspaces API ref
 Add, update, or remove members from a workspace:
 
 cURL
+
+
 
 ```shiki
 # Add a member to a workspace
@@ -218,6 +222,8 @@ For detailed information on rate limits and how they work, see [Rate limits](api
 Track usage and costs by workspace using the [Usage and Cost API](manage-claude/usage-cost-api.md):
 
 cURL
+
+
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\

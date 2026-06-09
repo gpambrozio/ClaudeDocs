@@ -168,7 +168,7 @@ The type of object (always 'work')
 
 Acknowledge Work
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -185,6 +185,8 @@ console.log(betaSelfHostedWork.id);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -211,6 +213,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

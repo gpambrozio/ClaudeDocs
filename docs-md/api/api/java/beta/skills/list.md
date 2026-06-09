@@ -142,7 +142,7 @@ ISO 8601 timestamp of when the skill was last updated.
 
 List Skills
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -165,6 +165,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "data": [
@@ -186,6 +188,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

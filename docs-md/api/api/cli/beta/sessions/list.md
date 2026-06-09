@@ -864,7 +864,7 @@ Opaque cursor for the next page. Null when no more results.
 
 List Sessions
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions list \
@@ -872,6 +872,8 @@ ant beta:sessions list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -1046,6 +1048,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

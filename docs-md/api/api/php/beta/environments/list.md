@@ -78,7 +78,7 @@ The visibility scope for this environment. 'organization' means visible to all a
 
 List Environments
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -98,6 +98,8 @@ var_dump($page);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -154,6 +156,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

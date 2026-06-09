@@ -316,12 +316,16 @@ User's email address
 
 Get chat messages
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/chats/$CLAUDE_CHAT_ID/messages \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -386,6 +390,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

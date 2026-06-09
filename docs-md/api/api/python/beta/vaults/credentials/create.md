@@ -296,7 +296,7 @@ Human-readable name for the credential.
 
 Create Credential
 
-Python
+Python
 
 ```shiki
 import os
@@ -317,6 +317,8 @@ print(beta_managed_agents_credential.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -340,6 +342,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

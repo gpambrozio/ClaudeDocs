@@ -82,7 +82,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Retrieve a Message Batch
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -99,6 +99,8 @@ var_dump($betaMessageBatch);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -124,6 +126,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -234,7 +234,7 @@ Token for fetching the next page of results. If `null`, there are no more result
 
 List Environments
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/environments \
@@ -244,6 +244,8 @@ curl https://api.anthropic.com/v1/environments \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -300,6 +302,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

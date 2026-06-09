@@ -160,7 +160,7 @@ Human-readable name for the credential.
 
 Update Credential
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults:credentials update \
@@ -170,6 +170,8 @@ ant beta:vaults:credentials update \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -193,6 +195,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

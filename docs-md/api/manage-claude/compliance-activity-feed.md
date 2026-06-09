@@ -12,6 +12,8 @@ The Activity Feed records every authentication, chat, file, project, administrat
 
 cURL
 
+
+
 ```shiki
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/activities?limit=1" \
@@ -19,6 +21,8 @@ curl --fail-with-body -sS \
 ```
 
 Response
+
+
 
 ```shiki
 {
@@ -53,6 +57,8 @@ Filter by organization, actor, activity type, or a `created_at` time window usin
 Repeatable parameters use array-bracket query syntax: pass `activity_types[]=...`, `actor_ids[]=...`, or `organization_ids[]=...` once for each value.
 
 cURL
+
+
 
 ```shiki
 curl --fail-with-body -sS -G \
@@ -97,6 +103,8 @@ points past.
 
 cURL
 
+
+
 ```shiki
 # Fetch the first page (newest activities first) and capture its trailing cursor.
 last_id=$(curl --fail-with-body -sS \
@@ -130,6 +138,8 @@ loop:
   if not page.has_more: break
 persist(cursor)
 ```
+
+
 
 ## Understand the Activity object
 

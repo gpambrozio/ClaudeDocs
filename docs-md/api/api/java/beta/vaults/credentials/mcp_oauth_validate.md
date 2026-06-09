@@ -182,7 +182,7 @@ Identifier of the vault containing the credential.
 
 Validate Credential
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -208,6 +208,8 @@ public final class Main {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -241,6 +243,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

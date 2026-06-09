@@ -42,7 +42,7 @@ For file deletion, this is always `"file_deleted"`.
 
 Delete File
 
-CLI
+CLI
 
 ```shiki
 ant beta:files delete \
@@ -51,6 +51,8 @@ ant beta:files delete \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -62,6 +64,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

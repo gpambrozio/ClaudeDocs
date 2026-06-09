@@ -5952,7 +5952,7 @@ The session's new title. Present only when the update changed it.
 
 Stream Events
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions:events stream \
@@ -5961,6 +5961,8 @@ ant beta:sessions:events stream \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -5979,6 +5981,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

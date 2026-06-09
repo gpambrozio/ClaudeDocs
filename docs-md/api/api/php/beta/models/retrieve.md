@@ -62,7 +62,7 @@ For Models, this is always `"model"`.
 
 Get a Model
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -79,6 +79,8 @@ var_dump($betaModelInfo);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -155,6 +157,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

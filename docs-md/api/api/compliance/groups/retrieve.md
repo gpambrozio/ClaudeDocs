@@ -52,12 +52,16 @@ Group last-updated timestamp (ISO 8601)
 
 Get Compliance Group
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/compliance/groups/$GROUP_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -76,6 +80,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

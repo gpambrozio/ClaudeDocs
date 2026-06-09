@@ -32,7 +32,7 @@ Type type
 
 Delete Session
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -50,6 +50,8 @@ var_dump($betaManagedAgentsDeletedSession);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -60,6 +62,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

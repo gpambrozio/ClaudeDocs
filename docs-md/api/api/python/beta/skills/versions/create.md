@@ -142,7 +142,7 @@ Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
 Create Skill Version
 
-Python
+Python
 
 ```shiki
 import os
@@ -158,6 +158,8 @@ print(version.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -175,6 +177,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

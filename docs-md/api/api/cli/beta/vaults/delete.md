@@ -40,7 +40,7 @@ type: "vault\_deleted"
 
 Delete Vault
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults delete \
@@ -49,6 +49,8 @@ ant beta:vaults delete \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -60,6 +62,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -80,7 +80,7 @@ THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
 Download File
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;

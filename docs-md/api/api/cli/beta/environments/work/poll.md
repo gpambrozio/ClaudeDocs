@@ -116,7 +116,7 @@ The type of object (always 'work')
 
 Poll for Work
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments:work poll \
@@ -125,6 +125,8 @@ ant beta:environments:work poll \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -151,6 +153,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

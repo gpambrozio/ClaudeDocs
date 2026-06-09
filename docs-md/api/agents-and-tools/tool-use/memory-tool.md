@@ -35,11 +35,15 @@ When you ask Claude to help with a task, Claude automatically checks its memory 
 "Help me respond to this customer service ticket."
 ```
 
+
+
 **2. Claude checks the memory directory:**
 
 ```inline-block
 "I'll help you respond to the customer service ticket. Let me check my memory for any previous context."
 ```
+
+
 
 Claude calls the memory tool:
 
@@ -55,6 +59,8 @@ Claude calls the memory tool:
 }
 ```
 
+
+
 **3. Your application returns the directory contents:**
 
 ```shiki
@@ -64,6 +70,8 @@ Claude calls the memory tool:
   "content": "Here're the files and directories up to 2 levels deep in /memories, excluding hidden items and node_modules:\n4.0K\t/memories\n1.5K\t/memories/customer_service_guidelines.xml\n2.0K\t/memories/refund_policies.xml"
 }
 ```
+
+
 
 **4. Claude reads relevant files:**
 
@@ -79,6 +87,8 @@ Claude calls the memory tool:
 }
 ```
 
+
+
 **5. Your application returns the file contents:**
 
 ```shiki
@@ -89,11 +99,15 @@ Claude calls the memory tool:
 }
 ```
 
+
+
 **6. Claude uses the memory to help:**
 
 ```inline-block
 "Based on your customer service guidelines, I can help you craft a response. Please share the ticket details..."
 ```
+
+
 
 For model support, see the [Tool reference](agents-and-tools/tool-use/tool-reference.md).
 
@@ -114,6 +128,8 @@ For working examples, see:
 ## Basic usage
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -149,6 +165,8 @@ Shows directory contents or file contents with optional line ranges:
 }
 ```
 
+
+
 #### Return values
 
 **For directories:** Return a listing that shows files and directories with their sizes:
@@ -159,6 +177,8 @@ Here're the files and directories up to 2 levels deep in {path}, excluding hidde
 {size}    {path}/{filename1}
 {size}    {path}/{filename2}
 ```
+
+
 
 - Lists files up to 2 levels deep
 - Shows human-readable sizes (for example, `5.5K`, `1.2M`)
@@ -171,6 +191,8 @@ Here're the files and directories up to 2 levels deep in {path}, excluding hidde
 Here's the content of {path} with line numbers:
 {line_numbers}{tab}{content}
 ```
+
+
 
 Line number formatting:
 
@@ -189,6 +211,8 @@ Here's the content of /memories/notes.txt with line numbers:
    100	Line one hundred
 ```
 
+
+
 #### Error handling
 
 - **File/directory does not exist**: `"The path {path} does not exist. Please provide a valid path."`
@@ -204,6 +228,8 @@ Create a new file:
   "file_text": "Meeting notes:\n- Discussed project timeline\n- Next steps defined\n"
 }
 ```
+
+
 
 #### Return values
 
@@ -225,6 +251,8 @@ Replace text in a file:
   "new_str": "Favorite color: green"
 }
 ```
+
+
 
 #### Return values
 
@@ -253,6 +281,8 @@ Insert text at a specific line:
 }
 ```
 
+
+
 #### Return values
 
 - **Success**: `"The file {path} has been edited."`
@@ -277,6 +307,8 @@ Delete a file or directory:
 }
 ```
 
+
+
 #### Return values
 
 - **Success**: `"Successfully deleted {path}"`
@@ -300,6 +332,8 @@ Rename or move a file/directory:
   "new_path": "/memories/final.txt"
 }
 ```
+
+
 
 #### Return values
 
@@ -326,6 +360,8 @@ MEMORY PROTOCOL:
      - As you make progress, record status / progress / thoughts etc in your memory.
 ASSUME INTERRUPTION: Your context window might be reset at any moment, so you risk losing any progress that is not recorded in your memory directory.
 ```
+
+
 
 If you observe Claude creating cluttered memory files, you can include this instruction:
 

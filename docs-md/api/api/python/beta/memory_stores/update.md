@@ -132,7 +132,7 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 Update a memory store
 
-Python
+Python
 
 ```shiki
 import os
@@ -148,6 +148,8 @@ print(beta_managed_agents_memory_store.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -167,6 +169,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

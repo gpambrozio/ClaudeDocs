@@ -98,7 +98,7 @@ type: Literal["vault\_credential\_deleted"]
 
 Delete Credential
 
-Python
+Python
 
 ```shiki
 import os
@@ -116,6 +116,8 @@ print(beta_managed_agents_deleted_credential.id)
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
@@ -126,6 +128,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

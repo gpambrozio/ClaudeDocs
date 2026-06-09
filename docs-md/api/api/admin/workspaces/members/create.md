@@ -70,6 +70,8 @@ One of the following:
 
 Create Workspace Member
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members \
     -H 'Content-Type: application/json' \
@@ -83,6 +85,8 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
 
 Response 200
 
+
+
 ```shiki
 {
   "type": "workspace_member",
@@ -95,6 +99,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

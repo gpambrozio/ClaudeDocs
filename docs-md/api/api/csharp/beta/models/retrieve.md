@@ -272,7 +272,7 @@ For Models, this is always `"model"`.
 
 Get a Model
 
-C#
+C#
 
 ```shiki
 ModelRetrieveParams parameters = new() { ModelID = "model_id" };
@@ -283,6 +283,8 @@ Console.WriteLine(betaModelInfo);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -359,6 +361,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

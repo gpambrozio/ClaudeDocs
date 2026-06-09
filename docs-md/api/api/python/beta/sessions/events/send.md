@@ -1290,7 +1290,7 @@ Routes this result to a subagent thread. Copy from the `agent.tool_use` event's 
 
 Send Events
 
-Python
+Python
 
 ```shiki
 import os
@@ -1314,6 +1314,8 @@ print(beta_managed_agents_send_session_events.data)
 
 Response 200
 
+
+
 ```shiki
 {
   "data": [
@@ -1335,6 +1337,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

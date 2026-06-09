@@ -58,7 +58,7 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 Archive a memory store
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -75,6 +75,8 @@ var_dump($betaManagedAgentsMemoryStore);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -94,6 +96,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

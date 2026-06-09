@@ -164,7 +164,7 @@ Pagination token for the next page, or null if no more results.
 
 List Credentials
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults:credentials list \
@@ -173,6 +173,8 @@ ant beta:vaults:credentials list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -201,6 +203,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

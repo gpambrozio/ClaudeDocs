@@ -138,7 +138,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 Update Session Resource
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions:resources update \
@@ -149,6 +149,8 @@ ant beta:sessions:resources update \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -168,6 +170,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

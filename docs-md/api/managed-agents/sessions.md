@@ -12,6 +12,8 @@ A session requires an `agent` ID and an `environment` ID. Agents are versioned r
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:sessions create \
   --agent "$AGENT_ID" \
@@ -21,6 +23,8 @@ ant beta:sessions create \
 To pin a session to a specific agent version, pass an object. This lets you control exactly which version runs and stage rollouts of new versions independently.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:sessions create <<YAML
@@ -40,6 +44,8 @@ If your agent uses MCP tools that require authentication, pass `vault_ids` at se
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:sessions create <<YAML
 agent: $AGENT_ID
@@ -54,6 +60,8 @@ YAML
 Creating a session provisions the environment's sandbox but does not start any work. To delegate a task, send events to the session using a [user event](managed-agents/reference.md). The session acts as a state machine that tracks progress while events drive the actual execution.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:sessions:events send \

@@ -152,7 +152,7 @@ The type of scope (e.g., `"session"`).
 
 List Files
 
-Python
+Python
 
 ```shiki
 import os
@@ -167,6 +167,8 @@ print(page.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -194,6 +196,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

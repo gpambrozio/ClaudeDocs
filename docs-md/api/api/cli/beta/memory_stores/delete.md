@@ -40,7 +40,7 @@ type: "memory\_store\_deleted"
 
 Delete a memory store
 
-CLI
+CLI
 
 ```shiki
 ant beta:memory-stores delete \
@@ -49,6 +49,8 @@ ant beta:memory-stores delete \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -60,6 +62,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

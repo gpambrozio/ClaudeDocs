@@ -55,6 +55,8 @@ Here's how to get started with computer use:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -216,6 +218,8 @@ def sampling_loop(model, messages, max_iterations=10):
 
     return messages
 ```
+
+
 
 The loop continues until either Claude responds without requesting any tools (task completion) or the maximum iteration limit is reached. This safeguard prevents potential infinite loops that could result in unexpected API costs.
 
@@ -391,6 +395,8 @@ The computer use tool is implemented as a schema-less tool. When using this tool
        # Handle other actions as needed
        return f"unhandled action: {action_type}"
    ```
+
+   
 3. 3
 
    Process Claude's tool calls
@@ -449,6 +455,8 @@ The computer use tool is implemented as a schema-less tool. When using this tool
                )
        return tool_results
    ```
+
+   
 4. 4
 
    Implement the agent loop
@@ -519,6 +527,8 @@ The computer use tool is implemented as a schema-less tool. When using this tool
 
        return messages
    ```
+
+   
 
 #### Handle errors
 
@@ -603,6 +613,8 @@ def execute_click(x, y):
     screen_y = y / scale
     perform_click(screen_x, screen_y)
 ```
+
+
 
 **macOS Retina displays** capture screenshots at a device pixel ratio of 2, so the image is twice the resolution of the logical screen coordinates. Either downscale the screenshot by 2x before sending, or halve the coordinates Claude returns before issuing the click.
 

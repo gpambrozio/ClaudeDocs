@@ -118,7 +118,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Retrieve a Message Batch
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -140,6 +140,8 @@ public final class Main {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -165,6 +167,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

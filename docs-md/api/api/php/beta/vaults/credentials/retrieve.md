@@ -64,7 +64,7 @@ Human-readable name for the credential.
 
 Get Credential
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -83,6 +83,8 @@ var_dump($betaManagedAgentsCredential);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -106,6 +108,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

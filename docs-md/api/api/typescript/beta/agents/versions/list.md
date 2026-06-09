@@ -396,7 +396,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 List Agent Versions
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -414,6 +414,8 @@ for await (const betaManagedAgentsAgent of client.beta.agents.versions.list(
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -493,6 +495,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -104,7 +104,7 @@ type: "memory\_deleted"
 
 Delete a memory
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMORY_ID \
@@ -116,6 +116,8 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memories/$MEMOR
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -126,6 +128,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

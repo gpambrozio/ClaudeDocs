@@ -734,7 +734,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 Create Agent
 
-C#
+C#
 
 ```shiki
 AgentCreateParams parameters = new()
@@ -749,6 +749,8 @@ Console.WriteLine(betaManagedAgentsAgent);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -823,6 +825,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

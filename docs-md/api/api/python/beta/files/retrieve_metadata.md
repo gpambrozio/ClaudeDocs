@@ -134,7 +134,7 @@ The type of scope (e.g., `"session"`).
 
 Get File Metadata
 
-Python
+Python
 
 ```shiki
 import os
@@ -150,6 +150,8 @@ print(file_metadata.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -170,6 +172,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

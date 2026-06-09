@@ -378,7 +378,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 Archive Agent
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -400,6 +400,8 @@ public final class Main {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -474,6 +476,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

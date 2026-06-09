@@ -206,7 +206,7 @@ Human-readable name for the credential.
 
 List Credentials
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -224,6 +224,8 @@ for await (const betaManagedAgentsCredential of client.beta.vaults.credentials.l
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -252,6 +254,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

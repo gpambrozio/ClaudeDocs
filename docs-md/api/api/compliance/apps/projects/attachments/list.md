@@ -105,12 +105,16 @@ To get the next page, use the 'next\_page' from the current response as the 'pag
 
 List project attachments
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/projects/$PROJECT_ID/attachments \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -131,6 +135,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

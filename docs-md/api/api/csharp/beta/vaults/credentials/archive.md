@@ -194,7 +194,7 @@ Human-readable name for the credential.
 
 Archive Credential
 
-C#
+C#
 
 ```shiki
 CredentialArchiveParams parameters = new()
@@ -209,6 +209,8 @@ Console.WriteLine(betaManagedAgentsCredential);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -232,6 +234,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

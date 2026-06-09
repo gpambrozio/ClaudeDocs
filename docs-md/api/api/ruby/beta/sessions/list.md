@@ -916,7 +916,7 @@ Vault IDs attached to the session at creation. Empty when no vaults were supplie
 
 List Sessions
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -929,6 +929,8 @@ puts(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -1103,6 +1105,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

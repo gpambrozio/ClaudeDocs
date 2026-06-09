@@ -98,7 +98,7 @@ type BetaSkillVersionDownloadResponse interface{…}
 
 Download Skill Version Content
 
-Go
+Go
 
 ```shiki
 package main

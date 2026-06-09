@@ -400,7 +400,7 @@ Total output tokens generated across all turns.
 
 Archive Session Thread
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions:threads archive \
@@ -410,6 +410,8 @@ ant beta:sessions:threads archive \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -487,6 +489,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

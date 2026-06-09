@@ -412,7 +412,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 List Agents
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -425,6 +425,8 @@ puts(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -504,6 +506,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -138,7 +138,7 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 List memory stores
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -154,6 +154,8 @@ for await (const betaManagedAgentsMemoryStore of client.beta.memoryStores.list()
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -178,6 +180,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

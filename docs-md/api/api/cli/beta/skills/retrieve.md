@@ -73,7 +73,7 @@ ISO 8601 timestamp of when the skill was last updated.
 
 Get Skill
 
-CLI
+CLI
 
 ```shiki
 ant beta:skills retrieve \
@@ -82,6 +82,8 @@ ant beta:skills retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -98,6 +100,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -166,7 +166,7 @@ Display name of the entity this profile represents. For `resold` this is the res
 
 Create User Profile
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -181,6 +181,8 @@ console.log(betaUserProfile.id);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -203,6 +205,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

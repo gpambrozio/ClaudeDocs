@@ -400,7 +400,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 Get Agent
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/agents/$AGENT_ID \
@@ -410,6 +410,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -484,6 +486,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

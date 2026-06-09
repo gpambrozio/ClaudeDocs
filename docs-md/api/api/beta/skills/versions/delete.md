@@ -108,7 +108,7 @@ For Skill Versions, this is always `"skill_version_deleted"`.
 
 Delete Skill Version
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
@@ -120,6 +120,8 @@ curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "1759178010641129",
@@ -130,6 +132,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

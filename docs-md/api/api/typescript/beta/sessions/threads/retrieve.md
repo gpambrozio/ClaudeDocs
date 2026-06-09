@@ -448,7 +448,7 @@ Total output tokens generated across all turns.
 
 Get Session Thread
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -466,6 +466,8 @@ console.log(betaManagedAgentsSessionThread.id);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -543,6 +545,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

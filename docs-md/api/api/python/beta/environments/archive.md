@@ -220,7 +220,7 @@ One of the following:
 
 Archive Environment
 
-Python
+Python
 
 ```shiki
 import os
@@ -236,6 +236,8 @@ print(beta_environment.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -287,6 +289,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

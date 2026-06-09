@@ -5566,7 +5566,7 @@ The session's new title. Present only when the update changed it.
 
 Stream Events
 
-Python
+Python
 
 ```shiki
 import os
@@ -5582,6 +5582,8 @@ for event in client.beta.sessions.events.stream(
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -5600,6 +5602,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

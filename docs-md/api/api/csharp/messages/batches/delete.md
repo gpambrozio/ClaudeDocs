@@ -42,7 +42,7 @@ For Message Batches, this is always `"message_batch_deleted"`.
 
 Delete a Message Batch
 
-C#
+C#
 
 ```shiki
 BatchDeleteParams parameters = new() { MessageBatchID = "message_batch_id" };
@@ -54,6 +54,8 @@ Console.WriteLine(deletedMessageBatch);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
@@ -64,6 +66,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

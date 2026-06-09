@@ -724,7 +724,7 @@ The session's new title. Present only when the update changed it.
 
 List Session Thread Events
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -745,6 +745,8 @@ var_dump($page);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -768,6 +770,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -26,6 +26,8 @@ type: "external\_key\_deleted"
 
 Delete External Key
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
     -X DELETE \
@@ -34,6 +36,8 @@ curl https://api.anthropic.com/v1/organizations/external_keys/$EXTERNAL_KEY_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -45,6 +49,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

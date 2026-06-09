@@ -16,6 +16,8 @@ Here's an example of how to use fine-grained tool streaming with the API:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -79,6 +81,8 @@ The type mismatch between the initial `input: {}` (object) and `partial_json` (s
 
 PythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -123,6 +127,8 @@ When using fine-grained tool streaming, you may receive invalid or incomplete JS
   "INVALID_JSON": "<your invalid json string>"
 }
 ```
+
+
 
 This approach helps the model understand that the content is invalid JSON while preserving the original malformed data for debugging purposes.
 

@@ -42,6 +42,8 @@ Get your organization's daily usage for the last 7 days:
 
 cURL
 
+
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2025-01-08T00:00:00Z&\
@@ -58,6 +60,8 @@ If you're building an integration, set your User-Agent header to help us underst
 ```inline-block
 User-Agent: YourApp/1.0.0 (https://yourapp.com)
 ```
+
+
 
 ## Usage API
 
@@ -78,6 +82,8 @@ For complete parameter details and response schemas, see the [Usage API referenc
 
 cURL
 
+
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2025-01-01T00:00:00Z&\
@@ -91,6 +97,8 @@ bucket_width=1d" \
 #### Hourly usage with filtering
 
 cURL
+
+
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
@@ -107,6 +115,8 @@ bucket_width=1h" \
 #### Filter usage by API keys and workspaces
 
 cURL
+
+
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
@@ -131,6 +141,8 @@ Track your [data residency controls](manage-claude/data-residency.md) by groupin
 
 cURL
 
+
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2026-02-01T00:00:00Z&\
@@ -145,6 +157,8 @@ bucket_width=1d" \
 You can also filter to a specific geo. Valid values are `global`, `us`, and `not_available`:
 
 cURL
+
+
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
@@ -165,6 +179,8 @@ Track [fast mode](build-with-claude/fast-mode.md) usage by grouping and filterin
 
 cURL
 
+
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
 starting_at=2026-02-01T00:00:00Z&\
@@ -180,6 +196,8 @@ bucket_width=1d" \
 You can also filter to a specific speed. Valid values are `standard` and `fast`:
 
 cURL
+
+
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/messages?\
@@ -222,6 +240,8 @@ Priority Tier costs use a different billing model and are not included in the co
 
 cURL
 
+
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/cost_report?\
 starting_at=2025-01-01T00:00:00Z&\
@@ -241,6 +261,8 @@ Both endpoints support pagination for large datasets:
 3. Continue until `has_more` is `false`
 
 cURL
+
+
 
 ```shiki
 # First request

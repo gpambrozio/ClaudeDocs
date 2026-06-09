@@ -127,6 +127,8 @@ For Workspaces, this is always `"workspace"`.
 
 Update Workspace
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \
     -H 'Content-Type: application/json' \
@@ -142,6 +144,8 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -168,6 +172,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -88,7 +88,7 @@ ISO 8601 timestamp of when the skill was last updated.
 
 List Skills
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -108,6 +108,8 @@ var_dump($page);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -130,6 +132,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -34,6 +34,8 @@ OAuth flows fail when your authorization server's source-IP allowlist blocks Ant
      auth: http://your-auth-server:8080
    ```
 
+   
+
    Restart the proxy after editing `routes` (`docker compose restart mcp-proxy`, or `helm upgrade`).
 2. 2
 
@@ -50,6 +52,8 @@ OAuth flows fail when your authorization server's source-IP allowlist blocks Ant
      "code_challenge_methods_supported": ["S256"]
    }
    ```
+
+   
 3. 3
 
    Point the MCP server at the tunnel issuer
@@ -62,6 +66,8 @@ OAuth flows fail when your authorization server's source-IP allowlist blocks Ant
      "authorization_servers": ["https://auth.<tunnel-domain>"]
    }
    ```
+
+   
 
 With this configuration, the user's browser hits `/authorize` on your existing hostname (which your allowlist already permits), while Anthropic's backend reaches `/token`, `/register`, and the discovery documents through the tunnel.
 
@@ -80,6 +86,8 @@ On Helm, the setup component runs as a pre-install hook Job. On failure, the Job
 helm uninstall mcp-tunnel -n mcp-tunnel
 kubectl -n mcp-tunnel delete job mcp-tunnel-setup
 ```
+
+
 
 ## Tunnel won't connect
 
@@ -109,6 +117,8 @@ If the proxy logs `IP validation failed: <ip> is not a private address`, the ups
 If the address is legitimate, add the narrowest covering CIDR to `upstream.allowed_ips`. Setting `allowed_ips` **replaces** the RFC1918 default rather than extending it, so include the private ranges your other upstream MCP servers use:
 
 config/mcp-proxy.yaml
+
+
 
 ```shiki
 upstream:

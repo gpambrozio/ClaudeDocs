@@ -140,6 +140,8 @@ updated\_at: string
 
 Create External Key
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/external_keys \
     -H 'Content-Type: application/json' \
@@ -156,6 +158,8 @@ curl https://api.anthropic.com/v1/organizations/external_keys \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -177,6 +181,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

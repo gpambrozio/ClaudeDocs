@@ -184,7 +184,7 @@ type: "memory\_prefix"
 
 List memories
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -202,6 +202,8 @@ for await (const betaManagedAgentsMemoryListItem of client.beta.memoryStores.mem
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -226,6 +228,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -830,7 +830,7 @@ Vault IDs attached to the session at creation. Empty when no vaults were supplie
 
 Archive Session
 
-C#
+C#
 
 ```shiki
 SessionArchiveParams parameters = new()
@@ -844,6 +844,8 @@ Console.WriteLine(betaManagedAgentsSession);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -1013,6 +1015,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

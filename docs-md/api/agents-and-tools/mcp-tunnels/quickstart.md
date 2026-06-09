@@ -44,6 +44,8 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
    export TUNNEL_DOMAIN=YOUR_TUNNEL_DOMAIN_HERE   # from step 1
    export TUNNEL_TOKEN='eyJ...'            # from step 1
    ```
+
+   
 3. 3
 
    Generate a CA and server certificate
@@ -82,6 +84,8 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
    chmod 644 data/tls.key
    ```
 
+   
+
    Back in the Console, on the tunnel detail page, click **Add certificate** and upload `data/ca.crt` (or paste its contents). The tunnel status flips to **Active**.
 4. 4
 
@@ -110,6 +114,8 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
        mcp.run(transport="streamable-http")
    EOF
    ```
+
+   
 5. 5
 
    Write the proxy config and compose file
@@ -159,6 +165,8 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
        restart: unless-stopped
    EOF
    ```
+
+   
 6. 6
 
    Start it
@@ -176,6 +184,8 @@ A two-container [tunnel stack](agents-and-tools/mcp-tunnels/concepts.md) (the [p
    docker compose logs mcp-proxy | grep "route configured"
    docker compose logs cloudflared | grep "Registered tunnel connection"
    ```
+
+   
 
    You should see one `route configured` line for `echo` and four `Registered tunnel connection` lines. The containers take a few seconds to start; rerun the log commands if they come back empty.
 7. 7

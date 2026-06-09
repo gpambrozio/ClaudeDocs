@@ -43,6 +43,8 @@ JSON outputs control Claude's response format, ensuring Claude returns valid JSO
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -78,6 +80,8 @@ print(response.content[0].text)
 **Response format:** Valid JSON matching your schema in `response.content[0].text`
 
 Output
+
+
 
 ```shiki
 {
@@ -124,6 +128,8 @@ Instead of writing raw JSON schemas, you can use familiar schema definition tool
 - **CLI**, **C#**, **Go:** Raw JSON schemas passed through `output_config`
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 from pydantic import BaseModel
@@ -217,6 +223,8 @@ contact = response.parsed_output
 print(contact.name, contact.email)
 ```
 
+
+
 **`transform_schema()` helper**
 
 For when you need to manually transform schemas before sending, or when you want to modify a Pydantic-generated schema. Unlike `client.messages.parse()`, which transforms provided schemas automatically, this gives you the transformed schema so you can further customize it.
@@ -240,6 +248,8 @@ response = client.messages.create(
     },
 )
 ```
+
+
 
 #### How SDK transformation works
 
@@ -277,6 +287,8 @@ JSON outputs and strict tool use solve different problems and work together:
 When combined, Claude can call tools with guaranteed-valid parameters AND return structured JSON responses. This is useful for agentic workflows where you need both reliable tool calls and structured final outputs.
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 response = client.messages.create(
@@ -377,6 +389,8 @@ For example, given this schema:
 }
 ```
 
+
+
 The output will order properties as:
 
 1. `name` (required, in schema order)
@@ -394,6 +408,8 @@ This means the output might look like:
   "age": 35
 }
 ```
+
+
 
 If property order in the output is important to your application, mark all properties as required, or account for this reordering in your parsing logic.
 

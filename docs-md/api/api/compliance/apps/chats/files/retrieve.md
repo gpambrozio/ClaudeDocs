@@ -58,12 +58,16 @@ Size in bytes of the file's preferred downloadable variant, if known
 
 Get file metadata
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/chats/files/$CLAUDE_FILE_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -85,6 +89,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

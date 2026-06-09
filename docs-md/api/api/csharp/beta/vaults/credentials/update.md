@@ -268,7 +268,7 @@ Human-readable name for the credential.
 
 Update Credential
 
-C#
+C#
 
 ```shiki
 CredentialUpdateParams parameters = new()
@@ -283,6 +283,8 @@ Console.WriteLine(betaManagedAgentsCredential);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -306,6 +308,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

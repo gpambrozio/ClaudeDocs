@@ -94,7 +94,7 @@ required Type Type
 
 Delete Session Resource
 
-C#
+C#
 
 ```shiki
 ResourceDeleteParams parameters = new()
@@ -110,6 +110,8 @@ Console.WriteLine(betaManagedAgentsDeleteSessionResource);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
@@ -120,6 +122,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

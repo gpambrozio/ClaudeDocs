@@ -146,7 +146,7 @@ Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
 List Skill Versions
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -162,6 +162,8 @@ for await (const versionListResponse of client.beta.skills.versions.list('skill_
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -185,6 +187,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

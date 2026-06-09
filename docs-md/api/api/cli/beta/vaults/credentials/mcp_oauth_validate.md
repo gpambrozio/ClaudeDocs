@@ -130,7 +130,7 @@ Identifier of the vault containing the credential.
 
 Validate Credential
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults:credentials mcp-oauth-validate \
@@ -140,6 +140,8 @@ ant beta:vaults:credentials mcp-oauth-validate \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -173,6 +175,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

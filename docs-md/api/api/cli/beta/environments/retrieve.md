@@ -156,7 +156,7 @@ The visibility scope for this environment. 'organization' means visible to all a
 
 Get Environment
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments retrieve \
@@ -165,6 +165,8 @@ ant beta:environments retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -216,6 +218,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

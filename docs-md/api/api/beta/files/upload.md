@@ -134,7 +134,7 @@ The type of scope (e.g., `"session"`).
 
 Upload File
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/files \
@@ -146,6 +146,8 @@ curl https://api.anthropic.com/v1/files \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -166,6 +168,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

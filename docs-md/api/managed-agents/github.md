@@ -14,6 +14,8 @@ First, create an agent that declares the GitHub MCP server. The agent definition
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 AGENT_ID=$(ant beta:agents create \
   --name "Code Reviewer" \
@@ -28,6 +30,8 @@ AGENT_ID=$(ant beta:agents create \
 Then create a session that mounts the GitHub repository:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 session = client.beta.sessions.create(
@@ -65,6 +69,8 @@ Mount multiple repositories by adding entries to the `resources` array:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 resources = [
     {
@@ -88,6 +94,8 @@ After a session is created, you can list its repository resources and rotate the
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 # List resources on the session
 listed = client.beta.sessions.resources.list(session.id)
@@ -107,6 +115,8 @@ client.beta.sessions.resources.update(
 With the GitHub MCP server, the agent can create branches, commit changes, and push them:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client.beta.sessions.events.send(

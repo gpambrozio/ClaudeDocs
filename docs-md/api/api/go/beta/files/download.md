@@ -90,7 +90,7 @@ type BetaFileDownloadResponse interface{…}
 
 Download File
 
-Go
+Go
 
 ```shiki
 package main

@@ -96,7 +96,7 @@ type: "vault\_deleted"
 
 Delete Vault
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID \
@@ -108,6 +108,8 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID \
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -118,6 +120,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -98,7 +98,7 @@ For Skills, this is always `"skill_deleted"`.
 
 Delete Skill
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -121,6 +121,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
@@ -131,6 +133,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

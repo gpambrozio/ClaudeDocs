@@ -54,6 +54,8 @@ Ruby
    ```shiki
    export ANTHROPIC_API_KEY="your-api-key-here"
    ```
+
+   
 2. 2
 
    Create a project and install the SDK
@@ -63,6 +65,8 @@ Ruby
    python3 -m venv .venv && source .venv/bin/activate
    pip install anthropic
    ```
+
+   
 3. 3
 
    Create your code
@@ -70,6 +74,8 @@ Ruby
    Create a file called `quickstart.py`:
 
    Python
+
+   
 
    ```shiki
    import anthropic
@@ -96,7 +102,11 @@ Ruby
    python quickstart.py
    ```
 
+   
+
    Output
+
+   
 
    ```inline-block
    [TextBlock(citations=None, text='Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- "Renewable energy news 2025"\n- ...', type='text')]
@@ -118,7 +128,7 @@ Compare Claude models by capability and cost.](about-claude/models/overview.md)[
 
 Browse all Claude capabilities: tools, context management, structured outputs, and more.](build-with-claude/overview.md)[Client SDKs
 
-Reference documentation for Python, TypeScript, Java, and other client libraries.](api/client-sdks.md)
+Reference documentation for Python, TypeScript, C#, and other client libraries.](cli-sdks-libraries/overview.md)
 
 Was this page helpful?
 

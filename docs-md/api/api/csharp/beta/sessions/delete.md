@@ -90,7 +90,7 @@ required Type Type
 
 Delete Session
 
-C#
+C#
 
 ```shiki
 SessionDeleteParams parameters = new()
@@ -105,6 +105,8 @@ Console.WriteLine(betaManagedAgentsDeletedSession);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -115,6 +117,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -178,7 +178,7 @@ The type of object (always 'work')
 
 Poll for Work
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/poll \
@@ -188,6 +188,8 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/poll \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -214,6 +216,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

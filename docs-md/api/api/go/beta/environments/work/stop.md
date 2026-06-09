@@ -172,7 +172,7 @@ The type of object (always 'work')
 
 Stop Work
 
-Go
+Go
 
 ```shiki
 package main
@@ -208,6 +208,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -233,6 +235,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -188,7 +188,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 Get Session Resource
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -205,6 +205,8 @@ console.log(resource);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -224,6 +226,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

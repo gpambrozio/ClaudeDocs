@@ -160,7 +160,7 @@ The type of object (always 'work')
 
 Get Work Item
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -187,6 +187,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -212,6 +214,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

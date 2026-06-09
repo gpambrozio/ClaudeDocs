@@ -38,6 +38,8 @@ You can still set the top-level `system` field for instructions that should appl
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -102,6 +104,8 @@ In an [agentic loop](agents-and-tools/tool-use/overview.md), the system message 
   }
 ]
 ```
+
+
 
 Phrase the system content as context rather than as a command that overrides the user. State the fact ("new input arrived from the user: X", "the remaining token budget is now Y") and let Claude act on it. Claude is trained to resist instructions that appear to work against the user, and that protection still applies to the system role, so language such as "ignore what the user said" is less effective than stating what changed.
 

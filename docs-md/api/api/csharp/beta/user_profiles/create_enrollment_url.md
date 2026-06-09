@@ -96,7 +96,7 @@ Enrollment URL to send to the end user. Valid until `expires_at`.
 
 Create Enrollment URL
 
-C#
+C#
 
 ```shiki
 UserProfileCreateEnrollmentUrlParams parameters = new()
@@ -111,6 +111,8 @@ Console.WriteLine(betaUserProfileEnrollmentUrl);
 
 Response 200
 
+
+
 ```shiki
 {
   "expires_at": "2026-03-15T10:15:00Z",
@@ -122,6 +124,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

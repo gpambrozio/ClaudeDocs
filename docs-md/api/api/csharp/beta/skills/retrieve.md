@@ -127,7 +127,7 @@ ISO 8601 timestamp of when the skill was last updated.
 
 Get Skill
 
-C#
+C#
 
 ```shiki
 SkillRetrieveParams parameters = new() { SkillID = "skill_id" };
@@ -138,6 +138,8 @@ Console.WriteLine(skill);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -154,6 +156,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

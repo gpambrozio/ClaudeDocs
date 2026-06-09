@@ -27,6 +27,8 @@ Each entry in the `skills` array uses the following fields:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:agents create <<'YAML'
 name: Financial Analyst

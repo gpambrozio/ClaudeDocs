@@ -196,7 +196,7 @@ Human-readable name for the credential.
 
 Archive Credential
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/archive \
@@ -207,6 +207,8 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/credentials/$CREDENTIAL_ID/ar
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -230,6 +232,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

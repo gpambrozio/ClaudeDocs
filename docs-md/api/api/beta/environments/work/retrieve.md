@@ -166,7 +166,7 @@ The type of object (always 'work')
 
 Get Work Item
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID \
@@ -176,6 +176,8 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -202,6 +204,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

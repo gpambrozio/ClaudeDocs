@@ -206,7 +206,7 @@ Human-readable name for the credential.
 
 List Credentials
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -219,6 +219,8 @@ puts(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -247,6 +249,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -28,6 +28,8 @@ For model support, see the [Tool reference](agents-and-tools/tool-use/tool-refer
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 import anthropic
 
@@ -85,6 +87,8 @@ Claude's tool uses:
    {"command": "python fetch_joke.py"}
 ```
 
+
+
 The session maintains state between commands, so files created in step 2 are available in step 3.
 
 ## Implement the bash tool
@@ -116,6 +120,8 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
            self.error_queue = queue.Queue()
            self._start_readers()
    ```
+
+   
 2. 2
 
    Handle command execution
@@ -132,6 +138,8 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
        output = self._read_output(timeout=10)
        return output
    ```
+
+   
 3. 3
 
    Process Claude's tool calls
@@ -155,6 +163,8 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
                "content": result,
            }
    ```
+
+   
 4. 4
 
    Implement safety measures
@@ -188,6 +198,8 @@ The bash tool is implemented as a schema-less tool. When using this tool, you do
 
        return True, None
    ```
+
+   
 
    This check is a first line of defense. For stronger isolation, run validated commands with `shell=False` and pass `shlex.split(command)` as the argument list, so the shell never interprets the string.
 

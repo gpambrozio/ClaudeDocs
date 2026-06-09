@@ -172,7 +172,7 @@ The type of object (always 'work')
 
 Poll for Work
 
-C#
+C#
 
 ```shiki
 WorkPollParams parameters = new()
@@ -186,6 +186,8 @@ Console.WriteLine(betaSelfHostedWork);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -212,6 +214,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

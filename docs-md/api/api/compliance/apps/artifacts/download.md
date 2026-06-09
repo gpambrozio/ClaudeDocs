@@ -24,6 +24,8 @@ The artifact version ID (tagged ID, e.g., claude\_artifact\_version\_abc123)
 
 Download artifact content
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID/content \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"

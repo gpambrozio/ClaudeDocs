@@ -39,6 +39,8 @@ if __name__ == "__main__":
 EOF
 ```
 
+
+
 The following Install steps `cd` into `mcp-tunnel/` and note where to add the corresponding service and route.
 
 ## Install
@@ -66,6 +68,8 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    cd mcp-tunnel
    sudo chown 65532:65532 data
    ```
+
+   
 
    The containers run as the non-root UID `65532` and need write access to `data/`.
 2. 2
@@ -141,6 +145,8 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    EOF
    ```
 
+   
+
    If you're using the [sample MCP server](#optional-use-a-sample-mcp-server), append it as a service:
 
    ```shiki
@@ -155,6 +161,8 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
        restart: unless-stopped
    EOF
    ```
+
+   
 3. 3
 
    Provision the tunnel
@@ -167,6 +175,8 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    export ANTHROPIC_ORGANIZATION_ID=00000000-0000-0000-0000-000000000000
    ```
 
+   
+
    If your federation rule is scoped to a workspace other than your organization's default, also set `ANTHROPIC_WORKSPACE_ID=wrkspc_...`; the setup component uses the default workspace otherwise.
 
    Set `ANTHROPIC_IDENTITY_TOKEN` to an OIDC JWT from this host's identity provider. Follow the [WIF guide for your provider](manage-claude/workload-identity-federation.md) to register the issuer, set the rule's subject, and mint the token; the rule's audience must match the audience you request when minting.
@@ -176,6 +186,8 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    ```shiki
    docker compose run --rm setup
    ```
+
+   
 
    `setup init` is idempotent over `data/`: re-running it reuses the existing CA and skips registration. A new CA is generated and registered only when `data/` is empty or `TUNNEL_ID` has changed; in that case the cap of two active certificates applies, so revoke one in the Console first if both slots are filled.
 
@@ -187,6 +199,8 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    export TUNNEL_DOMAIN=$(sudo cat data/tunnel-domain)
    echo "$TUNNEL_DOMAIN"
    ```
+
+   
 
    Workload Identity Federation tokens are short-lived (one hour by default) and expire automatically; there is nothing to revoke after setup completes.
 4. 4
@@ -209,6 +223,8 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    EOF
    ```
 
+   
+
    The `echo:` route targets the [sample MCP server](#optional-use-a-sample-mcp-server); replace it with (or add) your own routes. See the [proxy configuration](agents-and-tools/mcp-tunnels/reference.md) reference for all available fields.
 5. 5
 
@@ -218,6 +234,8 @@ The setup component uses Workload Identity Federation to fetch the tunnel token,
    export TUNNEL_TOKEN=$(sudo cat data/tunnel-token)
    docker compose up -d
    ```
+
+   
 
 The compose file reads `TUNNEL_TOKEN` from the host environment with no default, so the export must be repeated in every fresh shell and after a reboot.
 
@@ -255,6 +273,8 @@ export TUNNEL_TOKEN=$(sudo cat data/tunnel-token)
 docker compose up -d cloudflared
 ```
 
+
+
 The `--token-version` argument is edited in `docker-compose.yaml` rather than passed on the command line so the new value persists for future runs of the setup component. The setup component authenticates with Workload Identity Federation; there is no API token to revoke.
 
 Without programmatic access, click **Rotate token** on the tunnel detail page in the Console, then update the `TUNNEL_TOKEN` environment variable on each host and restart cloudflared (`docker compose up -d cloudflared`).
@@ -271,6 +291,8 @@ With programmatic access:
 docker compose run --rm setup renew-cert --output=dir:/data
 ```
 
+
+
 The CLI arguments replace the `setup` service's `command` (the `init` arguments) but keep its `entrypoint`, so this runs `/setup renew-cert --output=dir:/data`.
 
 Pass `--renew-before=720h` to make the command a no-op when more than 30 days of validity remain. This makes it safe to run on a fixed schedule.
@@ -286,6 +308,8 @@ openssl x509 -req -in /tmp/server.csr \
   -out data/tls.crt -days 90 \
   -extfile data/tls.ext
 ```
+
+
 
 In either flow the proxy polls `tls.cert_file` and reloads it automatically, so no restart is required.
 

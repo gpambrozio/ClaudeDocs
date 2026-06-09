@@ -177,7 +177,7 @@ Token for fetching the next page of results. If `null`, there are no more result
 
 List Environments
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments list \
@@ -185,6 +185,8 @@ ant beta:environments list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -241,6 +243,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

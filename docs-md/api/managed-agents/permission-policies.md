@@ -21,6 +21,8 @@ When creating an agent, you may optionally apply a policy to every tool in `agen
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:agents create <<'YAML'
 name: Coding Assistant
@@ -45,6 +47,8 @@ This example connects a GitHub MCP server and allows its tools to run without co
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:agents create <<'YAML'
 name: Dev Assistant
@@ -68,6 +72,8 @@ YAML
 Use the `configs` array to override the default for individual tools. This example allows the full agent toolset by default but requires confirmation before any bash command runs:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 tools=$(cat <<'YAML'
@@ -95,6 +101,8 @@ When the agent invokes a tool with an `always_ask` policy:
 Learn more about event handling in the [Session event stream](managed-agents/events-and-streaming.md) guide.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Allow the tool to execute

@@ -175,6 +175,8 @@ Opaque cursor token for fetching the next page of results, or null if no more pa
 
 Get Claude Code Usage Report
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
     -H 'anthropic-version: 2023-06-01' \
@@ -182,6 +184,8 @@ curl https://api.anthropic.com/v1/organizations/usage_report/claude_code \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -261,6 +265,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

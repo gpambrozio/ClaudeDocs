@@ -216,7 +216,7 @@ ID of the user who performed the write (a `user_...` value).
 
 Retrieve a memory version
 
-C#
+C#
 
 ```shiki
 MemoryVersionRetrieveParams parameters = new()
@@ -231,6 +231,8 @@ Console.WriteLine(betaManagedAgentsMemoryVersion);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -259,6 +261,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

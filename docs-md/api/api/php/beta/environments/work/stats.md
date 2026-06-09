@@ -48,7 +48,7 @@ Number of workers that have polled for work in the last 30 seconds. Requires wor
 
 Get Queue Statistics
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -66,6 +66,8 @@ var_dump($betaSelfHostedWorkQueueStats);
 
 Response 200
 
+
+
 ```shiki
 {
   "depth": 0,
@@ -79,6 +81,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

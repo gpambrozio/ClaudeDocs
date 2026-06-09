@@ -380,7 +380,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 Archive Agent
 
-C#
+C#
 
 ```shiki
 AgentArchiveParams parameters = new()
@@ -394,6 +394,8 @@ Console.WriteLine(betaManagedAgentsAgent);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -468,6 +470,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

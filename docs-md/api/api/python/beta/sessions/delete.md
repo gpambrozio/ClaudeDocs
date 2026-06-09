@@ -94,7 +94,7 @@ type: Literal["session\_deleted"]
 
 Delete Session
 
-Python
+Python
 
 ```shiki
 import os
@@ -111,6 +111,8 @@ print(beta_managed_agents_deleted_session.id)
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -121,6 +123,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

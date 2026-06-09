@@ -12,6 +12,8 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:environments create \
   --name "python-dev" \
@@ -25,6 +27,8 @@ The `name` must be unique within your organization and workspace.
 Pass the environment ID as a string when [creating a session](managed-agents/sessions.md).
 
 curlPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 session = client.beta.sessions.create(
@@ -40,6 +44,8 @@ session = client.beta.sessions.create(
 The `packages` field pre-installs packages into the sandbox before the agent starts. Packages are installed by their respective package managers and cached across sessions that share the same environment. When multiple package managers are specified, they run in alphabetical order (apt, cargo, gem, go, npm, pip). You can optionally pin specific versions; the default is latest.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:environments create <<'YAML'
@@ -80,6 +86,8 @@ The `networking` field controls the sandbox's outbound network access. It does n
 
 curlPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 config = {
     "type": "cloud",
@@ -110,6 +118,8 @@ When using `limited` networking:
 ## Manage environments
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # List environments

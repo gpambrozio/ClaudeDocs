@@ -70,7 +70,7 @@ For short-term access without IAM roles (12-hour maximum, least preferred):
 
 ## Install an SDK
 
-Anthropic's [client SDKs](api/client-sdks.md) support Claude in Amazon Bedrock through a Bedrock-specific package or module.
+Anthropic's [client SDKs](cli-sdks-libraries/overview.md) support Claude in Amazon Bedrock through a Bedrock-specific package or module.
 
 Python
 
@@ -103,6 +103,8 @@ Ruby
 ```shiki
 pip install -U "anthropic[bedrock]"
 ```
+
+
 
 ## Making your first request
 
@@ -159,6 +161,8 @@ message = client.messages.create(
 
 print(message.content[0].text)
 ```
+
+
 
 You can also use the standard `Anthropic` client: set `base_url` to `https://bedrock-mantle.{region}.api.aws/anthropic` and pass your bearer token as `api_key`. This path supports bearer-token authentication only. SigV4 signing requires the dedicated client.
 

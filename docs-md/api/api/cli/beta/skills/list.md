@@ -104,7 +104,7 @@ If `null`, there are no more results available. Pass this value to the `page_tok
 
 List Skills
 
-CLI
+CLI
 
 ```shiki
 ant beta:skills list \
@@ -112,6 +112,8 @@ ant beta:skills list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -134,6 +136,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

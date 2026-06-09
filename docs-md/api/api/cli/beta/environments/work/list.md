@@ -116,7 +116,7 @@ Opaque cursor for fetching the next page of results
 
 List Work Items
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments:work list \
@@ -125,6 +125,8 @@ ant beta:environments:work list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -156,6 +158,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

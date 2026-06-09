@@ -734,7 +734,7 @@ Routes this result to a subagent thread. Copy from the `agent.tool_use` event's 
 
 Send Events
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions:events send \
@@ -744,6 +744,8 @@ ant beta:sessions:events send \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -766,6 +768,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

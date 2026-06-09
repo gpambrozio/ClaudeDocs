@@ -168,7 +168,7 @@ The type of object (always 'work')
 
 Stop Work
 
-C#
+C#
 
 ```shiki
 WorkStopParams parameters = new()
@@ -183,6 +183,8 @@ Console.WriteLine(betaSelfHostedWork);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -209,6 +211,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

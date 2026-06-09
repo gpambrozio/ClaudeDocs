@@ -41,6 +41,8 @@ Confirm `jwt_issuer` is set in SPIRE Server's configuration and points at the di
 
 server.conf
 
+
+
 ```inline-block
 server {
     trust_domain         = "prod.example.com"
@@ -53,6 +55,8 @@ server {
 In the OIDC Discovery Provider's configuration, the same hostname must appear under `domains`, and the provider must be able to reach SPIRE Server's API socket. The provider serves the discovery document and JWKS over HTTPS; terminate TLS with its built-in ACME support or front it with a load balancer that does.
 
 oidc-discovery-provider.conf
+
+
 
 ```inline-block
 domains = ["oidc-discovery.prod.example.com"]
@@ -75,6 +79,8 @@ Each workload that calls the Claude API needs a SPIRE registration entry that ma
 
 CLI
 
+
+
 ```shiki
 spire-server entry create \
     -spiffeID spiffe://prod.example.com/ns/inference/sa/worker \
@@ -92,6 +98,8 @@ Workloads outside Kubernetes use host-level selectors such as `unix:uid:1000` (`
 [spiffe-helper](https://github.com/spiffe/spiffe-helper) is a sidecar utility that connects to the SPIRE Agent socket, fetches a JWT-SVID for a given audience, writes it to a file, and re-fetches it before expiry. The helper runs in daemon mode by default; the example below sets `daemon_mode = true` explicitly.
 
 helper.conf
+
+
 
 ```inline-block
 agent_address = "/run/spire/sockets/agent.sock"
@@ -120,6 +128,8 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 }
 ```
 
+
+
 If the discovery provider is not reachable from the public internet, fetch the JWKS yourself (`curl https://oidc-discovery.prod.example.com/keys`) and register the issuer with `"jwks": {"type": "inline", "keys": [...]}` using the contents of the returned `keys` array. In `inline` mode the `issuer_url` is only compared against the JWT-SVID's `iss` claim; Anthropic never attempts to reach it.
 
 SPIRE rotates JWT signing keys frequently, by default on the same cadence as the CA (`ca_ttl`, 24 hours). If you register the issuer with an inline JWKS instead of a discovery URL, you must update the JWKS every time SPIRE rotates: add the new key before workloads start presenting it, and **remove superseded keys** once tokens signed with them have expired. Stale keys left in an inline JWKS remain trusted indefinitely.
@@ -146,6 +156,8 @@ To automate JWKS updates without exposing a public discovery endpoint, configure
 }
 ```
 
+
+
 Be as specific as the workload allows. Loosen `subject_prefix` to `spiffe://prod.example.com/ns/inference/*` only if every workload registered under that path should map to the same Anthropic service account. Add the rule's `fdrl_...` ID to the workload's `ANTHROPIC_FEDERATION_RULE_ID` environment variable.
 
 ## Acquire and use the token
@@ -163,6 +175,8 @@ Callable via the SPIFFE Workload API
 With spiffe-helper writing a fresh JWT-SVID to `/var/run/secrets/anthropic.com/token`, set `ANTHROPIC_IDENTITY_TOKEN_FILE` to that path along with `ANTHROPIC_FEDERATION_RULE_ID`, `ANTHROPIC_ORGANIZATION_ID`, `ANTHROPIC_SERVICE_ACCOUNT_ID`, and `ANTHROPIC_WORKSPACE_ID`. The SDK reads the file on every token exchange, so it always picks up the most recently rotated SVID, and refreshes the Anthropic access token automatically before it expires.
 
 cURLPythonTypeScriptGoJavaC#CLIPHPRuby
+
+
 
 ```shiki
 import anthropic
@@ -187,6 +201,8 @@ Before wiring the SDK in, fetch a JWT-SVID directly from SPIRE Agent and confirm
 The Workload API attests the calling process. For a Kubernetes registration entry, run this command inside a pod that satisfies the entry's selectors and has the agent socket mounted (for example, by using `kubectl exec`). On VMs and bare metal, run it as the user or process that matches the entry's `unix:` selectors. Running from an unattested host shell returns `no identity issued`, which is the most common verify-step failure.
 
 CLI
+
+
 
 ```shiki
 spire-agent api fetch jwt \

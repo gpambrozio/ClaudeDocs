@@ -50,7 +50,7 @@ For Skill Versions, this is always `"skill_version_deleted"`.
 
 Delete Skill Version
 
-CLI
+CLI
 
 ```shiki
 ant beta:skills:versions delete \
@@ -60,6 +60,8 @@ ant beta:skills:versions delete \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -71,6 +73,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

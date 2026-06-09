@@ -160,7 +160,7 @@ Display name of the entity this profile represents. For `resold` this is the res
 
 List User Profiles
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -176,6 +176,8 @@ for await (const betaUserProfile of client.beta.userProfiles.list()) {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -203,6 +205,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

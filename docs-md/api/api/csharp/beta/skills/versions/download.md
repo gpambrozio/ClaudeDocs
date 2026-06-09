@@ -88,7 +88,7 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 Download Skill Version Content
 
-C#
+C#
 
 ```shiki
 VersionDownloadParams parameters = new()

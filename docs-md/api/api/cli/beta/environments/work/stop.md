@@ -112,7 +112,7 @@ The type of object (always 'work')
 
 Stop Work
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments:work stop \
@@ -122,6 +122,8 @@ ant beta:environments:work stop \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -148,6 +150,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

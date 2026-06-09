@@ -5526,7 +5526,7 @@ The session's new title. Present only when the update changed it.
 
 Stream Session Thread Events
 
-Go
+Go
 
 ```shiki
 package main
@@ -5562,6 +5562,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
@@ -5579,6 +5581,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

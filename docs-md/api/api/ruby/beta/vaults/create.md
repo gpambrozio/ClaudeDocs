@@ -122,7 +122,7 @@ A timestamp in RFC 3339 format
 
 Create Vault
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -135,6 +135,8 @@ puts(beta_managed_agents_vault)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -153,6 +155,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

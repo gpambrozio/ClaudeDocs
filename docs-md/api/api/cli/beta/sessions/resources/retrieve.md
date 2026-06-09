@@ -134,7 +134,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 Get Session Resource
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions:resources retrieve \
@@ -144,6 +144,8 @@ ant beta:sessions:resources retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -163,6 +165,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

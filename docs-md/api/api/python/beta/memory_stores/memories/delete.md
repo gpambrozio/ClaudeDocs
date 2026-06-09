@@ -102,7 +102,7 @@ type: Literal["memory\_deleted"]
 
 Delete a memory
 
-Python
+Python
 
 ```shiki
 import os
@@ -120,6 +120,8 @@ print(beta_managed_agents_deleted_memory.id)
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -130,6 +132,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

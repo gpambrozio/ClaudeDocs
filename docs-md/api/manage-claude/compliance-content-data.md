@@ -22,6 +22,8 @@ The chat list endpoint requires at least one `user_ids[]` value (and accepts up 
 
 cURL
 
+
+
 ```shiki
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/apps/chats" \
@@ -33,6 +35,8 @@ curl --fail-with-body -sS -G \
 ```
 
 Response
+
+
 
 ```shiki
 {
@@ -67,6 +71,8 @@ To pull the actual chat content, attached files, and inline artifacts (structure
 
 cURL
 
+
+
 ```shiki
 chat_id="claude_chat_01H5CWunD7RpVJ5bHa8RCkja"
 
@@ -78,6 +84,8 @@ curl --fail-with-body -sS \
 The messages endpoint returns the chat's metadata plus a `chat_messages` array sorted by `created_at`. When `limit` is omitted, the full message set is returned in one response; pass `limit`, `after_id`, or `before_id` to page through very long chats. The endpoint also accepts `created_at.*` and `updated_at.*` range bounds (`gt`, `gte`, `lt`, `lte`) and an `order` parameter (`asc` or `desc`). See [Get chat messages](api/compliance/apps/chats/messages/list.md) for the full parameter list. For user messages, `created_at` is when the message was sent; for assistant messages, it is when Claude finished generating the message. Each message carries its text content and, when present, any uploaded files (typically on user messages), any tool-generated files, and any artifacts the assistant produced or updated (typically on assistant messages):
 
 Response
+
+
 
 ```shiki
 {
@@ -174,6 +182,8 @@ The file content endpoint streams the original upload as a chunked binary respon
 
 cURL
 
+
+
 ```shiki
 file_id="claude_file_01UaT9wBcDfGhJkLmNpQrSv7"
 
@@ -207,6 +217,8 @@ A consumer that walks the attachment list must branch on `type` and call the mat
 
 cURL
 
+
+
 ```shiki
 project_id="claude_proj_01KGp4eZNug9ri4kE35RSppq"
 
@@ -216,6 +228,8 @@ curl --fail-with-body -sS -G \
 ```
 
 Response
+
+
 
 ```shiki
 {
@@ -257,6 +271,8 @@ The following request deletes one chat. The same pattern applies to the other de
 
 cURL
 
+
+
 ```shiki
 # WARNING: This operation PERMANENTLY deletes the chat, all of its messages,
 # and any attached files. Deletion is immediate and cannot be undone. It
@@ -272,6 +288,8 @@ curl --fail-with-body -sS -X DELETE \
 ```
 
 Response
+
+
 
 ```shiki
 {
@@ -294,6 +312,8 @@ A project cannot be deleted while any chats remain attached to it. The API retur
   }
 }
 ```
+
+
 
 To resolve, list the project's chats with `GET /v1/compliance/apps/chats?user_ids[]={user_id}&project_ids[]={project_id}` (the chat list endpoint requires at least one `user_ids[]` value; enumerate IDs through [List organization users](manage-claude/compliance-org-data.md)), delete each one with `DELETE /v1/compliance/apps/chats/{claude_chat_id}` (or move it out of the project from claude.ai), and then retry the project delete.
 

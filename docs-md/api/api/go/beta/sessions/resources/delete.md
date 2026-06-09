@@ -98,7 +98,7 @@ Type BetaManagedAgentsDeleteSessionResourceType
 
 Delete Session Resource
 
-Go
+Go
 
 ```shiki
 package main
@@ -131,6 +131,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
@@ -141,6 +143,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

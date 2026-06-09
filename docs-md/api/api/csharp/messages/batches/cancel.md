@@ -120,7 +120,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Cancel a Message Batch
 
-C#
+C#
 
 ```shiki
 BatchCancelParams parameters = new() { MessageBatchID = "message_batch_id" };
@@ -131,6 +131,8 @@ Console.WriteLine(messageBatch);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -156,6 +158,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

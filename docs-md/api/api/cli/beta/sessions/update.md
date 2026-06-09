@@ -828,7 +828,7 @@ Vault IDs attached to the session at creation. Empty when no vaults were supplie
 
 Update Session
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions update \
@@ -837,6 +837,8 @@ ant beta:sessions update \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -1006,6 +1008,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

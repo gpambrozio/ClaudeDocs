@@ -5524,7 +5524,7 @@ The session's new title. Present only when the update changed it.
 
 Stream Session Thread Events
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -5540,6 +5540,8 @@ puts(beta_managed_agents_stream_session_thread_events)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -5558,6 +5560,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

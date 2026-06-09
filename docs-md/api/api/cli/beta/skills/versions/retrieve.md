@@ -82,7 +82,7 @@ Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
 Get Skill Version
 
-CLI
+CLI
 
 ```shiki
 ant beta:skills:versions retrieve \
@@ -92,6 +92,8 @@ ant beta:skills:versions retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -109,6 +111,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

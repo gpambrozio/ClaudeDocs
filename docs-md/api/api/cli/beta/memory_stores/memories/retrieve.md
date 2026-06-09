@@ -80,7 +80,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 Retrieve a memory
 
-CLI
+CLI
 
 ```shiki
 ant beta:memory-stores:memories retrieve \
@@ -90,6 +90,8 @@ ant beta:memory-stores:memories retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -109,6 +111,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

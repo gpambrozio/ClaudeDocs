@@ -130,7 +130,7 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 Create a memory store
 
-Go
+Go
 
 ```shiki
 package main
@@ -159,6 +159,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -177,6 +179,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

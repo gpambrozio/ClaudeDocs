@@ -216,7 +216,7 @@ ID of the user who performed the write (a `user_...` value).
 
 Redact a memory version
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -234,6 +234,8 @@ console.log(betaManagedAgentsMemoryVersion.id);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -262,6 +264,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

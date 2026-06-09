@@ -40,7 +40,7 @@ For Message Batches, this is always `"message_batch_deleted"`.
 
 Delete a Message Batch
 
-CLI
+CLI
 
 ```shiki
 ant messages:batches delete \
@@ -49,6 +49,8 @@ ant messages:batches delete \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -60,6 +62,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

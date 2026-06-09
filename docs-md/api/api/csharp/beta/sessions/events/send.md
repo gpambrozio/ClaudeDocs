@@ -1284,7 +1284,7 @@ Routes this result to a subagent thread. Copy from the `agent.tool_use` event's 
 
 Send Events
 
-C#
+C#
 
 ```shiki
 EventSendParams parameters = new()
@@ -1314,6 +1314,8 @@ Console.WriteLine(betaManagedAgentsSendSessionEvents);
 
 Response 200
 
+
+
 ```shiki
 {
   "data": [
@@ -1335,6 +1337,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

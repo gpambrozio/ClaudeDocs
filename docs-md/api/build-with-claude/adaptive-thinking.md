@@ -36,6 +36,8 @@ Set `thinking.type` to `"adaptive"` in your API request:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -72,6 +74,8 @@ You can combine adaptive thinking with the [effort parameter](build-with-claude/
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -91,6 +95,8 @@ print(response.content[0].text)
 Adaptive thinking works seamlessly with [streaming](build-with-claude/streaming.md). Thinking blocks are streamed via `thinking_delta` events just like manual thinking mode:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -152,11 +158,15 @@ will meaningfully improve answer quality — typically for problems
 that require multi-step reasoning. When in doubt, respond directly.
 ```
 
+
+
 To encourage thinking instead, use a phrase like:
 
 ```inline-block
 This task involves multi-step reasoning. Think carefully before responding.
 ```
+
+
 
 Steering effectiveness can be sensitive to exact wording — if one phrasing doesn't produce the behavior you want, try a more direct variant.
 
@@ -187,7 +197,7 @@ Here are some important considerations for summarized thinking:
 - Summarization preserves the key ideas of Claude's thinking process with minimal added latency, enabling a streamable user experience.
 - Summarization is processed by a different model than the one you target in your requests. The thinking model does not see the summarized output.
 
-In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#0675676a6375466768726e7469766f652865696b).
+In rare cases where you need access to full thinking output for Claude 4 models, [contact Anthropic sales](/cdn-cgi/l/email-protection#0774666b6274476669736f7568776e642964686a).
 
 ### Controlling thinking display
 
@@ -216,11 +226,15 @@ thinking = {
 }
 ```
 
+
+
 For code examples and streaming behavior with `display: "omitted"`, see [Controlling thinking display](build-with-claude/extended-thinking.md) on the extended thinking page. The examples there use `type: "enabled"`; with adaptive thinking, use:
 
 ```shiki
 thinking = {"type": "adaptive", "display": "omitted"}
 ```
+
+
 
 ### Thinking encryption
 
@@ -277,6 +291,8 @@ To see how many billed output tokens were spent on internal reasoning, read `usa
   }
 }
 ```
+
+
 
 `output_tokens` remains the inclusive, authoritative total used for billing. `output_tokens_details` is a read-only breakdown for observability.
 

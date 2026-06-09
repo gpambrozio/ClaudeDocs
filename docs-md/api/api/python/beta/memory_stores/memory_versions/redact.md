@@ -214,7 +214,7 @@ ID of the user who performed the write (a `user_...` value).
 
 Redact a memory version
 
-Python
+Python
 
 ```shiki
 import os
@@ -231,6 +231,8 @@ print(beta_managed_agents_memory_version.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -259,6 +261,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -174,7 +174,7 @@ The visibility scope for this environment. 'organization' means visible to all a
 
 Create Environment
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments create \
@@ -183,6 +183,8 @@ ant beta:environments create \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -234,6 +236,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

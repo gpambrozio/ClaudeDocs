@@ -170,7 +170,7 @@ The type of object (always 'work')
 
 Poll for Work
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -193,6 +193,8 @@ public final class Main {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -219,6 +221,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

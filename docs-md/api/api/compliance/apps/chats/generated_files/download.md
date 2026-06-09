@@ -22,6 +22,8 @@ The generated-file id (e.g., 'claude\_gen\_file\_abc123') as returned in `chat_m
 
 Download a Claude-generated file
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/chats/generated-files/$CLAUDE_GEN_FILE_ID/content \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"

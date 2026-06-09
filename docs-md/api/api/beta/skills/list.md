@@ -162,7 +162,7 @@ If `null`, there are no more results available. Pass this value to the `page_tok
 
 List Skills
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills \
@@ -172,6 +172,8 @@ curl https://api.anthropic.com/v1/skills \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -194,6 +196,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

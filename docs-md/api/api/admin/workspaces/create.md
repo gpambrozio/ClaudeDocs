@@ -135,6 +135,8 @@ For Workspaces, this is always `"workspace"`.
 
 Create Workspace
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces \
     -H 'Content-Type: application/json' \
@@ -151,6 +153,8 @@ curl https://api.anthropic.com/v1/organizations/workspaces \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -177,6 +181,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

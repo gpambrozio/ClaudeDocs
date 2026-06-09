@@ -114,7 +114,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Cancel a Message Batch
 
-CLI
+CLI
 
 ```shiki
 ant messages:batches cancel \
@@ -123,6 +123,8 @@ ant messages:batches cancel \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -148,6 +150,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

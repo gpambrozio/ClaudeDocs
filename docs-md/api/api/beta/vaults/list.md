@@ -130,7 +130,7 @@ Pagination token for the next page, or null if no more results.
 
 List Vaults
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/vaults \
@@ -140,6 +140,8 @@ curl https://api.anthropic.com/v1/vaults \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -163,6 +165,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

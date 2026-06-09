@@ -26,6 +26,8 @@ Get your organization's Claude Code analytics for a specific day:
 
 cURL
 
+
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08&\
@@ -41,6 +43,8 @@ If you're building an integration, set your User-Agent header to help us underst
 ```inline-block
 User-Agent: YourApp/1.0.0 (https://yourapp.com)
 ```
+
+
 
 ## Claude Code Analytics API
 
@@ -63,6 +67,8 @@ For complete parameter details and response schemas, see the [Claude Code Analyt
 
 cURL
 
+
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/usage_report/claude_code?\
 starting_at=2025-09-08" \
@@ -73,6 +79,8 @@ starting_at=2025-09-08" \
 #### Get analytics with pagination
 
 cURL
+
+
 
 ```shiki
 # First request
@@ -201,6 +209,8 @@ The API returns data in the following format:
   "next_page": null
 }
 ```
+
+
 
 ## Pagination
 

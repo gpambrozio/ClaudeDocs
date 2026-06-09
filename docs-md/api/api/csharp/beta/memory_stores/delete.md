@@ -92,7 +92,7 @@ required Type Type
 
 Delete a memory store
 
-C#
+C#
 
 ```shiki
 MemoryStoreDeleteParams parameters = new()
@@ -107,6 +107,8 @@ Console.WriteLine(betaManagedAgentsDeletedMemoryStore);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -117,6 +119,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

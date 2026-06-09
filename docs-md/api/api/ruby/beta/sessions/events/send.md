@@ -1290,7 +1290,7 @@ Routes this result to a subagent thread. Copy from the `agent.tool_use` event's 
 
 Send Events
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -1306,6 +1306,8 @@ puts(beta_managed_agents_send_session_events)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -1328,6 +1330,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

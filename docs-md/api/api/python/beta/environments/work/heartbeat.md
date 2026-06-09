@@ -134,7 +134,7 @@ The type of response
 
 Record Heartbeat
 
-Python
+Python
 
 ```shiki
 import os
@@ -152,6 +152,8 @@ print(beta_self_hosted_work_heartbeat_response.last_heartbeat)
 
 Response 200
 
+
+
 ```shiki
 {
   "last_heartbeat": "last_heartbeat",
@@ -165,6 +167,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

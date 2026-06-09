@@ -182,7 +182,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Cancel a Message Batch
 
-Python
+Python
 
 ```shiki
 import os
@@ -198,6 +198,8 @@ print(beta_message_batch.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -223,6 +225,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

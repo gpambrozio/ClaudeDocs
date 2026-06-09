@@ -138,7 +138,7 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 List memory stores
 
-Python
+Python
 
 ```shiki
 import os
@@ -153,6 +153,8 @@ print(page.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -177,6 +179,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -86,6 +86,8 @@ For Invites, this is always `"invite"`.
 
 Create Invite
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/invites \
     -H 'Content-Type: application/json' \
@@ -98,6 +100,8 @@ curl https://api.anthropic.com/v1/organizations/invites \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -114,6 +118,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

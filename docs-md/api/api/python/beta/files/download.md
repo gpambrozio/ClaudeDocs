@@ -90,7 +90,7 @@ BinaryResponseContent
 
 Download File
 
-Python
+Python
 
 ```shiki
 import os

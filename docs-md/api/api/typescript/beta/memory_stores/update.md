@@ -132,7 +132,7 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 Update a memory store
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -147,6 +147,8 @@ console.log(betaManagedAgentsMemoryStore.id);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -166,6 +168,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -94,7 +94,7 @@ For file deletion, this is always `"file_deleted"`.
 
 Delete File
 
-C#
+C#
 
 ```shiki
 FileDeleteParams parameters = new() { FileID = "file_id" };
@@ -106,6 +106,8 @@ Console.WriteLine(deletedFile);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
@@ -116,6 +118,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

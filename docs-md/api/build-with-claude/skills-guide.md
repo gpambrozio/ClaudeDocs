@@ -64,6 +64,8 @@ The structure is identical for both Anthropic and custom Skills. Specify the req
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -95,6 +97,8 @@ When Skills create documents (Excel, PowerPoint, PDF, Word), they return `file_i
 **Example: Creating and downloading an Excel file**
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -142,6 +146,8 @@ for file_id in extract_file_ids(response):
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 file_id = "file_abc123"
@@ -165,6 +171,8 @@ For complete details on the Files API, see the [Files API documentation](api/fil
 Reuse the same container across multiple messages by specifying the container ID:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # First request creates container
@@ -204,6 +212,8 @@ response2 = client.beta.messages.create(
 Skills may perform operations that require multiple turns. Handle `pause_turn` stop reasons:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 messages = [{"role": "user", "content": "Process this large dataset"}]
@@ -259,6 +269,8 @@ Combine multiple Skills in a single request to handle complex workflows:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-8",
@@ -294,6 +306,8 @@ Upload your custom Skill to make it available in your workspace. You can upload 
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 # Option 1: Upload individual files (one --file flag per file)
 ant beta:skills create \
@@ -326,6 +340,8 @@ Retrieve all Skills available to your workspace, including both Anthropic pre-bu
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 # List all Skills
 ant beta:skills list
@@ -342,6 +358,8 @@ Get details about a specific Skill:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:skills retrieve \
   --skill-id skill_01AbCdEfGhIjKlMnOpQrStUv
@@ -352,6 +370,8 @@ ant beta:skills retrieve \
 To delete a Skill, you must first delete all its versions:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Step 1: Delete all versions
@@ -388,6 +408,8 @@ Skills support versioning to manage updates safely:
 - Create new versions when updating Skill files
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Create a new version
@@ -500,6 +522,8 @@ Combine Excel and custom DCF analysis Skills:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 # Create custom DCF analysis Skill
 from anthropic.lib import files_from_dir
@@ -588,6 +612,8 @@ container = {
 }
 ```
 
+
+
 **For development:**
 
 ```shiki
@@ -603,11 +629,15 @@ container = {
 }
 ```
 
+
+
 ### Prompt caching considerations
 
 When using prompt caching, note that changing the Skills list in your container breaks the cache:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # First request creates cache
@@ -657,6 +687,8 @@ For best caching performance, keep your Skills list consistent across requests.
 Handle Skill-related errors gracefully:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()

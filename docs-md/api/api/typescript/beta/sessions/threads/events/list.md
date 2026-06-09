@@ -2804,7 +2804,7 @@ The session's new title. Present only when the update changed it.
 
 List Session Thread Events
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -2823,6 +2823,8 @@ for await (const betaManagedAgentsSessionEvent of client.beta.sessions.threads.e
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -2846,6 +2848,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

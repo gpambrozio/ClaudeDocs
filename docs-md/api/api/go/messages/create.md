@@ -50,6 +50,8 @@ Example with a single `user` message:
 [{"role": "user", "content": "Hello, Claude"}]
 ```
 
+
+
 Example with multiple conversational turns:
 
 ```shiki
@@ -60,6 +62,8 @@ Example with multiple conversational turns:
 ]
 ```
 
+
+
 Example with a partially-filled response from Claude:
 
 ```shiki
@@ -69,15 +73,21 @@ Example with a partially-filled response from Claude:
 ]
 ```
 
+
+
 Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
 ```shiki
 {"role": "user", "content": "Hello, Claude"}
 ```
 
+
+
 ```shiki
 {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
 ```
+
+
 
 See [input examples](https://docs.claude.com/en/api/messages-examples).
 
@@ -2746,6 +2756,8 @@ For example, if you defined `tools` as:
 ]
 ```
 
+
+
 And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
 ```shiki
@@ -2759,6 +2771,8 @@ And then asked the model "What's the S&P 500 at today?", the model might produce
 ]
 ```
 
+
+
 You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
 ```shiki
@@ -2770,6 +2784,8 @@ You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an 
   }
 ]
 ```
+
+
 
 Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
@@ -3847,6 +3863,8 @@ Example:
 [{"type": "text", "text": "Hi, I'm Claude."}]
 ```
 
+
+
 If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
 For example, if the input `messages` were:
@@ -3858,11 +3876,15 @@ For example, if the input `messages` were:
 ]
 ```
 
+
+
 Then the response `content` might be:
 
 ```shiki
 [{"type": "text", "text": "B)"}]
 ```
+
+
 
 One of the following:
 
@@ -4773,6 +4795,8 @@ Example:
 [{"type": "text", "text": "Hi, I'm Claude."}]
 ```
 
+
+
 If the request input `messages` ended with an `assistant` turn, then the response `content` will continue directly from that last turn. You can use this to constrain the model's output.
 
 For example, if the input `messages` were:
@@ -4784,11 +4808,15 @@ For example, if the input `messages` were:
 ]
 ```
 
+
+
 Then the response `content` might be:
 
 ```shiki
 [{"type": "text", "text": "B)"}]
 ```
+
+
 
 One of the following:
 
@@ -6571,7 +6599,7 @@ Type ContentBlockStop
 
 Create a Message
 
-Go
+Go
 
 ```shiki
 package main
@@ -6608,6 +6636,8 @@ func main() {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -6668,6 +6698,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

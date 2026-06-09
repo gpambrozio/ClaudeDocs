@@ -2786,7 +2786,7 @@ The session's new title. Present only when the update changed it.
 
 List Session Thread Events
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -2813,6 +2813,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "data": [
@@ -2835,6 +2837,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

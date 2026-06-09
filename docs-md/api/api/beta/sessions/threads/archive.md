@@ -452,7 +452,7 @@ Total output tokens generated across all turns.
 
 Archive Session Thread
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archive \
@@ -463,6 +463,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/threads/$THREAD_ID/archiv
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -540,6 +542,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

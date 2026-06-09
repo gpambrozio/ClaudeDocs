@@ -114,7 +114,7 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 Retrieve a memory store
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -137,6 +137,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -155,6 +157,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

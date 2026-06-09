@@ -170,7 +170,7 @@ ID of the user who performed the write (a `user_...` value).
 
 Retrieve a memory version
 
-CLI
+CLI
 
 ```shiki
 ant beta:memory-stores:memory-versions retrieve \
@@ -180,6 +180,8 @@ ant beta:memory-stores:memory-versions retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -208,6 +210,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

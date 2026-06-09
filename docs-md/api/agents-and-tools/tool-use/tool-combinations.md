@@ -19,6 +19,8 @@ Search finds sources; code execution analyzes and synthesizes. Claude searches f
 }
 ```
 
+
+
 The flow is typically search, then execute, then optionally search again if the first pass surfaced a gap. Code execution runs server-side, so there's no client-side sandbox to manage.
 
 ## Coding agent: text\_editor + bash
@@ -33,6 +35,8 @@ The text editor reads and modifies files; bash runs tests and build commands. Th
   ]
 }
 ```
+
+
 
 Pair this with a constrained working directory and a command allowlist if the agent operates on untrusted code. See [Text editor tool](agents-and-tools/tool-use/text-editor-tool.md) and [Bash tool](agents-and-tools/tool-use/bash-tool.md) for the execution contracts.
 
@@ -49,6 +53,8 @@ Search surfaces candidate URLs; fetch retrieves full page content for the releva
 }
 ```
 
+
+
 This pairing is useful when the answer lives in long-form content (documentation pages, articles, specifications) that a search snippet can't fully capture. Fetch pulls the complete page so Claude can cite specific passages.
 
 ## Long-running agent: memory + any toolset
@@ -60,6 +66,8 @@ Memory persists state across conversations; the other tools do the work. Add mem
   "tools": [{ "type": "memory_20250818", "name": "memory" }]
 }
 ```
+
+
 
 Add your other tools alongside `memory` in the same array.
 
@@ -81,6 +89,8 @@ The computer use tool subsumes most others by operating a full desktop. Claude s
   ]
 }
 ```
+
+
 
 Computer use is the most general option and also the slowest, since every action requires a screenshot roundtrip. Prefer narrower tools when they cover your use case, and reach for computer use when nothing else fits. See [Computer use tool](agents-and-tools/tool-use/computer-use-tool.md) for the sandbox setup.
 

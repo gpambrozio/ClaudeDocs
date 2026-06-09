@@ -61,6 +61,8 @@ On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the wo
 
    cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+   
+
    ```shiki
    client = anthropic.Anthropic()
 
@@ -79,6 +81,8 @@ On [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the wo
    export ANTHROPIC_ENVIRONMENT_KEY="sk-ant-oat01-..."
    export ANTHROPIC_ENVIRONMENT_ID="env_..."
    ```
+
+   
 
 Skills can include executables that the agent may run directly. The CLI and SDK workers automatically mark downloaded skill files as executable in the sandbox. If you implement skills download manually, you are responsible for setting executable permissions.
 
@@ -111,6 +115,8 @@ Webhook-triggered (SDK)
    curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
      | sudo tar -xz -C /usr/local/bin ant
    ```
+
+   
 2. 2
 
    Run the worker
@@ -123,6 +129,8 @@ Webhook-triggered (SDK)
    ant beta:worker poll \
      --workdir "/workspace"
    ```
+
+   
 
    The worker exits cleanly on SIGTERM or SIGINT, draining in-flight tool calls before stopping.
 
@@ -142,6 +150,8 @@ Webhook-triggered (SDK)
    ENTRYPOINT ["ant", "beta:worker", "run"]
    ```
 
+   
+
    Then write a spawn script that forwards session details into a fresh sandbox. The poller injects `ANTHROPIC_SESSION_ID`, `ANTHROPIC_WORK_ID`, `ANTHROPIC_ENVIRONMENT_ID`, and `ANTHROPIC_ENVIRONMENT_KEY` into the script's environment. `ANTHROPIC_BASE_URL` is optional and is passed through only if it was set on the poller host; it overrides the default API endpoint. In the example, `/host/outputs` is a host directory you choose; it is bind-mounted to the sandbox's `/mnt/session/outputs` so you can retrieve session deliverables after the sandbox exits.
 
    ```shiki
@@ -155,12 +165,16 @@ Webhook-triggered (SDK)
      your-image
    ```
 
+   
+
    Start the poller pointing at the script:
 
    ```shiki
    ant beta:worker poll \
      --on-work ./spawn.sh
    ```
+
+   
 
 ### SDK helpers
 
@@ -179,6 +193,8 @@ The SDK provides three helpers at different levels of control. `EnvironmentWorke
 Use the work poller directly when you want to launch your own per-session process, for example spinning up a sandbox for each claimed session:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 import asyncio
@@ -213,6 +229,8 @@ asyncio.run(main())
 
 Python
 
+
+
 ```shiki
 EnvironmentWorker(client, ..., tools=lambda env: [beta_bash_tool(env), my_custom_tool])
 ```
@@ -220,6 +238,8 @@ EnvironmentWorker(client, ..., tools=lambda env: [beta_bash_tool(env), my_custom
 **With `work.poller()` and `tool_runner()`:** pass a tool list as `tools` to `client.beta.sessions.events.tool_runner()`. To build that list, set up `AgentToolContext` yourself and call `beta_agent_toolset_20260401(env)`:
 
 PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 from anthropic.lib.tools.agent_toolset import (
@@ -242,6 +262,8 @@ From a separate shell, using your Claude API key (not the environment key), conf
 ant beta:environments:work stats --environment-id "$ANTHROPIC_ENVIRONMENT_ID"
 ```
 
+
+
 If `workers_polling` stays at 0, the worker isn't reaching the queue: confirm `ANTHROPIC_ENVIRONMENT_KEY` and `ANTHROPIC_ENVIRONMENT_ID` are set on the worker host. See [Read queue depth](#read-queue-depth) for the full stats response and other language examples.
 
 ## Start a session
@@ -251,6 +273,8 @@ Once your worker is running, create a session that targets the environment. The 
 Anthropic doesn't mount files or GitHub repositories into self-hosted sandboxes. To make session-specific files available, pass file references (such as an S3 path or commit SHA) in the session `metadata` field. Your spawn script or `--on-work` handler reads that metadata from the claimed work item (through the [Environments Work endpoints](api/beta/environments/work.md)) and stages the files into the working directory before tool execution begins.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 session = client.beta.sessions.create(
@@ -281,6 +305,8 @@ These endpoints authenticate with your organization API key, not the environment
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 import os
 
@@ -302,6 +328,8 @@ print(f"depth={stats.depth} pending={stats.pending}")
 }
 ```
 
+
+
 ### Stop a session gracefully
 
 Use `work.stop` to ask the worker handling a specific session to shut it down cleanly. The worker finishes any in-flight tool call, posts a final status, and releases the session. Pass `force: true` in the request body to interrupt immediately instead of waiting for the current tool call to complete.
@@ -309,6 +337,8 @@ Use `work.stop` to ask the worker handling a specific session to shut it down cl
 Because these calls run from your operations tooling rather than the worker host, `ANTHROPIC_WORK_ID` isn't set automatically. Set it to the target work item's ID before running the following examples.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 import os

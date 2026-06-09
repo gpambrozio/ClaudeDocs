@@ -136,7 +136,7 @@ The type of response
 
 Record Heartbeat
 
-Go
+Go
 
 ```shiki
 package main
@@ -169,6 +169,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "last_heartbeat": "last_heartbeat",
@@ -182,6 +184,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

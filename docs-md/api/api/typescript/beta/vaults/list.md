@@ -126,7 +126,7 @@ A timestamp in RFC 3339 format
 
 List Vaults
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -142,6 +142,8 @@ for await (const betaManagedAgentsVault of client.beta.vaults.list()) {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -165,6 +167,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -166,7 +166,7 @@ Cursor for the next page, or `null` when there are no more results.
 
 List User Profiles
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/user_profiles \
@@ -176,6 +176,8 @@ curl https://api.anthropic.com/v1/user_profiles \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -203,6 +205,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -158,7 +158,7 @@ Token to provide in as `page` in the subsequent request to retrieve the next pag
 
 List Skill Versions
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
@@ -168,6 +168,8 @@ curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -191,6 +193,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

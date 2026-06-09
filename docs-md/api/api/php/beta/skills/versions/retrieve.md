@@ -82,7 +82,7 @@ Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
 Get Skill Version
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -100,6 +100,8 @@ var_dump($version);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "skillver_01JAbcdefghijklmnopqrstuvw",
@@ -116,6 +118,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -98,7 +98,7 @@ Token to provide in as `page` in the subsequent request to retrieve the next pag
 
 List Skill Versions
 
-CLI
+CLI
 
 ```shiki
 ant beta:skills:versions list \
@@ -107,6 +107,8 @@ ant beta:skills:versions list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -130,6 +132,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -292,7 +292,7 @@ For Models, this is always `"model"`.
 
 List Models
 
-Python
+Python
 
 ```shiki
 import os
@@ -307,6 +307,8 @@ print(page.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -390,6 +392,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

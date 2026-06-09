@@ -274,7 +274,7 @@ Human-readable name for the credential.
 
 Update Credential
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -292,6 +292,8 @@ console.log(betaManagedAgentsCredential.id);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -315,6 +317,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

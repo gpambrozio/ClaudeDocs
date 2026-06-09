@@ -134,7 +134,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 Create a memory
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -162,6 +162,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -180,6 +182,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

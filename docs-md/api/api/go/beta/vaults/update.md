@@ -124,7 +124,7 @@ A timestamp in RFC 3339 format
 
 Update Vault
 
-Go
+Go
 
 ```shiki
 package main
@@ -157,6 +157,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -174,6 +176,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

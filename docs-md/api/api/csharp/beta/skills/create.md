@@ -133,7 +133,7 @@ ISO 8601 timestamp of when the skill was last updated.
 
 Create Skill
 
-C#
+C#
 
 ```shiki
 SkillCreateParams parameters = new();
@@ -144,6 +144,8 @@ Console.WriteLine(skill);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -160,6 +162,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

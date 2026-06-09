@@ -876,7 +876,7 @@ Vault IDs attached to the session at creation. Empty when no vaults were supplie
 
 Archive Session
 
-Python
+Python
 
 ```shiki
 import os
@@ -892,6 +892,8 @@ print(beta_managed_agents_session.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -1061,6 +1063,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -27,6 +27,8 @@ You can optionally specify a `max_characters` parameter to control truncation wh
 
 cURLCLIPythonTypeScriptJava
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -154,6 +156,8 @@ First, your application provides Claude with the text editor tool and a prompt t
 
 cURLCLIPythonTypeScriptJava
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -175,6 +179,8 @@ print(response)
 Claude uses the text editor tool first to view the file:
 
 Output
+
+
 
 ```shiki
 {
@@ -203,6 +209,8 @@ Output
 Your application should then read the file and return its contents to Claude:
 
 cURLCLIPythonTypeScriptJava
+
+
 
 ```shiki
 response = client.messages.create(
@@ -253,6 +261,8 @@ Claude identifies the syntax error and uses the `str_replace` command to fix it:
 
 Output
 
+
+
 ```shiki
 {
   "id": "msg_01VwXyZAbCdEfGhIjKlMnO",
@@ -282,6 +292,8 @@ Output
 Your application should then make the edit and return the result:
 
 CLIPythonTypeScriptJava
+
+
 
 ```shiki
 response = client.messages.create(
@@ -329,6 +341,8 @@ print(response)
 Finally, Claude provides a complete explanation of the fix:
 
 Output
+
+
 
 ```shiki
 {
@@ -381,6 +395,8 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
            # Insert text at location
            pass
    ```
+
+   
 3. 3
 
    Implement security measures
@@ -411,6 +427,8 @@ The tool type is `type: "text_editor_20250728"` for Claude 4 models.
                "content": result,
            }
    ```
+
+   
 
 When implementing the text editor tool, keep in mind:
 

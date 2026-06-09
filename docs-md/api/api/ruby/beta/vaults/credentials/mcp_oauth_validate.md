@@ -188,7 +188,7 @@ Identifier of the vault containing the credential.
 
 Validate Credential
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -204,6 +204,8 @@ puts(beta_managed_agents_credential_validation)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -237,6 +239,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

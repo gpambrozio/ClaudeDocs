@@ -140,7 +140,7 @@ Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
 Get Skill Version
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
@@ -150,6 +150,8 @@ curl https://api.anthropic.com/v1/skills/$SKILL_ID/versions/$VERSION \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -167,6 +169,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

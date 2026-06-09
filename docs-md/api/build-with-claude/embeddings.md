@@ -63,6 +63,8 @@ To access Voyage embeddings:
 export VOYAGE_API_KEY="<your secret key>"
 ```
 
+
+
 You can obtain the embeddings by either using the official [`voyageai` Python package](https://github.com/voyage-ai/voyageai-python) or HTTP requests, as described below.
 
 ### Voyage Python library
@@ -72,6 +74,8 @@ The `voyageai` package can be installed using the following command:
 ```shiki
 pip install -U voyageai
 ```
+
+
 
 Then, you can create a client object and start using it to embed your texts:
 
@@ -89,12 +93,16 @@ print(result.embeddings[0])
 print(result.embeddings[1])
 ```
 
+
+
 `result.embeddings` will be a list of two embedding vectors, each containing 1024 floating-point numbers. After running the above code, the two embeddings will be printed on the screen:
 
 ```inline-block
 [-0.013131560757756233, 0.019828535616397858, ...]   # embedding for "Sample text 1"
 [-0.0069352793507277966, 0.020878976210951805, ...]  # embedding for "Sample text 2"
 ```
+
+
 
 When creating the embeddings, you can specify a few other arguments to the `embed()` function.
 
@@ -105,6 +113,8 @@ For more information on the Voyage python package, see [the Voyage documentation
 You can also get embeddings by requesting Voyage HTTP API. For example, you can send an HTTP request through the `curl` command in a terminal:
 
 cURL
+
+
 
 ```shiki
 curl https://api.voyageai.com/v1/embeddings \
@@ -138,6 +148,8 @@ The response you would get is a JSON object containing the embeddings and the to
 }
 ```
 
+
+
 For more information on the Voyage HTTP API, see [the Voyage documentation](https://docs.voyageai.com/reference/embeddings-api).
 
 ### AWS Marketplace
@@ -161,6 +173,8 @@ documents = [
 ]
 ```
 
+
+
 First, use Voyage to convert each document into an embedding vector
 
 ```shiki
@@ -172,11 +186,15 @@ vo = voyageai.Client()
 doc_embds = vo.embed(documents, model="voyage-4", input_type="document").embeddings
 ```
 
+
+
 The embeddings allow you to do semantic search / retrieval in the vector space. Given an example query,
 
 ```shiki
 query = "When is Apple's conference call scheduled?"
 ```
+
+
 
 Next, convert it into an embedding and conduct a nearest neighbor search to find the most relevant document based on the distance in the embedding space.
 
@@ -195,6 +213,8 @@ retrieved_id = np.argmax(similarities)
 print(documents[retrieved_id])
 ```
 
+
+
 Note that `input_type="document"` and `input_type="query"` are used for embedding the document and query, respectively. More specification can be found in [Voyage Python library](build-with-claude/embeddings.md).
 
 The output would be the 5th document, which is indeed the most relevant to the query:
@@ -202,6 +222,8 @@ The output would be the 5th document, which is indeed the most relevant to the q
 ```inline-block
 Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET.
 ```
+
+
 
 If you are looking for a detailed set of cookbooks on how to do RAG with embeddings, including vector databases, check out the [RAG cookbook](https://platform.claude.com/cookbook/third-party-pinecone-rag-using-pinecone).
 

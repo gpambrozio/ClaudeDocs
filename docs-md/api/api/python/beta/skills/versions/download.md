@@ -98,7 +98,7 @@ BinaryResponseContent
 
 Download Skill Version Content
 
-Python
+Python
 
 ```shiki
 import os

@@ -80,7 +80,7 @@ The scope of this file, indicating the context in which it was created (e.g., a 
 
 List Files
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -101,6 +101,8 @@ var_dump($page);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -128,6 +130,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

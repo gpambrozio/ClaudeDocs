@@ -33,6 +33,8 @@ Here's an example where Claude programmatically queries a database multiple time
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -102,6 +104,8 @@ The `allowed_callers` field specifies which contexts can invoke a tool:
 }
 ```
 
+
+
 **Possible values:**
 
 - `["direct"]` - Claude is guided to call this tool directly (default if omitted)
@@ -128,6 +132,8 @@ Every tool use block includes a `caller` field indicating how it was invoked:
 }
 ```
 
+
+
 **Programmatic invocation:**
 
 ```shiki
@@ -142,6 +148,8 @@ Every tool use block includes a `caller` field indicating how it was invoked:
   }
 }
 ```
+
+
 
 The `tool_id` references the code execution tool that made the programmatic call.
 
@@ -173,6 +181,8 @@ The request shape is identical to the [Quick start](#quick-start) example: inclu
 Claude writes code that calls your tool. The API pauses and returns:
 
 Output
+
+
 
 ```shiki
 {
@@ -214,6 +224,8 @@ Output
 Include the full conversation history plus your tool result:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 response = client.messages.create(
@@ -277,6 +289,8 @@ Once the code execution completes, Claude provides the final response:
 
 Output
 
+
+
 ```shiki
 {
   "content": [
@@ -319,6 +333,8 @@ async def _claude_code():
     print(f"Top region: {top_region[0]} with ${top_region[1]:,} in revenue")
 ```
 
+
+
 This pattern:
 
 - Reduces model round-trips from N (one per region) to 1
@@ -339,6 +355,8 @@ async def _claude_code():
             break  # Stop early, don't check remaining
 ```
 
+
+
 ### Conditional tool selection
 
 ```shiki
@@ -351,6 +369,8 @@ async def _claude_code():
     print(content)
 ```
 
+
+
 ### Data filtering
 
 ```shiki
@@ -361,6 +381,8 @@ async def _claude_code():
     for error in errors[-10:]:  # Only return last 10 errors
         print(error)
 ```
+
+
 
 ## Response format
 
@@ -381,6 +403,8 @@ When code execution calls a tool:
 }
 ```
 
+
+
 ### Tool result handling
 
 Your tool result is passed back to the running code:
@@ -397,6 +421,8 @@ Your tool result is passed back to the running code:
   ]
 }
 ```
+
+
 
 ### Code execution completion
 
@@ -415,6 +441,8 @@ When all tool calls are satisfied and code completes:
   }
 }
 ```
+
+
 
 ## Error handling
 
@@ -443,6 +471,8 @@ If your tool takes too long to respond, the code execution receives a `TimeoutEr
 }
 ```
 
+
+
 To prevent timeouts:
 
 - Monitor the `expires_at` field in responses
@@ -460,6 +490,8 @@ If your tool returns an error:
   "content": "Error: Query timeout - table lock exceeded 30 seconds"
 }
 ```
+
+
 
 Claude's code receives this error and can handle it appropriately.
 
@@ -499,6 +531,8 @@ Invalid - Cannot include text when responding to programmatic tool calls:
 }
 ```
 
+
+
 Valid - Only tool results when responding to programmatic tool calls:
 
 ```shiki
@@ -513,6 +547,8 @@ Valid - Only tool results when responding to programmatic tool calls:
   ]
 }
 ```
+
+
 
 This restriction only applies when responding to programmatic (code execution) tool calls. For regular client-side tool calls, you can include text content after tool results.
 

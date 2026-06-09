@@ -454,7 +454,7 @@ Total output tokens generated across all turns.
 
 Get Session Thread
 
-Go
+Go
 
 ```shiki
 package main
@@ -486,6 +486,8 @@ func main() {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -563,6 +565,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

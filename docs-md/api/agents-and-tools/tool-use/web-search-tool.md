@@ -57,6 +57,8 @@ To enable dynamic filtering, use the `web_search_20260209` tool version:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -82,6 +84,8 @@ Provide the web search tool in your API request:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -99,6 +103,8 @@ print(response)
 The web search tool supports the following parameters:
 
 JSON
+
+
 
 ```shiki
 {
@@ -150,6 +156,8 @@ The `user_location` parameter allows you to localize search results based on a u
 Here's an example response structure:
 
 Output
+
+
 
 ```shiki
 {
@@ -242,6 +250,8 @@ When the web search tool encounters an error (such as hitting rate limits), the 
 
 Output
 
+
+
 ```shiki
 {
   "type": "web_search_tool_result",
@@ -274,6 +284,8 @@ For caching tool definitions across turns, see [Tool use with prompt caching](ag
 With streaming enabled, you'll receive search events as part of the stream. There will be a pause while the search executes:
 
 Output
+
+
 
 ```shiki
 event: message_start
@@ -323,6 +335,8 @@ Web search usage is charged in addition to token usage:
   }
 }
 ```
+
+
 
 Web search is available on the Claude API for **$10 per 1,000 searches**, plus standard token costs for search-generated content. Web search results retrieved throughout a conversation are counted as input tokens, in search iterations executed during a single turn and in subsequent conversation turns.
 

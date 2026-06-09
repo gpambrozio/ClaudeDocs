@@ -262,7 +262,7 @@ ID of the user who performed the write (a `user_...` value).
 
 List memory versions
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -275,6 +275,8 @@ puts(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -308,6 +310,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

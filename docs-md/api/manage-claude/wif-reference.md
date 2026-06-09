@@ -95,6 +95,8 @@ Both the config file and the credentials file carry a top-level string `version`
 
 configs/production.json
 
+
+
 ```shiki
 {
   "version": "1.0",
@@ -188,6 +190,8 @@ Example:
 claims.sub.startsWith("repo:acme-corp/") && claims.ref in ["refs/heads/main", "refs/heads/release"]
 ```
 
+
+
 CEL conditions are security boundaries. An expression that evaluates to `true` for more inputs than intended grants broader access than intended. Prefer the static matchers when they express your constraint.
 
 ## Errors
@@ -233,6 +237,8 @@ If you still need to debug from the JWT itself, work through these checks in ord
    Decode the assertion you sent so you can compare each claim against your issuer and rule configuration:
 
    cURL
+
+   
 
    ```shiki
    jq -rR 'split(".")[1] | gsub("-";"+") | gsub("_";"/") | @base64d | fromjson' <<< "$JWT"

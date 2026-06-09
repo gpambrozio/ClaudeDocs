@@ -5478,7 +5478,7 @@ The session's new title. Present only when the update changed it.
 
 Stream Session Thread Events
 
-C#
+C#
 
 ```shiki
 EventStreamParams parameters = new()
@@ -5494,6 +5494,8 @@ await foreach (var betaManagedAgentsStreamSessionThreadEvents in client.Beta.Ses
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -5512,6 +5514,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -463,7 +463,7 @@ Total output tokens generated across all turns.
 
 Archive Session Thread
 
-Python
+Python
 
 ```shiki
 import os
@@ -480,6 +480,8 @@ print(beta_managed_agents_session_thread.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -557,6 +559,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

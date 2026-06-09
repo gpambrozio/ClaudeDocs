@@ -114,7 +114,7 @@ A timestamp in RFC 3339 format
 
 Add Session Resource
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -132,6 +132,8 @@ puts(beta_managed_agents_file_resource)
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
@@ -146,6 +148,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

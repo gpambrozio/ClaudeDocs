@@ -76,7 +76,7 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 Update a memory store
 
-CLI
+CLI
 
 ```shiki
 ant beta:memory-stores update \
@@ -85,6 +85,8 @@ ant beta:memory-stores update \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -104,6 +106,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

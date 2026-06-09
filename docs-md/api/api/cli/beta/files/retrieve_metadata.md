@@ -74,7 +74,7 @@ The type of scope (e.g., `"session"`).
 
 Get File Metadata
 
-CLI
+CLI
 
 ```shiki
 ant beta:files retrieve-metadata \
@@ -83,6 +83,8 @@ ant beta:files retrieve-metadata \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -103,6 +105,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

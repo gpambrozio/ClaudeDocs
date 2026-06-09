@@ -76,7 +76,7 @@ Pagination token for the next page, or null if no more results.
 
 List Vaults
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults list \
@@ -84,6 +84,8 @@ ant beta:vaults list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -107,6 +109,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -35,6 +35,8 @@ Send a `user.message` event to start or continue the agent's work:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client.beta.sessions.events.send(
     session.id,
@@ -55,6 +57,8 @@ client.beta.sessions.events.send(
 Send a `user.interrupt` event to stop the agent mid-execution, then follow up with a `user.message` event to redirect it:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Agent is currently analyzing a file...
@@ -90,6 +94,8 @@ When the agent invokes a [custom tool](managed-agents/tools.md):
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 with client.beta.sessions.events.stream(session.id) as stream:
@@ -127,6 +133,8 @@ When a [permission policy](managed-agents/permission-policies.md) requires confi
 4. Once all blocking events are resolved, the session transitions back to `running`.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 with client.beta.sessions.events.stream(session.id) as stream:
@@ -176,6 +184,8 @@ client.beta.sessions.events.send(
 )
 ```
 
+
+
 ### Tracking usage
 
 The session object includes a `usage` field with cumulative token statistics. Fetch the session after it goes idle to read the latest totals, and use them to track costs, enforce budgets, or monitor consumption.
@@ -192,6 +202,8 @@ The session object includes a `usage` field with cumulative token statistics. Fe
   }
 }
 ```
+
+
 
 `input_tokens` reports uncached input tokens and `output_tokens` reports total output tokens across all model calls in the session. The `cache_creation_input_tokens` and `cache_read_input_tokens` fields reflect prompt caching activity. Cache entries use a 5-minute TTL, so back-to-back turns within that window benefit from cache reads, which reduce per-token cost.
 

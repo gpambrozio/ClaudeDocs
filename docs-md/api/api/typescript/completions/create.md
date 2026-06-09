@@ -508,7 +508,7 @@ For Text Completions, this is always `"completion"`.
 
 Create a Text Completion
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -528,6 +528,8 @@ console.log(completion.id);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "compl_018CKm6gsux7P8yMcwZbeCPw",
@@ -541,6 +543,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

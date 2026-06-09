@@ -64,7 +64,7 @@ A timestamp in RFC 3339 format
 
 Create Vault
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults create \
@@ -73,6 +73,8 @@ ant beta:vaults create \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -91,6 +93,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

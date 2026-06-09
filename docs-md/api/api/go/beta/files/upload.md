@@ -134,7 +134,7 @@ The type of scope (e.g., `"session"`).
 
 Upload File
 
-Go
+Go
 
 ```shiki
 package main
@@ -165,6 +165,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
@@ -184,6 +186,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

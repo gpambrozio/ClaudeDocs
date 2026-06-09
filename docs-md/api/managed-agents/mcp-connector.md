@@ -21,6 +21,8 @@ The `name` you assign in the MCP server array is used to reference the `mcp_tool
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 AGENT_ID=$(ant beta:agents create \
   --name "GitHub Assistant" \
@@ -67,6 +69,8 @@ By default all tools exposed by the MCP server are enabled. To enable only speci
 }
 ```
 
+
+
 This pattern is useful when a server exposes many tools but the agent only needs a few, or when you want tools added by the server operator to stay off until you review them.
 
 To disable specific tools while keeping the rest enabled, omit `default_config` and set `enabled: false` on individual entries:
@@ -79,6 +83,8 @@ To disable specific tools while keeping the rest enabled, omit `default_config` 
 }
 ```
 
+
+
 See [configuring the toolset](managed-agents/tools.md) for the general `default_config` / `configs` pattern, and [MCP toolset permissions](managed-agents/permission-policies.md) for setting `permission_policy` on MCP tools and handling confirmation requests.
 
 ### MCP tool output handling
@@ -90,6 +96,8 @@ When an MCP tool output exceeds 100,000 tokens, it is automatically written to a
 When starting a session, pass `vault_ids` to provide credentials for your MCP servers. Vaults are collections of credentials that you register once and reference by ID. See [Authenticate with vaults](managed-agents/vaults.md) for how to create vaults and manage credentials.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 session = client.beta.sessions.create(

@@ -216,7 +216,7 @@ ID of the user who performed the write (a `user_...` value).
 
 Redact a memory version
 
-Go
+Go
 
 ```shiki
 package main
@@ -249,6 +249,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -276,6 +278,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

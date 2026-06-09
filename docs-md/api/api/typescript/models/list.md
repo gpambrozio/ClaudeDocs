@@ -292,7 +292,7 @@ For Models, this is always `"model"`.
 
 List Models
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -308,6 +308,8 @@ for await (const modelInfo of client.models.list()) {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -391,6 +393,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

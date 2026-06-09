@@ -61,6 +61,8 @@ To enable dynamic filtering, use the `web_fetch_20260209` tool version:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -84,6 +86,8 @@ Provide the web fetch tool in your API request:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -106,6 +110,8 @@ print(response)
 The web fetch tool supports the following parameters:
 
 JSON
+
+
 
 ```shiki
 {
@@ -156,6 +162,8 @@ When displaying API outputs directly to end users, citations must be included to
 Here's an example response structure:
 
 Output
+
+
 
 ```shiki
 {
@@ -241,6 +249,8 @@ For PDF documents, content is returned as base64-encoded data:
 
 Output
 
+
+
 ```shiki
 {
   "type": "web_fetch_tool_result",
@@ -267,6 +277,8 @@ Output
 When the web fetch tool encounters an error, the Claude API returns a 200 (success) response with the error represented in the response body:
 
 Output
+
+
 
 ```shiki
 {
@@ -305,6 +317,8 @@ The tool cannot fetch arbitrary URLs that Claude generates or URLs from containe
 Web fetch works seamlessly with web search for comprehensive information gathering:
 
 Python
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -349,6 +363,8 @@ For caching tool definitions across turns, see [Tool use with prompt caching](ag
 With streaming enabled, fetch events are part of the stream with a pause during content retrieval:
 
 Output
+
+
 
 ```shiki
 event: message_start
@@ -396,6 +412,8 @@ Web fetch usage has **no additional charges** beyond standard token costs:
   }
 }
 ```
+
+
 
 The web fetch tool is available on the Claude API at **no additional cost**. You only pay standard token costs for the fetched content that becomes part of your conversation context.
 

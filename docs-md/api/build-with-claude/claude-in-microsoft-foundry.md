@@ -6,7 +6,7 @@ This guide walks you through the process of setting up and making API calls to C
 
 Regional availability: At launch, Claude is available as a Global Standard deployment type in Foundry resources. Pricing for Claude in the Microsoft Marketplace uses Anthropic's standard API pricing. Visit [Pricing](https://claude.com/pricing#api) for details.
 
-Foundry is supported by the C#, Java, PHP, Python, and TypeScript SDKs. The Go and Ruby SDKs do not currently support Microsoft Foundry. For available SDK platform integrations, see [Client SDKs](api/client-sdks.md).
+Foundry is supported by the C#, Java, PHP, Python, and TypeScript SDKs. The Go and Ruby SDKs do not currently support Microsoft Foundry.
 
 ## Preview
 
@@ -22,7 +22,7 @@ Before you begin, ensure you have:
 
 ## Install an SDK
 
-Anthropic's [client SDKs](api/client-sdks.md) support Foundry through a platform-specific package or client class.
+Anthropic's [client SDKs](cli-sdks-libraries/overview.md) support Foundry through a platform-specific package or client class.
 
 Python
 
@@ -47,6 +47,8 @@ PHP
 ```shiki
 pip install -U "anthropic"
 ```
+
+
 
 ## Provisioning
 
@@ -151,6 +153,8 @@ message = client.messages.create(
 print(message.content)
 ```
 
+
+
 Keep your API keys secure. Never commit them to version control or share them publicly. Anyone with access to your API key can make requests to Claude through your Foundry resource.
 
 ### Microsoft Entra authentication
@@ -215,6 +219,8 @@ message = client.messages.create(
 )
 print(message.content)
 ```
+
+
 
 Microsoft Entra ID authentication allows you to manage access using Azure RBAC, integrate with your organization's identity management, and avoid managing API keys manually.
 

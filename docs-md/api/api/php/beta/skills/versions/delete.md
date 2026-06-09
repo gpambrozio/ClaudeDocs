@@ -50,7 +50,7 @@ For Skill Versions, this is always `"skill_version_deleted"`.
 
 Delete Skill Version
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -68,6 +68,8 @@ var_dump($version);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "1759178010641129",
@@ -78,6 +80,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

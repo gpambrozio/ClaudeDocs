@@ -29,6 +29,8 @@ Attach a dedicated service account to your service or instance:
 
 CLI
 
+
+
 ```shiki
 gcloud run deploy my-service \
   --service-account inference-worker@my-project.iam.gserviceaccount.com
@@ -41,9 +43,13 @@ GET http://metadata.google.internal/computeMetadata/v1/instance/service-accounts
 Metadata-Flavor: Google
 ```
 
+
+
 Or, with the gcloud CLI:
 
 CLI
+
+
 
 ```shiki
 gcloud auth print-identity-token \
@@ -67,6 +73,8 @@ The decoded token payload looks like this:
 }
 ```
 
+
+
 The `sub` claim is the Google service account's opaque numeric unique ID. The `email` claim is the human-readable service account address. Match on both `sub` and `email` in your federation rule.
 
 ## Configure Anthropic
@@ -82,6 +90,8 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
   "jwks_source": "discovery"
 }
 ```
+
+
 
 **Federation rule:** Match on both the `sub` and `email` claims. `email` is the readable service-account address; `sub` is the service account's numeric unique ID, which Google never reuses, so pinning it protects the rule if the service account is deleted and a new one is later created with the same email. Find the unique ID with `gcloud iam service-accounts describe SA_EMAIL --format='value(uniqueId)'`.
 
@@ -106,11 +116,15 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 }
 ```
 
+
+
 ## Acquire and use the token
 
 Inside your Google Cloud workload, fetch the identity token from the metadata server, exchange it at `POST /v1/oauth/token`, and use the returned bearer token to call the Claude API. Each Anthropic SDK handles the exchange and refresh loop for you when you supply a token-provider callable that returns a fresh identity token from the metadata server, as shown in the following examples.
 
 cURLPythonTypeScriptGoJavaC#CLIPHPRuby
+
+
 
 ```shiki
 import os
@@ -150,6 +164,8 @@ Google identity tokens expire after roughly one hour. The SDKs re-invoke the tok
 From inside your workload, decode the identity token and confirm the claims match your rule:
 
 cURL
+
+
 
 ```shiki
 curl -sS -H "Metadata-Flavor: Google" \

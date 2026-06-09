@@ -34,7 +34,7 @@ Type type
 
 Delete a memory store
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -52,6 +52,8 @@ var_dump($betaManagedAgentsDeletedMemoryStore);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -62,6 +64,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

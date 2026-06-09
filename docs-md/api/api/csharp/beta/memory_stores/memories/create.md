@@ -136,7 +136,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 Create a memory
 
-C#
+C#
 
 ```shiki
 MemoryCreateParams parameters = new()
@@ -152,6 +152,8 @@ Console.WriteLine(betaManagedAgentsMemory);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -171,6 +173,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

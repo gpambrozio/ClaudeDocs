@@ -32,6 +32,8 @@ Fast mode runs the same model with a faster inference configuration. There is no
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -87,6 +89,8 @@ The response `usage` object includes a `speed` field that indicates which speed 
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-8",
@@ -100,6 +104,8 @@ print(response.usage.speed)  # "fast" or "standard"
 ```
 
 Output
+
+
 
 ```shiki
 {
@@ -132,6 +138,8 @@ Falling back from fast to standard speed will result in a [prompt cache](build-w
 Since setting `max_retries` to `0` also disables retries for other transient errors (overloaded, internal server errors), the examples below re-issue the original request with default retries for those cases.
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()

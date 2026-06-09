@@ -230,7 +230,7 @@ One of the following:
 
 List Environments
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -246,6 +246,8 @@ for await (const betaEnvironment of client.beta.environments.list()) {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -302,6 +304,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

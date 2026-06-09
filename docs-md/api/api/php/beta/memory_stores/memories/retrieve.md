@@ -72,7 +72,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 Retrieve a memory
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -93,6 +93,8 @@ var_dump($betaManagedAgentsMemory);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -111,6 +113,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

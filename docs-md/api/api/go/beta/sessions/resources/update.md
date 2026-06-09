@@ -192,7 +192,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 Update Session Resource
 
-Go
+Go
 
 ```shiki
 package main
@@ -226,6 +226,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
@@ -244,6 +246,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

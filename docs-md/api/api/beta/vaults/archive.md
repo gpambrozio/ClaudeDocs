@@ -116,7 +116,7 @@ A timestamp in RFC 3339 format
 
 Archive Vault
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/vaults/$VAULT_ID/archive \
@@ -127,6 +127,8 @@ curl https://api.anthropic.com/v1/vaults/$VAULT_ID/archive \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -145,6 +147,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

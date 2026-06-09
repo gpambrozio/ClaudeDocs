@@ -94,7 +94,7 @@ type: "session\_deleted"
 
 Delete Session
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID \
@@ -106,6 +106,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID \
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -116,6 +118,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -176,7 +176,7 @@ Type BetaManagedAgentsMemoryPrefixType
 
 List memories
 
-Go
+Go
 
 ```shiki
 package main
@@ -209,6 +209,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "data": [
@@ -232,6 +234,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

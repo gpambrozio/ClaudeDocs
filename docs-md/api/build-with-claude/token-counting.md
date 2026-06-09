@@ -28,6 +28,8 @@ All [active models](about-claude/models/overview.md) support token counting.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -42,6 +44,8 @@ print(response.json())
 
 Output
 
+
+
 ```shiki
 { "input_tokens": 14 }
 ```
@@ -51,6 +55,8 @@ Output
 [Server tool](agents-and-tools/tool-use/server-tools.md) token counts only apply to the first sampling call.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -81,6 +87,8 @@ print(response.json())
 
 Output
 
+
+
 ```shiki
 { "input_tokens": 403 }
 ```
@@ -88,6 +96,8 @@ Output
 ### Count tokens in messages with images
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 import base64
@@ -123,6 +133,8 @@ print(response.json())
 
 Output
 
+
+
 ```shiki
 { "input_tokens": 1551 }
 ```
@@ -135,6 +147,8 @@ See [how the context window is calculated with extended thinking](build-with-cla
 - **Current** assistant turn thinking **does** count toward your input tokens
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -170,6 +184,8 @@ print(response.json())
 
 Output
 
+
+
 ```shiki
 { "input_tokens": 88 }
 ```
@@ -179,6 +195,8 @@ Output
 Token counting supports PDFs with the same [limitations](build-with-claude/pdf-support.md) as the Messages API.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 import base64
@@ -213,6 +231,8 @@ print(response.json())
 ```
 
 Output
+
+
 
 ```shiki
 { "input_tokens": 2188 }

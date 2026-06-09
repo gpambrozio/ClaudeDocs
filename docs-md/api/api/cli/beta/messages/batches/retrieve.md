@@ -116,7 +116,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Retrieve a Message Batch
 
-CLI
+CLI
 
 ```shiki
 ant beta:messages:batches retrieve \
@@ -125,6 +125,8 @@ ant beta:messages:batches retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -150,6 +152,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

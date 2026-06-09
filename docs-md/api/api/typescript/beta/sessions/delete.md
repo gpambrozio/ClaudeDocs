@@ -94,7 +94,7 @@ type: "session\_deleted"
 
 Delete Session
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -112,6 +112,8 @@ console.log(betaManagedAgentsDeletedSession.id);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -122,6 +124,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

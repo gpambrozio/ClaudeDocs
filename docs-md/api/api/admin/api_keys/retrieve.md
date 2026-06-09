@@ -76,6 +76,8 @@ ID of the Workspace associated with the API key, or `null` if the API key belong
 
 Get API Key
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
     -H 'anthropic-version: 2023-06-01' \
@@ -83,6 +85,8 @@ curl https://api.anthropic.com/v1/organizations/api_keys/$API_KEY_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -104,6 +108,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

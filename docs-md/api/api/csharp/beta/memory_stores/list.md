@@ -140,7 +140,7 @@ Opaque cursor for the next page (a `page_...` value). Pass as `page` on the next
 
 List memory stores
 
-C#
+C#
 
 ```shiki
 MemoryStoreListParams parameters = new();
@@ -153,6 +153,8 @@ await foreach (var item in page.Paginate())
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -177,6 +179,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -304,7 +304,7 @@ Last ID in the `data` list. Can be used as the `after_id` for the next page.
 
 List Models
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/models \
@@ -313,6 +313,8 @@ curl https://api.anthropic.com/v1/models \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -396,6 +398,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

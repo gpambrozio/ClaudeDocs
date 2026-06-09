@@ -16,7 +16,7 @@ Both methods grant the same access to Claude API endpoints. Choose API keys to g
 API keys are static secrets that you generate in the Claude Console and pass on every request.
 
 - **Create a key:** Go to [Settings → API keys](https://platform.claude.com/settings/keys) in the Claude Console. Use [workspaces](https://platform.claude.com/settings/workspaces) to scope keys by project or environment.
-- **Send the key:** Set the `x-api-key` header on direct HTTP requests, or set the `ANTHROPIC_API_KEY` environment variable and the [client SDKs](api/client-sdks.md) pick it up automatically.
+- **Send the key:** Set the `x-api-key` header on direct HTTP requests, or set the `ANTHROPIC_API_KEY` environment variable and the [client SDKs](cli-sdks-libraries/overview.md) pick it up automatically.
 
 ```shiki
 POST /v1/messages
@@ -25,9 +25,13 @@ anthropic-version: 2023-06-01
 content-type: application/json
 ```
 
+
+
 API keys have no expiry. Store them in a secrets manager, rotate them periodically, and revoke any key you suspect has leaked.
 
 cURLPythonTypeScriptGoJavaC#PHPRubyCLI
+
+
 
 ```shiki
 client = Anthropic(api_key="my-anthropic-api-key")
@@ -53,7 +57,7 @@ Step-by-step guides for AWS, Google Cloud, Azure, GitHub Actions, Kubernetes, SP
 
 Environment variables, validation rules, profile configuration, and error reference](manage-claude/wif-reference.md)[Client SDKs
 
-Python, TypeScript, Go, Java, C#, Ruby, PHP, and the CLI](api/client-sdks.md)
+Python, TypeScript, C#, Go, Java, PHP, Ruby, and the CLI](cli-sdks-libraries/overview.md)
 
 Was this page helpful?
 

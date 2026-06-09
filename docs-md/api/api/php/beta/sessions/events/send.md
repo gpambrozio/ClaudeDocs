@@ -36,7 +36,7 @@ Sent events
 
 Send Events
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -61,6 +61,8 @@ var_dump($betaManagedAgentsSendSessionEvents);
 
 Response 200
 
+
+
 ```shiki
 {
   "data": [
@@ -82,6 +84,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

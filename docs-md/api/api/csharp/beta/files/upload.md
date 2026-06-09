@@ -128,7 +128,7 @@ The type of scope (e.g., `"session"`).
 
 Upload File
 
-C#
+C#
 
 ```shiki
 FileUploadParams parameters = new()
@@ -142,6 +142,8 @@ Console.WriteLine(fileMetadata);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -162,6 +164,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

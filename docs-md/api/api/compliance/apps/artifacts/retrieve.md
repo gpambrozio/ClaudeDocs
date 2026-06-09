@@ -61,12 +61,16 @@ Artifact version ID e.g. 'claude\_artifact\_version\_abc123'
 
 Get artifact metadata
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/artifacts/$ARTIFACT_VERSION_ID \
     -H "Authorization: Bearer $ANTHROPIC_COMPLIANCE_API_KEY"
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -84,6 +88,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

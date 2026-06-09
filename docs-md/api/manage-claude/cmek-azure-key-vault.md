@@ -4,6 +4,8 @@ Copy page
 
 Configure with the /claude-api skill in Claude Code
 
+
+
 ```shiki
 claude "/claude-api help me configure a customer-managed encryption key with Azure Key Vault"
 ```
@@ -45,6 +47,8 @@ Use only this published client ID and display name. Never trust an identifier pr
    az ad sp create --id 8635ae1a-3e5d-44e8-a4ed-e0f614466f87
    ```
 
+   
+
    From the output, capture the `id` field. This is the service principal's object ID in your tenant, which you use when you assign the RBAC role.
 
    ```shiki
@@ -55,11 +59,15 @@ Use only this published client ID and display name. Never trust an identifier pr
    }
    ```
 
+   
+
    If the service principal already exists in your tenant (from a prior attempt or another integration), `az ad sp create` exits with an "already exists" error. Fetch its object ID instead:
 
    ```shiki
    az ad sp show --id 8635ae1a-3e5d-44e8-a4ed-e0f614466f87 --query id -o tsv
    ```
+
+   
 
    This step has no Portal equivalent. If you do not have the Azure CLI installed locally, open Cloud Shell from the Portal's top navigation bar. After the command succeeds, you can find the service principal's object ID in **Microsoft Entra ID > Enterprise applications** by clearing the default application-type filter and searching for `anthropic-cmek-client-us`.
 
@@ -79,6 +87,8 @@ Use only this published client ID and display name. Never trust an identifier pr
      --kty RSA --size 3072 \
      --ops wrapKey unwrapKey
    ```
+
+   
 
    For HSM-backed keys, use `--kty RSA-HSM` (requires a Premium-SKU vault). Software-protected RSA keys are acceptable for this integration.
 
@@ -107,6 +117,8 @@ Use only this published client ID and display name. Never trust an identifier pr
      --scope "${VAULT_ID}/keys/<your-key-name>"
    ```
 
+   
+
    The built-in `Key Vault Crypto User` role grants key cryptographic operations (encrypt, decrypt, wrap, unwrap, sign, verify) plus key read on its assigned scope. The `--ops wrapKey unwrapKey` restriction you set on the key in the previous step further narrows which of those operations can succeed against this key, so in practice Anthropic can only wrap and unwrap.
 
    From the Portal, open the **key** (not the vault), select its **Access control (IAM)** tab, click **Add > Add role assignment**, select **Key Vault Crypto User**, and assign it to the `anthropic-cmek-client-us` service principal.
@@ -124,6 +136,8 @@ Use only this published client ID and display name. Never trust an identifier pr
    az keyvault show --name <your-vault-name> \
      --query "{rbac:properties.enableRbacAuthorization, purge:properties.enablePurgeProtection, pub:properties.publicNetworkAccess, net:properties.networkAcls.defaultAction, ipRules:properties.networkAcls.ipRules, uri:properties.vaultUri, tenantId:properties.tenantId}"
    ```
+
+   
 
    Confirm that:
 
@@ -156,6 +170,8 @@ Use only this published client ID and display name. Never trust an identifier pr
      }'
    ```
 
+   
+
    The response contains the external key ID:
 
    ```shiki
@@ -165,6 +181,8 @@ Use only this published client ID and display name. Never trust an identifier pr
      "display_name": "<friendly-name>"
    }
    ```
+
+   
 6. 6
 
    Validate the key
@@ -178,11 +196,15 @@ Use only this published client ID and display name. Never trust an identifier pr
      -H "content-type: application/json" -d '{}'
    ```
 
+   
+
    A successful response looks like this:
 
    ```shiki
    { "type": "external_key_validation", "status": "success", "error": null }
    ```
+
+   
 
    If validation fails, the `error` field describes the problem. Common causes are:
 
@@ -204,6 +226,8 @@ Use only this published client ID and display name. Never trust an identifier pr
        "external_key_id": "ekey_<id>"
      }'
    ```
+
+   
 
 ## Terraform
 

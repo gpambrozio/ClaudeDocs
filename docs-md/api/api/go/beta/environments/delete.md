@@ -98,7 +98,7 @@ The type of response
 
 Delete Environment
 
-Go
+Go
 
 ```shiki
 package main
@@ -131,6 +131,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -141,6 +143,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

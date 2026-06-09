@@ -112,7 +112,7 @@ Number of workers that have polled for work in the last 30 seconds. Requires wor
 
 Get Queue Statistics
 
-Python
+Python
 
 ```shiki
 import os
@@ -129,6 +129,8 @@ print(beta_self_hosted_work_queue_stats.depth)
 
 Response 200
 
+
+
 ```shiki
 {
   "depth": 0,
@@ -142,6 +144,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -44,7 +44,7 @@ type: "vault\_credential\_deleted"
 
 Delete Credential
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults:credentials delete \
@@ -54,6 +54,8 @@ ant beta:vaults:credentials delete \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -65,6 +67,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

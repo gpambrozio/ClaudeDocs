@@ -294,7 +294,7 @@ Human-readable name for the credential.
 
 Create Credential
 
-Go
+Go
 
 ```shiki
 package main
@@ -333,6 +333,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
@@ -355,6 +357,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

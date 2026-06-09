@@ -18,6 +18,8 @@ The following call lists every organization under your parent. The response is a
 
 cURL
 
+
+
 ```shiki
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/organizations" \
@@ -25,6 +27,8 @@ curl --fail-with-body -sS \
 ```
 
 Response
+
+
 
 ```shiki
 {
@@ -68,6 +72,8 @@ Results are sorted by organization join date ascending. Unlike the Activity Feed
 
 cURL
 
+
+
 ```shiki
 org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
 
@@ -78,6 +84,8 @@ curl --fail-with-body -sS -G \
 ```
 
 Response
+
+
 
 ```shiki
 {
@@ -107,6 +115,8 @@ Both role endpoints require `read:compliance_org_data`. The list endpoint accept
 
 cURL
 
+
+
 ```shiki
 org_uuid="91012d09-e48b-438e-a489-1bebfd8fa6f9"
 
@@ -116,6 +126,8 @@ curl --fail-with-body -sS \
 ```
 
 Response
+
+
 
 ```shiki
 {
@@ -147,6 +159,8 @@ List groups, then for each group list its members:
 
 cURL
 
+
+
 ```shiki
 curl --fail-with-body -sS -G \
   "https://api.anthropic.com/v1/compliance/groups" \
@@ -154,6 +168,8 @@ curl --fail-with-body -sS -G \
 ```
 
 Response
+
+
 
 ```shiki
 {
@@ -177,6 +193,8 @@ For each group ID, list its members:
 
 cURL
 
+
+
 ```shiki
 group_id="rbac_group_01P9qRsTuVwXyZa2BcDeFgHjK"
 
@@ -186,6 +204,8 @@ curl --fail-with-body -sS -G \
 ```
 
 Response
+
+
 
 ```shiki
 {

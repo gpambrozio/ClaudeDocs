@@ -88,7 +88,7 @@ The visibility scope for this environment. 'organization' means visible to all a
 
 Update Environment
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -128,6 +128,8 @@ var_dump($betaEnvironment);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -179,6 +181,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

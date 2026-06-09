@@ -1404,7 +1404,7 @@ The session's new title. Present only when the update changed it.
 
 Stream Session Thread Events
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -1429,6 +1429,8 @@ var_dump($betaManagedAgentsStreamSessionThreadEvents);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
@@ -1446,6 +1448,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

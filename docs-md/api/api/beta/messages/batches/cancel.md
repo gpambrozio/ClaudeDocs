@@ -182,7 +182,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Cancel a Message Batch
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
@@ -193,6 +193,8 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID/cancel \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -218,6 +220,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

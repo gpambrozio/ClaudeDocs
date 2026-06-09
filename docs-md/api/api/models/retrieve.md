@@ -278,7 +278,7 @@ For Models, this is always `"model"`.
 
 Get a Model
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/models/$MODEL_ID \
@@ -287,6 +287,8 @@ curl https://api.anthropic.com/v1/models/$MODEL_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -363,6 +365,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -194,7 +194,7 @@ For Message Batches, this is always `"message_batch"`.
 
 List Message Batches
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -210,6 +210,8 @@ for await (const betaMessageBatch of client.beta.messages.batches.list()) {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -242,6 +244,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

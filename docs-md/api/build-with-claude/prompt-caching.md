@@ -15,6 +15,8 @@ The simplest way to start is with automatic caching:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -104,6 +106,8 @@ Automatic caching is the simplest way to enable prompt caching. Instead of placi
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -144,6 +148,8 @@ By default, automatic caching uses a 5-minute TTL. You can specify a 1-hour TTL 
 { "cache_control": { "type": "ephemeral", "ttl": "1h" } }
 ```
 
+
+
 ### Combining with block-level caching
 
 Automatic caching is compatible with [explicit cache breakpoints](#explicit-cache-breakpoints). When used together, the automatic cache breakpoint uses one of the 4 available breakpoint slots.
@@ -165,6 +171,8 @@ This lets you combine both approaches. For example, use an explicit breakpoint t
   "messages": [{ "role": "user", "content": "What are the key terms?" }]
 }
 ```
+
+
 
 ### What stays the same
 
@@ -326,6 +334,8 @@ To calculate total input tokens:
 total_input_tokens = cache_read_input_tokens + cache_creation_input_tokens + input_tokens
 ```
 
+
+
 **Spatial explanation:**
 
 - `cache_read_input_tokens` = tokens before breakpoint already cached (reads)
@@ -380,6 +390,8 @@ Assistant: [thinking_block_2] + [text block 2],
 User: [Text response, cache=True]
 # On earlier Opus/Sonnet and all Haiku models, non-tool-result user block causes prior thinking blocks to be stripped; on Opus 4.5+/Sonnet 4.6+ they are kept
 ```
+
+
 
 On earlier Opus/Sonnet models and all Haiku models, all previous thinking blocks are removed from context at this point. On Opus 4.5+ and Sonnet 4.6+, prior thinking blocks are kept by default and remain part of the cached prefix.
 
@@ -449,9 +461,13 @@ To use the extended cache, include `ttl` in the `cache_control` definition like 
 }
 ```
 
+
+
 The response will include detailed cache information like the following:
 
 Output
+
+
 
 ```shiki
 {
@@ -520,6 +536,8 @@ A pre-warm request incurs a **cache write** charge if the prefix is not already 
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -544,6 +562,8 @@ print(prewarm.usage)
 The API returns an empty `content` array:
 
 Output
+
+
 
 ```shiki
 {
@@ -587,6 +607,8 @@ Output
 Fire a pre-warm request when your application starts (or on a scheduled interval), then send real user requests after the pre-warm completes:
 
 Python
+
+
 
 ```shiki
 client = anthropic.Anthropic()

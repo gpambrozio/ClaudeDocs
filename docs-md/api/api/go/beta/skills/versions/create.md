@@ -142,7 +142,7 @@ Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
 Create Skill Version
 
-Go
+Go
 
 ```shiki
 package main
@@ -175,6 +175,8 @@ func main() {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "skillver_01JAbcdefghijklmnopqrstuvw",
@@ -191,6 +193,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

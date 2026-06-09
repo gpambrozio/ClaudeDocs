@@ -49,6 +49,8 @@ Here's a simple example with deferred tools:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -96,6 +98,8 @@ The tool search tool has two variants:
 
 JSON
 
+
+
 ```shiki
 {
   "type": "tool_search_tool_regex_20251119",
@@ -104,6 +108,8 @@ JSON
 ```
 
 JSON
+
+
 
 ```shiki
 {
@@ -132,6 +138,8 @@ When using `tool_search_tool_bm25_20251119`, Claude uses natural language querie
 Mark tools for on-demand loading by adding `defer_loading: true`:
 
 JSON
+
+
 
 ```shiki
 {
@@ -165,6 +173,8 @@ Both tool search variants (`regex` and `bm25`) search tool names, descriptions, 
 When Claude uses the tool search tool, the response includes new block types:
 
 JSON
+
+
 
 ```shiki
 {
@@ -224,6 +234,8 @@ You can implement your own tool search logic (for example, using embeddings or s
 
 JSON
 
+
+
 ```shiki
 {
   "type": "tool_result",
@@ -261,6 +273,8 @@ These errors prevent the request from being processed:
 }
 ```
 
+
+
 **Missing tool definition:**
 
 ```shiki
@@ -273,11 +287,15 @@ These errors prevent the request from being processed:
 }
 ```
 
+
+
 ### Tool result errors (200 status)
 
 Errors during tool execution return a 200 response with error information in the body:
 
 JSON
+
+
 
 ```shiki
 {
@@ -332,6 +350,8 @@ data: {"type": "content_block_start", "index": 2, "content_block": {"type": "too
 // Claude continues with discovered tools
 ```
 
+
+
 ## Batch requests
 
 You can include the tool search tool in the [Messages Batches API](build-with-claude/batch-processing.md). Tool search operations through the Messages Batches API are priced the same as those in regular Messages API requests.
@@ -375,6 +395,8 @@ You can include the tool search tool in the [Messages Batches API](build-with-cl
 Tool search tool usage is tracked in the response usage object:
 
 JSON
+
+
 
 ```shiki
 {

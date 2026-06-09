@@ -38,11 +38,15 @@ Go
 brew install anthropics/tap/ant
 ```
 
+
+
 Check the installation:
 
 ```shiki
 ant --version
 ```
+
+
 
 ## Install the SDK
 
@@ -78,11 +82,15 @@ PHP
 pip install anthropic
 ```
 
+
+
 Set your API key as an environment variable:
 
 ```shiki
 export ANTHROPIC_API_KEY="your-api-key-here"
 ```
+
+
 
 ## Create your first session
 
@@ -95,6 +103,8 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
    Create an agent that defines the model, system prompt, and available tools.
 
    curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+   
 
    ```shiki
    ant beta:agents create \
@@ -115,6 +125,8 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
    curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+   
+
    ```shiki
    ant beta:environments create \
      --name "quickstart-env" \
@@ -132,6 +144,8 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
    curlPythonTypeScriptC#GoJavaPHPRuby
 
+   
+
    ```shiki
    session = client.beta.sessions.create(
        agent=agent.id,
@@ -148,6 +162,8 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
    Open a stream, send a user event, then process events as they arrive:
 
    curlPythonTypeScriptC#GoJavaPHPRuby
+
+   
 
    ```shiki
    with client.beta.sessions.events.stream(session.id) as stream:
@@ -192,6 +208,8 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
    Agent finished.
    ```
+
+   
 
 ## What's happening
 

@@ -84,7 +84,7 @@ Display name of the entity this profile represents. For `resold` this is the res
 
 Get User Profile
 
-CLI
+CLI
 
 ```shiki
 ant beta:user-profiles retrieve \
@@ -93,6 +93,8 @@ ant beta:user-profiles retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -115,6 +117,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

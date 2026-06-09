@@ -126,7 +126,7 @@ A timestamp in RFC 3339 format
 
 List Vaults
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -139,6 +139,8 @@ puts(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -162,6 +164,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

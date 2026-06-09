@@ -88,7 +88,7 @@ Type type
 
 Delete Session
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -111,6 +111,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesn_011CZkZAtmR3yMPDzynEDxu7",
@@ -121,6 +123,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

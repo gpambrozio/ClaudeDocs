@@ -42,7 +42,7 @@ type: "session\_resource\_deleted"
 
 Delete Session Resource
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions:resources delete \
@@ -52,6 +52,8 @@ ant beta:sessions:resources delete \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -63,6 +65,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

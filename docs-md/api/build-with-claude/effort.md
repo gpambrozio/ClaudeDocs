@@ -78,6 +78,8 @@ When running Claude Opus 4.8 at `xhigh` or `max` effort, set a large `max_tokens
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 

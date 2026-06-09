@@ -98,7 +98,7 @@ The type of response
 
 Delete Environment
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -116,6 +116,8 @@ console.log(betaEnvironmentDeleteResponse.id);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -126,6 +128,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

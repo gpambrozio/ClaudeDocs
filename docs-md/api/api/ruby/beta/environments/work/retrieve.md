@@ -166,7 +166,7 @@ The type of object (always 'work')
 
 Get Work Item
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -179,6 +179,8 @@ puts(beta_self_hosted_work)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -205,6 +207,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

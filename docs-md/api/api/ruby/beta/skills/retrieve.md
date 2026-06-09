@@ -133,7 +133,7 @@ ISO 8601 timestamp of when the skill was last updated.
 
 Get Skill
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -146,6 +146,8 @@ puts(skill)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -162,6 +164,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

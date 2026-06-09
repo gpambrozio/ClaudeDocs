@@ -7,13 +7,13 @@ The Vertex API for accessing Claude is nearly identical to the [Messages API](ap
 - In Vertex, `model` is not passed in the request body. Instead, it is specified in the Google Cloud endpoint URL.
 - In Vertex, `anthropic_version` is passed in the request body (rather than as a header), and must be set to the value `vertex-2023-10-16`.
 
-Vertex is also supported by Anthropic's official [client SDKs](api/client-sdks.md). This guide walks you through making a request to Claude on Vertex AI using one of Anthropic's client SDKs.
+Vertex is also supported by Anthropic's official [client SDKs](cli-sdks-libraries/overview.md). This guide walks you through making a request to Claude on Vertex AI using one of Anthropic's client SDKs.
 
 Note that this guide assumes you already have a GCP project that is able to use Vertex AI. See [Anthropic Claude models on Vertex AI](https://docs.cloud.google.com/gemini-enterprise-agent-platform/models/partner-models/claude) for more information on the setup required and a full walkthrough.
 
 ## Install an SDK for accessing Vertex AI
 
-First, install Anthropic's [client SDK](api/client-sdks.md) for your language of choice.
+First, install Anthropic's [client SDK](cli-sdks-libraries/overview.md) for your language of choice.
 
 Python
 
@@ -46,6 +46,8 @@ Ruby
 ```shiki
 pip install -U google-cloud-aiplatform "anthropic[vertex]"
 ```
+
+
 
 ## Accessing Vertex AI
 
@@ -82,6 +84,8 @@ The following examples show how to generate text from Claude on Vertex AI:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 from anthropic import AnthropicVertex
 
@@ -103,7 +107,7 @@ message = client.messages.create(
 print(message)
 ```
 
-See the [client SDKs](api/client-sdks.md) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
+See the [client SDKs](cli-sdks-libraries/overview.md) and the official [Vertex AI docs](https://cloud.google.com/vertex-ai/docs) for more details.
 
 Claude is also available through [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), and [Microsoft Foundry](build-with-claude/claude-in-microsoft-foundry.md).
 
@@ -191,6 +195,8 @@ Set the `region` parameter to `"global"` when initializing the client:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 from anthropic import AnthropicVertex
 
@@ -218,6 +224,8 @@ Set the `region` parameter to a multi-region identifier: `"us"` for the United S
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 from anthropic import AnthropicVertex
 
@@ -244,6 +252,8 @@ print(message)
 Specify a specific region like `"us-east1"` or `"europe-west1"`:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 from anthropic import AnthropicVertex

@@ -278,7 +278,7 @@ For Models, this is always `"model"`.
 
 Get a Model
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -291,6 +291,8 @@ puts(beta_model_info)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -367,6 +369,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

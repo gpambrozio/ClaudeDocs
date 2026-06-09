@@ -86,7 +86,7 @@ One of the following:
 
 Download File
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/files/$FILE_ID/content \

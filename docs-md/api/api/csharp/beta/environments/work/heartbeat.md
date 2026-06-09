@@ -132,7 +132,7 @@ The type of response
 
 Record Heartbeat
 
-C#
+C#
 
 ```shiki
 WorkHeartbeatParams parameters = new()
@@ -148,6 +148,8 @@ Console.WriteLine(betaSelfHostedWorkHeartbeatResponse);
 
 Response 200
 
+
+
 ```shiki
 {
   "last_heartbeat": "last_heartbeat",
@@ -161,6 +163,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -33,6 +33,8 @@ Upload a file to be referenced in future API calls:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 uploaded = client.beta.files.upload(
     file=("document.pdf", open("/path/to/document.pdf", "rb"), "application/pdf"),
@@ -42,6 +44,8 @@ uploaded = client.beta.files.upload(
 The response from uploading a file will include:
 
 Output
+
+
 
 ```shiki
 {
@@ -60,6 +64,8 @@ Output
 Once uploaded, reference the file using its `file_id`:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 response = client.beta.messages.create(
@@ -101,6 +107,8 @@ The Files API supports different file types that correspond to different content
 For file types that are not supported as `document` blocks (.csv, .txt, .md, .docx, .xlsx), convert the files to plain text, and include the content directly in your message:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 import pandas as pd
@@ -148,6 +156,8 @@ For PDFs and text files, use the `document` content block:
 }
 ```
 
+
+
 #### Image blocks
 
 For images, use the `image` content block:
@@ -162,6 +172,8 @@ For images, use the `image` content block:
 }
 ```
 
+
+
 ### Managing files
 
 #### List files
@@ -169,6 +181,8 @@ For images, use the `image` content block:
 Retrieve a list of your uploaded files:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -181,6 +195,8 @@ Retrieve information about a specific file:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 file = client.beta.files.retrieve_metadata(file_id)
 ```
@@ -191,6 +207,8 @@ Remove a file from your workspace:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 result = client.beta.files.delete(file_id)
 ```
@@ -200,6 +218,8 @@ result = client.beta.files.delete(file_id)
 Download files that have been created by skills or the code execution tool:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 file_content = client.beta.files.download(file_id)
@@ -248,6 +268,8 @@ Common errors when using the Files API include:
 
 Output
 
+
+
 ```shiki
 {
   "type": "error",
@@ -275,7 +297,7 @@ File content used in `Messages` requests are priced as input tokens. You can onl
 During the beta period:
 
 - File-related API calls are limited to approximately 100 requests per minute
-- [Contact us](/cdn-cgi/l/email-protection#fe8d9f929b8dbe9f908a968c918e979dd09d9193) if you need higher limits for your use case
+- [Contact us](/cdn-cgi/l/email-protection#f380929f9680b3929d879b819c839a90dd909c9e) if you need higher limits for your use case
 
 Was this page helpful?
 

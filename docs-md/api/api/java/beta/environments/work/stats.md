@@ -106,7 +106,7 @@ Number of workers that have polled for work in the last 30 seconds. Requires wor
 
 Get Queue Statistics
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -129,6 +129,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "depth": 0,
@@ -142,6 +144,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -12,6 +12,8 @@ The following call returns the most recent activity event in your organization. 
 
 cURL
 
+
+
 ```shiki
 curl --fail-with-body -sS \
   "https://api.anthropic.com/v1/compliance/activities?limit=1" \
@@ -21,6 +23,8 @@ curl --fail-with-body -sS \
 A successful response returns a JSON object containing `data` (an array of `Activity` records), `has_more`, `first_id`, and `last_id`:
 
 Response
+
+
 
 ```shiki
 {

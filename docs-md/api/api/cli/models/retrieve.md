@@ -218,7 +218,7 @@ For Models, this is always `"model"`.
 
 Get a Model
 
-CLI
+CLI
 
 ```shiki
 ant models retrieve \
@@ -227,6 +227,8 @@ ant models retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -303,6 +305,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

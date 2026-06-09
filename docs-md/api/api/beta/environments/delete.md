@@ -98,7 +98,7 @@ The type of response
 
 Delete Environment
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID \
@@ -110,6 +110,8 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID \
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -120,6 +122,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

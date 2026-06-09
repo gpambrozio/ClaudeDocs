@@ -44,6 +44,8 @@ For example, this will cause a 400 error:
 }
 ```
 
+
+
 This is correct:
 
 ```shiki
@@ -55,6 +57,8 @@ This is correct:
   ]
 }
 ```
+
+
 
 If you receive an error like "tool\_use ids were found without tool\_result blocks immediately after", check that your tool results are formatted correctly.
 

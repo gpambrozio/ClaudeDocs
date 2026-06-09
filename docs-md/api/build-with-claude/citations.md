@@ -14,6 +14,8 @@ Here's an example of how to use citations with the Messages API:
 
 cURLCLIPythonJava
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -126,6 +128,8 @@ The citation blocks generated in responses cannot be cached directly, but the so
 
 cURLCLIPythonTypeScript
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -211,6 +215,8 @@ Files API
 }
 ```
 
+
+
 ### Example plain text citation
 
 ### PDF documents
@@ -243,6 +249,8 @@ Files API
 }
 ```
 
+
+
 ### Example PDF citation
 
 ### Custom content documents
@@ -264,6 +272,8 @@ Custom content documents give you control over citation granularity. No addition
     "citations": {"enabled": True},
 }
 ```
+
+
 
 ### Example citation
 
@@ -345,6 +355,8 @@ When citations are enabled, responses include multiple text blocks with citation
     ]
 }
 ```
+
+
 
 ### Streaming Support
 

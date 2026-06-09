@@ -268,7 +268,7 @@ Opaque cursor for the next page (a `page_...` value), or `null` if there are no 
 
 List memory versions
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memory_versions \
@@ -278,6 +278,8 @@ curl https://api.anthropic.com/v1/memory_stores/$MEMORY_STORE_ID/memory_versions
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -311,6 +313,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

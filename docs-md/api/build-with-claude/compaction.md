@@ -47,6 +47,8 @@ Enable compaction by adding the `compact_20260112` strategy to `context_manageme
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -79,6 +81,8 @@ Configure when compaction triggers using the `trigger` parameter:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
@@ -106,9 +110,13 @@ By default, compaction uses the following summarization prompt:
 You have written a partial transcript for the initial task above. Please write a summary of the transcript. The purpose of this summary is to provide continuity so you can continue to make progress towards solving the task in a future context, where the raw history above may not be accessible and will be replaced with this summary. Write down anything that would be helpful, including the state, next steps, learnings etc. You must wrap your summary in a <summary></summary> block.
 ```
 
+
+
 You can provide custom instructions via the `instructions` parameter to replace this prompt entirely. Custom instructions don't supplement the default; they completely replace it:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -136,6 +144,8 @@ Use `pause_after_compaction` to pause the API after generating the compaction su
 When enabled, the API returns a message with the `compaction` stop reason after generating the compaction block:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -170,6 +180,8 @@ if response.stop_reason == "compaction":
 When a model works on long tasks with many tool-use iterations, total token consumption can grow significantly. You can combine `pause_after_compaction` with a compaction counter to estimate cumulative usage and gracefully wrap up the task once a budget is reached:
 
 Python
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -216,6 +228,8 @@ A long-running conversation may result in multiple compactions. The last compact
 
 Output
 
+
+
 ```shiki
 {
   "content": [
@@ -236,6 +250,8 @@ Output
 You must pass the `compaction` block back to the API on subsequent requests to continue the conversation with the shortened prompt. The simplest approach is to append the entire response content to your messages:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -272,6 +288,8 @@ When the API receives a `compaction` block, all content blocks before it are ign
 When streaming responses with compaction enabled, you'll receive a `content_block_start` event when compaction begins. The compaction block streams differently from text blocks. You'll receive a `content_block_start` event, followed by a single `content_block_delta` with the complete summary content (no intermediate streaming), and then a `content_block_stop` event.
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -323,6 +341,8 @@ Compaction works well with [prompt caching](build-with-claude/prompt-caching.md)
 }
 ```
 
+
+
 #### Maximizing cache hits with system prompts
 
 When compaction occurs, the summary becomes new content that needs to be written to the cache. Without additional cache breakpoints, this would also invalidate any cached system prompt, requiring it to be re-cached along with the compaction summary.
@@ -333,6 +353,8 @@ To maximize cache hit rates, add a `cache_control` breakpoint at the end of your
 - Only the compaction summary needs to be written as a new cache entry
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -362,6 +384,8 @@ This approach is particularly beneficial for long system prompts, as they remain
 Compaction requires an additional sampling step, which contributes to rate limits and billing. The API returns detailed usage information in the response:
 
 Output
+
+
 
 ```shiki
 {
@@ -402,6 +426,8 @@ The token counting endpoint (`/v1/messages/count_tokens`) applies existing `comp
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 messages = [{"role": "user", "content": "Hello, Claude"}]
@@ -421,6 +447,8 @@ print(f"Original tokens: {count_response.context_management.original_input_token
 Here's a complete example of a long-running conversation with compaction:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -461,6 +489,8 @@ print(chat("Now add rate limiting and error handling"))
 Here's an example that uses `pause_after_compaction` to preserve the prior exchange and the current user message (three messages total) verbatim instead of summarizing them:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 from typing import Any
@@ -537,6 +567,8 @@ print(chat("Now add rate limiting and error handling"))
   ```inline-block
   Summarize the transcript inside <summary></summary> tags. Include relevant information in the summary for continuing the task in the next context window. Do not call any tools while writing this summary; respond with text only.
   ```
+
+  
 
 ## Next steps
 

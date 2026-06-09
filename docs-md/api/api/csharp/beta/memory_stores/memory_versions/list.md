@@ -252,7 +252,7 @@ Opaque cursor for the next page (a `page_...` value), or `null` if there are no 
 
 List memory versions
 
-C#
+C#
 
 ```shiki
 MemoryVersionListParams parameters = new()
@@ -268,6 +268,8 @@ await foreach (var item in page.Paginate())
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -301,6 +303,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

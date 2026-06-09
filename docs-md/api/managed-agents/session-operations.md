@@ -27,6 +27,8 @@ The session must be `idle` to update the agent. [Interrupt](managed-agents/event
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:sessions update --session-id "$SESSION_ID" <<'YAML'
 agent:
@@ -45,6 +47,8 @@ YAML
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:sessions retrieve --session-id "$SESSION_ID"
 ```
@@ -52,6 +56,8 @@ ant beta:sessions retrieve --session-id "$SESSION_ID"
 ## Listing sessions
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:sessions list --agent-id "$AGENT_ID"
@@ -62,6 +68,8 @@ ant beta:sessions list --agent-id "$AGENT_ID"
 Archive a session to prevent new events from being sent while preserving its history. A `running` session cannot be archived; send an [interrupt event](managed-agents/events-and-streaming.md) if you need to archive it immediately.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:sessions archive \
@@ -75,6 +83,8 @@ Delete a session to permanently remove its record, events, and associated sandbo
 Files, memory stores, vaults, skills, environments, and agents are independent resources and are not affected by session deletion.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:sessions delete \

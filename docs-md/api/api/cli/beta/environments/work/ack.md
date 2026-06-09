@@ -108,7 +108,7 @@ The type of object (always 'work')
 
 Acknowledge Work
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments:work ack \
@@ -118,6 +118,8 @@ ant beta:environments:work ack \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -144,6 +146,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

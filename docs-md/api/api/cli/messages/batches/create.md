@@ -114,7 +114,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Create a Message Batch
 
-CLI
+CLI
 
 ```shiki
 ant messages:batches create \
@@ -123,6 +123,8 @@ ant messages:batches create \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -148,6 +150,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

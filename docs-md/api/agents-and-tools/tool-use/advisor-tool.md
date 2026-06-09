@@ -45,6 +45,8 @@ The advisor tool is available in beta on the Claude API and on [Claude Platform 
 
 cURLCLIPythonTypeScriptC#GoPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -96,6 +98,8 @@ The advisor itself runs without tools and without context management. Its thinki
 
 The `caching` object has the shape `{"type": "ephemeral", "ttl": "5m" | "1h"}`. Unlike `cache_control` on content blocks, this is not a breakpoint marker; it is an on/off switch. The server decides where cache boundaries go.
 
+The advisor tool also accepts the generic properties available on any tool definition: `cache_control`, `allowed_callers`, `defer_loading`, and `strict` (covered in [structured outputs](build-with-claude/structured-outputs.md)). See the [Tool reference](agents-and-tools/tool-use/tool-reference.md) for their semantics.
+
 ## Response structure
 
 ### Successful advisor call
@@ -132,6 +136,8 @@ When the advisor is invoked, a `server_tool_use` block is followed by an `adviso
 }
 ```
 
+
+
 The `server_tool_use.input` is always empty. The server constructs the advisor's view from the full transcript automatically; nothing the executor puts in `input` reaches the advisor.
 
 ### Result variants
@@ -163,6 +169,8 @@ If the advisor call fails, the result carries an error:
   }
 }
 ```
+
+
 
 The executor sees the error and continues without further advice. The request itself does not fail.
 
@@ -224,6 +232,8 @@ response = client.beta.messages.create(
 )
 ```
 
+
+
 If you omit the advisor tool from `tools` on a follow-up turn while the message history still contains `advisor_tool_result` blocks, the API returns a `400 invalid_request_error`.
 
 The advisor tool has no built-in conversation-level cap. To limit advisor
@@ -281,6 +291,8 @@ Advisor calls run as a separate sub-inference billed at the advisor model's rate
 }
 ```
 
+
+
 Top-level `usage` fields reflect executor tokens only. Advisor tokens are not rolled into the top-level totals because they are billed at a different rate. Iterations with `type: "advisor_message"` are billed at the advisor model's rates; iterations with `type: "message"` are billed at the executor model's rates.
 
 The aggregation rules differ by field. Top-level `output_tokens` is the sum of all executor iterations. Top-level `input_tokens` and `cache_read_input_tokens` reflect the first executor iteration only; subsequent executor iterations' inputs are not re-summed because they include prior output tokens. Use `usage.iterations` for a full per-iteration breakdown when building cost-tracking logic.
@@ -311,6 +323,8 @@ tools = [
     }
 ]
 ```
+
+
 
 The advisor's prompt on the Nth call is the (N-1)th call's prompt with one more segment appended, so the prefix is stable across calls. With `caching` enabled, each advisor call writes a cache entry; the next call reads up to that point and pays only for the delta. You'll see `cache_read_input_tokens` become non-zero on the second and later `advisor_message` iterations.
 
@@ -355,6 +369,8 @@ tools = [
 ]
 ```
 
+
+
 The executor can search the web, call the advisor, and use your custom tools in the same turn. The advisor's plan can inform which tools the executor reaches for next.
 
 | Feature | Interaction |
@@ -396,6 +412,8 @@ Also call advisor:
 On tasks longer than a few steps, call advisor at least once before committing to an approach and once before declaring done. On short reactive tasks where the next action is dictated by tool output you just read, you don't need to keep calling — the advisor adds most of its value on the first call, before the approach crystallizes.
 ```
 
+
+
 How the executor should treat the advice (place directly after the timing block):
 
 ```inline-block
@@ -404,6 +422,8 @@ Give the advice serious weight. If you follow a step and it fails empirically, o
 If you've already retrieved data pointing one way and the advisor points another: don't silently switch. Surface the conflict in one more advisor call — "I found X, you suggest Y, which constraint breaks the tie?" The advisor saw your evidence but may have underweighted it; a reconcile call is cheaper than committing to the wrong branch.
 ```
 
+
+
 #### Trimming advisor output length
 
 Advisor output is the advisor's largest cost driver, and the top-level `max_tokens` does not bound it. The advisor sees both your system prompt and your user messages as quoted context about the executor's task, so instructions that address the advisor directly are followed much more reliably than third-person descriptions. The most effective placement Anthropic tested is a line in the user message:
@@ -411,6 +431,8 @@ Advisor output is the advisor's largest cost driver, and the top-level `max_toke
 ```inline-block
 (Advisor: please keep your guidance under 80 words — I need a focused starting point, not a comprehensive plan.)
 ```
+
+
 
 This line can be prefixed programmatically by your agent framework before sending the request. The limit is a soft constraint; the advisor will occasionally exceed it, so ask for roughly 80 percent of your true ceiling.
 
@@ -434,6 +456,8 @@ tools = [
     }
 ]
 ```
+
+
 
 The minimum value is 1024. Setting `max_tokens` above the advisor model's own output cap returns a 400 error. The cap applies to each advisor call independently and is not shared across calls in the same request.
 
@@ -462,6 +486,8 @@ When the advisor does hit the cap, the result block carries `stop_reason: "max_t
   }
 }
 ```
+
+
 
 Check `output_tokens` on the corresponding `advisor_message` entry in `usage.iterations` to see how close each call came to its cap.
 

@@ -100,7 +100,7 @@ Display name of the entity this profile represents. For `resold` this is the res
 
 Update User Profile
 
-CLI
+CLI
 
 ```shiki
 ant beta:user-profiles update \
@@ -109,6 +109,8 @@ ant beta:user-profiles update \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -131,6 +133,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -264,7 +264,7 @@ Human-readable name for the credential.
 
 Update Credential
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -291,6 +291,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
@@ -313,6 +315,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

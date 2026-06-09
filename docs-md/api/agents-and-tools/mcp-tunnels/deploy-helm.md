@@ -78,6 +78,8 @@ spec:
 EOF
 ```
 
+
+
 The Install steps that follow note where to add the corresponding route.
 
 ## Install
@@ -120,6 +122,8 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
      oci://us-docker.pkg.dev/anthropic-public-registry/charts/mcp-tunnel \
      --version 1.0.0 > values.yaml
    ```
+
+   
 3. 3
 
    Configure tunnel attachment and routes
@@ -127,6 +131,8 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
    Edit `values.yaml` and set the `api.wif.*` keys with the tunnel ID, federation rule ID, and organization ID, plus a `routes` entry for each [upstream MCP server](agents-and-tools/mcp-tunnels/concepts.md):
 
    values.yaml
+
+   
 
    ```shiki
    api:
@@ -166,6 +172,8 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
      -n mcp-tunnel \
      -f values.yaml > rendered.yaml
    ```
+
+   
 5. 5
 
    Install
@@ -177,6 +185,8 @@ The setup component exchanges the cluster's projected ServiceAccount token throu
      --namespace mcp-tunnel --create-namespace \
      -f values.yaml
    ```
+
+   
 
    The setup component runs as a Helm pre-install hook Job, so `helm install` blocks until it completes. On success Helm deletes the Job automatically. If `helm install` fails with a hook error, see [Setup component authentication failures](agents-and-tools/mcp-tunnels/troubleshooting.md).
 
@@ -218,6 +228,8 @@ helm upgrade mcp-tunnel \
   -f values.yaml
 ```
 
+
+
 Maintain a complete `values.yaml` rather than relying on `--reuse-values`. Helm's deep-merge behavior can silently fail to remove deleted routes.
 
 ### Rotate the tunnel token
@@ -233,6 +245,8 @@ helm upgrade mcp-tunnel \
   --set setup.force=true
 ```
 
+
+
 The setup component authenticates with Workload Identity Federation; there is no API token to revoke.
 
 Without programmatic access, click **Rotate token** on the tunnel detail page in the Console, then update the `mcp-tunnel-token` Secret:
@@ -242,6 +256,8 @@ kubectl -n mcp-tunnel create secret generic mcp-tunnel-token \
   --from-literal=tunnel-token='eyJ...' --dry-run=client -o yaml | kubectl apply -f -
 kubectl -n mcp-tunnel rollout restart deploy/mcp-tunnel
 ```
+
+
 
 Clicking **Rotate token** invalidates the current token immediately. Until the Secret is updated and the rollout completes, any pod that restarts with the old token (eviction, node drain, OOM) cannot reconnect. Update the Secret promptly after rotating; for stricter availability requirements, use programmatic access so the chart handles the rotation atomically.
 
@@ -265,6 +281,8 @@ kubectl -n mcp-tunnel create secret generic mcp-tunnel-cert \
   --from-file=tls.crt=data/tls.crt --from-file=tls.key=data/tls.key \
   --dry-run=client -o yaml | kubectl apply -f -
 ```
+
+
 
 The proxy hot-reloads the certificate from the Secret mount.
 

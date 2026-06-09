@@ -4,7 +4,7 @@ Copy page
 
 Claude Platform on AWS gives you the full Anthropic platform experience, including the Messages API, Agent Skills, code execution, and beta features, accessible through your AWS account. Unlike [Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), where AWS operates the inference stack, Anthropic operates Claude Platform on AWS. AWS provides the authentication layer (SigV4 or API key), IAM-based access control, and billing integration through AWS Marketplace.
 
-The Anthropic SDKs support Claude Platform on AWS. For per-language client availability, see [Client SDKs](api/client-sdks.md).
+The Anthropic SDKs support Claude Platform on AWS.
 
 ## How the platform integration works
 
@@ -114,6 +114,8 @@ The Claude Platform on AWS gateway calls `sts:GetWebIdentityToken` server-side t
 
 CLI
 
+
+
 ```shiki
 aws iam enable-outbound-web-identity-federation
 ```
@@ -121,6 +123,8 @@ aws iam enable-outbound-web-identity-federation
 If the response is `[ERROR] (FeatureEnabled) ... already enabled`, the setting is already on for your account and you can move on. Verify and retrieve your account's issuer URL:
 
 CLI
+
+
 
 ```shiki
 aws iam get-outbound-web-identity-federation-info
@@ -135,6 +139,8 @@ You create a workspace from the AWS Console after completing account setup (see 
 Set the `ANTHROPIC_AWS_WORKSPACE_ID` and `AWS_REGION` environment variables so the SDK clients read them automatically:
 
 CLI
+
+
 
 ```shiki
 export ANTHROPIC_AWS_WORKSPACE_ID='wrkspc_01AbCdEf23GhIj'
@@ -162,6 +168,8 @@ Verify that your credentials are working:
 
 CLI
 
+
+
 ```shiki
 aws sts get-caller-identity
 ```
@@ -183,6 +191,8 @@ AWS publishes token-generator libraries for [JavaScript](https://github.com/aws/
 Pass the generated token to the SDK the same way you'd pass an AWS Console-generated API key:
 
 PythonTypeScriptJava
+
+
 
 ```shiki
 from token_generator_for_aws_external_anthropic import TokenGenerator
@@ -213,7 +223,7 @@ The client reads `AWS_REGION` from the environment if `aws_region`/`awsRegion` i
 
 ## Install an SDK
 
-Anthropic's [client SDKs](api/client-sdks.md) support Claude Platform on AWS. Each SDK provides a platform-specific client class that handles SigV4 signing, region-based base URL construction, and the `anthropic-workspace-id` header.
+Anthropic's [client SDKs](cli-sdks-libraries/overview.md) support Claude Platform on AWS. Each SDK provides a platform-specific client class that handles SigV4 signing, region-based base URL construction, and the `anthropic-workspace-id` header.
 
 Python
 
@@ -247,6 +257,8 @@ Ruby
 pip install -U "anthropic[aws]"
 ```
 
+
+
 On macOS with Homebrew Python or other externally managed Python environments, `pip install` can fail with a PEP 668 `externally-managed-environment` error. Create and activate a virtual environment first: `python3 -m venv .venv && source .venv/bin/activate`.
 
 SDK clients for Claude Platform on AWS are in beta.
@@ -276,6 +288,8 @@ Upgrading to a newer Claude model? In Claude Code, run `/claude-api migrate` to 
 Claude Platform on AWS uses the same API endpoints as the first-party Claude API. The differences are the base URL, the authentication method, and a required `anthropic-workspace-id` header that identifies which [workspace](#workspaces) the request targets.
 
 cURLPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 from anthropic import AnthropicAWS
@@ -356,6 +370,8 @@ The `inference_geo` parameter is supported on Claude Opus 4.6, Claude Sonnet 4.6
 
 cURLPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 from anthropic import AnthropicAWS
 
@@ -387,11 +403,15 @@ Workspaces also serve as the primary IAM resource for Claude Platform on AWS. Yo
 arn:aws:aws-external-anthropic:{region}:{account-id}:workspace/{workspace-id}
 ```
 
+
+
 For example:
 
 ```inline-block
 arn:aws:aws-external-anthropic:us-west-2:123456789012:workspace/wrkspc_01AbCdEf23GhIj
 ```
+
+
 
 See [IAM policies](#iam-policies) for policy examples.
 
@@ -416,7 +436,7 @@ Two Claude Console roles are available: **Admin** and **Developer**. The Admin r
 
 ### Available pages
 
-The **Through AWS gateway** column indicates whether the page reads and writes data through the AWS gateway (and is therefore governed by [IAM actions](api/claude-platform-on-aws-iam-actions.md)). Pages marked **No** read organization-level metadata directly through Anthropic APIs and bypass IAM action checks.
+The **Through AWS gateway** column indicates whether the page reads and writes data through the AWS gateway (and is therefore governed by [IAM actions](api/claude-platform-on-aws-iam-actions.md)). Pages marked **No** read organization-level metadata directly from Anthropic and bypass IAM action checks.
 
 | Page | Available | Through AWS gateway | Notes |
 | --- | --- | --- | --- |
@@ -466,6 +486,8 @@ Each response includes two request IDs in the response headers:
 - **Anthropic request ID (`request-id`):** The secondary ID. Use this when contacting Anthropic support.
 
 PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 from anthropic import AnthropicAWS
@@ -580,6 +602,8 @@ The following policy allows real-time inference while blocking batch processing:
   ]
 }
 ```
+
+
 
 The `GetBatchInference` action authorizes both the batch metadata route and the batch results route. Denying it blocks both reads. For a Deny-only policy suitable for ZDR-sensitive workloads, see [Feature lockdown for a ZDR-sensitive workspace](api/claude-platform-on-aws-iam-actions.md).
 

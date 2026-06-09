@@ -260,6 +260,8 @@ Token to provide in as `page` in the subsequent request to retrieve the next pag
 
 Get Messages Usage Report
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/usage_report/messages \
     -H 'anthropic-version: 2023-06-01' \
@@ -267,6 +269,8 @@ curl https://api.anthropic.com/v1/organizations/usage_report/messages \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -306,6 +310,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

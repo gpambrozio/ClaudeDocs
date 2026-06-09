@@ -44,7 +44,7 @@ Enrollment URL to send to the end user. Valid until `expires_at`.
 
 Create Enrollment URL
 
-CLI
+CLI
 
 ```shiki
 ant beta:user-profiles create-enrollment-url \
@@ -53,6 +53,8 @@ ant beta:user-profiles create-enrollment-url \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -65,6 +67,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

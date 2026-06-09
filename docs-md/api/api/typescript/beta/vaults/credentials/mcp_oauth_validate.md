@@ -190,7 +190,7 @@ Identifier of the vault containing the credential.
 
 Validate Credential
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -208,6 +208,8 @@ console.log(betaManagedAgentsCredentialValidation.credential_id);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -241,6 +243,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

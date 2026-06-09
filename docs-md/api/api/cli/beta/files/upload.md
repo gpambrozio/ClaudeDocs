@@ -74,7 +74,7 @@ The type of scope (e.g., `"session"`).
 
 Upload File
 
-CLI
+CLI
 
 ```shiki
 ant beta:files upload \
@@ -83,6 +83,8 @@ ant beta:files upload \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -103,6 +105,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -394,7 +394,7 @@ The agent's current version. Starts at 1 and increments when the agent is modifi
 
 Archive Agent
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
@@ -405,6 +405,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/archive \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -479,6 +481,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

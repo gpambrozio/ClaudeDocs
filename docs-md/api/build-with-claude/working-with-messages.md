@@ -20,6 +20,8 @@ The `temperature`, `top_p`, and `top_k` sampling parameters are not supported on
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 message = anthropic.Anthropic().messages.create(
     model="claude-opus-4-8",
@@ -30,6 +32,8 @@ print(message)
 ```
 
 Output
+
+
 
 ```shiki
 {
@@ -60,6 +64,8 @@ The Messages API is stateless, which means that you always send the full convers
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 message = anthropic.Anthropic().messages.create(
     model="claude-opus-4-8",
@@ -74,6 +80,8 @@ print(message)
 ```
 
 Output
+
+
 
 ```shiki
 {
@@ -112,6 +120,8 @@ Prefilling is not supported on [Claude Mythos Preview](https://anthropic.com/gla
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 message = anthropic.Anthropic().messages.create(
     model="claude-sonnet-4-5",
@@ -128,6 +138,8 @@ print(message)
 ```
 
 Output
+
+
 
 ```shiki
 {
@@ -155,6 +167,8 @@ Output
 Claude can read both text and images in requests. Images can be supplied using the `base64`, `url`, or `file` source types. The `file` source type references an image uploaded through the [Files API](build-with-claude/files.md). Supported media types are `image/jpeg`, `image/png`, `image/gif`, and `image/webp`. See the [vision guide](build-with-claude/vision.md) for more details.
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 import base64
@@ -211,6 +225,8 @@ print(message_from_url)
 ```
 
 Output
+
+
 
 ```shiki
 {

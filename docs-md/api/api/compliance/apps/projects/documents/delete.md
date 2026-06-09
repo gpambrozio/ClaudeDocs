@@ -34,6 +34,8 @@ Constant string confirming deletion.
 
 Delete project document
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_ID \
     -X DELETE \
@@ -41,6 +43,8 @@ curl https://api.anthropic.com/v1/compliance/apps/projects/documents/$DOCUMENT_I
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -52,6 +56,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -452,7 +452,7 @@ Total output tokens generated across all turns.
 
 Archive Session Thread
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -468,6 +468,8 @@ puts(beta_managed_agents_session_thread)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -545,6 +547,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

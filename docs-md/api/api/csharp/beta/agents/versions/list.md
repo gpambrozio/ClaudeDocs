@@ -396,7 +396,7 @@ Opaque cursor for the next page. Null when no more results.
 
 List Agent Versions
 
-C#
+C#
 
 ```shiki
 VersionListParams parameters = new()
@@ -412,6 +412,8 @@ await foreach (var item in page.Paginate())
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -491,6 +493,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

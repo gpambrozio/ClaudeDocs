@@ -98,7 +98,7 @@ type: "session\_resource\_deleted"
 
 Delete Session Resource
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -117,6 +117,8 @@ console.log(betaManagedAgentsDeleteSessionResource.id);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
@@ -127,6 +129,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

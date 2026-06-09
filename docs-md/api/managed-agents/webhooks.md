@@ -45,6 +45,8 @@ Set `ANTHROPIC_WEBHOOK_SIGNING_KEY` to the `whsec_`-prefixed secret shown at end
 
 PythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 from flask import Flask, request
 import anthropic
@@ -90,7 +92,11 @@ Every event payload has the same structure, including the event type, identifier
 }
 ```
 
+
+
 PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 if event.data.type == "session.status_idled":

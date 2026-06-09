@@ -168,7 +168,7 @@ The type of object (always 'work')
 
 Update Work Item
 
-C#
+C#
 
 ```shiki
 WorkUpdateParams parameters = new()
@@ -184,6 +184,8 @@ Console.WriteLine(betaSelfHostedWork);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -210,6 +212,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

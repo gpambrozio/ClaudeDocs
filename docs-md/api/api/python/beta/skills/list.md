@@ -148,7 +148,7 @@ ISO 8601 timestamp of when the skill was last updated.
 
 List Skills
 
-Python
+Python
 
 ```shiki
 import os
@@ -163,6 +163,8 @@ print(page.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -185,6 +187,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

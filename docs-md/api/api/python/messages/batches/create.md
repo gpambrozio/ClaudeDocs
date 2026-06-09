@@ -68,6 +68,8 @@ Example with a single `user` message:
 [{"role": "user", "content": "Hello, Claude"}]
 ```
 
+
+
 Example with multiple conversational turns:
 
 ```shiki
@@ -78,6 +80,8 @@ Example with multiple conversational turns:
 ]
 ```
 
+
+
 Example with a partially-filled response from Claude:
 
 ```shiki
@@ -87,15 +91,21 @@ Example with a partially-filled response from Claude:
 ]
 ```
 
+
+
 Each input message `content` may be either a single `string` or an array of content blocks, where each block has a specific `type`. Using a `string` for `content` is shorthand for an array of one content block of type `"text"`. The following input messages are equivalent:
 
 ```shiki
 {"role": "user", "content": "Hello, Claude"}
 ```
 
+
+
 ```shiki
 {"role": "user", "content": [{"type": "text", "text": "Hello, Claude"}]}
 ```
+
+
 
 See [input examples](https://docs.claude.com/en/api/messages-examples).
 
@@ -3028,6 +3038,8 @@ For example, if you defined `tools` as:
 ]
 ```
 
+
+
 And then asked the model "What's the S&P 500 at today?", the model might produce `tool_use` content blocks in the response like this:
 
 ```shiki
@@ -3041,6 +3053,8 @@ And then asked the model "What's the S&P 500 at today?", the model might produce
 ]
 ```
 
+
+
 You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an input, and return the following back to the model in a subsequent `user` message:
 
 ```shiki
@@ -3052,6 +3066,8 @@ You might then run your `get_stock_price` tool with `{"ticker": "^GSPC"}` as an 
   }
 ]
 ```
+
+
 
 Tools can be used for workflows that include running client-side tools and functions, or more generally whenever you want the model to produce a particular JSON structure of output.
 
@@ -4191,7 +4207,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Create a Message Batch
 
-Python
+Python
 
 ```shiki
 import os
@@ -4218,6 +4234,8 @@ print(message_batch.id)
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
@@ -4242,6 +4260,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

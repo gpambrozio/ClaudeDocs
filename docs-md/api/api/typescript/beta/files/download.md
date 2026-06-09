@@ -90,7 +90,7 @@ unnamed\_schema\_2 = Response
 
 Download File
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';

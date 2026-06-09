@@ -92,7 +92,7 @@ The memory's UTF-8 text content. Populated when `view=full`; `null` when `view=b
 
 Update a memory
 
-CLI
+CLI
 
 ```shiki
 ant beta:memory-stores:memories update \
@@ -102,6 +102,8 @@ ant beta:memory-stores:memories update \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -121,6 +123,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

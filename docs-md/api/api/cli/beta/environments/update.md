@@ -178,7 +178,7 @@ The visibility scope for this environment. 'organization' means visible to all a
 
 Update Environment
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments update \
@@ -187,6 +187,8 @@ ant beta:environments update \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -238,6 +240,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

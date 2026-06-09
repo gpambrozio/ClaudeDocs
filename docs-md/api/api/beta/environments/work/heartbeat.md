@@ -136,7 +136,7 @@ The type of response
 
 Record Heartbeat
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/heartbeat \
@@ -147,6 +147,8 @@ curl https://api.anthropic.com/v1/environments/$ENVIRONMENT_ID/work/$WORK_ID/hea
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -161,6 +163,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

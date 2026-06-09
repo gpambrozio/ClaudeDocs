@@ -98,7 +98,7 @@ StringIO
 
 Download Skill Version Content
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"

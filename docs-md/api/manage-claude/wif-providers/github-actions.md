@@ -23,6 +23,8 @@ permissions:
   contents: read
 ```
 
+
+
 Inside the job, the runner exposes two environment variables: `ACTIONS_ID_TOKEN_REQUEST_URL` and `ACTIONS_ID_TOKEN_REQUEST_TOKEN`. Call the request URL with the request token as a bearer credential and your chosen audience as a query parameter, then write the returned JSON Web Token (JWT) to a file:
 
 ```shiki
@@ -32,6 +34,8 @@ Inside the job, the runner exposes two environment variables: `ACTIONS_ID_TOKEN_
       "$ACTIONS_ID_TOKEN_REQUEST_URL&audience=https://api.anthropic.com" \
       | jq -r .value > /tmp/gha-jwt
 ```
+
+
 
 If you prefer JavaScript, `actions/github-script` exposes the same capability through `core.getIDToken(audience)`:
 
@@ -44,6 +48,8 @@ If you prefer JavaScript, `actions/github-script` exposes the same capability th
       const token = await core.getIDToken('https://api.anthropic.com');
       fs.writeFileSync('/tmp/gha-jwt', token);
 ```
+
+
 
 The decoded token carries claims that describe the workflow run. Your federation rule matches against these:
 
@@ -62,6 +68,8 @@ The decoded token carries claims that describe the workflow run. Your federation
 }
 ```
 
+
+
 See [GitHub's OIDC subject claim reference](https://docs.github.com/en/actions/deployment/security-hardening-your-deployments/about-security-hardening-with-openid-connect#example-subject-claims) for the full list of `sub` formats.
 
 ## Configure Anthropic
@@ -77,6 +85,8 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
   "jwks_source": "discovery"
 }
 ```
+
+
 
 **Federation rule:** Match only the workflow runs you intend to trust. See [Restrict which workflows can authenticate](#restrict-which-workflows-can-authenticate) for how to scope these claims safely.
 
@@ -101,6 +111,8 @@ Follow the [setup walkthrough](manage-claude/workload-identity-federation.md) to
 }
 ```
 
+
+
 Be as specific as the workload allows. Loosen `subject_prefix` to `repo:your-org/your-repo:*` (paired with a `claims.ref` constraint) only if the rule must match multiple event types from the same repository, since the trailing segment of `sub` varies between `ref:...`, `environment:...`, and `pull_request` events.
 
 ## Acquire and use a token
@@ -108,6 +120,8 @@ Be as specific as the workload allows. Loosen `subject_prefix` to `repo:your-org
 Set the federation environment variables on the job and call the SDK normally. `Anthropic()` reads `ANTHROPIC_IDENTITY_TOKEN_FILE`, exchanges the JWT on the first request, and refreshes the access token automatically before it expires.
 
 WorkflowcURLPythonTypeScriptGoJavaC#CLIPHPRuby
+
+
 
 ```shiki
 import anthropic

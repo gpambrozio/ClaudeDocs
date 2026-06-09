@@ -2814,7 +2814,7 @@ The session's new title. Present only when the update changed it.
 
 List Session Thread Events
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -2830,6 +2830,8 @@ puts(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -2853,6 +2855,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -88,6 +88,8 @@ The simplest approach is to reference a PDF directly from a URL:
 
 cURLCLIPythonTypeScriptJava
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 message = client.messages.create(
@@ -118,6 +120,8 @@ print(message.content)
 If you need to send PDFs from your local system or when a URL isn't available:
 
 cURLCLIPythonTypeScriptJava
+
+
 
 ```shiki
 import base64
@@ -162,6 +166,8 @@ print(message.content)
 For PDFs you'll use repeatedly, or when you want to avoid encoding overhead, use the [Files API](build-with-claude/files.md):
 
 cURLCLIPythonTypeScriptJava
+
+
 
 ```shiki
 client = anthropic.Anthropic()
@@ -253,6 +259,8 @@ Cache PDFs to improve performance on repeated queries:
 
 cURLCLIPythonTypeScriptJava
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 # ...
@@ -284,6 +292,8 @@ message = client.messages.create(
 Use the Message Batches API for high-volume workflows:
 
 cURLCLIPythonTypeScriptJava
+
+
 
 ```shiki
 client = anthropic.Anthropic()

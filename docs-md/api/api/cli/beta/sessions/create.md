@@ -832,7 +832,7 @@ Vault IDs attached to the session at creation. Empty when no vaults were supplie
 
 Create Session
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions create \
@@ -842,6 +842,8 @@ ant beta:sessions create \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -1011,6 +1013,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -58,6 +58,8 @@ Object type. Always `tunnel_certificate` for Tunnel Certificates.
 
 Get Tunnel Certificate
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/$CERTIFICATE_ID \
     -H 'anthropic-version: 2023-06-01' \
@@ -65,6 +67,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/certificates/
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -81,6 +85,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

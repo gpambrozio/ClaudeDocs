@@ -96,7 +96,7 @@ required Type Type
 
 Delete Credential
 
-C#
+C#
 
 ```shiki
 CredentialDeleteParams parameters = new()
@@ -112,6 +112,8 @@ Console.WriteLine(betaManagedAgentsDeletedCredential);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
@@ -122,6 +124,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

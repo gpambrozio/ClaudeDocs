@@ -22,6 +22,8 @@ List the rate limits configured for your organization:
 
 cURL
 
+
+
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/rate_limits" \
   --header "anthropic-version: 2023-06-01" \
@@ -44,6 +46,8 @@ For complete parameter details and response schemas, see the [Organization Rate 
 ### List all organization rate limits
 
 cURL
+
+
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/rate_limits" \
@@ -81,11 +85,15 @@ curl "https://api.anthropic.com/v1/organizations/rate_limits" \
 }
 ```
 
+
+
 ### Look up the limits for a specific model
 
 Pass any model ID or alias as the `model` query parameter to return only the entry that contains it:
 
 cURL
+
+
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/rate_limits?model=claude-opus-4-8" \
@@ -110,6 +118,8 @@ For complete parameter details and response schemas, see the [Workspace Rate Lim
 To retrieve your organization's workspace IDs, use the [List Workspaces](api/admin/workspaces/list.md) endpoint, or find them in the [Claude Console](/settings/workspaces). The default workspace cannot have rate limit overrides, so it has no entry on this endpoint; use the organization endpoint to read its limits.
 
 cURL
+
+
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA5AGx3HKfFUJ/rate_limits" \
@@ -140,11 +150,15 @@ curl "https://api.anthropic.com/v1/organizations/workspaces/wrkspc_01JwQvzr7rXLA
 }
 ```
 
+
+
 ## Filtering by group type
 
 Both endpoints accept an optional `group_type` query parameter that restricts the response to a single category:
 
 cURL
+
+
 
 ```shiki
 curl "https://api.anthropic.com/v1/organizations/rate_limits?group_type=batch" \

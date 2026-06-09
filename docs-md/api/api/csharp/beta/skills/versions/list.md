@@ -152,7 +152,7 @@ Token to provide in as `page` in the subsequent request to retrieve the next pag
 
 List Skill Versions
 
-C#
+C#
 
 ```shiki
 VersionListParams parameters = new() { SkillID = "skill_id" };
@@ -165,6 +165,8 @@ await foreach (var item in page.Paginate())
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -188,6 +190,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -148,7 +148,7 @@ Human-readable name for the credential.
 
 Get Credential
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults:credentials retrieve \
@@ -158,6 +158,8 @@ ant beta:vaults:credentials retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -181,6 +183,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

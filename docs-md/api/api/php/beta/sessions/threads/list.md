@@ -78,7 +78,7 @@ Cumulative token usage for a session thread across all turns.
 
 List Session Threads
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -98,6 +98,8 @@ var_dump($page);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -180,6 +182,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

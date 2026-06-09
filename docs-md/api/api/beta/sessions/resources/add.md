@@ -116,7 +116,7 @@ A timestamp in RFC 3339 format
 
 Add Session Resource
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources \
@@ -133,6 +133,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID/resources \
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
@@ -147,6 +149,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

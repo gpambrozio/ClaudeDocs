@@ -3030,7 +3030,7 @@ Opaque cursor for the next page. Null when no more results.
 
 List Events
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions:events list \
@@ -3039,6 +3039,8 @@ ant beta:sessions:events list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -3073,6 +3075,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

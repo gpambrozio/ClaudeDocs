@@ -172,7 +172,7 @@ The type of object (always 'work')
 
 List Work Items
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -185,6 +185,8 @@ puts(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -216,6 +218,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

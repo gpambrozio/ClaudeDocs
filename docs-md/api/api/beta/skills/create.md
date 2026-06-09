@@ -137,7 +137,7 @@ ISO 8601 timestamp of when the skill was last updated.
 
 Create Skill
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/skills \
@@ -148,6 +148,8 @@ curl https://api.anthropic.com/v1/skills \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -164,6 +166,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

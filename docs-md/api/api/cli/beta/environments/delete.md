@@ -38,7 +38,7 @@ The type of response
 
 Delete Environment
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments delete \
@@ -47,6 +47,8 @@ ant beta:environments delete \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -58,6 +60,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

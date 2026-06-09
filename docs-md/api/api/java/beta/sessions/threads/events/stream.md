@@ -5474,7 +5474,7 @@ The session's new title. Present only when the update changed it.
 
 Stream Session Thread Events
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -5502,6 +5502,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sevt_011CZkZGOp0iBcp4kaQSihUmy",
@@ -5519,6 +5521,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

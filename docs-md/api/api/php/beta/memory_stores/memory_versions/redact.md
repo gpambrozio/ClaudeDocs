@@ -80,7 +80,7 @@ Identifies who performed a write or redact operation. Captured at write time on 
 
 Redact a memory version
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -103,6 +103,8 @@ var_dump($betaManagedAgentsMemoryVersion);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -131,6 +133,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

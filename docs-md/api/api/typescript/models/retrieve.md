@@ -278,7 +278,7 @@ For Models, this is always `"model"`.
 
 Get a Model
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -293,6 +293,8 @@ console.log(modelInfo.id);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -369,6 +371,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -104,7 +104,7 @@ For Message Batches, this is always `"message_batch_deleted"`.
 
 Delete a Message Batch
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
@@ -116,6 +116,8 @@ curl https://api.anthropic.com/v1/messages/batches/$MESSAGE_BATCH_ID \
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
@@ -126,6 +128,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

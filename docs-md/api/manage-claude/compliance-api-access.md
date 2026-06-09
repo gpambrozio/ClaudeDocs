@@ -89,6 +89,8 @@ forwarder configuration.
    export ANTHROPIC_COMPLIANCE_ACCESS_KEY=sk-ant-api01-...
    ```
 
+   
+
 ## Create an Admin API key
 
 The Compliance API must already be [enabled for your Claude Console organization](#request-compliance-api-access) before an Admin API key can call the Activity Feed.
@@ -123,6 +125,8 @@ The Compliance API must already be [enabled for your Claude Console organization
    export ANTHROPIC_ADMIN_KEY=sk-ant-admin01-...
    ```
 
+   
+
    The distinct variable name keeps the Admin API key from overwriting a Compliance Access Key if you provision both. The cURL examples in this guide read the key from `$ANTHROPIC_COMPLIANCE_ACCESS_KEY`; substitute `$ANTHROPIC_ADMIN_KEY` when calling the [Activity Feed](manage-claude/compliance-activity-feed.md) with an Admin API key.
 
 Admin API keys carry the `read:compliance_activities` scope only when the Compliance API was enabled for the organization before the key was created; see [After enablement: Claude Console organizations](#after-enablement-claude-console-organizations). They cannot be granted any other Compliance API scope, so calls to any endpoint other than the Activity Feed return [403 Forbidden](manage-claude/compliance-errors.md).
@@ -145,6 +149,8 @@ To inspect the scopes on a key you already have, use one of the following signal
   }
 }
 ```
+
+
 
 ## Manage and rotate keys
 

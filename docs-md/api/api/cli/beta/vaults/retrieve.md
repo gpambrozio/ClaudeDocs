@@ -60,7 +60,7 @@ A timestamp in RFC 3339 format
 
 Get Vault
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults retrieve \
@@ -69,6 +69,8 @@ ant beta:vaults retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -87,6 +89,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

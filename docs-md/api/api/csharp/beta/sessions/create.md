@@ -944,7 +944,7 @@ Vault IDs attached to the session at creation. Empty when no vaults were supplie
 
 Create Session
 
-C#
+C#
 
 ```shiki
 SessionCreateParams parameters = new()
@@ -959,6 +959,8 @@ Console.WriteLine(betaManagedAgentsSession);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -1128,6 +1130,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -38,7 +38,7 @@ mixed
 
 Download Skill Version Content
 
-PHP
+PHP
 
 ```shiki
 <?php

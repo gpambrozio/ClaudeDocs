@@ -158,7 +158,7 @@ Display name of the entity this profile represents. For `resold` this is the res
 
 Create User Profile
 
-C#
+C#
 
 ```shiki
 UserProfileCreateParams parameters = new();
@@ -169,6 +169,8 @@ Console.WriteLine(betaUserProfile);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -191,6 +193,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

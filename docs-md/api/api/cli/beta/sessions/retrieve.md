@@ -812,7 +812,7 @@ Vault IDs attached to the session at creation. Empty when no vaults were supplie
 
 Get Session
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions retrieve \
@@ -821,6 +821,8 @@ ant beta:sessions retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -990,6 +992,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

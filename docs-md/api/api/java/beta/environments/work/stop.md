@@ -164,7 +164,7 @@ The type of object (always 'work')
 
 Stop Work
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -193,6 +193,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -218,6 +220,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

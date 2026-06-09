@@ -128,7 +128,7 @@ The type of response
 
 Record Heartbeat
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -155,6 +155,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "last_heartbeat": "last_heartbeat",
@@ -168,6 +170,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

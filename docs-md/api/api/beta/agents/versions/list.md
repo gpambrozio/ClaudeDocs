@@ -408,7 +408,7 @@ Opaque cursor for the next page. Null when no more results.
 
 List Agent Versions
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/agents/$AGENT_ID/versions \
@@ -418,6 +418,8 @@ curl https://api.anthropic.com/v1/agents/$AGENT_ID/versions \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -497,6 +499,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

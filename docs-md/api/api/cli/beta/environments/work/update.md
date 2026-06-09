@@ -112,7 +112,7 @@ The type of object (always 'work')
 
 Update Work Item
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments:work update \
@@ -123,6 +123,8 @@ ant beta:environments:work update \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -149,6 +151,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

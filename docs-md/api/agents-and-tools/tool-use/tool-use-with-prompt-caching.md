@@ -38,6 +38,8 @@ Place `cache_control: {"type": "ephemeral"}` on the last tool in your `tools` ar
 }
 ```
 
+
+
 For `mcp_toolset`, the `cache_control` breakpoint lands on the last tool in the set. You don't control tool order within an MCP toolset, so place the breakpoint on the `mcp_toolset` entry itself and the API applies it to the final expanded tool.
 
 ## defer\_loading and cache preservation

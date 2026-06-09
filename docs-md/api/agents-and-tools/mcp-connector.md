@@ -46,6 +46,8 @@ This example enables all tools from an MCP server with default configuration:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 client = anthropic.Anthropic()
 
@@ -81,6 +83,8 @@ Each MCP server in the `mcp_servers` array defines the connection details:
 }
 ```
 
+
+
 ### Field descriptions
 
 | Property | Type | Required | Description |
@@ -112,6 +116,8 @@ The MCPToolset lives in the `tools` array and configures which tools from the MC
   }
 }
 ```
+
+
 
 ### Field descriptions
 
@@ -159,6 +165,8 @@ Example:
 }
 ```
 
+
+
 Results in:
 
 - `search_events`: `enabled: false` (from configs), `defer_loading: true` (from default\_config)
@@ -176,6 +184,8 @@ The simplest pattern - enable all tools from a server:
   "mcp_server_name": "google-calendar-mcp"
 }
 ```
+
+
 
 ### Allowlist: enable only specific tools
 
@@ -199,6 +209,8 @@ Set `enabled: false` as the default, then explicitly enable specific tools:
 }
 ```
 
+
+
 ### Denylist: disable specific tools
 
 Enable all tools by default, then explicitly disable unwanted tools. Denylisting write or destructive tools is recommended when building read-only assistants, or when you want a human confirmation step before state changes:
@@ -217,6 +229,8 @@ Enable all tools by default, then explicitly disable unwanted tools. Denylisting
   }
 }
 ```
+
+
 
 ### Mixed: allowlist with per-tool configuration
 
@@ -241,6 +255,8 @@ Combine allowlisting with custom configuration for each tool:
   }
 }
 ```
+
+
 
 In this example:
 
@@ -273,6 +289,8 @@ When Claude uses MCP tools, the response includes two new content block types:
 }
 ```
 
+
+
 ### MCP tool result block
 
 ```shiki
@@ -288,6 +306,8 @@ When Claude uses MCP tools, the response includes two new content block types:
   ]
 }
 ```
+
+
 
 ## Multiple MCP servers
 
@@ -333,6 +353,8 @@ You can connect to multiple MCP servers by including multiple server definitions
 }
 ```
 
+
+
 With many tools available, Claude selects based on tool names and descriptions. Clear, specific tool descriptions improve selection accuracy. For large tool sets (dozens of tools across several servers), consider enabling [`defer_loading`](#tool-configuration-options) with the [Tool search tool](agents-and-tools/tool-use/tool-search-tool.md) so only relevant tools are surfaced per query.
 
 ## Authentication
@@ -349,6 +371,8 @@ The MCP inspector can guide you through the process of obtaining an access token
    ```shiki
    npx @modelcontextprotocol/inspector
    ```
+
+   
 2. In the sidebar on the left, for "Transport type", select either "SSE" or "Streamable HTTP".
 3. Enter the URL of the MCP server.
 4. In the right area, click the "Open Auth Settings" button after "Need to configure authentication?".
@@ -374,6 +398,8 @@ Once you've obtained an access token using either of the preceding OAuth flows, 
 }
 ```
 
+
+
 For detailed explanations of the OAuth flow, refer to the [Authorization section](https://modelcontextprotocol.io/specification/2025-11-25/basic/authorization) in the MCP specification.
 
 ## Client-side MCP helpers (TypeScript)
@@ -392,6 +418,8 @@ Install both the Anthropic SDK and the MCP SDK:
 npm install @anthropic-ai/sdk @modelcontextprotocol/sdk
 ```
 
+
+
 ### Available helpers
 
 Import the helpers from the beta namespace:
@@ -404,6 +432,8 @@ import {
   mcpResourceToFile
 } from "@anthropic-ai/sdk/helpers/beta/mcp";
 ```
+
+
 
 | Helper | Description |
 | --- | --- |
@@ -440,6 +470,8 @@ const finalMessage = await anthropic.beta.messages.toolRunner({
 console.log(finalMessage);
 ```
 
+
+
 ### Use MCP prompts
 
 Convert MCP prompt messages into Claude API message format:
@@ -456,6 +488,8 @@ const response = await anthropic.beta.messages.create({
 
 console.log(response);
 ```
+
+
 
 ### Use MCP resources
 
@@ -484,6 +518,8 @@ await anthropic.beta.messages.create({
 const fileResource = await mcpClient.readResource({ uri: "file:///path/to/data.json" });
 await anthropic.beta.files.upload({ file: mcpResourceToFile(fileResource) });
 ```
+
+
 
 ### Error handling
 
@@ -535,6 +571,8 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 }
 ```
 
+
+
 **After (current):**
 
 ```shiki
@@ -572,6 +610,8 @@ If you're using the deprecated `mcp-client-2025-04-04` beta header, follow this 
 }
 ```
 
+
+
 ### Common migration patterns
 
 | Old pattern | New pattern |
@@ -602,6 +642,8 @@ The previous version of the MCP connector included tool configuration directly i
   ]
 }
 ```
+
+
 
 ### Deprecated field descriptions
 

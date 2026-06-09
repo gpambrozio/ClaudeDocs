@@ -360,7 +360,7 @@ Opaque cursor for the next page. Null when no more results.
 
 List Agent Versions
 
-CLI
+CLI
 
 ```shiki
 ant beta:agents:versions list \
@@ -369,6 +369,8 @@ ant beta:agents:versions list \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -448,6 +450,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

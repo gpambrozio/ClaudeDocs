@@ -37,6 +37,8 @@ If you believe your tunnel token, TLS keys, or proxy host has been compromised:
    ```shiki
    helm uninstall mcp-tunnel -n mcp-tunnel
    ```
+
+   
 2. 2
 
    Detach the upstream MCP servers
@@ -82,6 +84,8 @@ Follow these steps to decommission a tunnel and remove all stored credentials.
    ```shiki
    helm uninstall mcp-tunnel -n mcp-tunnel
    ```
+
+   
 2. 2
 
    Archive the tunnel
@@ -106,6 +110,8 @@ Follow these steps to decommission a tunnel and remove all stored credentials.
      mcp-tunnel mcp-tunnel-token mcp-tunnel-cert \
      --ignore-not-found
    ```
+
+   
 
 Was this page helpful?
 

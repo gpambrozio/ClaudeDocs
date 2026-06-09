@@ -36,7 +36,7 @@ The type of response
 
 Delete Environment
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -54,6 +54,8 @@ var_dump($betaEnvironmentDeleteResponse);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "env_011CZkZ9X2dpNyB7HsEFoRfW",
@@ -64,6 +66,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

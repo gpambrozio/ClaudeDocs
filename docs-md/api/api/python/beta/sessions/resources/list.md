@@ -192,7 +192,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 List Session Resources
 
-Python
+Python
 
 ```shiki
 import os
@@ -209,6 +209,8 @@ print(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -241,6 +243,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

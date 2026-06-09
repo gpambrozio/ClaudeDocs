@@ -118,7 +118,7 @@ A timestamp in RFC 3339 format
 
 Update Vault
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -141,6 +141,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -158,6 +160,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

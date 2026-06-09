@@ -23,6 +23,8 @@ When streaming classifiers detect content that violates Anthropic's policies, th
 }
 ```
 
+
+
 No additional refusal message is included. You must handle the response and provide appropriate user-facing messaging.
 
 ## Reset context after refusal
@@ -40,6 +42,8 @@ If you encounter `refusal` stop reasons frequently while using Claude Sonnet 4.5
 Here's how to detect and handle streaming refusals in your application:
 
 cURLPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 client = anthropic.Anthropic()

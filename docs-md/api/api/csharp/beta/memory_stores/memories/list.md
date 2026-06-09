@@ -180,7 +180,7 @@ Opaque cursor for the next page (a `page_...` value), or `null` if there are no 
 
 List memories
 
-C#
+C#
 
 ```shiki
 MemoryListParams parameters = new() { MemoryStoreID = "memory_store_id" };
@@ -193,6 +193,8 @@ await foreach (var item in page.Paginate())
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -217,6 +219,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

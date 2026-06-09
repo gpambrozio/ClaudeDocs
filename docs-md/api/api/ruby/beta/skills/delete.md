@@ -104,7 +104,7 @@ For Skills, this is always `"skill_deleted"`.
 
 Delete Skill
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -118,6 +118,8 @@ puts(skill)
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
@@ -128,6 +130,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

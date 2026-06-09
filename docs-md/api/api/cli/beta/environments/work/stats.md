@@ -52,7 +52,7 @@ Number of workers that have polled for work in the last 30 seconds. Requires wor
 
 Get Queue Statistics
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments:work stats \
@@ -61,6 +61,8 @@ ant beta:environments:work stats \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -75,6 +77,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

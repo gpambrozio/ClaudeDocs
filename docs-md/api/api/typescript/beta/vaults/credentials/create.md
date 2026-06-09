@@ -296,7 +296,7 @@ Human-readable name for the credential.
 
 Create Credential
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -321,6 +321,8 @@ console.log(betaManagedAgentsCredential.id);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
@@ -343,6 +345,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

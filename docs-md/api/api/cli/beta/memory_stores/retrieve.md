@@ -64,7 +64,7 @@ Arbitrary key-value tags for your own bookkeeping (such as the end user a store 
 
 Retrieve a memory store
 
-CLI
+CLI
 
 ```shiki
 ant beta:memory-stores retrieve \
@@ -73,6 +73,8 @@ ant beta:memory-stores retrieve \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -92,6 +94,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

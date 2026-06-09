@@ -80,7 +80,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Create a Message Batch
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -158,6 +158,8 @@ var_dump($messageBatch);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "msgbatch_013Zva2CMHLNnXjNJJKqJ2EF",
@@ -182,6 +184,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

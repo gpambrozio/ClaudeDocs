@@ -60,7 +60,7 @@ Identifier of the vault containing the credential.
 
 Validate Credential
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -83,6 +83,8 @@ var_dump($betaManagedAgentsCredentialValidation);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -116,6 +118,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

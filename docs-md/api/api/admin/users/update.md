@@ -74,6 +74,8 @@ For Users, this is always `"user"`.
 
 Update User
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
     -H 'Content-Type: application/json' \
@@ -85,6 +87,8 @@ curl https://api.anthropic.com/v1/organizations/users/$USER_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -100,6 +104,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

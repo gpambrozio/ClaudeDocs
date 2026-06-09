@@ -62,7 +62,7 @@ A timestamp in RFC 3339 format
 
 Update Vault
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -83,6 +83,8 @@ var_dump($betaManagedAgentsVault);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vlt_011CZkZDLs7fYzm1hXNPeRjv",
@@ -100,6 +102,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

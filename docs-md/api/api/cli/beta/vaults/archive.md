@@ -60,7 +60,7 @@ A timestamp in RFC 3339 format
 
 Archive Vault
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults archive \
@@ -69,6 +69,8 @@ ant beta:vaults archive \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -87,6 +89,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -158,7 +158,7 @@ If `null`, there are no more results available. Pass this value to the `page_tok
 
 List Skills
 
-C#
+C#
 
 ```shiki
 SkillListParams parameters = new();
@@ -171,6 +171,8 @@ await foreach (var item in page.Paginate())
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -193,6 +195,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

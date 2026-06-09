@@ -102,6 +102,8 @@ You can construct the client with explicit credentials or with no arguments. Wit
 
 cURLPythonTypeScriptGoJavaC#PHPRuby
 
+
+
 ```shiki
 from anthropic import Anthropic, WorkloadIdentityCredentials, IdentityTokenFile
 
@@ -134,7 +136,7 @@ Every SDK resolves credentials in the same five-tier order: constructor argument
 `ANTHROPIC_API_KEY` sits above the federation tiers, so a leftover key in the
 environment silently shadows federation. When migrating a workload from API
 keys to Workload Identity Federation, confirm `ANTHROPIC_API_KEY` is unset everywhere that workload
-runs (container env, CI secrets, shell profiles). The CLI's [`ant auth status`](api/sdks/cli.md)
+runs (container env, CI secrets, shell profiles). The CLI's [`ant auth status`](cli-sdks-libraries/cli/authentication.md)
 command reports which source won.
 
 For the full precedence table, the per-tier semantics, and the profile file schema, see [Credential precedence](manage-claude/wif-reference.md) in the WIF reference.

@@ -152,7 +152,7 @@ The type of scope (e.g., `"session"`).
 
 List Files
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -165,6 +165,8 @@ puts(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -192,6 +194,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

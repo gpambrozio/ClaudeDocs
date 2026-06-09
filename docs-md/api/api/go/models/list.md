@@ -292,7 +292,7 @@ For Models, this is always `"model"`.
 
 List Models
 
-Go
+Go
 
 ```shiki
 package main
@@ -320,6 +320,8 @@ func main() {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -403,6 +405,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

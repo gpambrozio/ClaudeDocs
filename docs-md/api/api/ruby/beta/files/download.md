@@ -90,7 +90,7 @@ StringIO
 
 Download File
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"

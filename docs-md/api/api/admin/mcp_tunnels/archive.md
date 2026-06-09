@@ -61,6 +61,8 @@ Workspace. Immutable after creation.
 
 Archive Tunnel
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
     -X POST \
@@ -69,6 +71,8 @@ curl https://api.anthropic.com/v1/organizations/tunnels/$TUNNEL_ID/archive \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -85,6 +89,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

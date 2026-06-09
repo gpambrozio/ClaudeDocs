@@ -104,7 +104,7 @@ For Skills, this is always `"skill_deleted"`.
 
 Delete Skill
 
-TypeScript
+TypeScript
 
 ```shiki
 import Anthropic from '@anthropic-ai/sdk';
@@ -120,6 +120,8 @@ console.log(skill.id);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "skill_01JAbcdefghijklmnopqrstuvw",
@@ -130,6 +132,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

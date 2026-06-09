@@ -100,7 +100,7 @@ Enrollment URL to send to the end user. Valid until `expires_at`.
 
 Create Enrollment URL
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url \
@@ -111,6 +111,8 @@ curl https://api.anthropic.com/v1/user_profiles/$USER_PROFILE_ID/enrollment_url 
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -123,6 +125,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

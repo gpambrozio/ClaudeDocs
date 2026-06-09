@@ -192,7 +192,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 List Session Resources
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -205,6 +205,8 @@ puts(page)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -237,6 +239,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

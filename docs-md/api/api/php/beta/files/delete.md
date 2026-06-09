@@ -40,7 +40,7 @@ For file deletion, this is always `"file_deleted"`.
 
 Delete File
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -58,6 +58,8 @@ var_dump($deletedFile);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "file_011CNha8iCJcU1wXNR6q4V8w",
@@ -68,6 +70,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

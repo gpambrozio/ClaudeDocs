@@ -148,7 +148,7 @@ Human-readable name for the credential.
 
 Archive Credential
 
-CLI
+CLI
 
 ```shiki
 ant beta:vaults:credentials archive \
@@ -158,6 +158,8 @@ ant beta:vaults:credentials archive \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -181,6 +183,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

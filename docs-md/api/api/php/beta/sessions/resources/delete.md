@@ -34,7 +34,7 @@ Type type
 
 Delete Session Resource
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -58,6 +58,8 @@ var_dump($betaManagedAgentsDeleteSessionResource);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesrsc_011CZkZBJq5dWxk9fVLNcPht",
@@ -68,6 +70,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

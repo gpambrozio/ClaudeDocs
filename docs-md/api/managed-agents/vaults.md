@@ -16,6 +16,8 @@ A vault is the collection of `credentials` associated with an end user. Give it 
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 VAULT_ID=$(ant beta:vaults create \
   --display-name "Alice" \
@@ -36,6 +38,8 @@ The response is the full vault record:
   "archived_at": null
 }
 ```
+
+
 
 ## Add a credential
 
@@ -58,6 +62,8 @@ The `refresh.token_endpoint_auth.type` field indicates how to authenticate the r
 - `client_secret_post`: client secret in the POST body
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 CREDENTIAL_ID=$(ant beta:vaults:credentials create \
@@ -96,6 +102,8 @@ Constraints:
 Pass `vault_ids` when creating a session:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 session = client.beta.sessions.create(
@@ -140,6 +148,8 @@ The top-level `status` tells you what to do next:
 
 curl
 
+
+
 ```shiki
 curl --fail-with-body -sS -X POST \
   "https://api.anthropic.com/v1/vaults/$vault_id/credentials/$credential_id/mcp_oauth_validate?beta=true" \
@@ -174,11 +184,15 @@ The response is a `vault_credential_validation` object. `mcp_probe` includes the
 }
 ```
 
+
+
 ## Rotate a credential
 
 Only the secret payload and a handful of metadata fields are mutable. `mcp_server_url`, `token_endpoint`, and `client_id` are locked after creation.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:vaults:credentials update \

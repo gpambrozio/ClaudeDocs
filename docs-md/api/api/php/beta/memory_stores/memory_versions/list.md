@@ -114,7 +114,7 @@ Identifies who performed a write or redact operation. Captured at write time on 
 
 List memory versions
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -141,6 +141,8 @@ var_dump($page);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -174,6 +176,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

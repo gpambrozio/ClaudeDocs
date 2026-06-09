@@ -178,7 +178,7 @@ Display name of the memory store, snapshotted at attach time. Later edits to the
 
 Get Session Resource
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -205,6 +205,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "sesrsc_011CZkZCKr6eXyl0gWMOdQiu",
@@ -223,6 +225,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

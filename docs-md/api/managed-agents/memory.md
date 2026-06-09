@@ -20,6 +20,8 @@ Give the store a `name` and a `description`. The description is passed to the ag
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 store_id=$(ant beta:memory-stores create \
   --name "User Preferences" \
@@ -34,6 +36,8 @@ The memory store `id` (`memstore_...`) is what you pass when attaching the store
 Pre-load a store with reference material before any agent runs:
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:memory-stores:memories create \
@@ -54,6 +58,8 @@ Optionally include `instructions` to provide session-specific guidance for how t
 You can configure `access` as well. It defaults to `read_write` (shown explicitly in the following example), but `read_only` is also supported.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:sessions create <<YAML
@@ -93,6 +99,8 @@ List the memories in a store, optionally filtered by `path_prefix` to browse a p
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:memory-stores:memories list \
   --memory-store-id "$store_id" \
@@ -107,6 +115,8 @@ Fetching an individual memory returns the full content.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:memory-stores:memories retrieve \
   --memory-store-id "$store_id" \
@@ -120,6 +130,8 @@ See the [Retrieve a memory reference](api/beta/memory_stores/memories/retrieve.m
 `memories.create` creates a memory at a given `path`. Create does not overwrite; to change an existing memory, use [`memories.update`](#update-a-memory).
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 mem=$(ant beta:memory-stores:memories create \
@@ -139,6 +151,8 @@ See the [Create a memory reference](api/beta/memory_stores/memories/create.md) f
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:memory-stores:memories update \
   --memory-store-id "$store_id" \
@@ -155,6 +169,8 @@ To avoid clobbering a concurrent write, pass a `content_sha256` precondition. Th
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:memory-stores:memories update \
   --memory-store-id "$store_id" \
@@ -167,6 +183,8 @@ ant beta:memory-stores:memories update \
 ### Delete a memory
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:memory-stores:memories delete \
@@ -193,6 +211,8 @@ List version history for a store, newest first. The example filters to a single 
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 versions=$(ant beta:memory-stores:memory-versions list \
   --memory-store-id "$store_id" \
@@ -210,6 +230,8 @@ Fetching an individual version returns the same fields as the list response plus
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:memory-stores:memory-versions retrieve \
   --memory-store-id "$store_id" \
@@ -225,6 +247,8 @@ Redact scrubs content out of a historical version while preserving the audit tra
 A version that is the current head of a live memory cannot be redacted. Write a new version first (or delete the memory), then redact the old one.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:memory-stores:memory-versions redact \
@@ -244,6 +268,8 @@ List stores in the workspace. Archived stores are excluded by default; pass `inc
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 ant beta:memory-stores list --include-archived
 ```
@@ -255,6 +281,8 @@ See the [List memory stores reference](api/beta/memory_stores/list.md) for full 
 Archiving makes a store read-only and prevents it from being attached to new sessions. Archiving is one-way; there is no unarchive.
 
 curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 ant beta:memory-stores archive --memory-store-id "$store_id"

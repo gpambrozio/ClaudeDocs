@@ -17,6 +17,8 @@ The `server_tool_use` block appears in Claude's response when a server-executed 
 }
 ```
 
+
+
 The API executes the tool internally. You see the call and its result in the response, but you don't handle execution. Unlike client `tool_use` blocks, you don't need to respond with a `tool_result`. The result block appears immediately after the `server_tool_use` block in the same assistant turn.
 
 ## The server-side loop and pause\_turn
@@ -26,6 +28,8 @@ When using server tools like web search, the API may return a `pause_turn` stop 
 Here's how to handle the `pause_turn` stop reason:
 
 PythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Initial request with web search
@@ -86,6 +90,8 @@ To use a `_20260209` server tool with ZDR, disable dynamic filtering by setting 
   "allowed_callers": ["direct"]
 }
 ```
+
+
 
 This restricts the tool to direct invocation only, bypassing the internal code execution step.
 

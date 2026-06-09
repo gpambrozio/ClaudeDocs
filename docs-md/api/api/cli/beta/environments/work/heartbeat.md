@@ -76,7 +76,7 @@ The type of response
 
 Record Heartbeat
 
-CLI
+CLI
 
 ```shiki
 ant beta:environments:work heartbeat \
@@ -86,6 +86,8 @@ ant beta:environments:work heartbeat \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -100,6 +102,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

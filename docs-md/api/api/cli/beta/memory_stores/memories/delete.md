@@ -48,7 +48,7 @@ type: "memory\_deleted"
 
 Delete a memory
 
-CLI
+CLI
 
 ```shiki
 ant beta:memory-stores:memories delete \
@@ -58,6 +58,8 @@ ant beta:memory-stores:memories delete \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -69,6 +71,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

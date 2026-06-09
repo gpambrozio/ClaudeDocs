@@ -124,7 +124,7 @@ A timestamp in RFC 3339 format
 
 Update Vault
 
-Python
+Python
 
 ```shiki
 import os
@@ -140,6 +140,8 @@ print(beta_managed_agents_vault.id)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -158,6 +160,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -30,7 +30,7 @@ mixed
 
 Download File
 
-PHP
+PHP
 
 ```shiki
 <?php

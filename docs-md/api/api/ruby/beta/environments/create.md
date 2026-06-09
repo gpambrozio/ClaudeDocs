@@ -336,7 +336,7 @@ One of the following:
 
 Create Environment
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -349,6 +349,8 @@ puts(beta_environment)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -400,6 +402,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

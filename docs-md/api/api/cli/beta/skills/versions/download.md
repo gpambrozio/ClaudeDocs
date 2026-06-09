@@ -38,7 +38,7 @@ unnamed\_schema\_1: file path
 
 Download Skill Version Content
 
-CLI
+CLI
 
 ```shiki
 ant beta:skills:versions download \

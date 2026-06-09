@@ -106,7 +106,7 @@ Number of workers that have polled for work in the last 30 seconds. Requires wor
 
 Get Queue Statistics
 
-C#
+C#
 
 ```shiki
 WorkStatsParams parameters = new()
@@ -121,6 +121,8 @@ Console.WriteLine(betaSelfHostedWorkQueueStats);
 
 Response 200
 
+
+
 ```shiki
 {
   "depth": 0,
@@ -134,6 +136,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

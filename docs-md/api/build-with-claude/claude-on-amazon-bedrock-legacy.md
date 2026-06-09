@@ -4,7 +4,7 @@ Copy page
 
 This page covers the legacy Amazon Bedrock integration: the `InvokeModel` and `Converse` APIs with ARN-versioned model identifiers and AWS event-stream encoding. For models available on the Messages-API Bedrock endpoint, see [Claude in Amazon Bedrock](build-with-claude/claude-in-amazon-bedrock.md), which uses the Messages API at `/anthropic/v1/messages` with SSE streaming. For an Anthropic-operated alternative with AWS Marketplace billing and typically same-day feature access, see [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md). Existing Bedrock users can follow the [migration guide](build-with-claude/claude-platform-on-aws.md).
 
-Calling Claude through Bedrock slightly differs from how you would call Claude on the Claude API directly. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic's [client SDKs](api/client-sdks.md).
+Calling Claude through Bedrock slightly differs from how you would call Claude on the Claude API directly. This guide walks you through completing an API call to Claude on Bedrock using one of Anthropic's [client SDKs](cli-sdks-libraries/overview.md).
 
 Note that this guide assumes you have already signed up for an [AWS account](https://portal.aws.amazon.com/billing/signup) and configured programmatic access.
 
@@ -16,13 +16,15 @@ Note that this guide assumes you have already signed up for an [AWS account](htt
 
 AWS CLI
 
+
+
 ```shiki
 aws sts get-caller-identity
 ```
 
 ## Install an SDK for accessing Bedrock
 
-Anthropic's [client SDKs](api/client-sdks.md) support Bedrock. You can also use an AWS SDK like `boto3` directly.
+Anthropic's [client SDKs](cli-sdks-libraries/overview.md) support Bedrock. You can also use an AWS SDK like `boto3` directly.
 
 Python
 
@@ -59,6 +61,8 @@ Boto3 (Python)
 ```shiki
 pip install -U "anthropic[bedrock]"
 ```
+
+
 
 ## Accessing Bedrock
 
@@ -98,6 +102,8 @@ The following examples show how to print a list of all the Claude models availab
 
 AWS CLIBoto3 (Python)TypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 import boto3
 
@@ -113,6 +119,8 @@ for summary in response["modelSummaries"]:
 The following examples show how to generate text from Claude on Bedrock:
 
 CLIPythonTypeScriptC#GoJavaPHPRubyBoto3 (Python)
+
+
 
 ```shiki
 from anthropic import AnthropicBedrock
@@ -138,7 +146,7 @@ message = client.messages.create(
 print(message.content)
 ```
 
-See the [client SDKs](api/client-sdks.md) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
+See the [client SDKs](cli-sdks-libraries/overview.md) for more details, and the [official Bedrock documentation](https://docs.aws.amazon.com/bedrock/).
 
 ### Bearer token authentication
 
@@ -151,6 +159,8 @@ The simplest approach is to set the `AWS_BEARER_TOKEN_BEDROCK` environment varia
 To provide a token programmatically:
 
 C#GoJava
+
+
 
 ```shiki
 using Anthropic.Bedrock;
@@ -252,6 +262,8 @@ The model IDs for Claude Opus 4.6, Sonnet 4.6, and Sonnet 4.5 already include th
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 from anthropic import AnthropicBedrock
 
@@ -269,6 +281,8 @@ message = client.messages.create(
 To use regional endpoints, replace the `global.` prefix with a regional prefix such as `us.`:
 
 CLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 from anthropic import AnthropicBedrock

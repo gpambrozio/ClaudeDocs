@@ -76,7 +76,7 @@ Human-readable name for the credential.
 
 Update Credential
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -110,6 +110,8 @@ var_dump($betaManagedAgentsCredential);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "vcrd_011CZkZEMt8gZan2iYOQfSkw",
@@ -132,6 +134,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

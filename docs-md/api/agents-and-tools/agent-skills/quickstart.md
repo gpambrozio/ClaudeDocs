@@ -27,6 +27,8 @@ First, check what Skills are available. Use the Skills API to list all Anthropic
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 # List Anthropic-managed Skills
 ant beta:skills list --source anthropic
@@ -41,6 +43,8 @@ This API returns each Skill's metadata: its name and description. Claude loads t
 Now use the PowerPoint Skill to create a presentation about renewable energy. Specify Skills using the `container` parameter in the Messages API:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Create a message with the PowerPoint Skill
@@ -72,6 +76,8 @@ Let's break down what each part does:
 - **`tools`:** Enables code execution (required for Skills)
 - **Beta headers:** `code-execution-2025-08-25` and `skills-2025-10-02`
 
+The examples here use the `code_execution_20250825` tool version with its matching `code-execution-2025-08-25` beta header. Skills also work with the newer [code execution tool](agents-and-tools/tool-use/code-execution-tool.md) revisions (`code_execution_20260120` and later); any code execution tool version satisfies the Skills requirement. Whichever version you use, keep its tool `type` and beta header consistent with the code execution tool page, and always include `skills-2025-10-02`.
+
 When you make this request, Claude automatically matches your task to the relevant Skill. Since you asked for a presentation, Claude determines the PowerPoint Skill is relevant and loads its full instructions: the second level of progressive disclosure. Then Claude executes the Skill's code to create your presentation.
 
 ## Step 3: Download the created file
@@ -79,6 +85,8 @@ When you make this request, Claude automatically matches your task to the releva
 The presentation was created in the code execution container and saved as a file. The response includes a file reference with a file ID. Extract the file ID and download it using the Files API:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 # Extract file ID from the code-execution tool result. The Skill might run
@@ -113,6 +121,8 @@ Now that you've created your first document with Skills, try these variations:
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-8",
@@ -135,6 +145,8 @@ response = client.beta.messages.create(
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
+
+
 ```shiki
 response = client.beta.messages.create(
     model="claude-opus-4-8",
@@ -156,6 +168,8 @@ response = client.beta.messages.create(
 ### Generate a PDF
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
 
 ```shiki
 response = client.beta.messages.create(

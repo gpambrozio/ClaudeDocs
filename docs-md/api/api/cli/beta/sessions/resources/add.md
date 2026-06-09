@@ -60,7 +60,7 @@ A timestamp in RFC 3339 format
 
 Add Session Resource
 
-CLI
+CLI
 
 ```shiki
 ant beta:sessions:resources add \
@@ -71,6 +71,8 @@ ant beta:sessions:resources add \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -86,6 +88,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

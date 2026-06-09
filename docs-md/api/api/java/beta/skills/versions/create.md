@@ -136,7 +136,7 @@ Each version is identified by a Unix epoch timestamp (e.g., "1759178010641129").
 
 Create Skill Version
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -159,6 +159,8 @@ public final class Main {
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "skillver_01JAbcdefghijklmnopqrstuvw",
@@ -175,6 +177,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

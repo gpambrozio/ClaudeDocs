@@ -36,6 +36,8 @@ ID of the Workspace.
 
 Delete Workspace Member
 
+
+
 ```shiki
 curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members/$USER_ID \
     -X DELETE \
@@ -44,6 +46,8 @@ curl https://api.anthropic.com/v1/organizations/workspaces/$WORKSPACE_ID/members
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -56,6 +60,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

@@ -242,7 +242,7 @@ ID of the user who performed the write (a `user_...` value).
 
 List memory versions
 
-Java
+Java
 
 ```shiki
 package com.anthropic.example;
@@ -264,6 +264,8 @@ public final class Main {
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -297,6 +299,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

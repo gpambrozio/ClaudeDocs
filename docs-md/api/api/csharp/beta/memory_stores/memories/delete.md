@@ -100,7 +100,7 @@ required Type Type
 
 Delete a memory
 
-C#
+C#
 
 ```shiki
 MemoryDeleteParams parameters = new()
@@ -116,6 +116,8 @@ Console.WriteLine(betaManagedAgentsDeletedMemory);
 
 Response 200
 
+
+
 ```shiki
 {
   "id": "id",
@@ -126,6 +128,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

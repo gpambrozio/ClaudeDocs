@@ -86,7 +86,7 @@ The type of object (always 'work')
 
 List Work Items
 
-PHP
+PHP
 
 ```shiki
 <?php
@@ -106,6 +106,8 @@ var_dump($page);
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -137,6 +139,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

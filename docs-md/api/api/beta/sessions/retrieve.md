@@ -854,7 +854,7 @@ Vault IDs attached to the session at creation. Empty when no vaults were supplie
 
 Get Session
 
-cURL
+cURL
 
 ```shiki
 curl https://api.anthropic.com/v1/sessions/$SESSION_ID \
@@ -864,6 +864,8 @@ curl https://api.anthropic.com/v1/sessions/$SESSION_ID \
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -1033,6 +1035,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {

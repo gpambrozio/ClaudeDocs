@@ -116,7 +116,7 @@ For Message Batches, this is always `"message_batch"`.
 
 Retrieve a Message Batch
 
-Ruby
+Ruby
 
 ```shiki
 require "anthropic"
@@ -129,6 +129,8 @@ puts(message_batch)
 ```
 
 Response 200
+
+
 
 ```shiki
 {
@@ -154,6 +156,8 @@ Response 200
 ##### Returns Examples
 
 Response 200
+
+
 
 ```shiki
 {
