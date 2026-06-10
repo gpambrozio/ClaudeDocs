@@ -94,6 +94,10 @@ CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
 THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
+SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+
+FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+
 ##### ReturnsExpand Collapse
 
 class BetaModelInfo:
@@ -101,6 +105,10 @@ class BetaModelInfo:
 String id
 
 Unique model identifier.
+
+Optional<List<String>> allowedFallbackModels
+
+Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
 Optional<[BetaModelCapabilities](api/beta.md)> capabilities
 
@@ -316,6 +324,9 @@ Response 200
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true
@@ -401,6 +412,9 @@ Response 200
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true

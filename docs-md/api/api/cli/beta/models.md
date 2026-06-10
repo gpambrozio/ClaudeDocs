@@ -270,11 +270,15 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-beta\_model\_info: object { id, capabilities, created\_at, 4 more }
+beta\_model\_info: object { id, allowed\_fallback\_models, capabilities, 5 more }
 
 id: string
 
 Unique model identifier.
+
+allowed\_fallback\_models: array of string
+
+Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
 capabilities: object { batch, citations, code\_execution, 6 more }
 

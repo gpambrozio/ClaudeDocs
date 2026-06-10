@@ -82,6 +82,10 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
 
+"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+
+"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsCredential:
@@ -167,6 +171,38 @@ Static bearer token credential details for an MCP server.
 required string McpServerUrl
 
 URL of the MCP server this credential authenticates against.
+
+required Type Type
+
+class BetaManagedAgentsEnvironmentVariableAuthResponse:
+
+Environment variable credential details. The secret value is never returned.
+
+required Networking Networking
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse:
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+required Type Type
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse:
+
+The secret is substituted only on requests to the listed hosts.
+
+required IReadOnlyList<string> AllowedHosts
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+required Type Type
+
+required string SecretName
+
+Name of the environment variable.
 
 required Type Type
 

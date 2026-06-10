@@ -145,7 +145,7 @@ Your [CLAUDE.md](memory.md) file is loaded into context at session start. If it 
 
 ### [​](#adjust-extended-thinking) Adjust extended thinking
 
-Extended thinking is enabled by default because it significantly improves performance on complex planning and reasoning tasks. Thinking tokens are billed as output tokens, and the default budget can be tens of thousands of tokens per request depending on the model. For simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the [effort level](model-config.md) with `/effort` or in `/model`, disabling thinking in `/config`, or lowering the budget with `MAX_THINKING_TOKENS=8000`.
+Extended thinking is enabled by default because it significantly improves performance on complex planning and reasoning tasks. Thinking tokens are billed as output tokens, and the default budget can be tens of thousands of tokens per request depending on the model. For simpler tasks where deep reasoning isn’t needed, you can reduce costs by lowering the [effort level](model-config.md) with `/effort` or in `/model`, disabling thinking in `/config`, or, on models with a [fixed thinking budget](model-config.md), lowering the budget with `MAX_THINKING_TOKENS=8000`. Adaptive-reasoning models ignore nonzero budgets, so use effort levels there instead. Disabling thinking is not available on Fable 5, which always uses extended thinking.
 
 ### [​](#delegate-verbose-operations-to-subagents) Delegate verbose operations to subagents
 

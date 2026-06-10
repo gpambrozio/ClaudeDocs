@@ -55,7 +55,7 @@ BetaWebhookSessionCreatedEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -67,7 +67,7 @@ BetaWebhookSessionPendingEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -79,7 +79,7 @@ BetaWebhookSessionRunningEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -91,7 +91,7 @@ BetaWebhookSessionIdledEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -103,7 +103,7 @@ BetaWebhookSessionRequiresActionEventData object { id, organization\_id, type, w
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -115,7 +115,7 @@ BetaWebhookSessionArchivedEventData object { id, organization\_id, type, workspa
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -127,7 +127,7 @@ BetaWebhookSessionDeletedEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -139,7 +139,7 @@ BetaWebhookSessionStatusRescheduledEventData object { id, organization\_id, type
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -151,7 +151,7 @@ BetaWebhookSessionStatusRunStartedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -163,7 +163,7 @@ BetaWebhookSessionStatusIdledEventData object { id, organization\_id, type, work
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -175,7 +175,7 @@ BetaWebhookSessionStatusTerminatedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -183,37 +183,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -223,7 +235,7 @@ BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization\_id,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -235,7 +247,7 @@ BetaWebhookVaultCreatedEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -247,7 +259,7 @@ BetaWebhookVaultArchivedEventData object { id, organization\_id, type, workspace
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -259,7 +271,7 @@ BetaWebhookVaultDeletedEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -271,7 +283,7 @@ BetaWebhookVaultCredentialCreatedEventData object { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -287,7 +299,7 @@ BetaWebhookVaultCredentialArchivedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -303,7 +315,7 @@ BetaWebhookVaultCredentialDeletedEventData object { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -319,7 +331,7 @@ BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization\_id, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -343,7 +355,7 @@ BetaWebhookSessionCreatedEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -355,7 +367,7 @@ BetaWebhookSessionPendingEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -367,7 +379,7 @@ BetaWebhookSessionRunningEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -379,7 +391,7 @@ BetaWebhookSessionIdledEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -391,7 +403,7 @@ BetaWebhookSessionRequiresActionEventData object { id, organization\_id, type, w
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -403,7 +415,7 @@ BetaWebhookSessionArchivedEventData object { id, organization\_id, type, workspa
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -415,7 +427,7 @@ BetaWebhookSessionDeletedEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -427,7 +439,7 @@ BetaWebhookSessionStatusRescheduledEventData object { id, organization\_id, type
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -439,7 +451,7 @@ BetaWebhookSessionStatusRunStartedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -451,7 +463,7 @@ BetaWebhookSessionStatusIdledEventData object { id, organization\_id, type, work
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -463,7 +475,7 @@ BetaWebhookSessionStatusTerminatedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -471,37 +483,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -511,7 +535,7 @@ BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization\_id,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -523,7 +547,7 @@ BetaWebhookVaultCreatedEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -535,7 +559,7 @@ BetaWebhookVaultArchivedEventData object { id, organization\_id, type, workspace
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -547,7 +571,7 @@ BetaWebhookVaultDeletedEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -559,7 +583,7 @@ BetaWebhookVaultCredentialCreatedEventData object { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -575,7 +599,7 @@ BetaWebhookVaultCredentialArchivedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -591,7 +615,7 @@ BetaWebhookVaultCredentialDeletedEventData object { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -607,7 +631,7 @@ BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization\_id, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -623,7 +647,7 @@ BetaWebhookSessionArchivedEventData object { id, organization\_id, type, workspa
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -635,7 +659,7 @@ BetaWebhookSessionCreatedEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -647,7 +671,7 @@ BetaWebhookSessionDeletedEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -659,7 +683,7 @@ BetaWebhookSessionIdledEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -671,7 +695,7 @@ BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization\_id,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -683,7 +707,7 @@ BetaWebhookSessionPendingEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -695,7 +719,7 @@ BetaWebhookSessionRequiresActionEventData object { id, organization\_id, type, w
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -707,7 +731,7 @@ BetaWebhookSessionRunningEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -719,7 +743,7 @@ BetaWebhookSessionStatusIdledEventData object { id, organization\_id, type, work
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -731,7 +755,7 @@ BetaWebhookSessionStatusRescheduledEventData object { id, organization\_id, type
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -743,7 +767,7 @@ BetaWebhookSessionStatusRunStartedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -755,7 +779,7 @@ BetaWebhookSessionStatusTerminatedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -763,37 +787,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -803,7 +839,7 @@ BetaWebhookVaultArchivedEventData object { id, organization\_id, type, workspace
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -815,7 +851,7 @@ BetaWebhookVaultCreatedEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -827,7 +863,7 @@ BetaWebhookVaultCredentialArchivedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -843,7 +879,7 @@ BetaWebhookVaultCredentialCreatedEventData object { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -859,7 +895,7 @@ BetaWebhookVaultCredentialDeletedEventData object { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -875,7 +911,7 @@ BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization\_id, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -891,7 +927,7 @@ BetaWebhookVaultDeletedEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -917,7 +953,7 @@ BetaWebhookSessionCreatedEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -929,7 +965,7 @@ BetaWebhookSessionPendingEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -941,7 +977,7 @@ BetaWebhookSessionRunningEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -953,7 +989,7 @@ BetaWebhookSessionIdledEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -965,7 +1001,7 @@ BetaWebhookSessionRequiresActionEventData object { id, organization\_id, type, w
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -977,7 +1013,7 @@ BetaWebhookSessionArchivedEventData object { id, organization\_id, type, workspa
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -989,7 +1025,7 @@ BetaWebhookSessionDeletedEventData object { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -1001,7 +1037,7 @@ BetaWebhookSessionStatusRescheduledEventData object { id, organization\_id, type
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -1013,7 +1049,7 @@ BetaWebhookSessionStatusRunStartedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -1025,7 +1061,7 @@ BetaWebhookSessionStatusIdledEventData object { id, organization\_id, type, work
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -1037,7 +1073,7 @@ BetaWebhookSessionStatusTerminatedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -1045,37 +1081,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -1085,7 +1133,7 @@ BetaWebhookSessionOutcomeEvaluationEndedEventData object { id, organization\_id,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -1097,7 +1145,7 @@ BetaWebhookVaultCreatedEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -1109,7 +1157,7 @@ BetaWebhookVaultArchivedEventData object { id, organization\_id, type, workspace
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -1121,7 +1169,7 @@ BetaWebhookVaultDeletedEventData object { id, organization\_id, type, workspace\
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -1133,7 +1181,7 @@ BetaWebhookVaultCredentialCreatedEventData object { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -1149,7 +1197,7 @@ BetaWebhookVaultCredentialArchivedEventData object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -1165,7 +1213,7 @@ BetaWebhookVaultCredentialDeletedEventData object { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -1181,7 +1229,7 @@ BetaWebhookVaultCredentialRefreshFailedEventData object { id, organization\_id, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 

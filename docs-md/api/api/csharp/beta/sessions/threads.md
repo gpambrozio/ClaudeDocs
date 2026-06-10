@@ -64,6 +64,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 "claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
@@ -282,17 +286,11 @@ required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 required string Name
 
@@ -1918,6 +1916,48 @@ required Type Type
 
 required Type Type
 
+class BetaManagedAgentsCredentialHostUnreachableError:
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+required string CredentialID
+
+ID of the affected credential.
+
+required string Message
+
+Human-readable error description.
+
+required RetryStatus RetryStatus
+
+What the client should do next in response to this error.
+
+One of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+required Type Type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+required Type Type
+
+required Type Type
+
+required string VaultID
+
+ID of the vault containing the affected credential.
+
 required DateTimeOffset ProcessedAt
 
 A timestamp in RFC 3339 format
@@ -2616,6 +2656,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 "claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
@@ -2698,6 +2742,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 "claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
@@ -2916,17 +2964,11 @@ required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 required string Name
 
@@ -3106,17 +3148,11 @@ required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 required string Name
 
@@ -3133,6 +3169,30 @@ The session's full metadata bag after the update. Present when the update set no
 string? Title
 
 The session's new title. Present only when the update changed it.
+
+class BetaManagedAgentsSystemMessageEvent:
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+
+System content blocks. Text-only.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
 
 #### ThreadsEvents
 

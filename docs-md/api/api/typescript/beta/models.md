@@ -10,13 +10,13 @@ TypeScript
 
 ##### [List Models](api/beta/models/list.md)
 
-client.beta.models.list(ModelListParams { after\_id, before\_id, limit, betas } params?, RequestOptionsoptions?): Page<[BetaModelInfo](api/beta.md) { id, capabilities, created\_at, 4 more } >
+client.beta.models.list(ModelListParams { after\_id, before\_id, limit, betas } params?, RequestOptionsoptions?): Page<[BetaModelInfo](api/beta.md) { id, allowed\_fallback\_models, capabilities, 5 more } >
 
 GET/v1/models
 
 ##### [Get a Model](api/beta/models/retrieve.md)
 
-client.beta.models.retrieve(stringmodelID, ModelRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaModelInfo](api/beta.md) { id, capabilities, created\_at, 4 more }
+client.beta.models.retrieve(stringmodelID, ModelRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaModelInfo](api/beta.md) { id, allowed\_fallback\_models, capabilities, 5 more }
 
 GET/v1/models/{model\_id}
 
@@ -270,11 +270,15 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaModelInfo { id, capabilities, created\_at, 4 more }
+BetaModelInfo { id, allowed\_fallback\_models, capabilities, 5 more }
 
 id: string
 
 Unique model identifier.
+
+allowed\_fallback\_models: Array<string> | null
+
+Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
 capabilities: [BetaModelCapabilities](api/beta.md) { batch, citations, code\_execution, 6 more }  | null
 

@@ -2245,11 +2245,11 @@ One of the following:
 
 ToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
-content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
 One of the following:
 
-ToolSearchToolResultErrorParam { error\_code, type }
+ToolSearchToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
@@ -2264,6 +2264,8 @@ One of the following:
 "execution\_time\_exceeded"
 
 type: "tool\_search\_tool\_result\_error"
+
+error\_message?: string | null
 
 ToolSearchToolSearchResultBlockParam { tool\_references, type }
 
@@ -2538,7 +2540,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 

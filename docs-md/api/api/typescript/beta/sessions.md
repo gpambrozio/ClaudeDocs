@@ -10,25 +10,25 @@ TypeScript
 
 ##### [Create Session](api/beta/sessions/create.md)
 
-client.beta.sessions.create(SessionCreateParams { agent, environment\_id, metadata, 4 more } params, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 12 more }
+client.beta.sessions.create(SessionCreateParams { agent, environment\_id, metadata, 4 more } params, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 13 more }
 
 POST/v1/sessions
 
 ##### [List Sessions](api/beta/sessions/list.md)
 
-client.beta.sessions.list(SessionListParams { agent\_id, agent\_version, created\_at[gt], 10 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 12 more } >
+client.beta.sessions.list(SessionListParams { agent\_id, agent\_version, created\_at[gt], 11 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 13 more } >
 
 GET/v1/sessions
 
 ##### [Get Session](api/beta/sessions/retrieve.md)
 
-client.beta.sessions.retrieve(stringsessionID, SessionRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 12 more }
+client.beta.sessions.retrieve(stringsessionID, SessionRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 13 more }
 
 GET/v1/sessions/{session\_id}
 
 ##### [Update Session](api/beta/sessions/update.md)
 
-client.beta.sessions.update(stringsessionID, SessionUpdateParams { agent, metadata, title, 2 more } params, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 12 more }
+client.beta.sessions.update(stringsessionID, SessionUpdateParams { agent, metadata, title, 2 more } params, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 13 more }
 
 POST/v1/sessions/{session\_id}
 
@@ -40,7 +40,7 @@ DELETE/v1/sessions/{session\_id}
 
 ##### [Archive Session](api/beta/sessions/archive.md)
 
-client.beta.sessions.archive(stringsessionID, SessionArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 12 more }
+client.beta.sessions.archive(stringsessionID, SessionArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 13 more }
 
 POST/v1/sessions/{session\_id}/archive
 
@@ -282,7 +282,7 @@ Current evaluation state. `pending` before the agent begins work; `running` whil
 
 type: "outcome\_evaluation"
 
-BetaManagedAgentsSession { id, agent, archived\_at, 12 more }
+BetaManagedAgentsSession { id, agent, archived\_at, 13 more }
 
 A Managed Agents `session`.
 
@@ -316,7 +316,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -402,7 +406,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -620,21 +628,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -810,21 +812,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -1038,6 +1034,10 @@ vault\_ids: Array<string>
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+deployment\_id?: string | null
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 BetaManagedAgentsSessionAgent { id, description, mcp\_servers, 8 more }
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
@@ -1066,7 +1066,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -1152,7 +1156,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -1370,21 +1378,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -1560,21 +1562,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -1762,21 +1758,15 @@ description: string
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -1816,7 +1806,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -2034,21 +2028,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -2114,7 +2102,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -2200,7 +2192,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -2418,21 +2414,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -2608,21 +2598,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -2667,6 +2651,40 @@ Total input tokens consumed across all turns.
 output\_tokens?: number
 
 Total output tokens generated across all turns.
+
+BetaManagedAgentsSystemContentBlock { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsSystemMessageEvent { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at?: string | null
+
+A timestamp in RFC 3339 format
 
 BetaManagedAgentsUserToolResultEvent { id, tool\_use\_id, type, 4 more }
 
@@ -3770,6 +3788,48 @@ type: "terminal"
 
 type: "billing\_error"
 
+BetaManagedAgentsCredentialHostUnreachableError { credential\_id, message, retry\_status, 2 more }
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: string
+
+ID of the affected credential.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+One of the following:
+
+BetaManagedAgentsRetryStatusRetrying { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "credential\_host\_unreachable\_error"
+
+vault\_id: string
+
+ID of the vault containing the affected credential.
+
 BetaManagedAgentsDocumentBlock { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
@@ -3838,7 +3898,7 @@ title?: string | null
 
 The title of the document.
 
-BetaManagedAgentsEventParams = [BetaManagedAgentsUserMessageEventParams](api/beta.md) { content, type }  | [BetaManagedAgentsUserInterruptEventParams](api/beta.md) { type, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEventParams](api/beta.md) { result, tool\_use\_id, type, deny\_message }  | 3 more
+BetaManagedAgentsEventParams = [BetaManagedAgentsUserMessageEventParams](api/beta.md) { content, type }  | [BetaManagedAgentsUserInterruptEventParams](api/beta.md) { type, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEventParams](api/beta.md) { result, tool\_use\_id, type, deny\_message }  | 4 more
 
 Union type for event parameters that can be sent to a session.
 
@@ -4406,6 +4466,22 @@ is\_error?: boolean | null
 
 Whether the tool execution resulted in an error.
 
+BetaManagedAgentsSystemMessageEventParams { content, type }
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks to append. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
 BetaManagedAgentsFileDocumentSource { file\_id, type }
 
 Document referenced by file ID.
@@ -4756,7 +4832,7 @@ BetaManagedAgentsSendSessionEvents { data }
 
 Events that were successfully sent to the session.
 
-data?: Array<[BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 3 more>
+data?: Array<[BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 4 more>
 
 Sent events
 
@@ -5388,6 +5464,30 @@ session\_thread\_id?: string | null
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+BetaManagedAgentsSystemMessageEvent { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at?: string | null
+
+A timestamp in RFC 3339 format
+
 BetaManagedAgentsSessionDeletedEvent { id, processed\_at, type }
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -5416,7 +5516,7 @@ id: string
 
 Unique identifier for this event.
 
-error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 4 more
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 5 more
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -5668,13 +5768,55 @@ type: "terminal"
 
 type: "billing\_error"
 
+BetaManagedAgentsCredentialHostUnreachableError { credential\_id, message, retry\_status, 2 more }
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: string
+
+ID of the affected credential.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+One of the following:
+
+BetaManagedAgentsRetryStatusRetrying { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "credential\_host\_unreachable\_error"
+
+vault\_id: string
+
+ID of the vault containing the affected credential.
+
 processed\_at: string
 
 A timestamp in RFC 3339 format
 
 type: "session.error"
 
-BetaManagedAgentsSessionEvent = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 30 more
+BetaManagedAgentsSessionEvent = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 31 more
 
 Union type for all event types in a session.
 
@@ -6904,7 +7046,7 @@ id: string
 
 Unique identifier for this event.
 
-error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 4 more
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 5 more
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -7155,6 +7297,48 @@ The session encountered a terminal error and will transition to `terminated` sta
 type: "terminal"
 
 type: "billing\_error"
+
+BetaManagedAgentsCredentialHostUnreachableError { credential\_id, message, retry\_status, 2 more }
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: string
+
+ID of the affected credential.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+One of the following:
+
+BetaManagedAgentsRetryStatusRetrying { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "credential\_host\_unreachable\_error"
+
+vault\_id: string
+
+ID of the vault containing the affected credential.
 
 processed\_at: string
 
@@ -7854,7 +8038,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -7940,7 +8128,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -8158,21 +8350,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -8348,21 +8534,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -8379,6 +8559,30 @@ The session's full metadata bag after the update. Present when the update set no
 title?: string | null
 
 The session's new title. Present only when the update changed it.
+
+BetaManagedAgentsSystemMessageEvent { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at?: string | null
+
+A timestamp in RFC 3339 format
 
 BetaManagedAgentsSessionRequiresAction { event\_ids, type }
 
@@ -8822,7 +9026,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_start"
 
-BetaManagedAgentsStreamSessionEvents = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 30 more
+BetaManagedAgentsStreamSessionEvents = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 31 more
 
 Server-sent event in the session stream.
 
@@ -10052,7 +10256,7 @@ id: string
 
 Unique identifier for this event.
 
-error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 4 more
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 5 more
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -10303,6 +10507,48 @@ The session encountered a terminal error and will transition to `terminated` sta
 type: "terminal"
 
 type: "billing\_error"
+
+BetaManagedAgentsCredentialHostUnreachableError { credential\_id, message, retry\_status, 2 more }
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: string
+
+ID of the affected credential.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+One of the following:
+
+BetaManagedAgentsRetryStatusRetrying { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "credential\_host\_unreachable\_error"
+
+vault\_id: string
+
+ID of the vault containing the affected credential.
 
 processed\_at: string
 
@@ -11002,7 +11248,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -11088,7 +11338,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -11306,21 +11560,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -11496,21 +11744,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -11527,6 +11769,46 @@ The session's full metadata bag after the update. Present when the update set no
 title?: string | null
 
 The session's new title. Present only when the update changed it.
+
+BetaManagedAgentsSystemMessageEvent { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at?: string | null
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsSystemMessageEventParams { content, type }
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks to append. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
 
 BetaManagedAgentsTextBlock { text, type }
 
@@ -13098,7 +13380,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -13316,21 +13602,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -13478,7 +13758,7 @@ output\_tokens?: number
 
 Total output tokens generated across all turns.
 
-BetaManagedAgentsStreamSessionThreadEvents = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 30 more
+BetaManagedAgentsStreamSessionThreadEvents = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 31 more
 
 Server-sent event in a single thread's stream.
 
@@ -14708,7 +14988,7 @@ id: string
 
 Unique identifier for this event.
 
-error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 4 more
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 5 more
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -14959,6 +15239,48 @@ The session encountered a terminal error and will transition to `terminated` sta
 type: "terminal"
 
 type: "billing\_error"
+
+BetaManagedAgentsCredentialHostUnreachableError { credential\_id, message, retry\_status, 2 more }
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: string
+
+ID of the affected credential.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+One of the following:
+
+BetaManagedAgentsRetryStatusRetrying { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "credential\_host\_unreachable\_error"
+
+vault\_id: string
+
+ID of the vault containing the affected credential.
 
 processed\_at: string
 
@@ -15658,7 +15980,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -15744,7 +16070,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -15962,21 +16292,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -16152,21 +16476,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -16183,6 +16501,30 @@ The session's full metadata bag after the update. Present when the update set no
 title?: string | null
 
 The session's new title. Present only when the update changed it.
+
+BetaManagedAgentsSystemMessageEvent { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at?: string | null
+
+A timestamp in RFC 3339 format
 
 #### SessionsThreadsEvents
 

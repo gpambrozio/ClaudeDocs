@@ -66,6 +66,10 @@ One of the following:
 
 "thinking-token-count-2026-05-13"
 
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
+
 [BetaAPIError](api/beta.md)
 
 string message
@@ -296,6 +300,10 @@ string id
 
 Unique model identifier.
 
+?list<string> allowedFallbackModels
+
+Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
+
 ?[BetaModelCapabilities](api/beta.md) capabilities
 
 Model capability information.
@@ -346,7 +354,7 @@ Whether the model supports thinking with type 'enabled'.
 
 ##### [Create a Message](api/beta/messages/create.md)
 
-$client->beta->messages->create(int maxTokens, list<[BetaMessageParam](api/beta.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta.md) cacheControl, ?[Container](api/beta/messages/create.md) container, ?[BetaContextManagementConfig](api/beta.md) contextManagement, ?[BetaDiagnosticsParam](api/beta.md) diagnostics, ?string inferenceGeo, ?list<[BetaRequestMCPServerURLDefinition](api/beta.md)> mcpServers, ?[BetaMetadata](api/beta.md) metadata, ?[BetaOutputConfig](api/beta.md) outputConfig, ?[BetaJSONOutputFormat](api/beta.md) outputFormat, ?[ServiceTier](api/beta/messages/create.md) serviceTier, ?[Speed](api/beta/messages/create.md) speed, ?list<string> stopSequences, ?[System](api/beta/messages/create.md) system, ?float temperature, ?[BetaThinkingConfigParam](api/beta.md) thinking, ?[BetaToolChoice](api/beta.md) toolChoice, ?list<[BetaToolUnion](api/beta.md)> tools, ?int topK, ?float topP, ?string userProfileID, ?list<AnthropicBeta> betas): [BetaMessage](api/beta.md)
+$client->beta->messages->create(int maxTokens, list<[BetaMessageParam](api/beta.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta.md) cacheControl, ?[Container](api/beta/messages/create.md) container, ?[BetaContextManagementConfig](api/beta.md) contextManagement, ?[BetaDiagnosticsParam](api/beta.md) diagnostics, ?string fallbackCreditToken, ?list<[BetaFallbackParam](api/beta.md)> fallbacks, ?string inferenceGeo, ?list<[BetaRequestMCPServerURLDefinition](api/beta.md)> mcpServers, ?[BetaMetadata](api/beta.md) metadata, ?[BetaOutputConfig](api/beta.md) outputConfig, ?[BetaJSONOutputFormat](api/beta.md) outputFormat, ?[ServiceTier](api/beta/messages/create.md) serviceTier, ?[Speed](api/beta/messages/create.md) speed, ?list<string> stopSequences, ?[System](api/beta/messages/create.md) system, ?float temperature, ?[BetaThinkingConfigParam](api/beta.md) thinking, ?[BetaToolChoice](api/beta.md) toolChoice, ?list<[BetaToolUnion](api/beta.md)> tools, ?int topK, ?float topP, ?string userProfileID, ?list<AnthropicBeta> betas): [BetaMessage](api/beta.md)
 
 POST/v1/messages
 
@@ -459,6 +467,10 @@ Caching for the advisor's own prompt. When set, each advisor call writes a cache
 ?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxTokens
+
+Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
 ?int maxUses
 
@@ -1433,6 +1445,18 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 "compaction" type
 
+[BetaFallbackBlock](api/beta.md)
+
+[BetaFallbackInfo](api/beta.md) from
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+[BetaFallbackInfo](api/beta.md) to
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+"fallback" type
+
 [BetaContentBlockParam](api/beta.md)
 
 One of the following:
@@ -1719,6 +1743,18 @@ System instruction text blocks.
 
 Create a cache control breakpoint at this content block.
 
+[BetaFallbackBlockParam](api/beta.md)
+
+[BetaFallbackInfoParam](api/beta.md) from
+
+Identifies one hop of a fallback transition.
+
+[BetaFallbackInfoParam](api/beta.md) to
+
+Identifies one hop of a fallback transition.
+
+"fallback" type
+
 [BetaContentBlockSource](api/beta.md)
 
 Content content
@@ -1823,6 +1859,94 @@ string stderr
 
 "encrypted\_code\_execution\_result" type
 
+[BetaFallbackBlock](api/beta.md)
+
+[BetaFallbackInfo](api/beta.md) from
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+[BetaFallbackInfo](api/beta.md) to
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+"fallback" type
+
+[BetaFallbackBlockParam](api/beta.md)
+
+[BetaFallbackInfoParam](api/beta.md) from
+
+Identifies one hop of a fallback transition.
+
+[BetaFallbackInfoParam](api/beta.md) to
+
+Identifies one hop of a fallback transition.
+
+"fallback" type
+
+[BetaFallbackInfo](api/beta.md)
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+[BetaFallbackInfoParam](api/beta.md)
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+[BetaFallbackMessageIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
+
+Breakdown of cached tokens by TTL
+
+int cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+int cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+int inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+int outputTokens
+
+The number of output tokens which were used.
+
+"fallback\_message" type
+
+Usage for the fallback-model attempt that served the response
+
+[BetaFallbackParam](api/beta.md)
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+?int maxTokens
+
+?[BetaOutputConfig](api/beta.md) outputConfig
+
+?Speed speed
+
+?Thinking thinking
+
 [BetaFileDocumentSource](api/beta.md)
 
 string fileID
@@ -1884,6 +2008,12 @@ The number of input tokens read from the cache.
 int inputTokens
 
 The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 int outputTokens
 
@@ -1950,6 +2080,38 @@ The number of output tokens which were used.
 "advisor\_message" type
 
 Usage for an advisor sub-inference iteration
+
+[BetaFallbackMessageIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
+
+Breakdown of cached tokens by TTL
+
+int cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+int cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+int inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+int outputTokens
+
+The number of output tokens which were used.
+
+"fallback\_message" type
+
+Usage for the fallback-model attempt that served the response
 
 [BetaJSONOutputFormat](api/beta.md)
 
@@ -2413,6 +2575,12 @@ int inputTokens
 
 The number of input tokens which were used.
 
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
 int outputTokens
 
 The number of output tokens which were used.
@@ -2681,6 +2849,55 @@ The policy category that triggered the refusal.
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+?string fallbackCreditToken
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+?bool fallbackHasPrefillClaim
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+?string recommendedModel
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 "refusal" type
 
@@ -3702,6 +3919,8 @@ ErrorCode errorCode
 
 "tool\_search\_tool\_result\_error" type
 
+?string errorMessage
+
 [BetaToolSearchToolSearchResultBlock](api/beta.md)
 
 list<[BetaToolReferenceBlock](api/beta.md)> toolReferences
@@ -4489,6 +4708,10 @@ Caching for the advisor's own prompt. When set, each advisor call writes a cache
 ?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxTokens
+
+Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
 ?int maxUses
 
@@ -5617,17 +5840,11 @@ Type type
 
 [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
+"object" type
+
 ?array<string,mixed> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 ?list<string> required
-
-List of required property names.
-
-?Type type
-
-Must be 'object' for tool input schemas.
 
 [BetaManagedAgentsCustomToolParams](api/beta.md)
 
@@ -5726,6 +5943,10 @@ Default configuration for all tools from an MCP server.
 BetaManagedAgentsModel
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -6307,7 +6528,7 @@ POST/v1/sessions
 
 ##### [List Sessions](api/beta/sessions/list.md)
 
-$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?[Order](api/beta/sessions/list.md) order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsSession](api/beta.md)>
+$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?[Order](api/beta/sessions/list.md) order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsSession](api/beta.md)>
 
 GET/v1/sessions
 
@@ -6545,6 +6766,10 @@ list<string> vaultIDs
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+?string deploymentID
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 [BetaManagedAgentsSessionAgent](api/beta.md)
 
 string id
@@ -6642,6 +6867,30 @@ Total input tokens consumed across all turns.
 ?int outputTokens
 
 Total output tokens generated across all turns.
+
+[BetaManagedAgentsSystemContentBlock](api/beta.md)
+
+string text
+
+The text content.
+
+Type type
+
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
 
 [BetaManagedAgentsUserToolResultEvent](api/beta.md)
 
@@ -6949,6 +7198,26 @@ What the client should do next in response to this error.
 
 Type type
 
+[ManagedAgentsCredentialHostUnreachableError](api/beta.md)
+
+string credentialID
+
+ID of the affected credential.
+
+string message
+
+Human-readable error description.
+
+RetryStatus retryStatus
+
+What the client should do next in response to this error.
+
+Type type
+
+string vaultID
+
+ID of the vault containing the affected credential.
+
 [ManagedAgentsDocumentBlock](api/beta.md)
 
 Source source
@@ -7048,6 +7317,14 @@ The result content returned by the tool.
 ?bool isError
 
 Whether the tool execution resulted in an error.
+
+[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks to append. Text-only.
+
+Type type
 
 [ManagedAgentsFileDocumentSource](api/beta.md)
 
@@ -7940,6 +8217,22 @@ The session's full metadata bag after the update. Present when the update set no
 ?string title
 
 The session's new title. Present only when the update changed it.
+
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
 
 [ManagedAgentsSessionRequiresAction](api/beta.md)
 
@@ -8930,6 +9223,30 @@ The session's full metadata bag after the update. Present when the update set no
 ?string title
 
 The session's new title. Present only when the update changed it.
+
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
+
+[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks to append. Text-only.
+
+Type type
 
 [ManagedAgentsTextBlock](api/beta.md)
 
@@ -10153,6 +10470,22 @@ The session's full metadata bag after the update. Present when the update set no
 
 The session's new title. Present only when the update changed it.
 
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
+
 #### BetaSessionsThreadsEvents
 
 ##### [List Session Thread Events](api/beta/sessions/threads/events/list.md)
@@ -10166,6 +10499,746 @@ GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
 $client->beta->sessions->threads->events->stream(string threadID, string sessionID, ?list<AnthropicBeta> betas): [ManagedAgentsStreamSessionThreadEvents](api/beta.md)
 
 GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
+
+#### BetaDeployments
+
+##### [Create Deployment](api/beta/deployments/create.md)
+
+$client->beta->deployments->create([Agent](api/beta/deployments/create.md) agent, string environmentID, list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)> initialEvents, string name, ?string description, ?array<string,string> metadata, ?list<Resource> resources, ?[BetaManagedAgentsScheduleParams](api/beta.md) schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+
+POST/v1/deployments
+
+##### [List Deployments](api/beta/deployments/list.md)
+
+$client->beta->deployments->list(?string agentID, ?\Datetime createdAtGte, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string page, ?[BetaManagedAgentsDeploymentStatus](api/beta.md) status, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeployment](api/beta.md)>
+
+GET/v1/deployments
+
+##### [Get Deployment](api/beta/deployments/retrieve.md)
+
+$client->beta->deployments->retrieve(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+
+GET/v1/deployments/{deployment\_id}
+
+##### [Update Deployment](api/beta/deployments/update.md)
+
+$client->beta->deployments->update(string deploymentID, ?[Agent](api/beta/deployments/update.md) agent, ?string description, ?string environmentID, ?list<[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)> initialEvents, ?array<string,string> metadata, ?string name, ?list<Resource> resources, ?[BetaManagedAgentsScheduleParams](api/beta.md) schedule, ?list<string> vaultIDs, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+
+POST/v1/deployments/{deployment\_id}
+
+##### [Archive Deployment](api/beta/deployments/archive.md)
+
+$client->beta->deployments->archive(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+
+POST/v1/deployments/{deployment\_id}/archive
+
+##### [Run Deployment Now](api/beta/deployments/run.md)
+
+$client->beta->deployments->run(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeploymentRun](api/beta.md)
+
+POST/v1/deployments/{deployment\_id}/run
+
+##### [Pause Deployment](api/beta/deployments/pause.md)
+
+$client->beta->deployments->pause(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+
+POST/v1/deployments/{deployment\_id}/pause
+
+##### [Unpause Deployment](api/beta/deployments/unpause.md)
+
+$client->beta->deployments->unpause(string deploymentID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeployment](api/beta.md)
+
+POST/v1/deployments/{deployment\_id}/unpause
+
+##### ModelsExpand Collapse
+
+[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsCronSchedule](api/beta.md)
+
+string expression
+
+5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+string timezone
+
+IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
+
+Type type
+
+?\Datetime lastRunAt
+
+A timestamp in RFC 3339 format
+
+?list<\Datetime> upcomingRunsAt
+
+Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+[BetaManagedAgentsCronScheduleParams](api/beta.md)
+
+string expression
+
+5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+string timezone
+
+Required. IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC"). Validated against the IANA timezone database.
+
+Type type
+
+[BetaManagedAgentsDeployment](api/beta.md)
+
+string id
+
+Unique identifier for this deployment.
+
+[BetaManagedAgentsAgentReference](api/beta.md) agent
+
+A resolved agent reference with a concrete version.
+
+?\Datetime archivedAt
+
+A timestamp in RFC 3339 format
+
+\Datetime createdAt
+
+A timestamp in RFC 3339 format
+
+?string description
+
+Description of what the deployment does.
+
+string environmentID
+
+ID of the `environment` where sessions run.
+
+list<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)> initialEvents
+
+Events sent to each session immediately after creation.
+
+array<string,string> metadata
+
+Arbitrary key-value metadata. Maximum 16 pairs.
+
+string name
+
+Human-readable name.
+
+?[BetaManagedAgentsDeploymentPausedReason](api/beta.md) pausedReason
+
+Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+list<[BetaManagedAgentsSessionResourceConfig](api/beta.md)> resources
+
+Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+?[BetaManagedAgentsSchedule](api/beta.md) schedule
+
+5-field POSIX cron schedule with computed runtime timestamps.
+
+[BetaManagedAgentsDeploymentStatus](api/beta.md) status
+
+Lifecycle status of a deployment.
+
+Type type
+
+\Datetime updatedAt
+
+A timestamp in RFC 3339 format
+
+list<string> vaultIDs
+
+Vault IDs supplying stored credentials for sessions created from this deployment.
+
+[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)
+
+One of the following:
+
+[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+
+list<Content> content
+
+Array of content blocks for the user message.
+
+Type type
+
+[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+
+string description
+
+What the agent should produce. This is the task specification.
+
+Rubric rubric
+
+Rubric for grading the quality of an outcome.
+
+Type type
+
+?int maxIterations
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
+[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks to append. Text-only.
+
+Type type
+
+[BetaManagedAgentsDeploymentInitialEventParams](api/beta.md)
+
+One of the following:
+
+[ManagedAgentsUserMessageEventParams](api/beta.md)
+
+list<Content> content
+
+Array of content blocks for the user message.
+
+Type type
+
+[ManagedAgentsUserDefineOutcomeEventParams](api/beta.md)
+
+string description
+
+What the agent should produce. This is the task specification.
+
+Rubric rubric
+
+Rubric for grading the quality of an outcome.
+
+Type type
+
+?int maxIterations
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
+[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks to append. Text-only.
+
+Type type
+
+[BetaManagedAgentsDeploymentPausedReason](api/beta.md)
+
+One of the following:
+
+[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
+
+The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+Type type
+
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+
+One of the following:
+
+[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsDeploymentStatus](api/beta.md)
+
+One of the following:
+
+"active"
+
+"paused"
+
+[BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks to append. Text-only.
+
+Type type
+
+[BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md)
+
+string description
+
+What the agent should produce. This is the task specification.
+
+Rubric rubric
+
+Rubric for grading the quality of an outcome.
+
+Type type
+
+?int maxIterations
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
+[BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md)
+
+list<Content> content
+
+Array of content blocks for the user message.
+
+Type type
+
+[BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md)
+
+[BetaManagedAgentsDeploymentPausedReasonError](api/beta.md) error
+
+The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+Type type
+
+[BetaManagedAgentsFileNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsFileResourceConfig](api/beta.md)
+
+string fileID
+
+ID of a previously uploaded file.
+
+Type type
+
+?string mountPath
+
+Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
+
+Type type
+
+string url
+
+Github URL of the repository
+
+?Checkout checkout
+
+Branch or commit to check out. Defaults to the repository's default branch.
+
+?string mountPath
+
+Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+[BetaManagedAgentsManualDeploymentPausedReason](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+
+string memoryStoreID
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+Type type
+
+?Access access
+
+Access mode for an attached memory store.
+
+?string instructions
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+[BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsSchedule](api/beta.md)
+
+string expression
+
+5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+string timezone
+
+IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
+
+Type type
+
+?\Datetime lastRunAt
+
+A timestamp in RFC 3339 format
+
+?list<\Datetime> upcomingRunsAt
+
+Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+[BetaManagedAgentsScheduleParams](api/beta.md)
+
+string expression
+
+5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+string timezone
+
+Required. IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC"). Validated against the IANA timezone database.
+
+Type type
+
+[BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsSessionResourceConfig](api/beta.md)
+
+One of the following:
+
+[BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md)
+
+Type type
+
+string url
+
+Github URL of the repository
+
+?Checkout checkout
+
+Branch or commit to check out. Defaults to the repository's default branch.
+
+?string mountPath
+
+Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+[BetaManagedAgentsFileResourceConfig](api/beta.md)
+
+string fileID
+
+ID of a previously uploaded file.
+
+Type type
+
+?string mountPath
+
+Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+[BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md)
+
+string memoryStoreID
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+Type type
+
+?Access access
+
+Access mode for an attached memory store.
+
+?string instructions
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+[BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsUnknownDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsVaultArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError](api/beta.md)
+
+Type type
+
+#### BetaDeployment Runs
+
+##### [List Deployment Runs](api/beta/deployment_runs/list.md)
+
+$client->beta->deploymentRuns->list(?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool hasError, ?int limit, ?string page, ?[BetaManagedAgentsTriggerType](api/beta.md) triggerType, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsDeploymentRun](api/beta.md)>
+
+GET/v1/deployment\_runs
+
+##### [Get Deployment Run](api/beta/deployment_runs/retrieve.md)
+
+$client->beta->deploymentRuns->retrieve(string deploymentRunID, ?list<AnthropicBeta> betas): [BetaManagedAgentsDeploymentRun](api/beta.md)
+
+GET/v1/deployment\_runs/{deployment\_run\_id}
+
+##### ModelsExpand Collapse
+
+[BetaManagedAgentsAgentArchivedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsDeploymentRun](api/beta.md)
+
+string id
+
+Unique identifier for this run (`drun_...`).
+
+[BetaManagedAgentsAgentReference](api/beta.md) agent
+
+A resolved agent reference with a concrete version.
+
+\Datetime createdAt
+
+A timestamp in RFC 3339 format
+
+string deploymentID
+
+ID of the deployment that produced this run.
+
+?Error error
+
+Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+?string sessionID
+
+Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
+
+[BetaManagedAgentsTriggerContext](api/beta.md) triggerContext
+
+Describes what triggered a deployment run, with trigger-specific metadata.
+
+Type type
+
+[BetaManagedAgentsEnvironmentArchivedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsEnvironmentNotFoundRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsFileNotFoundRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsManualTriggerContext](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsMCPEgressBlockedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsMemoryStoreArchivedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsOrganizationDisabledRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+
+\Datetime scheduledAt
+
+A timestamp in RFC 3339 format
+
+Type type
+
+[BetaManagedAgentsSelfHostedResourcesUnsupportedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsSessionCreationRejectedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsSessionRateLimitedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsSessionResourceNotFoundRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsSkillNotFoundRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsTriggerContext](api/beta.md)
+
+One of the following:
+
+[BetaManagedAgentsScheduleTriggerContext](api/beta.md)
+
+\Datetime scheduledAt
+
+A timestamp in RFC 3339 format
+
+Type type
+
+[BetaManagedAgentsManualTriggerContext](api/beta.md)
+
+Type type
+
+[BetaManagedAgentsTriggerType](api/beta.md)
+
+One of the following:
+
+"schedule"
+
+"manual"
+
+[BetaManagedAgentsUnknownRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsVaultArchivedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsVaultNotFoundRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
+
+[BetaManagedAgentsWorkspaceArchivedRunError](api/beta.md)
+
+string message
+
+Human-readable error description.
+
+Type type
 
 #### BetaVaults
 
@@ -10325,6 +11398,22 @@ Identifier of the vault this credential belongs to.
 
 Human-readable name for the credential.
 
+[ManagedAgentsCredentialNetworkingParams](api/beta.md)
+
+One of the following:
+
+[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+
+Type type
+
+[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+
+list<string> allowedHosts
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+Type type
+
 [ManagedAgentsCredentialValidation](api/beta.md)
 
 string credentialID
@@ -10372,6 +11461,62 @@ One of the following:
 string id
 
 Unique identifier of the deleted credential.
+
+Type type
+
+[ManagedAgentsEnvironmentVariableAuthResponse](api/beta.md)
+
+Networking networking
+
+Outbound hosts the secret value is substituted on.
+
+string secretName
+
+Name of the environment variable.
+
+Type type
+
+[ManagedAgentsEnvironmentVariableCreateParams](api/beta.md)
+
+[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+
+Outbound hosts the secret value is substituted on.
+
+string secretName
+
+Name of the environment variable. Immutable after create.
+
+string secretValue
+
+Secret value. Write-only; never returned in responses.
+
+Type type
+
+[ManagedAgentsEnvironmentVariableUpdateParams](api/beta.md)
+
+Type type
+
+?[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+
+Updated networking scope. Full replacement.
+
+?string secretValue
+
+Updated secret value.
+
+[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+
+list<string> allowedHosts
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+Type type
+
+[ManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md)
+
+list<string> allowedHosts
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
 Type type
 
@@ -10602,6 +11747,14 @@ Type type
 ?string clientSecret
 
 Updated OAuth client secret.
+
+[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+
+Type type
+
+[ManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md)
+
+Type type
 
 #### BetaMemory Stores
 
@@ -11386,7 +12539,7 @@ One of the following:
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11398,7 +12551,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11410,7 +12563,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11422,7 +12575,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11434,7 +12587,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11446,7 +12599,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11458,7 +12611,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11470,7 +12623,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11482,7 +12635,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11494,7 +12647,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11506,7 +12659,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11518,9 +12671,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_created" type
 
@@ -11530,9 +12687,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_idled" type
 
@@ -11542,9 +12703,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_terminated" type
 
@@ -11554,7 +12719,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11566,7 +12731,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 
@@ -11578,7 +12743,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 
@@ -11590,7 +12755,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 
@@ -11602,7 +12767,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -11618,7 +12783,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -11634,7 +12799,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -11650,7 +12815,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -11666,7 +12831,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11678,7 +12843,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11690,7 +12855,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11702,7 +12867,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11714,7 +12879,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11726,7 +12891,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11738,7 +12903,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11750,7 +12915,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11762,7 +12927,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11774,7 +12939,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11786,7 +12951,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11798,7 +12963,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -11810,9 +12975,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_created" type
 
@@ -11822,9 +12991,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_idled" type
 
@@ -11834,9 +13007,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_terminated" type
 
@@ -11846,7 +13023,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 
@@ -11858,7 +13035,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 
@@ -11870,7 +13047,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -11886,7 +13063,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -11902,7 +13079,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -11918,7 +13095,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -11934,7 +13111,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 

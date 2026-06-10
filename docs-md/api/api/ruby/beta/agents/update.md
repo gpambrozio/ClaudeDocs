@@ -24,7 +24,7 @@ The agent's current version, used to prevent concurrent overwrites. Obtain this 
 
 description: String
 
-Description. Up to 2048 characters. Omit to preserve; send empty string or null to clear.
+Description. Omit to preserve; send empty string or null to clear.
 
 mcp\_servers: Array[[BetaManagedAgentsURLMCPServerParams](api/beta.md) { name, type, url } ]
 
@@ -50,7 +50,7 @@ Model identifier. Accepts the [model string](about-claude/models/overview.md), e
 
 One of the following:
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more | String
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more | String
 
 The model that will power your agent.
 
@@ -58,13 +58,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 :"claude-opus-4-8"
 
@@ -120,13 +124,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 :"claude-opus-4-8"
 
@@ -216,11 +224,11 @@ type: :coordinator
 
 name: String
 
-Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
 skills: Array[[BetaManagedAgentsSkillParams](api/beta.md)]
 
-Skills. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 20.
+Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
 One of the following:
 
@@ -254,7 +262,7 @@ Version to pin. Defaults to latest if omitted.
 
 system\_: String
 
-System prompt. Up to 100,000 characters. Omit to preserve; send empty string or null to clear.
+System prompt. Omit to preserve; send empty string or null to clear.
 
 tools: Array[[BetaManagedAgentsAgentToolset20260401Params](api/beta.md) { type, configs, default\_config }  | [BetaManagedAgentsMCPToolsetParams](api/beta.md) { mcp\_server\_name, type, configs, default\_config }  | [BetaManagedAgentsCustomToolParams](api/beta.md) { description, input\_schema, name, type } ]
 
@@ -416,21 +424,15 @@ description: String
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
-properties: Hash[Symbol, untyped]
-
-JSON Schema properties defining the tool's input parameters.
-
-required: Array[String]
-
-List of required property names.
-
 type: :object
 
-Must be 'object' for tool input schemas.
+properties: Hash[Symbol, untyped]
+
+required: Array[String]
 
 name: String
 
@@ -446,7 +448,7 @@ One of the following:
 
 String = String
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more
 
 One of the following:
 
@@ -502,6 +504,10 @@ One of the following:
 
 :"thinking-token-count-2026-05-13"
 
+:"server-side-fallback-2026-06-01"
+
+:"fallback-credit-2026-06-01"
+
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsAgent { id, archived\_at, created\_at, 12 more }
@@ -542,13 +548,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 :"claude-opus-4-8"
 
@@ -782,21 +792,15 @@ A custom tool as returned in API responses.
 
 description: String
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
-properties: Hash[Symbol, untyped]
-
-JSON Schema properties defining the tool's input parameters.
-
-required: Array[String]
-
-List of required property names.
-
 type: :object
 
-Must be 'object' for tool input schemas.
+properties: Hash[Symbol, untyped]
+
+required: Array[String]
 
 name: String
 

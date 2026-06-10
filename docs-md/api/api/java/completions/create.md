@@ -78,6 +78,10 @@ CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
 THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
+SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+
+FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+
 long maxTokensToSample
 
 The maximum number of tokens to generate before stopping.
@@ -188,6 +192,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -294,6 +306,14 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
 
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
@@ -403,7 +423,7 @@ public final class Main {
 
         CompletionCreateParams params = CompletionCreateParams.builder()
             .maxTokensToSample(256L)
-            .model(Model.CLAUDE_OPUS_4_8)
+            .model(Model.CLAUDE_FABLE_5)
             .prompt("\n\nHuman: Hello, world!\n\nAssistant:")
             .build();
         Completion completion = client.completions().create(params);

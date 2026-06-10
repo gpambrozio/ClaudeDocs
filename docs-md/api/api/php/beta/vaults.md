@@ -164,6 +164,22 @@ Identifier of the vault this credential belongs to.
 
 Human-readable name for the credential.
 
+[ManagedAgentsCredentialNetworkingParams](api/beta.md)
+
+One of the following:
+
+[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+
+Type type
+
+[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+
+list<string> allowedHosts
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+Type type
+
 [ManagedAgentsCredentialValidation](api/beta.md)
 
 string credentialID
@@ -211,6 +227,62 @@ One of the following:
 string id
 
 Unique identifier of the deleted credential.
+
+Type type
+
+[ManagedAgentsEnvironmentVariableAuthResponse](api/beta.md)
+
+Networking networking
+
+Outbound hosts the secret value is substituted on.
+
+string secretName
+
+Name of the environment variable.
+
+Type type
+
+[ManagedAgentsEnvironmentVariableCreateParams](api/beta.md)
+
+[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+
+Outbound hosts the secret value is substituted on.
+
+string secretName
+
+Name of the environment variable. Immutable after create.
+
+string secretValue
+
+Secret value. Write-only; never returned in responses.
+
+Type type
+
+[ManagedAgentsEnvironmentVariableUpdateParams](api/beta.md)
+
+Type type
+
+?[ManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+
+Updated networking scope. Full replacement.
+
+?string secretValue
+
+Updated secret value.
+
+[ManagedAgentsLimitedCredentialNetworkingParams](api/beta.md)
+
+list<string> allowedHosts
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+Type type
+
+[ManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md)
+
+list<string> allowedHosts
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
 Type type
 
@@ -441,6 +513,14 @@ Type type
 ?string clientSecret
 
 Updated OAuth client secret.
+
+[ManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md)
+
+Type type
+
+[ManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md)
+
+Type type
 
 ---
 

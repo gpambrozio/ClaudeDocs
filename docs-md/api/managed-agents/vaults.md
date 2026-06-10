@@ -4,7 +4,7 @@ Copy page
 
 Vaults and credentials are authentication primitives that let you register credentials for third-party services once and reference them by ID at session creation. This means you don't need to run your own secret store, transmit tokens on every call, or lose track of which end user an agent acted on behalf of.
 
-The vault reference is a per-session parameter, so you can manage your product at the agent level and your users at the session level.
+The vault reference is a per-session parameter, so you can manage your product at the `agent` resource granularity and your users at the `session` resource granularity.
 
 All Managed Agents API requests require the `managed-agents-2026-04-01` beta header. The SDK sets the beta header automatically.
 
@@ -23,6 +23,7 @@ VAULT_ID=$(ant beta:vaults create \
   --display-name "Alice" \
   --metadata '{external_user_id: usr_abc123}' \
   --transform id --raw-output)
+echo "$VAULT_ID"  # "vlt_01ABC..."
 ```
 
 The response is the full vault record:
@@ -43,15 +44,26 @@ The response is the full vault record:
 
 ## Add a credential
 
-Each credential binds to a single `mcp_server_url`. When the agent connects to an MCP server at session runtime, the API matches the server URL against active credentials on the referenced vault and injects the token.
+Two credential categories are supported:
 
-MCP OAuth credential
+- **MCP credentials** (`mcp_oauth`, `static_bearer`): each credential is keyed by an `mcp_server_url`. When the agent connects to a server at that URL at session runtime, the token is injected automatically.
+- **Environment variables** (`environment_variable`): each credential is keyed by a `secret_name` (the environment variable name) and stored in the sandbox as an opaque placeholder. When the agent initiates an outbound request, the opaque placeholder is substituted with the real secret at egress. The agent never sees the secret value. Use this for any service that authenticates through an environment variable, such as CLIs, SDKs, or direct API calls.
 
-MCP OAuth credential
+The actual credential values you supply (`token`, `access_token`, `refresh_token`, `client_secret`, `secret_value`) are treated as sensitive, write-only fields and never returned in API responses.
 
-Static bearer credential
+Environment variable credentials (`environment_variable`) are not yet supported with [self-hosted sandboxes](managed-agents/self-hosted-sandboxes.md).
 
-Static bearer credential
+MCP OAuth
+
+MCP OAuth
+
+MCP static bearer
+
+MCP static bearer
+
+Environment variable
+
+Environment variable
 
 Use `mcp_oauth` when the MCP server uses OAuth 2.0. If you supply a `refresh` block, Anthropic refreshes the access token on your behalf when it expires.
 
@@ -69,7 +81,7 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 CREDENTIAL_ID=$(ant beta:vaults:credentials create \
   --vault-id "$VAULT_ID" \
   --display-name "Alice's Slack" \
-  --transform id --raw-output <<'EOF'
+  --transform id --raw-output <<'YAML'
 auth:
   type: mcp_oauth
   mcp_server_url: https://mcp.slack.com/mcp
@@ -83,19 +95,17 @@ auth:
     token_endpoint_auth:
       type: client_secret_post
       client_secret: abc123...
-EOF
+YAML
 )
 ```
 
-Secret fields (`token`, `access_token`, `refresh_token`, `client_secret`) are write-only. They are never returned in API responses.
-
-Credentials are stored as provided and are not validated until session runtime. A bad token surfaces as an MCP authentication error during the session, which is emitted but does not block the session from continuing.
+Credentials are stored as provided and are not validated until session runtime. An invalid credential surfaces as an authentication or downstream error during the session, which is emitted but does not block the session from continuing.
 
 Constraints:
 
-- **One active credential per `mcp_server_url` per vault.** Creating a second credential for the same URL returns a 409.
-- **`mcp_server_url` is immutable.** To point at a different server, archive this credential and create a new one.
-- **Maximum 20 credentials per vault.** This matches the maximum number of MCP servers per agent.
+- **Unique key per vault.** `mcp_server_url` (MCP credentials) and `secret_name` (environment variable credentials) must be unique among active credentials in a vault. Creating a duplicate returns a 409.
+- **Keys are immutable.** To change `mcp_server_url` or `secret_name`, archive the credential and create a new one.
+- **Maximum 20 credentials per vault.**
 
 ## Reference the vault at session creation
 
@@ -106,21 +116,42 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 ```shiki
-session = client.beta.sessions.create(
-    agent=agent.id,
-    environment_id=environment.id,
-    vault_ids=[vault.id],
-    title="Alice's Slack digest",
-)
+SESSION_ID=$(ant beta:sessions create \
+  --agent "$AGENT_ID" \
+  --environment-id "$ENVIRONMENT_ID" \
+  --vault-id "$VAULT_ID" \
+  --title "Alice's Slack digest" \
+  --transform id --raw-output)
 ```
 
 Runtime behavior:
 
-- When a vault has no credential for the MCP server, the connection is attempted unauthenticated and produces an error if the server requires authentication.
-- When multiple vaults cover the MCP server, the first vault with a match wins.
-- In [multiagent sessions](managed-agents/multi-agent.md), vault credentials apply to every thread. An agent whose own definition declares the matching MCP server authenticates with these credentials. See [Connect agents to MCP servers](managed-agents/multi-agent.md).
+- When no MCP credential matches by `mcp_server_url`, the connection is attempted unauthenticated and will error if the server requires authentication.
+- When multiple vaults contain a matching credential, the first vault with a match wins.
+- In [multi-agent sessions](managed-agents/multi-agent.md), vault credentials apply to every thread. An agent whose own definition declares the matching MCP server authenticates with these credentials. See [Connect agents to MCP servers](managed-agents/multi-agent.md).
 
-## Credential refresh
+## Rotate a credential
+
+Secret values and `display_name` can be updated. Structural fields (`mcp_server_url`, `secret_name`, `token_endpoint`, `client_id`) are locked after creation. To change them, archive the credential and create a new one.
+
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+ant beta:vaults:credentials update \
+  --vault-id "$VAULT_ID" \
+  --credential-id "$CREDENTIAL_ID" <<'YAML'
+auth:
+  type: mcp_oauth
+  access_token: xoxp-new-...
+  expires_at: "2099-12-31T23:59:59Z"
+  refresh:
+    refresh_token: xoxe-1-new-...
+YAML
+```
+
+## Credential lifecycle
 
 Credentials are re-resolved periodically, both during a session and during the vault lifecycle. This ensures that credential rotation, archival, or deletion propagates to running sessions without a restart.
 
@@ -136,6 +167,8 @@ To be notified if a credential is archived, deleted, or fails to refresh, you ca
 
 This is a non-exhaustive list of webhooks; see [Subscribe to webhooks](managed-agents/webhooks.md) for the complete list.
 
+For `mcp_oauth` credentials, re-resolution also refreshes the access token if it has expired. If the refresh fails, a `vault_credential.refresh_failed` event is emitted.
+
 ### Diagnose an OAuth refresh failure
 
 To diagnose why a refresh failed, call `POST /v1/vaults/{vault_id}/credentials/{credential_id}/mcp_oauth_validate` (or `client.beta.vaults.credentials.mcp_oauth_validate(...)` in the SDK). This lets you decide how to handle the failure; the right action depends on the error type.
@@ -146,16 +179,15 @@ The top-level `status` tells you what to do next:
 - `invalid`: the grant is gone or the OAuth server rejected the refresh with a 4xx. Prompt the end user to re-authorize.
 - `unknown`: a transient error (5xx, 429, or network failure). Wait and retry.
 
-curl
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
 
 ```shiki
-curl --fail-with-body -sS -X POST \
-  "https://api.anthropic.com/v1/vaults/$vault_id/credentials/$credential_id/mcp_oauth_validate?beta=true" \
-  -H "x-api-key: $ANTHROPIC_API_KEY" \
-  -H "anthropic-version: 2023-06-01" \
-  -H "anthropic-beta: managed-agents-2026-04-01"
+ant beta:vaults:credentials mcp-oauth-validate \
+  --vault-id "$VAULT_ID" \
+  --credential-id "$CREDENTIAL_ID" \
+  --transform status --raw-output  # "valid", "invalid", or "unknown"
 ```
 
 The response is a `vault_credential_validation` object. `mcp_probe` includes the failed MCP handshake step; `refresh` includes the outcome of the attempted refresh.
@@ -186,32 +218,11 @@ The response is a `vault_credential_validation` object. `mcp_probe` includes the
 
 
 
-## Rotate a credential
-
-Only the secret payload and a handful of metadata fields are mutable. `mcp_server_url`, `token_endpoint`, and `client_id` are locked after creation.
-
-curlCLIPythonTypeScriptC#GoJavaPHPRuby
-
-
-
-```shiki
-ant beta:vaults:credentials update \
-  --vault-id "$VAULT_ID" \
-  --credential-id "$CREDENTIAL_ID" <<'EOF'
-auth:
-  type: mcp_oauth
-  access_token: xoxp-new-...
-  expires_at: "2099-12-31T23:59:59Z"
-  refresh:
-    refresh_token: xoxe-1-new-...
-EOF
-```
-
 ## Other operations
 
 - **List vaults or credentials:** Paginated, newest first. Archived records are excluded by default (pass `include_archived=true` to include them).
 - **Archive a vault:** `POST /v1/vaults/{id}/archive`. Cascades to all credentials. Secrets are purged; records are retained for auditing. Future sessions referencing this vault fail; running sessions continue.
-- **Archive a credential:** `POST /v1/vaults/{id}/credentials/{cred_id}/archive`. Purges the secret payload; `mcp_server_url` remains visible. Frees the `mcp_server_url` for a replacement credential.
+- **Archive a credential:** `POST /v1/vaults/{id}/credentials/{cred_id}/archive`. Purges the secret payload; the credential key (`mcp_server_url` or `secret_name`) remains visible and is freed for a replacement credential.
 - **Delete a vault or credential:** Hard delete. The record is not retained. Use archive if you need an audit trail.
 
 Was this page helpful?

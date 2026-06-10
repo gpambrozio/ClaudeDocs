@@ -78,6 +78,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 "claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
@@ -312,17 +316,11 @@ required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 required string Name
 
@@ -818,17 +816,11 @@ required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 required string Name
 
@@ -838,17 +830,11 @@ class BetaManagedAgentsCustomToolInputSchema:
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 class BetaManagedAgentsCustomToolParams:
 
@@ -862,17 +848,11 @@ required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 required string Name
 
@@ -1128,6 +1108,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 "claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
@@ -1189,6 +1173,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"ClaudeOpus4\_8
 
@@ -1323,6 +1311,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"ClaudeOpus4\_8
 
@@ -1542,17 +1534,11 @@ required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 required string Name
 

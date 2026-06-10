@@ -72,11 +72,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
+id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -320,23 +324,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: object { properties, required, type }
+input\_schema: object { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
-
-"object"
 
 name: string
 
@@ -858,23 +854,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: object { properties, required, type }
+input\_schema: object { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
-
-"object"
 
 name: string
 
@@ -882,23 +870,15 @@ type: "custom"
 
 "custom"
 
-beta\_managed\_agents\_custom\_tool\_input\_schema: object { properties, required, type }
+beta\_managed\_agents\_custom\_tool\_input\_schema: object { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
-
-"object"
 
 beta\_managed\_agents\_custom\_tool\_params: object { description, input\_schema, name, type }
 
@@ -908,23 +888,15 @@ description: string
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-input\_schema: object { properties, required, type }
+input\_schema: object { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
-
-"object"
 
 name: string
 
@@ -1196,11 +1168,15 @@ beta\_managed\_agents\_model\_config: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
+id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -1254,11 +1230,15 @@ beta\_managed\_agents\_model\_config\_params: object { id, speed }
 
 An object that defines additional configuration control over model use
 
-id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
+id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -1396,11 +1376,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
+id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -1624,23 +1608,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: object { properties, required, type }
+input\_schema: object { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
-
-"object"
 
 name: string
 

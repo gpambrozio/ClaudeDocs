@@ -78,6 +78,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -312,17 +316,11 @@ String description
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 String name
 
@@ -818,17 +816,11 @@ String description
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 String name
 
@@ -838,17 +830,11 @@ class BetaManagedAgentsCustomToolInputSchema:
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 class BetaManagedAgentsCustomToolParams:
 
@@ -862,17 +848,11 @@ Description of what the tool does, shown to the agent to help it decide when to 
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 String name
 
@@ -1122,6 +1102,10 @@ The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -1173,6 +1157,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
@@ -1235,6 +1223,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
@@ -1369,6 +1361,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
@@ -1588,17 +1584,11 @@ String description
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 String name
 

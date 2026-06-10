@@ -714,6 +714,22 @@ The session's full metadata bag after the update. Present when the update set no
 
 The session's new title. Present only when the update changed it.
 
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
+
 [ManagedAgentsStreamSessionThreadEvents](api/beta.md)
 
 One of the following:
@@ -1401,6 +1417,22 @@ The session's full metadata bag after the update. Present when the update set no
 ?string title
 
 The session's new title. Present only when the update changed it.
+
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
 
 Stream Session Thread Events
 

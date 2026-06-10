@@ -218,6 +218,38 @@ URL of the MCP server this credential authenticates against.
 
 type: Literal["static\_bearer"]
 
+class BetaManagedAgentsEnvironmentVariableAuthResponse: …
+
+Environment variable credential details. The secret value is never returned.
+
+networking: Networking
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+type: Literal["unrestricted"]
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse: …
+
+The secret is substituted only on requests to the listed hosts.
+
+allowed\_hosts: List[str]
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+type: Literal["limited"]
+
+secret\_name: str
+
+Name of the environment variable.
+
+type: Literal["environment\_variable"]
+
 created\_at: datetime
 
 A timestamp in RFC 3339 format
@@ -239,6 +271,28 @@ Identifier of the vault this credential belongs to.
 display\_name: Optional[str]
 
 Human-readable name for the credential.
+
+[BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: Literal["unrestricted"]
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams: …
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: List[str]
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: Literal["limited"]
 
 class BetaManagedAgentsCredentialValidation: …
 
@@ -361,6 +415,126 @@ id: str
 Unique identifier of the deleted credential.
 
 type: Literal["vault\_credential\_deleted"]
+
+class BetaManagedAgentsEnvironmentVariableAuthResponse: …
+
+Environment variable credential details. The secret value is never returned.
+
+networking: Networking
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+type: Literal["unrestricted"]
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse: …
+
+The secret is substituted only on requests to the listed hosts.
+
+allowed\_hosts: List[str]
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+type: Literal["limited"]
+
+secret\_name: str
+
+Name of the environment variable.
+
+type: Literal["environment\_variable"]
+
+class BetaManagedAgentsEnvironmentVariableCreateParams: …
+
+Parameters for creating an environment variable credential.
+
+networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: Literal["unrestricted"]
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams: …
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: List[str]
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: Literal["limited"]
+
+secret\_name: str
+
+Name of the environment variable. Immutable after create.
+
+secret\_value: str
+
+Secret value. Write-only; never returned in responses.
+
+type: Literal["environment\_variable"]
+
+class BetaManagedAgentsEnvironmentVariableUpdateParams: …
+
+Parameters for updating an environment variable credential. `secret_name` is immutable.
+
+type: Literal["environment\_variable"]
+
+networking: Optional[BetaManagedAgentsCredentialNetworkingParams]
+
+Updated networking scope. Full replacement.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: Literal["unrestricted"]
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams: …
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: List[str]
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: Literal["limited"]
+
+secret\_value: Optional[str]
+
+Updated secret value.
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams: …
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: List[str]
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: Literal["limited"]
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse: …
+
+The secret is substituted only on requests to the listed hosts.
+
+allowed\_hosts: List[str]
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+type: Literal["limited"]
 
 class BetaManagedAgentsMCPOAuthAuthResponse: …
 
@@ -867,6 +1041,18 @@ type: Literal["client\_secret\_post"]
 client\_secret: Optional[str]
 
 Updated OAuth client secret.
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams: …
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: Literal["unrestricted"]
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse: …
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+type: Literal["unrestricted"]
 
 ---
 

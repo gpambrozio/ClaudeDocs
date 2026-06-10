@@ -95,6 +95,10 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
 
+"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+
+"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+
 ##### ReturnsExpand Collapse
 
 class SkillListPageResponse:

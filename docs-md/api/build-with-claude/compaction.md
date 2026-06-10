@@ -22,6 +22,8 @@ Compaction is in beta. Include the [beta header](api/beta-headers.md) `compact-2
 
 Compaction is supported on the following models:
 
+- Claude Fable 5 (`claude-fable-5`)
+- [Claude Mythos 5](https://anthropic.com/glasswing) (`claude-mythos-5`)
 - [Claude Mythos Preview](https://anthropic.com/glasswing) (claude-mythos-preview)
 - Claude Opus 4.8 (claude-opus-4-8)
 - Claude Opus 4.7 (claude-opus-4-7)

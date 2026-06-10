@@ -76,6 +76,10 @@ CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
 THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
+SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+
+FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+
 Auth auth
 
 Authentication details for creating a credential.
@@ -165,6 +169,42 @@ Static bearer token value.
 String mcpServerUrl
 
 URL of the MCP server this credential authenticates against.
+
+Type type
+
+class BetaManagedAgentsEnvironmentVariableCreateParams:
+
+Parameters for creating an environment variable credential.
+
+[BetaManagedAgentsCredentialNetworkingParams](api/beta.md) networking
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams:
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+Type type
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams:
+
+Substitute the secret only on requests to the listed hosts.
+
+List<String> allowedHosts
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+Type type
+
+String secretName
+
+Name of the environment variable. Immutable after create.
+
+String secretValue
+
+Secret value. Write-only; never returned in responses.
 
 Type type
 
@@ -261,6 +301,38 @@ Static bearer token credential details for an MCP server.
 String mcpServerUrl
 
 URL of the MCP server this credential authenticates against.
+
+Type type
+
+class BetaManagedAgentsEnvironmentVariableAuthResponse:
+
+Environment variable credential details. The secret value is never returned.
+
+Networking networking
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse:
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+Type type
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse:
+
+The secret is substituted only on requests to the listed hosts.
+
+List<String> allowedHosts
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+Type type
+
+String secretName
+
+Name of the environment variable.
 
 Type type
 

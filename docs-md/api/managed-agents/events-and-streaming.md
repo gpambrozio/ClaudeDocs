@@ -10,7 +10,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
 Events flow in two directions.
 
-- **User events** are what you send to the agent to kick off a session and steer it as it progresses.
+- **User events** and **system events** are what you send to the agent: `user.*` events kick off a session and steer it as it progresses; `system.message` updates the agent's system prompt between turns.
 - **Session events**, **span events**, and **agent events** are sent to you for observability into your session state and agent progress.
 
 Event type strings follow a `{domain}.{action}` naming convention. See [Event types](managed-agents/reference.md) in the reference for the full catalog.
@@ -100,10 +100,10 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 with client.beta.sessions.events.stream(session.id) as stream:
     for event in stream:
-        if event.type == "session.status_idle" and (stop := event.stop_reason):
-            match stop.type:
+        if event.type == "session.status_idle" and (stop_reason := event.stop_reason):
+            match stop_reason.type:
                 case "requires_action":
-                    for event_id in stop.event_ids:
+                    for event_id in stop_reason.event_ids:
                         # Look up the custom tool use event and execute it
                         tool_event = events_by_id[event_id]
                         result = call_tool(tool_event.name, tool_event.input)
@@ -139,10 +139,10 @@ curlCLIPythonTypeScriptC#GoJavaPHPRuby
 ```shiki
 with client.beta.sessions.events.stream(session.id) as stream:
     for event in stream:
-        if event.type == "session.status_idle" and (stop := event.stop_reason):
-            match stop.type:
+        if event.type == "session.status_idle" and (stop_reason := event.stop_reason):
+            match stop_reason.type:
                 case "requires_action":
-                    for event_id in stop.event_ids:
+                    for event_id in stop_reason.event_ids:
                         # Approve the pending tool call
                         client.beta.sessions.events.send(
                             session.id,
@@ -166,25 +166,42 @@ While session history is persisted until deleted, checkpoints are only preserved
 
 To resume a session, send a `user.message` event to it as usual:
 
-```shiki
-# Resume a previously created session by ID
-client.beta.sessions.events.send(
-    "sesn_01...",
-    events=[
-        {
-            "type": "user.message",
-            "content": [
-                {
-                    "type": "text",
-                    "text": "Now run the tests against the changes you made earlier.",
-                },
-            ],
-        },
-    ],
-)
-```
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
 
 
+
+```shiki
+# In production, pass the stored ID of the session you want to resume.
+ant beta:sessions:events send --session-id "$SESSION_ID" <<'YAML'
+events:
+  - type: user.message
+    content:
+      - type: text
+        text: Now run the tests against the changes you made earlier.
+YAML
+```
+
+### Sending system messages
+
+`system.message` is currently only supported by Claude Opus 4.8. If any model configured on the agent does not support mid-conversation system injection, the event is rejected with a `model_does_not_support_mid_conversation_system` validation error.
+
+Send a `system.message` event to update the agent's system prompt between turns. Unlike the `system` field on the agent definition (which is fixed at session creation), `system.message` lets you change the system prompt as the session progresses. Use it when the agent needs updated system-level guidance mid-session: a different persona, revised constraints, or context fetched at runtime that should shape the model's behavior going forward.
+
+curlCLIPythonTypeScriptC#GoJavaPHPRuby
+
+
+
+```shiki
+ant beta:sessions:events send --session-id "$SESSION_ID" <<'YAML'
+events:
+  - type: system.message
+    content:
+      - type: text
+        text: "The user's current timezone is America/New_York."
+YAML
+```
+
+`system.message` cannot be sent while the session is idle with `stop_reason: requires_action`. `content` accepts 1–1000 text items.
 
 ### Tracking usage
 

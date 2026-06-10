@@ -2271,6 +2271,8 @@ const ToolSearchToolResultErrorCodeExecutionTimeExceeded [ToolSearchToolResultEr
 
 Type ToolSearchToolResultError
 
+ErrorMessage stringOptional
+
 type ToolSearchToolSearchResultBlockParamResp struct{…}
 
 ToolReferences [][ToolReferenceBlockParamResp](api/messages.md)
@@ -2551,6 +2553,14 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const ModelClaudeFable5 Model = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+const ModelClaudeMythos5 Model = "claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
 

@@ -55,7 +55,7 @@ class BetaWebhookSessionCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -67,7 +67,7 @@ class BetaWebhookSessionPendingEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -79,7 +79,7 @@ class BetaWebhookSessionRunningEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -91,7 +91,7 @@ class BetaWebhookSessionIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -103,7 +103,7 @@ class BetaWebhookSessionRequiresActionEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -115,7 +115,7 @@ class BetaWebhookSessionArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -127,7 +127,7 @@ class BetaWebhookSessionDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -139,7 +139,7 @@ class BetaWebhookSessionStatusRescheduledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -151,7 +151,7 @@ class BetaWebhookSessionStatusRunStartedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -163,7 +163,7 @@ class BetaWebhookSessionStatusIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -175,7 +175,7 @@ class BetaWebhookSessionStatusTerminatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -187,9 +187,13 @@ class BetaWebhookSessionThreadCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_created"constant
 
@@ -199,9 +203,13 @@ class BetaWebhookSessionThreadIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_idled"constant
 
@@ -211,9 +219,13 @@ class BetaWebhookSessionThreadTerminatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_terminated"constant
 
@@ -223,7 +235,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -235,7 +247,7 @@ class BetaWebhookVaultCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -247,7 +259,7 @@ class BetaWebhookVaultArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -259,7 +271,7 @@ class BetaWebhookVaultDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -271,7 +283,7 @@ class BetaWebhookVaultCredentialCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -287,7 +299,7 @@ class BetaWebhookVaultCredentialArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -303,7 +315,7 @@ class BetaWebhookVaultCredentialDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -319,7 +331,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -341,7 +353,7 @@ class BetaWebhookSessionCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -353,7 +365,7 @@ class BetaWebhookSessionPendingEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -365,7 +377,7 @@ class BetaWebhookSessionRunningEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -377,7 +389,7 @@ class BetaWebhookSessionIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -389,7 +401,7 @@ class BetaWebhookSessionRequiresActionEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -401,7 +413,7 @@ class BetaWebhookSessionArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -413,7 +425,7 @@ class BetaWebhookSessionDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -425,7 +437,7 @@ class BetaWebhookSessionStatusRescheduledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -437,7 +449,7 @@ class BetaWebhookSessionStatusRunStartedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -449,7 +461,7 @@ class BetaWebhookSessionStatusIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -461,7 +473,7 @@ class BetaWebhookSessionStatusTerminatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -473,9 +485,13 @@ class BetaWebhookSessionThreadCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_created"constant
 
@@ -485,9 +501,13 @@ class BetaWebhookSessionThreadIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_idled"constant
 
@@ -497,9 +517,13 @@ class BetaWebhookSessionThreadTerminatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_terminated"constant
 
@@ -509,7 +533,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -521,7 +545,7 @@ class BetaWebhookVaultCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -533,7 +557,7 @@ class BetaWebhookVaultArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -545,7 +569,7 @@ class BetaWebhookVaultDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -557,7 +581,7 @@ class BetaWebhookVaultCredentialCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -573,7 +597,7 @@ class BetaWebhookVaultCredentialArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -589,7 +613,7 @@ class BetaWebhookVaultCredentialDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -605,7 +629,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -621,7 +645,7 @@ class BetaWebhookSessionArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -633,7 +657,7 @@ class BetaWebhookSessionCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -645,7 +669,7 @@ class BetaWebhookSessionDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -657,7 +681,7 @@ class BetaWebhookSessionIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -669,7 +693,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -681,7 +705,7 @@ class BetaWebhookSessionPendingEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -693,7 +717,7 @@ class BetaWebhookSessionRequiresActionEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -705,7 +729,7 @@ class BetaWebhookSessionRunningEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -717,7 +741,7 @@ class BetaWebhookSessionStatusIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -729,7 +753,7 @@ class BetaWebhookSessionStatusRescheduledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -741,7 +765,7 @@ class BetaWebhookSessionStatusRunStartedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -753,7 +777,7 @@ class BetaWebhookSessionStatusTerminatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -765,9 +789,13 @@ class BetaWebhookSessionThreadCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_created"constant
 
@@ -777,9 +805,13 @@ class BetaWebhookSessionThreadIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_idled"constant
 
@@ -789,9 +821,13 @@ class BetaWebhookSessionThreadTerminatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_terminated"constant
 
@@ -801,7 +837,7 @@ class BetaWebhookVaultArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -813,7 +849,7 @@ class BetaWebhookVaultCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -825,7 +861,7 @@ class BetaWebhookVaultCredentialArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -841,7 +877,7 @@ class BetaWebhookVaultCredentialCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -857,7 +893,7 @@ class BetaWebhookVaultCredentialDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -873,7 +909,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -889,7 +925,7 @@ class BetaWebhookVaultDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -915,7 +951,7 @@ class BetaWebhookSessionCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -927,7 +963,7 @@ class BetaWebhookSessionPendingEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -939,7 +975,7 @@ class BetaWebhookSessionRunningEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -951,7 +987,7 @@ class BetaWebhookSessionIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -963,7 +999,7 @@ class BetaWebhookSessionRequiresActionEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -975,7 +1011,7 @@ class BetaWebhookSessionArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -987,7 +1023,7 @@ class BetaWebhookSessionDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -999,7 +1035,7 @@ class BetaWebhookSessionStatusRescheduledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -1011,7 +1047,7 @@ class BetaWebhookSessionStatusRunStartedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -1023,7 +1059,7 @@ class BetaWebhookSessionStatusIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -1035,7 +1071,7 @@ class BetaWebhookSessionStatusTerminatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -1047,9 +1083,13 @@ class BetaWebhookSessionThreadCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_created"constant
 
@@ -1059,9 +1099,13 @@ class BetaWebhookSessionThreadIdledEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_idled"constant
 
@@ -1071,9 +1115,13 @@ class BetaWebhookSessionThreadTerminatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
+
+required string SessionThreadID
+
+ID of the session thread this event refers to.
 
 JsonElement Type "session.thread\_terminated"constant
 
@@ -1083,7 +1131,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 required string OrganizationID
 
@@ -1095,7 +1143,7 @@ class BetaWebhookVaultCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -1107,7 +1155,7 @@ class BetaWebhookVaultArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -1119,7 +1167,7 @@ class BetaWebhookVaultDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 required string OrganizationID
 
@@ -1131,7 +1179,7 @@ class BetaWebhookVaultCredentialCreatedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -1147,7 +1195,7 @@ class BetaWebhookVaultCredentialArchivedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -1163,7 +1211,7 @@ class BetaWebhookVaultCredentialDeletedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 
@@ -1179,7 +1227,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData:
 
 required string ID
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 required string OrganizationID
 

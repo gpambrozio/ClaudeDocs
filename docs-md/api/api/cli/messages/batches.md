@@ -867,11 +867,19 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -955,7 +963,7 @@ stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -964,6 +972,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 
@@ -1843,11 +1853,19 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -1931,7 +1949,7 @@ stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -1940,6 +1958,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 
@@ -2783,11 +2803,19 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -2871,7 +2899,7 @@ stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -2880,6 +2908,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 

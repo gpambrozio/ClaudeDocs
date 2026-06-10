@@ -54,6 +54,7 @@ These actions cause the next request to miss part or all of the cache. You see a
 
 Each model has its own cache. Switching with [`/model`](model-config.md) means the next request reads the entire conversation history with no cache hits, even though the content is identical.
 The [`opusplan` model setting](model-config.md) resolves to Opus during plan mode and Sonnet during execution, so each plan-mode toggle is a model switch and starts a fresh cache.
+[Automatic model fallback](model-config.md) on Fable 5 is also a model switch. When a safety classifier flags a request, Claude Code re-runs it on the default Opus model and the session continues there.
 
 ### [​](#changing-effort-level) Changing effort level
 
@@ -68,7 +69,7 @@ Keeping the header across toggles requires Claude Code v2.1.86 or later. On earl
 
 ### [​](#connecting-or-disconnecting-an-mcp-server) Connecting or disconnecting an MCP server
 
-Tool definitions sit in the system prompt layer, so the cache invalidates when the set of tool definitions in the request changes between turns. Whether an [MCP server](mcp.md) change does this depends on whether its tools are deferred by [tool search](mcp.md) or loaded into the prefix:
+Tool definitions sit in the system prompt layer, so the cache invalidates when the set of tool definitions in the request changes between turns. Toggling the [advisor tool](advisor.md) is an exception: its definition sits after the cache breakpoint, so enabling or disabling `/advisor` keeps the cached prefix intact. Whether an [MCP server](mcp.md) change does this depends on whether its tools are deferred by [tool search](mcp.md) or loaded into the prefix:
 
 - **Deferred tools**, the default on supported models: a server connecting, disconnecting, or changing its tool list only appends new content and doesn’t disturb anything already cached.
 - **Tools loaded into the prefix**: any change to them invalidates the cache. This happens when [tool search is unavailable or disabled](mcp.md), such as on Haiku models, on Vertex AI, or with a custom `ANTHROPIC_BASE_URL` gateway. It also happens for a server or tool marked [`alwaysLoad`](mcp.md), and for definitions kept upfront by [threshold-based loading](mcp.md).
@@ -80,13 +81,13 @@ Editing your MCP config does not by itself change the cache. The new config take
 
 [Plugins](plugins.md) bundle several component types, and the cost of a change depends on which components the plugin provides. Skills, commands, agents, hooks, LSP servers, monitors, and themes never invalidate the cache: anything they add to the request is appended after the existing conversation, so the next request pays for the new content but still reads everything before it from the cache.
 The exception is a plugin that provides [MCP servers](plugins-reference.md). Enabling or disabling one follows the same rules as [connecting or disconnecting an MCP server](#connecting-or-disconnecting-an-mcp-server): the cache survives when the server’s tools are deferred, and the next request re-reads the entire conversation when they load into the prefix.
-Plugin changes apply when you run [`/reload-plugins`](discover-plugins.md) or start a new session. The cost, whether appended announcements or a full re-read, shows up on the first turn after the reload, not when you run `/plugin install`, `/plugin enable`, or `/plugin disable`. As of v2.1.163, when a reload would trigger the full re-read, `/reload-plugins` warns and holds instead of applying it. Pass `--force` to apply anyway.
+Plugin changes apply when you run [`/reload-plugins`](discover-plugins.md) or start a new session. The cost, whether appended announcements or a full re-read, shows up on the first turn after the reload, not when you run `/plugin install`, `/plugin enable`, or `/plugin disable`. As of v2.1.163, when a reload would trigger the full re-read, `/reload-plugins` shows a warning and does not apply the reload. Pass `--force` to apply anyway.
 Disabling a plugin you enabled earlier in the session restores the previous request shape. If that prefix is still within its [cache lifetime](#cache-lifetime), the next request reads the older cache entry instead of rebuilding.
 
 ### [​](#denying-an-entire-tool) Denying an entire tool
 
 Adding a bare tool name like `Bash` or `WebFetch` as a [deny rule](permissions.md) removes that tool from Claude’s context entirely. Built-in tool definitions load into the system prompt layer, so adding or removing one of these rules mid-session invalidates the cache. The change takes effect on the next turn whether you add it through `/permissions` or by [editing a settings file directly](settings.md).
-Only a bare tool name, or the equivalent `Bash(*)` form, has this effect. Scoped deny rules like `Bash(rm *)`, and all allow and ask rules, don’t change which tools Claude sees. Claude Code checks them when Claude attempts a call, leaving the prefix intact.
+Only a deny rule that matches in the tool-name position has this effect: a bare tool name, the equivalent `Bash(*)` form, or a [tool-name glob](permissions.md) like `"*"`. A glob that matches only MCP tools, such as `"mcp__*"`, removes those tools the same way but leaves the cache intact when the matched tools are [deferred](#connecting-or-disconnecting-an-mcp-server), the default, since deferred definitions were never in the cached prefix. Scoped deny rules like `Bash(rm *)`, and all allow and ask rules, don’t change which tools Claude sees. Claude Code checks them when Claude attempts a call, leaving the prefix intact.
 
 ### [​](#compacting-the-conversation) Compacting the conversation
 
@@ -197,6 +198,7 @@ Disabling caching is occasionally useful when debugging caching behavior with a 
 | `DISABLE_PROMPT_CACHING_HAIKU` | Disable for Haiku only |
 | `DISABLE_PROMPT_CACHING_SONNET` | Disable for Sonnet only |
 | `DISABLE_PROMPT_CACHING_OPUS` | Disable for Opus only |
+| `DISABLE_PROMPT_CACHING_FABLE` | Disable for Fable only |
 
 To set caching policy across an organization, put any of these or the [TTL variables](#cache-lifetime) in the `env` block of [managed settings](settings.md). For normal use, leave caching enabled.
 

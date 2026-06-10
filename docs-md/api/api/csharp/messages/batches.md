@@ -927,6 +927,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"ClaudeMythos5
+
+Most capable model for cybersecurity and biology research
+
 "claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
@@ -1020,6 +1028,8 @@ One of the following:
 "cyber"Cyber
 
 "bio"Bio
+
+"reasoning\_extraction"ReasoningExtraction
 
 required string? Explanation
 
@@ -1959,6 +1969,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"ClaudeMythos5
+
+Most capable model for cybersecurity and biology research
+
 "claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
@@ -2052,6 +2070,8 @@ One of the following:
 "cyber"Cyber
 
 "bio"Bio
+
+"reasoning\_extraction"ReasoningExtraction
 
 required string? Explanation
 
@@ -2955,6 +2975,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"ClaudeMythos5
+
+Most capable model for cybersecurity and biology research
+
 "claude-opus-4-8"ClaudeOpus4\_8
 
 Frontier intelligence for long-running agents and coding
@@ -3048,6 +3076,8 @@ One of the following:
 "cyber"Cyber
 
 "bio"Bio
+
+"reasoning\_extraction"ReasoningExtraction
 
 required string? Explanation
 

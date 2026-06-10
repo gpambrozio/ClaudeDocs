@@ -2275,6 +2275,8 @@ One of the following:
 
 JsonElement Type "tool\_search\_tool\_result\_error"constant
 
+string? ErrorMessage
+
 class ToolSearchToolSearchResultBlockParam:
 
 required IReadOnlyList<[ToolReferenceBlockParam](api/messages.md)> ToolReferences
@@ -2547,6 +2549,14 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"ClaudeMythos5
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"ClaudeOpus4\_8
 

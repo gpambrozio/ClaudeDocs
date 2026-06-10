@@ -94,9 +94,9 @@ You can also hold `Shift` while dragging files into the prompt box to add them a
 
 Click the **Session history** button at the top of the Claude Code panel to access your conversation history. You can search by keyword or browse by time (Today, Yesterday, Last 7 days, etc.). Click any conversation to resume it with the full message history. New sessions receive AI-generated titles based on your first message. Hover over a session to reveal rename and remove actions: rename to give it a descriptive title, or remove to delete it from the list. For more on resuming sessions, see [Manage sessions](sessions.md).
 
-### [​](#resume-remote-sessions-from-claude-ai) Resume remote sessions from Claude.ai
+### [​](#resume-cloud-sessions-from-claude-ai) Resume cloud sessions from Claude.ai
 
-If you use [Claude Code on the web](claude-code-on-the-web.md), you can resume those remote sessions directly in VS Code. This requires signing in with **Claude.ai Subscription**, not Anthropic Console.
+If you use [Claude Code on the web](claude-code-on-the-web.md), you can resume those cloud sessions directly in VS Code. This requires signing in with **Claude.ai Subscription**, not Anthropic Console.
 
 1
 
@@ -114,7 +114,7 @@ The dialog shows two tabs: Local and Remote. Click **Remote** to see sessions fr
 
 Select a session to resume
 
-Browse or search your remote sessions. Click any session to download it and continue the conversation locally.
+Browse or search your cloud sessions. Click any session to download it and continue the conversation locally.
 
 Only web sessions started with a GitHub repository appear in the Remote tab. Resuming loads the conversation history locally; changes are not synced back to claude.ai.
 

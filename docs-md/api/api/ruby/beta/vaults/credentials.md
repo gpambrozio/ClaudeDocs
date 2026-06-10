@@ -64,7 +64,7 @@ archived\_at: Time
 
 A timestamp in RFC 3339 format
 
-auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  | [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }
+auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  | [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }  | [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta.md) { networking, secret\_name, type }
 
 Authentication details for a credential.
 
@@ -138,6 +138,38 @@ URL of the MCP server this credential authenticates against.
 
 type: :static\_bearer
 
+class BetaManagedAgentsEnvironmentVariableAuthResponse { networking, secret\_name, type }
+
+Environment variable credential details. The secret value is never returned.
+
+networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md) { type }  | [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md) { allowed\_hosts, type }
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse { type }
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+type: :unrestricted
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse { allowed\_hosts, type }
+
+The secret is substituted only on requests to the listed hosts.
+
+allowed\_hosts: Array[String]
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+type: :limited
+
+secret\_name: String
+
+Name of the environment variable.
+
+type: :environment\_variable
+
 created\_at: Time
 
 A timestamp in RFC 3339 format
@@ -159,6 +191,28 @@ Identifier of the vault this credential belongs to.
 display\_name: String
 
 Human-readable name for the credential.
+
+BetaManagedAgentsCredentialNetworkingParams = [BetaManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md) { type }  | [BetaManagedAgentsLimitedCredentialNetworkingParams](api/beta.md) { allowed\_hosts, type }
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams { type }
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: :unrestricted
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams { allowed\_hosts, type }
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: Array[String]
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: :limited
 
 class BetaManagedAgentsCredentialValidation { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
 
@@ -281,6 +335,126 @@ id: String
 Unique identifier of the deleted credential.
 
 type: :vault\_credential\_deleted
+
+class BetaManagedAgentsEnvironmentVariableAuthResponse { networking, secret\_name, type }
+
+Environment variable credential details. The secret value is never returned.
+
+networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md) { type }  | [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md) { allowed\_hosts, type }
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse { type }
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+type: :unrestricted
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse { allowed\_hosts, type }
+
+The secret is substituted only on requests to the listed hosts.
+
+allowed\_hosts: Array[String]
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+type: :limited
+
+secret\_name: String
+
+Name of the environment variable.
+
+type: :environment\_variable
+
+class BetaManagedAgentsEnvironmentVariableCreateParams { networking, secret\_name, secret\_value, type }
+
+Parameters for creating an environment variable credential.
+
+networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams { type }
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: :unrestricted
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams { allowed\_hosts, type }
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: Array[String]
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: :limited
+
+secret\_name: String
+
+Name of the environment variable. Immutable after create.
+
+secret\_value: String
+
+Secret value. Write-only; never returned in responses.
+
+type: :environment\_variable
+
+class BetaManagedAgentsEnvironmentVariableUpdateParams { type, networking, secret\_value }
+
+Parameters for updating an environment variable credential. `secret_name` is immutable.
+
+type: :environment\_variable
+
+networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+
+Updated networking scope. Full replacement.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams { type }
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: :unrestricted
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams { allowed\_hosts, type }
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: Array[String]
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: :limited
+
+secret\_value: String
+
+Updated secret value.
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams { allowed\_hosts, type }
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: Array[String]
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: :limited
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse { allowed\_hosts, type }
+
+The secret is substituted only on requests to the listed hosts.
+
+allowed\_hosts: Array[String]
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+type: :limited
 
 class BetaManagedAgentsMCPOAuthAuthResponse { mcp\_server\_url, type, expires\_at, refresh }
 
@@ -787,6 +961,18 @@ type: :client\_secret\_post
 client\_secret: String
 
 Updated OAuth client secret.
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams { type }
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: :unrestricted
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse { type }
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+type: :unrestricted
 
 ---
 

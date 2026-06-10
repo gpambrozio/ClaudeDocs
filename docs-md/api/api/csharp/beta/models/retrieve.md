@@ -80,6 +80,10 @@ Optional header to specify the beta version(s) you want to use.
 
 "thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
 
+"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+
+"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+
 ##### ReturnsExpand Collapse
 
 class BetaModelInfo:
@@ -87,6 +91,10 @@ class BetaModelInfo:
 required string ID
 
 Unique model identifier.
+
+required IReadOnlyList<string>? AllowedFallbackModels
+
+Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
 required [BetaModelCapabilities](api/beta.md)? Capabilities
 
@@ -289,6 +297,9 @@ Response 200
 ```shiki
 {
   "id": "claude-opus-4-6",
+  "allowed_fallback_models": [
+    "string"
+  ],
   "capabilities": {
     "batch": {
       "supported": true
@@ -367,6 +378,9 @@ Response 200
 ```shiki
 {
   "id": "claude-opus-4-6",
+  "allowed_fallback_models": [
+    "string"
+  ],
   "capabilities": {
     "batch": {
       "supported": true

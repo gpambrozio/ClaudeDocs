@@ -40,7 +40,7 @@ One of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
 "message-batches-2024-09-24"
 
@@ -94,6 +94,10 @@ One of the following:
 
 "thinking-token-count-2026-05-13"
 
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
+
 ##### ReturnsExpand Collapse
 
 BetaManagedAgentsCredential { id, archived\_at, auth, 6 more }
@@ -108,7 +112,7 @@ archived\_at: string | null
 
 A timestamp in RFC 3339 format
 
-auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  | [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }
+auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  | [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }  | [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta.md) { networking, secret\_name, type }
 
 Authentication details for a credential.
 
@@ -181,6 +185,38 @@ mcp\_server\_url: string
 URL of the MCP server this credential authenticates against.
 
 type: "static\_bearer"
+
+BetaManagedAgentsEnvironmentVariableAuthResponse { networking, secret\_name, type }
+
+Environment variable credential details. The secret value is never returned.
+
+networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md) { type }  | [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md) { allowed\_hosts, type }
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+BetaManagedAgentsUnrestrictedCredentialNetworkingResponse { type }
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+type: "unrestricted"
+
+BetaManagedAgentsLimitedCredentialNetworkingResponse { allowed\_hosts, type }
+
+The secret is substituted only on requests to the listed hosts.
+
+allowed\_hosts: Array<string>
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+type: "limited"
+
+secret\_name: string
+
+Name of the environment variable.
+
+type: "environment\_variable"
 
 created\_at: string
 

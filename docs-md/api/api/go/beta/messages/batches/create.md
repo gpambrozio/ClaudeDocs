@@ -2076,6 +2076,8 @@ const BetaAdvisorToolResultErrorParamErrorCodeUnavailable BetaAdvisorToolResultE
 
 const BetaAdvisorToolResultErrorParamErrorCodeExecutionTimeExceeded BetaAdvisorToolResultErrorParamErrorCode = "execution\_time\_exceeded"
 
+const BetaAdvisorToolResultErrorParamErrorCodeModelNotFound BetaAdvisorToolResultErrorParamErrorCode = "model\_not\_found"
+
 Type AdvisorToolResultError
 
 type BetaAdvisorResultBlockParamResp struct{…}
@@ -2391,6 +2393,8 @@ const BetaToolSearchToolResultErrorParamErrorCodeTooManyRequests BetaToolSearchT
 const BetaToolSearchToolResultErrorParamErrorCodeExecutionTimeExceeded BetaToolSearchToolResultErrorParamErrorCode = "execution\_time\_exceeded"
 
 Type ToolSearchToolResultError
+
+ErrorMessage stringOptional
 
 type BetaToolSearchToolSearchResultBlockParamResp struct{…}
 
@@ -2893,6 +2897,230 @@ const BetaCacheControlEphemeralTTLTTL5m BetaCacheControlEphemeralTTL = "5m"
 
 const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 
+type BetaFallbackBlockParamResp struct{…}
+
+A `fallback` block echoed back from a prior response.
+
+Accepted in `messages[].content` and never rendered into the prompt,
+not validated against the request's `fallbacks` chain or top-level
+`model`, and stripped before the sticky-routing cache key is computed.
+
+Callers should echo the assistant turn verbatim — block included. The
+block's position is load-bearing for thinking verification: the thinking
+runs on either side of a fallback hop carry independently-rooted
+verification hash chains, and this block is the only record of where one
+chain ends and the next begins. When thinking runs flank the boundary,
+omitting the block merges the runs into one contiguous span whose hashes
+cannot verify (the request is rejected), and moving it into the middle of
+a single run splits that run's chain and is likewise rejected; between
+non-thinking blocks the block's placement has no verification effect.
+
+From [BetaFallbackInfoParamResp](api/beta.md)
+
+Identifies one hop of a fallback transition.
+
+Model Model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+type Model string
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+const ModelClaudeFable5 Model = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+const ModelClaudeMythos5 Model = "claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeMythosPreview Model = "claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const ModelClaudeHaiku4\_5 Model = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeHaiku4\_5\_20251001 Model = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeOpus4\_5 Model = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeSonnet4\_5 Model = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const ModelClaudeSonnet4\_5\_20250929 Model = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+const ModelClaudeOpus4\_1 Model = "claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
+
+Powerful model for complex tasks
+
+const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+string
+
+To [BetaFallbackInfoParamResp](api/beta.md)
+
+Identifies one hop of a fallback transition.
+
+Model Model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+type Model string
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+const ModelClaudeFable5 Model = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+const ModelClaudeMythos5 Model = "claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeMythosPreview Model = "claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const ModelClaudeHaiku4\_5 Model = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeHaiku4\_5\_20251001 Model = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeOpus4\_5 Model = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeSonnet4\_5 Model = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const ModelClaudeSonnet4\_5\_20250929 Model = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+const ModelClaudeOpus4\_1 Model = "claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
+
+Powerful model for complex tasks
+
+const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+string
+
+Type Fallback
+
 Role BetaMessageParamRole
 
 One of the following:
@@ -2918,6 +3146,14 @@ The model that will complete your prompt.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const ModelClaudeFable5 Model = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+const ModelClaudeMythos5 Model = "claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
 
@@ -3170,6 +3406,235 @@ id for prompt-cache divergence reporting.
 PreviousMessageID stringOptional
 
 The `id` (`msg_...`) from this client's previous /v1/messages response. The server compares that request's prompt fingerprint against this one and returns `diagnostics.cache_miss_reason` when the prompt-cache prefix could not be reused. Pass `null` on the first turn to opt in without a prior message to compare.
+
+FallbackCreditToken stringOptional
+
+The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+When a preceding request was refused and returned a `fallback_credit_token`,
+pass that code here on the retry to have the retry's cache-creation tokens
+for the prefix that was warm on the refused model billed at the cache-read
+rate. Must be redeemed by the same organization and workspace, with the same
+request body (optionally extended by one appended `assistant` message whose
+content is the partial text — with any trailing whitespace stripped from
+the final text block — and paired server-tool blocks streamed before the
+refusal; the appended-assistant form is not available for requests with
+`output_format` set or forced `tool_choice`), on an eligible fallback
+model, on the same platform,
+and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+mid-server-tool-loop whose partial content was continuable may only be
+redeemed with the appended-assistant form — if an exact-body retry is
+rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry with the appended-assistant form instead.
+
+When the appended-assistant form is used on a model that otherwise disallows
+assistant-turn prefill, this token also authorizes that one prefill.
+
+maxLength2048
+
+minLength1
+
+Fallbacks [][BetaFallbackParamResp](api/beta.md)Optional
+
+Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+
+Model Model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+type Model string
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+const ModelClaudeFable5 Model = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+const ModelClaudeMythos5 Model = "claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeOpus4\_7 Model = "claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeMythosPreview Model = "claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+const ModelClaudeOpus4\_6 Model = "claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+const ModelClaudeSonnet4\_6 Model = "claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+const ModelClaudeHaiku4\_5 Model = "claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeHaiku4\_5\_20251001 Model = "claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+const ModelClaudeOpus4\_5 Model = "claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeOpus4\_5\_20251101 Model = "claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+const ModelClaudeSonnet4\_5 Model = "claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+const ModelClaudeSonnet4\_5\_20250929 Model = "claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+const ModelClaudeOpus4\_1 Model = "claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_1\_20250805 Model = "claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+const ModelClaudeOpus4\_0 Model = "claude-opus-4-0"
+
+Powerful model for complex tasks
+
+const ModelClaudeOpus4\_20250514 Model = "claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+const ModelClaudeSonnet4\_0 Model = "claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+const ModelClaudeSonnet4\_20250514 Model = "claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+const ModelClaude\_3\_Haiku\_20240307 Model = "claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+string
+
+MaxTokens int64Optional
+
+OutputConfig [BetaOutputConfig](api/beta.md)Optional
+
+Effort BetaOutputConfigEffortOptional
+
+All possible effort levels.
+
+One of the following:
+
+const BetaOutputConfigEffortLow BetaOutputConfigEffort = "low"
+
+const BetaOutputConfigEffortMedium BetaOutputConfigEffort = "medium"
+
+const BetaOutputConfigEffortHigh BetaOutputConfigEffort = "high"
+
+const BetaOutputConfigEffortXhigh BetaOutputConfigEffort = "xhigh"
+
+const BetaOutputConfigEffortMax BetaOutputConfigEffort = "max"
+
+Format [BetaJSONOutputFormat](api/beta.md)Optional
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+Schema map[string, any]
+
+The JSON schema of the format
+
+Type JSONSchema
+
+TaskBudget [BetaTokenTaskBudget](api/beta.md)Optional
+
+User-configurable total token budget across contexts.
+
+Total int64
+
+Total token budget across all contexts in the session.
+
+Type Tokens
+
+The budget type. Currently only 'tokens' is supported.
+
+Remaining int64Optional
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+Speed BetaFallbackParamSpeedOptional
+
+One of the following:
+
+const BetaFallbackParamSpeedStandard BetaFallbackParamSpeed = "standard"
+
+const BetaFallbackParamSpeedFast BetaFallbackParamSpeed = "fast"
+
+Thinking BetaFallbackParamThinkingUnionRespOptional
+
+One of the following:
+
+type BetaThinkingConfigEnabled struct{…}
+
+BudgetTokens int64
+
+Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+Must be ≥1024 and less than `max_tokens`.
+
+See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+
+minimum1024
+
+Type Enabled
+
+Display BetaThinkingConfigEnabledDisplayOptional
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+One of the following:
+
+const BetaThinkingConfigEnabledDisplaySummarized BetaThinkingConfigEnabledDisplay = "summarized"
+
+const BetaThinkingConfigEnabledDisplayOmitted BetaThinkingConfigEnabledDisplay = "omitted"
+
+type BetaThinkingConfigDisabled struct{…}
+
+Type Disabled
+
+type BetaThinkingConfigAdaptive struct{…}
+
+Type Adaptive
+
+Display BetaThinkingConfigAdaptiveDisplayOptional
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+One of the following:
+
+const BetaThinkingConfigAdaptiveDisplaySummarized BetaThinkingConfigAdaptiveDisplay = "summarized"
+
+const BetaThinkingConfigAdaptiveDisplayOmitted BetaThinkingConfigAdaptiveDisplay = "omitted"
 
 InferenceGeo stringOptional
 
@@ -4847,6 +5312,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const ModelClaudeFable5 Model = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+const ModelClaudeMythos5 Model = "claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
 const ModelClaudeOpus4\_8 Model = "claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
@@ -4988,6 +5461,10 @@ const BetaCacheControlEphemeralTTLTTL1h BetaCacheControlEphemeralTTL = "1h"
 DeferLoading boolOptional
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+MaxTokens int64Optional
+
+Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
 MaxUses int64Optional
 
@@ -5254,6 +5731,10 @@ const AnthropicBetaManagedAgents2026\_04\_01 AnthropicBeta = "managed-agents-202
 const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2026-04-07"
 
 const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
+
+const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+
+const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 

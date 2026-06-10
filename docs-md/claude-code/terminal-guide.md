@@ -163,7 +163,7 @@ You don’t have to use the terminal. Claude Code is also available in:
 
 - [VS Code](vs-code.md) and [JetBrains IDEs](jetbrains.md) as editor extensions
 - The [desktop app](desktop-quickstart.md), with no terminal required
-- The [web](claude-code-on-the-web.md) at claude.ai/code for remote sessions
+- The [web](claude-code-on-the-web.md) at claude.ai/code for cloud sessions
 - [GitHub Actions](github-actions.md) and [GitLab CI/CD](gitlab-ci-cd.md) for automation
 
 ### [​](#learn-more) Learn more

@@ -21,7 +21,7 @@ ZDR is enabled on a per-organization basis. Each new organization requires ZDR t
 
 ### [​](#what-zdr-covers) What ZDR covers
 
-ZDR covers model inference calls made through Claude Code on Claude for Enterprise. When you use Claude Code in your terminal, the prompts you send and the responses Claude generates are not retained by Anthropic. This applies regardless of which Claude model is used.
+ZDR covers model inference calls made through Claude Code on Claude for Enterprise. When you use Claude Code in your terminal, the prompts you send and the responses Claude generates are not retained by Anthropic. This applies to every model available to ZDR organizations. Some models require data retention and are not available under ZDR; see [Model availability under ZDR](#model-availability-under-zdr).
 
 ### [​](#what-zdr-does-not-cover) What ZDR does not cover
 
@@ -42,11 +42,16 @@ When ZDR is enabled for a Claude Code organization on Claude for Enterprise, cer
 | Feature | Reason |
 | --- | --- |
 | [Claude Code on the Web](claude-code-on-the-web.md) | Requires server-side storage of conversation history. |
-| [Remote sessions](desktop.md) from the Desktop app | Requires persistent session data that includes prompts and completions. |
+| [Cloud sessions](desktop.md) from the Desktop app | Requires persistent session data that includes prompts and completions. |
 | Feedback submission (`/feedback`) | Submitting feedback sends conversation data to Anthropic. |
 
 These features are blocked in the backend regardless of client-side display. If you see a disabled feature in the Claude Code terminal during startup, attempting to use it returns an error indicating the organization’s policies do not allow that action.
 Future features may also be disabled if they require storing prompts or completions.
+
+### [​](#model-availability-under-zdr) Model availability under ZDR
+
+Claude Fable 5 is not available for organizations with zero data retention enabled. This model class [requires data retention](manage-claude/api-and-data-retention.md), so requests from ZDR organizations cannot be served by it. The model is either absent from the `/model` picker for ZDR organizations or shown as disabled with a notice that disabling ZDR is required, and the server rejects requests for it regardless of client configuration.
+Other models remain available under ZDR. Fable 5 is not the default model, and the `best` alias, which resolves to Fable 5 where it is available, resolves to Opus for organizations where it is not, including ZDR organizations.
 
 ## [​](#data-retention-for-policy-violations) Data retention for policy violations
 

@@ -8,7 +8,7 @@ Ruby
 
 # List Models
 
-beta.models.list(\*\*kwargs) -> Page<[BetaModelInfo](api/beta.md) { id, capabilities, created\_at, 4 more } >
+beta.models.list(\*\*kwargs) -> Page<[BetaModelInfo](api/beta.md) { id, allowed\_fallback\_models, capabilities, 5 more } >
 
 GET/v1/models
 
@@ -44,7 +44,7 @@ One of the following:
 
 String = String
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more
 
 One of the following:
 
@@ -100,13 +100,21 @@ One of the following:
 
 :"thinking-token-count-2026-05-13"
 
+:"server-side-fallback-2026-06-01"
+
+:"fallback-credit-2026-06-01"
+
 ##### ReturnsExpand Collapse
 
-class BetaModelInfo { id, capabilities, created\_at, 4 more }
+class BetaModelInfo { id, allowed\_fallback\_models, capabilities, 5 more }
 
 id: String
 
 Unique model identifier.
+
+allowed\_fallback\_models: Array[String]
+
+Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
 capabilities: [BetaModelCapabilities](api/beta.md) { batch, citations, code\_execution, 6 more }
 
@@ -313,6 +321,9 @@ Response 200
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true
@@ -398,6 +409,9 @@ Response 200
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true

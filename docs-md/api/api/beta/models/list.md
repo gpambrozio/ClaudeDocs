@@ -44,7 +44,7 @@ One of the following:
 
 string
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more
 
 One of the following:
 
@@ -100,13 +100,21 @@ One of the following:
 
 "thinking-token-count-2026-05-13"
 
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
+
 ##### ReturnsExpand Collapse
 
-data: array of [BetaModelInfo](api/beta.md) { id, capabilities, created\_at, 4 more }
+data: array of [BetaModelInfo](api/beta.md) { id, allowed\_fallback\_models, capabilities, 5 more }
 
 id: string
 
 Unique model identifier.
+
+allowed\_fallback\_models: array of string
+
+Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
 capabilities: [BetaModelCapabilities](api/beta.md) { batch, citations, code\_execution, 6 more }
 
@@ -321,6 +329,9 @@ Response 200
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true
@@ -406,6 +417,9 @@ Response 200
   "data": [
     {
       "id": "claude-opus-4-6",
+      "allowed_fallback_models": [
+        "string"
+      ],
       "capabilities": {
         "batch": {
           "supported": true

@@ -2239,6 +2239,8 @@ const ToolSearchToolResultErrorCodeExecutionTimeExceeded [ToolSearchToolResultEr
 
 Type ToolSearchToolResultError
 
+ErrorMessage stringOptional
+
 type ToolSearchToolSearchResultBlockParamResp struct{…}
 
 ToolReferences [][ToolReferenceBlockParamResp](api/messages.md)

@@ -22,7 +22,7 @@ One of the following:
 
 string
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more
 
 One of the following:
 
@@ -78,6 +78,10 @@ One of the following:
 
 "thinking-token-count-2026-05-13"
 
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
+
 ##### Body ParametersJSONExpand Collapse
 
 model: [BetaManagedAgentsModel](api/beta.md) or [BetaManagedAgentsModelConfigParams](api/beta.md) { id, speed }
@@ -86,7 +90,7 @@ Model identifier. Accepts the [model string](about-claude/models/overview.md), e
 
 One of the following:
 
-BetaManagedAgentsModel = "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
+BetaManagedAgentsModel = "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
 
 The model that will power your agent.
 
@@ -94,13 +98,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more
+"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -156,13 +164,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more
+"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -218,11 +230,11 @@ One of the following:
 
 name: string
 
-Human-readable name for the agent. 1-256 characters.
+Human-readable name for the agent.
 
 description: optional string
 
-Description of what the agent does. Up to 2048 characters.
+Description of what the agent does.
 
 mcp\_servers: optional array of [BetaManagedAgentsURLMCPServerParams](api/beta.md) { name, type, url }
 
@@ -278,7 +290,7 @@ type: "coordinator"
 
 skills: optional array of [BetaManagedAgentsSkillParams](api/beta.md)
 
-Skills available to the agent. Maximum 20.
+Skills available to the agent.
 
 One of the following:
 
@@ -312,7 +324,7 @@ Version to pin. Defaults to latest if omitted.
 
 system: optional string
 
-System prompt for the agent. Up to 100,000 characters.
+System prompt for the agent.
 
 tools: optional array of [BetaManagedAgentsAgentToolset20260401Params](api/beta.md) { type, configs, default\_config }  or [BetaManagedAgentsMCPToolsetParams](api/beta.md) { mcp\_server\_name, type, configs, default\_config }  or [BetaManagedAgentsCustomToolParams](api/beta.md) { description, input\_schema, name, type }
 
@@ -474,21 +486,15 @@ description: string
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
 
 name: string
 
@@ -536,13 +542,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more
+"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -776,21 +786,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
 
 name: string
 

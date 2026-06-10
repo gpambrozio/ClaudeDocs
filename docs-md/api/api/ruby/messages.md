@@ -3914,11 +3914,11 @@ One of the following:
 
 class ToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
-content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
 One of the following:
 
-class ToolSearchToolResultErrorParam { error\_code, type }
+class ToolSearchToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
@@ -3933,6 +3933,8 @@ One of the following:
 :execution\_time\_exceeded
 
 type: :tool\_search\_tool\_result\_error
+
+error\_message: String
 
 class ToolSearchToolSearchResultBlockParam { tool\_references, type }
 
@@ -5715,13 +5717,21 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 :"claude-opus-4-8"
 
@@ -5807,7 +5817,7 @@ stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, ty
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -5818,6 +5828,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 
@@ -9170,11 +9182,11 @@ One of the following:
 
 class ToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
-content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
 One of the following:
 
-class ToolSearchToolResultErrorParam { error\_code, type }
+class ToolSearchToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
@@ -9189,6 +9201,8 @@ One of the following:
 :execution\_time\_exceeded
 
 type: :tool\_search\_tool\_result\_error
+
+error\_message: String
 
 class ToolSearchToolSearchResultBlockParam { tool\_references, type }
 
@@ -9634,7 +9648,7 @@ One of the following:
 
 :"1h"
 
-Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more | String
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more | String
 
 The model that will complete your prompt.
 
@@ -9642,13 +9656,21 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 :"claude-opus-4-8"
 
@@ -10713,7 +10735,7 @@ stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, ty
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -10724,6 +10746,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 
@@ -11500,13 +11524,21 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 :"claude-opus-4-8"
 
@@ -11592,7 +11624,7 @@ stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, ty
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -11603,6 +11635,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 
@@ -12438,13 +12472,21 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 :"claude-opus-4-8"
 
@@ -12530,7 +12572,7 @@ stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, ty
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -12541,6 +12583,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 
@@ -12703,7 +12747,7 @@ stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, ty
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -12714,6 +12758,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 
@@ -13605,7 +13651,7 @@ class RefusalStopDetails { category, explanation, type }
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -13616,6 +13662,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 
@@ -15940,11 +15988,11 @@ type: :tool\_search\_tool\_result
 
 class ToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
-content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  | [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
 One of the following:
 
-class ToolSearchToolResultErrorParam { error\_code, type }
+class ToolSearchToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
@@ -15959,6 +16007,8 @@ One of the following:
 :execution\_time\_exceeded
 
 type: :tool\_search\_tool\_result\_error
+
+error\_message: String
 
 class ToolSearchToolSearchResultBlockParam { tool\_references, type }
 
@@ -16050,7 +16100,7 @@ One of the following:
 
 :execution\_time\_exceeded
 
-class ToolSearchToolResultErrorParam { error\_code, type }
+class ToolSearchToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: [ToolSearchToolResultErrorCode](api/messages.md)
 
@@ -16065,6 +16115,8 @@ One of the following:
 :execution\_time\_exceeded
 
 type: :tool\_search\_tool\_result\_error
+
+error\_message: String
 
 class ToolSearchToolSearchResultBlock { tool\_references, type }
 
@@ -19979,13 +20031,21 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 :"claude-opus-4-8"
 
@@ -20071,7 +20131,7 @@ stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, ty
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -20082,6 +20142,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 
@@ -21023,13 +21085,21 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 :"claude-opus-4-8"
 
@@ -21115,7 +21185,7 @@ stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, ty
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -21126,6 +21196,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 
@@ -22029,13 +22101,21 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 :"claude-opus-4-8"
 
@@ -22121,7 +22201,7 @@ stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, ty
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -22132,6 +22212,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 

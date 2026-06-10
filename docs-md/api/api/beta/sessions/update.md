@@ -26,7 +26,7 @@ One of the following:
 
 string
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more
 
 One of the following:
 
@@ -81,6 +81,10 @@ One of the following:
 "cache-diagnosis-2026-04-07"
 
 "thinking-token-count-2026-05-13"
+
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -262,21 +266,15 @@ description: string
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
 
 name: string
 
@@ -298,7 +296,7 @@ Vault IDs (`vlt_*`) to attach to the session. Not yet supported; requests settin
 
 ##### ReturnsExpand Collapse
 
-BetaManagedAgentsSession object { id, agent, archived\_at, 12 more }
+BetaManagedAgentsSession object { id, agent, archived\_at, 13 more }
 
 A Managed Agents `session`.
 
@@ -332,13 +330,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more
+"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -424,13 +426,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more
+"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -648,21 +654,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
 
 name: string
 
@@ -838,21 +838,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
 
 name: string
 
@@ -1066,6 +1060,10 @@ vault\_ids: array of string
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+deployment\_id: optional string
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 Update Session
 
 cURL
@@ -1246,7 +1244,8 @@ Response 200
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -1417,7 +1416,8 @@ Response 200
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 

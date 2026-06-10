@@ -16,7 +16,7 @@ POST/v1/sessions
 
 ##### [List Sessions](api/beta/sessions/list.md)
 
-$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?[Order](api/beta/sessions/list.md) order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsSession](api/beta.md)>
+$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?[Order](api/beta/sessions/list.md) order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsSession](api/beta.md)>
 
 GET/v1/sessions
 
@@ -254,6 +254,10 @@ list<string> vaultIDs
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+?string deploymentID
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 [BetaManagedAgentsSessionAgent](api/beta.md)
 
 string id
@@ -351,6 +355,30 @@ Total input tokens consumed across all turns.
 ?int outputTokens
 
 Total output tokens generated across all turns.
+
+[BetaManagedAgentsSystemContentBlock](api/beta.md)
+
+string text
+
+The text content.
+
+Type type
+
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
 
 [BetaManagedAgentsUserToolResultEvent](api/beta.md)
 
@@ -658,6 +686,26 @@ What the client should do next in response to this error.
 
 Type type
 
+[ManagedAgentsCredentialHostUnreachableError](api/beta.md)
+
+string credentialID
+
+ID of the affected credential.
+
+string message
+
+Human-readable error description.
+
+RetryStatus retryStatus
+
+What the client should do next in response to this error.
+
+Type type
+
+string vaultID
+
+ID of the vault containing the affected credential.
+
 [ManagedAgentsDocumentBlock](api/beta.md)
 
 Source source
@@ -757,6 +805,14 @@ The result content returned by the tool.
 ?bool isError
 
 Whether the tool execution resulted in an error.
+
+[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks to append. Text-only.
+
+Type type
 
 [ManagedAgentsFileDocumentSource](api/beta.md)
 
@@ -1649,6 +1705,22 @@ The session's full metadata bag after the update. Present when the update set no
 ?string title
 
 The session's new title. Present only when the update changed it.
+
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
 
 [ManagedAgentsSessionRequiresAction](api/beta.md)
 
@@ -2639,6 +2711,30 @@ The session's full metadata bag after the update. Present when the update set no
 ?string title
 
 The session's new title. Present only when the update changed it.
+
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
+
+[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks to append. Text-only.
+
+Type type
 
 [ManagedAgentsTextBlock](api/beta.md)
 
@@ -3861,6 +3957,22 @@ The session's full metadata bag after the update. Present when the update set no
 ?string title
 
 The session's new title. Present only when the update changed it.
+
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
 
 #### SessionsThreadsEvents
 

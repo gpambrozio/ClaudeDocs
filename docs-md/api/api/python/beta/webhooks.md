@@ -55,7 +55,7 @@ class BetaWebhookSessionCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -67,7 +67,7 @@ class BetaWebhookSessionPendingEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -79,7 +79,7 @@ class BetaWebhookSessionRunningEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -91,7 +91,7 @@ class BetaWebhookSessionIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -103,7 +103,7 @@ class BetaWebhookSessionRequiresActionEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -115,7 +115,7 @@ class BetaWebhookSessionArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -127,7 +127,7 @@ class BetaWebhookSessionDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -139,7 +139,7 @@ class BetaWebhookSessionStatusRescheduledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -151,7 +151,7 @@ class BetaWebhookSessionStatusRunStartedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -163,7 +163,7 @@ class BetaWebhookSessionStatusIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -175,7 +175,7 @@ class BetaWebhookSessionStatusTerminatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -187,9 +187,13 @@ class BetaWebhookSessionThreadCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_created"]
 
@@ -199,9 +203,13 @@ class BetaWebhookSessionThreadIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_idled"]
 
@@ -211,9 +219,13 @@ class BetaWebhookSessionThreadTerminatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_terminated"]
 
@@ -223,7 +235,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -235,7 +247,7 @@ class BetaWebhookVaultCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -247,7 +259,7 @@ class BetaWebhookVaultArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -259,7 +271,7 @@ class BetaWebhookVaultDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -271,7 +283,7 @@ class BetaWebhookVaultCredentialCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -287,7 +299,7 @@ class BetaWebhookVaultCredentialArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -303,7 +315,7 @@ class BetaWebhookVaultCredentialDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -319,7 +331,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -343,7 +355,7 @@ class BetaWebhookSessionCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -355,7 +367,7 @@ class BetaWebhookSessionPendingEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -367,7 +379,7 @@ class BetaWebhookSessionRunningEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -379,7 +391,7 @@ class BetaWebhookSessionIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -391,7 +403,7 @@ class BetaWebhookSessionRequiresActionEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -403,7 +415,7 @@ class BetaWebhookSessionArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -415,7 +427,7 @@ class BetaWebhookSessionDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -427,7 +439,7 @@ class BetaWebhookSessionStatusRescheduledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -439,7 +451,7 @@ class BetaWebhookSessionStatusRunStartedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -451,7 +463,7 @@ class BetaWebhookSessionStatusIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -463,7 +475,7 @@ class BetaWebhookSessionStatusTerminatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -475,9 +487,13 @@ class BetaWebhookSessionThreadCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_created"]
 
@@ -487,9 +503,13 @@ class BetaWebhookSessionThreadIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_idled"]
 
@@ -499,9 +519,13 @@ class BetaWebhookSessionThreadTerminatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_terminated"]
 
@@ -511,7 +535,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -523,7 +547,7 @@ class BetaWebhookVaultCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -535,7 +559,7 @@ class BetaWebhookVaultArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -547,7 +571,7 @@ class BetaWebhookVaultDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -559,7 +583,7 @@ class BetaWebhookVaultCredentialCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -575,7 +599,7 @@ class BetaWebhookVaultCredentialArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -591,7 +615,7 @@ class BetaWebhookVaultCredentialDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -607,7 +631,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -623,7 +647,7 @@ class BetaWebhookSessionArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -635,7 +659,7 @@ class BetaWebhookSessionCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -647,7 +671,7 @@ class BetaWebhookSessionDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -659,7 +683,7 @@ class BetaWebhookSessionIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -671,7 +695,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -683,7 +707,7 @@ class BetaWebhookSessionPendingEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -695,7 +719,7 @@ class BetaWebhookSessionRequiresActionEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -707,7 +731,7 @@ class BetaWebhookSessionRunningEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -719,7 +743,7 @@ class BetaWebhookSessionStatusIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -731,7 +755,7 @@ class BetaWebhookSessionStatusRescheduledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -743,7 +767,7 @@ class BetaWebhookSessionStatusRunStartedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -755,7 +779,7 @@ class BetaWebhookSessionStatusTerminatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -767,9 +791,13 @@ class BetaWebhookSessionThreadCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_created"]
 
@@ -779,9 +807,13 @@ class BetaWebhookSessionThreadIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_idled"]
 
@@ -791,9 +823,13 @@ class BetaWebhookSessionThreadTerminatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_terminated"]
 
@@ -803,7 +839,7 @@ class BetaWebhookVaultArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -815,7 +851,7 @@ class BetaWebhookVaultCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -827,7 +863,7 @@ class BetaWebhookVaultCredentialArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -843,7 +879,7 @@ class BetaWebhookVaultCredentialCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -859,7 +895,7 @@ class BetaWebhookVaultCredentialDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -875,7 +911,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -891,7 +927,7 @@ class BetaWebhookVaultDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -917,7 +953,7 @@ class BetaWebhookSessionCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -929,7 +965,7 @@ class BetaWebhookSessionPendingEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -941,7 +977,7 @@ class BetaWebhookSessionRunningEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -953,7 +989,7 @@ class BetaWebhookSessionIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -965,7 +1001,7 @@ class BetaWebhookSessionRequiresActionEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -977,7 +1013,7 @@ class BetaWebhookSessionArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -989,7 +1025,7 @@ class BetaWebhookSessionDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -1001,7 +1037,7 @@ class BetaWebhookSessionStatusRescheduledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -1013,7 +1049,7 @@ class BetaWebhookSessionStatusRunStartedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -1025,7 +1061,7 @@ class BetaWebhookSessionStatusIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -1037,7 +1073,7 @@ class BetaWebhookSessionStatusTerminatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -1049,9 +1085,13 @@ class BetaWebhookSessionThreadCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_created"]
 
@@ -1061,9 +1101,13 @@ class BetaWebhookSessionThreadIdledEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_idled"]
 
@@ -1073,9 +1117,13 @@ class BetaWebhookSessionThreadTerminatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
+
+session\_thread\_id: str
+
+ID of the session thread this event refers to.
 
 type: Literal["session.thread\_terminated"]
 
@@ -1085,7 +1133,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: str
 
@@ -1097,7 +1145,7 @@ class BetaWebhookVaultCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -1109,7 +1157,7 @@ class BetaWebhookVaultArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -1121,7 +1169,7 @@ class BetaWebhookVaultDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: str
 
@@ -1133,7 +1181,7 @@ class BetaWebhookVaultCredentialCreatedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -1149,7 +1197,7 @@ class BetaWebhookVaultCredentialArchivedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -1165,7 +1213,7 @@ class BetaWebhookVaultCredentialDeletedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 
@@ -1181,7 +1229,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData: …
 
 id: str
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: str
 

@@ -76,13 +76,17 @@ CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
 THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
+SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+
+FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+
 long version
 
 The agent's current version, used to prevent concurrent overwrites. Obtain this value from a create or retrieve response. The request fails if this does not match the server's current version.
 
 Optional<String> description
 
-Description. Up to 2048 characters. Omit to preserve; send empty string or null to clear.
+Description. Omit to preserve; send empty string or null to clear.
 
 Optional<List<[BetaManagedAgentsUrlMcpServerParams](api/beta.md)>> mcpServers
 
@@ -111,6 +115,10 @@ enum BetaManagedAgentsModel:
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
@@ -163,6 +171,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
@@ -220,11 +232,11 @@ A coordinator topology: the session's primary thread orchestrates work by spawni
 
 Optional<String> name
 
-Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
 Optional<List<[BetaManagedAgentsSkillParams](api/beta.md)>> skills
 
-Skills. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 20.
+Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
 class BetaManagedAgentsAnthropicSkillParams:
 
@@ -256,7 +268,7 @@ Version to pin. Defaults to latest if omitted.
 
 Optional<String> system
 
-System prompt. Up to 100,000 characters. Omit to preserve; send empty string or null to clear.
+System prompt. Omit to preserve; send empty string or null to clear.
 
 Optional<List<Tool>> tools
 
@@ -420,17 +432,11 @@ Description of what the tool does, shown to the agent to help it decide when to 
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 String name
 
@@ -477,6 +483,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
@@ -712,17 +722,11 @@ String description
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 String name
 

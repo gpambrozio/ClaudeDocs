@@ -61,7 +61,7 @@ One of the following:
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -73,7 +73,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -85,7 +85,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -97,7 +97,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -109,7 +109,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -121,7 +121,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -133,7 +133,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -145,7 +145,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -157,7 +157,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -169,7 +169,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -181,7 +181,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -193,9 +193,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_created" type
 
@@ -205,9 +209,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_idled" type
 
@@ -217,9 +225,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_terminated" type
 
@@ -229,7 +241,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -241,7 +253,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 
@@ -253,7 +265,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 
@@ -265,7 +277,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 
@@ -277,7 +289,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -293,7 +305,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -309,7 +321,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -325,7 +337,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -341,7 +353,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -353,7 +365,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -365,7 +377,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -377,7 +389,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -389,7 +401,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -401,7 +413,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -413,7 +425,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -425,7 +437,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -437,7 +449,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -449,7 +461,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -461,7 +473,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -473,7 +485,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
 
@@ -485,9 +497,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_created" type
 
@@ -497,9 +513,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_idled" type
 
@@ -509,9 +529,13 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 string organizationID
+
+string sessionThreadID
+
+ID of the session thread this event refers to.
 
 "session.thread\_terminated" type
 
@@ -521,7 +545,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 
@@ -533,7 +557,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 
@@ -545,7 +569,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -561,7 +585,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -577,7 +601,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -593,7 +617,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 string organizationID
 
@@ -609,7 +633,7 @@ string workspaceID
 
 string id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 string organizationID
 

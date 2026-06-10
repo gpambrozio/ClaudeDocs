@@ -34,7 +34,7 @@ beta\_managed\_agents\_send\_session\_events: object { data }
 
 Events that were successfully sent to the session.
 
-data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  or 3 more
+data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  or 4 more
 
 Sent events
 
@@ -731,6 +731,34 @@ A timestamp in RFC 3339 format
 session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
+beta\_managed\_agents\_system\_message\_event: object { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type }
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+"text"
+
+type: "system.message"
+
+"system.message"
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
 
 Send Events
 

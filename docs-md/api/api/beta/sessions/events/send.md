@@ -26,7 +26,7 @@ One of the following:
 
 string
 
-"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 23 more
+"message-batches-2024-09-24" or "prompt-caching-2024-07-31" or "computer-use-2024-10-22" or 25 more
 
 One of the following:
 
@@ -81,6 +81,10 @@ One of the following:
 "cache-diagnosis-2026-04-07"
 
 "thinking-token-count-2026-05-13"
+
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
 
 ##### Body ParametersJSONExpand Collapse
 
@@ -652,13 +656,29 @@ is\_error: optional boolean
 
 Whether the tool execution resulted in an error.
 
+BetaManagedAgentsSystemMessageEventParams object { content, type }
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type }
+
+System content blocks to append. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
 ##### ReturnsExpand Collapse
 
 BetaManagedAgentsSendSessionEvents object { data }
 
 Events that were successfully sent to the session.
 
-data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  or 3 more
+data: optional array of [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  or 4 more
 
 Sent events
 
@@ -1289,6 +1309,30 @@ A timestamp in RFC 3339 format
 session\_thread\_id: optional string
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
+BetaManagedAgentsSystemMessageEvent object { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type }
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
 
 Send Events
 

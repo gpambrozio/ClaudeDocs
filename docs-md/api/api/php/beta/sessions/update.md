@@ -90,6 +90,10 @@ list<string> vaultIDs
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+?string deploymentID
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 Update Session
 
 PHP
@@ -301,7 +305,8 @@ Response 200
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -472,7 +477,8 @@ Response 200
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 

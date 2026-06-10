@@ -64,6 +64,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -282,17 +286,11 @@ String description
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 String name
 
@@ -1918,6 +1916,48 @@ Type type
 
 Type type
 
+class BetaManagedAgentsCredentialHostUnreachableError:
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+String credentialId
+
+ID of the affected credential.
+
+String message
+
+Human-readable error description.
+
+RetryStatus retryStatus
+
+What the client should do next in response to this error.
+
+One of the following:
+
+class BetaManagedAgentsRetryStatusRetrying:
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+Type type
+
+class BetaManagedAgentsRetryStatusExhausted:
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+Type type
+
+class BetaManagedAgentsRetryStatusTerminal:
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+Type type
+
+Type type
+
+String vaultId
+
+ID of the vault containing the affected credential.
+
 LocalDateTime processedAt
 
 A timestamp in RFC 3339 format
@@ -2616,6 +2656,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -2698,6 +2742,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -2916,17 +2964,11 @@ String description
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 String name
 
@@ -3106,17 +3148,11 @@ String description
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 String name
 
@@ -3133,6 +3169,30 @@ The session's full metadata bag after the update. Present when the update set no
 Optional<String> title
 
 The session's new title. Present only when the update changed it.
+
+class BetaManagedAgentsSystemMessageEvent:
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+String id
+
+Unique identifier for this event.
+
+List<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+String text
+
+The text content.
+
+Type type
+
+Type type
+
+Optional<LocalDateTime> processedAt
+
+A timestamp in RFC 3339 format
 
 #### ThreadsEvents
 

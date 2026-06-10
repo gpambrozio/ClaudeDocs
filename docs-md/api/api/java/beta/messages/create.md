@@ -78,6 +78,10 @@ CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
 THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
+SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+
+FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+
 long maxTokens
 
 The maximum number of tokens to generate before stopping.
@@ -2116,6 +2120,8 @@ UNAVAILABLE("unavailable")
 
 EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
+MODEL\_NOT\_FOUND("model\_not\_found")
+
 JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
 
 class BetaAdvisorResultBlockParam:
@@ -2431,6 +2437,8 @@ TOO\_MANY\_REQUESTS("too\_many\_requests")
 EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
 JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
+
+Optional<String> errorMessage
 
 class BetaToolSearchToolSearchResultBlockParam:
 
@@ -2933,6 +2941,210 @@ TTL\_5M("5m")
 
 TTL\_1H("1h")
 
+class BetaFallbackBlockParam:
+
+A `fallback` block echoed back from a prior response.
+
+Accepted in `messages[].content` and never rendered into the prompt,
+not validated against the request's `fallbacks` chain or top-level
+`model`, and stripped before the sticky-routing cache key is computed.
+
+Callers should echo the assistant turn verbatim — block included. The
+block's position is load-bearing for thinking verification: the thinking
+runs on either side of a fallback hop carry independently-rooted
+verification hash chains, and this block is the only record of where one
+chain ends and the next begins. When thinking runs flank the boundary,
+omitting the block merges the runs into one contiguous span whose hashes
+cannot verify (the request is rejected), and moving it into the middle of
+a single run splits that run's chain and is likewise rejected; between
+non-thinking blocks the block's placement has no verification effect.
+
+[BetaFallbackInfoParam](api/beta.md) from
+
+Identifies one hop of a fallback transition.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+[BetaFallbackInfoParam](api/beta.md) to
+
+Identifies one hop of a fallback transition.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+JsonValue; type "fallback"constant"fallback"constant
+
 Role role
 
 One of the following:
@@ -2999,6 +3211,225 @@ Optional<[BetaDiagnosticsParam](api/beta.md)> diagnostics
 
 Request-level diagnostics. Currently carries the previous response
 id for prompt-cache divergence reporting.
+
+Optional<String> fallbackCreditToken
+
+The `fallback_credit_token` from a prior refusal's `stop_details`.
+
+When a preceding request was refused and returned a `fallback_credit_token`,
+pass that code here on the retry to have the retry's cache-creation tokens
+for the prefix that was warm on the refused model billed at the cache-read
+rate. Must be redeemed by the same organization and workspace, with the same
+request body (optionally extended by one appended `assistant` message whose
+content is the partial text — with any trailing whitespace stripped from
+the final text block — and paired server-tool blocks streamed before the
+refusal; the appended-assistant form is not available for requests with
+`output_format` set or forced `tool_choice`), on an eligible fallback
+model, on the same platform,
+and within 5 minutes of the refusal; a mismatch is a 400. A token minted
+mid-server-tool-loop whose partial content was continuable may only be
+redeemed with the appended-assistant form — if an exact-body retry is
+rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry with the appended-assistant form instead.
+
+When the appended-assistant form is used on a model that otherwise disallows
+assistant-turn prefill, this token also authorizes that one prefill.
+
+maxLength2048
+
+minLength1
+
+Optional<List<[BetaFallbackParam](api/beta.md)>> fallbacks
+
+Opt-in server-side retry on one or more substitute models when the requested model declines for policy reasons. Tried in order: if the first entry also declines, the second is tried, and so on.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+Optional<Long> maxTokens
+
+Optional<[BetaOutputConfig](api/beta.md)> outputConfig
+
+Optional<Effort> effort
+
+All possible effort levels.
+
+One of the following:
+
+LOW("low")
+
+MEDIUM("medium")
+
+HIGH("high")
+
+XHIGH("xhigh")
+
+MAX("max")
+
+Optional<[BetaJsonOutputFormat](api/beta.md)> format
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+Schema schema
+
+The JSON schema of the format
+
+JsonValue; type "json\_schema"constant"json\_schema"constant
+
+Optional<[BetaTokenTaskBudget](api/beta.md)> taskBudget
+
+User-configurable total token budget across contexts.
+
+long total
+
+Total token budget across all contexts in the session.
+
+JsonValue; type "tokens"constant"tokens"constant
+
+The budget type. Currently only 'tokens' is supported.
+
+Optional<Long> remaining
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+Optional<Speed> speed
+
+One of the following:
+
+STANDARD("standard")
+
+FAST("fast")
+
+Optional<Thinking> thinking
+
+One of the following:
+
+class BetaThinkingConfigEnabled:
+
+long budgetTokens
+
+Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+Must be ≥1024 and less than `max_tokens`.
+
+See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+
+minimum1024
+
+JsonValue; type "enabled"constant"enabled"constant
+
+Optional<Display> display
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+One of the following:
+
+SUMMARIZED("summarized")
+
+OMITTED("omitted")
+
+class BetaThinkingConfigDisabled:
+
+JsonValue; type "disabled"constant"disabled"constant
+
+class BetaThinkingConfigAdaptive:
+
+JsonValue; type "adaptive"constant"adaptive"constant
+
+Optional<Display> display
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+One of the following:
+
+SUMMARIZED("summarized")
+
+OMITTED("omitted")
 
 Optional<String> inferenceGeo
 
@@ -4508,6 +4939,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -4647,6 +5086,10 @@ TTL\_1H("1h")
 Optional<Boolean> deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+Optional<Long> maxTokens
+
+Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
 Optional<Long> maxUses
 
@@ -5353,6 +5796,8 @@ UNAVAILABLE("unavailable")
 
 EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
+MODEL\_NOT\_FOUND("model\_not\_found")
+
 JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
 
 class BetaAdvisorResultBlock:
@@ -5769,6 +6214,206 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction"constant"compaction"constant
 
+class BetaFallbackBlock:
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+[BetaFallbackInfo](api/beta.md) from
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+[BetaFallbackInfo](api/beta.md) to
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+JsonValue; type "fallback"constant"fallback"constant
+
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
 
 Context management response.
@@ -5868,6 +6513,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -5962,11 +6615,62 @@ CYBER("cyber")
 
 BIO("bio")
 
+REASONING\_EXTRACTION("reasoning\_extraction")
+
 Optional<String> explanation
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Optional<String> fallbackCreditToken
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+Optional<Boolean> fallbackHasPrefillClaim
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+Optional<String> recommendedModel
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 JsonValue; type "refusal"constant"refusal"constant
 
@@ -6095,6 +6799,94 @@ long inputTokens
 
 The number of input tokens which were used.
 
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
 long outputTokens
 
 The number of output tokens which were used.
@@ -6175,6 +6967,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -6254,6 +7054,135 @@ The number of output tokens which were used.
 JsonValue; type "advisor\_message"constant"advisor\_message"constant
 
 Usage for an advisor sub-inference iteration
+
+class BetaFallbackMessageIterationUsage:
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "fallback\_message"constant"fallback\_message"constant
+
+Usage for the fallback-model attempt that served the response
 
 long outputTokens
 
@@ -6818,6 +7747,8 @@ UNAVAILABLE("unavailable")
 
 EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
+MODEL\_NOT\_FOUND("model\_not\_found")
+
 JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
 
 class BetaAdvisorResultBlock:
@@ -7234,6 +8165,206 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction"constant"compaction"constant
 
+class BetaFallbackBlock:
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+[BetaFallbackInfo](api/beta.md) from
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+[BetaFallbackInfo](api/beta.md) to
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+JsonValue; type "fallback"constant"fallback"constant
+
 Optional<[BetaContextManagementResponse](api/beta.md)> contextManagement
 
 Context management response.
@@ -7333,6 +8464,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -7427,11 +8566,62 @@ CYBER("cyber")
 
 BIO("bio")
 
+REASONING\_EXTRACTION("reasoning\_extraction")
+
 Optional<String> explanation
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Optional<String> fallbackCreditToken
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+Optional<Boolean> fallbackHasPrefillClaim
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+Optional<String> recommendedModel
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 JsonValue; type "refusal"constant"refusal"constant
 
@@ -7560,6 +8750,94 @@ long inputTokens
 
 The number of input tokens which were used.
 
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
 long outputTokens
 
 The number of output tokens which were used.
@@ -7640,6 +8918,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -7719,6 +9005,135 @@ The number of output tokens which were used.
 JsonValue; type "advisor\_message"constant"advisor\_message"constant
 
 Usage for an advisor sub-inference iteration
+
+class BetaFallbackMessageIterationUsage:
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "fallback\_message"constant"fallback\_message"constant
+
+Usage for the fallback-model attempt that served the response
 
 long outputTokens
 
@@ -7874,11 +9289,62 @@ CYBER("cyber")
 
 BIO("bio")
 
+REASONING\_EXTRACTION("reasoning\_extraction")
+
 Optional<String> explanation
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+Optional<String> fallbackCreditToken
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+Optional<Boolean> fallbackHasPrefillClaim
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+Optional<String> recommendedModel
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 JsonValue; type "refusal"constant"refusal"constant
 
@@ -7970,6 +9436,94 @@ long inputTokens
 
 The number of input tokens which were used.
 
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
 long outputTokens
 
 The number of output tokens which were used.
@@ -8050,6 +9604,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -8129,6 +9691,135 @@ The number of output tokens which were used.
 JsonValue; type "advisor\_message"constant"advisor\_message"constant
 
 Usage for an advisor sub-inference iteration
+
+class BetaFallbackMessageIterationUsage:
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+Optional<[BetaCacheCreation](api/beta.md)> cacheCreation
+
+Breakdown of cached tokens by TTL
+
+long ephemeral1hInputTokens
+
+The number of input tokens used to create the 1 hour cache entry.
+
+long ephemeral5mInputTokens
+
+The number of input tokens used to create the 5 minute cache entry.
+
+long cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+long cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+long inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+long outputTokens
+
+The number of output tokens which were used.
+
+JsonValue; type "fallback\_message"constant"fallback\_message"constant
+
+Usage for the fallback-model attempt that served the response
 
 long outputTokens
 
@@ -8600,6 +10291,8 @@ UNAVAILABLE("unavailable")
 
 EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
+MODEL\_NOT\_FOUND("model\_not\_found")
+
 JsonValue; type "advisor\_tool\_result\_error"constant"advisor\_tool\_result\_error"constant
 
 class BetaAdvisorResultBlock:
@@ -9016,6 +10709,206 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 JsonValue; type "compaction"constant"compaction"constant
 
+class BetaFallbackBlock:
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+[BetaFallbackInfo](api/beta.md) from
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+[BetaFallbackInfo](api/beta.md) to
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
+CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_OPUS\_4\_7("claude-opus-4-7")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_MYTHOS\_PREVIEW("claude-mythos-preview")
+
+New class of intelligence, strongest in coding and cybersecurity
+
+CLAUDE\_OPUS\_4\_6("claude-opus-4-6")
+
+Frontier intelligence for long-running agents and coding
+
+CLAUDE\_SONNET\_4\_6("claude-sonnet-4-6")
+
+Best combination of speed and intelligence
+
+CLAUDE\_HAIKU\_4\_5("claude-haiku-4-5")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_HAIKU\_4\_5\_20251001("claude-haiku-4-5-20251001")
+
+Fastest model with near-frontier intelligence
+
+CLAUDE\_OPUS\_4\_5("claude-opus-4-5")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_OPUS\_4\_5\_20251101("claude-opus-4-5-20251101")
+
+Premium model combining maximum intelligence with practical performance
+
+CLAUDE\_SONNET\_4\_5("claude-sonnet-4-5")
+
+High-performance model for agents and coding
+
+CLAUDE\_SONNET\_4\_5\_20250929("claude-sonnet-4-5-20250929")
+
+High-performance model for agents and coding
+
+CLAUDE\_OPUS\_4\_1("claude-opus-4-1")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_1\_20250805("claude-opus-4-1-20250805")
+
+Exceptional model for specialized complex tasks
+
+CLAUDE\_OPUS\_4\_0("claude-opus-4-0")
+
+Powerful model for complex tasks
+
+CLAUDE\_OPUS\_4\_20250514("claude-opus-4-20250514")
+
+Powerful model for complex tasks
+
+CLAUDE\_SONNET\_4\_0("claude-sonnet-4-0")
+
+High-performance model with extended thinking
+
+CLAUDE\_SONNET\_4\_20250514("claude-sonnet-4-20250514")
+
+High-performance model with extended thinking
+
+CLAUDE\_3\_HAIKU\_20240307("claude-3-haiku-20240307")
+
+Fast and cost-effective model
+
+JsonValue; type "fallback"constant"fallback"constant
+
 long index
 
 JsonValue; type "content\_block\_start"constant"content\_block\_start"constant
@@ -9268,6 +11161,9 @@ Response 200
   "stop_details": {
     "category": "cyber",
     "explanation": "explanation",
+    "fallback_credit_token": "fallback_credit_token",
+    "fallback_has_prefill_claim": true,
+    "recommended_model": "recommended_model",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -9291,6 +11187,7 @@ Response 200
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
+        "model": "claude-fable-5",
         "output_tokens": 0,
         "type": "message"
       }
@@ -9366,6 +11263,9 @@ Response 200
   "stop_details": {
     "category": "cyber",
     "explanation": "explanation",
+    "fallback_credit_token": "fallback_credit_token",
+    "fallback_has_prefill_claim": true,
+    "recommended_model": "recommended_model",
     "type": "refusal"
   },
   "stop_reason": "end_turn",
@@ -9389,6 +11289,7 @@ Response 200
         "cache_creation_input_tokens": 0,
         "cache_read_input_tokens": 0,
         "input_tokens": 0,
+        "model": "claude-fable-5",
         "output_tokens": 0,
         "type": "message"
       }

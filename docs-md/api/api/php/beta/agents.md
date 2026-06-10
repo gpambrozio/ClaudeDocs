@@ -302,17 +302,11 @@ Type type
 
 [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
+"object" type
+
 ?array<string,mixed> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 ?list<string> required
-
-List of required property names.
-
-?Type type
-
-Must be 'object' for tool input schemas.
 
 [BetaManagedAgentsCustomToolParams](api/beta.md)
 
@@ -411,6 +405,10 @@ Default configuration for all tools from an MCP server.
 BetaManagedAgentsModel
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 

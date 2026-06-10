@@ -22,11 +22,11 @@ Body param: Model identifier. Accepts the [model string](about-claude/models/ove
 
 --name: string
 
-Body param: Human-readable name for the agent. 1-256 characters.
+Body param: Human-readable name for the agent.
 
 --description: optional string
 
-Body param: Description of what the agent does. Up to 2048 characters.
+Body param: Description of what the agent does.
 
 --mcp-server: optional array of [BetaManagedAgentsURLMCPServerParams](api/beta.md) { name, type, url }
 
@@ -42,11 +42,11 @@ Body param: A coordinator topology: the session's primary thread orchestrates wo
 
 --skill: optional array of [BetaManagedAgentsSkillParams](api/beta.md)
 
-Body param: Skills available to the agent. Maximum 20.
+Body param: Skills available to the agent.
 
 --system: optional string
 
-Body param: System prompt for the agent. Up to 100,000 characters.
+Body param: System prompt for the agent.
 
 --tool: optional array of [BetaManagedAgentsAgentToolset20260401Params](api/beta.md) { type, configs, default\_config }  or [BetaManagedAgentsMCPToolsetParams](api/beta.md) { mcp\_server\_name, type, configs, default\_config }  or [BetaManagedAgentsCustomToolParams](api/beta.md) { description, input\_schema, name, type }
 
@@ -90,11 +90,15 @@ model: object { id, speed }
 
 Model identifier and configuration.
 
-id: "claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more or string
+id: "claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more or string
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -338,23 +342,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: object { properties, required, type }
+input\_schema: object { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
-
-"object"
 
 name: string
 

@@ -42,6 +42,10 @@ Optional<LocalDateTime> createdAtLte
 
 Return sessions created at or before this time (inclusive).
 
+Optional<String> deploymentId
+
+Filter sessions created by this deployment ID.
+
 Optional<Boolean> includeArchived
 
 When true, includes archived sessions. Default: false (exclude archived).
@@ -64,7 +68,7 @@ DESC("desc")
 
 Optional<String> page
 
-Opaque pagination cursor from a previous response's next\_page.
+Opaque pagination cursor from a previous response.
 
 Optional<List<Status>> statuses
 
@@ -134,6 +138,10 @@ CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
 THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
+SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+
+FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsSession:
@@ -169,6 +177,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
@@ -251,6 +263,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
@@ -470,17 +486,11 @@ String description
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 String name
 
@@ -660,17 +670,11 @@ String description
 
 JSON Schema for custom tool input parameters.
 
+JsonValue; type "object"constant"object"constant
+
 Optional<Properties> properties
 
-JSON Schema properties defining the tool's input parameters.
-
 Optional<List<String>> required
-
-List of required property names.
-
-Optional<Type> type
-
-Must be 'object' for tool input schemas.
 
 String name
 
@@ -884,6 +888,10 @@ List<String> vaultIds
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+Optional<String> deploymentId
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 List Sessions
 
 Java
@@ -1074,7 +1082,8 @@ Response 200
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -1250,7 +1259,8 @@ Response 200
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="

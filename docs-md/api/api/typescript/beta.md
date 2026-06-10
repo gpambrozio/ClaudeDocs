@@ -10,13 +10,13 @@ TypeScript
 
 ##### ModelsExpand Collapse
 
-AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more
+AnthropicBeta = (string & {}) | "message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
 One of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
 "message-batches-2024-09-24"
 
@@ -69,6 +69,10 @@ One of the following:
 "cache-diagnosis-2026-04-07"
 
 "thinking-token-count-2026-05-13"
+
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
 
 BetaAPIError { message, type }
 
@@ -250,13 +254,13 @@ type: "rate\_limit\_error"
 
 ##### [List Models](api/beta/models/list.md)
 
-client.beta.models.list(ModelListParams { after\_id, before\_id, limit, betas } params?, RequestOptionsoptions?): Page<[BetaModelInfo](api/beta.md) { id, capabilities, created\_at, 4 more } >
+client.beta.models.list(ModelListParams { after\_id, before\_id, limit, betas } params?, RequestOptionsoptions?): Page<[BetaModelInfo](api/beta.md) { id, allowed\_fallback\_models, capabilities, 5 more } >
 
 GET/v1/models
 
 ##### [Get a Model](api/beta/models/retrieve.md)
 
-client.beta.models.retrieve(stringmodelID, ModelRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaModelInfo](api/beta.md) { id, capabilities, created\_at, 4 more }
+client.beta.models.retrieve(stringmodelID, ModelRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaModelInfo](api/beta.md) { id, allowed\_fallback\_models, capabilities, 5 more }
 
 GET/v1/models/{model\_id}
 
@@ -510,11 +514,15 @@ supported: boolean
 
 Whether this capability is supported by the model.
 
-BetaModelInfo { id, capabilities, created\_at, 4 more }
+BetaModelInfo { id, allowed\_fallback\_models, capabilities, 5 more }
 
 id: string
 
 Unique model identifier.
+
+allowed\_fallback\_models: Array<string> | null
+
+Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
 capabilities: [BetaModelCapabilities](api/beta.md) { batch, citations, code\_execution, 6 more }  | null
 
@@ -798,7 +806,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -922,7 +938,7 @@ type: "advisor\_result"
 
 stop\_reason?: string | null
 
-BetaAdvisorTool20260301 { model, name, type, 6 more }
+BetaAdvisorTool20260301 { model, name, type, 7 more }
 
 model: [Model](api/messages.md)
 
@@ -932,7 +948,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -1076,6 +1100,10 @@ defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
 
+max\_tokens?: number | null
+
+Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
+
 max\_uses?: number | null
 
 Maximum number of times the tool can be used in the API request.
@@ -1092,7 +1120,7 @@ One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -1107,6 +1135,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -1144,7 +1174,7 @@ One of the following:
 
 BetaAdvisorToolResultErrorParam { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -1159,6 +1189,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -1209,7 +1241,7 @@ One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -1224,12 +1256,14 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
 BetaAdvisorToolResultErrorParam { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -1244,6 +1278,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -2694,7 +2730,7 @@ One of the following:
 
 "1h"
 
-BetaContentBlock = [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 13 more
+BetaContentBlock = [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 14 more
 
 Response model for a file uploaded to the container.
 
@@ -3104,7 +3140,7 @@ One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -3119,6 +3155,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -3536,7 +3574,215 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
-BetaContentBlockParam = [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  | [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }  | 18 more
+BetaFallbackBlock { from, to, type }
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+from: [BetaFallbackInfo](api/beta.md) { model }
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfo](api/beta.md) { model }
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
+
+BetaContentBlockParam = [BetaTextBlockParam](api/beta.md) { text, type, cache\_control, citations }  | [BetaImageBlockParam](api/beta.md) { source, type, cache\_control }  | [BetaRequestDocumentBlock](api/beta.md) { source, type, cache\_control, 3 more }  | 19 more
 
 Regular text content.
 
@@ -5473,7 +5719,7 @@ One of the following:
 
 BetaAdvisorToolResultErrorParam { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -5488,6 +5734,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -5785,11 +6033,11 @@ One of the following:
 
 BetaToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
-content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
+content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  | [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
 
 One of the following:
 
-BetaToolSearchToolResultErrorParam { error\_code, type }
+BetaToolSearchToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
 
@@ -5804,6 +6052,8 @@ One of the following:
 "execution\_time\_exceeded"
 
 type: "tool\_search\_tool\_result\_error"
+
+error\_message?: string | null
 
 BetaToolSearchToolSearchResultBlockParam { tool\_references, type }
 
@@ -6305,6 +6555,218 @@ One of the following:
 "5m"
 
 "1h"
+
+BetaFallbackBlockParam { from, to, type }
+
+A `fallback` block echoed back from a prior response.
+
+Accepted in `messages[].content` and never rendered into the prompt,
+not validated against the request's `fallbacks` chain or top-level
+`model`, and stripped before the sticky-routing cache key is computed.
+
+Callers should echo the assistant turn verbatim — block included. The
+block's position is load-bearing for thinking verification: the thinking
+runs on either side of a fallback hop carry independently-rooted
+verification hash chains, and this block is the only record of where one
+chain ends and the next begins. When thinking runs flank the boundary,
+omitting the block merges the runs into one contiguous span whose hashes
+cannot verify (the request is rejected), and moving it into the middle of
+a single run splits that run's chain and is likewise rejected; between
+non-thinking blocks the block's placement has no verification effect.
+
+from: [BetaFallbackInfoParam](api/beta.md) { model }
+
+Identifies one hop of a fallback transition.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfoParam](api/beta.md) { model }
+
+Identifies one hop of a fallback transition.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
 
 BetaContentBlockSource { content, type }
 
@@ -6986,6 +7448,952 @@ stderr: string
 
 type: "encrypted\_code\_execution\_result"
 
+BetaFallbackBlock { from, to, type }
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+from: [BetaFallbackInfo](api/beta.md) { model }
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfo](api/beta.md) { model }
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
+
+BetaFallbackBlockParam { from, to, type }
+
+A `fallback` block echoed back from a prior response.
+
+Accepted in `messages[].content` and never rendered into the prompt,
+not validated against the request's `fallbacks` chain or top-level
+`model`, and stripped before the sticky-routing cache key is computed.
+
+Callers should echo the assistant turn verbatim — block included. The
+block's position is load-bearing for thinking verification: the thinking
+runs on either side of a fallback hop carry independently-rooted
+verification hash chains, and this block is the only record of where one
+chain ends and the next begins. When thinking runs flank the boundary,
+omitting the block merges the runs into one contiguous span whose hashes
+cannot verify (the request is rejected), and moving it into the middle of
+a single run splits that run's chain and is likewise rejected; between
+non-thinking blocks the block's placement has no verification effect.
+
+from: [BetaFallbackInfoParam](api/beta.md) { model }
+
+Identifies one hop of a fallback transition.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfoParam](api/beta.md) { model }
+
+Identifies one hop of a fallback transition.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
+
+BetaFallbackInfo { model }
+
+Identifies one hop of a fallback transition.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+BetaFallbackInfoParam { model }
+
+Identifies one hop of a fallback transition.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
+
+BetaFallbackParam { model, max\_tokens, output\_config, 2 more }
+
+One entry in the `fallbacks` chain on a `/v1/messages` request.
+
+`model` is required. The four override fields (`max_tokens`, `thinking`,
+`output_config`, and `speed`) replace the corresponding top-level field
+for this attempt only and are validated as if the request were made to
+`model`. Any other key is rejected at parse time.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+max\_tokens?: number | null
+
+output\_config?: [BetaOutputConfig](api/beta.md) { effort, format, task\_budget }  | null
+
+effort?: "low" | "medium" | "high" | 2 more | null
+
+All possible effort levels.
+
+One of the following:
+
+"low"
+
+"medium"
+
+"high"
+
+"xhigh"
+
+"max"
+
+format?: [BetaJSONOutputFormat](api/beta.md) { schema, type }  | null
+
+A schema to specify Claude's output format in responses. See [structured outputs](build-with-claude/structured-outputs.md)
+
+schema: Record<string, unknown>
+
+The JSON schema of the format
+
+type: "json\_schema"
+
+task\_budget?: [BetaTokenTaskBudget](api/beta.md) { total, type, remaining }  | null
+
+User-configurable total token budget across contexts.
+
+total: number
+
+Total token budget across all contexts in the session.
+
+type: "tokens"
+
+The budget type. Currently only 'tokens' is supported.
+
+remaining?: number | null
+
+Remaining tokens in the budget. Use this to track usage across contexts when implementing compaction client-side. Defaults to total if not provided.
+
+speed?: "standard" | "fast" | null
+
+One of the following:
+
+"standard"
+
+"fast"
+
+thinking?: [BetaThinkingConfigEnabled](api/beta.md) { budget\_tokens, type, display }  | [BetaThinkingConfigDisabled](api/beta.md) { type }  | [BetaThinkingConfigAdaptive](api/beta.md) { type, display }  | null
+
+One of the following:
+
+BetaThinkingConfigEnabled { budget\_tokens, type, display }
+
+budget\_tokens: number
+
+Determines how many tokens Claude can use for its internal reasoning process. Larger budgets can enable more thorough analysis for complex problems, improving response quality.
+
+Must be ≥1024 and less than `max_tokens`.
+
+See [extended thinking](https://docs.claude.com/en/docs/build-with-claude/extended-thinking) for details.
+
+minimum1024
+
+type: "enabled"
+
+display?: "summarized" | "omitted" | null
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+One of the following:
+
+"summarized"
+
+"omitted"
+
+BetaThinkingConfigDisabled { type }
+
+type: "disabled"
+
+BetaThinkingConfigAdaptive { type, display }
+
+type: "adaptive"
+
+display?: "summarized" | "omitted" | null
+
+Controls how thinking content appears in the response. When set to `summarized`, thinking is returned normally. When set to `omitted`, thinking content is redacted but a signature is returned for multi-turn continuity. Defaults to `summarized`.
+
+One of the following:
+
+"summarized"
+
+"omitted"
+
 BetaFileDocumentSource { file\_id, type }
 
 file\_id: string
@@ -7077,7 +8485,7 @@ type: "input\_tokens"
 
 value: number
 
-BetaIterationsUsage = Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaAdvisorMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } > | null
+BetaIterationsUsage = Array<[BetaMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }  | [BetaCompactionIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }  | [BetaAdvisorMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }  | [BetaFallbackMessageIterationUsage](api/beta.md) { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more } > | null
 
 Per-iteration token usage breakdown.
 
@@ -7089,7 +8497,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -7116,6 +8524,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -7197,7 +8697,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -7280,6 +8788,139 @@ The number of output tokens which were used.
 type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
 
 BetaJSONOutputFormat { schema, type }
 
@@ -8256,7 +9897,7 @@ One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -8271,6 +9912,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -8688,6 +10331,214 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
+BetaFallbackBlock { from, to, type }
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+from: [BetaFallbackInfo](api/beta.md) { model }
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfo](api/beta.md) { model }
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
 
 Context management response.
@@ -8787,7 +10638,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -8869,11 +10728,11 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | null
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -8885,11 +10744,62 @@ One of the following:
 
 "bio"
 
+"reasoning\_extraction"
+
 explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+fallback\_credit\_token: string | null
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+fallback\_has\_prefill\_claim: boolean | null
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+recommended\_model: string | null
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 type: "refusal"
 
@@ -8990,7 +10900,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -9017,6 +10927,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -9098,7 +11100,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -9181,6 +11191,139 @@ The number of output tokens which were used.
 type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
 
 output\_tokens: number
 
@@ -9268,7 +11411,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -9295,6 +11438,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -9376,7 +11611,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -9460,6 +11703,139 @@ type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
 
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
+
 output\_tokens: number
 
 The cumulative number of output tokens which were used.
@@ -9498,7 +11874,7 @@ web\_search\_requests: number
 
 The number of web search tool requests.
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -9525,6 +11901,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -11475,7 +13943,7 @@ One of the following:
 
 BetaAdvisorToolResultErrorParam { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -11490,6 +13958,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -11787,11 +14257,11 @@ One of the following:
 
 BetaToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
-content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
+content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  | [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
 
 One of the following:
 
-BetaToolSearchToolResultErrorParam { error\_code, type }
+BetaToolSearchToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
 
@@ -11806,6 +14276,8 @@ One of the following:
 "execution\_time\_exceeded"
 
 type: "tool\_search\_tool\_result\_error"
+
+error\_message?: string | null
 
 BetaToolSearchToolSearchResultBlockParam { tool\_references, type }
 
@@ -12307,6 +14779,218 @@ One of the following:
 "5m"
 
 "1h"
+
+BetaFallbackBlockParam { from, to, type }
+
+A `fallback` block echoed back from a prior response.
+
+Accepted in `messages[].content` and never rendered into the prompt,
+not validated against the request's `fallbacks` chain or top-level
+`model`, and stripped before the sticky-routing cache key is computed.
+
+Callers should echo the assistant turn verbatim — block included. The
+block's position is load-bearing for thinking verification: the thinking
+runs on either side of a fallback hop carry independently-rooted
+verification hash chains, and this block is the only record of where one
+chain ends and the next begins. When thinking runs flank the boundary,
+omitting the block merges the runs into one contiguous span whose hashes
+cannot verify (the request is rejected), and moving it into the middle of
+a single run splits that run's chain and is likewise rejected; between
+non-thinking blocks the block's placement has no verification effect.
+
+from: [BetaFallbackInfoParam](api/beta.md) { model }
+
+Identifies one hop of a fallback transition.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfoParam](api/beta.md) { model }
+
+Identifies one hop of a fallback transition.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
 
 role: "user" | "assistant" | "system"
 
@@ -12884,7 +15568,7 @@ type: "content\_block\_delta"
 
 BetaRawContentBlockStartEvent { content\_block, index, type }
 
-content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 13 more
+content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 14 more
 
 Response model for a file uploaded to the container.
 
@@ -13294,7 +15978,7 @@ One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -13309,6 +15993,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -13726,6 +16412,214 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
+BetaFallbackBlock { from, to, type }
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+from: [BetaFallbackInfo](api/beta.md) { model }
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfo](api/beta.md) { model }
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
+
 index: number
 
 type: "content\_block\_start"
@@ -13812,11 +16706,11 @@ version: string
 
 Skill version or 'latest' for most recent version
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | null
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -13828,11 +16722,62 @@ One of the following:
 
 "bio"
 
+"reasoning\_extraction"
+
 explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+fallback\_credit\_token: string | null
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+fallback\_has\_prefill\_claim: boolean | null
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+recommended\_model: string | null
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 type: "refusal"
 
@@ -13896,7 +16841,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -13923,6 +16868,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -14004,7 +17041,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -14087,6 +17132,139 @@ The number of output tokens which were used.
 type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
 
 output\_tokens: number
 
@@ -14611,7 +17789,7 @@ One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -14626,6 +17804,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -15043,6 +18223,214 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
+BetaFallbackBlock { from, to, type }
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+from: [BetaFallbackInfo](api/beta.md) { model }
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfo](api/beta.md) { model }
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
 
 Context management response.
@@ -15142,7 +18530,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -15224,11 +18620,11 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | null
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -15240,11 +18636,62 @@ One of the following:
 
 "bio"
 
+"reasoning\_extraction"
+
 explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+fallback\_credit\_token: string | null
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+fallback\_has\_prefill\_claim: boolean | null
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+recommended\_model: string | null
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 type: "refusal"
 
@@ -15345,7 +18792,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -15372,6 +18819,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -15453,7 +18992,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -15536,6 +19083,139 @@ The number of output tokens which were used.
 type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
 
 output\_tokens: number
 
@@ -16092,7 +19772,7 @@ One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -16107,6 +19787,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -16524,6 +20206,214 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
+BetaFallbackBlock { from, to, type }
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+from: [BetaFallbackInfo](api/beta.md) { model }
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfo](api/beta.md) { model }
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
 
 Context management response.
@@ -16623,7 +20513,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -16705,11 +20603,11 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | null
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -16721,11 +20619,62 @@ One of the following:
 
 "bio"
 
+"reasoning\_extraction"
+
 explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+fallback\_credit\_token: string | null
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+fallback\_has\_prefill\_claim: boolean | null
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+recommended\_model: string | null
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 type: "refusal"
 
@@ -16826,7 +20775,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -16853,6 +20802,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -16934,7 +20975,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -17017,6 +21066,139 @@ The number of output tokens which were used.
 type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
 
 output\_tokens: number
 
@@ -17156,11 +21338,11 @@ version: string
 
 Skill version or 'latest' for most recent version
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | null
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -17172,11 +21354,62 @@ One of the following:
 
 "bio"
 
+"reasoning\_extraction"
+
 explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+fallback\_credit\_token: string | null
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+fallback\_has\_prefill\_claim: boolean | null
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+recommended\_model: string | null
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 type: "refusal"
 
@@ -17240,7 +21473,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -17267,6 +21500,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -17348,7 +21673,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -17432,6 +21765,139 @@ type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
 
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
+
 output\_tokens: number
 
 The cumulative number of output tokens which were used.
@@ -17476,7 +21942,7 @@ type: "message\_stop"
 
 BetaRawContentBlockStartEvent { content\_block, index, type }
 
-content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 13 more
+content\_block: [BetaTextBlock](api/beta.md) { citations, text, type }  | [BetaThinkingBlock](api/beta.md) { signature, thinking, type }  | [BetaRedactedThinkingBlock](api/beta.md) { data, type }  | 14 more
 
 Response model for a file uploaded to the container.
 
@@ -17886,7 +22352,7 @@ One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -17901,6 +22367,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -18318,6 +22786,214 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
+BetaFallbackBlock { from, to, type }
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+from: [BetaFallbackInfo](api/beta.md) { model }
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfo](api/beta.md) { model }
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
+
 index: number
 
 type: "content\_block\_start"
@@ -18498,11 +23174,11 @@ data: string
 
 type: "redacted\_thinking"
 
-BetaRefusalStopDetails { category, explanation, type }
+BetaRefusalStopDetails { category, explanation, fallback\_credit\_token, 3 more }
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | null
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -18514,11 +23190,62 @@ One of the following:
 
 "bio"
 
+"reasoning\_extraction"
+
 explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+fallback\_credit\_token: string | null
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+fallback\_has\_prefill\_claim: boolean | null
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+recommended\_model: string | null
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 type: "refusal"
 
@@ -21624,11 +26351,11 @@ type: "tool\_search\_tool\_result"
 
 BetaToolSearchToolResultBlockParam { content, tool\_use\_id, type, cache\_control }
 
-content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type }  | [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
+content: [BetaToolSearchToolResultErrorParam](api/beta.md) { error\_code, type, error\_message }  | [BetaToolSearchToolSearchResultBlockParam](api/beta.md) { tool\_references, type }
 
 One of the following:
 
-BetaToolSearchToolResultErrorParam { error\_code, type }
+BetaToolSearchToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
 
@@ -21643,6 +26370,8 @@ One of the following:
 "execution\_time\_exceeded"
 
 type: "tool\_search\_tool\_result\_error"
+
+error\_message?: string | null
 
 BetaToolSearchToolSearchResultBlockParam { tool\_references, type }
 
@@ -21722,7 +26451,7 @@ error\_message: string | null
 
 type: "tool\_search\_tool\_result\_error"
 
-BetaToolSearchToolResultErrorParam { error\_code, type }
+BetaToolSearchToolResultErrorParam { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" | "unavailable" | "too\_many\_requests" | "execution\_time\_exceeded"
 
@@ -21737,6 +26466,8 @@ One of the following:
 "execution\_time\_exceeded"
 
 type: "tool\_search\_tool\_result\_error"
+
+error\_message?: string | null
 
 BetaToolSearchToolSearchResultBlock { tool\_references, type }
 
@@ -23206,7 +27937,7 @@ use\_cache?: boolean
 
 Whether to use cached content. Set to false to bypass the cache and fetch fresh content. Only set to false when the user explicitly requests fresh content or when fetching rapidly-changing sources.
 
-BetaAdvisorTool20260301 { model, name, type, 6 more }
+BetaAdvisorTool20260301 { model, name, type, 7 more }
 
 model: [Model](api/messages.md)
 
@@ -23216,7 +27947,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -23359,6 +28098,10 @@ One of the following:
 defer\_loading?: boolean
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+max\_tokens?: number | null
+
+Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
 max\_uses?: number | null
 
@@ -23695,7 +28438,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -23722,6 +28465,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -23803,7 +28638,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -23886,6 +28729,139 @@ The number of output tokens which were used.
 type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
 
 output\_tokens: number
 
@@ -26269,7 +31245,7 @@ One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -26284,6 +31260,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -26701,6 +31679,214 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
+BetaFallbackBlock { from, to, type }
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+from: [BetaFallbackInfo](api/beta.md) { model }
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfo](api/beta.md) { model }
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
 
 Context management response.
@@ -26800,7 +31986,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -26882,11 +32076,11 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | null
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -26898,11 +32092,62 @@ One of the following:
 
 "bio"
 
+"reasoning\_extraction"
+
 explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+fallback\_credit\_token: string | null
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+fallback\_has\_prefill\_claim: boolean | null
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+recommended\_model: string | null
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 type: "refusal"
 
@@ -27003,7 +32248,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -27030,6 +32275,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -27111,7 +32448,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -27194,6 +32539,139 @@ The number of output tokens which were used.
 type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
 
 output\_tokens: number
 
@@ -27856,7 +33334,7 @@ One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -27871,6 +33349,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -28288,6 +33768,214 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
+BetaFallbackBlock { from, to, type }
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+from: [BetaFallbackInfo](api/beta.md) { model }
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfo](api/beta.md) { model }
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
 
 Context management response.
@@ -28387,7 +34075,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -28469,11 +34165,11 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | null
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -28485,11 +34181,62 @@ One of the following:
 
 "bio"
 
+"reasoning\_extraction"
+
 explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+fallback\_credit\_token: string | null
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+fallback\_has\_prefill\_claim: boolean | null
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+recommended\_model: string | null
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 type: "refusal"
 
@@ -28590,7 +34337,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -28617,6 +34364,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -28698,7 +34537,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -28781,6 +34628,139 @@ The number of output tokens which were used.
 type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
 
 output\_tokens: number
 
@@ -29405,7 +35385,7 @@ One of the following:
 
 BetaAdvisorToolResultError { error\_code, type }
 
-error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 3 more
+error\_code: "max\_uses\_exceeded" | "prompt\_too\_long" | "too\_many\_requests" | 4 more
 
 One of the following:
 
@@ -29420,6 +35400,8 @@ One of the following:
 "unavailable"
 
 "execution\_time\_exceeded"
+
+"model\_not\_found"
 
 type: "advisor\_tool\_result\_error"
 
@@ -29837,6 +35819,214 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 type: "compaction"
 
+BetaFallbackBlock { from, to, type }
+
+Marks the point in `content` where one model's output gives way to the next.
+
+One block appears per hop where a preceding model actually ran this turn and
+declined. A turn routed directly by the sticky decision has no such boundary
+and carries no block — the signal for whether a fallback model served the
+response is the presence of a `fallback_message` entry in
+`usage.iterations`, not this block.
+
+The block is treated like a server-tool content block for streaming: it
+arrives via the standard `content_block_start` / `content_block_stop`
+pair and carries no deltas.
+
+from: [BetaFallbackInfo](api/beta.md) { model }
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+to: [BetaFallbackInfo](api/beta.md) { model }
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+type: "fallback"
+
 context\_management: [BetaContextManagementResponse](api/beta.md) { applied\_edits }  | null
 
 Context management response.
@@ -29936,7 +36126,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -30018,11 +36216,11 @@ Conversational role of the generated message.
 
 This will always be `"assistant"`.
 
-stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, type }  | null
+stop\_details: [BetaRefusalStopDetails](api/beta.md) { category, explanation, fallback\_credit\_token, 3 more }  | null
 
 Structured information about a refusal.
 
-category: "cyber" | "bio" | null
+category: "cyber" | "bio" | "reasoning\_extraction" | null
 
 The policy category that triggered the refusal.
 
@@ -30034,11 +36232,62 @@ One of the following:
 
 "bio"
 
+"reasoning\_extraction"
+
 explanation: string | null
 
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+fallback\_credit\_token: string | null
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+fallback\_has\_prefill\_claim: boolean | null
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+recommended\_model: string | null
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 type: "refusal"
 
@@ -30139,7 +36388,7 @@ Each entry represents one sampling iteration, with its own input/output token co
 
 One of the following:
 
-BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 3 more }
+BetaMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
 
 Token usage for a sampling iteration.
 
@@ -30166,6 +36415,98 @@ The number of input tokens read from the cache.
 input\_tokens: number
 
 The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
 
 output\_tokens: number
 
@@ -30247,7 +36588,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -30330,6 +36679,139 @@ The number of output tokens which were used.
 type: "advisor\_message"
 
 Usage for an advisor sub-inference iteration
+
+BetaFallbackMessageIterationUsage { cache\_creation, cache\_creation\_input\_tokens, cache\_read\_input\_tokens, 4 more }
+
+Token usage for the fallback-model attempt of a server-side fallback request.
+
+Produced in place of a `message` entry for whichever hop served the
+response. A declined hop produces the existing `message` entry. Whether
+a fallback model served the response is signalled by the presence of this
+entry in `usage.iterations`.
+
+cache\_creation: [BetaCacheCreation](api/beta.md) { ephemeral\_1h\_input\_tokens, ephemeral\_5m\_input\_tokens }  | null
+
+Breakdown of cached tokens by TTL
+
+ephemeral\_1h\_input\_tokens: number
+
+The number of input tokens used to create the 1 hour cache entry.
+
+ephemeral\_5m\_input\_tokens: number
+
+The number of input tokens used to create the 5 minute cache entry.
+
+cache\_creation\_input\_tokens: number
+
+The number of input tokens used to create the cache entry.
+
+cache\_read\_input\_tokens: number
+
+The number of input tokens read from the cache.
+
+input\_tokens: number
+
+The number of input tokens which were used.
+
+model: [Model](api/messages.md)
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+One of the following:
+
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
+"claude-opus-4-8"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-opus-4-7"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-mythos-preview"
+
+New class of intelligence, strongest in coding and cybersecurity
+
+"claude-opus-4-6"
+
+Frontier intelligence for long-running agents and coding
+
+"claude-sonnet-4-6"
+
+Best combination of speed and intelligence
+
+"claude-haiku-4-5"
+
+Fastest model with near-frontier intelligence
+
+"claude-haiku-4-5-20251001"
+
+Fastest model with near-frontier intelligence
+
+"claude-opus-4-5"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-opus-4-5-20251101"
+
+Premium model combining maximum intelligence with practical performance
+
+"claude-sonnet-4-5"
+
+High-performance model for agents and coding
+
+"claude-sonnet-4-5-20250929"
+
+High-performance model for agents and coding
+
+"claude-opus-4-1"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-1-20250805"
+
+Exceptional model for specialized complex tasks
+
+"claude-opus-4-0"
+
+Powerful model for complex tasks
+
+"claude-opus-4-20250514"
+
+Powerful model for complex tasks
+
+"claude-sonnet-4-0"
+
+High-performance model with extended thinking
+
+"claude-sonnet-4-20250514"
+
+High-performance model with extended thinking
+
+"claude-3-haiku-20240307"
+
+Fast and cost-effective model
+
+(string & {})
+
+output\_tokens: number
+
+The number of output tokens which were used.
+
+type: "fallback\_message"
+
+Usage for the fallback-model attempt that served the response
 
 output\_tokens: number
 
@@ -30465,7 +36947,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -30699,21 +37185,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -31205,41 +37685,29 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
 type: "custom"
 
-BetaManagedAgentsCustomToolInputSchema { properties, required, type }
+BetaManagedAgentsCustomToolInputSchema { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 BetaManagedAgentsCustomToolParams { description, input\_schema, name, type }
 
@@ -31249,21 +37717,15 @@ description: string
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -31507,7 +37969,7 @@ Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsModel = "claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more | (string & {})
+BetaManagedAgentsModel = "claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more | (string & {})
 
 The model that will power your agent.
 
@@ -31515,7 +37977,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -31571,7 +38037,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -31637,7 +38107,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -31775,7 +38249,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -31993,21 +38471,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -32853,25 +39325,25 @@ Type of work data
 
 ##### [Create Session](api/beta/sessions/create.md)
 
-client.beta.sessions.create(SessionCreateParams { agent, environment\_id, metadata, 4 more } params, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 12 more }
+client.beta.sessions.create(SessionCreateParams { agent, environment\_id, metadata, 4 more } params, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 13 more }
 
 POST/v1/sessions
 
 ##### [List Sessions](api/beta/sessions/list.md)
 
-client.beta.sessions.list(SessionListParams { agent\_id, agent\_version, created\_at[gt], 10 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 12 more } >
+client.beta.sessions.list(SessionListParams { agent\_id, agent\_version, created\_at[gt], 11 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 13 more } >
 
 GET/v1/sessions
 
 ##### [Get Session](api/beta/sessions/retrieve.md)
 
-client.beta.sessions.retrieve(stringsessionID, SessionRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 12 more }
+client.beta.sessions.retrieve(stringsessionID, SessionRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 13 more }
 
 GET/v1/sessions/{session\_id}
 
 ##### [Update Session](api/beta/sessions/update.md)
 
-client.beta.sessions.update(stringsessionID, SessionUpdateParams { agent, metadata, title, 2 more } params, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 12 more }
+client.beta.sessions.update(stringsessionID, SessionUpdateParams { agent, metadata, title, 2 more } params, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 13 more }
 
 POST/v1/sessions/{session\_id}
 
@@ -32883,7 +39355,7 @@ DELETE/v1/sessions/{session\_id}
 
 ##### [Archive Session](api/beta/sessions/archive.md)
 
-client.beta.sessions.archive(stringsessionID, SessionArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 12 more }
+client.beta.sessions.archive(stringsessionID, SessionArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 13 more }
 
 POST/v1/sessions/{session\_id}/archive
 
@@ -33125,7 +39597,7 @@ Current evaluation state. `pending` before the agent begins work; `running` whil
 
 type: "outcome\_evaluation"
 
-BetaManagedAgentsSession { id, agent, archived\_at, 12 more }
+BetaManagedAgentsSession { id, agent, archived\_at, 13 more }
 
 A Managed Agents `session`.
 
@@ -33159,7 +39631,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -33245,7 +39721,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -33463,21 +39943,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -33653,21 +40127,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -33881,6 +40349,10 @@ vault\_ids: Array<string>
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+deployment\_id?: string | null
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 BetaManagedAgentsSessionAgent { id, description, mcp\_servers, 8 more }
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
@@ -33909,7 +40381,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -33995,7 +40471,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -34213,21 +40693,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -34403,21 +40877,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -34605,21 +41073,15 @@ description: string
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -34659,7 +41121,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -34877,21 +41343,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -34957,7 +41417,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -35043,7 +41507,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -35261,21 +41729,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -35451,21 +41913,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -35510,6 +41966,40 @@ Total input tokens consumed across all turns.
 output\_tokens?: number
 
 Total output tokens generated across all turns.
+
+BetaManagedAgentsSystemContentBlock { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsSystemMessageEvent { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at?: string | null
+
+A timestamp in RFC 3339 format
 
 BetaManagedAgentsUserToolResultEvent { id, tool\_use\_id, type, 4 more }
 
@@ -36613,6 +43103,48 @@ type: "terminal"
 
 type: "billing\_error"
 
+BetaManagedAgentsCredentialHostUnreachableError { credential\_id, message, retry\_status, 2 more }
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: string
+
+ID of the affected credential.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+One of the following:
+
+BetaManagedAgentsRetryStatusRetrying { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "credential\_host\_unreachable\_error"
+
+vault\_id: string
+
+ID of the vault containing the affected credential.
+
 BetaManagedAgentsDocumentBlock { source, type, context, title }
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
@@ -36681,7 +43213,7 @@ title?: string | null
 
 The title of the document.
 
-BetaManagedAgentsEventParams = [BetaManagedAgentsUserMessageEventParams](api/beta.md) { content, type }  | [BetaManagedAgentsUserInterruptEventParams](api/beta.md) { type, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEventParams](api/beta.md) { result, tool\_use\_id, type, deny\_message }  | 3 more
+BetaManagedAgentsEventParams = [BetaManagedAgentsUserMessageEventParams](api/beta.md) { content, type }  | [BetaManagedAgentsUserInterruptEventParams](api/beta.md) { type, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEventParams](api/beta.md) { result, tool\_use\_id, type, deny\_message }  | 4 more
 
 Union type for event parameters that can be sent to a session.
 
@@ -37249,6 +43781,22 @@ is\_error?: boolean | null
 
 Whether the tool execution resulted in an error.
 
+BetaManagedAgentsSystemMessageEventParams { content, type }
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks to append. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
 BetaManagedAgentsFileDocumentSource { file\_id, type }
 
 Document referenced by file ID.
@@ -37599,7 +44147,7 @@ BetaManagedAgentsSendSessionEvents { data }
 
 Events that were successfully sent to the session.
 
-data?: Array<[BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 3 more>
+data?: Array<[BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 4 more>
 
 Sent events
 
@@ -38231,6 +44779,30 @@ session\_thread\_id?: string | null
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+BetaManagedAgentsSystemMessageEvent { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at?: string | null
+
+A timestamp in RFC 3339 format
+
 BetaManagedAgentsSessionDeletedEvent { id, processed\_at, type }
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -38259,7 +44831,7 @@ id: string
 
 Unique identifier for this event.
 
-error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 4 more
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 5 more
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -38511,13 +45083,55 @@ type: "terminal"
 
 type: "billing\_error"
 
+BetaManagedAgentsCredentialHostUnreachableError { credential\_id, message, retry\_status, 2 more }
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: string
+
+ID of the affected credential.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+One of the following:
+
+BetaManagedAgentsRetryStatusRetrying { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "credential\_host\_unreachable\_error"
+
+vault\_id: string
+
+ID of the vault containing the affected credential.
+
 processed\_at: string
 
 A timestamp in RFC 3339 format
 
 type: "session.error"
 
-BetaManagedAgentsSessionEvent = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 30 more
+BetaManagedAgentsSessionEvent = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 31 more
 
 Union type for all event types in a session.
 
@@ -39747,7 +46361,7 @@ id: string
 
 Unique identifier for this event.
 
-error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 4 more
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 5 more
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -39998,6 +46612,48 @@ The session encountered a terminal error and will transition to `terminated` sta
 type: "terminal"
 
 type: "billing\_error"
+
+BetaManagedAgentsCredentialHostUnreachableError { credential\_id, message, retry\_status, 2 more }
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: string
+
+ID of the affected credential.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+One of the following:
+
+BetaManagedAgentsRetryStatusRetrying { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "credential\_host\_unreachable\_error"
+
+vault\_id: string
+
+ID of the vault containing the affected credential.
 
 processed\_at: string
 
@@ -40697,7 +47353,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -40783,7 +47443,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -41001,21 +47665,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -41191,21 +47849,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -41222,6 +47874,30 @@ The session's full metadata bag after the update. Present when the update set no
 title?: string | null
 
 The session's new title. Present only when the update changed it.
+
+BetaManagedAgentsSystemMessageEvent { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at?: string | null
+
+A timestamp in RFC 3339 format
 
 BetaManagedAgentsSessionRequiresAction { event\_ids, type }
 
@@ -41665,7 +48341,7 @@ A timestamp in RFC 3339 format
 
 type: "span.outcome\_evaluation\_start"
 
-BetaManagedAgentsStreamSessionEvents = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 30 more
+BetaManagedAgentsStreamSessionEvents = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 31 more
 
 Server-sent event in the session stream.
 
@@ -42895,7 +49571,7 @@ id: string
 
 Unique identifier for this event.
 
-error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 4 more
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 5 more
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -43146,6 +49822,48 @@ The session encountered a terminal error and will transition to `terminated` sta
 type: "terminal"
 
 type: "billing\_error"
+
+BetaManagedAgentsCredentialHostUnreachableError { credential\_id, message, retry\_status, 2 more }
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: string
+
+ID of the affected credential.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+One of the following:
+
+BetaManagedAgentsRetryStatusRetrying { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "credential\_host\_unreachable\_error"
+
+vault\_id: string
+
+ID of the vault containing the affected credential.
 
 processed\_at: string
 
@@ -43845,7 +50563,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -43931,7 +50653,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -44149,21 +50875,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -44339,21 +51059,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -44370,6 +51084,46 @@ The session's full metadata bag after the update. Present when the update set no
 title?: string | null
 
 The session's new title. Present only when the update changed it.
+
+BetaManagedAgentsSystemMessageEvent { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at?: string | null
+
+A timestamp in RFC 3339 format
+
+BetaManagedAgentsSystemMessageEventParams { content, type }
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks to append. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
 
 BetaManagedAgentsTextBlock { text, type }
 
@@ -45941,7 +52695,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -46159,21 +52917,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -46321,7 +53073,7 @@ output\_tokens?: number
 
 Total output tokens generated across all turns.
 
-BetaManagedAgentsStreamSessionThreadEvents = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 30 more
+BetaManagedAgentsStreamSessionThreadEvents = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  | [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  | [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  | 31 more
 
 Server-sent event in a single thread's stream.
 
@@ -47551,7 +54303,7 @@ id: string
 
 Unique identifier for this event.
 
-error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 4 more
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  | [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  | 5 more
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -47802,6 +54554,48 @@ The session encountered a terminal error and will transition to `terminated` sta
 type: "terminal"
 
 type: "billing\_error"
+
+BetaManagedAgentsCredentialHostUnreachableError { credential\_id, message, retry\_status, 2 more }
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: string
+
+ID of the affected credential.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  | [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+One of the following:
+
+BetaManagedAgentsRetryStatusRetrying { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "credential\_host\_unreachable\_error"
+
+vault\_id: string
+
+ID of the vault containing the affected credential.
 
 processed\_at: string
 
@@ -48501,7 +55295,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -48587,7 +55385,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -48805,21 +55607,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -48995,21 +55791,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -49027,6 +55817,30 @@ title?: string | null
 
 The session's new title. Present only when the update changed it.
 
+BetaManagedAgentsSystemMessageEvent { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at?: string | null
+
+A timestamp in RFC 3339 format
+
 #### BetaSessionsThreadsEvents
 
 ##### [List Session Thread Events](api/beta/sessions/threads/events/list.md)
@@ -49040,6 +55854,2180 @@ GET/v1/sessions/{session\_id}/threads/{thread\_id}/events
 client.beta.sessions.threads.events.stream(stringthreadID, EventStreamParams { session\_id, betas } params, RequestOptionsoptions?): [BetaManagedAgentsStreamSessionThreadEvents](api/beta.md) | Stream<[BetaManagedAgentsStreamSessionThreadEvents](api/beta.md)>
 
 GET/v1/sessions/{session\_id}/threads/{thread\_id}/stream
+
+#### BetaDeployments
+
+##### [Create Deployment](api/beta/deployments/create.md)
+
+client.beta.deployments.create(DeploymentCreateParams { agent, environment\_id, initial\_events, 7 more } params, RequestOptionsoptions?): [BetaManagedAgentsDeployment](api/beta.md) { id, agent, archived\_at, 13 more }
+
+POST/v1/deployments
+
+##### [List Deployments](api/beta/deployments/list.md)
+
+client.beta.deployments.list(DeploymentListParams { agent\_id, created\_at[gte], created\_at[lte], 5 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsDeployment](api/beta.md) { id, agent, archived\_at, 13 more } >
+
+GET/v1/deployments
+
+##### [Get Deployment](api/beta/deployments/retrieve.md)
+
+client.beta.deployments.retrieve(stringdeploymentID, DeploymentRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeployment](api/beta.md) { id, agent, archived\_at, 13 more }
+
+GET/v1/deployments/{deployment\_id}
+
+##### [Update Deployment](api/beta/deployments/update.md)
+
+client.beta.deployments.update(stringdeploymentID, DeploymentUpdateParams { agent, description, environment\_id, 7 more } params, RequestOptionsoptions?): [BetaManagedAgentsDeployment](api/beta.md) { id, agent, archived\_at, 13 more }
+
+POST/v1/deployments/{deployment\_id}
+
+##### [Archive Deployment](api/beta/deployments/archive.md)
+
+client.beta.deployments.archive(stringdeploymentID, DeploymentArchiveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeployment](api/beta.md) { id, agent, archived\_at, 13 more }
+
+POST/v1/deployments/{deployment\_id}/archive
+
+##### [Run Deployment Now](api/beta/deployments/run.md)
+
+client.beta.deployments.run(stringdeploymentID, DeploymentRunParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeploymentRun](api/beta.md) { id, agent, created\_at, 5 more }
+
+POST/v1/deployments/{deployment\_id}/run
+
+##### [Pause Deployment](api/beta/deployments/pause.md)
+
+client.beta.deployments.pause(stringdeploymentID, DeploymentPauseParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeployment](api/beta.md) { id, agent, archived\_at, 13 more }
+
+POST/v1/deployments/{deployment\_id}/pause
+
+##### [Unpause Deployment](api/beta/deployments/unpause.md)
+
+client.beta.deployments.unpause(stringdeploymentID, DeploymentUnpauseParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeployment](api/beta.md) { id, agent, archived\_at, 13 more }
+
+POST/v1/deployments/{deployment\_id}/unpause
+
+##### ModelsExpand Collapse
+
+BetaManagedAgentsAgentArchivedDeploymentPausedReasonError { type }
+
+The deployment's agent was archived.
+
+type: "agent\_archived\_error"
+
+BetaManagedAgentsCronSchedule { expression, timezone, type, 2 more }
+
+5-field POSIX cron schedule with computed runtime timestamps.
+
+expression: string
+
+5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+timezone: string
+
+IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
+
+type: "cron"
+
+last\_run\_at?: string | null
+
+A timestamp in RFC 3339 format
+
+upcoming\_runs\_at?: Array<string>
+
+Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+BetaManagedAgentsCronScheduleParams { expression, timezone, type }
+
+5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+
+expression: string
+
+5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+timezone: string
+
+Required. IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC"). Validated against the IANA timezone database.
+
+type: "cron"
+
+BetaManagedAgentsDeployment { id, agent, archived\_at, 13 more }
+
+A deployment is a configured instance of an agent — it binds the agent to everything needed to run it autonomously: an environment, credentials, initial events, and an optional schedule.
+
+id: string
+
+Unique identifier for this deployment.
+
+agent: [BetaManagedAgentsAgentReference](api/beta.md) { id, type, version }
+
+A resolved agent reference with a concrete version.
+
+id: string
+
+type: "agent"
+
+version: number
+
+archived\_at: string | null
+
+A timestamp in RFC 3339 format
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+description: string | null
+
+Description of what the deployment does.
+
+environment\_id: string
+
+ID of the `environment` where sessions run.
+
+initial\_events: Array<[BetaManagedAgentsDeploymentInitialEvent](api/beta.md)>
+
+Events sent to each session immediately after creation.
+
+One of the following:
+
+BetaManagedAgentsDeploymentUserMessageEvent { content, type }
+
+A user message sent to the session.
+
+content: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } >
+
+Array of content blocks for the user message.
+
+One of the following:
+
+BetaManagedAgentsTextBlock { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+One of the following:
+
+BetaManagedAgentsBase64ImageSource { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+One of the following:
+
+BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context?: string | null
+
+Additional context about the document for the model.
+
+title?: string | null
+
+The title of the document.
+
+type: "user.message"
+
+BetaManagedAgentsDeploymentUserDefineOutcomeEvent { description, rubric, type, max\_iterations }
+
+An outcome the agent should work toward. The agent begins work on receipt.
+
+description: string
+
+What the agent should produce. This is the task specification.
+
+rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  | [BetaManagedAgentsTextRubric](api/beta.md) { content, type }
+
+Rubric for grading the quality of an outcome.
+
+One of the following:
+
+BetaManagedAgentsFileRubric { file\_id, type }
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: string
+
+ID of the rubric file.
+
+type: "file"
+
+BetaManagedAgentsTextRubric { content, type }
+
+Rubric content provided inline as text.
+
+content: string
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+type: "text"
+
+type: "user.define\_outcome"
+
+max\_iterations?: number | null
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
+BetaManagedAgentsDeploymentSystemMessageEvent { content, type }
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks to append. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+metadata: Record<string, string>
+
+Arbitrary key-value metadata. Maximum 16 pairs.
+
+name: string
+
+Human-readable name.
+
+paused\_reason: [BetaManagedAgentsDeploymentPausedReason](api/beta.md) | null
+
+Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+One of the following:
+
+BetaManagedAgentsManualDeploymentPausedReason { type }
+
+The caller invoked the pause endpoint on the deployment.
+
+type: "manual"
+
+BetaManagedAgentsErrorDeploymentPausedReason { error, type }
+
+A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+error: [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+
+The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+One of the following:
+
+BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError { type }
+
+The deployment's environment was archived.
+
+type: "environment\_archived\_error"
+
+BetaManagedAgentsAgentArchivedDeploymentPausedReasonError { type }
+
+The deployment's agent was archived.
+
+type: "agent\_archived\_error"
+
+BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError { type }
+
+The deployment's environment no longer exists.
+
+type: "environment\_not\_found\_error"
+
+BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError { type }
+
+A vault referenced by the deployment no longer exists.
+
+type: "vault\_not\_found\_error"
+
+BetaManagedAgentsFileNotFoundDeploymentPausedReasonError { type }
+
+A file resource referenced by the deployment no longer exists.
+
+type: "file\_not\_found\_error"
+
+BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError { type }
+
+A referenced resource no longer exists and its kind was not reported.
+
+type: "session\_resource\_not\_found\_error"
+
+BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError { type }
+
+The deployment's workspace was archived.
+
+type: "workspace\_archived\_error"
+
+BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError { type }
+
+The deployment's organization is disabled.
+
+type: "organization\_disabled\_error"
+
+BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError { type }
+
+A memory store referenced by the deployment is archived.
+
+type: "memory\_store\_archived\_error"
+
+BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError { type }
+
+A skill referenced by the deployment's agent no longer exists.
+
+type: "skill\_not\_found\_error"
+
+BetaManagedAgentsVaultArchivedDeploymentPausedReasonError { type }
+
+A vault referenced by the deployment is archived.
+
+type: "vault\_archived\_error"
+
+BetaManagedAgentsUnknownDeploymentPausedReasonError { type }
+
+An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+type: "unknown\_error"
+
+BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError { type }
+
+The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+type: "self\_hosted\_resources\_unsupported\_error"
+
+BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError { type }
+
+An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+type: "mcp\_egress\_blocked\_error"
+
+type: "error"
+
+resources: Array<[BetaManagedAgentsSessionResourceConfig](api/beta.md)>
+
+Resources attached to sessions created from this deployment. Echoes the input minus write-only credentials.
+
+One of the following:
+
+BetaManagedAgentsGitHubRepositoryResourceConfig { type, url, checkout, mount\_path }
+
+A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+type: "github\_repository"
+
+url: string
+
+Github URL of the repository
+
+checkout?: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }  | null
+
+Branch or commit to check out. Defaults to the repository's default branch.
+
+One of the following:
+
+BetaManagedAgentsBranchCheckout { name, type }
+
+name: string
+
+Branch name to check out.
+
+type: "branch"
+
+BetaManagedAgentsCommitCheckout { sha, type }
+
+sha: string
+
+Full commit SHA to check out.
+
+type: "commit"
+
+mount\_path?: string | null
+
+Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+BetaManagedAgentsFileResourceConfig { file\_id, type, mount\_path }
+
+A file mounted into each session's container.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+mount\_path?: string | null
+
+Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+BetaManagedAgentsMemoryStoreResourceConfig { memory\_store\_id, type, access, instructions }
+
+A memory store attached to each session created from this deployment.
+
+memory\_store\_id: string
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: "memory\_store"
+
+access?: "read\_write" | "read\_only" | null
+
+Access mode for an attached memory store.
+
+One of the following:
+
+"read\_write"
+
+"read\_only"
+
+instructions?: string | null
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+schedule: [BetaManagedAgentsSchedule](api/beta.md) { expression, timezone, type, 2 more }  | null
+
+5-field POSIX cron schedule with computed runtime timestamps.
+
+expression: string
+
+5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+timezone: string
+
+IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
+
+type: "cron"
+
+last\_run\_at?: string | null
+
+A timestamp in RFC 3339 format
+
+upcoming\_runs\_at?: Array<string>
+
+Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+status: [BetaManagedAgentsDeploymentStatus](api/beta.md)
+
+Lifecycle status of a deployment.
+
+One of the following:
+
+"active"
+
+"paused"
+
+type: "deployment"
+
+updated\_at: string
+
+A timestamp in RFC 3339 format
+
+vault\_ids: Array<string>
+
+Vault IDs supplying stored credentials for sessions created from this deployment.
+
+BetaManagedAgentsDeploymentInitialEvent = [BetaManagedAgentsDeploymentUserMessageEvent](api/beta.md) { content, type }  | [BetaManagedAgentsDeploymentUserDefineOutcomeEvent](api/beta.md) { description, rubric, type, max\_iterations }  | [BetaManagedAgentsDeploymentSystemMessageEvent](api/beta.md) { content, type }
+
+An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
+
+One of the following:
+
+BetaManagedAgentsDeploymentUserMessageEvent { content, type }
+
+A user message sent to the session.
+
+content: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } >
+
+Array of content blocks for the user message.
+
+One of the following:
+
+BetaManagedAgentsTextBlock { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+One of the following:
+
+BetaManagedAgentsBase64ImageSource { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+One of the following:
+
+BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context?: string | null
+
+Additional context about the document for the model.
+
+title?: string | null
+
+The title of the document.
+
+type: "user.message"
+
+BetaManagedAgentsDeploymentUserDefineOutcomeEvent { description, rubric, type, max\_iterations }
+
+An outcome the agent should work toward. The agent begins work on receipt.
+
+description: string
+
+What the agent should produce. This is the task specification.
+
+rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  | [BetaManagedAgentsTextRubric](api/beta.md) { content, type }
+
+Rubric for grading the quality of an outcome.
+
+One of the following:
+
+BetaManagedAgentsFileRubric { file\_id, type }
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: string
+
+ID of the rubric file.
+
+type: "file"
+
+BetaManagedAgentsTextRubric { content, type }
+
+Rubric content provided inline as text.
+
+content: string
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+type: "text"
+
+type: "user.define\_outcome"
+
+max\_iterations?: number | null
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
+BetaManagedAgentsDeploymentSystemMessageEvent { content, type }
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks to append. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+BetaManagedAgentsDeploymentInitialEventParams = [BetaManagedAgentsUserMessageEventParams](api/beta.md) { content, type }  | [BetaManagedAgentsUserDefineOutcomeEventParams](api/beta.md) { description, rubric, type, max\_iterations }  | [BetaManagedAgentsSystemMessageEventParams](api/beta.md) { content, type }
+
+An event sent to a session immediately after it is created. Supports `user.message`, `user.define_outcome`, and `system.message`.
+
+One of the following:
+
+BetaManagedAgentsUserMessageEventParams { content, type }
+
+Parameters for sending a user message to the session.
+
+content: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } >
+
+Array of content blocks for the user message.
+
+One of the following:
+
+BetaManagedAgentsTextBlock { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+One of the following:
+
+BetaManagedAgentsBase64ImageSource { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+One of the following:
+
+BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context?: string | null
+
+Additional context about the document for the model.
+
+title?: string | null
+
+The title of the document.
+
+type: "user.message"
+
+BetaManagedAgentsUserDefineOutcomeEventParams { description, rubric, type, max\_iterations }
+
+Parameters for defining an outcome the agent should work toward. The agent begins work on receipt.
+
+description: string
+
+What the agent should produce. This is the task specification.
+
+rubric: [BetaManagedAgentsFileRubricParams](api/beta.md) { file\_id, type }  | [BetaManagedAgentsTextRubricParams](api/beta.md) { content, type }
+
+Rubric for grading the quality of an outcome.
+
+One of the following:
+
+BetaManagedAgentsFileRubricParams { file\_id, type }
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: string
+
+ID of the rubric file.
+
+type: "file"
+
+BetaManagedAgentsTextRubricParams { content, type }
+
+Rubric content provided inline as text.
+
+content: string
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text. Maximum 262144 characters.
+
+type: "text"
+
+type: "user.define\_outcome"
+
+max\_iterations?: number | null
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
+BetaManagedAgentsSystemMessageEventParams { content, type }
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks to append. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+BetaManagedAgentsDeploymentPausedReason = [BetaManagedAgentsManualDeploymentPausedReason](api/beta.md) { type }  | [BetaManagedAgentsErrorDeploymentPausedReason](api/beta.md) { error, type }
+
+Why a deployment is paused. Non-null exactly when `status` is `paused`.
+
+One of the following:
+
+BetaManagedAgentsManualDeploymentPausedReason { type }
+
+The caller invoked the pause endpoint on the deployment.
+
+type: "manual"
+
+BetaManagedAgentsErrorDeploymentPausedReason { error, type }
+
+A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+error: [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+
+The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+One of the following:
+
+BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError { type }
+
+The deployment's environment was archived.
+
+type: "environment\_archived\_error"
+
+BetaManagedAgentsAgentArchivedDeploymentPausedReasonError { type }
+
+The deployment's agent was archived.
+
+type: "agent\_archived\_error"
+
+BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError { type }
+
+The deployment's environment no longer exists.
+
+type: "environment\_not\_found\_error"
+
+BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError { type }
+
+A vault referenced by the deployment no longer exists.
+
+type: "vault\_not\_found\_error"
+
+BetaManagedAgentsFileNotFoundDeploymentPausedReasonError { type }
+
+A file resource referenced by the deployment no longer exists.
+
+type: "file\_not\_found\_error"
+
+BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError { type }
+
+A referenced resource no longer exists and its kind was not reported.
+
+type: "session\_resource\_not\_found\_error"
+
+BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError { type }
+
+The deployment's workspace was archived.
+
+type: "workspace\_archived\_error"
+
+BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError { type }
+
+The deployment's organization is disabled.
+
+type: "organization\_disabled\_error"
+
+BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError { type }
+
+A memory store referenced by the deployment is archived.
+
+type: "memory\_store\_archived\_error"
+
+BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError { type }
+
+A skill referenced by the deployment's agent no longer exists.
+
+type: "skill\_not\_found\_error"
+
+BetaManagedAgentsVaultArchivedDeploymentPausedReasonError { type }
+
+A vault referenced by the deployment is archived.
+
+type: "vault\_archived\_error"
+
+BetaManagedAgentsUnknownDeploymentPausedReasonError { type }
+
+An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+type: "unknown\_error"
+
+BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError { type }
+
+The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+type: "self\_hosted\_resources\_unsupported\_error"
+
+BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError { type }
+
+An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+type: "mcp\_egress\_blocked\_error"
+
+type: "error"
+
+BetaManagedAgentsDeploymentPausedReasonError = [BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError](api/beta.md) { type }  | [BetaManagedAgentsAgentArchivedDeploymentPausedReasonError](api/beta.md) { type }  | [BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError](api/beta.md) { type }  | 11 more
+
+The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+One of the following:
+
+BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError { type }
+
+The deployment's environment was archived.
+
+type: "environment\_archived\_error"
+
+BetaManagedAgentsAgentArchivedDeploymentPausedReasonError { type }
+
+The deployment's agent was archived.
+
+type: "agent\_archived\_error"
+
+BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError { type }
+
+The deployment's environment no longer exists.
+
+type: "environment\_not\_found\_error"
+
+BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError { type }
+
+A vault referenced by the deployment no longer exists.
+
+type: "vault\_not\_found\_error"
+
+BetaManagedAgentsFileNotFoundDeploymentPausedReasonError { type }
+
+A file resource referenced by the deployment no longer exists.
+
+type: "file\_not\_found\_error"
+
+BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError { type }
+
+A referenced resource no longer exists and its kind was not reported.
+
+type: "session\_resource\_not\_found\_error"
+
+BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError { type }
+
+The deployment's workspace was archived.
+
+type: "workspace\_archived\_error"
+
+BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError { type }
+
+The deployment's organization is disabled.
+
+type: "organization\_disabled\_error"
+
+BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError { type }
+
+A memory store referenced by the deployment is archived.
+
+type: "memory\_store\_archived\_error"
+
+BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError { type }
+
+A skill referenced by the deployment's agent no longer exists.
+
+type: "skill\_not\_found\_error"
+
+BetaManagedAgentsVaultArchivedDeploymentPausedReasonError { type }
+
+A vault referenced by the deployment is archived.
+
+type: "vault\_archived\_error"
+
+BetaManagedAgentsUnknownDeploymentPausedReasonError { type }
+
+An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+type: "unknown\_error"
+
+BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError { type }
+
+The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+type: "self\_hosted\_resources\_unsupported\_error"
+
+BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError { type }
+
+An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+type: "mcp\_egress\_blocked\_error"
+
+BetaManagedAgentsDeploymentStatus = "active" | "paused"
+
+Lifecycle status of a deployment.
+
+One of the following:
+
+"active"
+
+"paused"
+
+BetaManagedAgentsDeploymentSystemMessageEvent { content, type }
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt.
+
+content: Array<[BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type } >
+
+System content blocks to append. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+BetaManagedAgentsDeploymentUserDefineOutcomeEvent { description, rubric, type, max\_iterations }
+
+An outcome the agent should work toward. The agent begins work on receipt.
+
+description: string
+
+What the agent should produce. This is the task specification.
+
+rubric: [BetaManagedAgentsFileRubric](api/beta.md) { file\_id, type }  | [BetaManagedAgentsTextRubric](api/beta.md) { content, type }
+
+Rubric for grading the quality of an outcome.
+
+One of the following:
+
+BetaManagedAgentsFileRubric { file\_id, type }
+
+Rubric referenced by a file uploaded via the Files API.
+
+file\_id: string
+
+ID of the rubric file.
+
+type: "file"
+
+BetaManagedAgentsTextRubric { content, type }
+
+Rubric content provided inline as text.
+
+content: string
+
+Rubric content. Plain text or markdown — the grader treats it as freeform text.
+
+type: "text"
+
+type: "user.define\_outcome"
+
+max\_iterations?: number | null
+
+Eval→revision cycles before giving up. Default 3, max 20.
+
+BetaManagedAgentsDeploymentUserMessageEvent { content, type }
+
+A user message sent to the session.
+
+content: Array<[BetaManagedAgentsTextBlock](api/beta.md) { text, type }  | [BetaManagedAgentsImageBlock](api/beta.md) { source, type }  | [BetaManagedAgentsDocumentBlock](api/beta.md) { source, type, context, title } >
+
+Array of content blocks for the user message.
+
+One of the following:
+
+BetaManagedAgentsTextBlock { text, type }
+
+Regular text content.
+
+text: string
+
+The text content.
+
+type: "text"
+
+BetaManagedAgentsImageBlock { source, type }
+
+Image content specified directly as base64 data or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64ImageSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLImageSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileImageSource](api/beta.md) { file\_id, type }
+
+Union type for image source variants.
+
+One of the following:
+
+BetaManagedAgentsBase64ImageSource { data, media\_type, type }
+
+Base64-encoded image data.
+
+data: string
+
+Base64-encoded image data.
+
+media\_type: string
+
+MIME type of the image (e.g., "image/png", "image/jpeg", "image/gif", "image/webp").
+
+type: "base64"
+
+BetaManagedAgentsURLImageSource { type, url }
+
+Image referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the image to fetch.
+
+BetaManagedAgentsFileImageSource { file\_id, type }
+
+Image referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "image"
+
+BetaManagedAgentsDocumentBlock { source, type, context, title }
+
+Document content, either specified directly as base64 data, as text, or as a reference via a URL.
+
+source: [BetaManagedAgentsBase64DocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsPlainTextDocumentSource](api/beta.md) { data, media\_type, type }  | [BetaManagedAgentsURLDocumentSource](api/beta.md) { type, url }  | [BetaManagedAgentsFileDocumentSource](api/beta.md) { file\_id, type }
+
+Union type for document source variants.
+
+One of the following:
+
+BetaManagedAgentsBase64DocumentSource { data, media\_type, type }
+
+Base64-encoded document data.
+
+data: string
+
+Base64-encoded document data.
+
+media\_type: string
+
+MIME type of the document (e.g., "application/pdf").
+
+type: "base64"
+
+BetaManagedAgentsPlainTextDocumentSource { data, media\_type, type }
+
+Plain text document content.
+
+data: string
+
+The plain text content.
+
+media\_type: "text/plain"
+
+MIME type of the text content. Must be "text/plain".
+
+type: "text"
+
+BetaManagedAgentsURLDocumentSource { type, url }
+
+Document referenced by URL.
+
+type: "url"
+
+url: string
+
+URL of the document to fetch.
+
+BetaManagedAgentsFileDocumentSource { file\_id, type }
+
+Document referenced by file ID.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+type: "document"
+
+context?: string | null
+
+Additional context about the document for the model.
+
+title?: string | null
+
+The title of the document.
+
+type: "user.message"
+
+BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError { type }
+
+The deployment's environment was archived.
+
+type: "environment\_archived\_error"
+
+BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError { type }
+
+The deployment's environment no longer exists.
+
+type: "environment\_not\_found\_error"
+
+BetaManagedAgentsErrorDeploymentPausedReason { error, type }
+
+A scheduled fire recorded a failed run whose error auto-pauses the deployment.
+
+error: [BetaManagedAgentsDeploymentPausedReasonError](api/beta.md)
+
+The error that triggered an auto-pause. Matches the failed run's `error.type`.
+
+One of the following:
+
+BetaManagedAgentsEnvironmentArchivedDeploymentPausedReasonError { type }
+
+The deployment's environment was archived.
+
+type: "environment\_archived\_error"
+
+BetaManagedAgentsAgentArchivedDeploymentPausedReasonError { type }
+
+The deployment's agent was archived.
+
+type: "agent\_archived\_error"
+
+BetaManagedAgentsEnvironmentNotFoundDeploymentPausedReasonError { type }
+
+The deployment's environment no longer exists.
+
+type: "environment\_not\_found\_error"
+
+BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError { type }
+
+A vault referenced by the deployment no longer exists.
+
+type: "vault\_not\_found\_error"
+
+BetaManagedAgentsFileNotFoundDeploymentPausedReasonError { type }
+
+A file resource referenced by the deployment no longer exists.
+
+type: "file\_not\_found\_error"
+
+BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError { type }
+
+A referenced resource no longer exists and its kind was not reported.
+
+type: "session\_resource\_not\_found\_error"
+
+BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError { type }
+
+The deployment's workspace was archived.
+
+type: "workspace\_archived\_error"
+
+BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError { type }
+
+The deployment's organization is disabled.
+
+type: "organization\_disabled\_error"
+
+BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError { type }
+
+A memory store referenced by the deployment is archived.
+
+type: "memory\_store\_archived\_error"
+
+BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError { type }
+
+A skill referenced by the deployment's agent no longer exists.
+
+type: "skill\_not\_found\_error"
+
+BetaManagedAgentsVaultArchivedDeploymentPausedReasonError { type }
+
+A vault referenced by the deployment is archived.
+
+type: "vault\_archived\_error"
+
+BetaManagedAgentsUnknownDeploymentPausedReasonError { type }
+
+An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+type: "unknown\_error"
+
+BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError { type }
+
+The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+type: "self\_hosted\_resources\_unsupported\_error"
+
+BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError { type }
+
+An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+type: "mcp\_egress\_blocked\_error"
+
+type: "error"
+
+BetaManagedAgentsFileNotFoundDeploymentPausedReasonError { type }
+
+A file resource referenced by the deployment no longer exists.
+
+type: "file\_not\_found\_error"
+
+BetaManagedAgentsFileResourceConfig { file\_id, type, mount\_path }
+
+A file mounted into each session's container.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+mount\_path?: string | null
+
+Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+BetaManagedAgentsGitHubRepositoryResourceConfig { type, url, checkout, mount\_path }
+
+A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+type: "github\_repository"
+
+url: string
+
+Github URL of the repository
+
+checkout?: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }  | null
+
+Branch or commit to check out. Defaults to the repository's default branch.
+
+One of the following:
+
+BetaManagedAgentsBranchCheckout { name, type }
+
+name: string
+
+Branch name to check out.
+
+type: "branch"
+
+BetaManagedAgentsCommitCheckout { sha, type }
+
+sha: string
+
+Full commit SHA to check out.
+
+type: "commit"
+
+mount\_path?: string | null
+
+Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+BetaManagedAgentsManualDeploymentPausedReason { type }
+
+The caller invoked the pause endpoint on the deployment.
+
+type: "manual"
+
+BetaManagedAgentsMCPEgressBlockedDeploymentPausedReasonError { type }
+
+An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+type: "mcp\_egress\_blocked\_error"
+
+BetaManagedAgentsMemoryStoreArchivedDeploymentPausedReasonError { type }
+
+A memory store referenced by the deployment is archived.
+
+type: "memory\_store\_archived\_error"
+
+BetaManagedAgentsMemoryStoreResourceConfig { memory\_store\_id, type, access, instructions }
+
+A memory store attached to each session created from this deployment.
+
+memory\_store\_id: string
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: "memory\_store"
+
+access?: "read\_write" | "read\_only" | null
+
+Access mode for an attached memory store.
+
+One of the following:
+
+"read\_write"
+
+"read\_only"
+
+instructions?: string | null
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+BetaManagedAgentsOrganizationDisabledDeploymentPausedReasonError { type }
+
+The deployment's organization is disabled.
+
+type: "organization\_disabled\_error"
+
+BetaManagedAgentsSchedule { expression, timezone, type, 2 more }
+
+5-field POSIX cron schedule with computed runtime timestamps.
+
+expression: string
+
+5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+timezone: string
+
+IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC").
+
+type: "cron"
+
+last\_run\_at?: string | null
+
+A timestamp in RFC 3339 format
+
+upcoming\_runs\_at?: Array<string>
+
+Up to 5 timestamps of upcoming cron occurrences. Non-empty for active and paused deployments (reflects what the schedule would do if unpaused); empty once the deployment is archived (`archived_at` set). Each fire is offset by a small per-schedule jitter, so a run will actually start at or shortly after its listed time.
+
+BetaManagedAgentsScheduleParams { expression, timezone, type }
+
+5-field POSIX cron schedule. Literal wall-clock matching in the configured timezone.
+
+expression: string
+
+5-field POSIX cron expression: minute hour day-of-month month day-of-week (e.g., "0 9 \* \* 1-5" for weekdays at 9am). Day-of-week is 0-7 where 0 and 7 both mean Sunday. Extended cron syntax - seconds or year fields, and the special characters L, W, #, and ? - is not supported, nor are predefined shortcuts (@daily).
+
+timezone: string
+
+Required. IANA timezone identifier (e.g., "America/Los\_Angeles", "UTC"). Validated against the IANA timezone database.
+
+type: "cron"
+
+BetaManagedAgentsSelfHostedResourcesUnsupportedDeploymentPausedReasonError { type }
+
+The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+type: "self\_hosted\_resources\_unsupported\_error"
+
+BetaManagedAgentsSessionResourceConfig = [BetaManagedAgentsGitHubRepositoryResourceConfig](api/beta.md) { type, url, checkout, mount\_path }  | [BetaManagedAgentsFileResourceConfig](api/beta.md) { file\_id, type, mount\_path }  | [BetaManagedAgentsMemoryStoreResourceConfig](api/beta.md) { memory\_store\_id, type, access, instructions }
+
+A configured session resource. Echoes the input minus write-only credentials.
+
+One of the following:
+
+BetaManagedAgentsGitHubRepositoryResourceConfig { type, url, checkout, mount\_path }
+
+A GitHub repository mounted into each session's container. The authorization token is write-only and never returned.
+
+type: "github\_repository"
+
+url: string
+
+Github URL of the repository
+
+checkout?: [BetaManagedAgentsBranchCheckout](api/beta.md) { name, type }  | [BetaManagedAgentsCommitCheckout](api/beta.md) { sha, type }  | null
+
+Branch or commit to check out. Defaults to the repository's default branch.
+
+One of the following:
+
+BetaManagedAgentsBranchCheckout { name, type }
+
+name: string
+
+Branch name to check out.
+
+type: "branch"
+
+BetaManagedAgentsCommitCheckout { sha, type }
+
+sha: string
+
+Full commit SHA to check out.
+
+type: "commit"
+
+mount\_path?: string | null
+
+Mount path in the container. Defaults to `/workspace/<repo-name>`.
+
+BetaManagedAgentsFileResourceConfig { file\_id, type, mount\_path }
+
+A file mounted into each session's container.
+
+file\_id: string
+
+ID of a previously uploaded file.
+
+type: "file"
+
+mount\_path?: string | null
+
+Mount path in the container. Defaults to `/mnt/session/uploads/<file_id>`.
+
+BetaManagedAgentsMemoryStoreResourceConfig { memory\_store\_id, type, access, instructions }
+
+A memory store attached to each session created from this deployment.
+
+memory\_store\_id: string
+
+The memory store ID (memstore\_...). Must belong to the caller's organization and workspace.
+
+type: "memory\_store"
+
+access?: "read\_write" | "read\_only" | null
+
+Access mode for an attached memory store.
+
+One of the following:
+
+"read\_write"
+
+"read\_only"
+
+instructions?: string | null
+
+Per-attachment guidance for the agent on how to use this store. Rendered into the memory section of the system prompt. Max 4096 chars.
+
+BetaManagedAgentsSessionResourceNotFoundDeploymentPausedReasonError { type }
+
+A referenced resource no longer exists and its kind was not reported.
+
+type: "session\_resource\_not\_found\_error"
+
+BetaManagedAgentsSkillNotFoundDeploymentPausedReasonError { type }
+
+A skill referenced by the deployment's agent no longer exists.
+
+type: "skill\_not\_found\_error"
+
+BetaManagedAgentsUnknownDeploymentPausedReasonError { type }
+
+An unrecognized error auto-paused the deployment. A fallback variant; matches a run whose `error.type` is `unknown_error`.
+
+type: "unknown\_error"
+
+BetaManagedAgentsVaultArchivedDeploymentPausedReasonError { type }
+
+A vault referenced by the deployment is archived.
+
+type: "vault\_archived\_error"
+
+BetaManagedAgentsVaultNotFoundDeploymentPausedReasonError { type }
+
+A vault referenced by the deployment no longer exists.
+
+type: "vault\_not\_found\_error"
+
+BetaManagedAgentsWorkspaceArchivedDeploymentPausedReasonError { type }
+
+The deployment's workspace was archived.
+
+type: "workspace\_archived\_error"
+
+#### BetaDeployment Runs
+
+##### [List Deployment Runs](api/beta/deployment_runs/list.md)
+
+client.beta.deploymentRuns.list(DeploymentRunListParams { created\_at[gt], created\_at[gte], created\_at[lt], 7 more } params?, RequestOptionsoptions?): PageCursor<[BetaManagedAgentsDeploymentRun](api/beta.md) { id, agent, created\_at, 5 more } >
+
+GET/v1/deployment\_runs
+
+##### [Get Deployment Run](api/beta/deployment_runs/retrieve.md)
+
+client.beta.deploymentRuns.retrieve(stringdeploymentRunID, DeploymentRunRetrieveParams { betas } params?, RequestOptionsoptions?): [BetaManagedAgentsDeploymentRun](api/beta.md) { id, agent, created\_at, 5 more }
+
+GET/v1/deployment\_runs/{deployment\_run\_id}
+
+##### ModelsExpand Collapse
+
+BetaManagedAgentsAgentArchivedRunError { message, type }
+
+The deployment's agent was archived.
+
+message: string
+
+Human-readable error description.
+
+type: "agent\_archived\_error"
+
+BetaManagedAgentsDeploymentRun { id, agent, created\_at, 5 more }
+
+A persistent, append-only record of a single deployment execution. Records session creation success or failure — no session lifecycle tracking.
+
+id: string
+
+Unique identifier for this run (`drun_...`).
+
+agent: [BetaManagedAgentsAgentReference](api/beta.md) { id, type, version }
+
+A resolved agent reference with a concrete version.
+
+id: string
+
+type: "agent"
+
+version: number
+
+created\_at: string
+
+A timestamp in RFC 3339 format
+
+deployment\_id: string
+
+ID of the deployment that produced this run.
+
+error: [BetaManagedAgentsEnvironmentArchivedRunError](api/beta.md) { message, type }  | [BetaManagedAgentsAgentArchivedRunError](api/beta.md) { message, type }  | [BetaManagedAgentsEnvironmentNotFoundRunError](api/beta.md) { message, type }  | 13 more | null
+
+Why the run failed to create a session. The type identifies the failure; message is human-readable detail.
+
+One of the following:
+
+BetaManagedAgentsEnvironmentArchivedRunError { message, type }
+
+The deployment's environment was archived.
+
+message: string
+
+Human-readable error description.
+
+type: "environment\_archived\_error"
+
+BetaManagedAgentsAgentArchivedRunError { message, type }
+
+The deployment's agent was archived.
+
+message: string
+
+Human-readable error description.
+
+type: "agent\_archived\_error"
+
+BetaManagedAgentsEnvironmentNotFoundRunError { message, type }
+
+The deployment's environment no longer exists.
+
+message: string
+
+Human-readable error description.
+
+type: "environment\_not\_found\_error"
+
+BetaManagedAgentsVaultNotFoundRunError { message, type }
+
+A vault referenced by the deployment no longer exists.
+
+message: string
+
+Human-readable error description.
+
+type: "vault\_not\_found\_error"
+
+BetaManagedAgentsVaultArchivedRunError { message, type }
+
+A vault referenced by the deployment is archived.
+
+message: string
+
+Human-readable error description.
+
+type: "vault\_archived\_error"
+
+BetaManagedAgentsFileNotFoundRunError { message, type }
+
+A file resource referenced by the deployment no longer exists.
+
+message: string
+
+Human-readable error description.
+
+type: "file\_not\_found\_error"
+
+BetaManagedAgentsMemoryStoreArchivedRunError { message, type }
+
+A memory store referenced by the deployment is archived.
+
+message: string
+
+Human-readable error description.
+
+type: "memory\_store\_archived\_error"
+
+BetaManagedAgentsSkillNotFoundRunError { message, type }
+
+A skill referenced by the deployment's agent no longer exists.
+
+message: string
+
+Human-readable error description.
+
+type: "skill\_not\_found\_error"
+
+BetaManagedAgentsSessionResourceNotFoundRunError { message, type }
+
+A referenced resource no longer exists and its kind was not reported.
+
+message: string
+
+Human-readable error description.
+
+type: "session\_resource\_not\_found\_error"
+
+BetaManagedAgentsWorkspaceArchivedRunError { message, type }
+
+The deployment's workspace was archived.
+
+message: string
+
+Human-readable error description.
+
+type: "workspace\_archived\_error"
+
+BetaManagedAgentsOrganizationDisabledRunError { message, type }
+
+The deployment's organization is disabled.
+
+message: string
+
+Human-readable error description.
+
+type: "organization\_disabled\_error"
+
+BetaManagedAgentsSessionRateLimitedRunError { message, type }
+
+Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+message: string
+
+Human-readable error description.
+
+type: "session\_rate\_limited\_error"
+
+BetaManagedAgentsSessionCreationRejectedRunError { message, type }
+
+The session create request was rejected with a non-retryable validation error.
+
+message: string
+
+Human-readable error description.
+
+type: "session\_creation\_rejected\_error"
+
+BetaManagedAgentsUnknownRunError { message, type }
+
+An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+message: string
+
+Human-readable error description.
+
+type: "unknown\_error"
+
+BetaManagedAgentsSelfHostedResourcesUnsupportedRunError { message, type }
+
+The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+message: string
+
+Human-readable error description.
+
+type: "self\_hosted\_resources\_unsupported\_error"
+
+BetaManagedAgentsMCPEgressBlockedRunError { message, type }
+
+An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+message: string
+
+Human-readable error description.
+
+type: "mcp\_egress\_blocked\_error"
+
+session\_id: string | null
+
+Populated on success. Null on creation failure. Exactly one of session\_id or error is non-null.
+
+trigger\_context: [BetaManagedAgentsTriggerContext](api/beta.md)
+
+Describes what triggered a deployment run, with trigger-specific metadata.
+
+One of the following:
+
+BetaManagedAgentsScheduleTriggerContext { scheduled\_at, type }
+
+The run was fired by the deployment's cron schedule.
+
+scheduled\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "schedule"
+
+BetaManagedAgentsManualTriggerContext { type }
+
+The run was started manually by creating a session directly against the deployment.
+
+type: "manual"
+
+type: "deployment\_run"
+
+BetaManagedAgentsEnvironmentArchivedRunError { message, type }
+
+The deployment's environment was archived.
+
+message: string
+
+Human-readable error description.
+
+type: "environment\_archived\_error"
+
+BetaManagedAgentsEnvironmentNotFoundRunError { message, type }
+
+The deployment's environment no longer exists.
+
+message: string
+
+Human-readable error description.
+
+type: "environment\_not\_found\_error"
+
+BetaManagedAgentsFileNotFoundRunError { message, type }
+
+A file resource referenced by the deployment no longer exists.
+
+message: string
+
+Human-readable error description.
+
+type: "file\_not\_found\_error"
+
+BetaManagedAgentsManualTriggerContext { type }
+
+The run was started manually by creating a session directly against the deployment.
+
+type: "manual"
+
+BetaManagedAgentsMCPEgressBlockedRunError { message, type }
+
+An MCP server host used by the deployment's agent is blocked by the environment's network policy.
+
+message: string
+
+Human-readable error description.
+
+type: "mcp\_egress\_blocked\_error"
+
+BetaManagedAgentsMemoryStoreArchivedRunError { message, type }
+
+A memory store referenced by the deployment is archived.
+
+message: string
+
+Human-readable error description.
+
+type: "memory\_store\_archived\_error"
+
+BetaManagedAgentsOrganizationDisabledRunError { message, type }
+
+The deployment's organization is disabled.
+
+message: string
+
+Human-readable error description.
+
+type: "organization\_disabled\_error"
+
+BetaManagedAgentsScheduleTriggerContext { scheduled\_at, type }
+
+The run was fired by the deployment's cron schedule.
+
+scheduled\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "schedule"
+
+BetaManagedAgentsSelfHostedResourcesUnsupportedRunError { message, type }
+
+The deployment configures resources, but its environment is self-hosted and cannot mount them.
+
+message: string
+
+Human-readable error description.
+
+type: "self\_hosted\_resources\_unsupported\_error"
+
+BetaManagedAgentsSessionCreationRejectedRunError { message, type }
+
+The session create request was rejected with a non-retryable validation error.
+
+message: string
+
+Human-readable error description.
+
+type: "session\_creation\_rejected\_error"
+
+BetaManagedAgentsSessionRateLimitedRunError { message, type }
+
+Session creation was rejected due to rate limiting. The schedule keeps firing; subsequent runs may succeed.
+
+message: string
+
+Human-readable error description.
+
+type: "session\_rate\_limited\_error"
+
+BetaManagedAgentsSessionResourceNotFoundRunError { message, type }
+
+A referenced resource no longer exists and its kind was not reported.
+
+message: string
+
+Human-readable error description.
+
+type: "session\_resource\_not\_found\_error"
+
+BetaManagedAgentsSkillNotFoundRunError { message, type }
+
+A skill referenced by the deployment's agent no longer exists.
+
+message: string
+
+Human-readable error description.
+
+type: "skill\_not\_found\_error"
+
+BetaManagedAgentsTriggerContext = [BetaManagedAgentsScheduleTriggerContext](api/beta.md) { scheduled\_at, type }  | [BetaManagedAgentsManualTriggerContext](api/beta.md) { type }
+
+Describes what triggered a deployment run, with trigger-specific metadata.
+
+One of the following:
+
+BetaManagedAgentsScheduleTriggerContext { scheduled\_at, type }
+
+The run was fired by the deployment's cron schedule.
+
+scheduled\_at: string
+
+A timestamp in RFC 3339 format
+
+type: "schedule"
+
+BetaManagedAgentsManualTriggerContext { type }
+
+The run was started manually by creating a session directly against the deployment.
+
+type: "manual"
+
+BetaManagedAgentsTriggerType = "schedule" | "manual"
+
+What triggered a deployment run.
+
+One of the following:
+
+"schedule"
+
+"manual"
+
+BetaManagedAgentsUnknownRunError { message, type }
+
+An unknown or unexpected error caused the run to fail. A fallback variant; clients that do not recognize a new error type can match on message alone.
+
+message: string
+
+Human-readable error description.
+
+type: "unknown\_error"
+
+BetaManagedAgentsVaultArchivedRunError { message, type }
+
+A vault referenced by the deployment is archived.
+
+message: string
+
+Human-readable error description.
+
+type: "vault\_archived\_error"
+
+BetaManagedAgentsVaultNotFoundRunError { message, type }
+
+A vault referenced by the deployment no longer exists.
+
+message: string
+
+Human-readable error description.
+
+type: "vault\_not\_found\_error"
+
+BetaManagedAgentsWorkspaceArchivedRunError { message, type }
+
+The deployment's workspace was archived.
+
+message: string
+
+Human-readable error description.
+
+type: "workspace\_archived\_error"
 
 #### BetaVaults
 
@@ -49179,7 +58167,7 @@ archived\_at: string | null
 
 A timestamp in RFC 3339 format
 
-auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  | [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }
+auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  | [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }  | [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta.md) { networking, secret\_name, type }
 
 Authentication details for a credential.
 
@@ -49253,6 +58241,38 @@ URL of the MCP server this credential authenticates against.
 
 type: "static\_bearer"
 
+BetaManagedAgentsEnvironmentVariableAuthResponse { networking, secret\_name, type }
+
+Environment variable credential details. The secret value is never returned.
+
+networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md) { type }  | [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md) { allowed\_hosts, type }
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+BetaManagedAgentsUnrestrictedCredentialNetworkingResponse { type }
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+type: "unrestricted"
+
+BetaManagedAgentsLimitedCredentialNetworkingResponse { allowed\_hosts, type }
+
+The secret is substituted only on requests to the listed hosts.
+
+allowed\_hosts: Array<string>
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+type: "limited"
+
+secret\_name: string
+
+Name of the environment variable.
+
+type: "environment\_variable"
+
 created\_at: string
 
 A timestamp in RFC 3339 format
@@ -49274,6 +58294,28 @@ Identifier of the vault this credential belongs to.
 display\_name?: string | null
 
 Human-readable name for the credential.
+
+BetaManagedAgentsCredentialNetworkingParams = [BetaManagedAgentsUnrestrictedCredentialNetworkingParams](api/beta.md) { type }  | [BetaManagedAgentsLimitedCredentialNetworkingParams](api/beta.md) { allowed\_hosts, type }
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+One of the following:
+
+BetaManagedAgentsUnrestrictedCredentialNetworkingParams { type }
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: "unrestricted"
+
+BetaManagedAgentsLimitedCredentialNetworkingParams { allowed\_hosts, type }
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: Array<string>
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: "limited"
 
 BetaManagedAgentsCredentialValidation { credential\_id, has\_refresh\_token, mcp\_probe, 5 more }
 
@@ -49396,6 +58438,126 @@ id: string
 Unique identifier of the deleted credential.
 
 type: "vault\_credential\_deleted"
+
+BetaManagedAgentsEnvironmentVariableAuthResponse { networking, secret\_name, type }
+
+Environment variable credential details. The secret value is never returned.
+
+networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md) { type }  | [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md) { allowed\_hosts, type }
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+BetaManagedAgentsUnrestrictedCredentialNetworkingResponse { type }
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+type: "unrestricted"
+
+BetaManagedAgentsLimitedCredentialNetworkingResponse { allowed\_hosts, type }
+
+The secret is substituted only on requests to the listed hosts.
+
+allowed\_hosts: Array<string>
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+type: "limited"
+
+secret\_name: string
+
+Name of the environment variable.
+
+type: "environment\_variable"
+
+BetaManagedAgentsEnvironmentVariableCreateParams { networking, secret\_name, secret\_value, type }
+
+Parameters for creating an environment variable credential.
+
+networking: [BetaManagedAgentsCredentialNetworkingParams](api/beta.md)
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+BetaManagedAgentsUnrestrictedCredentialNetworkingParams { type }
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: "unrestricted"
+
+BetaManagedAgentsLimitedCredentialNetworkingParams { allowed\_hosts, type }
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: Array<string>
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: "limited"
+
+secret\_name: string
+
+Name of the environment variable. Immutable after create.
+
+secret\_value: string
+
+Secret value. Write-only; never returned in responses.
+
+type: "environment\_variable"
+
+BetaManagedAgentsEnvironmentVariableUpdateParams { type, networking, secret\_value }
+
+Parameters for updating an environment variable credential. `secret_name` is immutable.
+
+type: "environment\_variable"
+
+networking?: [BetaManagedAgentsCredentialNetworkingParams](api/beta.md) | null
+
+Updated networking scope. Full replacement.
+
+One of the following:
+
+BetaManagedAgentsUnrestrictedCredentialNetworkingParams { type }
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: "unrestricted"
+
+BetaManagedAgentsLimitedCredentialNetworkingParams { allowed\_hosts, type }
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: Array<string>
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: "limited"
+
+secret\_value?: string | null
+
+Updated secret value.
+
+BetaManagedAgentsLimitedCredentialNetworkingParams { allowed\_hosts, type }
+
+Substitute the secret only on requests to the listed hosts.
+
+allowed\_hosts: Array<string>
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+type: "limited"
+
+BetaManagedAgentsLimitedCredentialNetworkingResponse { allowed\_hosts, type }
+
+The secret is substituted only on requests to the listed hosts.
+
+allowed\_hosts: Array<string>
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+type: "limited"
 
 BetaManagedAgentsMCPOAuthAuthResponse { mcp\_server\_url, type, expires\_at, refresh }
 
@@ -49902,6 +59064,18 @@ type: "client\_secret\_post"
 client\_secret?: string | null
 
 Updated OAuth client secret.
+
+BetaManagedAgentsUnrestrictedCredentialNetworkingParams { type }
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+type: "unrestricted"
+
+BetaManagedAgentsUnrestrictedCredentialNetworkingResponse { type }
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+type: "unrestricted"
 
 #### BetaMemory Stores
 
@@ -51127,7 +60301,7 @@ BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51139,7 +60313,7 @@ BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51151,7 +60325,7 @@ BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51163,7 +60337,7 @@ BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51175,7 +60349,7 @@ BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51187,7 +60361,7 @@ BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51199,7 +60373,7 @@ BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51211,7 +60385,7 @@ BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, works
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51223,7 +60397,7 @@ BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, worksp
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51235,7 +60409,7 @@ BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51247,7 +60421,7 @@ BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, worksp
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51255,37 +60429,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -51295,7 +60481,7 @@ BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51307,7 +60493,7 @@ BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -51319,7 +60505,7 @@ BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -51331,7 +60517,7 @@ BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -51343,7 +60529,7 @@ BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51359,7 +60545,7 @@ BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51375,7 +60561,7 @@ BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51391,7 +60577,7 @@ BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51415,7 +60601,7 @@ BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51427,7 +60613,7 @@ BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51439,7 +60625,7 @@ BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51451,7 +60637,7 @@ BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51463,7 +60649,7 @@ BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51475,7 +60661,7 @@ BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51487,7 +60673,7 @@ BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51499,7 +60685,7 @@ BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, works
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51511,7 +60697,7 @@ BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, worksp
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51523,7 +60709,7 @@ BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51535,7 +60721,7 @@ BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, worksp
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51543,37 +60729,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -51583,7 +60781,7 @@ BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51595,7 +60793,7 @@ BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -51607,7 +60805,7 @@ BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -51619,7 +60817,7 @@ BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -51631,7 +60829,7 @@ BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51647,7 +60845,7 @@ BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51663,7 +60861,7 @@ BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51679,7 +60877,7 @@ BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51695,7 +60893,7 @@ BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51707,7 +60905,7 @@ BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51719,7 +60917,7 @@ BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51731,7 +60929,7 @@ BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51743,7 +60941,7 @@ BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51755,7 +60953,7 @@ BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51767,7 +60965,7 @@ BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51779,7 +60977,7 @@ BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51791,7 +60989,7 @@ BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51803,7 +61001,7 @@ BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, works
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51815,7 +61013,7 @@ BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, worksp
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51827,7 +61025,7 @@ BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, worksp
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -51835,37 +61033,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -51875,7 +61085,7 @@ BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -51887,7 +61097,7 @@ BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -51899,7 +61109,7 @@ BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51915,7 +61125,7 @@ BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51931,7 +61141,7 @@ BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51947,7 +61157,7 @@ BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -51963,7 +61173,7 @@ BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -51989,7 +61199,7 @@ BetaWebhookSessionCreatedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52001,7 +61211,7 @@ BetaWebhookSessionPendingEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52013,7 +61223,7 @@ BetaWebhookSessionRunningEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52025,7 +61235,7 @@ BetaWebhookSessionIdledEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52037,7 +61247,7 @@ BetaWebhookSessionRequiresActionEventData { id, organization\_id, type, workspac
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52049,7 +61259,7 @@ BetaWebhookSessionArchivedEventData { id, organization\_id, type, workspace\_id 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52061,7 +61271,7 @@ BetaWebhookSessionDeletedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52073,7 +61283,7 @@ BetaWebhookSessionStatusRescheduledEventData { id, organization\_id, type, works
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52085,7 +61295,7 @@ BetaWebhookSessionStatusRunStartedEventData { id, organization\_id, type, worksp
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52097,7 +61307,7 @@ BetaWebhookSessionStatusIdledEventData { id, organization\_id, type, workspace\_
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52109,7 +61319,7 @@ BetaWebhookSessionStatusTerminatedEventData { id, organization\_id, type, worksp
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52117,37 +61327,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadCreatedEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadCreatedEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadIdledEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadIdledEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, type, workspace\_id }
+BetaWebhookSessionThreadTerminatedEventData { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -52157,7 +61379,7 @@ BetaWebhookSessionOutcomeEvaluationEndedEventData { id, organization\_id, type, 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -52169,7 +61391,7 @@ BetaWebhookVaultCreatedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -52181,7 +61403,7 @@ BetaWebhookVaultArchivedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -52193,7 +61415,7 @@ BetaWebhookVaultDeletedEventData { id, organization\_id, type, workspace\_id }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -52205,7 +61427,7 @@ BetaWebhookVaultCredentialCreatedEventData { id, organization\_id, type, 2 more 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -52221,7 +61443,7 @@ BetaWebhookVaultCredentialArchivedEventData { id, organization\_id, type, 2 more
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -52237,7 +61459,7 @@ BetaWebhookVaultCredentialDeletedEventData { id, organization\_id, type, 2 more 
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -52253,7 +61475,7 @@ BetaWebhookVaultCredentialRefreshFailedEventData { id, organization\_id, type, 2
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 

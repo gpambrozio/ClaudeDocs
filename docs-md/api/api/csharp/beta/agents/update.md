@@ -28,7 +28,7 @@ Body param: The agent's current version, used to prevent concurrent overwrites. 
 
 string? description
 
-Body param: Description. Up to 2048 characters. Omit to preserve; send empty string or null to clear.
+Body param: Description. Omit to preserve; send empty string or null to clear.
 
 IReadOnlyList<[BetaManagedAgentsUrlMcpServerParams](api/beta.md)>? mcpServers
 
@@ -57,6 +57,10 @@ enum BetaManagedAgentsModel:
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"ClaudeOpus4\_8
 
@@ -109,6 +113,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"ClaudeOpus4\_8
 
@@ -166,11 +174,11 @@ Body param: A coordinator topology: the session's primary thread orchestrates wo
 
 string name
 
-Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
 IReadOnlyList<[BetaManagedAgentsSkillParams](api/beta.md)>? skills
 
-Body param: Skills. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 20.
+Body param: Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
 class BetaManagedAgentsAnthropicSkillParams:
 
@@ -202,7 +210,7 @@ Version to pin. Defaults to latest if omitted.
 
 string? system
 
-Body param: System prompt. Up to 100,000 characters. Omit to preserve; send empty string or null to clear.
+Body param: System prompt. Omit to preserve; send empty string or null to clear.
 
 IReadOnlyList<Tool>? tools
 
@@ -366,17 +374,11 @@ required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 required string Name
 
@@ -440,6 +442,10 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
 
+"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+
+"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsAgent:
@@ -479,6 +485,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"ClaudeOpus4\_8
 
@@ -714,17 +724,11 @@ required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 required string Name
 

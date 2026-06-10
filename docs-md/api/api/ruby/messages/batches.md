@@ -927,13 +927,21 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 :"claude-opus-4-8"
 
@@ -1019,7 +1027,7 @@ stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, ty
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -1030,6 +1038,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 
@@ -1971,13 +1981,21 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 :"claude-opus-4-8"
 
@@ -2063,7 +2081,7 @@ stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, ty
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -2074,6 +2092,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 
@@ -2977,13 +2997,21 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Model = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-mythos-preview" | 15 more
+Model = :"claude-fable-5" | :"claude-mythos-5" | :"claude-opus-4-8" | 17 more
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+:"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 :"claude-opus-4-8"
 
@@ -3069,7 +3097,7 @@ stop\_details: [RefusalStopDetails](api/messages.md) { category, explanation, ty
 
 Structured information about a refusal.
 
-category: :cyber | :bio
+category: :cyber | :bio | :reasoning\_extraction
 
 The policy category that triggered the refusal.
 
@@ -3080,6 +3108,8 @@ One of the following:
 :cyber
 
 :bio
+
+:reasoning\_extraction
 
 explanation: String
 

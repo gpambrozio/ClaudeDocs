@@ -58,13 +58,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more
+"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -282,21 +286,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
 
 name: string
 
@@ -444,7 +442,7 @@ output\_tokens: optional number
 
 Total output tokens generated across all turns.
 
-BetaManagedAgentsStreamSessionThreadEvents = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  or 30 more
+BetaManagedAgentsStreamSessionThreadEvents = [BetaManagedAgentsUserMessageEvent](api/beta.md) { id, content, type, processed\_at }  or [BetaManagedAgentsUserInterruptEvent](api/beta.md) { id, type, processed\_at, session\_thread\_id }  or [BetaManagedAgentsUserToolConfirmationEvent](api/beta.md) { id, result, tool\_use\_id, 4 more }  or 31 more
 
 Server-sent event in a single thread's stream.
 
@@ -1674,7 +1672,7 @@ id: string
 
 Unique identifier for this event.
 
-error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  or 4 more
+error: [BetaManagedAgentsUnknownError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelOverloadedError](api/beta.md) { message, retry\_status, type }  or [BetaManagedAgentsModelRateLimitedError](api/beta.md) { message, retry\_status, type }  or 5 more
 
 An unknown or unexpected error occurred during session execution. A fallback variant; clients that don't recognize a new error code can match on `retry_status` and `message` alone.
 
@@ -1925,6 +1923,48 @@ The session encountered a terminal error and will transition to `terminated` sta
 type: "terminal"
 
 type: "billing\_error"
+
+BetaManagedAgentsCredentialHostUnreachableError object { credential\_id, message, retry\_status, 2 more }
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: string
+
+ID of the affected credential.
+
+message: string
+
+Human-readable error description.
+
+retry\_status: [BetaManagedAgentsRetryStatusRetrying](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusExhausted](api/beta.md) { type }  or [BetaManagedAgentsRetryStatusTerminal](api/beta.md) { type }
+
+What the client should do next in response to this error.
+
+One of the following:
+
+BetaManagedAgentsRetryStatusRetrying object { type }
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: "retrying"
+
+BetaManagedAgentsRetryStatusExhausted object { type }
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: "exhausted"
+
+BetaManagedAgentsRetryStatusTerminal object { type }
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: "terminal"
+
+type: "credential\_host\_unreachable\_error"
+
+vault\_id: string
+
+ID of the vault containing the affected credential.
 
 processed\_at: string
 
@@ -2624,13 +2664,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more
+"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -2716,13 +2760,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" or "claude-opus-4-7" or "claude-opus-4-6" or 7 more
+"claude-fable-5" or "claude-opus-4-8" or "claude-opus-4-7" or 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -2940,21 +2988,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
 
 name: string
 
@@ -3130,21 +3172,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties: optional map[unknown]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: optional array of string
-
-List of required property names.
-
-type: optional "object"
-
-Must be 'object' for tool input schemas.
 
 name: string
 
@@ -3161,6 +3197,30 @@ The session's full metadata bag after the update. Present when the update set no
 title: optional string
 
 The session's new title. Present only when the update changed it.
+
+BetaManagedAgentsSystemMessageEvent object { id, content, type, processed\_at }
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: string
+
+Unique identifier for this event.
+
+content: array of [BetaManagedAgentsSystemContentBlock](api/beta.md) { text, type }
+
+System content blocks. Text-only.
+
+text: string
+
+The text content.
+
+type: "text"
+
+type: "system.message"
+
+processed\_at: optional string
+
+A timestamp in RFC 3339 format
 
 #### ThreadsEvents
 

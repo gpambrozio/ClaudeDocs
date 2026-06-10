@@ -14,7 +14,7 @@ When tool search is active, tool definitions are withheld from the context windo
 Tool search adds one extra round-trip the first time Claude discovers a tool (the search step), but for large tool sets this is offset by smaller context on every turn. With fewer than ~10 tools, loading everything upfront is typically faster.
 For details on the underlying API mechanism, see [Tool search in the API](agents-and-tools/tool-use/tool-search-tool.md).
 
-Tool search requires Claude Sonnet 4 or later, or Claude Opus 4 or later. Haiku models do not support tool search.
+Tool search is supported on every Claude model except Haiku.
 
 ## [​](#configure-tool-search) Configure tool search
 
@@ -75,7 +75,7 @@ You can search for tools to interact with Slack, GitHub, and Jira.
 
 - **Maximum tools:** 10,000 tools in your catalog
 - **Search results:** Returns 3-5 most relevant tools per search
-- **Model support:** Claude Sonnet 4 and later, Claude Opus 4 and later (no Haiku)
+- **Model support:** every Claude model except Haiku
 
 ## [​](#related-documentation) Related documentation
 

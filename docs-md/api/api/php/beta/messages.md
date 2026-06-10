@@ -10,7 +10,7 @@ PHP
 
 ##### [Create a Message](api/beta/messages/create.md)
 
-$client->beta->messages->create(int maxTokens, list<[BetaMessageParam](api/beta.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta.md) cacheControl, ?[Container](api/beta/messages/create.md) container, ?[BetaContextManagementConfig](api/beta.md) contextManagement, ?[BetaDiagnosticsParam](api/beta.md) diagnostics, ?string inferenceGeo, ?list<[BetaRequestMCPServerURLDefinition](api/beta.md)> mcpServers, ?[BetaMetadata](api/beta.md) metadata, ?[BetaOutputConfig](api/beta.md) outputConfig, ?[BetaJSONOutputFormat](api/beta.md) outputFormat, ?[ServiceTier](api/beta/messages/create.md) serviceTier, ?[Speed](api/beta/messages/create.md) speed, ?list<string> stopSequences, ?[System](api/beta/messages/create.md) system, ?float temperature, ?[BetaThinkingConfigParam](api/beta.md) thinking, ?[BetaToolChoice](api/beta.md) toolChoice, ?list<[BetaToolUnion](api/beta.md)> tools, ?int topK, ?float topP, ?string userProfileID, ?list<AnthropicBeta> betas): [BetaMessage](api/beta.md)
+$client->beta->messages->create(int maxTokens, list<[BetaMessageParam](api/beta.md)> messages, Model model, ?[BetaCacheControlEphemeral](api/beta.md) cacheControl, ?[Container](api/beta/messages/create.md) container, ?[BetaContextManagementConfig](api/beta.md) contextManagement, ?[BetaDiagnosticsParam](api/beta.md) diagnostics, ?string fallbackCreditToken, ?list<[BetaFallbackParam](api/beta.md)> fallbacks, ?string inferenceGeo, ?list<[BetaRequestMCPServerURLDefinition](api/beta.md)> mcpServers, ?[BetaMetadata](api/beta.md) metadata, ?[BetaOutputConfig](api/beta.md) outputConfig, ?[BetaJSONOutputFormat](api/beta.md) outputFormat, ?[ServiceTier](api/beta/messages/create.md) serviceTier, ?[Speed](api/beta/messages/create.md) speed, ?list<string> stopSequences, ?[System](api/beta/messages/create.md) system, ?float temperature, ?[BetaThinkingConfigParam](api/beta.md) thinking, ?[BetaToolChoice](api/beta.md) toolChoice, ?list<[BetaToolUnion](api/beta.md)> tools, ?int topK, ?float topP, ?string userProfileID, ?list<AnthropicBeta> betas): [BetaMessage](api/beta.md)
 
 POST/v1/messages
 
@@ -123,6 +123,10 @@ Caching for the advisor's own prompt. When set, each advisor call writes a cache
 ?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxTokens
+
+Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
 ?int maxUses
 
@@ -1097,6 +1101,18 @@ Opaque metadata from prior compaction, to be round-tripped verbatim
 
 "compaction" type
 
+[BetaFallbackBlock](api/beta.md)
+
+[BetaFallbackInfo](api/beta.md) from
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+[BetaFallbackInfo](api/beta.md) to
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+"fallback" type
+
 [BetaContentBlockParam](api/beta.md)
 
 One of the following:
@@ -1383,6 +1399,18 @@ System instruction text blocks.
 
 Create a cache control breakpoint at this content block.
 
+[BetaFallbackBlockParam](api/beta.md)
+
+[BetaFallbackInfoParam](api/beta.md) from
+
+Identifies one hop of a fallback transition.
+
+[BetaFallbackInfoParam](api/beta.md) to
+
+Identifies one hop of a fallback transition.
+
+"fallback" type
+
 [BetaContentBlockSource](api/beta.md)
 
 Content content
@@ -1487,6 +1515,94 @@ string stderr
 
 "encrypted\_code\_execution\_result" type
 
+[BetaFallbackBlock](api/beta.md)
+
+[BetaFallbackInfo](api/beta.md) from
+
+The model whose output ends at this point — the model that declined at this hop. When the declining hop is the requested model, its `model` echoes the top-level `model` string the caller sent (alias or canonical); when the declining hop is a fallback model, its `model` is that model's canonical id.
+
+[BetaFallbackInfo](api/beta.md) to
+
+The fallback model producing the content that follows this block. Its `model` is always the canonical id.
+
+"fallback" type
+
+[BetaFallbackBlockParam](api/beta.md)
+
+[BetaFallbackInfoParam](api/beta.md) from
+
+Identifies one hop of a fallback transition.
+
+[BetaFallbackInfoParam](api/beta.md) to
+
+Identifies one hop of a fallback transition.
+
+"fallback" type
+
+[BetaFallbackInfo](api/beta.md)
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+[BetaFallbackInfoParam](api/beta.md)
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+[BetaFallbackMessageIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
+
+Breakdown of cached tokens by TTL
+
+int cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+int cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+int inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+int outputTokens
+
+The number of output tokens which were used.
+
+"fallback\_message" type
+
+Usage for the fallback-model attempt that served the response
+
+[BetaFallbackParam](api/beta.md)
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+?int maxTokens
+
+?[BetaOutputConfig](api/beta.md) outputConfig
+
+?Speed speed
+
+?Thinking thinking
+
 [BetaFileDocumentSource](api/beta.md)
 
 string fileID
@@ -1548,6 +1664,12 @@ The number of input tokens read from the cache.
 int inputTokens
 
 The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 int outputTokens
 
@@ -1614,6 +1736,38 @@ The number of output tokens which were used.
 "advisor\_message" type
 
 Usage for an advisor sub-inference iteration
+
+[BetaFallbackMessageIterationUsage](api/beta.md)
+
+?[BetaCacheCreation](api/beta.md) cacheCreation
+
+Breakdown of cached tokens by TTL
+
+int cacheCreationInputTokens
+
+The number of input tokens used to create the cache entry.
+
+int cacheReadInputTokens
+
+The number of input tokens read from the cache.
+
+int inputTokens
+
+The number of input tokens which were used.
+
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+int outputTokens
+
+The number of output tokens which were used.
+
+"fallback\_message" type
+
+Usage for the fallback-model attempt that served the response
 
 [BetaJSONOutputFormat](api/beta.md)
 
@@ -2077,6 +2231,12 @@ int inputTokens
 
 The number of input tokens which were used.
 
+Model model
+
+The model that will complete your prompt.
+
+See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
 int outputTokens
 
 The number of output tokens which were used.
@@ -2345,6 +2505,55 @@ The policy category that triggered the refusal.
 Human-readable explanation of the refusal.
 
 This text is not guaranteed to be stable. `null` when no explanation is available for the category.
+
+?string fallbackCreditToken
+
+Opaque code that refunds the cache-miss cost when retrying this refused
+request on the fallback model. Pass it as `fallback_credit_token` on the
+retry request. Expires 5 minutes after the refusal.
+
+The retry is sent either with the same request body (`system`, `messages`,
+`tools`, and other render-shaping fields), or with the same body plus one
+appended `assistant` message whose content is the partial text (with any
+trailing whitespace stripped from the final text block) and paired
+server-tool blocks from this refusal — which also authorizes that
+appended turn as an assistant-prefill continuation on models that otherwise
+disallow prefill. A token minted mid-server-tool-loop whose partial content
+was continuable may only be redeemed the second way — if a same-body retry
+is rejected with a 400 saying the token must be redeemed by continuing the
+partial response, retry the second way instead. Either way: same workspace,
+same platform; a mismatch is a 400. Resending a token for an already-warm
+prefix is permitted but yields no additional credit.
+
+`null` when the refused model isn't eligible for a fallback credit.
+
+?bool fallbackHasPrefillClaim
+
+Whether the accompanying `fallback_credit_token` may be redeemed with the
+appended-assistant retry form. Only set when `fallback_credit_token` is
+present.
+
+`true`: retry by resending the same request body plus one appended
+`assistant` message whose content is this response's `content` with any
+trailing whitespace stripped from the final text block and unpaired
+`tool_use` blocks omitted (the same appended-turn shape described on
+`fallback_credit_token`), with the token attached. `false`: retry by
+resending the original request body unchanged, with the token attached —
+the appended-assistant form is not available for this refusal (no
+continuable partial content, or the request uses `output_format` or a
+`tool_choice` that forces tool use). One exception: when the request used
+`output_format` or a forced `tool_choice` and the refusal arrived after
+server tools (including MCP connector tools) had already executed, the
+token may not be redeemable by either retry form; if the exact-body retry
+is then rejected with a 400 saying the token must be redeemed by
+continuing the partial response, discard the token and retry without it.
+
+Advisory: if an appended-assistant retry is rejected with a 400 despite
+`true`, fall back to resending the original request body with the token.
+
+?string recommendedModel
+
+The server's suggested retry target for this refusal. Populated when a fallback attempt could not be made (the fallback model's rate limit was exhausted, or it was overloaded); names the fallback model the caller can retry directly. Null otherwise.
 
 "refusal" type
 
@@ -3366,6 +3575,8 @@ ErrorCode errorCode
 
 "tool\_search\_tool\_result\_error" type
 
+?string errorMessage
+
 [BetaToolSearchToolSearchResultBlock](api/beta.md)
 
 list<[BetaToolReferenceBlock](api/beta.md)> toolReferences
@@ -4153,6 +4364,10 @@ Caching for the advisor's own prompt. When set, each advisor call writes a cache
 ?bool deferLoading
 
 If true, tool will not be included in initial system prompt. Only loaded when returned via tool\_reference from tool search.
+
+?int maxTokens
+
+Bounds the advisor's total output (thinking + text) per call. When the advisor hits this cap, the returned advisor\_result or advisor\_redacted\_result block carries stop\_reason='max\_tokens', and a truncation note is appended to the advice text the worker model sees (inside the encrypted blob in redacted mode). When set, the server also emits a remaining-tokens budget block in the advisor's prompt so the advisor self-shapes toward the cap. When omitted, the advisor model's default output cap applies and no budget block is emitted.
 
 ?int maxUses
 

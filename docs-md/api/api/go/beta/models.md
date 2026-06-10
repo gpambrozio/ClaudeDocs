@@ -276,6 +276,10 @@ ID string
 
 Unique model identifier.
 
+AllowedFallbackModels []string
+
+Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
+
 Capabilities [BetaModelCapabilities](api/beta.md)
 
 Model capability information.

@@ -2243,6 +2243,8 @@ One of the following:
 
 JsonElement Type "tool\_search\_tool\_result\_error"constant
 
+string? ErrorMessage
+
 class ToolSearchToolSearchResultBlockParam:
 
 required IReadOnlyList<[ToolReferenceBlockParam](api/messages.md)> ToolReferences

@@ -46,7 +46,7 @@ One of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
 "message-batches-2024-09-24"
 
@@ -100,6 +100,10 @@ One of the following:
 
 "thinking-token-count-2026-05-13"
 
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
+
 ##### ReturnsExpand Collapse
 
 BetaManagedAgentsAgent { id, archived\_at, created\_at, 12 more }
@@ -140,7 +144,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -374,21 +382,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 

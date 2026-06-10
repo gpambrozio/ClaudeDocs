@@ -2255,6 +2255,8 @@ EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
 JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
 
+Optional<String> errorMessage
+
 class ToolSearchToolSearchResultBlockParam:
 
 List<[ToolReferenceBlockParam](api/messages.md)> toolReferences
@@ -4520,6 +4522,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -4613,6 +4623,8 @@ One of the following:
 CYBER("cyber")
 
 BIO("bio")
+
+REASONING\_EXTRACTION("reasoning\_extraction")
 
 Optional<String> explanation
 
@@ -5440,6 +5452,14 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+CLAUDE\_FABLE\_5("claude-fable-5")
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+CLAUDE\_MYTHOS\_5("claude-mythos-5")
+
+Most capable model for cybersecurity and biology research
+
 CLAUDE\_OPUS\_4\_8("claude-opus-4-8")
 
 Frontier intelligence for long-running agents and coding
@@ -5533,6 +5553,8 @@ One of the following:
 CYBER("cyber")
 
 BIO("bio")
+
+REASONING\_EXTRACTION("reasoning\_extraction")
 
 Optional<String> explanation
 
@@ -5706,6 +5728,8 @@ One of the following:
 CYBER("cyber")
 
 BIO("bio")
+
+REASONING\_EXTRACTION("reasoning\_extraction")
 
 Optional<String> explanation
 

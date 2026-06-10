@@ -316,12 +316,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -334,6 +335,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -419,12 +424,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -437,6 +443,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -658,17 +668,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -848,17 +852,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -1072,6 +1070,10 @@ vault\_ids: List[str]
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+deployment\_id: Optional[str]
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 class BetaManagedAgentsSessionAgent: …
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
@@ -1100,12 +1102,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -1118,6 +1121,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -1203,12 +1210,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -1221,6 +1229,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -1442,17 +1454,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -1632,17 +1638,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -1834,17 +1834,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -1884,12 +1878,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -1902,6 +1897,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -2123,17 +2122,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -2199,12 +2192,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -2217,6 +2211,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -2302,12 +2300,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -2320,6 +2319,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -2541,17 +2544,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -2731,17 +2728,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -2786,6 +2777,40 @@ Total input tokens consumed across all turns.
 output\_tokens: Optional[int]
 
 Total output tokens generated across all turns.
+
+class BetaManagedAgentsSystemContentBlock: …
+
+Regular text content.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+class BetaManagedAgentsSystemMessageEvent: …
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: str
+
+Unique identifier for this event.
+
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+
+System content blocks. Text-only.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+type: Literal["system.message"]
+
+processed\_at: Optional[datetime]
+
+A timestamp in RFC 3339 format
 
 class BetaManagedAgentsUserToolResultEvent: …
 
@@ -3889,6 +3914,48 @@ type: Literal["terminal"]
 
 type: Literal["billing\_error"]
 
+class BetaManagedAgentsCredentialHostUnreachableError: …
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: str
+
+ID of the affected credential.
+
+message: str
+
+Human-readable error description.
+
+retry\_status: RetryStatus
+
+What the client should do next in response to this error.
+
+One of the following:
+
+class BetaManagedAgentsRetryStatusRetrying: …
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: Literal["retrying"]
+
+class BetaManagedAgentsRetryStatusExhausted: …
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: Literal["exhausted"]
+
+class BetaManagedAgentsRetryStatusTerminal: …
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: Literal["terminal"]
+
+type: Literal["credential\_host\_unreachable\_error"]
+
+vault\_id: str
+
+ID of the vault containing the affected credential.
+
 class BetaManagedAgentsDocumentBlock: …
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
@@ -4524,6 +4591,22 @@ type: Literal["search\_result"]
 is\_error: Optional[bool]
 
 Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsSystemMessageEventParams: …
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+
+System content blocks to append. Text-only.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+type: Literal["system.message"]
 
 class BetaManagedAgentsFileDocumentSource: …
 
@@ -5507,6 +5590,30 @@ session\_thread\_id: Optional[str]
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+class BetaManagedAgentsSystemMessageEvent: …
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: str
+
+Unique identifier for this event.
+
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+
+System content blocks. Text-only.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+type: Literal["system.message"]
+
+processed\_at: Optional[datetime]
+
+A timestamp in RFC 3339 format
+
 class BetaManagedAgentsSessionDeletedEvent: …
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -5786,6 +5893,48 @@ The session encountered a terminal error and will transition to `terminated` sta
 type: Literal["terminal"]
 
 type: Literal["billing\_error"]
+
+class BetaManagedAgentsCredentialHostUnreachableError: …
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: str
+
+ID of the affected credential.
+
+message: str
+
+Human-readable error description.
+
+retry\_status: RetryStatus
+
+What the client should do next in response to this error.
+
+One of the following:
+
+class BetaManagedAgentsRetryStatusRetrying: …
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: Literal["retrying"]
+
+class BetaManagedAgentsRetryStatusExhausted: …
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: Literal["exhausted"]
+
+class BetaManagedAgentsRetryStatusTerminal: …
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: Literal["terminal"]
+
+type: Literal["credential\_host\_unreachable\_error"]
+
+vault\_id: str
+
+ID of the vault containing the affected credential.
 
 processed\_at: datetime
 
@@ -7275,6 +7424,48 @@ type: Literal["terminal"]
 
 type: Literal["billing\_error"]
 
+class BetaManagedAgentsCredentialHostUnreachableError: …
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: str
+
+ID of the affected credential.
+
+message: str
+
+Human-readable error description.
+
+retry\_status: RetryStatus
+
+What the client should do next in response to this error.
+
+One of the following:
+
+class BetaManagedAgentsRetryStatusRetrying: …
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: Literal["retrying"]
+
+class BetaManagedAgentsRetryStatusExhausted: …
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: Literal["exhausted"]
+
+class BetaManagedAgentsRetryStatusTerminal: …
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: Literal["terminal"]
+
+type: Literal["credential\_host\_unreachable\_error"]
+
+vault\_id: str
+
+ID of the vault containing the affected credential.
+
 processed\_at: datetime
 
 A timestamp in RFC 3339 format
@@ -7973,12 +8164,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -7991,6 +8183,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -8076,12 +8272,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -8094,6 +8291,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -8315,17 +8516,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -8505,17 +8700,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -8532,6 +8721,30 @@ The session's full metadata bag after the update. Present when the update set no
 title: Optional[str]
 
 The session's new title. Present only when the update changed it.
+
+class BetaManagedAgentsSystemMessageEvent: …
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: str
+
+Unique identifier for this event.
+
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+
+System content blocks. Text-only.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+type: Literal["system.message"]
+
+processed\_at: Optional[datetime]
+
+A timestamp in RFC 3339 format
 
 class BetaManagedAgentsSessionRequiresAction: …
 
@@ -10457,6 +10670,48 @@ type: Literal["terminal"]
 
 type: Literal["billing\_error"]
 
+class BetaManagedAgentsCredentialHostUnreachableError: …
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: str
+
+ID of the affected credential.
+
+message: str
+
+Human-readable error description.
+
+retry\_status: RetryStatus
+
+What the client should do next in response to this error.
+
+One of the following:
+
+class BetaManagedAgentsRetryStatusRetrying: …
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: Literal["retrying"]
+
+class BetaManagedAgentsRetryStatusExhausted: …
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: Literal["exhausted"]
+
+class BetaManagedAgentsRetryStatusTerminal: …
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: Literal["terminal"]
+
+type: Literal["credential\_host\_unreachable\_error"]
+
+vault\_id: str
+
+ID of the vault containing the affected credential.
+
 processed\_at: datetime
 
 A timestamp in RFC 3339 format
@@ -11155,12 +11410,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -11173,6 +11429,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -11258,12 +11518,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -11276,6 +11537,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -11497,17 +11762,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -11687,17 +11946,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -11714,6 +11967,46 @@ The session's full metadata bag after the update. Present when the update set no
 title: Optional[str]
 
 The session's new title. Present only when the update changed it.
+
+class BetaManagedAgentsSystemMessageEvent: …
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: str
+
+Unique identifier for this event.
+
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+
+System content blocks. Text-only.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+type: Literal["system.message"]
+
+processed\_at: Optional[datetime]
+
+A timestamp in RFC 3339 format
+
+class BetaManagedAgentsSystemMessageEventParams: …
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+
+System content blocks to append. Text-only.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+type: Literal["system.message"]
 
 class BetaManagedAgentsTextBlock: …
 
@@ -13285,12 +13578,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -13303,6 +13597,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -13524,17 +13822,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -15164,6 +15456,48 @@ type: Literal["terminal"]
 
 type: Literal["billing\_error"]
 
+class BetaManagedAgentsCredentialHostUnreachableError: …
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+credential\_id: str
+
+ID of the affected credential.
+
+message: str
+
+Human-readable error description.
+
+retry\_status: RetryStatus
+
+What the client should do next in response to this error.
+
+One of the following:
+
+class BetaManagedAgentsRetryStatusRetrying: …
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+type: Literal["retrying"]
+
+class BetaManagedAgentsRetryStatusExhausted: …
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+type: Literal["exhausted"]
+
+class BetaManagedAgentsRetryStatusTerminal: …
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+type: Literal["terminal"]
+
+type: Literal["credential\_host\_unreachable\_error"]
+
+vault\_id: str
+
+ID of the vault containing the affected credential.
+
 processed\_at: datetime
 
 A timestamp in RFC 3339 format
@@ -15862,12 +16196,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -15880,6 +16215,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -15965,12 +16304,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -15983,6 +16323,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -16204,17 +16548,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -16394,17 +16732,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -16421,6 +16753,30 @@ The session's full metadata bag after the update. Present when the update set no
 title: Optional[str]
 
 The session's new title. Present only when the update changed it.
+
+class BetaManagedAgentsSystemMessageEvent: …
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: str
+
+Unique identifier for this event.
+
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+
+System content blocks. Text-only.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+type: Literal["system.message"]
+
+processed\_at: Optional[datetime]
+
+A timestamp in RFC 3339 format
 
 #### SessionsThreadsEvents
 

@@ -86,6 +86,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
@@ -322,17 +326,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -828,17 +826,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -848,17 +840,11 @@ type BetaManagedAgentsCustomToolInputSchema struct{…}
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 type BetaManagedAgentsCustomToolParamsResp struct{…}
 
@@ -872,17 +858,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -1142,6 +1122,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
@@ -1203,6 +1187,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -1275,6 +1263,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -1419,6 +1411,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -1640,17 +1636,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 

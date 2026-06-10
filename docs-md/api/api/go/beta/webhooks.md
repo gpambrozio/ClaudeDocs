@@ -55,7 +55,7 @@ type BetaWebhookSessionCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -67,7 +67,7 @@ type BetaWebhookSessionPendingEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -79,7 +79,7 @@ type BetaWebhookSessionRunningEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -91,7 +91,7 @@ type BetaWebhookSessionIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -103,7 +103,7 @@ type BetaWebhookSessionRequiresActionEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -115,7 +115,7 @@ type BetaWebhookSessionArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -127,7 +127,7 @@ type BetaWebhookSessionDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -139,7 +139,7 @@ type BetaWebhookSessionStatusRescheduledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -151,7 +151,7 @@ type BetaWebhookSessionStatusRunStartedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -163,7 +163,7 @@ type BetaWebhookSessionStatusIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -175,7 +175,7 @@ type BetaWebhookSessionStatusTerminatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -187,9 +187,13 @@ type BetaWebhookSessionThreadCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadCreated
 
@@ -199,9 +203,13 @@ type BetaWebhookSessionThreadIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadIdled
 
@@ -211,9 +219,13 @@ type BetaWebhookSessionThreadTerminatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadTerminated
 
@@ -223,7 +235,7 @@ type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -235,7 +247,7 @@ type BetaWebhookVaultCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -247,7 +259,7 @@ type BetaWebhookVaultArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -259,7 +271,7 @@ type BetaWebhookVaultDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -271,7 +283,7 @@ type BetaWebhookVaultCredentialCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -287,7 +299,7 @@ type BetaWebhookVaultCredentialArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -303,7 +315,7 @@ type BetaWebhookVaultCredentialDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -319,7 +331,7 @@ type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -343,7 +355,7 @@ type BetaWebhookSessionCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -355,7 +367,7 @@ type BetaWebhookSessionPendingEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -367,7 +379,7 @@ type BetaWebhookSessionRunningEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -379,7 +391,7 @@ type BetaWebhookSessionIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -391,7 +403,7 @@ type BetaWebhookSessionRequiresActionEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -403,7 +415,7 @@ type BetaWebhookSessionArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -415,7 +427,7 @@ type BetaWebhookSessionDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -427,7 +439,7 @@ type BetaWebhookSessionStatusRescheduledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -439,7 +451,7 @@ type BetaWebhookSessionStatusRunStartedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -451,7 +463,7 @@ type BetaWebhookSessionStatusIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -463,7 +475,7 @@ type BetaWebhookSessionStatusTerminatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -475,9 +487,13 @@ type BetaWebhookSessionThreadCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadCreated
 
@@ -487,9 +503,13 @@ type BetaWebhookSessionThreadIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadIdled
 
@@ -499,9 +519,13 @@ type BetaWebhookSessionThreadTerminatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadTerminated
 
@@ -511,7 +535,7 @@ type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -523,7 +547,7 @@ type BetaWebhookVaultCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -535,7 +559,7 @@ type BetaWebhookVaultArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -547,7 +571,7 @@ type BetaWebhookVaultDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -559,7 +583,7 @@ type BetaWebhookVaultCredentialCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -575,7 +599,7 @@ type BetaWebhookVaultCredentialArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -591,7 +615,7 @@ type BetaWebhookVaultCredentialDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -607,7 +631,7 @@ type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -623,7 +647,7 @@ type BetaWebhookSessionArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -635,7 +659,7 @@ type BetaWebhookSessionCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -647,7 +671,7 @@ type BetaWebhookSessionDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -659,7 +683,7 @@ type BetaWebhookSessionIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -671,7 +695,7 @@ type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -683,7 +707,7 @@ type BetaWebhookSessionPendingEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -695,7 +719,7 @@ type BetaWebhookSessionRequiresActionEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -707,7 +731,7 @@ type BetaWebhookSessionRunningEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -719,7 +743,7 @@ type BetaWebhookSessionStatusIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -731,7 +755,7 @@ type BetaWebhookSessionStatusRescheduledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -743,7 +767,7 @@ type BetaWebhookSessionStatusRunStartedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -755,7 +779,7 @@ type BetaWebhookSessionStatusTerminatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -767,9 +791,13 @@ type BetaWebhookSessionThreadCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadCreated
 
@@ -779,9 +807,13 @@ type BetaWebhookSessionThreadIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadIdled
 
@@ -791,9 +823,13 @@ type BetaWebhookSessionThreadTerminatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadTerminated
 
@@ -803,7 +839,7 @@ type BetaWebhookVaultArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -815,7 +851,7 @@ type BetaWebhookVaultCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -827,7 +863,7 @@ type BetaWebhookVaultCredentialArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -843,7 +879,7 @@ type BetaWebhookVaultCredentialCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -859,7 +895,7 @@ type BetaWebhookVaultCredentialDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -875,7 +911,7 @@ type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -891,7 +927,7 @@ type BetaWebhookVaultDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -917,7 +953,7 @@ type BetaWebhookSessionCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -929,7 +965,7 @@ type BetaWebhookSessionPendingEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -941,7 +977,7 @@ type BetaWebhookSessionRunningEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -953,7 +989,7 @@ type BetaWebhookSessionIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -965,7 +1001,7 @@ type BetaWebhookSessionRequiresActionEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -977,7 +1013,7 @@ type BetaWebhookSessionArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -989,7 +1025,7 @@ type BetaWebhookSessionDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -1001,7 +1037,7 @@ type BetaWebhookSessionStatusRescheduledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -1013,7 +1049,7 @@ type BetaWebhookSessionStatusRunStartedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -1025,7 +1061,7 @@ type BetaWebhookSessionStatusIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -1037,7 +1073,7 @@ type BetaWebhookSessionStatusTerminatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -1049,9 +1085,13 @@ type BetaWebhookSessionThreadCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadCreated
 
@@ -1061,9 +1101,13 @@ type BetaWebhookSessionThreadIdledEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadIdled
 
@@ -1073,9 +1117,13 @@ type BetaWebhookSessionThreadTerminatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
+
+SessionThreadID string
+
+ID of the session thread this event refers to.
 
 Type SessionThreadTerminated
 
@@ -1085,7 +1133,7 @@ type BetaWebhookSessionOutcomeEvaluationEndedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 OrganizationID string
 
@@ -1097,7 +1145,7 @@ type BetaWebhookVaultCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -1109,7 +1157,7 @@ type BetaWebhookVaultArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -1121,7 +1169,7 @@ type BetaWebhookVaultDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 OrganizationID string
 
@@ -1133,7 +1181,7 @@ type BetaWebhookVaultCredentialCreatedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -1149,7 +1197,7 @@ type BetaWebhookVaultCredentialArchivedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -1165,7 +1213,7 @@ type BetaWebhookVaultCredentialDeletedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 
@@ -1181,7 +1229,7 @@ type BetaWebhookVaultCredentialRefreshFailedEventData struct{…}
 
 ID string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 OrganizationID string
 

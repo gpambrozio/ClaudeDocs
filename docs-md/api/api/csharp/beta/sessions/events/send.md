@@ -588,6 +588,22 @@ Boolean? IsError
 
 Whether the tool execution resulted in an error.
 
+class BetaManagedAgentsSystemMessageEventParams:
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+
+System content blocks to append. Text-only.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+required Type Type
+
 IReadOnlyList<[AnthropicBeta](api/beta.md)> betas
 
 Header param: Optional header to specify the beta version(s) you want to use.
@@ -643,6 +659,10 @@ Header param: Optional header to specify the beta version(s) you want to use.
 "cache-diagnosis-2026-04-07"CacheDiagnosis2026\_04\_07
 
 "thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
+
+"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+
+"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
 
 ##### ReturnsExpand Collapse
 
@@ -1281,6 +1301,30 @@ A timestamp in RFC 3339 format
 string? SessionThreadID
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
+class BetaManagedAgentsSystemMessageEvent:
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+required string ID
+
+Unique identifier for this event.
+
+required IReadOnlyList<[BetaManagedAgentsSystemContentBlock](api/beta.md)> Content
+
+System content blocks. Text-only.
+
+required string Text
+
+The text content.
+
+required Type Type
+
+required Type Type
+
+DateTimeOffset? ProcessedAt
+
+A timestamp in RFC 3339 format
 
 Send Events
 

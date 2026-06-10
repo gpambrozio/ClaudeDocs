@@ -40,7 +40,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -212,7 +220,7 @@ One of the following:
 
 (string & {})
 
-"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 23 more
+"message-batches-2024-09-24" | "prompt-caching-2024-07-31" | "computer-use-2024-10-22" | 25 more
 
 "message-batches-2024-09-24"
 
@@ -266,6 +274,10 @@ One of the following:
 
 "thinking-token-count-2026-05-13"
 
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
+
 CompletionCreateParamsNonStreaming extends CompletionCreateParamsBase { max\_tokens\_to\_sample, model, prompt, 7 more }  { stream }
 
 stream?: false
@@ -304,7 +316,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -415,7 +435,15 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-mythos-preview" | 15 more
+"claude-fable-5" | "claude-mythos-5" | "claude-opus-4-8" | 17 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 

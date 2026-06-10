@@ -30,7 +30,7 @@ One of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 23 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]
 
 One of the following:
 
@@ -86,6 +86,10 @@ One of the following:
 
 "thinking-token-count-2026-05-13"
 
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
+
 ##### ReturnsExpand Collapse
 
 class BetaModelInfo: …
@@ -93,6 +97,10 @@ class BetaModelInfo: …
 id: str
 
 Unique model identifier.
+
+allowed\_fallback\_models: Optional[List[str]]
+
+Model IDs this model accepts as `fallbacks[i].model` on the Messages API. An empty list means the `fallbacks` parameter is not supported for this model as primary.
 
 capabilities: Optional[BetaModelCapabilities]
 
@@ -300,6 +308,9 @@ Response 200
 ```shiki
 {
   "id": "claude-opus-4-6",
+  "allowed_fallback_models": [
+    "string"
+  ],
   "capabilities": {
     "batch": {
       "supported": true
@@ -378,6 +389,9 @@ Response 200
 ```shiki
 {
   "id": "claude-opus-4-6",
+  "allowed_fallback_models": [
+    "string"
+  ],
   "capabilities": {
     "batch": {
       "supported": true

@@ -78,13 +78,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 :"claude-opus-4-8"
 
@@ -318,21 +322,15 @@ A custom tool as returned in API responses.
 
 description: String
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
-properties: Hash[Symbol, untyped]
-
-JSON Schema properties defining the tool's input parameters.
-
-required: Array[String]
-
-List of required property names.
-
 type: :object
 
-Must be 'object' for tool input schemas.
+properties: Hash[Symbol, untyped]
+
+required: Array[String]
 
 name: String
 
@@ -824,41 +822,29 @@ A custom tool as returned in API responses.
 
 description: String
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
-properties: Hash[Symbol, untyped]
-
-JSON Schema properties defining the tool's input parameters.
-
-required: Array[String]
-
-List of required property names.
-
 type: :object
 
-Must be 'object' for tool input schemas.
+properties: Hash[Symbol, untyped]
+
+required: Array[String]
 
 name: String
 
 type: :custom
 
-class BetaManagedAgentsCustomToolInputSchema { properties, required, type }
+class BetaManagedAgentsCustomToolInputSchema { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
-properties: Hash[Symbol, untyped]
-
-JSON Schema properties defining the tool's input parameters.
-
-required: Array[String]
-
-List of required property names.
-
 type: :object
 
-Must be 'object' for tool input schemas.
+properties: Hash[Symbol, untyped]
+
+required: Array[String]
 
 class BetaManagedAgentsCustomToolParams { description, input\_schema, name, type }
 
@@ -868,21 +854,15 @@ description: String
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
-properties: Hash[Symbol, untyped]
-
-JSON Schema properties defining the tool's input parameters.
-
-required: Array[String]
-
-List of required property names.
-
 type: :object
 
-Must be 'object' for tool input schemas.
+properties: Hash[Symbol, untyped]
+
+required: Array[String]
 
 name: String
 
@@ -1126,7 +1106,7 @@ Tool calls require user confirmation before execution.
 
 type: :always\_ask
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more | String
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more | String
 
 The model that will power your agent.
 
@@ -1134,13 +1114,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 :"claude-opus-4-8"
 
@@ -1196,13 +1180,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 :"claude-opus-4-8"
 
@@ -1268,13 +1256,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 :"claude-opus-4-8"
 
@@ -1412,13 +1404,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 :"claude-opus-4-8"
 
@@ -1636,21 +1632,15 @@ A custom tool as returned in API responses.
 
 description: String
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
-properties: Hash[Symbol, untyped]
-
-JSON Schema properties defining the tool's input parameters.
-
-required: Array[String]
-
-List of required property names.
-
 type: :object
 
-Must be 'object' for tool input schemas.
+properties: Hash[Symbol, untyped]
+
+required: Array[String]
 
 name: String
 

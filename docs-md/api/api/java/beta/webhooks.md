@@ -55,7 +55,7 @@ class BetaWebhookSessionCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -67,7 +67,7 @@ class BetaWebhookSessionPendingEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -79,7 +79,7 @@ class BetaWebhookSessionRunningEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -91,7 +91,7 @@ class BetaWebhookSessionIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -103,7 +103,7 @@ class BetaWebhookSessionRequiresActionEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -115,7 +115,7 @@ class BetaWebhookSessionArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -127,7 +127,7 @@ class BetaWebhookSessionDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -139,7 +139,7 @@ class BetaWebhookSessionStatusRescheduledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -151,7 +151,7 @@ class BetaWebhookSessionStatusRunStartedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -163,7 +163,7 @@ class BetaWebhookSessionStatusIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -175,7 +175,7 @@ class BetaWebhookSessionStatusTerminatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -187,9 +187,13 @@ class BetaWebhookSessionThreadCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_created"constant"session.thread\_created"constant
 
@@ -199,9 +203,13 @@ class BetaWebhookSessionThreadIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_idled"constant"session.thread\_idled"constant
 
@@ -211,9 +219,13 @@ class BetaWebhookSessionThreadTerminatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_terminated"constant"session.thread\_terminated"constant
 
@@ -223,7 +235,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -235,7 +247,7 @@ class BetaWebhookVaultCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -247,7 +259,7 @@ class BetaWebhookVaultArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -259,7 +271,7 @@ class BetaWebhookVaultDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -271,7 +283,7 @@ class BetaWebhookVaultCredentialCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -287,7 +299,7 @@ class BetaWebhookVaultCredentialArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -303,7 +315,7 @@ class BetaWebhookVaultCredentialDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -319,7 +331,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -341,7 +353,7 @@ class BetaWebhookSessionCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -353,7 +365,7 @@ class BetaWebhookSessionPendingEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -365,7 +377,7 @@ class BetaWebhookSessionRunningEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -377,7 +389,7 @@ class BetaWebhookSessionIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -389,7 +401,7 @@ class BetaWebhookSessionRequiresActionEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -401,7 +413,7 @@ class BetaWebhookSessionArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -413,7 +425,7 @@ class BetaWebhookSessionDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -425,7 +437,7 @@ class BetaWebhookSessionStatusRescheduledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -437,7 +449,7 @@ class BetaWebhookSessionStatusRunStartedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -449,7 +461,7 @@ class BetaWebhookSessionStatusIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -461,7 +473,7 @@ class BetaWebhookSessionStatusTerminatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -473,9 +485,13 @@ class BetaWebhookSessionThreadCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_created"constant"session.thread\_created"constant
 
@@ -485,9 +501,13 @@ class BetaWebhookSessionThreadIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_idled"constant"session.thread\_idled"constant
 
@@ -497,9 +517,13 @@ class BetaWebhookSessionThreadTerminatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_terminated"constant"session.thread\_terminated"constant
 
@@ -509,7 +533,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -521,7 +545,7 @@ class BetaWebhookVaultCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -533,7 +557,7 @@ class BetaWebhookVaultArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -545,7 +569,7 @@ class BetaWebhookVaultDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -557,7 +581,7 @@ class BetaWebhookVaultCredentialCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -573,7 +597,7 @@ class BetaWebhookVaultCredentialArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -589,7 +613,7 @@ class BetaWebhookVaultCredentialDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -605,7 +629,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -621,7 +645,7 @@ class BetaWebhookSessionArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -633,7 +657,7 @@ class BetaWebhookSessionCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -645,7 +669,7 @@ class BetaWebhookSessionDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -657,7 +681,7 @@ class BetaWebhookSessionIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -669,7 +693,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -681,7 +705,7 @@ class BetaWebhookSessionPendingEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -693,7 +717,7 @@ class BetaWebhookSessionRequiresActionEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -705,7 +729,7 @@ class BetaWebhookSessionRunningEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -717,7 +741,7 @@ class BetaWebhookSessionStatusIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -729,7 +753,7 @@ class BetaWebhookSessionStatusRescheduledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -741,7 +765,7 @@ class BetaWebhookSessionStatusRunStartedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -753,7 +777,7 @@ class BetaWebhookSessionStatusTerminatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -765,9 +789,13 @@ class BetaWebhookSessionThreadCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_created"constant"session.thread\_created"constant
 
@@ -777,9 +805,13 @@ class BetaWebhookSessionThreadIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_idled"constant"session.thread\_idled"constant
 
@@ -789,9 +821,13 @@ class BetaWebhookSessionThreadTerminatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_terminated"constant"session.thread\_terminated"constant
 
@@ -801,7 +837,7 @@ class BetaWebhookVaultArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -813,7 +849,7 @@ class BetaWebhookVaultCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -825,7 +861,7 @@ class BetaWebhookVaultCredentialArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -841,7 +877,7 @@ class BetaWebhookVaultCredentialCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -857,7 +893,7 @@ class BetaWebhookVaultCredentialDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -873,7 +909,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -889,7 +925,7 @@ class BetaWebhookVaultDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -915,7 +951,7 @@ class BetaWebhookSessionCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -927,7 +963,7 @@ class BetaWebhookSessionPendingEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -939,7 +975,7 @@ class BetaWebhookSessionRunningEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -951,7 +987,7 @@ class BetaWebhookSessionIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -963,7 +999,7 @@ class BetaWebhookSessionRequiresActionEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -975,7 +1011,7 @@ class BetaWebhookSessionArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -987,7 +1023,7 @@ class BetaWebhookSessionDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -999,7 +1035,7 @@ class BetaWebhookSessionStatusRescheduledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -1011,7 +1047,7 @@ class BetaWebhookSessionStatusRunStartedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -1023,7 +1059,7 @@ class BetaWebhookSessionStatusIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -1035,7 +1071,7 @@ class BetaWebhookSessionStatusTerminatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -1047,9 +1083,13 @@ class BetaWebhookSessionThreadCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_created"constant"session.thread\_created"constant
 
@@ -1059,9 +1099,13 @@ class BetaWebhookSessionThreadIdledEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_idled"constant"session.thread\_idled"constant
 
@@ -1071,9 +1115,13 @@ class BetaWebhookSessionThreadTerminatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
+
+String sessionThreadId
+
+ID of the session thread this event refers to.
 
 JsonValue; type "session.thread\_terminated"constant"session.thread\_terminated"constant
 
@@ -1083,7 +1131,7 @@ class BetaWebhookSessionOutcomeEvaluationEndedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 String organizationId
 
@@ -1095,7 +1143,7 @@ class BetaWebhookVaultCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -1107,7 +1155,7 @@ class BetaWebhookVaultArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -1119,7 +1167,7 @@ class BetaWebhookVaultDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 String organizationId
 
@@ -1131,7 +1179,7 @@ class BetaWebhookVaultCredentialCreatedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -1147,7 +1195,7 @@ class BetaWebhookVaultCredentialArchivedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -1163,7 +1211,7 @@ class BetaWebhookVaultCredentialDeletedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 
@@ -1179,7 +1227,7 @@ class BetaWebhookVaultCredentialRefreshFailedEventData:
 
 String id
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 String organizationId
 

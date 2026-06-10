@@ -2243,6 +2243,8 @@ EXECUTION\_TIME\_EXCEEDED("execution\_time\_exceeded")
 
 JsonValue; type "tool\_search\_tool\_result\_error"constant"tool\_search\_tool\_result\_error"constant
 
+Optional<String> errorMessage
+
 class ToolSearchToolSearchResultBlockParam:
 
 List<[ToolReferenceBlockParam](api/messages.md)> toolReferences

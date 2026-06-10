@@ -8,7 +8,7 @@ Ruby
 
 # Update Session
 
-beta.sessions.update(session\_id, \*\*kwargs) -> [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 12 more }
+beta.sessions.update(session\_id, \*\*kwargs) -> [BetaManagedAgentsSession](api/beta.md) { id, agent, archived\_at, 13 more }
 
 POST/v1/sessions/{session\_id}
 
@@ -196,21 +196,15 @@ description: String
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
-properties: Hash[Symbol, untyped]
-
-JSON Schema properties defining the tool's input parameters.
-
-required: Array[String]
-
-List of required property names.
-
 type: :object
 
-Must be 'object' for tool input schemas.
+properties: Hash[Symbol, untyped]
+
+required: Array[String]
 
 name: String
 
@@ -238,7 +232,7 @@ One of the following:
 
 String = String
 
-AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 23 more
+AnthropicBeta = :"message-batches-2024-09-24" | :"prompt-caching-2024-07-31" | :"computer-use-2024-10-22" | 25 more
 
 One of the following:
 
@@ -294,9 +288,13 @@ One of the following:
 
 :"thinking-token-count-2026-05-13"
 
+:"server-side-fallback-2026-06-01"
+
+:"fallback-credit-2026-06-01"
+
 ##### ReturnsExpand Collapse
 
-class BetaManagedAgentsSession { id, agent, archived\_at, 12 more }
+class BetaManagedAgentsSession { id, agent, archived\_at, 13 more }
 
 A Managed Agents `session`.
 
@@ -330,13 +328,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 :"claude-opus-4-8"
 
@@ -422,13 +424,17 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-BetaManagedAgentsModel = :"claude-opus-4-8" | :"claude-opus-4-7" | :"claude-opus-4-6" | 7 more
+BetaManagedAgentsModel = :"claude-fable-5" | :"claude-opus-4-8" | :"claude-opus-4-7" | 8 more
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+:"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 :"claude-opus-4-8"
 
@@ -646,21 +652,15 @@ A custom tool as returned in API responses.
 
 description: String
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
-properties: Hash[Symbol, untyped]
-
-JSON Schema properties defining the tool's input parameters.
-
-required: Array[String]
-
-List of required property names.
-
 type: :object
 
-Must be 'object' for tool input schemas.
+properties: Hash[Symbol, untyped]
+
+required: Array[String]
 
 name: String
 
@@ -836,21 +836,15 @@ A custom tool as returned in API responses.
 
 description: String
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
-properties: Hash[Symbol, untyped]
-
-JSON Schema properties defining the tool's input parameters.
-
-required: Array[String]
-
-List of required property names.
-
 type: :object
 
-Must be 'object' for tool input schemas.
+properties: Hash[Symbol, untyped]
+
+required: Array[String]
 
 name: String
 
@@ -1064,6 +1058,10 @@ vault\_ids: Array[String]
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+deployment\_id: String
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 Update Session
 
 Ruby
@@ -1243,7 +1241,8 @@ Response 200
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -1414,7 +1413,8 @@ Response 200
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 

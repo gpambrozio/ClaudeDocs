@@ -53,7 +53,7 @@ beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -65,7 +65,7 @@ beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -77,7 +77,7 @@ beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -89,7 +89,7 @@ beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -101,7 +101,7 @@ beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -113,7 +113,7 @@ beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, ty
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -125,7 +125,7 @@ beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -137,7 +137,7 @@ beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organizat
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -149,7 +149,7 @@ beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organiza
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -161,7 +161,7 @@ beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_i
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -173,7 +173,7 @@ beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organizati
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -181,37 +181,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -221,7 +233,7 @@ beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, or
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -233,7 +245,7 @@ beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -245,7 +257,7 @@ beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -257,7 +269,7 @@ beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -269,7 +281,7 @@ beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organizatio
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -285,7 +297,7 @@ beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organizati
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -301,7 +313,7 @@ beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organizatio
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -317,7 +329,7 @@ beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, org
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -339,7 +351,7 @@ beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -351,7 +363,7 @@ beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -363,7 +375,7 @@ beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -375,7 +387,7 @@ beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -387,7 +399,7 @@ beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -399,7 +411,7 @@ beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, ty
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -411,7 +423,7 @@ beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -423,7 +435,7 @@ beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organizat
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -435,7 +447,7 @@ beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organiza
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -447,7 +459,7 @@ beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_i
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -459,7 +471,7 @@ beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organizati
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -467,37 +479,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -507,7 +531,7 @@ beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, or
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -519,7 +543,7 @@ beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -531,7 +555,7 @@ beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -543,7 +567,7 @@ beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -555,7 +579,7 @@ beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organizatio
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -571,7 +595,7 @@ beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organizati
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -587,7 +611,7 @@ beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organizatio
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -603,7 +627,7 @@ beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, org
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -619,7 +643,7 @@ beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, ty
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -631,7 +655,7 @@ beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -643,7 +667,7 @@ beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -655,7 +679,7 @@ beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -667,7 +691,7 @@ beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, or
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -679,7 +703,7 @@ beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -691,7 +715,7 @@ beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -703,7 +727,7 @@ beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -715,7 +739,7 @@ beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_i
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -727,7 +751,7 @@ beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organizat
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -739,7 +763,7 @@ beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organiza
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -751,7 +775,7 @@ beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organizati
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -759,37 +783,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -799,7 +835,7 @@ beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -811,7 +847,7 @@ beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -823,7 +859,7 @@ beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organizati
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -839,7 +875,7 @@ beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organizatio
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -855,7 +891,7 @@ beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organizatio
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -871,7 +907,7 @@ beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, org
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -887,7 +923,7 @@ beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -911,7 +947,7 @@ beta\_webhook\_session\_created\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -923,7 +959,7 @@ beta\_webhook\_session\_pending\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -935,7 +971,7 @@ beta\_webhook\_session\_running\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -947,7 +983,7 @@ beta\_webhook\_session\_idled\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -959,7 +995,7 @@ beta\_webhook\_session\_requires\_action\_event\_data: object { id, organization
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -971,7 +1007,7 @@ beta\_webhook\_session\_archived\_event\_data: object { id, organization\_id, ty
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -983,7 +1019,7 @@ beta\_webhook\_session\_deleted\_event\_data: object { id, organization\_id, typ
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -995,7 +1031,7 @@ beta\_webhook\_session\_status\_rescheduled\_event\_data: object { id, organizat
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -1007,7 +1043,7 @@ beta\_webhook\_session\_status\_run\_started\_event\_data: object { id, organiza
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -1019,7 +1055,7 @@ beta\_webhook\_session\_status\_idled\_event\_data: object { id, organization\_i
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -1031,7 +1067,7 @@ beta\_webhook\_session\_status\_terminated\_event\_data: object { id, organizati
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -1039,37 +1075,49 @@ type: "session.status\_terminated"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_created\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_created"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_idled\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_idled"
 
 workspace\_id: string
 
-beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, type, workspace\_id }
+beta\_webhook\_session\_thread\_terminated\_event\_data: object { id, organization\_id, session\_thread\_id, 2 more }
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
+
+session\_thread\_id: string
+
+ID of the session thread this event refers to.
 
 type: "session.thread\_terminated"
 
@@ -1079,7 +1127,7 @@ beta\_webhook\_session\_outcome\_evaluation\_ended\_event\_data: object { id, or
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the session that triggered the event.
 
 organization\_id: string
 
@@ -1091,7 +1139,7 @@ beta\_webhook\_vault\_created\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -1103,7 +1151,7 @@ beta\_webhook\_vault\_archived\_event\_data: object { id, organization\_id, type
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -1115,7 +1163,7 @@ beta\_webhook\_vault\_deleted\_event\_data: object { id, organization\_id, type,
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault that triggered the event.
 
 organization\_id: string
 
@@ -1127,7 +1175,7 @@ beta\_webhook\_vault\_credential\_created\_event\_data: object { id, organizatio
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -1143,7 +1191,7 @@ beta\_webhook\_vault\_credential\_archived\_event\_data: object { id, organizati
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -1159,7 +1207,7 @@ beta\_webhook\_vault\_credential\_deleted\_event\_data: object { id, organizatio
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 
@@ -1175,7 +1223,7 @@ beta\_webhook\_vault\_credential\_refresh\_failed\_event\_data: object { id, org
 
 id: string
 
-ID of the resource that triggered the event.
+ID of the vault credential that triggered the event.
 
 organization\_id: string
 

@@ -1776,6 +1776,14 @@ Model
 
 One of the following:
 
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
+
 "claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
@@ -2844,6 +2852,8 @@ One of the following:
 [ToolSearchToolResultErrorCode](api/messages.md) errorCode
 
 "tool\_search\_tool\_result\_error" type
+
+?string errorMessage
 
 [ToolSearchToolSearchResultBlock](api/messages.md)
 

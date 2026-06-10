@@ -185,12 +185,21 @@ Python
 TypeScript
 
 ```shiki
-options = ClaudeAgentOptions(
-    env={
-        "CLAUDE_CODE_USE_BEDROCK": "1",
-        "ENABLE_PROMPT_CACHING_1H": "1",
-    },
-)
+from claude_agent_sdk import ClaudeAgentOptions, query
+import asyncio
+
+async def main():
+    options = ClaudeAgentOptions(
+        env={
+            "CLAUDE_CODE_USE_BEDROCK": "1",
+            "ENABLE_PROMPT_CACHING_1H": "1",
+        },
+    )
+
+    async for message in query(prompt="Summarize this project", options=options):
+        print(message)
+
+asyncio.run(main())
 ```
 
 Cache writes with a 1-hour TTL are billed at a higher rate than 5-minute writes, so enabling this trades higher write cost for more cache reads. See [prompt caching pricing](build-with-claude/prompt-caching.md) for details. Claude subscription users already receive 1-hour TTL automatically and do not need to set this variable.

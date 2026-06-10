@@ -22,7 +22,7 @@ Enabling CMEK is permanent. If your KMS key is deleted or disabled, Anthropic ca
 
 ## Amazon Resource Name (ARN) for Anthropic
 
-In order to have Anthropic use your encryption key, you must give Anthropic's IAM role a KMS key it can use for encrypting data. The ARN for Anthropic CMEK is:
+To have Anthropic use your encryption key, you must give Anthropic's IAM role a KMS key it can use for encrypting data. The ARN for Anthropic CMEK is:
 
 ```inline-block
 arn:aws:iam::915198916910:role/anthropic-cmek-client-us
@@ -115,6 +115,8 @@ Use only this published ARN. Never trust an identifier provided over email, chat
 
    Create an external key configuration through the Admin API.
 
+   For organizations on [Claude Platform on AWS](build-with-claude/claude-platform-on-aws.md), the external key endpoints are not yet available. Register, validate, and attach your key in the Claude Console instead.
+
    ```shiki
    curl -sS https://api.anthropic.com/v1/organizations/external_keys \
      -H "x-api-key: <anthropic-admin-api-key>" \
@@ -169,10 +171,10 @@ Use only this published ARN. Never trust an identifier provided over email, chat
 
    If validation fails, common causes are:
 
-   - **Encryption context mismatch:** if you kept the `EncryptionContext` condition in the key policy, confirm you replaced `<compartment-uuid>` with your workspace's actual compartment ID (see step 1). A wrong or unsubstituted value makes KMS return an opaque `AccessDeniedException`. To rule it out, temporarily remove the `Condition` block from the `AllowAnthropicCMEKCrypto` statement and re-validate.
-   - **Resource control policies (RCPs):** if your AWS organization has an RCP that denies KMS operations when `aws:PrincipalOrgID` does not match your org, it blocks Anthropic's cross-account role. The RCP needs a carve-out for this key or for Anthropic's role ARN. Service control policies do not apply here, because they do not evaluate for external principals calling through resource-based policies.
-   - **Access granted via IAM instead of the key policy:** cross-account KMS access must be granted in the key policy itself, not through an IAM policy in your account. Check with `aws kms get-key-policy --key-id <id> --policy-name default`.
-   - **Region mismatch:** confirm the key's region is one Anthropic operates in for the geo tier you configured.
+   - **Encryption context mismatch:** If you kept the `EncryptionContext` condition in the key policy, confirm you replaced `<compartment-uuid>` with your workspace's actual compartment ID (see step 1). A wrong or unsubstituted value makes KMS return an opaque `AccessDeniedException`. To rule it out, temporarily remove the `Condition` block from the `AllowAnthropicCMEKCrypto` statement and re-validate.
+   - **Resource control policies (RCPs):** If your AWS organization has an RCP that denies KMS operations when `aws:PrincipalOrgID` does not match your org, it blocks Anthropic's cross-account role. The RCP needs a carve-out for this key or for Anthropic's role ARN. Service control policies do not apply here, because they do not evaluate for external principals calling through resource-based policies.
+   - **Access granted through IAM instead of the key policy:** Cross-account KMS access must be granted in the key policy itself, not through an IAM policy in your account. Check with `aws kms get-key-policy --key-id <id> --policy-name default`.
+   - **Region mismatch:** Confirm the key's region is one Anthropic operates in for the geo tier you configured.
 4. 4
 
    Attach the key to a workspace

@@ -94,6 +94,10 @@ const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2
 
 const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
 
+const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+
+const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsCredential struct{…}
@@ -181,6 +185,38 @@ MCPServerURL string
 URL of the MCP server this credential authenticates against.
 
 Type BetaManagedAgentsStaticBearerAuthResponseType
+
+type BetaManagedAgentsEnvironmentVariableAuthResponse struct{…}
+
+Environment variable credential details. The secret value is never returned.
+
+Networking BetaManagedAgentsEnvironmentVariableAuthResponseNetworkingUnion
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+type BetaManagedAgentsUnrestrictedCredentialNetworkingResponse struct{…}
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+Type BetaManagedAgentsUnrestrictedCredentialNetworkingResponseType
+
+type BetaManagedAgentsLimitedCredentialNetworkingResponse struct{…}
+
+The secret is substituted only on requests to the listed hosts.
+
+AllowedHosts []string
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+Type BetaManagedAgentsLimitedCredentialNetworkingResponseType
+
+SecretName string
+
+Name of the environment variable.
+
+Type BetaManagedAgentsEnvironmentVariableAuthResponseType
 
 CreatedAt Time
 

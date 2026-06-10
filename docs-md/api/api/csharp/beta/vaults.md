@@ -218,6 +218,38 @@ URL of the MCP server this credential authenticates against.
 
 required Type Type
 
+class BetaManagedAgentsEnvironmentVariableAuthResponse:
+
+Environment variable credential details. The secret value is never returned.
+
+required Networking Networking
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse:
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+required Type Type
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse:
+
+The secret is substituted only on requests to the listed hosts.
+
+required IReadOnlyList<string> AllowedHosts
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+required Type Type
+
+required string SecretName
+
+Name of the environment variable.
+
+required Type Type
+
 required DateTimeOffset CreatedAt
 
 A timestamp in RFC 3339 format
@@ -239,6 +271,26 @@ Identifier of the vault this credential belongs to.
 string? DisplayName
 
 Human-readable name for the credential.
+
+class BetaManagedAgentsCredentialNetworkingParams: A class that can be one of several variants.union
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams:
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+required Type Type
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams:
+
+Substitute the secret only on requests to the listed hosts.
+
+required IReadOnlyList<string> AllowedHosts
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+required Type Type
 
 class BetaManagedAgentsCredentialValidation:
 
@@ -357,6 +409,126 @@ Confirmation of a deleted credential.
 required string ID
 
 Unique identifier of the deleted credential.
+
+required Type Type
+
+class BetaManagedAgentsEnvironmentVariableAuthResponse:
+
+Environment variable credential details. The secret value is never returned.
+
+required Networking Networking
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse:
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+required Type Type
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse:
+
+The secret is substituted only on requests to the listed hosts.
+
+required IReadOnlyList<string> AllowedHosts
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+required Type Type
+
+required string SecretName
+
+Name of the environment variable.
+
+required Type Type
+
+class BetaManagedAgentsEnvironmentVariableCreateParams:
+
+Parameters for creating an environment variable credential.
+
+required [BetaManagedAgentsCredentialNetworkingParams](api/beta.md) Networking
+
+Outbound hosts the secret value is substituted on.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams:
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+required Type Type
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams:
+
+Substitute the secret only on requests to the listed hosts.
+
+required IReadOnlyList<string> AllowedHosts
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+required Type Type
+
+required string SecretName
+
+Name of the environment variable. Immutable after create.
+
+required string SecretValue
+
+Secret value. Write-only; never returned in responses.
+
+required Type Type
+
+class BetaManagedAgentsEnvironmentVariableUpdateParams:
+
+Parameters for updating an environment variable credential. `secret_name` is immutable.
+
+required Type Type
+
+[BetaManagedAgentsCredentialNetworkingParams](api/beta.md)? Networking
+
+Updated networking scope. Full replacement.
+
+One of the following:
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams:
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+required Type Type
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams:
+
+Substitute the secret only on requests to the listed hosts.
+
+required IReadOnlyList<string> AllowedHosts
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+required Type Type
+
+string? SecretValue
+
+Updated secret value.
+
+class BetaManagedAgentsLimitedCredentialNetworkingParams:
+
+Substitute the secret only on requests to the listed hosts.
+
+required IReadOnlyList<string> AllowedHosts
+
+Hostnames on which the secret will be substituted. Each entry is a bare hostname (`api.example.com`), an IPv4 address (`192.0.2.1`), or a `*.`-prefixed wildcard (`*.example.com`). URLs, ports, paths, and IPv6 addresses are not accepted. At most 16 entries.
+
+required Type Type
+
+class BetaManagedAgentsLimitedCredentialNetworkingResponse:
+
+The secret is substituted only on requests to the listed hosts.
+
+required IReadOnlyList<string> AllowedHosts
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
 
 required Type Type
 
@@ -865,6 +1037,18 @@ required Type Type
 string? ClientSecret
 
 Updated OAuth client secret.
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingParams:
+
+Substitute the secret on any host the session's Environment network policy permits egress to. The Environment's network policy is the only boundary on where the secret can reach.
+
+required Type Type
+
+class BetaManagedAgentsUnrestrictedCredentialNetworkingResponse:
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+required Type Type
 
 ---
 

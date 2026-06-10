@@ -86,6 +86,10 @@ const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2
 
 const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
 
+const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+
+const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsSessionThread struct{…}
@@ -131,6 +135,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -352,17 +360,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 

@@ -76,6 +76,10 @@ CACHE\_DIAGNOSIS\_2026\_04\_07("cache-diagnosis-2026-04-07")
 
 THINKING\_TOKEN\_COUNT\_2026\_05\_13("thinking-token-count-2026-05-13")
 
+SERVER\_SIDE\_FALLBACK\_2026\_06\_01("server-side-fallback-2026-06-01")
+
+FALLBACK\_CREDIT\_2026\_06\_01("fallback-credit-2026-06-01")
+
 List<[BetaManagedAgentsEventParams](api/beta.md)> events
 
 Events to send to the `session`.
@@ -641,6 +645,22 @@ Type type
 Optional<Boolean> isError
 
 Whether the tool execution resulted in an error.
+
+class BetaManagedAgentsSystemMessageEventParams:
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+List<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks to append. Text-only.
+
+String text
+
+The text content.
+
+Type type
+
+Type type
 
 ##### ReturnsExpand Collapse
 
@@ -1279,6 +1299,30 @@ A timestamp in RFC 3339 format
 Optional<String> sessionThreadId
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
+class BetaManagedAgentsSystemMessageEvent:
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+String id
+
+Unique identifier for this event.
+
+List<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+String text
+
+The text content.
+
+Type type
+
+Type type
+
+Optional<LocalDateTime> processedAt
+
+A timestamp in RFC 3339 format
 
 Send Events
 

@@ -42,6 +42,10 @@ DateTimeOffset createdAtLte
 
 Query param: Return sessions created at or before this time (inclusive).
 
+string deploymentID
+
+Query param: Filter sessions created by this deployment ID.
+
 Boolean includeArchived
 
 Query param: When true, includes archived sessions. Default: false (exclude archived).
@@ -64,7 +68,7 @@ Query param: Sort direction for results, ordered by created\_at. Defaults to des
 
 string page
 
-Query param: Opaque pagination cursor from a previous response's next\_page.
+Query param: Opaque pagination cursor from a previous response.
 
 IReadOnlyList<Status> statuses
 
@@ -134,6 +138,10 @@ Header param: Optional header to specify the beta version(s) you want to use.
 
 "thinking-token-count-2026-05-13"ThinkingTokenCount2026\_05\_13
 
+"server-side-fallback-2026-06-01"ServerSideFallback2026\_06\_01
+
+"fallback-credit-2026-06-01"FallbackCredit2026\_06\_01
+
 ##### ReturnsExpand Collapse
 
 class SessionListPageResponse:
@@ -173,6 +181,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"ClaudeOpus4\_8
 
@@ -255,6 +267,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+"claude-fable-5"ClaudeFable5
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"ClaudeOpus4\_8
 
@@ -474,17 +490,11 @@ required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 required string Name
 
@@ -664,17 +674,11 @@ required [BetaManagedAgentsCustomToolInputSchema](api/beta.md) InputSchema
 
 JSON Schema for custom tool input parameters.
 
+JsonElement Type "object"constant
+
 IReadOnlyDictionary<string, JsonElement>? Properties
 
-JSON Schema properties defining the tool's input parameters.
-
-IReadOnlyList<string> Required
-
-List of required property names.
-
-Type Type
-
-Must be 'object' for tool input schemas.
+IReadOnlyList<string>? Required
 
 required string Name
 
@@ -888,6 +892,10 @@ required IReadOnlyList<string> VaultIds
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+string? DeploymentID
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 string? NextPage
 
 Opaque cursor for the next page. Null when no more results.
@@ -1073,7 +1081,8 @@ Response 200
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -1249,7 +1258,8 @@ Response 200
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="

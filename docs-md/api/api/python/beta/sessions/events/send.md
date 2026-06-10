@@ -586,6 +586,22 @@ is\_error: Optional[bool]
 
 Whether the tool execution resulted in an error.
 
+class BetaManagedAgentsSystemMessageEventParams: …
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+
+System content blocks to append. Text-only.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+type: Literal["system.message"]
+
 betas: Optional[List[[AnthropicBetaParam](api/beta.md)]]
 
 Optional header to specify the beta version(s) you want to use.
@@ -594,7 +610,7 @@ One of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 23 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]
 
 One of the following:
 
@@ -649,6 +665,10 @@ One of the following:
 "cache-diagnosis-2026-04-07"
 
 "thinking-token-count-2026-05-13"
+
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
 
 ##### ReturnsExpand Collapse
 
@@ -1287,6 +1307,30 @@ A timestamp in RFC 3339 format
 session\_thread\_id: Optional[str]
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
+
+class BetaManagedAgentsSystemMessageEvent: …
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+id: str
+
+Unique identifier for this event.
+
+content: List[[BetaManagedAgentsSystemContentBlock](api/beta.md)]
+
+System content blocks. Text-only.
+
+text: str
+
+The text content.
+
+type: Literal["text"]
+
+type: Literal["system.message"]
+
+processed\_at: Optional[datetime]
+
+A timestamp in RFC 3339 format
 
 Send Events
 

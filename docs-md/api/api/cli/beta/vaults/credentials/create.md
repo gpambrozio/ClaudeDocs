@@ -20,7 +20,7 @@ Create Credential
 
 Path param: Path parameter vault\_id
 
---auth: [BetaManagedAgentsMCPOAuthCreateParams](api/beta.md) { access\_token, mcp\_server\_url, type, 2 more }  or [BetaManagedAgentsStaticBearerCreateParams](api/beta.md) { token, mcp\_server\_url, type }
+--auth: [BetaManagedAgentsMCPOAuthCreateParams](api/beta.md) { access\_token, mcp\_server\_url, type, 2 more }  or [BetaManagedAgentsStaticBearerCreateParams](api/beta.md) { token, mcp\_server\_url, type }  or [BetaManagedAgentsEnvironmentVariableCreateParams](api/beta.md) { networking, secret\_name, secret\_value, type }
 
 Body param: Authentication details for creating a credential.
 
@@ -50,7 +50,7 @@ archived\_at: string
 
 A timestamp in RFC 3339 format
 
-auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }
+auth: [BetaManagedAgentsMCPOAuthAuthResponse](api/beta.md) { mcp\_server\_url, type, expires\_at, refresh }  or [BetaManagedAgentsStaticBearerAuthResponse](api/beta.md) { mcp\_server\_url, type }  or [BetaManagedAgentsEnvironmentVariableAuthResponse](api/beta.md) { networking, secret\_name, type }
 
 Authentication details for a credential.
 
@@ -129,6 +129,42 @@ URL of the MCP server this credential authenticates against.
 type: "static\_bearer"
 
 "static\_bearer"
+
+beta\_managed\_agents\_environment\_variable\_auth\_response: object { networking, secret\_name, type }
+
+Environment variable credential details. The secret value is never returned.
+
+networking: [BetaManagedAgentsUnrestrictedCredentialNetworkingResponse](api/beta.md) { type }  or [BetaManagedAgentsLimitedCredentialNetworkingResponse](api/beta.md) { allowed\_hosts, type }
+
+Outbound hosts the secret value is substituted on.
+
+beta\_managed\_agents\_unrestricted\_credential\_networking\_response: object { type }
+
+The secret is substituted on any host the session's Environment network policy permits egress to.
+
+type: "unrestricted"
+
+"unrestricted"
+
+beta\_managed\_agents\_limited\_credential\_networking\_response: object { allowed\_hosts, type }
+
+The secret is substituted only on requests to the listed hosts.
+
+allowed\_hosts: array of string
+
+Hostnames on which the secret will be substituted. An entry matches the request host exactly; a `*.`-prefixed entry matches any subdomain of the named domain but not the domain itself.
+
+type: "limited"
+
+"limited"
+
+secret\_name: string
+
+Name of the environment variable.
+
+type: "environment\_variable"
+
+"environment\_variable"
 
 created\_at: string
 

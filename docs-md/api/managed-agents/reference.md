@@ -26,6 +26,10 @@ Span events
 
 Span events
 
+System events
+
+System events
+
 | Type | Description |
 | --- | --- |
 | `user.message` | A user message with text content. |

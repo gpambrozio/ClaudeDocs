@@ -284,6 +284,26 @@ What the client should do next in response to this error.
 
 Type type
 
+[ManagedAgentsCredentialHostUnreachableError](api/beta.md)
+
+string credentialID
+
+ID of the affected credential.
+
+string message
+
+Human-readable error description.
+
+RetryStatus retryStatus
+
+What the client should do next in response to this error.
+
+Type type
+
+string vaultID
+
+ID of the vault containing the affected credential.
+
 [ManagedAgentsDocumentBlock](api/beta.md)
 
 Source source
@@ -383,6 +403,14 @@ The result content returned by the tool.
 ?bool isError
 
 Whether the tool execution resulted in an error.
+
+[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks to append. Text-only.
+
+Type type
 
 [ManagedAgentsFileDocumentSource](api/beta.md)
 
@@ -1275,6 +1303,22 @@ The session's full metadata bag after the update. Present when the update set no
 ?string title
 
 The session's new title. Present only when the update changed it.
+
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
 
 [ManagedAgentsSessionRequiresAction](api/beta.md)
 
@@ -2265,6 +2309,30 @@ The session's full metadata bag after the update. Present when the update set no
 ?string title
 
 The session's new title. Present only when the update changed it.
+
+[BetaManagedAgentsSystemMessageEvent](api/beta.md)
+
+string id
+
+Unique identifier for this event.
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks. Text-only.
+
+Type type
+
+?\Datetime processedAt
+
+A timestamp in RFC 3339 format
+
+[ManagedAgentsSystemMessageEventParams](api/beta.md)
+
+list<[BetaManagedAgentsSystemContentBlock](api/beta.md)> content
+
+System content blocks to append. Text-only.
+
+Type type
 
 [ManagedAgentsTextBlock](api/beta.md)
 

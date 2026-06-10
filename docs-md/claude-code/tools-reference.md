@@ -277,6 +277,8 @@ What tools do you have access to?
 
 Claude gives a conversational summary. For exact MCP tool names, run `/mcp`.
 
+The [advisor tool](advisor.md) is a [server tool](agents-and-tools/tool-use/advisor-tool.md) that the API runs, rather than a tool that Claude Code implements. It has no name you can reference in permission rules or hook matchers.
+
 ## [​](#see-also) See also
 
 - [MCP servers](mcp.md): add custom tools by connecting external servers

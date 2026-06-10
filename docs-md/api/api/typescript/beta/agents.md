@@ -78,7 +78,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -312,21 +316,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -818,41 +816,29 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
 type: "custom"
 
-BetaManagedAgentsCustomToolInputSchema { properties, required, type }
+BetaManagedAgentsCustomToolInputSchema { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 BetaManagedAgentsCustomToolParams { description, input\_schema, name, type }
 
@@ -862,21 +848,15 @@ description: string
 
 Description of what the tool does, shown to the agent to help it decide when to use the tool. 1-1024 characters.
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 
@@ -1120,7 +1100,7 @@ Tool calls require user confirmation before execution.
 
 type: "always\_ask"
 
-BetaManagedAgentsModel = "claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more | (string & {})
+BetaManagedAgentsModel = "claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more | (string & {})
 
 The model that will power your agent.
 
@@ -1128,7 +1108,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -1184,7 +1168,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -1250,7 +1238,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -1388,7 +1380,11 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-"claude-opus-4-8" | "claude-opus-4-7" | "claude-opus-4-6" | 7 more
+"claude-fable-5" | "claude-opus-4-8" | "claude-opus-4-7" | 8 more
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -1606,21 +1602,15 @@ A custom tool as returned in API responses.
 
 description: string
 
-input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { properties, required, type }
+input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md) { type, properties, required }
 
 JSON Schema for custom tool input parameters.
 
+type: "object"
+
 properties?: Record<string, unknown> | null
 
-JSON Schema properties defining the tool's input parameters.
-
-required?: Array<string>
-
-List of required property names.
-
-type?: "object"
-
-Must be 'object' for tool input schemas.
+required?: Array<string> | null
 
 name: string
 

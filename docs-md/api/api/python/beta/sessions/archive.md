@@ -26,7 +26,7 @@ One of the following:
 
 str
 
-Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 23 more]
+Literal["message-batches-2024-09-24", "prompt-caching-2024-07-31", "computer-use-2024-10-22", 25 more]
 
 One of the following:
 
@@ -82,6 +82,10 @@ One of the following:
 
 "thinking-token-count-2026-05-13"
 
+"server-side-fallback-2026-06-01"
+
+"fallback-credit-2026-06-01"
+
 ##### ReturnsExpand Collapse
 
 class BetaManagedAgentsSession: …
@@ -118,12 +122,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -136,6 +141,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -221,12 +230,13 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
-Literal["claude-opus-4-8", "claude-opus-4-7", "claude-opus-4-6", 7 more]
+Literal["claude-fable-5", "claude-opus-4-8", "claude-opus-4-7", 8 more]
 
 The model that will power your agent.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
+- `claude-fable-5` - Next generation of intelligence for the hardest knowledge work and coding problems
 - `claude-opus-4-8` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-7` - Frontier intelligence for long-running agents and coding
 - `claude-opus-4-6` - Most intelligent model for building agents and coding
@@ -239,6 +249,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 - `claude-sonnet-4-5-20250929` - High-performance model for agents and coding
 
 One of the following:
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 "claude-opus-4-8"
 
@@ -460,17 +474,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -650,17 +658,11 @@ input\_schema: [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+type: Literal["object"]
+
 properties: Optional[Dict[str, object]]
 
-JSON Schema properties defining the tool's input parameters.
-
 required: Optional[List[str]]
-
-List of required property names.
-
-type: Optional[Literal["object"]]
-
-Must be 'object' for tool input schemas.
 
 name: str
 
@@ -874,6 +876,10 @@ vault\_ids: List[str]
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+deployment\_id: Optional[str]
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 Archive Session
 
 Python
@@ -1056,7 +1062,8 @@ Response 200
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 
@@ -1227,7 +1234,8 @@ Response 200
   },
   "vault_ids": [
     "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-  ]
+  ],
+  "deployment_id": "deployment_id"
 }
 ```
 

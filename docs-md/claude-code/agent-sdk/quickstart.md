@@ -254,7 +254,7 @@ With `Bash` enabled, try: `"Write unit tests for utils.py, run them, and fix any
 | `acceptEdits` | Auto-approves file edits and common filesystem commands, asks for other actions | Trusted development workflows |
 | `dontAsk` | Denies anything not in `allowedTools` | Locked-down headless agents |
 | `auto` (TypeScript only) | A model classifier approves or denies each tool call | Autonomous agents with safety guardrails |
-| `bypassPermissions` | Runs every tool without prompts | Sandboxed CI, fully trusted environments |
+| `bypassPermissions` | Runs every tool without prompting, unless an explicit [`ask` rule](agent-sdk/permissions.md) matches | Sandboxed CI, fully trusted environments |
 | `default` | Requires a `canUseTool` callback to handle approval | Custom approval flows |
 
 The example above uses `acceptEdits` mode, which auto-approves file operations so the agent can run without interactive prompts. If you want to prompt users for approval, use `default` mode and provide a [`canUseTool` callback](agent-sdk/user-input.md) that collects user input. For more control, see [Permissions](agent-sdk/permissions.md).

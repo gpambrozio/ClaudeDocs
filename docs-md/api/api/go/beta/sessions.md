@@ -324,6 +324,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
@@ -415,6 +419,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -636,17 +644,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -826,17 +828,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -1050,6 +1046,10 @@ VaultIDs []string
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+DeploymentID stringOptional
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 type BetaManagedAgentsSessionAgent struct{…}
 
 Resolved `agent` definition for a `session`. Snapshot of the `agent` at `session` creation time.
@@ -1085,6 +1085,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -1177,6 +1181,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -1398,17 +1406,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -1588,17 +1590,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -1790,17 +1786,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -1847,6 +1837,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -2068,17 +2062,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -2151,6 +2139,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -2244,6 +2236,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
@@ -2464,17 +2460,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -2654,17 +2644,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -2709,6 +2693,40 @@ Total input tokens consumed across all turns.
 OutputTokens int64Optional
 
 Total output tokens generated across all turns.
+
+type BetaManagedAgentsSystemContentBlock struct{…}
+
+Regular text content.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSystemContentBlockType
+
+type BetaManagedAgentsSystemMessageEvent struct{…}
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+ID string
+
+Unique identifier for this event.
+
+Content [][BetaManagedAgentsSystemContentBlock](api/beta.md)
+
+System content blocks. Text-only.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSystemContentBlockType
+
+Type BetaManagedAgentsSystemMessageEventType
+
+ProcessedAt TimeOptional
+
+A timestamp in RFC 3339 format
 
 type BetaManagedAgentsUserToolResultEvent struct{…}
 
@@ -3812,6 +3830,48 @@ Type BetaManagedAgentsRetryStatusTerminalType
 
 Type BetaManagedAgentsBillingErrorType
 
+type BetaManagedAgentsCredentialHostUnreachableError struct{…}
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+CredentialID string
+
+ID of the affected credential.
+
+Message string
+
+Human-readable error description.
+
+RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion
+
+What the client should do next in response to this error.
+
+One of the following:
+
+type BetaManagedAgentsRetryStatusRetrying struct{…}
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+Type BetaManagedAgentsRetryStatusRetryingType
+
+type BetaManagedAgentsRetryStatusExhausted struct{…}
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+Type BetaManagedAgentsRetryStatusExhaustedType
+
+type BetaManagedAgentsRetryStatusTerminal struct{…}
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+Type BetaManagedAgentsRetryStatusTerminalType
+
+Type BetaManagedAgentsCredentialHostUnreachableErrorType
+
+VaultID string
+
+ID of the vault containing the affected credential.
+
 type BetaManagedAgentsDocumentBlock struct{…}
 
 Document content, either specified directly as base64 data, as text, or as a reference via a URL.
@@ -4447,6 +4507,22 @@ Type BetaManagedAgentsSearchResultBlockType
 IsError boolOptional
 
 Whether the tool execution resulted in an error.
+
+type BetaManagedAgentsSystemMessageEventParamsResp struct{…}
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+Content [][BetaManagedAgentsSystemContentBlock](api/beta.md)
+
+System content blocks to append. Text-only.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSystemContentBlockType
+
+Type BetaManagedAgentsSystemMessageEventParamsType
 
 type BetaManagedAgentsFileDocumentSource struct{…}
 
@@ -5430,6 +5506,30 @@ SessionThreadID stringOptional
 
 Routes this result to a subagent thread. Copy from the `agent.tool_use` event's `session_thread_id`.
 
+type BetaManagedAgentsSystemMessageEvent struct{…}
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+ID string
+
+Unique identifier for this event.
+
+Content [][BetaManagedAgentsSystemContentBlock](api/beta.md)
+
+System content blocks. Text-only.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSystemContentBlockType
+
+Type BetaManagedAgentsSystemMessageEventType
+
+ProcessedAt TimeOptional
+
+A timestamp in RFC 3339 format
+
 type BetaManagedAgentsSessionDeletedEvent struct{…}
 
 Emitted when a session has been deleted. Terminates any active event stream — no further events will be emitted for this session.
@@ -5709,6 +5809,48 @@ The session encountered a terminal error and will transition to `terminated` sta
 Type BetaManagedAgentsRetryStatusTerminalType
 
 Type BetaManagedAgentsBillingErrorType
+
+type BetaManagedAgentsCredentialHostUnreachableError struct{…}
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+CredentialID string
+
+ID of the affected credential.
+
+Message string
+
+Human-readable error description.
+
+RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion
+
+What the client should do next in response to this error.
+
+One of the following:
+
+type BetaManagedAgentsRetryStatusRetrying struct{…}
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+Type BetaManagedAgentsRetryStatusRetryingType
+
+type BetaManagedAgentsRetryStatusExhausted struct{…}
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+Type BetaManagedAgentsRetryStatusExhaustedType
+
+type BetaManagedAgentsRetryStatusTerminal struct{…}
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+Type BetaManagedAgentsRetryStatusTerminalType
+
+Type BetaManagedAgentsCredentialHostUnreachableErrorType
+
+VaultID string
+
+ID of the vault containing the affected credential.
 
 ProcessedAt Time
 
@@ -7198,6 +7340,48 @@ Type BetaManagedAgentsRetryStatusTerminalType
 
 Type BetaManagedAgentsBillingErrorType
 
+type BetaManagedAgentsCredentialHostUnreachableError struct{…}
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+CredentialID string
+
+ID of the affected credential.
+
+Message string
+
+Human-readable error description.
+
+RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion
+
+What the client should do next in response to this error.
+
+One of the following:
+
+type BetaManagedAgentsRetryStatusRetrying struct{…}
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+Type BetaManagedAgentsRetryStatusRetryingType
+
+type BetaManagedAgentsRetryStatusExhausted struct{…}
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+Type BetaManagedAgentsRetryStatusExhaustedType
+
+type BetaManagedAgentsRetryStatusTerminal struct{…}
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+Type BetaManagedAgentsRetryStatusTerminalType
+
+Type BetaManagedAgentsCredentialHostUnreachableErrorType
+
+VaultID string
+
+ID of the vault containing the affected credential.
+
 ProcessedAt Time
 
 A timestamp in RFC 3339 format
@@ -7904,6 +8088,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
@@ -7995,6 +8183,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -8216,17 +8408,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -8406,17 +8592,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -8433,6 +8613,30 @@ The session's full metadata bag after the update. Present when the update set no
 Title stringOptional
 
 The session's new title. Present only when the update changed it.
+
+type BetaManagedAgentsSystemMessageEvent struct{…}
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+ID string
+
+Unique identifier for this event.
+
+Content [][BetaManagedAgentsSystemContentBlock](api/beta.md)
+
+System content blocks. Text-only.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSystemContentBlockType
+
+Type BetaManagedAgentsSystemMessageEventType
+
+ProcessedAt TimeOptional
+
+A timestamp in RFC 3339 format
 
 type BetaManagedAgentsSessionRequiresAction struct{…}
 
@@ -10358,6 +10562,48 @@ Type BetaManagedAgentsRetryStatusTerminalType
 
 Type BetaManagedAgentsBillingErrorType
 
+type BetaManagedAgentsCredentialHostUnreachableError struct{…}
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+CredentialID string
+
+ID of the affected credential.
+
+Message string
+
+Human-readable error description.
+
+RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion
+
+What the client should do next in response to this error.
+
+One of the following:
+
+type BetaManagedAgentsRetryStatusRetrying struct{…}
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+Type BetaManagedAgentsRetryStatusRetryingType
+
+type BetaManagedAgentsRetryStatusExhausted struct{…}
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+Type BetaManagedAgentsRetryStatusExhaustedType
+
+type BetaManagedAgentsRetryStatusTerminal struct{…}
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+Type BetaManagedAgentsRetryStatusTerminalType
+
+Type BetaManagedAgentsCredentialHostUnreachableErrorType
+
+VaultID string
+
+ID of the vault containing the affected credential.
+
 ProcessedAt Time
 
 A timestamp in RFC 3339 format
@@ -11064,6 +11310,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
@@ -11155,6 +11405,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -11376,17 +11630,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -11566,17 +11814,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -11593,6 +11835,46 @@ The session's full metadata bag after the update. Present when the update set no
 Title stringOptional
 
 The session's new title. Present only when the update changed it.
+
+type BetaManagedAgentsSystemMessageEvent struct{…}
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+ID string
+
+Unique identifier for this event.
+
+Content [][BetaManagedAgentsSystemContentBlock](api/beta.md)
+
+System content blocks. Text-only.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSystemContentBlockType
+
+Type BetaManagedAgentsSystemMessageEventType
+
+ProcessedAt TimeOptional
+
+A timestamp in RFC 3339 format
+
+type BetaManagedAgentsSystemMessageEventParamsResp struct{…}
+
+Privileged context for the accompanying turn and all subsequent turns, appended to the session's system context as a `role: "system"` turn rather than replacing the top-level system prompt. At most one per request: it must be the final event and immediately follow the `user.message`, `user.tool_result`, or `user.custom_tool_result` it accompanies. Only supported on models that accept mid-conversation system messages.
+
+Content [][BetaManagedAgentsSystemContentBlock](api/beta.md)
+
+System content blocks to append. Text-only.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSystemContentBlockType
+
+Type BetaManagedAgentsSystemMessageEventParamsType
 
 type BetaManagedAgentsTextBlock struct{…}
 
@@ -12976,6 +13258,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
@@ -13196,17 +13482,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -14836,6 +15116,48 @@ Type BetaManagedAgentsRetryStatusTerminalType
 
 Type BetaManagedAgentsBillingErrorType
 
+type BetaManagedAgentsCredentialHostUnreachableError struct{…}
+
+An `environment_variable` credential's `auth.networking.allowed_hosts` includes a host the environment's network policy does not permit.
+
+CredentialID string
+
+ID of the affected credential.
+
+Message string
+
+Human-readable error description.
+
+RetryStatus BetaManagedAgentsCredentialHostUnreachableErrorRetryStatusUnion
+
+What the client should do next in response to this error.
+
+One of the following:
+
+type BetaManagedAgentsRetryStatusRetrying struct{…}
+
+The server is retrying automatically. Client should wait; the same error type may fire again as retrying, then once as exhausted when the retry budget runs out.
+
+Type BetaManagedAgentsRetryStatusRetryingType
+
+type BetaManagedAgentsRetryStatusExhausted struct{…}
+
+This turn is dead; queued inputs are flushed and the session returns to idle. Client may send a new prompt.
+
+Type BetaManagedAgentsRetryStatusExhaustedType
+
+type BetaManagedAgentsRetryStatusTerminal struct{…}
+
+The session encountered a terminal error and will transition to `terminated` state.
+
+Type BetaManagedAgentsRetryStatusTerminalType
+
+Type BetaManagedAgentsCredentialHostUnreachableErrorType
+
+VaultID string
+
+ID of the vault containing the affected credential.
+
 ProcessedAt Time
 
 A timestamp in RFC 3339 format
@@ -15542,6 +15864,10 @@ See [models](https://docs.anthropic.com/en/docs/models-overview) for additional 
 
 One of the following:
 
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
 Frontier intelligence for long-running agents and coding
@@ -15633,6 +15959,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -15854,17 +16184,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -16044,17 +16368,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -16071,6 +16389,30 @@ The session's full metadata bag after the update. Present when the update set no
 Title stringOptional
 
 The session's new title. Present only when the update changed it.
+
+type BetaManagedAgentsSystemMessageEvent struct{…}
+
+A mid-conversation system message event. Carries system-role content that is appended to the session as a `role: "system"` turn.
+
+ID string
+
+Unique identifier for this event.
+
+Content [][BetaManagedAgentsSystemContentBlock](api/beta.md)
+
+System content blocks. Text-only.
+
+Text string
+
+The text content.
+
+Type BetaManagedAgentsSystemContentBlockType
+
+Type BetaManagedAgentsSystemMessageEventType
+
+ProcessedAt TimeOptional
+
+A timestamp in RFC 3339 format
 
 #### SessionsThreadsEvents
 

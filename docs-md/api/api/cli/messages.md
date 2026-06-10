@@ -3644,9 +3644,9 @@ Defaults to `5m`.
 
 tool\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
 
-content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
-tool\_search\_tool\_result\_error\_param: object { error\_code, type }
+tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
@@ -3659,6 +3659,8 @@ error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or
 "execution\_time\_exceeded"
 
 type: "tool\_search\_tool\_result\_error"
+
+error\_message: optional string
 
 tool\_search\_tool\_search\_result\_block\_param: object { tool\_references, type }
 
@@ -5313,11 +5315,19 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -5401,7 +5411,7 @@ stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -5410,6 +5420,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 
@@ -8516,9 +8528,9 @@ Defaults to `5m`.
 
 tool\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
 
-content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
-tool\_search\_tool\_result\_error\_param: object { error\_code, type }
+tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
@@ -8531,6 +8543,8 @@ error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or
 "execution\_time\_exceeded"
 
 type: "tool\_search\_tool\_result\_error"
+
+error\_message: optional string
 
 tool\_search\_tool\_search\_result\_block\_param: object { tool\_references, type }
 
@@ -9879,7 +9893,7 @@ stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -9888,6 +9902,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 
@@ -10608,11 +10624,19 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -10696,7 +10720,7 @@ stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -10705,6 +10729,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 
@@ -11480,11 +11506,19 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -11568,7 +11602,7 @@ stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -11577,6 +11611,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 
@@ -11733,7 +11769,7 @@ stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -11742,6 +11778,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 
@@ -12579,7 +12617,7 @@ refusal\_stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -12588,6 +12626,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 
@@ -14754,9 +14794,9 @@ type: "tool\_search\_tool\_result"
 
 tool\_search\_tool\_result\_block\_param: object { content, tool\_use\_id, type, cache\_control }
 
-content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
+content: [ToolSearchToolResultErrorParam](api/messages.md) { error\_code, type, error\_message }  or [ToolSearchToolSearchResultBlockParam](api/messages.md) { tool\_references, type }
 
-tool\_search\_tool\_result\_error\_param: object { error\_code, type }
+tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
@@ -14769,6 +14809,8 @@ error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or
 "execution\_time\_exceeded"
 
 type: "tool\_search\_tool\_result\_error"
+
+error\_message: optional string
 
 tool\_search\_tool\_search\_result\_block\_param: object { tool\_references, type }
 
@@ -14852,7 +14894,7 @@ tool\_search\_tool\_result\_error\_code: "invalid\_tool\_input" or "unavailable"
 
 "execution\_time\_exceeded"
 
-tool\_search\_tool\_result\_error\_param: object { error\_code, type }
+tool\_search\_tool\_result\_error\_param: object { error\_code, type, error\_message }
 
 error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or "execution\_time\_exceeded"
 
@@ -14865,6 +14907,8 @@ error\_code: "invalid\_tool\_input" or "unavailable" or "too\_many\_requests" or
 "execution\_time\_exceeded"
 
 type: "tool\_search\_tool\_result\_error"
+
+error\_message: optional string
 
 tool\_search\_tool\_search\_result\_block: object { tool\_references, type }
 
@@ -18511,11 +18555,19 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -18599,7 +18651,7 @@ stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -18608,6 +18660,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 
@@ -19487,11 +19541,19 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -19575,7 +19637,7 @@ stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -19584,6 +19646,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 
@@ -20427,11 +20491,19 @@ file\_id: string
 
 type: "container\_upload"
 
-model: "claude-opus-4-8" or "claude-opus-4-7" or "claude-mythos-preview" or 15 more or string
+model: "claude-fable-5" or "claude-mythos-5" or "claude-opus-4-8" or 17 more or string
 
 The model that will complete your prompt.
 
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
+
+"claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
+
+"claude-mythos-5"
+
+Most capable model for cybersecurity and biology research
 
 "claude-opus-4-8"
 
@@ -20515,7 +20587,7 @@ stop\_details: object { category, explanation, type }
 
 Structured information about a refusal.
 
-category: "cyber" or "bio"
+category: "cyber" or "bio" or "reasoning\_extraction"
 
 The policy category that triggered the refusal.
 
@@ -20524,6 +20596,8 @@ The policy category that triggered the refusal.
 "cyber"
 
 "bio"
+
+"reasoning\_extraction"
 
 explanation: string
 

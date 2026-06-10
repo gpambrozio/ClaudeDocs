@@ -8,7 +8,7 @@ PHP
 
 # List Sessions
 
-$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?[Order](api/beta/sessions/list.md) order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsSession](api/beta.md)>
+$client->beta->sessions->list(?string agentID, ?int agentVersion, ?\Datetime createdAtGt, ?\Datetime createdAtGte, ?\Datetime createdAtLt, ?\Datetime createdAtLte, ?string deploymentID, ?bool includeArchived, ?int limit, ?string memoryStoreID, ?[Order](api/beta/sessions/list.md) order, ?string page, ?list<Status> statuses, ?list<AnthropicBeta> betas): PageCursor<[BetaManagedAgentsSession](api/beta.md)>
 
 GET/v1/sessions
 
@@ -40,6 +40,10 @@ createdAtLte?:optional \Datetime
 
 Return sessions created at or before this time (inclusive).
 
+deploymentID?:optional string
+
+Filter sessions created by this deployment ID.
+
 includeArchived?:optional bool
 
 When true, includes archived sessions. Default: false (exclude archived).
@@ -58,7 +62,7 @@ Sort direction for results, ordered by created\_at. Defaults to desc (newest fir
 
 page?:optional string
 
-Opaque pagination cursor from a previous response's next\_page.
+Opaque pagination cursor from a previous response.
 
 statuses?:optional list<Status>
 
@@ -120,6 +124,10 @@ list<string> vaultIDs
 
 Vault IDs attached to the session at creation. Empty when no vaults were supplied.
 
+?string deploymentID
+
+Deployment ID when the session was created from a deployment reference. Null otherwise.
+
 List Sessions
 
 PHP
@@ -138,6 +146,7 @@ $page = $client->beta->sessions->list(
   createdAtGte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
   createdAtLt: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
   createdAtLte: new \DateTimeImmutable('2019-12-27T18:11:19.117Z'),
+  deploymentID: 'deployment_id',
   includeArchived: true,
   limit: 0,
   memoryStoreID: 'memory_store_id',
@@ -317,7 +326,8 @@ Response 200
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="
@@ -493,7 +503,8 @@ Response 200
       },
       "vault_ids": [
         "vlt_011CZkZDLs7fYzm1hXNPeRjv"
-      ]
+      ],
+      "deployment_id": "deployment_id"
     }
   ],
   "next_page": "page_MjAyNS0wNS0xNFQwMDowMDowMFo="

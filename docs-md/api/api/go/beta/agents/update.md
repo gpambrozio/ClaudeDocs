@@ -26,7 +26,7 @@ Body param: The agent's current version, used to prevent concurrent overwrites. 
 
 Description param.Field[string]Optional
 
-Body param: Description. Up to 2048 characters. Omit to preserve; send empty string or null to clear.
+Body param: Description. Omit to preserve; send empty string or null to clear.
 
 MCPServers param.Field[[][BetaManagedAgentsURLMCPServerParamsResp](api/beta.md)]Optional
 
@@ -69,6 +69,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -128,11 +132,11 @@ Body param: A coordinator topology: the session's primary thread orchestrates wo
 
 Name param.Field[string]Optional
 
-Body param: Human-readable name. 1-256 characters. Omit to preserve. Cannot be cleared.
+Body param: Human-readable name. Must be non-empty. Omit to preserve. Cannot be cleared.
 
 Skills param.Field[[][BetaManagedAgentsSkillParamsUnionResp](api/beta.md)]Optional
 
-Body param: Skills. Full replacement. Omit to preserve; send empty array or null to clear. Maximum 20.
+Body param: Skills. Full replacement. Omit to preserve; send empty array or null to clear.
 
 type BetaManagedAgentsAnthropicSkillParamsResp struct{…}
 
@@ -164,7 +168,7 @@ Version to pin. Defaults to latest if omitted.
 
 System param.Field[string]Optional
 
-Body param: System prompt. Up to 100,000 characters. Omit to preserve; send empty string or null to clear.
+Body param: System prompt. Omit to preserve; send empty string or null to clear.
 
 Tools param.Field[[]BetaAgentUpdateParamsToolUnion]Optional
 
@@ -328,17 +332,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
@@ -408,6 +406,10 @@ const AnthropicBetaCacheDiagnosis2026\_04\_07 AnthropicBeta = "cache-diagnosis-2
 
 const AnthropicBetaThinkingTokenCount2026\_05\_13 AnthropicBeta = "thinking-token-count-2026-05-13"
 
+const AnthropicBetaServerSideFallback2026\_06\_01 AnthropicBeta = "server-side-fallback-2026-06-01"
+
+const AnthropicBetaFallbackCredit2026\_06\_01 AnthropicBeta = "fallback-credit-2026-06-01"
+
 ##### ReturnsExpand Collapse
 
 type BetaManagedAgentsAgent struct{…}
@@ -455,6 +457,10 @@ The model that will power your agent.
 See [models](https://docs.anthropic.com/en/docs/models-overview) for additional details and options.
 
 One of the following:
+
+const BetaManagedAgentsModelClaudeFable5 BetaManagedAgentsModel = "claude-fable-5"
+
+Next generation of intelligence for the hardest knowledge work and coding problems
 
 const BetaManagedAgentsModelClaudeOpus4\_8 BetaManagedAgentsModel = "claude-opus-4-8"
 
@@ -692,17 +698,11 @@ InputSchema [BetaManagedAgentsCustomToolInputSchema](api/beta.md)
 
 JSON Schema for custom tool input parameters.
 
+Type Object
+
 Properties map[string, any]Optional
 
-JSON Schema properties defining the tool's input parameters.
-
 Required []stringOptional
-
-List of required property names.
-
-Type BetaManagedAgentsCustomToolInputSchemaTypeOptional
-
-Must be 'object' for tool input schemas.
 
 Name string
 
