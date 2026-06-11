@@ -24,7 +24,7 @@ Enabling CMEK is permanent. If your KMS key is deleted or disabled, Anthropic ca
 
 To have Anthropic use your encryption key, you must give Anthropic's IAM role a KMS key it can use for encrypting data. The ARN for Anthropic CMEK is:
 
-```inline-block
+```block
 arn:aws:iam::915198916910:role/anthropic-cmek-client-us
 ```
 

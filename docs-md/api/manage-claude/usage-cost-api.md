@@ -57,7 +57,7 @@ bucket_width=1d" \
 
 If you're building an integration, set your User-Agent header to help us understand usage patterns:
 
-```inline-block
+```block
 User-Agent: YourApp/1.0.0 (https://yourapp.com)
 ```
 

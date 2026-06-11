@@ -27,7 +27,7 @@ Self-hosting controls *where the agent's code executes*. [MCP tunnels](agents-an
 
 ## Environment worker
 
-This guide describes how to build a worker with any generic sandboxing platform. Additional, platform-specific guides are available for [Cloudflare](https://developers.cloudflare.com/sandbox/claude-managed-agents/), [Daytona](guides/claude/claude-managed-agents.md), [Modal](https://github.com/modal-labs/claude-managed-agents-modal-sandbox), and [Vercel](https://vercel.com/kb/guide/run-claude-managed-agent-tools-with-vercel-sandbox).
+This guide describes how to build a worker with any generic sandboxing platform. Additional, platform-specific guides are available for [Blaxel](https://github.com/blaxel-ai/cma-blaxel-sandbox), [Cloudflare](https://developers.cloudflare.com/sandbox/claude-managed-agents/), [Daytona](guides/claude/claude-managed-agents.md), [E2B](https://e2b.dev/docs/agents/claude-managed-agents), [Modal](https://github.com/modal-labs/claude-managed-agents-modal-sandbox), [Namespace](https://namespace.so/docs/integrations/claude), [Superserve](https://docs.superserve.ai/integrations/managed-agents/claude-managed-agents), and [Vercel](https://vercel.com/kb/guide/run-claude-managed-agent-tools-with-vercel-sandbox).
 
 An environment worker is a process you run on your own infrastructure. It receives tool execution requests from Anthropic and runs them locally. The `self_hosted` environment acts as a work queue: when a [session](managed-agents/sessions.md) is assigned to it, Anthropic enqueues the session as a work item. Your worker claims work items from that queue, spawns an execution context for each one, downloads the agent's [skills](managed-agents/skills.md) (reusable, filesystem-based resources that give the agent domain-specific expertise), runs the tool calls, and posts the results back.
 
@@ -109,7 +109,7 @@ Webhook-triggered (SDK)
    Run this on the worker host.
 
    ```shiki
-   VERSION=1.11.0
+   VERSION=1.12.0
    OS=$(uname -s | tr '[:upper:]' '[:lower:]')
    ARCH=$(uname -m | sed -e 's/x86_64/amd64/' -e 's/aarch64/arm64/')
    curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${VERSION}/ant_${VERSION}_${OS}_${ARCH}.tar.gz" \
@@ -140,7 +140,7 @@ Webhook-triggered (SDK)
 
    ```inline-block
    FROM your-base-image
-   ARG ANT_VERSION=1.11.0
+   ARG ANT_VERSION=1.12.0
    ARG TARGETARCH
    RUN ARCH=$([ "$TARGETARCH" = "arm64" ] && echo arm64 || echo amd64) && \
        curl -fsSL "https://github.com/anthropics/anthropic-cli/releases/download/v${ANT_VERSION}/ant_${ANT_VERSION}_linux_${ARCH}.tar.gz" \
@@ -318,7 +318,7 @@ stats = client.beta.environments.work.stats(os.environ["ANTHROPIC_ENVIRONMENT_ID
 print(f"depth={stats.depth} pending={stats.pending}")
 ```
 
-```inline-block
+```block
 {
   "type": "work_queue_stats",
   "depth": 0,

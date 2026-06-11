@@ -334,7 +334,7 @@ The `input_tokens` field represents only the tokens that come **after the last c
 
 To calculate total input tokens:
 
-```inline-block
+```block
 total_input_tokens = cache_read_input_tokens + cache_creation_input_tokens + input_tokens
 ```
 
@@ -374,7 +374,7 @@ For more details on cache invalidation, see [What invalidates the cache](#what-i
 
 **Example with tool use**:
 
-```inline-block
+```block
 Request 1: User: "What's the weather in Paris?"
 Response: [thinking_block_1] + [tool_use block 1]
 

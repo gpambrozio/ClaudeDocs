@@ -219,7 +219,7 @@ Note that `input_type="document"` and `input_type="query"` are used for embeddin
 
 The output would be the 5th document, which is indeed the most relevant to the query:
 
-```inline-block
+```block
 Apple's conference call to discuss fourth fiscal quarter results and business updates is scheduled for Thursday, November 2, 2023 at 2:00 p.m. PT / 5:00 p.m. ET.
 ```
 

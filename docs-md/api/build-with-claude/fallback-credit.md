@@ -2,7 +2,7 @@
 
 Copy page
 
-Prompt caches are per-model. When Claude Fable 5 declines a request and you retry on another model, the conversation prefix that was already cached for Claude Fable 5 must be written into the new model's cache from scratch, and cache writes cost more than cache reads. Fallback credit removes that extra cost: the refusal carries a credit token, you echo the token on the retry, and the retry is billed as though the conversation had been on the new model all along.
+Prompt caches are per-model. When Claude Fable 5 declines a request and you retry on another model, the conversation prefix that was already cached for Claude Fable 5 must be written into the new model's cache from scratch. Cache writes cost more than cache reads. Fallback credit removes that extra cost. The refusal carries a credit token, you echo the token on the retry, and the retry is billed as though the conversation had been on the new model all along.
 
 You need this page only when you build the retry yourself: on the Ruby or PHP SDK, over raw HTTP, or with custom retry logic. [Server-side fallback](build-with-claude/refusals-and-fallback.md) and the [SDK middleware](build-with-claude/refusals-and-fallback.md) apply fallback credit automatically. If you use either, skip this page.
 
@@ -19,7 +19,12 @@ You need this page only when you build the retry yourself: on the Ruby or PHP SD
 
    Read two fields from the refusal
 
-   On a refusal, `stop_details` includes `fallback_credit_token`, an opaque string that represents the credit, and `fallback_has_prefill_claim`, a Boolean that tells you which retry body shape to use. Both are `null` when no credit is available for the refusal.
+   On a refusal, `stop_details` includes two fields:
+
+   - **`fallback_credit_token`:** an opaque string that represents the credit.
+   - **`fallback_has_prefill_claim`:** a Boolean that tells you which retry body shape to use.
+
+   Both are `null` when no credit is available for the refusal.
 3. 3
 
    Build the retry
@@ -40,7 +45,7 @@ The `fallback_has_prefill_claim` field tells you whether the retry can continue 
 
 ## Example
 
-The example below makes a request that may be refused, redeems the credit token on a retry against Claude Opus 4.8, and degrades through the rejection ladder covered in [When a retry is rejected](#when-a-retry-is-rejected).
+The following example makes a request that may be refused and redeems the credit token on a retry against Claude Opus 4.8. When a retry attempt is rejected, the example degrades through the rejection ladder: the sequence of progressively simpler retry shapes covered in [When a retry is rejected](#when-a-retry-is-rejected).
 
 cURLCLIPythonTypeScriptC#GoJavaPHPRuby
 
@@ -105,7 +110,7 @@ print(json.dumps({"stop_reason": response.stop_reason, "model": response.model})
 
 ## Where it works
 
-Fallback credit is in beta on the Claude API, Claude Platform on AWS, Amazon Bedrock, Vertex AI, and Microsoft Foundry. Credit tokens returned in [Message Batches](build-with-claude/batch-processing.md) results cannot be redeemed; redemption applies only to direct Messages API requests.
+Fallback credit is in beta on the Claude API, Claude Platform on AWS, Amazon Bedrock, Vertex AI, and Microsoft Foundry. Credit tokens returned in [Message Batches](build-with-claude/batch-processing.md) results cannot be redeemed. Redemption applies only to direct Messages API requests.
 
 The retry model must be one of the refused model's permitted fallback targets. At launch, Claude Fable 5's permitted target is Claude Opus 4.8 (`claude-opus-4-8`).
 
@@ -113,7 +118,7 @@ The retry model must be one of the refused model's permitted fallback targets. A
 
 ## Checking that the credit applied
 
-The refund is visible in the retry's `usage`: `cache_creation_input_tokens` is lower, and `cache_read_input_tokens` is higher by the same amount, than the same request would report without the token. A shift of zero means the token was honored but there was nothing to reprice, for example because the retry model's cache was already warm.
+The refund is visible in the retry's `usage`. Compared with what the same request would report without the token, `cache_creation_input_tokens` is lower, and `cache_read_input_tokens` is higher by the same amount. A shift of zero means the token was honored but there was nothing to reprice, for example because the retry model's cache was already warm.
 
 ## When a retry is rejected
 

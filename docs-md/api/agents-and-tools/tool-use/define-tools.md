@@ -29,7 +29,7 @@ For the full set of optional properties available on any tool definition, includ
 
 When you call the Claude API with the `tools` parameter, the API constructs a special system prompt from the tool definitions, tool configuration, and any user-specified system prompt. The constructed prompt is designed to instruct the model to use the specified tool(s) and provide the necessary context for the tool to operate properly:
 
-```inline-block
+```block
 In this environment you have access to a set of tools you can use to answer the user's question.
 {{ FORMATTING INSTRUCTIONS }}
 String and scalar parameters should be specified as is, while lists and objects should use JSON format. Note that spaces for string values are not stripped. The output is not expected to be valid XML and is parsed with regular expressions.
@@ -131,7 +131,7 @@ Examples are included in the prompt alongside your tool schema, showing Claude c
 
 In some cases, you may want Claude to use a specific tool to answer the user's question, even if Claude would otherwise answer directly without calling a tool. You can do this by specifying the tool in the `tool_choice` field like so:
 
-```inline-block
+```block
 tool_choice = {"type": "tool", "name": "get_weather"}
 ```
 

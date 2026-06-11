@@ -402,7 +402,7 @@ Workspaces are bound to a single AWS region. A workspace created in `us-west-2` 
 
 Workspaces also serve as the primary IAM resource for Claude Platform on AWS. You grant or deny access to specific workspaces through AWS IAM policies using the workspace ARN. The ARN's resource segment is the same `wrkspc_`-prefixed ID you pass in the `anthropic-workspace-id` header:
 
-```inline-block
+```block
 arn:aws:aws-external-anthropic:{region}:{account-id}:workspace/{workspace-id}
 ```
 
@@ -410,7 +410,7 @@ arn:aws:aws-external-anthropic:{region}:{account-id}:workspace/{workspace-id}
 
 For example:
 
-```inline-block
+```block
 arn:aws:aws-external-anthropic:us-west-2:123456789012:workspace/wrkspc_01AbCdEf23GhIj
 ```
 

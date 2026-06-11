@@ -198,7 +198,7 @@ All Managed Agents API requests require the `managed-agents-2026-04-01` beta hea
 
    The agent writes a Python script, executes it in the sandbox, and verifies the output file was created. Your output looks similar to this:
 
-   ```inline-block
+   ```block
    I'll create a Python script that generates the first 20 Fibonacci numbers and saves them to a file.
    [Using tool: write]
    [Using tool: bash]

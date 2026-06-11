@@ -35,7 +35,7 @@ Opus 4.8 requires Claude Code v2.1.154 or later. Run `claude update` to upgrade.
 
 ### [​](#work-with-fable-5) Work with Fable 5
 
-[Claude Fable 5](about-claude/models/introducing-claude-fable-5.md) is the most capable model in Claude Code, suited to tasks larger than a single sitting. It sustains long autonomous sessions, investigates before acting, and verifies its work more often than smaller models.
+[Claude Fable 5](about-claude/models/introducing-claude-fable-5-and-claude-mythos-5.md) is the most capable model in Claude Code, suited to tasks larger than a single sitting. It sustains long autonomous sessions, investigates before acting, and verifies its work more often than smaller models.
 Fable 5 is not the default model. Select it with `/model fable`. Requests that its safety classifiers flag, most often in cybersecurity and biology domains, trigger [automatic model fallback](#automatic-model-fallback).
 To get the most from Fable 5:
 

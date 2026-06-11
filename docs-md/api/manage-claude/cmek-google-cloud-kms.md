@@ -27,7 +27,7 @@ Enabling CMEK is permanent. If your KMS key is deleted or disabled, Anthropic ca
 
 In order to have Anthropic use your encryption key, you must give Anthropic's service account a key it can use for encrypting data. The service account email for Anthropic CMEK is:
 
-```inline-block
+```block
 anthropic-cmek-client-us@gcp-anthropic-cmek-clients.iam.gserviceaccount.com
 ```
 
@@ -119,7 +119,7 @@ Use only this published service account email. Never trust an identifier provide
 
    You pass this to Anthropic when you register the key. The format is:
 
-   ```inline-block
+   ```block
    projects/<your-project-id>/locations/<region>/keyRings/<your-keyring-name>/cryptoKeys/<your-key-name>
    ```
 

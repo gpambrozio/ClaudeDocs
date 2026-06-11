@@ -548,7 +548,7 @@ For Claude 4.6 and later models, the same capture-and-resume strategy applies, b
 
    
 
-   ```inline-block
+   ```block
    Your previous response was interrupted and ended with [previous_response]. Continue from where you left off.
    ```
 3. **Resume streaming:** Continue receiving the rest of the response from where it was interrupted

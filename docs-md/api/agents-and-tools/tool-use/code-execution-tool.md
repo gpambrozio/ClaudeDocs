@@ -18,6 +18,8 @@ The code execution tool is available on the following models:
 
 | Model | Tool versions |
 | --- | --- |
+| Claude Fable 5 (claude-fable-5) | `code_execution_20250825`, `code_execution_20260120` |
+| Claude Mythos 5 (claude-mythos-5) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Opus 4.8 (claude-opus-4-8) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Opus 4.7 (claude-opus-4-7) | `code_execution_20250825`, `code_execution_20260120` |
 | Claude Opus 4.6 (claude-opus-4-6) | `code_execution_20250825`, `code_execution_20260120` |
@@ -29,7 +31,7 @@ The code execution tool is available on the following models:
 | Claude Opus 4 (claude-opus-4-20250514) ([deprecated](about-claude/model-deprecations.md)) | `code_execution_20250825` |
 | Claude Sonnet 4 (claude-sonnet-4-20250514) ([deprecated](about-claude/model-deprecations.md)) | `code_execution_20250825` |
 
-`code_execution_20250825` supports Bash commands and file operations and is available on every model listed above. `code_execution_20260120` adds REPL state persistence and [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) from within the sandbox, and is available on Opus 4.5+ and Sonnet 4.5+ only. If you're still using the legacy `code_execution_20250522` (Python only), see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.
+`code_execution_20250825` supports Bash commands and file operations and is available on every model in the table. `code_execution_20260120` adds REPL state persistence and [programmatic tool calling](agents-and-tools/tool-use/programmatic-tool-calling.md) from within the sandbox, and is available on Claude Fable 5, Claude Mythos 5, Opus 4.5+, and Sonnet 4.5+ only. If you're still using the legacy `code_execution_20250522` (Python only), see [Upgrade to latest tool version](#upgrade-to-latest-tool-version) to migrate from it.
 
 Older tool versions are not guaranteed to be backwards-compatible with newer models. Always use the tool version that corresponds to your model version.
 
@@ -106,7 +108,7 @@ When you provide code execution alongside client-provided tools that also run co
 
 To avoid this, add instructions to your system prompt that clarify the distinction:
 
-```inline-block
+```block
 When multiple code execution environments are available, be aware that:
 - Variables, files, and state do NOT persist between different execution environments
 - Use the code_execution tool for general-purpose computation in Anthropic's sandboxed environment

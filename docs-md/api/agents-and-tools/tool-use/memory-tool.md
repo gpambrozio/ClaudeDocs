@@ -31,7 +31,7 @@ When you ask Claude to help with a task, Claude automatically checks its memory 
 
 **1. User request:**
 
-```inline-block
+```block
 "Help me respond to this customer service ticket."
 ```
 
@@ -39,7 +39,7 @@ When you ask Claude to help with a task, Claude automatically checks its memory 
 
 **2. Claude checks the memory directory:**
 
-```inline-block
+```block
 "I'll help you respond to the customer service ticket. Let me check my memory for any previous context."
 ```
 
@@ -103,7 +103,7 @@ Claude calls the memory tool:
 
 **6. Claude uses the memory to help:**
 
-```inline-block
+```block
 "Based on your customer service guidelines, I can help you craft a response. Please share the ticket details..."
 ```
 
@@ -187,7 +187,7 @@ Here're the files and directories up to 2 levels deep in {path}, excluding hidde
 
 **For files:** Return file contents with a header and line numbers:
 
-```inline-block
+```block
 Here's the content of {path} with line numbers:
 {line_numbers}{tab}{content}
 ```
@@ -352,7 +352,7 @@ Renames the directory.
 
 This instruction is automatically included in the system prompt when the memory tool is enabled:
 
-```inline-block
+```block
 IMPORTANT: ALWAYS VIEW YOUR MEMORY DIRECTORY BEFORE DOING ANYTHING ELSE.
 MEMORY PROTOCOL:
 1. Use the `view` command of your `memory` tool to check for earlier progress.

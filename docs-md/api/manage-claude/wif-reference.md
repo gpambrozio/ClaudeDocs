@@ -186,7 +186,7 @@ The `condition` expression has access to a single variable:
 
 Example:
 
-```inline-block
+```block
 claims.sub.startsWith("repo:acme-corp/") && claims.ref in ["refs/heads/main", "refs/heads/release"]
 ```
 

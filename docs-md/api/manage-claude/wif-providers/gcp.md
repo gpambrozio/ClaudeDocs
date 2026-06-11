@@ -38,7 +38,7 @@ gcloud run deploy my-service \
 
 Inside the workload, the metadata server returns a signed identity token on demand. Request it with the `audience` you intend to register on the Anthropic side, and include `format=full` so the response carries the `email` claim:
 
-```inline-block
+```block
 GET http://metadata.google.internal/computeMetadata/v1/instance/service-accounts/default/identity?audience=https://api.anthropic.com&format=full
 Metadata-Flavor: Google
 ```

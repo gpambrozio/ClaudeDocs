@@ -108,7 +108,7 @@ Ruby
 
    
 
-   ```inline-block
+   ```block
    [TextBlock(citations=None, text='Here are some effective search strategies to find the latest developments in renewable energy:\n\n## General Search Terms\n- "Renewable energy news 2025"\n- ...', type='text')]
    ```
 

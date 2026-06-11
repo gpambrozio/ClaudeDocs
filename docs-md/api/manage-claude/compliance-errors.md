@@ -42,7 +42,7 @@ The request was syntactically valid but contained a parameter the server rejecte
 
 **Type:** `invalid_request_error`
 
-```inline-block
+```block
 The `created_at.gte` parameter contains an invalid timestamp format. Timestamps must be provided in RFC 3339 format e.g., "2024-03-01T00:00:00Z". Got "2024-01-01".
 ```
 
@@ -56,7 +56,7 @@ The `created_at.gte` parameter contains an invalid timestamp format. Timestamps 
 
 **Type:** `invalid_request_error`
 
-```inline-block
+```block
 The limit parameter must be between 1 and 1000, inclusive. Got 1500.
 ```
 
@@ -70,7 +70,7 @@ The limit parameter must be between 1 and 1000, inclusive. Got 1500.
 
 **Type:** `invalid_request_error`
 
-```inline-block
+```block
 Invalid `after_id`. No activity found for `after_id` "activity_invalid123"
 ```
 
@@ -90,7 +90,7 @@ The `x-api-key` header was missing or did not match a known key. A valid key wit
 
 **Type:** `authentication_error`
 
-```inline-block
+```block
 The API key provided is invalid or has been revoked.
 ```
 
@@ -108,7 +108,7 @@ The key in `x-api-key` is valid but does not carry the scope the endpoint requir
 
 **Type:** `permission_error`
 
-```inline-block
+```block
 Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compliance_activities']
 ```
 
@@ -125,7 +125,7 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 
 **Type:** `permission_error`
 
-```inline-block
+```block
 Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compliance_org_data']
 ```
 
@@ -142,7 +142,7 @@ Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['read:compl
 
 **Type:** `permission_error`
 
-```inline-block
+```block
 Missing required scopes. Got: ['read:compliance_activities'] Needed: ['read:compliance_user_data']
 ```
 
@@ -159,7 +159,7 @@ Missing required scopes. Got: ['read:compliance_activities'] Needed: ['read:comp
 
 **Type:** `permission_error`
 
-```inline-block
+```block
 Missing required scopes. Got: ['read:compliance_user_data'] Needed: ['delete:compliance_user_data']
 ```
 
@@ -177,7 +177,7 @@ The endpoint resolved but the resource ID does not exist or has already been del
 
 **Type:** `not_found_error`
 
-```inline-block
+```block
 Chat claude_chat_01H5CWunD7RpVJ5bHa8RCkja not found.
 ```
 
@@ -191,7 +191,7 @@ Chat claude_chat_01H5CWunD7RpVJ5bHa8RCkja not found.
 
 **Type:** `not_found_error`
 
-```inline-block
+```block
 No file found with provided id, or it has already been deleted.
 ```
 
@@ -205,7 +205,7 @@ No file found with provided id, or it has already been deleted.
 
 **Type:** `not_found_error`
 
-```inline-block
+```block
 No project is found with the provided id.
 ```
 
@@ -219,7 +219,7 @@ No project is found with the provided id.
 
 **Type:** `not_found_error`
 
-```inline-block
+```block
 No project document found with provided id, or it has already been deleted.
 ```
 
@@ -233,7 +233,7 @@ No project document found with provided id, or it has already been deleted.
 
 **Type:** `not_found_error`
 
-```inline-block
+```block
 The "ce86b5f3-7c16-48b3-a9f3-e1d2c4b8a0f1" organization does not exist or the requester is not authorized to access it.
 ```
 
@@ -253,7 +253,7 @@ The request is well-formed and authorized but conflicts with the resource's curr
 
 **Type:** `conflict_error`
 
-```inline-block
+```block
 The "claude_proj_01KGp4eZNug9ri4kE35RSppq" project cannot be deleted as it has chats attached to it. Delete or detach all chats, and try deleting the project again.
 ```
 
@@ -317,7 +317,7 @@ For service-wide incidents, check [status.anthropic.com](https://status.anthropi
 
 **Type:** `api_error`
 
-```inline-block
+```block
 Response exceeds maximum of 1,000 organizations. Contact support for assistance with larger organization lists.
 ```
 

@@ -128,7 +128,7 @@ Output
 
 
 
-```inline-block
+```block
 stop_reason: tool_use
 Tool: create_calendar_event
 Input: {'title': 'Sync', 'start': '2026-03-30T10:00:00', 'end': '2026-03-30T10:30:00', 'attendees': ['alice@example.com', 'bob@example.com']}
@@ -243,7 +243,7 @@ Output
 
 
 
-```inline-block
+```block
 I've set up your weekly team standup for the next 4 Mondays at 9am with Alice, Bob, and Carol invited.
 ```
 
@@ -362,7 +362,7 @@ Output
 
 
 
-```inline-block
+```block
 I checked your calendar for next Monday and found an existing meeting from 2pm to 3pm. I've scheduled the planning session for 10am to 11am to avoid the conflict.
 ```
 
@@ -486,7 +486,7 @@ Output
 
 
 
-```inline-block
+```block
 I tried to schedule the all-hands but the calendar only allows 10 attendees per event. I can split this into two sessions, or you can let me know which 10 people to prioritize.
 ```
 
@@ -567,7 +567,7 @@ Output
 
 
 
-```inline-block
+```block
 I checked your calendar for next Monday and found an existing meeting from 2pm to 3pm. I've scheduled the planning session for 10am to 11am to avoid the conflict.
 ```
 
